@@ -1,0 +1,26 @@
+import React from 'react'
+
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string
+}
+
+const GlassLinear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden={true}
+    focusable="false"
+    {...props}
+  >
+<path d="M8.15979 22C3.97979 22 3.13979 19.47 4.49979 16.39L8.74979 6.74H8.44979C7.79979 6.74 7.19979 6.48 6.76979 6.05C6.32979 5.62 6.06979 5.02 6.06979 4.37C6.06979 3.07 7.12979 2 8.43979 2H15.5498C16.2098 2 16.7998 2.27 17.2298 2.7C17.7898 3.26 18.0698 4.08 17.8598 4.95C17.5898 6.03 16.5498 6.74 15.4398 6.74H15.2798L19.4998 16.4C20.8498 19.48 19.9698 22 15.8298 22H8.15979Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M5.93994 13.1201C5.93994 13.1201 8.99994 13.0001 11.9999 14.0001C14.9999 15.0001 17.8299 13.1101 17.8299 13.1101" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+GlassLinear.displayName = 'GlassLinear'
+
+export { GlassLinear }
+export default GlassLinear
