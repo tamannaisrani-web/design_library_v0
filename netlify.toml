@@ -1,8 +1,8 @@
 [build]
   command = "npm run build"
-  publish = "packages/components/demo"
+  publish = "packages/components"
 
 [[redirects]]
   from = "/"
-  to = "/playground.html"
+  to = "/demo/playground.html"
   status = 200
