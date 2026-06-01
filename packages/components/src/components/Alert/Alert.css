@@ -1,0 +1,247 @@
+/* Alert — token-driven styles. Never override colour/border via className. */
+
+/* ===========================================================
+ * Container
+ * =========================================================== */
+
+.dcds-Alert {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--gap-12);
+  border-radius: var(--rd-S);
+  font-family: var(--font-family);
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ===========================================================
+ * Emphasis × isFlag — border & background matrix
+ * =========================================================== */
+
+/* subtle + inline: light-fill bg + 1px coloured border on all sides */
+.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) {
+  border: 1px solid transparent;
+}
+
+/* subtle + toast: light-fill bg + 4px left border only */
+.dcds-Alert--emphasis-subtle.dcds-Alert--flag {
+  border: none;
+  border-left: 4px solid transparent;
+  box-shadow: var(--shadow-S);
+}
+
+/* subtler + inline: white/surface-1 bg + 2px coloured border on all sides */
+.dcds-Alert--emphasis-subtler {
+  background-color: var(--color-surface-1);
+  border: 2px solid transparent;
+}
+
+/* ===========================================================
+ * State: success
+ * =========================================================== */
+
+.dcds-Alert--state-success.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) {
+  background-color: var(--color-fill-light-success);
+  border-color: var(--color-stroke-success);
+}
+.dcds-Alert--state-success.dcds-Alert--emphasis-subtle.dcds-Alert--flag {
+  background-color: var(--color-fill-light-success);
+  border-left-color: var(--color-stroke-success);
+}
+.dcds-Alert--state-success.dcds-Alert--emphasis-subtler {
+  border-color: var(--color-stroke-success);
+}
+.dcds-Alert--state-success .dcds-Alert__icon {
+  color: var(--color-stroke-success);
+}
+
+/* ===========================================================
+ * State: error
+ * =========================================================== */
+
+.dcds-Alert--state-error.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) {
+  background-color: var(--color-fill-light-error);
+  border-color: var(--color-stroke-error);
+}
+.dcds-Alert--state-error.dcds-Alert--emphasis-subtle.dcds-Alert--flag {
+  background-color: var(--color-fill-light-error);
+  border-left-color: var(--color-stroke-error);
+}
+.dcds-Alert--state-error.dcds-Alert--emphasis-subtler {
+  border-color: var(--color-stroke-error);
+}
+.dcds-Alert--state-error .dcds-Alert__icon {
+  color: var(--color-stroke-error);
+}
+
+/* ===========================================================
+ * State: warning
+ * =========================================================== */
+
+.dcds-Alert--state-warning.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) {
+  background-color: var(--color-fill-light-warning);
+  border-color: var(--color-stroke-warning);
+}
+.dcds-Alert--state-warning.dcds-Alert--emphasis-subtle.dcds-Alert--flag {
+  background-color: var(--color-fill-light-warning);
+  border-left-color: var(--color-stroke-warning);
+}
+.dcds-Alert--state-warning.dcds-Alert--emphasis-subtler {
+  border-color: var(--color-stroke-warning);
+}
+.dcds-Alert--state-warning .dcds-Alert__icon {
+  color: var(--color-stroke-warning);
+}
+
+/* ===========================================================
+ * State: info
+ * =========================================================== */
+
+.dcds-Alert--state-info.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) {
+  background-color: var(--color-fill-light-info);
+  border-color: var(--color-stroke-info);
+}
+.dcds-Alert--state-info.dcds-Alert--emphasis-subtle.dcds-Alert--flag {
+  background-color: var(--color-fill-light-info);
+  border-left-color: var(--color-stroke-info);
+}
+.dcds-Alert--state-info.dcds-Alert--emphasis-subtler {
+  border-color: var(--color-stroke-info);
+}
+.dcds-Alert--state-info .dcds-Alert__icon {
+  color: var(--color-stroke-info);
+}
+
+/* ===========================================================
+ * Inner layout — row: [content] [close-btn]
+ * =========================================================== */
+
+.dcds-Alert__inner {
+  display: flex;
+  flex: 1;
+  gap: var(--gap-8);
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.dcds-Alert--flag .dcds-Alert__inner {
+  align-items: center;
+}
+
+/* ===========================================================
+ * Content — row: [icon] [body]
+ * =========================================================== */
+
+.dcds-Alert__content {
+  display: flex;
+  flex: 1;
+  gap: var(--gap-8);
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.dcds-Alert--flag .dcds-Alert__content {
+  align-items: flex-start;
+}
+
+/* Icon (16 px wide, 20 px tall container — matches Figma spec) */
+.dcds-Alert__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===========================================================
+ * Body — column (inline) or row (toast)
+ * =========================================================== */
+
+.dcds-Alert__body {
+  display: flex;
+  flex: 1;
+  gap: var(--gap-8);
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.dcds-Alert:not(.dcds-Alert--flag) .dcds-Alert__body {
+  flex-direction: column;
+}
+
+.dcds-Alert--flag .dcds-Alert__body {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* ===========================================================
+ * Text — title + message
+ * =========================================================== */
+
+.dcds-Alert__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 14 px Bold · color/text/primary */
+.dcds-Alert__title {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: normal;
+  margin: 0;
+}
+
+/* 12 px Regular · color/text/subdued */
+.dcds-Alert__message {
+  font-size: var(--font-size-body-small);
+  font-weight: 400;
+  color: var(--color-text-subdued);
+  line-height: normal;
+  margin: 0;
+}
+
+/* ===========================================================
+ * Actions row (subtle only — subtler never shows actions)
+ * =========================================================== */
+
+.dcds-Alert__actions {
+  display: flex;
+  gap: var(--gap-8);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ===========================================================
+ * Close button (subtle only)
+ * =========================================================== */
+
+.dcds-Alert__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-subdued);
+  padding: 0;
+  border-radius: var(--rd-XS);
+  transition: color 120ms ease;
+}
+
+.dcds-Alert__close:hover {
+  color: var(--color-text-primary);
+}
+
+.dcds-Alert__close:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}

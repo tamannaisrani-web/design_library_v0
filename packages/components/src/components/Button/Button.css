@@ -1,0 +1,169 @@
+/* Button — token-driven styles. Never override these via className. */
+
+.dcds-Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-8);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  background: none;
+}
+
+.dcds-Button:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Sizes ---------- */
+.dcds-Button--size-L {
+  height: 48px;
+  padding: 0 var(--gap-20);
+  font-size: var(--font-size-body);
+  border-radius: var(--rd-S);
+}
+.dcds-Button--size-M {
+  height: 40px;
+  padding: 0 var(--gap-16);
+  font-size: var(--font-size-body);
+  border-radius: var(--rd-S);
+}
+.dcds-Button--size-S {
+  height: 32px;
+  padding: 0 var(--gap-12);
+  font-size: var(--font-size-body-small);
+  border-radius: var(--rd-XS);
+}
+.dcds-Button--size-XS {
+  height: var(--gap-24);
+  padding: 0 var(--gap-8);
+  font-size: var(--font-size-body-small);
+  border-radius: var(--rd-XS);
+}
+
+/* ---------- Icon slots (leading / trailing) ---------- */
+.dcds-Button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.dcds-Button--size-L .dcds-Button__icon,
+.dcds-Button--size-M .dcds-Button__icon { width: 16px; height: 16px; }
+.dcds-Button--size-S .dcds-Button__icon,
+.dcds-Button--size-XS .dcds-Button__icon { width: 12px; height: 12px; }
+
+/* ---------- isIconOnly (square footprint) ---------- */
+.dcds-Button--icon-only.dcds-Button--size-L  { width: 48px; padding: 0; }
+.dcds-Button--icon-only.dcds-Button--size-M  { width: 40px; padding: 0; }
+.dcds-Button--icon-only.dcds-Button--size-S  { width: 32px; padding: 0; }
+.dcds-Button--icon-only.dcds-Button--size-XS { width: var(--gap-24); padding: 0; }
+
+/* ---------- isFullWidth ---------- */
+.dcds-Button--full-width {
+  width: 100%;
+}
+
+/* ===========================================================
+ * VARIANT × COLOR matrix
+ * =========================================================== */
+
+/* ----- Primary (filled) ----- */
+.dcds-Button--variant-Primary.dcds-Button--color-Primary {
+  background-color: var(--color-fill-action);
+  color: var(--color-text-invert);
+}
+.dcds-Button--variant-Primary.dcds-Button--color-Primary:hover:not(:disabled) {
+  background-color: var(--color-fill-dark-action);
+}
+.dcds-Button--variant-Primary.dcds-Button--color-Error {
+  background-color: var(--color-fill-invert-error);
+  color: var(--color-text-invert);
+}
+.dcds-Button--variant-Primary.dcds-Button--color-Error:hover:not(:disabled) {
+  background-color: var(--color-fill-dark-error);
+}
+.dcds-Button--variant-Primary.dcds-Button--color-Warning {
+  background-color: var(--color-fill-invert-warning);
+  color: var(--color-text-invert-warning);
+}
+.dcds-Button--variant-Primary.dcds-Button--color-Warning:hover:not(:disabled) {
+  background-color: var(--color-fill-dark-warning);
+}
+
+/* ----- Secondary (outlined) ----- */
+.dcds-Button--variant-Secondary {
+  background-color: var(--color-surface-1);
+}
+.dcds-Button--variant-Secondary.dcds-Button--color-Primary {
+  border-color: var(--color-stroke-action);
+  color: var(--color-text-action);
+}
+.dcds-Button--variant-Secondary.dcds-Button--color-Primary:hover:not(:disabled) {
+  background-color: var(--color-fill-light-action);
+}
+.dcds-Button--variant-Secondary.dcds-Button--color-Error {
+  border-color: var(--color-stroke-error);
+  color: var(--color-text-error);
+}
+.dcds-Button--variant-Secondary.dcds-Button--color-Error:hover:not(:disabled) {
+  background-color: var(--color-fill-light-error);
+}
+.dcds-Button--variant-Secondary.dcds-Button--color-Warning {
+  border-color: var(--color-stroke-warning);
+  color: var(--color-text-warning);
+}
+.dcds-Button--variant-Secondary.dcds-Button--color-Warning:hover:not(:disabled) {
+  background-color: var(--color-fill-light-warning);
+}
+
+/* ----- Tertiary (ghost) ----- */
+.dcds-Button--variant-Tertiary {
+  background-color: transparent;
+  border-color: transparent;
+}
+.dcds-Button--variant-Tertiary.dcds-Button--color-Primary {
+  color: var(--color-text-action);
+}
+.dcds-Button--variant-Tertiary.dcds-Button--color-Primary:hover:not(:disabled) {
+  background-color: var(--color-fill-light-action);
+}
+.dcds-Button--variant-Tertiary.dcds-Button--color-Error {
+  color: var(--color-text-error);
+}
+.dcds-Button--variant-Tertiary.dcds-Button--color-Error:hover:not(:disabled) {
+  background-color: var(--color-fill-light-error);
+}
+.dcds-Button--variant-Tertiary.dcds-Button--color-Warning {
+  color: var(--color-text-warning);
+}
+.dcds-Button--variant-Tertiary.dcds-Button--color-Warning:hover:not(:disabled) {
+  background-color: var(--color-fill-light-warning);
+}
+
+/* ---------- Disabled (overrides all variant/color rules) ---------- */
+.dcds-Button:disabled,
+.dcds-Button[aria-disabled='true'] {
+  cursor: not-allowed;
+  background-color: var(--color-surface-disabled);
+  border-color: transparent;
+  color: var(--color-text-disabled);
+  pointer-events: none;
+}
+.dcds-Button--variant-Tertiary:disabled,
+.dcds-Button--variant-Tertiary[aria-disabled='true'] {
+  background-color: transparent;
+  color: var(--color-text-disabled);
+}
+.dcds-Button--variant-Secondary:disabled,
+.dcds-Button--variant-Secondary[aria-disabled='true'] {
+  background-color: transparent;
+  border-color: var(--color-stroke-disabled);
+  color: var(--color-text-disabled);
+}

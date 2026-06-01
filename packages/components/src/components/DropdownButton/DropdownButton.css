@@ -1,0 +1,150 @@
+/* DropdownButton — Button-like trigger + floating _BaseMenu when open. */
+
+.dcds-DropdownButton__wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dcds-DropdownButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-8);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--rd-S);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.dcds-DropdownButton:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+.dcds-DropdownButton--size-L  { height: 48px; padding: 0 var(--gap-16); font-size: var(--font-size-body); }
+.dcds-DropdownButton--size-M  { height: 40px; padding: 0 var(--gap-16); font-size: var(--font-size-body); }
+.dcds-DropdownButton--size-S  { height: 32px; padding: 0 var(--gap-12); font-size: var(--font-size-label); }
+.dcds-DropdownButton--size-XS { height: 28px; padding: 0 var(--gap-8); font-size: var(--font-size-label); }
+
+/* Primary (filled) */
+.dcds-DropdownButton--variant-Primary {
+  background-color: var(--color-fill-action);
+  color: var(--color-text-invert);
+}
+.dcds-DropdownButton--variant-Primary:hover:not(:disabled) {
+  background-color: var(--color-fill-dark-action);
+}
+
+/* Secondary (outlined) */
+.dcds-DropdownButton--variant-Secondary {
+  background-color: transparent;
+  border-color: var(--color-stroke-action);
+  color: var(--color-text-action);
+}
+.dcds-DropdownButton--variant-Secondary:hover:not(:disabled) {
+  background-color: var(--color-fill-light-action);
+}
+
+/* Tertiary (ghost) */
+.dcds-DropdownButton--variant-Tertiary {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-text-action);
+}
+.dcds-DropdownButton--variant-Tertiary:hover:not(:disabled) {
+  background-color: var(--color-fill-light-action);
+}
+
+/* Open state highlight */
+.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Primary {
+  background-color: var(--color-fill-dark-action);
+}
+.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Secondary,
+.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Tertiary {
+  background-color: var(--color-fill-light-action);
+}
+
+/* Disabled */
+.dcds-DropdownButton:disabled,
+.dcds-DropdownButton[aria-disabled='true'] {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: var(--color-surface-disabled);
+  border-color: transparent;
+  color: var(--color-text-disabled);
+}
+
+/* Chevron rotates when open */
+.dcds-DropdownButton__chevron {
+  transition: transform 150ms ease;
+  display: inline-flex;
+}
+.dcds-DropdownButton--state-Open .dcds-DropdownButton__chevron {
+  transform: rotate(180deg);
+}
+
+/* ===========================================================
+ * _BaseMenu — floating menu shown when isOpen=true
+ * =========================================================== */
+
+.dcds-DropdownButton__menu {
+  position: absolute;
+  top: calc(100% + var(--gap-4));
+  left: 0;
+  min-width: 100%;
+  background-color: var(--color-surface-1);
+  border-radius: var(--rd-S);
+  box-shadow: var(--shadow-S);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 10;
+  overflow: hidden;
+  /* simple fade-in */
+  animation: dcds-DropdownButton__menu-in 120ms ease-out;
+}
+
+@keyframes dcds-DropdownButton__menu-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dcds-DropdownButton__menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--gap-16) var(--gap-16);
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.dcds-DropdownButton__menu-item + .dcds-DropdownButton__menu-item,
+.dcds-DropdownButton__menu li + li .dcds-DropdownButton__menu-item {
+  border-top: 1px solid var(--color-stroke-subdued);
+}
+
+.dcds-DropdownButton__menu-item:hover:not(:disabled) {
+  background-color: var(--color-fill-primary-1);
+}
+
+.dcds-DropdownButton__menu-item:focus-visible {
+  outline: none;
+  background-color: var(--color-fill-primary-1);
+  box-shadow: inset 0 0 0 2px var(--color-stroke-focus);
+}
+
+.dcds-DropdownButton__menu-item:disabled,
+.dcds-DropdownButton__menu-item[aria-disabled='true'] {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
