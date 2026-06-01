@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Alert } from './components/Alert';
+import { Alert } from '../components/Alert';
 import { Box } from '@mui/material';
-import { PALETTE_COLORS } from './theme/constants';
+import { PALETTE_COLORS } from '../components/theme/constants';
 
 const Section = ({ label }: { label: string }) => (
   <Box

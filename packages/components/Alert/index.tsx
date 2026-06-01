@@ -8,8 +8,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import MuiIconButton from '@mui/material/IconButton';
 import MuiButton from '@mui/material/Button';
 import MuiLink from '@mui/material/Link';
-import { CssOverrideType } from '../../types/common';
-import { PALETTE_COLORS, FONT_FAMILY, FONT_WEIGHTS } from '../../theme/constants';
+import { CssOverrideType } from '../types/common';
+import { PALETTE_COLORS, FONT_FAMILY, FONT_WEIGHTS } from '../theme/constants';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
