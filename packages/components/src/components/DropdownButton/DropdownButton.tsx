@@ -105,6 +105,8 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({
     [onSelect, onToggle]
   );
 
+  const chevronSize = size === 'L' || size === 'M' ? 16 : 12;
+
   const buttonClasses = [
     'dcds-DropdownButton',
     `dcds-DropdownButton--variant-${variant}`,
@@ -140,7 +142,7 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({
       >
         <span>{children}</span>
         <span className="dcds-DropdownButton__chevron">
-          <ChevronDownIcon size={16} />
+          <ChevronDownIcon size={chevronSize} />
         </span>
       </button>
 

@@ -47,6 +47,18 @@
   border-radius: var(--rd-XS);
 }
 
+/* ---------- Icon slots (leading / trailing) ---------- */
+.dcds-Button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.dcds-Button--size-L .dcds-Button__icon,
+.dcds-Button--size-M .dcds-Button__icon { width: 16px; height: 16px; }
+.dcds-Button--size-S .dcds-Button__icon,
+.dcds-Button--size-XS .dcds-Button__icon { width: 12px; height: 12px; }
+
 /* ---------- isIconOnly (square footprint) ---------- */
 .dcds-Button--icon-only.dcds-Button--size-L  { width: 48px; padding: 0; }
 .dcds-Button--icon-only.dcds-Button--size-M  { width: 40px; padding: 0; }
