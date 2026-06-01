@@ -1,0 +1,41 @@
+/* LinkButton — text-only hyperlink-style action. */
+
+.dcds-LinkButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-hyperlink-default);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+
+.dcds-LinkButton:hover:not(:disabled):not([aria-disabled='true']) {
+  color: var(--color-hyperlink-hover);
+  text-decoration: underline;
+}
+
+.dcds-LinkButton:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+  border-radius: var(--rd-XS);
+}
+
+.dcds-LinkButton--size-L  { font-size: var(--font-size-body); }
+.dcds-LinkButton--size-M  { font-size: var(--font-size-label); }
+.dcds-LinkButton--size-S  { font-size: var(--font-size-body-small); }
+.dcds-LinkButton--size-XS { font-size: var(--font-size-validation); }
+
+.dcds-LinkButton--state-Disabled,
+.dcds-LinkButton:disabled,
+.dcds-LinkButton[aria-disabled='true'] {
+  color: var(--color-hyperlink-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: none;
+}

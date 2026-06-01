@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DCDS Components — Interactive Playground</title>
+
+    <!-- Tokens (CSS variables) -->
+    <link rel="stylesheet" href="../src/theme/tokens.css" />
+    <link rel="stylesheet" href="../src/components/Button/Button.css" />
+    <link rel="stylesheet" href="../src/components/LinkButton/LinkButton.css" />
+    <link rel="stylesheet" href="../src/components/DropdownButton/DropdownButton.css" />
+    <link rel="stylesheet" href="../src/components/ButtonGroup/ButtonGroup.css" />
+    <link rel="stylesheet" href="../src/components/Switch/Switch.css" />
+    <link rel="stylesheet" href="../src/components/RadioButton/RadioButton.css" />
+    <link rel="stylesheet" href="../src/components/Checkbox/Checkbox.css" />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- React + ReactDOM + Babel Standalone (in-browser JSX) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Nunito Sans', system-ui, sans-serif;
+        background: var(--color-surface-2);
+        color: var(--color-text-primary);
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        min-height: 100vh;
+      }
+      .panel {
+        background: var(--color-surface-1);
+        border-right: 1px solid var(--color-stroke-subdued);
+        padding: var(--gap-24);
+        overflow-y: auto;
+      }
+      .panel h1 {
+        font-size: var(--font-size-h4);
+        margin: 0 0 var(--gap-8);
+      }
+      .panel h2 {
+        font-size: var(--font-size-label);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--color-text-subdued);
+        margin: var(--gap-24) 0 var(--gap-8);
+        border-bottom: 1px solid var(--color-stroke-subdued);
+        padding-bottom: var(--gap-4);
+      }
+      .control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--gap-8);
+        gap: var(--gap-8);
+      }
+      .control label {
+        font-size: var(--font-size-body-small);
+        color: var(--color-text-subdued);
+        flex-shrink: 0;
+      }
+      .control select,
+      .control input[type='text'] {
+        flex: 1;
+        font-family: inherit;
+        font-size: var(--font-size-body-small);
+        padding: var(--gap-4) var(--gap-8);
+        border: 1px solid var(--color-stroke-subdued);
+        border-radius: var(--rd-XS);
+        background: var(--color-surface-1);
+        color: var(--color-text-primary);
+        max-width: 180px;
+      }
+      .control input[type='checkbox'] { transform: scale(1.1); }
+
+      .stage {
+        padding: var(--gap-32);
+        overflow-y: auto;
+      }
+      .stage h2 {
+        font-size: var(--font-size-h4);
+        margin: 0 0 var(--gap-16);
+        border-bottom: 2px solid var(--color-stroke-action);
+        padding-bottom: var(--gap-4);
+      }
+      .stage section {
+        margin-bottom: var(--gap-32);
+        padding: var(--gap-24);
+        background: var(--color-surface-1);
+        border-radius: var(--rd-M);
+      }
+      .preview {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-16);
+        align-items: center;
+        margin-top: var(--gap-8);
+        padding: var(--gap-16);
+        background: var(--color-surface-2);
+        border-radius: var(--rd-S);
+        min-height: 80px;
+      }
+      .preview--dark {
+        background: var(--color-fill-primary-9);
+      }
+      .events {
+        margin-top: var(--gap-8);
+        font-family: ui-monospace, SFMono-Regular, monospace;
+        font-size: var(--font-size-validation);
+        color: var(--color-text-subdued);
+        max-height: 80px;
+        overflow-y: auto;
+        padding: var(--gap-4) var(--gap-8);
+        background: var(--color-surface-3);
+        border-radius: var(--rd-XS);
+      }
+      .stage-note {
+        font-size: var(--font-size-validation);
+        color: var(--color-text-subdued);
+        margin: 0 0 var(--gap-8);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--
+      Inline component re-implementations.
+      The canonical source is src/components/*.tsx. These mirror the same
+      props/classes 1:1 so opening this HTML produces a true preview without
+      a build step.
+    -->
+    <script type="text/babel" data-presets="react">
+      const { useState, useEffect, useRef, useId } = React;
+
+      /* ============================================================
+       * Button
+       * ============================================================ */
+      function Button({
+        variant = 'Primary',
+        color = 'Primary',
+        size = 'M',
+        isDisabled = false,
+        isFullWidth = false,
+        isIconOnly = false,
+        ariaLabel,
+        ariaBusy,
+        type = 'button',
+        className,
+        children,
+        onClick,
+        onFocus,
+        onBlur,
+        onMouseEnter,
+        onMouseLeave,
+        onKeyDown,
+      }) {
+        const classes = [
+          'dcds-Button',
+          `dcds-Button--variant-${variant}`,
+          `dcds-Button--color-${color}`,
+          `dcds-Button--size-${size}`,
+          isIconOnly ? 'dcds-Button--icon-only' : '',
+          isFullWidth ? 'dcds-Button--full-width' : '',
+          className || '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+        return (
+          <button
+            type={type}
+            className={classes}
+            disabled={isDisabled}
+            aria-disabled={isDisabled || undefined}
+            aria-busy={ariaBusy || undefined}
+            aria-label={isIconOnly ? ariaLabel : undefined}
+            onClick={onClick}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            onKeyDown={onKeyDown}
+          >
+            {children}
+          </button>
+        );
+      }
+
+      /* ============================================================
+       * LinkButton
+       * ============================================================ */
+      function LinkButton({
+        state = 'Default',
+        size = 'M',
+        isIconOnly = false,
+        ariaLabel,
+        href,
+        target,
+        rel,
+        className,
+        children,
+        onClick,
+      }) {
+        const isDisabled = state === 'Disabled';
+        const classes = [
+          'dcds-LinkButton',
+          `dcds-LinkButton--state-${state}`,
+          `dcds-LinkButton--size-${size}`,
+          className || '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+        if (href) {
+          return (
+            <a
+              className={classes}
+              href={isDisabled ? undefined : href}
+              target={target}
+              rel={rel}
+              aria-disabled={isDisabled || undefined}
+              aria-label={isIconOnly ? ariaLabel : undefined}
+              onClick={onClick}
+            >
+              {children}
+            </a>
+          );
+        }
+        return (
+          <button
+            type="button"
+            className={classes}
+            disabled={isDisabled}
+            aria-disabled={isDisabled || undefined}
+            aria-label={isIconOnly ? ariaLabel : undefined}
+            onClick={onClick}
+          >
+            {children}
+          </button>
+        );
+      }
+
+      /* ============================================================
+       * ChevronDownIcon
+       * ============================================================ */
+      const ChevronDownIcon = ({ size = 16 }) => (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M3.5 6L8 10.5L12.5 6"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+
+      /* ============================================================
+       * DropdownButton (with floating _BaseMenu)
+       * ============================================================ */
+      function DropdownButton({
+        variant = 'Secondary',
+        state = 'Default',
+        size = 'M',
+        isOpen = false,
+        isDisabled = false,
+        menuItems = [],
+        onToggle,
+        onSelect,
+        className,
+        children,
+        onClick,
+      }) {
+        const wrapperRef = useRef(null);
+        const resolvedState = isDisabled ? 'Disabled' : isOpen ? 'Open' : state;
+
+        useEffect(() => {
+          if (!isOpen) return;
+          const handler = (e) => {
+            if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+              if (onToggle) onToggle(false);
+            }
+          };
+          document.addEventListener('mousedown', handler);
+          return () => document.removeEventListener('mousedown', handler);
+        }, [isOpen, onToggle]);
+
+        useEffect(() => {
+          if (!isOpen) return;
+          const handler = (e) => {
+            if (e.key === 'Escape' && onToggle) onToggle(false);
+          };
+          document.addEventListener('keydown', handler);
+          return () => document.removeEventListener('keydown', handler);
+        }, [isOpen, onToggle]);
+
+        const buttonClasses = [
+          'dcds-DropdownButton',
+          `dcds-DropdownButton--variant-${variant}`,
+          `dcds-DropdownButton--state-${resolvedState}`,
+          `dcds-DropdownButton--size-${size}`,
+        ]
+          .filter(Boolean)
+          .join(' ');
+        const wrapperClasses = ['dcds-DropdownButton__wrapper', className || '']
+          .filter(Boolean)
+          .join(' ');
+
+        return (
+          <div ref={wrapperRef} className={wrapperClasses}>
+            <button
+              type="button"
+              className={buttonClasses}
+              disabled={isDisabled || resolvedState === 'Disabled'}
+              aria-disabled={isDisabled || undefined}
+              aria-haspopup="menu"
+              aria-expanded={isOpen}
+              onClick={(e) => {
+                if (onToggle) onToggle(!isOpen);
+                if (onClick) onClick(e);
+              }}
+            >
+              <span>{children}</span>
+              <span className="dcds-DropdownButton__chevron">
+                <ChevronDownIcon size={16} />
+              </span>
+            </button>
+            {isOpen && (
+              <ul role="menu" className="dcds-DropdownButton__menu">
+                {menuItems.map((item) => (
+                  <li role="none" key={item.id}>
+                    <button
+                      type="button"
+                      role="menuitem"
+                      className="dcds-DropdownButton__menu-item"
+                      disabled={item.disabled}
+                      onClick={() => {
+                        if (item.disabled) return;
+                        if (item.onClick) item.onClick();
+                        if (onSelect) onSelect(item.id);
+                        if (onToggle) onToggle(false);
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * ButtonGroup
+       * ============================================================ */
+      function ButtonGroup({ Style = 'Default', isLink = false, ariaLabel, className, children }) {
+        const resolved = isLink ? 'Link' : Style;
+        const classes = [
+          'dcds-ButtonGroup',
+          `dcds-ButtonGroup--Style-${resolved}`,
+          className || '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+        return (
+          <div role="group" aria-label={ariaLabel} className={classes}>
+            {children}
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * Switch
+       * ============================================================ */
+      function Switch({
+        State = 'Enabled',
+        checked,
+        defaultChecked = false,
+        name,
+        label,
+        onChange,
+      }) {
+        const isControlled = checked !== undefined;
+        const [internal, setInternal] = useState(defaultChecked);
+        const value = isControlled ? !!checked : internal;
+        const isDisabled = State === 'Disabled';
+        const id = useId();
+        const classes = ['dcds-Switch', `dcds-Switch--State-${State}`].join(' ');
+        return (
+          <label className={classes} htmlFor={id}>
+            <input
+              id={id}
+              type="checkbox"
+              role="switch"
+              className="dcds-Switch__input"
+              name={name}
+              checked={value}
+              disabled={isDisabled}
+              aria-checked={value}
+              onChange={(e) => {
+                const next = e.target.checked;
+                if (!isControlled) setInternal(next);
+                if (onChange) onChange(next, e);
+              }}
+            />
+            <span className="dcds-Switch__track">
+              <span className="dcds-Switch__thumb" />
+            </span>
+            {label && <span className="dcds-Switch__label">{label}</span>}
+          </label>
+        );
+      }
+
+      /* ============================================================
+       * RadioButton
+       * ============================================================ */
+      function RadioButton({
+        State = 'Enabled',
+        name,
+        value,
+        label,
+        checked,
+        defaultChecked,
+        onChange,
+      }) {
+        const isDisabled = State === 'Disabled';
+        const id = useId();
+        return (
+          <label
+            className={`dcds-RadioButton dcds-RadioButton--State-${State}`}
+            htmlFor={id}
+          >
+            <input
+              id={id}
+              type="radio"
+              className="dcds-RadioButton__input"
+              name={name}
+              value={value}
+              checked={checked}
+              defaultChecked={defaultChecked}
+              disabled={isDisabled}
+              onChange={onChange}
+            />
+            <span className="dcds-RadioButton__indicator" />
+            <span className="dcds-RadioButton__label">{label}</span>
+          </label>
+        );
+      }
+
+      /* ============================================================
+       * Checkbox
+       * ============================================================ */
+      function Checkbox({
+        State = 'Enabled',
+        name,
+        value,
+        label,
+        checked,
+        defaultChecked = false,
+        indeterminate = false,
+        required = false,
+        onChange,
+      }) {
+        const isControlled = checked !== undefined;
+        const [internal, setInternal] = useState(defaultChecked);
+        const resolved = isControlled ? !!checked : internal;
+        const isDisabled = State === 'Disabled';
+        const ref = useRef(null);
+        useEffect(() => {
+          if (ref.current) ref.current.indeterminate = indeterminate;
+        }, [indeterminate]);
+        const id = useId();
+        const classes = [
+          'dcds-Checkbox',
+          `dcds-Checkbox--State-${State}`,
+          indeterminate ? 'dcds-Checkbox--indeterminate' : '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+        return (
+          <label className={classes} htmlFor={id}>
+            <input
+              id={id}
+              ref={ref}
+              type="checkbox"
+              className="dcds-Checkbox__input"
+              name={name}
+              value={value}
+              checked={resolved}
+              disabled={isDisabled}
+              required={required}
+              aria-checked={indeterminate ? 'mixed' : resolved}
+              onChange={(e) => {
+                const next = e.target.checked;
+                if (!isControlled) setInternal(next);
+                if (onChange) onChange(next, e);
+              }}
+            />
+            <span className="dcds-Checkbox__indicator" />
+            <span className="dcds-Checkbox__label">{label}</span>
+          </label>
+        );
+      }
+
+      /* ============================================================
+       * Reusable control widgets
+       * ============================================================ */
+      function Select({ label, value, onChange, options }) {
+        return (
+          <div className="control">
+            <label>{label}</label>
+            <select value={value} onChange={(e) => onChange(e.target.value)}>
+              {options.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
+          </div>
+        );
+      }
+      function Toggle({ label, checked, onChange }) {
+        return (
+          <div className="control">
+            <label>{label}</label>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={(e) => onChange(e.target.checked)}
+            />
+          </div>
+        );
+      }
+      function TextInput({ label, value, onChange }) {
+        return (
+          <div className="control">
+            <label>{label}</label>
+            <input type="text" value={value} onChange={(e) => onChange(e.target.value)} />
+          </div>
+        );
+      }
+      function useEventLog() {
+        const [log, setLog] = useState([]);
+        const push = (msg) =>
+          setLog((prev) => [
+            `${new Date().toLocaleTimeString()}  ${msg}`,
+            ...prev.slice(0, 9),
+          ]);
+        return [log, push];
+      }
+
+      /* ============================================================
+       * The full playground
+       * ============================================================ */
+      function Playground() {
+        /* Button controls */
+        const [btnVariant, setBtnVariant] = useState('Primary');
+        const [btnColor, setBtnColor] = useState('Primary');
+        const [btnSize, setBtnSize] = useState('M');
+        const [btnDisabled, setBtnDisabled] = useState(false);
+        const [btnFullWidth, setBtnFullWidth] = useState(false);
+        const [btnIconOnly, setBtnIconOnly] = useState(false);
+        const [btnLabel, setBtnLabel] = useState('Save changes');
+        const [btnLog, pushBtnLog] = useEventLog();
+
+        /* LinkButton controls */
+        const [lbState, setLbState] = useState('Default');
+        const [lbSize, setLbSize] = useState('M');
+        const [lbLabel, setLbLabel] = useState('View details');
+        const [lbHref, setLbHref] = useState('');
+        const [lbLog, pushLbLog] = useEventLog();
+
+        /* DropdownButton controls */
+        const [dbVariant, setDbVariant] = useState('Secondary');
+        const [dbSize, setDbSize] = useState('M');
+        const [dbDisabled, setDbDisabled] = useState(false);
+        const [dbOpen, setDbOpen] = useState(false);
+        const [dbLabel, setDbLabel] = useState('Actions');
+        const [dbLog, pushDbLog] = useEventLog();
+
+        /* ButtonGroup controls (paired layout) */
+        const [bgStyle, setBgStyle] = useState('Default');
+
+        /* Switch controls */
+        const [swState, setSwState] = useState('Enabled');
+        const [swChecked, setSwChecked] = useState(true);
+        const [swLog, pushSwLog] = useEventLog();
+
+        /* RadioButton controls */
+        const [rbState, setRbState] = useState('Enabled');
+        const [rbValue, setRbValue] = useState('monthly');
+
+        /* Checkbox controls */
+        const [cbState, setCbState] = useState('Enabled');
+        const [cbIndeterminate, setCbIndeterminate] = useState(false);
+        const [cbChecked, setCbChecked] = useState(false);
+
+        return (
+          <div className="app">
+            <aside className="panel">
+              <h1>DCDS Playground</h1>
+              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
+                Switch every prop on every component live. Click components on the right to
+                fire their event handlers — output appears under each section.
+              </p>
+
+              <h2>Button</h2>
+              <Select
+                label="variant"
+                value={btnVariant}
+                onChange={setBtnVariant}
+                options={['Primary', 'Secondary', 'Tertiary']}
+              />
+              <Select
+                label="color"
+                value={btnColor}
+                onChange={setBtnColor}
+                options={['Primary', 'Error', 'Warning']}
+              />
+              <Select
+                label="size"
+                value={btnSize}
+                onChange={setBtnSize}
+                options={['L', 'M', 'S', 'XS']}
+              />
+              <Toggle label="isDisabled" checked={btnDisabled} onChange={setBtnDisabled} />
+              <Toggle label="isFullWidth" checked={btnFullWidth} onChange={setBtnFullWidth} />
+              <Toggle label="isIconOnly" checked={btnIconOnly} onChange={setBtnIconOnly} />
+              <TextInput label="label" value={btnLabel} onChange={setBtnLabel} />
+
+              <h2>LinkButton</h2>
+              <Select
+                label="state"
+                value={lbState}
+                onChange={setLbState}
+                options={['Default', 'Disabled']}
+              />
+              <Select
+                label="size"
+                value={lbSize}
+                onChange={setLbSize}
+                options={['L', 'M', 'S', 'XS']}
+              />
+              <TextInput label="label" value={lbLabel} onChange={setLbLabel} />
+              <TextInput label="href" value={lbHref} onChange={setLbHref} />
+
+              <h2>DropdownButton</h2>
+              <Select
+                label="variant"
+                value={dbVariant}
+                onChange={setDbVariant}
+                options={['Primary', 'Secondary', 'Tertiary']}
+              />
+              <Select
+                label="size"
+                value={dbSize}
+                onChange={setDbSize}
+                options={['L', 'M', 'S', 'XS']}
+              />
+              <Toggle label="isDisabled" checked={dbDisabled} onChange={setDbDisabled} />
+              <Toggle label="isOpen" checked={dbOpen} onChange={setDbOpen} />
+              <TextInput label="label" value={dbLabel} onChange={setDbLabel} />
+
+              <h2>ButtonGroup (paired)</h2>
+              <Select
+                label="Style"
+                value={bgStyle}
+                onChange={setBgStyle}
+                options={['Default', 'Link']}
+              />
+
+              <h2>Switch</h2>
+              <Select
+                label="State"
+                value={swState}
+                onChange={setSwState}
+                options={['Enabled', 'Disabled']}
+              />
+              <Toggle label="checked" checked={swChecked} onChange={setSwChecked} />
+
+              <h2>RadioButton</h2>
+              <Select
+                label="State"
+                value={rbState}
+                onChange={setRbState}
+                options={['Enabled', 'Disabled']}
+              />
+              <Select
+                label="selected"
+                value={rbValue}
+                onChange={setRbValue}
+                options={['monthly', 'quarterly', 'annual']}
+              />
+
+              <h2>Checkbox</h2>
+              <Select
+                label="State"
+                value={cbState}
+                onChange={setCbState}
+                options={['Enabled', 'Disabled']}
+              />
+              <Toggle label="checked" checked={cbChecked} onChange={setCbChecked} />
+              <Toggle
+                label="indeterminate"
+                checked={cbIndeterminate}
+                onChange={setCbIndeterminate}
+              />
+            </aside>
+
+            <main className="stage">
+              {/* ----- Button ----- */}
+              <section>
+                <h2>Button</h2>
+                <p className="stage-note">
+                  Click the button to fire all attached handlers (onClick, onFocus, onBlur,
+                  onMouseEnter, onMouseLeave, onKeyDown).
+                </p>
+                <div className="preview">
+                  <Button
+                    variant={btnVariant}
+                    color={btnColor}
+                    size={btnSize}
+                    isDisabled={btnDisabled}
+                    isFullWidth={btnFullWidth}
+                    isIconOnly={btnIconOnly}
+                    ariaLabel={btnIconOnly ? btnLabel : undefined}
+                    onClick={() => pushBtnLog('onClick')}
+                    onFocus={() => pushBtnLog('onFocus')}
+                    onBlur={() => pushBtnLog('onBlur')}
+                    onMouseEnter={() => pushBtnLog('onMouseEnter')}
+                    onMouseLeave={() => pushBtnLog('onMouseLeave')}
+                    onKeyDown={(e) => pushBtnLog(`onKeyDown: ${e.key}`)}
+                  >
+                    {btnIconOnly ? <ChevronDownIcon size={16} /> : btnLabel}
+                  </Button>
+                </div>
+                <div className="events">
+                  {btnLog.length === 0 ? '— no events yet —' : btnLog.join('\n')}
+                </div>
+              </section>
+
+              {/* ----- LinkButton ----- */}
+              <section>
+                <h2>LinkButton</h2>
+                <p className="stage-note">
+                  Provide an <code>href</code> to render as <code>&lt;a&gt;</code>; leave empty
+                  for <code>&lt;button&gt;</code>.
+                </p>
+                <div className="preview">
+                  <LinkButton
+                    state={lbState}
+                    size={lbSize}
+                    href={lbHref || undefined}
+                    onClick={() => pushLbLog('onClick')}
+                  >
+                    {lbLabel}
+                  </LinkButton>
+                </div>
+                <div className="events">
+                  {lbLog.length === 0 ? '— no events yet —' : lbLog.join('\n')}
+                </div>
+              </section>
+
+              {/* ----- DropdownButton ----- */}
+              <section>
+                <h2>DropdownButton + _BaseMenu</h2>
+                <p className="stage-note">
+                  When <code>isOpen=true</code>, the floating <code>_BaseMenu</code> sub-component
+                  drops below the button with selectable options. Click outside or press{' '}
+                  <code>Escape</code> to dismiss.
+                </p>
+                <div className="preview" style={{ minHeight: 180, alignItems: 'flex-start' }}>
+                  <DropdownButton
+                    variant={dbVariant}
+                    size={dbSize}
+                    isDisabled={dbDisabled}
+                    isOpen={dbOpen}
+                    onToggle={(next) => {
+                      setDbOpen(next);
+                      pushDbLog(`onToggle: ${next}`);
+                    }}
+                    onSelect={(id) => pushDbLog(`onSelect: ${id}`)}
+                    onClick={() => pushDbLog('onClick')}
+                    menuItems={[
+                      { id: 'option-1', label: 'Option' },
+                      { id: 'option-2', label: 'Option' },
+                    ]}
+                  >
+                    {dbLabel}
+                  </DropdownButton>
+                </div>
+                <div className="events">
+                  {dbLog.length === 0 ? '— no events yet —' : dbLog.join('\n')}
+                </div>
+              </section>
+
+              {/* ----- ButtonGroup (nested Buttons — paired layout) ----- */}
+              <section>
+                <h2>ButtonGroup — paired action layout</h2>
+                <p className="stage-note">
+                  Pairs related action buttons with a consistent gap. Each child keeps its
+                  own rounded corners and border — the group does <em>not</em> merge them
+                  into a shared container.
+                </p>
+                <div className="preview">
+                  <ButtonGroup Style={bgStyle} ariaLabel="Paired actions">
+                    {bgStyle === 'Link' ? (
+                      <>
+                        <LinkButton size="M" href="#">
+                          Link ↗
+                        </LinkButton>
+                        <Button variant="Primary" color="Primary" size="M">
+                          Button
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button variant="Secondary" color="Primary" size="M">
+                          Cancel
+                        </Button>
+                        <Button variant="Primary" color="Primary" size="M">
+                          Save
+                        </Button>
+                      </>
+                    )}
+                  </ButtonGroup>
+                </div>
+                <p className="stage-note" style={{ marginTop: 'var(--gap-16)' }}>
+                  Larger size demonstration:
+                </p>
+                <div className="preview">
+                  <ButtonGroup Style={bgStyle} ariaLabel="Paired actions (large)">
+                    {bgStyle === 'Link' ? (
+                      <>
+                        <LinkButton size="L" href="#">
+                          Link ↗
+                        </LinkButton>
+                        <Button variant="Primary" color="Primary" size="L">
+                          Button
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button variant="Secondary" color="Primary" size="L">
+                          Button
+                        </Button>
+                        <Button variant="Primary" color="Primary" size="L">
+                          Button
+                        </Button>
+                      </>
+                    )}
+                  </ButtonGroup>
+                </div>
+              </section>
+
+              {/* ----- Switch ----- */}
+              <section>
+                <h2>Switch</h2>
+                <div className="preview">
+                  <Switch
+                    State={swState}
+                    checked={swChecked}
+                    label="Email notifications"
+                    onChange={(next) => {
+                      setSwChecked(next);
+                      pushSwLog(`onChange: ${next}`);
+                    }}
+                  />
+                </div>
+                <div className="events">
+                  {swLog.length === 0 ? '— no events yet —' : swLog.join('\n')}
+                </div>
+              </section>
+
+              {/* ----- RadioButton (group) ----- */}
+              <section>
+                <h2>RadioButton — group</h2>
+                <p className="stage-note">
+                  Always group with the same <code>name</code> and wrap in a
+                  <code> &lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code>.
+                </p>
+                <div className="preview">
+                  <fieldset
+                    style={{
+                      border: '1px solid var(--color-stroke-subdued)',
+                      borderRadius: 'var(--rd-S)',
+                      padding: 'var(--gap-12)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 'var(--gap-8)',
+                    }}
+                  >
+                    <legend
+                      style={{
+                        padding: '0 var(--gap-8)',
+                        color: 'var(--color-text-subdued)',
+                        fontSize: 'var(--font-size-body-small)',
+                      }}
+                    >
+                      Repayment frequency
+                    </legend>
+                    {['monthly', 'quarterly', 'annual'].map((v) => (
+                      <RadioButton
+                        key={v}
+                        name="freq"
+                        value={v}
+                        label={v[0].toUpperCase() + v.slice(1)}
+                        State={rbState}
+                        checked={rbValue === v}
+                        onChange={() => setRbValue(v)}
+                      />
+                    ))}
+                  </fieldset>
+                </div>
+              </section>
+
+              {/* ----- Checkbox ----- */}
+              <section>
+                <h2>Checkbox</h2>
+                <p className="stage-note">
+                  Toggling <code>indeterminate</code> sets <code>aria-checked="mixed"</code>
+                  for select-all patterns.
+                </p>
+                <div className="preview">
+                  <Checkbox
+                    State={cbState}
+                    label="I agree to the terms and conditions"
+                    checked={cbChecked}
+                    indeterminate={cbIndeterminate}
+                    onChange={(next) => setCbChecked(next)}
+                  />
+                </div>
+              </section>
+            </main>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<Playground />);
+    </script>
+  </body>
+</html>

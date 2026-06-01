@@ -1,0 +1,34 @@
+/* ButtonGroup — paired-action layout.
+ *
+ * The group is a simple flex row with a consistent gap between children.
+ * It does NOT add a shared container border, shared radius, or internal
+ * dividers — each child Button/LinkButton keeps its own visuals.
+ *
+ * Default style pairs two `Button`s (typically Secondary + Primary).
+ * Link style pairs a `LinkButton` with a `Button`.
+ */
+
+.dcds-ButtonGroup {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-16);
+}
+
+/* Default style — typical Secondary + Primary action pair */
+.dcds-ButtonGroup--Style-Default {
+  /* No additional styling — flex gap is sufficient. */
+}
+
+/* Link style — LinkButton + Button pair */
+.dcds-ButtonGroup--Style-Link {
+  gap: var(--gap-16);
+}
+
+/* Optional vertical-stacked mode for narrow viewports.
+ * Apply via .dcds-ButtonGroup--stack on the wrapper when needed.
+ */
+.dcds-ButtonGroup--stack {
+  flex-direction: column;
+  align-items: stretch;
+}
