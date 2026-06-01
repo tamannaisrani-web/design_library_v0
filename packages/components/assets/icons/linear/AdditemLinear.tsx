@@ -1,0 +1,35 @@
+import React from 'react'
+
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string
+}
+
+const AdditemLinear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden={true}
+    focusable="false"
+    {...props}
+  >
+<g clipPath="url(#clip0_332_18836)">
+<path d="M8 16H5.43C3.14 16 2 14.86 2 12.57V5.43C2 3.14 3.14 2 5.43 2H10C12.29 2 13.43 3.14 13.43 5.43" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18.5701 22H14.0001C11.7101 22 10.5701 20.86 10.5701 18.57V11.43C10.5701 9.14 11.7101 8 14.0001 8H18.5701C20.8601 8 22.0001 9.14 22.0001 11.43V18.57C22.0001 20.86 20.8601 22 18.5701 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M14.8701 15H18.1301" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M16.5 16.6301V13.3701" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_332_18836">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+  </svg>
+)
+
+AdditemLinear.displayName = 'AdditemLinear'
+
+export { AdditemLinear }
+export default AdditemLinear

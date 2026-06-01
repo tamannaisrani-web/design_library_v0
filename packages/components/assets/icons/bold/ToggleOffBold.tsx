@@ -1,0 +1,25 @@
+import React from 'react'
+
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string
+}
+
+const ToggleOffBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden={true}
+    focusable="false"
+    {...props}
+  >
+<path d="M16.65 3.85986H7.35C3.25 3.85986 2 5.10986 2 9.20986V14.7899C2 18.8899 3.25 20.1399 7.35 20.1399H16.65C20.75 20.1399 22 18.8899 22 14.7899V9.20986C22 5.10986 20.75 3.85986 16.65 3.85986ZM14.09 13.1199C14.09 15.3699 13.04 16.4199 10.79 16.4199H8.56C6.31 16.4199 5.26 15.3699 5.26 13.1199V10.8899C5.26 8.63986 6.31 7.58986 8.56 7.58986H10.79C13.04 7.58986 14.09 8.63986 14.09 10.8899V13.1199Z" fill="currentColor"/>
+  </svg>
+)
+
+ToggleOffBold.displayName = 'ToggleOffBold'
+
+export { ToggleOffBold }
+export default ToggleOffBold

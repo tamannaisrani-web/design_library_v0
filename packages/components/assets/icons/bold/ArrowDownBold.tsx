@@ -1,0 +1,25 @@
+import React from 'react'
+
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string
+}
+
+const ArrowDownBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden={true}
+    focusable="false"
+    {...props}
+  >
+<path d="M17.9202 8.17993H11.6902H6.08024C5.12024 8.17993 4.64024 9.33993 5.32024 10.0199L10.5002 15.1999C11.3302 16.0299 12.6802 16.0299 13.5102 15.1999L15.4802 13.2299L18.6902 10.0199C19.3602 9.33993 18.8802 8.17993 17.9202 8.17993Z" fill="currentColor"/>
+  </svg>
+)
+
+ArrowDownBold.displayName = 'ArrowDownBold'
+
+export { ArrowDownBold }
+export default ArrowDownBold
