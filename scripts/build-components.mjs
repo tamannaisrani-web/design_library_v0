@@ -18,11 +18,13 @@ const ROOT = path.join(__dirname, '..')
 const VARIANTS = ['linear', 'bold', 'outline']
 
 function toPascalCase(str) {
-  const result = str
+  const decoded = str.replace(/&amp;/g, '&').replace(/&/g, 'And')
+  const result = decoded
     .split(/[-_\s]+/)
     .filter(s => s.length > 0)
     .map(s => s.charAt(0).toUpperCase() + s.slice(1))
     .join('')
+    .replace(/[^A-Za-z0-9]/g, '')
   return /^\d/.test(result) ? `Icon${result}` : result
 }
 

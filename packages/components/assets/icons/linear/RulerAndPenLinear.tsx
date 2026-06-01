@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const Ruler&amp;penLinear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const RulerAndPenLinear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -25,7 +25,7 @@ const Ruler&amp;penLinear = ({ size = 24, ...props }: IconProps): React.ReactEle
   </svg>
 )
 
-Ruler&amp;penLinear.displayName = 'Ruler&amp;penLinear'
+RulerAndPenLinear.displayName = 'RulerAndPenLinear'
 
-export { Ruler&amp;penLinear }
-export default Ruler&amp;penLinear
+export { RulerAndPenLinear }
+export default RulerAndPenLinear
