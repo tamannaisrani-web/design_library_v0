@@ -4,11 +4,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--gap-4);
+  gap: var(--gap-8);
   font-family: var(--font-family);
   font-weight: var(--font-weight-bold);
-  border-radius: var(--rd-S);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   cursor: pointer;
   transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
   white-space: nowrap;
@@ -25,30 +24,34 @@
 /* ---------- Sizes ---------- */
 .dcds-Button--size-L {
   height: 48px;
-  padding: 0 var(--gap-24);
+  padding: 0 var(--gap-20);
   font-size: var(--font-size-body);
+  border-radius: var(--rd-S);
 }
 .dcds-Button--size-M {
   height: 40px;
   padding: 0 var(--gap-16);
   font-size: var(--font-size-body);
+  border-radius: var(--rd-S);
 }
 .dcds-Button--size-S {
   height: 32px;
   padding: 0 var(--gap-12);
-  font-size: var(--font-size-label);
+  font-size: var(--font-size-body-small);
+  border-radius: var(--rd-XS);
 }
 .dcds-Button--size-XS {
-  height: 28px;
+  height: var(--gap-24);
   padding: 0 var(--gap-8);
-  font-size: var(--font-size-label);
+  font-size: var(--font-size-body-small);
+  border-radius: var(--rd-XS);
 }
 
 /* ---------- isIconOnly (square footprint) ---------- */
 .dcds-Button--icon-only.dcds-Button--size-L  { width: 48px; padding: 0; }
 .dcds-Button--icon-only.dcds-Button--size-M  { width: 40px; padding: 0; }
 .dcds-Button--icon-only.dcds-Button--size-S  { width: 32px; padding: 0; }
-.dcds-Button--icon-only.dcds-Button--size-XS { width: 28px; padding: 0; }
+.dcds-Button--icon-only.dcds-Button--size-XS { width: var(--gap-24); padding: 0; }
 
 /* ---------- isFullWidth ---------- */
 .dcds-Button--full-width {
@@ -84,7 +87,7 @@
 
 /* ----- Secondary (outlined) ----- */
 .dcds-Button--variant-Secondary {
-  background-color: transparent;
+  background-color: var(--color-surface-1);
 }
 .dcds-Button--variant-Secondary.dcds-Button--color-Primary {
   border-color: var(--color-stroke-action);
