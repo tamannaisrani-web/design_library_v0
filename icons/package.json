@@ -1,0 +1,24 @@
+{
+  "name": "@dcds/icons",
+  "version": "0.1.0",
+  "description": "Design Language System — React icon components (linear, bold, outline)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "import": "./dist/index.mjs", "require": "./dist/index.js", "types": "./dist/index.d.ts" },
+    "./linear": { "import": "./dist/linear.mjs", "require": "./dist/linear.js", "types": "./dist/linear.d.ts" },
+    "./bold": { "import": "./dist/bold.mjs", "require": "./dist/bold.js", "types": "./dist/bold.d.ts" },
+    "./outline": { "import": "./dist/outline.mjs", "require": "./dist/outline.js", "types": "./dist/outline.d.ts" }
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "generate": "node ../scripts/generate-icons.mjs",
+    "build": "npm run generate && tsup",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": { "react": ">=16.8.0" },
+  "keywords": ["icons", "svg", "react", "design-system", "dcds"],
+  "license": "MIT"
+}

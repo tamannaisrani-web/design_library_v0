@@ -1,0 +1,21 @@
+{
+  "name": "@dcds/components",
+  "version": "0.1.0",
+  "description": "Design Language System — React UI components (Button, Alert, Switch, etc.)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "import": "./dist/index.mjs", "require": "./dist/index.js", "types": "./dist/index.d.ts" }
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": { "react": ">=16.8.0" },
+  "keywords": ["components", "react", "design-system", "dcds"],
+  "license": "MIT"
+}
