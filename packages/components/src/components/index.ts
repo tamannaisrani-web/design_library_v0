@@ -8,6 +8,7 @@
  *   - `index.ts`         re-export
  */
 
+export * from './Alert';
 export * from './Button';
 export * from './LinkButton';
 export * from './DropdownButton';

@@ -41,6 +41,8 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   id,
   dataTestId,
+  leadingIcon,
+  trailingIcon,
   children,
   onClick,
   onFocus,
@@ -86,7 +88,9 @@ export const Button: React.FC<ButtonProps> = ({
       onKeyDown={onKeyDown}
       onKeyUp={onKeyUp}
     >
+      {leadingIcon && <span className="dcds-Button__icon">{leadingIcon}</span>}
       {children}
+      {trailingIcon && <span className="dcds-Button__icon">{trailingIcon}</span>}
     </button>
   );
 };

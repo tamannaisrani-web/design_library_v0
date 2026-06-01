@@ -49,7 +49,7 @@ export interface ButtonProps
    * - `L` 48px — page-level hero CTA only
    * - `M` 40px — default
    * - `S` 32px — toolbars, dense layouts
-   * - `XS` 28px — tables, tags only
+   * - `XS` 24px — tables, tags only
    * @default 'M'
    */
   size?: ActionSize;
@@ -75,6 +75,17 @@ export interface ButtonProps
   /** Communicates an in-flight async operation to assistive technology. */
   ariaBusy?: boolean;
 
-  /** Label and/or icon. Icon-only buttons should contain a single icon element. */
+  /**
+   * Icon rendered **before** the label. Sized automatically to the button's scale
+   * (16 px for L/M, 12 px for S/XS). Pass a single icon component.
+   */
+  leadingIcon?: ReactNode;
+
+  /**
+   * Icon rendered **after** the label. Same automatic sizing as `leadingIcon`.
+   */
+  trailingIcon?: ReactNode;
+
+  /** Label text (and/or arbitrary content). For icon-only buttons, pass the icon here instead. */
   children?: ReactNode;
 }
