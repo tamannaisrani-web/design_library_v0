@@ -30,7 +30,7 @@
   },
   "files": [
     "dist",
-    "src/icons"
+    "packages/components/assets/icons"
   ],
   "scripts": {
     "dev": "vite",

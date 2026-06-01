@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Generates React TSX components from SVG files in src/icons/.
+ * Generates React TSX components from SVG files in packages/components/assets/icons/.
  * Run after export-figma.mjs.
  *
  * Usage: node scripts/build-components.mjs
@@ -53,7 +53,7 @@ const svgrConfig = {
 const variantExports = Object.fromEntries(VARIANTS.map(v => [v, []]))
 
 for (const variant of VARIANTS) {
-  const svgDir = path.join(ROOT, 'src/icons', variant)
+  const svgDir = path.join(ROOT, 'packages/components/assets/icons', variant)
 
   if (!existsSync(svgDir)) {
     console.warn(`[${variant}] No SVGs found, skipping`)
@@ -69,7 +69,7 @@ for (const variant of VARIANTS) {
 
   console.log(`[${variant}] Generating ${files.length} components...`)
 
-  const outDir = path.join(ROOT, 'src/components', variant)
+  const outDir = path.join(ROOT, 'packages/components/assets/icons', variant)
   await mkdir(outDir, { recursive: true })
 
   for (const file of files) {
@@ -90,7 +90,7 @@ for (const variant of VARIANTS) {
     }
   }
 
-  // Write variant barrel file
+  // Write variant barrel file (alongside SVGs + TSX in same folder)
   const barrel = variantExports[variant]
     .map(name => `export { ${name} } from './${name}'`)
     .join('\n')
@@ -102,15 +102,15 @@ const activeVariants = VARIANTS.filter(v => variantExports[v].length > 0)
 
 for (const variant of activeVariants) {
   await writeFile(
-    path.join(ROOT, `src/${variant}.ts`),
-    `export * from './components/${variant}'\n`,
+    path.join(ROOT, `packages/components/assets/icons/${variant}.ts`),
+    `export * from './icons/${variant}'\n`,
     'utf-8'
   )
 }
 
 await writeFile(
-  path.join(ROOT, 'src/index.ts'),
-  activeVariants.map(v => `export * from './components/${v}'`).join('\n') + '\n',
+  path.join(ROOT, 'packages/components/assets/icons/index.ts'),
+  activeVariants.map(v => `export * from './${v}'`).join('\n') + '\n',
   'utf-8'
 )
 

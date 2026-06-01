@@ -2,10 +2,10 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: {
-    index: 'src/index.ts',
-    linear: 'src/linear.ts',
-    bold: 'src/bold.ts',
-    outline: 'src/outline.ts',
+    index: 'packages/components/assets/icons/index.ts',
+    linear: 'packages/components/assets/icons/linear/index.ts',
+    bold: 'packages/components/assets/icons/bold/index.ts',
+    outline: 'packages/components/assets/icons/outline/index.ts',
   },
   format: ['cjs', 'esm'],
   dts: true,
