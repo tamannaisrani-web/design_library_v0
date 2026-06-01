@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const Ruler&amp;penBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const RulerAndPenBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -21,7 +21,7 @@ const Ruler&amp;penBold = ({ size = 24, ...props }: IconProps): React.ReactEleme
   </svg>
 )
 
-Ruler&amp;penBold.displayName = 'Ruler&amp;penBold'
+RulerAndPenBold.displayName = 'RulerAndPenBold'
 
-export { Ruler&amp;penBold }
-export default Ruler&amp;penBold
+export { RulerAndPenBold }
+export default RulerAndPenBold

@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const MonitorMobbile Linear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const MonitorMobbileLinear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -24,7 +24,7 @@ const MonitorMobbile Linear = ({ size = 24, ...props }: IconProps): React.ReactE
   </svg>
 )
 
-MonitorMobbile Linear.displayName = 'MonitorMobbile Linear'
+MonitorMobbileLinear.displayName = 'MonitorMobbile Linear'
 
-export { MonitorMobbile Linear }
-export default MonitorMobbile Linear
+export { MonitorMobbileLinear }
+export default MonitorMobbileLinear

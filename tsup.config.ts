@@ -8,7 +8,7 @@ export default defineConfig({
     outline: 'packages/components/assets/icons/outline/index.ts',
   },
   format: ['cjs', 'esm'],
-  dts: true,
+  dts: false,
   clean: true,
   external: ['react', 'react/jsx-runtime'],
   treeshake: true,

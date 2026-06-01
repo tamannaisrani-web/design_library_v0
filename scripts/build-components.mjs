@@ -18,10 +18,14 @@ const ROOT = path.join(__dirname, '..')
 const VARIANTS = ['linear', 'bold', 'outline']
 
 function toPascalCase(str) {
-  return str
-    .split(/[-_]/)
+  const decoded = str.replace(/&amp;/g, '&').replace(/&/g, 'And')
+  const result = decoded
+    .split(/[-_\s]+/)
+    .filter(s => s.length > 0)
     .map(s => s.charAt(0).toUpperCase() + s.slice(1))
     .join('')
+    .replace(/[^A-Za-z0-9]/g, '')
+  return /^\d/.test(result) ? `Icon${result}` : result
 }
 
 const svgrConfig = {
@@ -103,7 +107,7 @@ const activeVariants = VARIANTS.filter(v => variantExports[v].length > 0)
 for (const variant of activeVariants) {
   await writeFile(
     path.join(ROOT, `packages/components/assets/icons/${variant}.ts`),
-    `export * from './icons/${variant}'\n`,
+    `export * from './${variant}'\n`,
     'utf-8'
   )
 }

@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const 24SupportOutline = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const Icon24SupportOutline = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -21,7 +21,7 @@ const 24SupportOutline = ({ size = 24, ...props }: IconProps): React.ReactElemen
   </svg>
 )
 
-24SupportOutline.displayName = '24SupportOutline'
+Icon24SupportOutline.displayName = '24SupportOutline'
 
-export { 24SupportOutline }
-export default 24SupportOutline
+export { Icon24SupportOutline }
+export default Icon24SupportOutline

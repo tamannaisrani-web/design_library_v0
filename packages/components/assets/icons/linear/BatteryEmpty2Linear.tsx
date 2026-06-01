@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const BatteryEmpty 2Linear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const BatteryEmpty2Linear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -21,7 +21,7 @@ const BatteryEmpty 2Linear = ({ size = 24, ...props }: IconProps): React.ReactEl
   </svg>
 )
 
-BatteryEmpty 2Linear.displayName = 'BatteryEmpty 2Linear'
+BatteryEmpty2Linear.displayName = 'BatteryEmpty 2Linear'
 
-export { BatteryEmpty 2Linear }
-export default BatteryEmpty 2Linear
+export { BatteryEmpty2Linear }
+export default BatteryEmpty2Linear

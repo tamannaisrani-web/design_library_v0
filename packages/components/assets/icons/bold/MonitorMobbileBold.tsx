@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const MonitorMobbile Bold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const MonitorMobbileBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -20,7 +20,7 @@ const MonitorMobbile Bold = ({ size = 24, ...props }: IconProps): React.ReactEle
   </svg>
 )
 
-MonitorMobbile Bold.displayName = 'MonitorMobbile Bold'
+MonitorMobbileBold.displayName = 'MonitorMobbile Bold'
 
-export { MonitorMobbile Bold }
-export default MonitorMobbile Bold
+export { MonitorMobbileBold }
+export default MonitorMobbileBold
