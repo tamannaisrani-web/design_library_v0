@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const BatteryEmpty 2Outline = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const BatteryEmpty2Outline = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -21,7 +21,7 @@ const BatteryEmpty 2Outline = ({ size = 24, ...props }: IconProps): React.ReactE
   </svg>
 )
 
-BatteryEmpty 2Outline.displayName = 'BatteryEmpty 2Outline'
+BatteryEmpty2Outline.displayName = 'BatteryEmpty 2Outline'
 
-export { BatteryEmpty 2Outline }
-export default BatteryEmpty 2Outline
+export { BatteryEmpty2Outline }
+export default BatteryEmpty2Outline

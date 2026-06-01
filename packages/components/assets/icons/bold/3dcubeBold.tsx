@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const 3dcubeBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const Icon3dcubeBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -21,7 +21,7 @@ const 3dcubeBold = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   </svg>
 )
 
-3dcubeBold.displayName = '3dcubeBold'
+Icon3dcubeBold.displayName = '3dcubeBold'
 
-export { 3dcubeBold }
-export default 3dcubeBold
+export { Icon3dcubeBold }
+export default Icon3dcubeBold

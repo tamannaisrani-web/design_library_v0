@@ -4,7 +4,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
 }
 
-const 3dcubeLinear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
+const Icon3dcubeLinear = ({ size = 24, ...props }: IconProps): React.ReactElement => (
   <svg
     width={size}
     height={size}
@@ -21,7 +21,7 @@ const 3dcubeLinear = ({ size = 24, ...props }: IconProps): React.ReactElement =>
   </svg>
 )
 
-3dcubeLinear.displayName = '3dcubeLinear'
+Icon3dcubeLinear.displayName = '3dcubeLinear'
 
-export { 3dcubeLinear }
-export default 3dcubeLinear
+export { Icon3dcubeLinear }
+export default Icon3dcubeLinear
