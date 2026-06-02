@@ -5,16 +5,358 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DCDS Components — Interactive Playground</title>
 
-    <!-- Tokens (CSS variables) -->
-    <link rel="stylesheet" href="/src/theme/tokens.css" />
-    <link rel="stylesheet" href="/src/components/Alert/Alert.css" />
-    <link rel="stylesheet" href="/src/components/Button/Button.css" />
-    <link rel="stylesheet" href="/src/components/LinkButton/LinkButton.css" />
-    <link rel="stylesheet" href="/src/components/DropdownButton/DropdownButton.css" />
-    <link rel="stylesheet" href="/src/components/ButtonGroup/ButtonGroup.css" />
-    <link rel="stylesheet" href="/src/components/Switch/Switch.css" />
-    <link rel="stylesheet" href="/src/components/RadioButton/RadioButton.css" />
-    <link rel="stylesheet" href="/src/components/Checkbox/Checkbox.css" />
+    <style>
+/* ============================================================
+ * tokens.css
+ * ============================================================ */
+:root {
+  --dcds-noble-blue-0: #eff6ff;
+  --dcds-noble-blue-50: #dae9fb;
+  --dcds-noble-blue-100: #b5d4f6;
+  --dcds-noble-blue-200: #6ba8ee;
+  --dcds-noble-blue-300: #217ce5;
+  --dcds-noble-blue-400: #1355a1;
+  --dcds-noble-blue-500: #0a2e57;
+  --dcds-noble-blue-600: #082546;
+  --dcds-noble-blue-700: #061b34;
+  --dcds-noble-blue-800: #041223;
+  --dcds-noble-blue-900: #020911;
+  --dcds-wealthy-green-0: #f3fff9;
+  --dcds-wealthy-green-50: #e7faf2;
+  --dcds-wealthy-green-100: #cff3e6;
+  --dcds-wealthy-green-200: #9febcc;
+  --dcds-wealthy-green-300: #6fe1b3;
+  --dcds-wealthy-green-400: #3fd79a;
+  --dcds-wealthy-green-500: #26b67f;
+  --dcds-wealthy-green-600: #1e9263;
+  --dcds-wealthy-green-700: #176d4a;
+  --dcds-wealthy-green-800: #0f4932;
+  --dcds-wealthy-green-900: #082419;
+  --dcds-sky-blue-0: #f1f9ff;
+  --dcds-sky-blue-50: #ebf5fb;
+  --dcds-sky-blue-100: #daecf7;
+  --dcds-sky-blue-200: #b5d8ef;
+  --dcds-sky-blue-300: #8fc5e8;
+  --dcds-sky-blue-400: #6ab1e1;
+  --dcds-sky-blue-500: #459ed9;
+  --dcds-sky-blue-600: #2782be;
+  --dcds-sky-blue-700: #1d618e;
+  --dcds-sky-blue-800: #13405f;
+  --dcds-sky-blue-900: #0a202f;
+  --dcds-mustard-yellow-0: #fffbf4;
+  --dcds-mustard-yellow-50: #fef7ec;
+  --dcds-mustard-yellow-100: #fcf0d8;
+  --dcds-mustard-yellow-200: #fae0b1;
+  --dcds-mustard-yellow-300: #f7d18b;
+  --dcds-mustard-yellow-400: #f5c164;
+  --dcds-mustard-yellow-500: #f2b23d;
+  --dcds-mustard-yellow-600: #e3980f;
+  --dcds-mustard-yellow-700: #aa720b;
+  --dcds-mustard-yellow-800: #724c08;
+  --dcds-mustard-yellow-900: #392604;
+  --dcds-zesty-orange-0: #fff7f5;
+  --dcds-zesty-orange-50: #faefec;
+  --dcds-zesty-orange-100: #f5e0d9;
+  --dcds-zesty-orange-200: #ebc1b3;
+  --dcds-zesty-orange-300: #e0a18c;
+  --dcds-zesty-orange-400: #d68266;
+  --dcds-zesty-orange-500: #cc6340;
+  --dcds-zesty-orange-600: #a94c2d;
+  --dcds-zesty-orange-700: #7f3922;
+  --dcds-zesty-orange-800: #552617;
+  --dcds-zesty-orange-900: #2a130b;
+  --dcds-spring-green-0: #e3fceb;
+  --dcds-spring-green-50: #ceedd9;
+  --dcds-spring-green-100: #b9dec8;
+  --dcds-spring-green-200: #8fc1a8;
+  --dcds-spring-green-300: #66a486;
+  --dcds-spring-green-400: #3c8765;
+  --dcds-spring-green-500: #126a43;
+  --dcds-spring-green-600: #0e5535;
+  --dcds-spring-green-700: #0b4028;
+  --dcds-spring-green-800: #072b1b;
+  --dcds-spring-green-900: #04150d;
+  --dcds-cool-grey-0: #ffffff;
+  --dcds-cool-grey-50: #f9f9f9;
+  --dcds-cool-grey-100: #f5f5f5;
+  --dcds-cool-grey-200: #f0f0f0;
+  --dcds-cool-grey-300: #dedede;
+  --dcds-cool-grey-400: #b5b5b5;
+  --dcds-cool-grey-500: #989898;
+  --dcds-cool-grey-600: #737171;
+  --dcds-cool-grey-700: #4b4b4b;
+  --dcds-cool-grey-800: #292929;
+  --dcds-cool-grey-900: #121212;
+  --color-text-primary: var(--dcds-noble-blue-500);
+  --color-text-secondary: var(--dcds-sky-blue-500);
+  --color-text-action: var(--dcds-wealthy-green-500);
+  --color-text-neutral: var(--dcds-cool-grey-900);
+  --color-text-subdued: var(--dcds-cool-grey-700);
+  --color-text-invert: var(--dcds-cool-grey-0);
+  --color-text-disabled: var(--dcds-cool-grey-400);
+  --color-text-warning: var(--dcds-mustard-yellow-800);
+  --color-text-invert-warning: var(--dcds-mustard-yellow-50);
+  --color-text-error: var(--dcds-zesty-orange-700);
+  --color-text-invert-error: var(--dcds-zesty-orange-50);
+  --color-text-success: var(--dcds-spring-green-700);
+  --color-text-invert-success: var(--dcds-spring-green-50);
+  --color-text-info: var(--dcds-noble-blue-700);
+  --color-text-invert-info: var(--dcds-sky-blue-50);
+  --color-icon-primary: var(--dcds-noble-blue-500);
+  --color-icon-secondary: var(--dcds-sky-blue-500);
+  --color-icon-action: var(--dcds-wealthy-green-500);
+  --color-icon-neutral: var(--dcds-cool-grey-900);
+  --color-icon-subdued: var(--dcds-cool-grey-600);
+  --color-icon-invert: var(--dcds-cool-grey-50);
+  --color-icon-disabled: var(--dcds-cool-grey-400);
+  --color-icon-warning: var(--dcds-mustard-yellow-600);
+  --color-icon-error: var(--dcds-zesty-orange-600);
+  --color-icon-success: var(--dcds-spring-green-600);
+  --color-icon-info: var(--dcds-sky-blue-600);
+  --color-surface-1: var(--dcds-cool-grey-0);
+  --color-surface-2: var(--dcds-cool-grey-50);
+  --color-surface-3: var(--dcds-cool-grey-100);
+  --color-surface-4: var(--dcds-cool-grey-200);
+  --color-surface-disabled: var(--dcds-cool-grey-300);
+  --color-overlay-50: rgba(18, 18, 18, 0.5);
+  --color-overlay-25: rgba(18, 18, 18, 0.25);
+  --color-fill-light-action: var(--dcds-wealthy-green-100);
+  --color-fill-action: var(--dcds-wealthy-green-500);
+  --color-fill-dark-action: var(--dcds-wealthy-green-600);
+  --color-fill-primary-0: var(--dcds-noble-blue-0);
+  --color-fill-primary-1: var(--dcds-noble-blue-50);
+  --color-fill-primary-2: var(--dcds-noble-blue-100);
+  --color-fill-primary-3: var(--dcds-noble-blue-200);
+  --color-fill-primary-9: var(--dcds-noble-blue-600);
+  --color-fill-secondary-0: var(--dcds-sky-blue-0);
+  --color-fill-secondary-1: var(--dcds-sky-blue-50);
+  --color-fill-secondary-2: var(--dcds-sky-blue-100);
+  --color-fill-secondary-3: var(--dcds-sky-blue-200);
+  --color-fill-light-warning: var(--dcds-mustard-yellow-100);
+  --color-fill-invert-warning: var(--dcds-mustard-yellow-600);
+  --color-fill-dark-warning: var(--dcds-mustard-yellow-700);
+  --color-fill-light-error: var(--dcds-zesty-orange-100);
+  --color-fill-invert-error: var(--dcds-zesty-orange-600);
+  --color-fill-dark-error: var(--dcds-zesty-orange-700);
+  --color-fill-light-success: var(--dcds-wealthy-green-100);
+  --color-fill-invert-success: var(--dcds-spring-green-600);
+  --color-fill-dark-success: var(--dcds-spring-green-700);
+  --color-fill-light-info: var(--dcds-sky-blue-100);
+  --color-fill-invert-info: var(--dcds-sky-blue-600);
+  --color-fill-dark-info: var(--dcds-sky-blue-700);
+  --color-stroke-focus: var(--dcds-noble-blue-400);
+  --color-stroke-focus-subtle: var(--dcds-noble-blue-200);
+  --color-stroke-action: var(--dcds-wealthy-green-500);
+  --color-stroke-neutral: var(--dcds-cool-grey-400);
+  --color-stroke-subdued: var(--dcds-cool-grey-300);
+  --color-stroke-invert: var(--dcds-cool-grey-0);
+  --color-stroke-disabled: var(--dcds-cool-grey-400);
+  --color-stroke-warning: var(--dcds-mustard-yellow-600);
+  --color-stroke-error: var(--dcds-zesty-orange-600);
+  --color-stroke-success: var(--dcds-spring-green-600);
+  --color-stroke-info: var(--dcds-sky-blue-600);
+  --color-hyperlink-default: var(--dcds-sky-blue-600);
+  --color-hyperlink-hover: var(--dcds-sky-blue-400);
+  --color-hyperlink-disabled: var(--dcds-cool-grey-400);
+  --gap-0: 0px; --gap-2: 2px; --gap-4: 4px; --gap-8: 8px;
+  --gap-12: 12px; --gap-16: 16px; --gap-20: 20px; --gap-24: 24px;
+  --gap-32: 32px; --gap-40: 40px; --gap-48: 48px; --gap-56: 56px;
+  --gap-64: 64px; --gap-80: 80px; --gap-108: 108px;
+  --rd-Nil: 0px; --rd-XS: 4px; --rd-S: 8px; --rd-M: 12px;
+  --rd-L: 24px; --rd-XL: 40px; --rd-Max: 1000px;
+  --shadow-S: 4px 4px 16px rgba(0,0,0,0.16);
+  --font-family: 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-h1: 44px; --font-size-h2: 32px; --font-size-h3: 24px;
+  --font-size-h4: 20px; --font-size-caption: 18px; --font-size-body: 16px;
+  --font-size-label: 14px; --font-size-body-small: 12px; --font-size-validation: 10px;
+  --font-weight-regular: 400; --font-weight-bold: 700;
+}
+
+/* ============================================================
+ * Button.css
+ * ============================================================ */
+.dcds-Button { display:inline-flex; align-items:center; justify-content:center; gap:var(--gap-8); font-family:var(--font-family); font-weight:var(--font-weight-bold); border:1px solid transparent; cursor:pointer; transition:background-color 120ms ease,border-color 120ms ease,color 120ms ease; white-space:nowrap; user-select:none; text-decoration:none; background:none; }
+.dcds-Button:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-Button--size-L { height:48px; padding:0 var(--gap-20); font-size:var(--font-size-body); border-radius:var(--rd-S); }
+.dcds-Button--size-M { height:40px; padding:0 var(--gap-16); font-size:var(--font-size-body); border-radius:var(--rd-S); }
+.dcds-Button--size-S { height:32px; padding:0 var(--gap-12); font-size:var(--font-size-body-small); border-radius:var(--rd-XS); }
+.dcds-Button--size-XS { height:var(--gap-24); padding:0 var(--gap-8); font-size:var(--font-size-body-small); border-radius:var(--rd-XS); }
+.dcds-Button__icon { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.dcds-Button--size-L .dcds-Button__icon, .dcds-Button--size-M .dcds-Button__icon { width:16px; height:16px; }
+.dcds-Button--size-S .dcds-Button__icon, .dcds-Button--size-XS .dcds-Button__icon { width:12px; height:12px; }
+.dcds-Button--icon-only.dcds-Button--size-L { width:48px; padding:0; }
+.dcds-Button--icon-only.dcds-Button--size-M { width:40px; padding:0; }
+.dcds-Button--icon-only.dcds-Button--size-S { width:32px; padding:0; }
+.dcds-Button--icon-only.dcds-Button--size-XS { width:var(--gap-24); padding:0; }
+.dcds-Button--full-width { width:100%; }
+.dcds-Button--variant-Primary.dcds-Button--color-Primary { background-color:var(--color-fill-action); color:var(--color-text-invert); }
+.dcds-Button--variant-Primary.dcds-Button--color-Primary:hover:not(:disabled) { background-color:var(--color-fill-dark-action); }
+.dcds-Button--variant-Primary.dcds-Button--color-Error { background-color:var(--color-fill-invert-error); color:var(--color-text-invert); }
+.dcds-Button--variant-Primary.dcds-Button--color-Error:hover:not(:disabled) { background-color:var(--color-fill-dark-error); }
+.dcds-Button--variant-Primary.dcds-Button--color-Warning { background-color:var(--color-fill-invert-warning); color:var(--color-text-invert-warning); }
+.dcds-Button--variant-Primary.dcds-Button--color-Warning:hover:not(:disabled) { background-color:var(--color-fill-dark-warning); }
+.dcds-Button--variant-Secondary { background-color:var(--color-surface-1); }
+.dcds-Button--variant-Secondary.dcds-Button--color-Primary { border-color:var(--color-stroke-action); color:var(--color-text-action); }
+.dcds-Button--variant-Secondary.dcds-Button--color-Primary:hover:not(:disabled) { background-color:var(--color-fill-light-action); }
+.dcds-Button--variant-Secondary.dcds-Button--color-Error { border-color:var(--color-stroke-error); color:var(--color-text-error); }
+.dcds-Button--variant-Secondary.dcds-Button--color-Error:hover:not(:disabled) { background-color:var(--color-fill-light-error); }
+.dcds-Button--variant-Secondary.dcds-Button--color-Warning { border-color:var(--color-stroke-warning); color:var(--color-text-warning); }
+.dcds-Button--variant-Secondary.dcds-Button--color-Warning:hover:not(:disabled) { background-color:var(--color-fill-light-warning); }
+.dcds-Button--variant-Tertiary { background-color:transparent; border-color:transparent; }
+.dcds-Button--variant-Tertiary.dcds-Button--color-Primary { color:var(--color-text-action); }
+.dcds-Button--variant-Tertiary.dcds-Button--color-Primary:hover:not(:disabled) { background-color:var(--color-fill-light-action); }
+.dcds-Button--variant-Tertiary.dcds-Button--color-Error { color:var(--color-text-error); }
+.dcds-Button--variant-Tertiary.dcds-Button--color-Error:hover:not(:disabled) { background-color:var(--color-fill-light-error); }
+.dcds-Button--variant-Tertiary.dcds-Button--color-Warning { color:var(--color-text-warning); }
+.dcds-Button--variant-Tertiary.dcds-Button--color-Warning:hover:not(:disabled) { background-color:var(--color-fill-light-warning); }
+.dcds-Button:disabled, .dcds-Button[aria-disabled='true'] { cursor:not-allowed; background-color:var(--color-surface-disabled); border-color:transparent; color:var(--color-text-disabled); pointer-events:none; }
+.dcds-Button--variant-Tertiary:disabled, .dcds-Button--variant-Tertiary[aria-disabled='true'] { background-color:transparent; color:var(--color-text-disabled); }
+.dcds-Button--variant-Secondary:disabled, .dcds-Button--variant-Secondary[aria-disabled='true'] { background-color:transparent; border-color:var(--color-stroke-disabled); color:var(--color-text-disabled); }
+
+/* ============================================================
+ * LinkButton.css
+ * ============================================================ */
+.dcds-LinkButton { display:inline-flex; align-items:center; gap:var(--gap-4); font-family:var(--font-family); font-weight:var(--font-weight-bold); background:none; border:none; padding:0; cursor:pointer; color:var(--color-hyperlink-default); text-decoration:none; transition:color 120ms ease; }
+.dcds-LinkButton:hover:not(:disabled):not([aria-disabled='true']) { color:var(--color-hyperlink-hover); text-decoration:underline; }
+.dcds-LinkButton:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
+.dcds-LinkButton--size-L { font-size:var(--font-size-body); }
+.dcds-LinkButton--size-M { font-size:var(--font-size-label); }
+.dcds-LinkButton--size-S { font-size:var(--font-size-body-small); }
+.dcds-LinkButton--size-XS { font-size:var(--font-size-validation); }
+.dcds-LinkButton--state-Disabled, .dcds-LinkButton:disabled, .dcds-LinkButton[aria-disabled='true'] { color:var(--color-hyperlink-disabled); cursor:not-allowed; pointer-events:none; text-decoration:none; }
+
+/* ============================================================
+ * DropdownButton.css
+ * ============================================================ */
+.dcds-DropdownButton__wrapper { position:relative; display:inline-block; }
+.dcds-DropdownButton { display:inline-flex; align-items:center; justify-content:space-between; gap:var(--gap-8); font-family:var(--font-family); font-weight:var(--font-weight-bold); border-radius:var(--rd-S); border:2px solid transparent; cursor:pointer; transition:background-color 120ms ease,border-color 120ms ease,color 120ms ease; white-space:nowrap; width:100%; }
+.dcds-DropdownButton:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-DropdownButton--size-L { height:48px; padding:0 var(--gap-16); font-size:var(--font-size-body); }
+.dcds-DropdownButton--size-M { height:40px; padding:0 var(--gap-16); font-size:var(--font-size-body); }
+.dcds-DropdownButton--size-S { height:32px; padding:0 var(--gap-12); font-size:var(--font-size-label); }
+.dcds-DropdownButton--size-XS { height:28px; padding:0 var(--gap-8); font-size:var(--font-size-label); }
+.dcds-DropdownButton--variant-Primary { background-color:var(--color-fill-action); color:var(--color-text-invert); }
+.dcds-DropdownButton--variant-Primary:hover:not(:disabled) { background-color:var(--color-fill-dark-action); }
+.dcds-DropdownButton--variant-Secondary { background-color:transparent; border-color:var(--color-stroke-action); color:var(--color-text-action); }
+.dcds-DropdownButton--variant-Secondary:hover:not(:disabled) { background-color:var(--color-fill-light-action); }
+.dcds-DropdownButton--variant-Tertiary { background-color:transparent; border-color:transparent; color:var(--color-text-action); }
+.dcds-DropdownButton--variant-Tertiary:hover:not(:disabled) { background-color:var(--color-fill-light-action); }
+.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Primary { background-color:var(--color-fill-dark-action); }
+.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Secondary, .dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Tertiary { background-color:var(--color-fill-light-action); }
+.dcds-DropdownButton:disabled, .dcds-DropdownButton[aria-disabled='true'] { cursor:not-allowed; pointer-events:none; background-color:var(--color-surface-disabled); border-color:transparent; color:var(--color-text-disabled); }
+.dcds-DropdownButton__chevron { transition:transform 150ms ease; display:inline-flex; }
+.dcds-DropdownButton--state-Open .dcds-DropdownButton__chevron { transform:rotate(180deg); }
+.dcds-DropdownButton__menu { position:absolute; top:calc(100% + var(--gap-4)); left:0; min-width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:var(--shadow-S); padding:0; margin:0; list-style:none; z-index:10; overflow:hidden; animation:dcds-DropdownButton__menu-in 120ms ease-out; }
+@keyframes dcds-DropdownButton__menu-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+.dcds-DropdownButton__menu-item { display:block; width:100%; text-align:left; padding:var(--gap-16); background:none; border:none; color:var(--color-text-primary); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); cursor:pointer; transition:background-color 120ms ease; }
+.dcds-DropdownButton__menu-item + .dcds-DropdownButton__menu-item, .dcds-DropdownButton__menu li + li .dcds-DropdownButton__menu-item { border-top:1px solid var(--color-stroke-subdued); }
+.dcds-DropdownButton__menu-item:hover:not(:disabled) { background-color:var(--color-fill-primary-1); }
+.dcds-DropdownButton__menu-item:focus-visible { outline:none; background-color:var(--color-fill-primary-1); box-shadow:inset 0 0 0 2px var(--color-stroke-focus); }
+.dcds-DropdownButton__menu-item:disabled, .dcds-DropdownButton__menu-item[aria-disabled='true'] { color:var(--color-text-disabled); cursor:not-allowed; }
+
+/* ============================================================
+ * ButtonGroup.css
+ * ============================================================ */
+.dcds-ButtonGroup { display:inline-flex; flex-direction:row; align-items:center; gap:var(--gap-16); }
+.dcds-ButtonGroup--Style-Default {}
+.dcds-ButtonGroup--Style-Link { gap:var(--gap-16); }
+.dcds-ButtonGroup--stack { flex-direction:column; align-items:stretch; }
+
+/* ============================================================
+ * Switch.css
+ * ============================================================ */
+.dcds-Switch { display:inline-flex; align-items:center; gap:var(--gap-8); font-family:var(--font-family); cursor:pointer; }
+.dcds-Switch__input { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.dcds-Switch__track { position:relative; width:40px; height:20px; background-color:var(--color-surface-1); border:2px solid var(--color-stroke-action); border-radius:var(--rd-Max); transition:background-color 150ms ease,border-color 150ms ease; flex-shrink:0; }
+.dcds-Switch__thumb { position:absolute; top:50%; left:2px; width:12px; height:12px; margin-top:-6px; background-color:var(--color-fill-action); border-radius:var(--rd-Max); transition:transform 150ms ease,background-color 150ms ease; }
+.dcds-Switch__input:checked + .dcds-Switch__track { background-color:var(--color-fill-action); border-color:var(--color-fill-action); }
+.dcds-Switch__input:checked + .dcds-Switch__track .dcds-Switch__thumb { transform:translateX(20px); background-color:var(--color-surface-1); }
+.dcds-Switch__input:focus-visible + .dcds-Switch__track { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-Switch__label { font-size:var(--font-size-label); color:var(--color-text-primary); }
+.dcds-Switch--State-Disabled, .dcds-Switch--State-Disabled .dcds-Switch__label { cursor:not-allowed; }
+.dcds-Switch--State-Disabled .dcds-Switch__track { background-color:var(--color-surface-disabled); border-color:var(--color-stroke-disabled); }
+.dcds-Switch--State-Disabled .dcds-Switch__input:checked + .dcds-Switch__track { background-color:var(--color-stroke-disabled); border-color:var(--color-stroke-disabled); }
+.dcds-Switch--State-Disabled .dcds-Switch__thumb { background-color:var(--dcds-cool-grey-400); }
+.dcds-Switch--State-Disabled .dcds-Switch__label { color:var(--color-text-disabled); }
+
+/* ============================================================
+ * RadioButton.css
+ * ============================================================ */
+.dcds-RadioButton { display:inline-flex; align-items:center; gap:var(--gap-8); font-family:var(--font-family); cursor:pointer; }
+.dcds-RadioButton__input { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.dcds-RadioButton__indicator { position:relative; width:24px; height:24px; border:2px solid var(--color-stroke-neutral); border-radius:var(--rd-Max); background-color:var(--color-surface-1); transition:border-color 120ms ease,background-color 120ms ease; flex-shrink:0; }
+.dcds-RadioButton__indicator::after { content:''; position:absolute; top:50%; left:50%; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:var(--rd-Max); background-color:transparent; transition:background-color 120ms ease; }
+.dcds-RadioButton:hover .dcds-RadioButton__indicator { border-color:var(--color-stroke-focus); }
+.dcds-RadioButton__input:checked + .dcds-RadioButton__indicator { border-color:var(--color-stroke-action); }
+.dcds-RadioButton__input:checked + .dcds-RadioButton__indicator::after { background-color:var(--color-fill-action); }
+.dcds-RadioButton__input:focus-visible + .dcds-RadioButton__indicator { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-RadioButton__label { font-size:var(--font-size-label); color:var(--color-text-primary); }
+.dcds-RadioButton--State-Disabled { cursor:not-allowed; }
+.dcds-RadioButton--State-Disabled .dcds-RadioButton__indicator { border-color:var(--color-stroke-disabled); background-color:var(--color-surface-disabled); }
+.dcds-RadioButton--State-Disabled .dcds-RadioButton__input:checked + .dcds-RadioButton__indicator::after { background-color:var(--color-text-disabled); }
+.dcds-RadioButton--State-Disabled .dcds-RadioButton__label { color:var(--color-text-disabled); }
+
+/* ============================================================
+ * Checkbox.css
+ * ============================================================ */
+.dcds-Checkbox { display:inline-flex; align-items:center; gap:var(--gap-8); font-family:var(--font-family); cursor:pointer; }
+.dcds-Checkbox__input { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.dcds-Checkbox__indicator { position:relative; width:24px; height:24px; border:2px solid var(--color-stroke-neutral); border-radius:var(--rd-XS); background-color:var(--color-surface-1); transition:background-color 120ms ease,border-color 120ms ease; flex-shrink:0; }
+.dcds-Checkbox__indicator::after { content:''; position:absolute; top:3px; left:7px; width:5px; height:11px; border:solid var(--color-text-invert); border-width:0 2px 2px 0; transform:rotate(45deg) scale(0); transition:transform 120ms ease; }
+.dcds-Checkbox__indicator::before { content:''; position:absolute; top:50%; left:4px; right:4px; height:2px; margin-top:-1px; background-color:var(--color-text-invert); transform:scaleX(0); transition:transform 120ms ease; }
+.dcds-Checkbox:hover .dcds-Checkbox__indicator { border-color:var(--color-stroke-focus); }
+.dcds-Checkbox__input:checked + .dcds-Checkbox__indicator { background-color:var(--color-fill-action); border-color:var(--color-fill-action); }
+.dcds-Checkbox__input:checked + .dcds-Checkbox__indicator::after { transform:rotate(45deg) scale(1); }
+.dcds-Checkbox--indeterminate .dcds-Checkbox__indicator { background-color:var(--color-fill-action); border-color:var(--color-fill-action); }
+.dcds-Checkbox--indeterminate .dcds-Checkbox__indicator::after { transform:rotate(45deg) scale(0); }
+.dcds-Checkbox--indeterminate .dcds-Checkbox__indicator::before { transform:scaleX(1); }
+.dcds-Checkbox__input:focus-visible + .dcds-Checkbox__indicator { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-Checkbox__label { font-size:var(--font-size-label); color:var(--color-text-primary); }
+.dcds-Checkbox--State-Disabled { cursor:not-allowed; }
+.dcds-Checkbox--State-Disabled .dcds-Checkbox__indicator { background-color:var(--color-surface-disabled); border-color:var(--color-stroke-disabled); }
+.dcds-Checkbox--State-Disabled .dcds-Checkbox__input:checked + .dcds-Checkbox__indicator { background-color:var(--color-surface-disabled); border-color:var(--color-stroke-disabled); }
+.dcds-Checkbox--State-Disabled .dcds-Checkbox__input:checked + .dcds-Checkbox__indicator::after { border-color:var(--color-text-disabled); }
+.dcds-Checkbox--State-Disabled .dcds-Checkbox__label { color:var(--color-text-disabled); }
+
+/* ============================================================
+ * Alert.css
+ * ============================================================ */
+.dcds-Alert { display:flex; align-items:flex-start; padding:var(--gap-12); border-radius:var(--rd-S); font-family:var(--font-family); overflow:hidden; width:100%; }
+.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) { border:1px solid transparent; }
+.dcds-Alert--emphasis-subtle.dcds-Alert--flag { border:none; border-left:4px solid transparent; box-shadow:var(--shadow-S); }
+.dcds-Alert--emphasis-subtler { background-color:var(--color-surface-1); border:2px solid transparent; }
+.dcds-Alert--state-success.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) { background-color:var(--color-fill-light-success); border-color:var(--color-stroke-success); }
+.dcds-Alert--state-success.dcds-Alert--emphasis-subtle.dcds-Alert--flag { background-color:var(--color-fill-light-success); border-left-color:var(--color-stroke-success); }
+.dcds-Alert--state-success.dcds-Alert--emphasis-subtler { border-color:var(--color-stroke-success); }
+.dcds-Alert--state-success .dcds-Alert__icon { color:var(--color-stroke-success); }
+.dcds-Alert--state-error.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) { background-color:var(--color-fill-light-error); border-color:var(--color-stroke-error); }
+.dcds-Alert--state-error.dcds-Alert--emphasis-subtle.dcds-Alert--flag { background-color:var(--color-fill-light-error); border-left-color:var(--color-stroke-error); }
+.dcds-Alert--state-error.dcds-Alert--emphasis-subtler { border-color:var(--color-stroke-error); }
+.dcds-Alert--state-error .dcds-Alert__icon { color:var(--color-stroke-error); }
+.dcds-Alert--state-warning.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) { background-color:var(--color-fill-light-warning); border-color:var(--color-stroke-warning); }
+.dcds-Alert--state-warning.dcds-Alert--emphasis-subtle.dcds-Alert--flag { background-color:var(--color-fill-light-warning); border-left-color:var(--color-stroke-warning); }
+.dcds-Alert--state-warning.dcds-Alert--emphasis-subtler { border-color:var(--color-stroke-warning); }
+.dcds-Alert--state-warning .dcds-Alert__icon { color:var(--color-stroke-warning); }
+.dcds-Alert--state-info.dcds-Alert--emphasis-subtle:not(.dcds-Alert--flag) { background-color:var(--color-fill-light-info); border-color:var(--color-stroke-info); }
+.dcds-Alert--state-info.dcds-Alert--emphasis-subtle.dcds-Alert--flag { background-color:var(--color-fill-light-info); border-left-color:var(--color-stroke-info); }
+.dcds-Alert--state-info.dcds-Alert--emphasis-subtler { border-color:var(--color-stroke-info); }
+.dcds-Alert--state-info .dcds-Alert__icon { color:var(--color-stroke-info); }
+.dcds-Alert__inner { display:flex; flex:1; gap:var(--gap-8); align-items:flex-start; min-width:0; }
+.dcds-Alert--flag .dcds-Alert__inner { align-items:center; }
+.dcds-Alert__content { display:flex; flex:1; gap:var(--gap-8); align-items:flex-start; min-width:0; }
+.dcds-Alert--flag .dcds-Alert__content { align-items:flex-start; }
+.dcds-Alert__icon { flex-shrink:0; width:16px; height:20px; display:flex; align-items:center; justify-content:center; }
+.dcds-Alert__body { display:flex; flex:1; gap:var(--gap-8); align-items:flex-start; min-width:0; }
+.dcds-Alert:not(.dcds-Alert--flag) .dcds-Alert__body { flex-direction:column; }
+.dcds-Alert--flag .dcds-Alert__body { flex-direction:row; align-items:center; }
+.dcds-Alert__text { display:flex; flex-direction:column; gap:4px; flex:1; min-width:0; }
+.dcds-Alert__title { font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; margin:0; }
+.dcds-Alert__message { font-size:var(--font-size-body-small); font-weight:400; color:var(--color-text-subdued); line-height:normal; margin:0; }
+.dcds-Alert__actions { display:flex; gap:var(--gap-8); align-items:center; flex-shrink:0; }
+.dcds-Alert__close { display:flex; align-items:center; justify-content:center; width:16px; height:16px; flex-shrink:0; align-self:flex-start; background:none; border:none; cursor:pointer; color:var(--color-text-subdued); padding:0; border-radius:var(--rd-XS); transition:color 120ms ease; }
+.dcds-Alert__close:hover { color:var(--color-text-primary); }
+.dcds-Alert__close:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+    </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,102 +380,109 @@
         color: var(--color-text-primary);
         height: 100vh;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         overflow: hidden;
       }
 
-      /* React mounts here — make it transparent to the flex column */
+      /* React mounts here */
       #root {
         display: contents;
       }
 
       /* ------------------------------------------------------------------ */
-      /* Top navigation bar                                                   */
+      /* Three-column layout                                                  */
       /* ------------------------------------------------------------------ */
-      .app-nav {
-        display: flex;
-        align-items: stretch;
-        background: var(--color-surface-1);
-        border-bottom: 1px solid var(--color-stroke-subdued);
-        padding: 0 var(--gap-24);
-        height: 52px;
-        flex-shrink: 0;
-        z-index: 10;
-        gap: var(--gap-4);
+      .app {
+        display: grid;
+        grid-template-columns: 180px 300px 1fr;
+        width: 100%;
+        overflow: hidden;
       }
-      .app-nav__brand {
+
+      /* ------------------------------------------------------------------ */
+      /* Primary navigation — component list                                  */
+      /* ------------------------------------------------------------------ */
+      .primary-nav {
+        display: flex;
+        flex-direction: column;
+        background: var(--color-surface-1);
+        border-right: 1px solid var(--color-stroke-subdued);
+        overflow-y: auto;
+      }
+      .primary-nav__brand {
         display: flex;
         align-items: center;
         font-weight: var(--font-weight-bold);
         font-size: var(--font-size-label);
         color: var(--color-text-primary);
-        padding-right: var(--gap-20);
-        margin-right: var(--gap-12);
-        border-right: 1px solid var(--color-stroke-subdued);
+        padding: var(--gap-20) var(--gap-16) var(--gap-12);
+        border-bottom: 1px solid var(--color-stroke-subdued);
         user-select: none;
-        white-space: nowrap;
         letter-spacing: 0.02em;
+        flex-shrink: 0;
       }
-      .app-nav__tab {
-        display: flex;
-        align-items: center;
-        padding: 0 var(--gap-12);
+      .primary-nav__list {
+        list-style: none;
+        margin: 0;
+        padding: var(--gap-8) 0;
+        flex: 1;
+      }
+      .primary-nav__item {
+        display: block;
+        width: 100%;
+        padding: var(--gap-8) var(--gap-16);
         border: none;
-        border-bottom: 2px solid transparent;
         background: none;
         cursor: pointer;
         font-family: inherit;
         font-size: var(--font-size-label);
         color: var(--color-text-subdued);
         font-weight: 400;
-        transition: color 120ms ease, border-color 120ms ease;
-        margin-bottom: -1px;
+        text-align: left;
+        transition: color 120ms ease, background 120ms ease;
+        border-radius: 0;
         white-space: nowrap;
       }
-      .app-nav__tab:hover {
+      .primary-nav__item:hover {
         color: var(--color-text-primary);
+        background: var(--color-surface-2);
       }
-      .app-nav__tab--active {
+      .primary-nav__item--active {
         color: var(--color-text-primary);
-        border-bottom-color: var(--color-stroke-action);
         font-weight: var(--font-weight-bold);
+        background: var(--color-surface-2);
+        border-left: 2px solid var(--color-stroke-action);
+        padding-left: calc(var(--gap-16) - 2px);
       }
-      .app-nav__tab:focus-visible {
+      .primary-nav__item:focus-visible {
         outline: 2px solid var(--color-stroke-focus);
         outline-offset: -2px;
-        border-radius: var(--rd-XS);
       }
 
       /* ------------------------------------------------------------------ */
-      /* Two-column layout                                                    */
+      /* Secondary navigation — props panel                                   */
       /* ------------------------------------------------------------------ */
-      .app {
-        display: grid;
-        grid-template-columns: 360px 1fr;
-        flex: 1;
-        overflow: hidden;
-      }
       .panel {
         background: var(--color-surface-1);
         border-right: 1px solid var(--color-stroke-subdued);
-        padding: var(--gap-24);
+        padding: var(--gap-20) var(--gap-20);
         overflow-y: auto;
       }
       .panel h1 {
         font-size: var(--font-size-h4);
-        margin: 0 0 var(--gap-8);
+        margin: 0 0 var(--gap-4);
       }
       .panel h2 {
         font-size: var(--font-size-label);
         text-transform: uppercase;
         letter-spacing: 0.04em;
         color: var(--color-text-subdued);
-        margin: var(--gap-24) 0 var(--gap-8);
+        margin: var(--gap-20) 0 var(--gap-8);
         border-bottom: 1px solid var(--color-stroke-subdued);
         padding-bottom: var(--gap-4);
       }
       .panel h2:first-of-type {
-        margin-top: var(--gap-16);
+        margin-top: var(--gap-12);
       }
       .control {
         display: flex;
@@ -722,7 +1071,18 @@
        * ============================================================ */
       function Playground() {
         /* --- Navigation --- */
-        const [activeTab, setActiveTab] = useState('buttons');
+        const [activeComponent, setActiveComponent] = useState('button');
+
+        const NAV_ITEMS = [
+          { id: 'button',         label: 'Button'         },
+          { id: 'linkbutton',     label: 'LinkButton'     },
+          { id: 'dropdownbutton', label: 'DropdownButton' },
+          { id: 'buttongroup',    label: 'ButtonGroup'    },
+          { id: 'switch',         label: 'Switch'         },
+          { id: 'radiobutton',    label: 'RadioButton'    },
+          { id: 'checkbox',       label: 'Checkbox'       },
+          { id: 'alert',          label: 'Alert'          },
+        ];
 
         /* --- Button controls --- */
         const [btnVariant, setBtnVariant] = useState('Primary');
@@ -787,376 +1147,382 @@
           setToasts((prev) => prev.filter((t) => t.id !== id));
         }
 
-        const tabs = [
-          { id: 'buttons',   label: 'Buttons'   },
-          { id: 'selection', label: 'Selection'  },
-          { id: 'feedback',  label: 'Feedback'   },
-        ];
-
         return (
-          <>
-            {/* ---- Top navigation ---- */}
-            <nav className="app-nav" aria-label="Component groups">
-              <span className="app-nav__brand">DCDS Playground</span>
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  className={`app-nav__tab ${activeTab === tab.id ? 'app-nav__tab--active' : ''}`}
-                  onClick={() => setActiveTab(tab.id)}
-                  aria-current={activeTab === tab.id ? 'page' : undefined}
-                >
-                  {tab.label}
-                </button>
-              ))}
+          <div className="app">
+            {/* ============================================================
+             * PRIMARY NAV — component list
+             * ============================================================ */}
+            <nav className="primary-nav" aria-label="Components">
+              <span className="primary-nav__brand">DCDS Playground</span>
+              <ul className="primary-nav__list">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      className={`primary-nav__item${activeComponent === item.id ? ' primary-nav__item--active' : ''}`}
+                      onClick={() => setActiveComponent(item.id)}
+                      aria-current={activeComponent === item.id ? 'page' : undefined}
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </nav>
 
-            <div className="app">
-              {/* ============================================================
-               * LEFT PANEL — controls
-               * ============================================================ */}
-              <aside className="panel">
-                <h1>Controls</h1>
-                <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
-                  Adjust props and see the result live on the right.
-                </p>
+            {/* ============================================================
+             * SECONDARY NAV — props panel
+             * ============================================================ */}
+            <aside className="panel">
+              <h1>Props</h1>
+              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
+                Adjust and see live on the right.
+              </p>
 
-                {/* --- Buttons tab controls --- */}
-                {activeTab === 'buttons' && (
-                  <>
-                    <h2>Button</h2>
-                    <CtrlSelect label="variant"    value={btnVariant}  onChange={setBtnVariant}  options={['Primary', 'Secondary', 'Tertiary']} />
-                    <CtrlSelect label="color"      value={btnColor}    onChange={setBtnColor}    options={['Primary', 'Error', 'Warning']} />
-                    <CtrlSelect label="size"       value={btnSize}     onChange={setBtnSize}     options={['L', 'M', 'S', 'XS']} />
-                    <CtrlToggle label="isDisabled" checked={btnDisabled}  onChange={setBtnDisabled} />
-                    <CtrlToggle label="isFullWidth" checked={btnFullWidth} onChange={setBtnFullWidth} />
-                    <CtrlToggle label="isIconOnly" checked={btnIconOnly}  onChange={setBtnIconOnly} />
-                    <CtrlText   label="label"      value={btnLabel}    onChange={setBtnLabel} />
+              {activeComponent === 'button' && (
+                <>
+                  <h2>Button</h2>
+                  <CtrlSelect label="variant"    value={btnVariant}  onChange={setBtnVariant}  options={['Primary', 'Secondary', 'Tertiary']} />
+                  <CtrlSelect label="color"      value={btnColor}    onChange={setBtnColor}    options={['Primary', 'Error', 'Warning']} />
+                  <CtrlSelect label="size"       value={btnSize}     onChange={setBtnSize}     options={['L', 'M', 'S', 'XS']} />
+                  <CtrlToggle label="isDisabled"  checked={btnDisabled}   onChange={setBtnDisabled} />
+                  <CtrlToggle label="isFullWidth" checked={btnFullWidth}  onChange={setBtnFullWidth} />
+                  <CtrlToggle label="isIconOnly"  checked={btnIconOnly}   onChange={setBtnIconOnly} />
+                  <CtrlText   label="label"       value={btnLabel}        onChange={setBtnLabel} />
+                </>
+              )}
 
-                    <h2>LinkButton</h2>
-                    <CtrlSelect label="state" value={lbState} onChange={setLbState} options={['Default', 'Disabled']} />
-                    <CtrlSelect label="size"  value={lbSize}  onChange={setLbSize}  options={['L', 'M', 'S', 'XS']} />
-                    <CtrlText   label="label" value={lbLabel} onChange={setLbLabel} />
-                    <CtrlText   label="href"  value={lbHref}  onChange={setLbHref} />
+              {activeComponent === 'linkbutton' && (
+                <>
+                  <h2>LinkButton</h2>
+                  <CtrlSelect label="state" value={lbState} onChange={setLbState} options={['Default', 'Disabled']} />
+                  <CtrlSelect label="size"  value={lbSize}  onChange={setLbSize}  options={['L', 'M', 'S', 'XS']} />
+                  <CtrlText   label="label" value={lbLabel} onChange={setLbLabel} />
+                  <CtrlText   label="href"  value={lbHref}  onChange={setLbHref} />
+                </>
+              )}
 
-                    <h2>DropdownButton</h2>
-                    <CtrlSelect label="variant"    value={dbVariant}  onChange={setDbVariant}  options={['Primary', 'Secondary', 'Tertiary']} />
-                    <CtrlSelect label="size"       value={dbSize}     onChange={setDbSize}     options={['L', 'M', 'S', 'XS']} />
-                    <CtrlToggle label="isDisabled" checked={dbDisabled} onChange={setDbDisabled} />
-                    <CtrlToggle label="isOpen"     checked={dbOpen}    onChange={setDbOpen} />
-                    <CtrlText   label="label"      value={dbLabel}    onChange={setDbLabel} />
+              {activeComponent === 'dropdownbutton' && (
+                <>
+                  <h2>DropdownButton</h2>
+                  <CtrlSelect label="variant"    value={dbVariant}  onChange={setDbVariant}  options={['Primary', 'Secondary', 'Tertiary']} />
+                  <CtrlSelect label="size"       value={dbSize}     onChange={setDbSize}     options={['L', 'M', 'S', 'XS']} />
+                  <CtrlToggle label="isDisabled" checked={dbDisabled} onChange={setDbDisabled} />
+                  <CtrlToggle label="isOpen"     checked={dbOpen}    onChange={setDbOpen} />
+                  <CtrlText   label="label"      value={dbLabel}    onChange={setDbLabel} />
+                </>
+              )}
 
-                    <h2>ButtonGroup</h2>
-                    <CtrlSelect label="Style" value={bgStyle} onChange={setBgStyle} options={['Default', 'Link']} />
-                  </>
-                )}
+              {activeComponent === 'buttongroup' && (
+                <>
+                  <h2>ButtonGroup</h2>
+                  <CtrlSelect label="Style" value={bgStyle} onChange={setBgStyle} options={['Default', 'Link']} />
+                </>
+              )}
 
-                {/* --- Selection tab controls --- */}
-                {activeTab === 'selection' && (
-                  <>
-                    <h2>Switch</h2>
-                    <CtrlSelect label="State"   value={swState}   onChange={setSwState}   options={['Enabled', 'Disabled']} />
-                    <CtrlToggle label="checked" checked={swChecked} onChange={setSwChecked} />
+              {activeComponent === 'switch' && (
+                <>
+                  <h2>Switch</h2>
+                  <CtrlSelect label="State"   value={swState}   onChange={setSwState}   options={['Enabled', 'Disabled']} />
+                  <CtrlToggle label="checked" checked={swChecked} onChange={setSwChecked} />
+                </>
+              )}
 
-                    <h2>RadioButton</h2>
-                    <CtrlSelect label="State"    value={rbState} onChange={setRbState} options={['Enabled', 'Disabled']} />
-                    <CtrlSelect label="selected" value={rbValue} onChange={setRbValue} options={['monthly', 'quarterly', 'annual']} />
+              {activeComponent === 'radiobutton' && (
+                <>
+                  <h2>RadioButton</h2>
+                  <CtrlSelect label="State"    value={rbState} onChange={setRbState} options={['Enabled', 'Disabled']} />
+                  <CtrlSelect label="selected" value={rbValue} onChange={setRbValue} options={['monthly', 'quarterly', 'annual']} />
+                </>
+              )}
 
-                    <h2>Checkbox</h2>
-                    <CtrlSelect label="State"         value={cbState}        onChange={setCbState}        options={['Enabled', 'Disabled']} />
-                    <CtrlToggle label="checked"       checked={cbChecked}     onChange={setCbChecked} />
-                    <CtrlToggle label="indeterminate" checked={cbIndeterminate} onChange={setCbIndeterminate} />
-                  </>
-                )}
+              {activeComponent === 'checkbox' && (
+                <>
+                  <h2>Checkbox</h2>
+                  <CtrlSelect label="State"         value={cbState}          onChange={setCbState}          options={['Enabled', 'Disabled']} />
+                  <CtrlToggle label="checked"       checked={cbChecked}       onChange={setCbChecked} />
+                  <CtrlToggle label="indeterminate" checked={cbIndeterminate} onChange={setCbIndeterminate} />
+                </>
+              )}
 
-                {/* --- Feedback tab controls --- */}
-                {activeTab === 'feedback' && (
-                  <>
-                    <h2>Alert</h2>
-                    <CtrlSelect label="state"        value={alertState}       onChange={(v) => { setAlertState(v); setAlertClosed(false); }} options={['success', 'error', 'warning', 'info']} />
-                    <CtrlSelect label="emphasis"     value={alertEmphasis}    onChange={(v) => { setAlertEmphasis(v); setAlertClosed(false); }} options={['subtle', 'subtler']} />
-                    <CtrlToggle label="isFlag"       checked={alertIsFlag}    onChange={(v) => { setAlertIsFlag(v); setAlertClosed(false); }} />
-                    <CtrlToggle label="showTitle"    checked={alertShowTitle} onChange={setAlertShowTitle} />
-                    <CtrlText   label="title"        value={alertTitle}       onChange={setAlertTitle} />
-                    <CtrlText   label="message"      value={alertMessage}     onChange={setAlertMessage} />
-                    <CtrlToggle label="showDismiss"  checked={alertShowClose} onChange={(v) => { setAlertShowClose(v); setAlertClosed(false); }} />
-                    <CtrlToggle label="showActions"  checked={alertShowActions} onChange={setAlertShowActions} />
-                  </>
-                )}
-              </aside>
+              {activeComponent === 'alert' && (
+                <>
+                  <h2>Alert</h2>
+                  <CtrlSelect label="state"       value={alertState}    onChange={(v) => { setAlertState(v); setAlertClosed(false); }} options={['success', 'error', 'warning', 'info']} />
+                  <CtrlSelect label="emphasis"    value={alertEmphasis} onChange={(v) => { setAlertEmphasis(v); setAlertClosed(false); }} options={['subtle', 'subtler']} />
+                  <CtrlToggle label="isFlag"      checked={alertIsFlag}      onChange={(v) => { setAlertIsFlag(v); setAlertClosed(false); }} />
+                  <CtrlToggle label="showTitle"   checked={alertShowTitle}   onChange={setAlertShowTitle} />
+                  <CtrlText   label="title"       value={alertTitle}         onChange={setAlertTitle} />
+                  <CtrlText   label="message"     value={alertMessage}       onChange={setAlertMessage} />
+                  <CtrlToggle label="showDismiss" checked={alertShowClose}   onChange={(v) => { setAlertShowClose(v); setAlertClosed(false); }} />
+                  <CtrlToggle label="showActions" checked={alertShowActions} onChange={setAlertShowActions} />
+                </>
+              )}
+            </aside>
 
-              {/* ============================================================
-               * RIGHT STAGE — previews
-               * ============================================================ */}
-              <main className="stage">
+            {/* ============================================================
+             * MAIN STAGE — previews
+             * ============================================================ */}
+            <main className="stage">
 
-                {/* ============================================================
-                 * BUTTONS TAB
-                 * ============================================================ */}
-                {activeTab === 'buttons' && (
-                  <>
-                    <section>
-                      <h2>Button</h2>
-                      <p className="stage-note">
-                        Click to fire all attached handlers (onClick, onFocus, onBlur, onMouseEnter, onMouseLeave, onKeyDown).
-                      </p>
-                      <div className="preview">
-                        <Button
-                          variant={btnVariant}
-                          color={btnColor}
-                          size={btnSize}
-                          isDisabled={btnDisabled}
-                          isFullWidth={btnFullWidth}
-                          isIconOnly={btnIconOnly}
-                          ariaLabel={btnIconOnly ? btnLabel : undefined}
-                          onClick={() => pushBtnLog('onClick')}
-                          onFocus={() => pushBtnLog('onFocus')}
-                          onBlur={() => pushBtnLog('onBlur')}
-                          onMouseEnter={() => pushBtnLog('onMouseEnter')}
-                          onMouseLeave={() => pushBtnLog('onMouseLeave')}
-                          onKeyDown={(e) => pushBtnLog(`onKeyDown: ${e.key}`)}
-                        >
-                          {btnIconOnly ? <ChevronDownIcon size={16} /> : btnLabel}
-                        </Button>
-                      </div>
-                      <div className="events">
-                        {btnLog.length === 0 ? '— no events yet —' : btnLog.join('\n')}
-                      </div>
-                    </section>
+              {activeComponent === 'button' && (
+                <section>
+                  <h2>Button</h2>
+                  <p className="stage-note">
+                    Click to fire all attached handlers (onClick, onFocus, onBlur, onMouseEnter, onMouseLeave, onKeyDown).
+                  </p>
+                  <div className="preview">
+                    <Button
+                      variant={btnVariant}
+                      color={btnColor}
+                      size={btnSize}
+                      isDisabled={btnDisabled}
+                      isFullWidth={btnFullWidth}
+                      isIconOnly={btnIconOnly}
+                      ariaLabel={btnIconOnly ? btnLabel : undefined}
+                      onClick={() => pushBtnLog('onClick')}
+                      onFocus={() => pushBtnLog('onFocus')}
+                      onBlur={() => pushBtnLog('onBlur')}
+                      onMouseEnter={() => pushBtnLog('onMouseEnter')}
+                      onMouseLeave={() => pushBtnLog('onMouseLeave')}
+                      onKeyDown={(e) => pushBtnLog(`onKeyDown: ${e.key}`)}
+                    >
+                      {btnIconOnly ? <ChevronDownIcon size={16} /> : btnLabel}
+                    </Button>
+                  </div>
+                  <div className="events">
+                    {btnLog.length === 0 ? '— no events yet —' : btnLog.join('\n')}
+                  </div>
+                </section>
+              )}
 
-                    <section>
-                      <h2>LinkButton</h2>
-                      <p className="stage-note">
-                        Provide an <code>href</code> to render as <code>&lt;a&gt;</code>; leave empty for <code>&lt;button&gt;</code>.
-                      </p>
-                      <div className="preview">
-                        <LinkButton state={lbState} size={lbSize} href={lbHref || undefined} onClick={() => pushLbLog('onClick')}>
-                          {lbLabel}
-                        </LinkButton>
-                      </div>
-                      <div className="events">
-                        {lbLog.length === 0 ? '— no events yet —' : lbLog.join('\n')}
-                      </div>
-                    </section>
+              {activeComponent === 'linkbutton' && (
+                <section>
+                  <h2>LinkButton</h2>
+                  <p className="stage-note">
+                    Provide an <code>href</code> to render as <code>&lt;a&gt;</code>; leave empty for <code>&lt;button&gt;</code>.
+                  </p>
+                  <div className="preview">
+                    <LinkButton state={lbState} size={lbSize} href={lbHref || undefined} onClick={() => pushLbLog('onClick')}>
+                      {lbLabel}
+                    </LinkButton>
+                  </div>
+                  <div className="events">
+                    {lbLog.length === 0 ? '— no events yet —' : lbLog.join('\n')}
+                  </div>
+                </section>
+              )}
 
-                    <section>
-                      <h2>DropdownButton + _BaseMenu</h2>
-                      <p className="stage-note">
-                        When <code>isOpen=true</code>, the floating menu drops below. Click outside or press <code>Escape</code> to dismiss.
-                      </p>
-                      <div className="preview" style={{ minHeight: 180, alignItems: 'flex-start' }}>
-                        <DropdownButton
-                          variant={dbVariant}
-                          size={dbSize}
-                          isDisabled={dbDisabled}
-                          isOpen={dbOpen}
-                          onToggle={(next) => { setDbOpen(next); pushDbLog(`onToggle: ${next}`); }}
-                          onSelect={(id) => pushDbLog(`onSelect: ${id}`)}
-                          onClick={() => pushDbLog('onClick')}
-                          menuItems={[{ id: 'opt-1', label: 'Option 1' }, { id: 'opt-2', label: 'Option 2' }]}
-                        >
-                          {dbLabel}
-                        </DropdownButton>
-                      </div>
-                      <div className="events">
-                        {dbLog.length === 0 ? '— no events yet —' : dbLog.join('\n')}
-                      </div>
-                    </section>
+              {activeComponent === 'dropdownbutton' && (
+                <section>
+                  <h2>DropdownButton</h2>
+                  <p className="stage-note">
+                    When <code>isOpen=true</code>, the floating menu drops below. Click outside or press <code>Escape</code> to dismiss.
+                  </p>
+                  <div className="preview" style={{ minHeight: 180, alignItems: 'flex-start' }}>
+                    <DropdownButton
+                      variant={dbVariant}
+                      size={dbSize}
+                      isDisabled={dbDisabled}
+                      isOpen={dbOpen}
+                      onToggle={(next) => { setDbOpen(next); pushDbLog(`onToggle: ${next}`); }}
+                      onSelect={(id) => pushDbLog(`onSelect: ${id}`)}
+                      onClick={() => pushDbLog('onClick')}
+                      menuItems={[{ id: 'opt-1', label: 'Option 1' }, { id: 'opt-2', label: 'Option 2' }]}
+                    >
+                      {dbLabel}
+                    </DropdownButton>
+                  </div>
+                  <div className="events">
+                    {dbLog.length === 0 ? '— no events yet —' : dbLog.join('\n')}
+                  </div>
+                </section>
+              )}
 
-                    <section>
-                      <h2>ButtonGroup — paired action layout</h2>
-                      <p className="stage-note">
-                        Pairs related action buttons with a consistent gap. Each child retains its own rounded corners.
-                      </p>
-                      <div className="preview">
-                        <ButtonGroup Style={bgStyle} ariaLabel="Paired actions">
-                          {bgStyle === 'Link' ? (
-                            <>
-                              <LinkButton size="M" href="#">Link ↗</LinkButton>
-                              <Button variant="Primary" color="Primary" size="M">Button</Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button variant="Secondary" color="Primary" size="M">Cancel</Button>
-                              <Button variant="Primary" color="Primary" size="M">Save</Button>
-                            </>
-                          )}
-                        </ButtonGroup>
-                      </div>
-                      <p className="stage-note" style={{ marginTop: 'var(--gap-16)' }}>Large size:</p>
-                      <div className="preview">
-                        <ButtonGroup Style={bgStyle} ariaLabel="Paired actions large">
-                          {bgStyle === 'Link' ? (
-                            <>
-                              <LinkButton size="L" href="#">Link ↗</LinkButton>
-                              <Button variant="Primary" color="Primary" size="L">Button</Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button variant="Secondary" color="Primary" size="L">Cancel</Button>
-                              <Button variant="Primary" color="Primary" size="L">Save</Button>
-                            </>
-                          )}
-                        </ButtonGroup>
-                      </div>
-                    </section>
-                  </>
-                )}
-
-                {/* ============================================================
-                 * SELECTION TAB
-                 * ============================================================ */}
-                {activeTab === 'selection' && (
-                  <>
-                    <section>
-                      <h2>Switch</h2>
-                      <div className="preview">
-                        <Switch
-                          State={swState}
-                          checked={swChecked}
-                          label="Email notifications"
-                          onChange={(next) => { setSwChecked(next); pushSwLog(`onChange: ${next}`); }}
-                        />
-                      </div>
-                      <div className="events">
-                        {swLog.length === 0 ? '— no events yet —' : swLog.join('\n')}
-                      </div>
-                    </section>
-
-                    <section>
-                      <h2>RadioButton — group</h2>
-                      <p className="stage-note">
-                        Always wrap in <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> with a shared <code>name</code>.
-                      </p>
-                      <div className="preview">
-                        <fieldset style={{ border: '1px solid var(--color-stroke-subdued)', borderRadius: 'var(--rd-S)', padding: 'var(--gap-12)', display: 'flex', flexDirection: 'column', gap: 'var(--gap-8)' }}>
-                          <legend style={{ padding: '0 var(--gap-8)', color: 'var(--color-text-subdued)', fontSize: 'var(--font-size-body-small)' }}>
-                            Repayment frequency
-                          </legend>
-                          {['monthly', 'quarterly', 'annual'].map((v) => (
-                            <RadioButton key={v} name="freq" value={v} label={v[0].toUpperCase() + v.slice(1)} State={rbState} checked={rbValue === v} onChange={() => setRbValue(v)} />
-                          ))}
-                        </fieldset>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h2>Checkbox</h2>
-                      <p className="stage-note">
-                        Toggling <code>indeterminate</code> sets <code>aria-checked="mixed"</code> for select-all patterns.
-                      </p>
-                      <div className="preview">
-                        <Checkbox
-                          State={cbState}
-                          label="I agree to the terms and conditions"
-                          checked={cbChecked}
-                          indeterminate={cbIndeterminate}
-                          onChange={(next) => setCbChecked(next)}
-                        />
-                      </div>
-                    </section>
-                  </>
-                )}
-
-                {/* ============================================================
-                 * FEEDBACK TAB
-                 * ============================================================ */}
-                {activeTab === 'feedback' && (
-                  <>
-                    {/* Interactive playground — TOP */}
-                    <section>
-                      <h2>Alert — Interactive Playground</h2>
-                      <p className="stage-note">Adjust props in the left panel to preview any combination.</p>
-                      <div className="preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
-                        {alertClosed ? (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-8)', padding: 'var(--gap-8) var(--gap-12)', background: 'var(--color-surface-3)', borderRadius: 'var(--rd-S)', fontSize: 'var(--font-size-body-small)', color: 'var(--color-text-subdued)' }}>
-                            <span>Alert dismissed.</span>
-                            <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-action)', fontFamily: 'inherit', fontSize: 'var(--font-size-body-small)', padding: 0 }} onClick={() => setAlertClosed(false)}>
-                              Restore
-                            </button>
-                          </div>
-                        ) : (
-                          <Alert
-                            state={alertState}
-                            emphasis={alertEmphasis}
-                            isFlag={alertIsFlag}
-                            title={alertShowTitle ? (alertTitle || undefined) : undefined}
-                            onClose={alertShowClose ? () => setAlertClosed(true) : undefined}
-                            actions={alertShowActions ? (
-                              <>
-                                <Button variant="Secondary" color="Primary" size="S">Button</Button>
-                                <LinkButton size="S">Link</LinkButton>
-                              </>
-                            ) : undefined}
-                          >
-                            {alertMessage}
-                          </Alert>
-                        )}
-                      </div>
-                    </section>
-
-                    {/* All 4 states — subtle emphasis */}
-                    <section>
-                      <h2>Alert — All States · subtle</h2>
-                      <p className="stage-note">
-                        <code>emphasis="subtle"</code>: light background tint + 1 px coloured border. Default for most usage.
-                      </p>
-                      <div className="alert-grid">
-                        {STATES.map((s) => (
-                          <Alert key={s} state={s} emphasis="subtle" title={ALERT_TITLES[s]}>
-                            {ALERT_MESSAGES[s]}
-                          </Alert>
-                        ))}
-                      </div>
-                    </section>
-
-                    {/* All 4 states — subtler emphasis */}
-                    <section>
-                      <h2>Alert — All States · subtler</h2>
-                      <p className="stage-note">
-                        <code>emphasis="subtler"</code>: white background + 2 px coloured border. Use when the Alert is secondary to surrounding content.
-                      </p>
-                      <div className="alert-grid">
-                        {STATES.map((s) => (
-                          <Alert key={s} state={s} emphasis="subtler" title={ALERT_TITLES[s]}>
-                            {ALERT_MESSAGES[s]}
-                          </Alert>
-                        ))}
-                      </div>
-                    </section>
-
-                    {/* Dismiss demo */}
-                    <section>
-                      <h2>Alert — Dismiss (onClose)</h2>
-                      <p className="stage-note">
-                        <code>emphasis="subtle"</code> shows a dismiss button when <code>onClose</code> is supplied. <code>emphasis="subtler"</code> never shows one.
-                      </p>
-                      <div className="alert-grid">
-                        {STATES.map((s) => <DismissableAlert key={s} state={s} />)}
-                      </div>
-                    </section>
-
-                    {/* Toast / isFlag demo */}
-                    <section>
-                      <h2>Alert — Toast (isFlag)</h2>
-                      <p className="stage-note">
-                        <code>isFlag=true</code>: floating snackbar with left-border accent + shadow. Auto-dismisses after 5 s.
-                      </p>
-                      <div className="alert-toast-triggers">
-                        <Button variant="Secondary" color="Primary"  size="M" onClick={() => showToast('success')}>Success toast</Button>
-                        <Button variant="Secondary" color="Error"    size="M" onClick={() => showToast('error')}>Error toast</Button>
-                        <Button variant="Secondary" color="Warning"  size="M" onClick={() => showToast('warning')}>Warning toast</Button>
-                        <Button variant="Secondary" color="Primary"  size="M" onClick={() => showToast('info')}>Info toast</Button>
-                      </div>
-                      {toasts.length > 0 && (
-                        <p className="stage-note" style={{ marginTop: 'var(--gap-8)' }}>
-                          {toasts.length} active toast{toasts.length > 1 ? 's' : ''} — bottom-right corner.
-                        </p>
+              {activeComponent === 'buttongroup' && (
+                <section>
+                  <h2>ButtonGroup</h2>
+                  <p className="stage-note">
+                    Pairs related action buttons with a consistent gap. Each child retains its own rounded corners.
+                  </p>
+                  <div className="preview">
+                    <ButtonGroup Style={bgStyle} ariaLabel="Paired actions">
+                      {bgStyle === 'Link' ? (
+                        <>
+                          <LinkButton size="M" href="#">Link ↗</LinkButton>
+                          <Button variant="Primary" color="Primary" size="M">Button</Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button variant="Secondary" color="Primary" size="M">Cancel</Button>
+                          <Button variant="Primary" color="Primary" size="M">Save</Button>
+                        </>
                       )}
-                    </section>
-                  </>
-                )}
-              </main>
-            </div>
+                    </ButtonGroup>
+                  </div>
+                  <p className="stage-note" style={{ marginTop: 'var(--gap-16)' }}>Large size:</p>
+                  <div className="preview">
+                    <ButtonGroup Style={bgStyle} ariaLabel="Paired actions large">
+                      {bgStyle === 'Link' ? (
+                        <>
+                          <LinkButton size="L" href="#">Link ↗</LinkButton>
+                          <Button variant="Primary" color="Primary" size="L">Button</Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button variant="Secondary" color="Primary" size="L">Cancel</Button>
+                          <Button variant="Primary" color="Primary" size="L">Save</Button>
+                        </>
+                      )}
+                    </ButtonGroup>
+                  </div>
+                </section>
+              )}
+
+              {activeComponent === 'switch' && (
+                <section>
+                  <h2>Switch</h2>
+                  <div className="preview">
+                    <Switch
+                      State={swState}
+                      checked={swChecked}
+                      label="Email notifications"
+                      onChange={(next) => { setSwChecked(next); pushSwLog(`onChange: ${next}`); }}
+                    />
+                  </div>
+                  <div className="events">
+                    {swLog.length === 0 ? '— no events yet —' : swLog.join('\n')}
+                  </div>
+                </section>
+              )}
+
+              {activeComponent === 'radiobutton' && (
+                <section>
+                  <h2>RadioButton</h2>
+                  <p className="stage-note">
+                    Always wrap in <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> with a shared <code>name</code>.
+                  </p>
+                  <div className="preview">
+                    <fieldset style={{ border: '1px solid var(--color-stroke-subdued)', borderRadius: 'var(--rd-S)', padding: 'var(--gap-12)', display: 'flex', flexDirection: 'column', gap: 'var(--gap-8)' }}>
+                      <legend style={{ padding: '0 var(--gap-8)', color: 'var(--color-text-subdued)', fontSize: 'var(--font-size-body-small)' }}>
+                        Repayment frequency
+                      </legend>
+                      {['monthly', 'quarterly', 'annual'].map((v) => (
+                        <RadioButton key={v} name="freq" value={v} label={v[0].toUpperCase() + v.slice(1)} State={rbState} checked={rbValue === v} onChange={() => setRbValue(v)} />
+                      ))}
+                    </fieldset>
+                  </div>
+                </section>
+              )}
+
+              {activeComponent === 'checkbox' && (
+                <section>
+                  <h2>Checkbox</h2>
+                  <p className="stage-note">
+                    Toggling <code>indeterminate</code> sets <code>aria-checked="mixed"</code> for select-all patterns.
+                  </p>
+                  <div className="preview">
+                    <Checkbox
+                      State={cbState}
+                      label="I agree to the terms and conditions"
+                      checked={cbChecked}
+                      indeterminate={cbIndeterminate}
+                      onChange={(next) => setCbChecked(next)}
+                    />
+                  </div>
+                </section>
+              )}
+
+              {activeComponent === 'alert' && (
+                <>
+                  <section>
+                    <h2>Alert — Interactive Playground</h2>
+                    <p className="stage-note">Adjust props in the left panel to preview any combination.</p>
+                    <div className="preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+                      {alertClosed ? (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-8)', padding: 'var(--gap-8) var(--gap-12)', background: 'var(--color-surface-3)', borderRadius: 'var(--rd-S)', fontSize: 'var(--font-size-body-small)', color: 'var(--color-text-subdued)' }}>
+                          <span>Alert dismissed.</span>
+                          <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-action)', fontFamily: 'inherit', fontSize: 'var(--font-size-body-small)', padding: 0 }} onClick={() => setAlertClosed(false)}>
+                            Restore
+                          </button>
+                        </div>
+                      ) : (
+                        <Alert
+                          state={alertState}
+                          emphasis={alertEmphasis}
+                          isFlag={alertIsFlag}
+                          title={alertShowTitle ? (alertTitle || undefined) : undefined}
+                          onClose={alertShowClose ? () => setAlertClosed(true) : undefined}
+                          actions={alertShowActions ? (
+                            <>
+                              <Button variant="Secondary" color="Primary" size="S">Button</Button>
+                              <LinkButton size="S">Link</LinkButton>
+                            </>
+                          ) : undefined}
+                        >
+                          {alertMessage}
+                        </Alert>
+                      )}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>Alert — All States · subtle</h2>
+                    <p className="stage-note">
+                      <code>emphasis="subtle"</code>: light background tint + 1 px coloured border. Default for most usage.
+                    </p>
+                    <div className="alert-grid">
+                      {STATES.map((s) => (
+                        <Alert key={s} state={s} emphasis="subtle" title={ALERT_TITLES[s]}>
+                          {ALERT_MESSAGES[s]}
+                        </Alert>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>Alert — All States · subtler</h2>
+                    <p className="stage-note">
+                      <code>emphasis="subtler"</code>: white background + 2 px coloured border. Use when the Alert is secondary to surrounding content.
+                    </p>
+                    <div className="alert-grid">
+                      {STATES.map((s) => (
+                        <Alert key={s} state={s} emphasis="subtler" title={ALERT_TITLES[s]}>
+                          {ALERT_MESSAGES[s]}
+                        </Alert>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>Alert — Dismiss (onClose)</h2>
+                    <p className="stage-note">
+                      <code>emphasis="subtle"</code> shows a dismiss button when <code>onClose</code> is supplied. <code>emphasis="subtler"</code> never shows one.
+                    </p>
+                    <div className="alert-grid">
+                      {STATES.map((s) => <DismissableAlert key={s} state={s} />)}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>Alert — Toast (isFlag)</h2>
+                    <p className="stage-note">
+                      <code>isFlag=true</code>: floating snackbar with left-border accent + shadow. Auto-dismisses after 5 s.
+                    </p>
+                    <div className="alert-toast-triggers">
+                      <Button variant="Secondary" color="Primary"  size="M" onClick={() => showToast('success')}>Success toast</Button>
+                      <Button variant="Secondary" color="Error"    size="M" onClick={() => showToast('error')}>Error toast</Button>
+                      <Button variant="Secondary" color="Warning"  size="M" onClick={() => showToast('warning')}>Warning toast</Button>
+                      <Button variant="Secondary" color="Primary"  size="M" onClick={() => showToast('info')}>Info toast</Button>
+                    </div>
+                    {toasts.length > 0 && (
+                      <p className="stage-note" style={{ marginTop: 'var(--gap-8)' }}>
+                        {toasts.length} active toast{toasts.length > 1 ? 's' : ''} — bottom-right corner.
+                      </p>
+                    )}
+                  </section>
+                </>
+              )}
+            </main>
 
             {/* ---- Toast overlay (fixed bottom-right) ---- */}
             <div className="toast-container" aria-live="polite" aria-atomic="false">
@@ -1166,7 +1532,7 @@
                 </Alert>
               ))}
             </div>
-          </>
+          </div>
         );
       }
 
