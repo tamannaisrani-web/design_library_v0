@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useId, useRef } from 'react';
-import { ChevronDownIcon } from '../../icons/ChevronDownIcon';
+import { ChevronDownIcon } from '../icons/ChevronDownIcon';
 import { _BaseMenu } from './_BaseMenu';
 import type { DropdownButtonProps, DropdownMenuItem } from './DropdownButton.types';
 import './DropdownButton.css';

@@ -8,6 +8,13 @@
  * ```
  */
 
-export * from './components';
+export * from './Alert';
+export * from './Button';
+export * from './LinkButton';
+export * from './DropdownButton';
+export * from './ButtonGroup';
+export * from './Switch';
+export * from './RadioButton';
+export * from './Checkbox';
+export * from './shared';
 export * from './theme';
-export * from './icons';

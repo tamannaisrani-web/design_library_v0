@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import type { AlertProps } from './Alert.types';
-import { InfoCircleBold } from '../../../assets/icons/bold/InfoCircleBold';
-import { CloseLinear } from '../../../assets/icons/linear/CloseLinear';
+import { InfoCircleBold } from '../../assets/icons/bold/InfoCircleBold';
+import { CloseLinear } from '../../assets/icons/linear/CloseLinear';
 import './Alert.css';
 
 const TOAST_AUTO_DISMISS_MS = 5000;
