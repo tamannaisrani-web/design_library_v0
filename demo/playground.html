@@ -319,6 +319,28 @@
 .dcds-Checkbox--State-Disabled .dcds-Checkbox__label { color:var(--color-text-disabled); }
 
 /* ============================================================
+ * Breadcrumbs.css
+ * ============================================================ */
+.dcds-Breadcrumbs { display:inline-flex; align-items:center; }
+.dcds-Breadcrumbs__list { display:inline-flex; align-items:center; list-style:none; margin:0; padding:0; gap:var(--gap-4); }
+.dcds-Breadcrumbs__list > li { display:inline-flex; align-items:center; }
+.dcds-BaseHomeIcon, .dcds-BaseHomeIcon--current { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; flex-shrink:0; text-decoration:none; border-radius:var(--rd-XS); }
+.dcds-BaseHomeIcon { color:var(--color-icon-secondary); }
+.dcds-BaseHomeIcon--current { color:var(--color-icon-primary); cursor:default; }
+.dcds-BaseHomeIcon:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-BaseHomeIcon svg, .dcds-BaseHomeIcon--current svg { width:16px; height:16px; }
+.dcds-BaseHomeIcon__linear, .dcds-BaseHomeIcon--current .dcds-BaseHomeIcon__linear { display:flex; align-items:center; justify-content:center; }
+.dcds-BaseHomeIcon__bold, .dcds-BaseHomeIcon--current .dcds-BaseHomeIcon__bold { display:none; align-items:center; justify-content:center; }
+.dcds-BaseHomeIcon:hover .dcds-BaseHomeIcon__linear, .dcds-BaseHomeIcon--current:hover .dcds-BaseHomeIcon__linear { display:none; }
+.dcds-BaseHomeIcon:hover .dcds-BaseHomeIcon__bold, .dcds-BaseHomeIcon--current:hover .dcds-BaseHomeIcon__bold { display:flex; }
+.dcds-BaseBreadcrumbItems--previous { display:inline-flex; align-items:center; font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-text-secondary); text-decoration:none; border-radius:var(--rd-XS); cursor:pointer; background:none; border:none; padding:0; }
+.dcds-BaseBreadcrumbItems--previous:hover { color:var(--color-text-secondary); text-decoration:underline; }
+.dcds-BaseBreadcrumbItems--previous:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-BaseBreadcrumbItems--current { display:inline-flex; align-items:center; font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-text-primary); cursor:default; }
+.dcds-BaseBreadcrumbItems--current:hover { color:var(--color-text-primary); text-decoration:underline; }
+.dcds-Breadcrumbs__separator { display:inline-flex; align-items:center; justify-content:center; width:5px; height:18px; font-size:12px; line-height:18px; color:var(--color-text-neutral); flex-shrink:0; user-select:none; }
+
+/* ============================================================
  * Alert.css
  * ============================================================ */
 .dcds-Alert { display:flex; align-items:flex-start; padding:var(--gap-12); border-radius:var(--rd-S); font-family:var(--font-family); overflow:hidden; width:100%; }
@@ -997,6 +1019,89 @@
       }
 
       /* ============================================================
+       * Breadcrumbs
+       * ============================================================ */
+      /* ── _BaseHomeIcon — linear/home-2.svg (default) + bold/home-2.svg (hover) ── */
+      function _BaseHomeIcon({ position = 'Previous', href, onClick }) {
+        const icons = (
+          <>
+            <span className="dcds-BaseHomeIcon__linear">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M9.02 2.83998L3.63 7.03998C2.73 7.73998 2 9.22998 2 10.36V17.77C2 20.09 3.89 21.99 6.21 21.99H17.79C20.11 21.99 22 20.09 22 17.78V10.5C22 9.28998 21.19 7.73998 20.2 7.04998L14.02 2.71998C12.62 1.73998 10.37 1.78998 9.02 2.83998Z"
+                      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M12 17.99V14.99" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span className="dcds-BaseHomeIcon__bold">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M20.04 6.82L14.28 2.79C12.71 1.69 10.3 1.75 8.78999 2.92L3.77999 6.83C2.77999 7.61 1.98999 9.21 1.98999 10.47V17.37C1.98999 19.92 4.05999 22 6.60999 22H17.39C19.94 22 22.01 19.93 22.01 17.38V10.6C22.01 9.25 21.14 7.59 20.04 6.82ZM12.75 18C12.75 18.41 12.41 18.75 12 18.75C11.59 18.75 11.25 18.41 11.25 18V15C11.25 14.59 11.59 14.25 12 14.25C12.41 14.25 12.75 14.59 12.75 15V18Z"
+                      fill="currentColor" />
+              </svg>
+            </span>
+          </>
+        );
+
+        if (position === 'Current') {
+          return <div className="dcds-BaseHomeIcon--current" aria-label="Home">{icons}</div>;
+        }
+        return (
+          <a className="dcds-BaseHomeIcon" href={href || '#'} aria-label="Home"
+             onClick={(e) => { e.preventDefault(); if (onClick) onClick(e); }}>
+            {icons}
+          </a>
+        );
+      }
+
+      /* ── _BaseBreadcrumbItems ── */
+      function _BaseBreadcrumbItems({ label, position, href, onClick }) {
+        if (position === 'Current') {
+          return <span className="dcds-BaseBreadcrumbItems--current" aria-current="page">{label}</span>;
+        }
+        return (
+          <a className="dcds-BaseBreadcrumbItems--previous" href={href || '#'}
+             onClick={(e) => { e.preventDefault(); if (onClick) onClick(e); }}>
+            {label}
+          </a>
+        );
+      }
+
+      /* ── Separator ── */
+      function Separator() {
+        return (
+          <li aria-hidden="true">
+            <span className="dcds-Breadcrumbs__separator">/</span>
+          </li>
+        );
+      }
+
+      /* ── Breadcrumbs ── */
+      function Breadcrumbs({ items = [], showHome = false, className }) {
+        const classes = ['dcds-Breadcrumbs', className || ''].filter(Boolean).join(' ');
+        return (
+          <nav className={classes} aria-label="Breadcrumb">
+            <ol className="dcds-Breadcrumbs__list">
+              {items.map((item, index) => {
+                const isFirst = index === 0;
+                const isLast = index === items.length - 1;
+                const position = isLast ? 'Current' : 'Previous';
+                return (
+                  <React.Fragment key={`${item.label}-${index}`}>
+                    {!isFirst && <Separator />}
+                    <li>
+                      {isFirst && showHome
+                        ? <_BaseHomeIcon position={position} href={item.href} onClick={item.onClick} />
+                        : <_BaseBreadcrumbItems label={item.label} position={position} href={item.href} onClick={item.onClick} />
+                      }
+                    </li>
+                  </React.Fragment>
+                );
+              })}
+            </ol>
+          </nav>
+        );
+      }
+
+      /* ============================================================
        * Reusable control widgets
        * ============================================================ */
       function CtrlSelect({ label, value, onChange, options }) {
@@ -1082,6 +1187,7 @@
           { id: 'radiobutton',    label: 'RadioButton'    },
           { id: 'checkbox',       label: 'Checkbox'       },
           { id: 'alert',          label: 'Alert'          },
+          { id: 'breadcrumbs',    label: 'Breadcrumbs'    },
         ];
 
         /* --- Button controls --- */
@@ -1125,6 +1231,37 @@
         const [cbState, setCbState] = useState('Enabled');
         const [cbIndeterminate, setCbIndeterminate] = useState(false);
         const [cbChecked, setCbChecked] = useState(false);
+
+        /* --- Breadcrumbs controls --- */
+        const [bcShowHome, setBcShowHome] = useState(false);
+        const [bcItemCount, setBcItemCount] = useState('3');
+        const [bcLog, pushBcLog] = useEventLog();
+
+        const BC_ITEMS_MAP = {
+          '1': [{ label: 'Loan #1042', current: true }],
+          '2': [
+            { label: 'Loans', href: '/loans', onClick: () => pushBcLog('onClick: Loans') },
+            { label: 'Loan #1042', current: true },
+          ],
+          '3': [
+            { label: 'Loans', href: '/loans', onClick: () => pushBcLog('onClick: Loans') },
+            { label: 'Active', href: '/loans/active', onClick: () => pushBcLog('onClick: Active') },
+            { label: 'Loan #1042', current: true },
+          ],
+          '4': [
+            { label: 'Customers', href: '/customers', onClick: () => pushBcLog('onClick: Customers') },
+            { label: 'Retail', href: '/customers/retail', onClick: () => pushBcLog('onClick: Retail') },
+            { label: 'Active', href: '/loans/active', onClick: () => pushBcLog('onClick: Active') },
+            { label: 'Loan #1042', current: true },
+          ],
+          '5': [
+            { label: 'Customers', href: '/customers', onClick: () => pushBcLog('onClick: Customers') },
+            { label: 'Retail', href: '/customers/retail', onClick: () => pushBcLog('onClick: Retail') },
+            { label: 'Mumbai', href: '/customers/retail/mumbai', onClick: () => pushBcLog('onClick: Mumbai') },
+            { label: 'Active', href: '/loans/active', onClick: () => pushBcLog('onClick: Active') },
+            { label: 'Loan #1042', current: true },
+          ],
+        };
 
         /* --- Alert controls --- */
         const [alertState, setAlertState] = useState('info');
@@ -1241,6 +1378,14 @@
                   <CtrlSelect label="State"         value={cbState}          onChange={setCbState}          options={['Enabled', 'Disabled']} />
                   <CtrlToggle label="checked"       checked={cbChecked}       onChange={setCbChecked} />
                   <CtrlToggle label="indeterminate" checked={cbIndeterminate} onChange={setCbIndeterminate} />
+                </>
+              )}
+
+              {activeComponent === 'breadcrumbs' && (
+                <>
+                  <h2>Breadcrumbs</h2>
+                  <CtrlSelect label="No of items" value={bcItemCount} onChange={setBcItemCount} options={['1', '2', '3', '4', '5']} />
+                  <CtrlToggle label="showHome"    checked={bcShowHome}  onChange={setBcShowHome} />
                 </>
               )}
 
@@ -1430,6 +1575,66 @@
                     />
                   </div>
                 </section>
+              )}
+
+              {activeComponent === 'breadcrumbs' && (
+                <>
+                  <section>
+                    <h2>Breadcrumbs — Interactive Playground</h2>
+                    <p className="stage-note">
+                      Ancestor items fire onClick. The current page item is plain text (non-interactive).
+                    </p>
+                    <div className="preview" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 'var(--gap-16)' }}>
+                      <Breadcrumbs
+                        items={BC_ITEMS_MAP[bcItemCount]}
+                        showHome={bcShowHome}
+                      />
+                    </div>
+                    <div className="events">
+                      {bcLog.length === 0 ? '— no events yet —' : bcLog.join('\n')}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>Breadcrumbs — All Variants</h2>
+                    <p className="stage-note">showHome=false (text start) and showHome=true (home icon start), across item counts 2–5.</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-16)', padding: 'var(--gap-16)', background: 'var(--color-surface-2)', borderRadius: 'var(--rd-S)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>2 items · showHome=false</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['2']} showHome={false} />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>2 items · showHome=true</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['2']} showHome={true} />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>3 items · showHome=false</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['3']} showHome={false} />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>3 items · showHome=true</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['3']} showHome={true} />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>4 items · showHome=false</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['4']} showHome={false} />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>4 items · showHome=true</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['4']} showHome={true} />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>5 items · showHome=false</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['5']} showHome={false} />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>5 items · showHome=true</p>
+                        <Breadcrumbs items={BC_ITEMS_MAP['5']} showHome={true} />
+                      </div>
+                    </div>
+                  </section>
+
+                </>
               )}
 
               {activeComponent === 'alert' && (
