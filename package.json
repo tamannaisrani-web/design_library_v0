@@ -1,55 +1,11 @@
 {
-  "name": "@dcds/icons",
-  "version": "0.1.0",
-  "description": "Design Language System — React icon components (linear, bold, outline)",
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./linear": {
-      "import": "./dist/linear.mjs",
-      "require": "./dist/linear.js",
-      "types": "./dist/linear.d.ts"
-    },
-    "./bold": {
-      "import": "./dist/bold.mjs",
-      "require": "./dist/bold.js",
-      "types": "./dist/bold.d.ts"
-    },
-    "./outline": {
-      "import": "./dist/outline.mjs",
-      "require": "./dist/outline.js",
-      "types": "./dist/outline.d.ts"
-    }
-  },
-  "files": [
-    "dist",
-    "packages/components/assets/icons"
-  ],
+  "name": "dcds-design-library",
+  "private": true,
+  "workspaces": ["icons"],
   "scripts": {
-    "dev": "vite",
-    "build:app": "vite build",
-    "export:figma": "node scripts/export-figma.mjs",
-    "generate": "node scripts/build-components.mjs",
-    "build": "npm run generate && tsup",
-    "prepublishOnly": "npm run build"
-  },
-  "peerDependencies": {
-    "react": ">=16.8.0"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.6.2",
-    "@mui/material": "^5.6.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "generate": "node scripts/generate-icons.mjs",
+    "build": "npm run build --workspace=icons",
+    "export:figma": "node scripts/export-figma.mjs"
   },
   "devDependencies": {
     "@svgr/core": "^8.1.0",
@@ -57,18 +13,9 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^4.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "vite": "^5.0.0"
+    "typescript": "^5.0.0"
   },
-  "keywords": [
-    "icons",
-    "svg",
-    "react",
-    "design-system",
-    "dcds"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",
