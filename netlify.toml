@@ -1,7 +1,2 @@
 [build]
   publish = "."
-
-[[redirects]]
-  from = "/"
-  to = "/demo/playground.html"
-  status = 200
