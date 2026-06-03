@@ -522,8 +522,8 @@
     />
 
     <!-- React + ReactDOM + Babel Standalone (in-browser JSX) -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
@@ -799,6 +799,72 @@
       .toast-container > * {
         pointer-events: all;
       }
+
+      /* ============================================================
+       * Chip.css
+       * ============================================================ */
+      .dcds-Chip { display:inline-flex; align-items:center; justify-content:center; gap:var(--gap-8); padding:var(--gap-4) var(--gap-8); border:0.5px solid var(--color-stroke-neutral); border-radius:var(--rd-Max); background-color:var(--color-surface-1); color:var(--color-text-subdued); font-family:var(--font-family); font-weight:var(--font-weight-regular); cursor:pointer; transition:background-color 120ms ease,border-color 120ms ease,color 120ms ease,opacity 120ms ease; white-space:nowrap; user-select:none; outline:none; line-height:1; }
+      .dcds-Chip--size-S { font-size:var(--font-size-validation); }
+      .dcds-Chip--size-M { font-size:var(--font-size-label); height:32px; }
+      .dcds-Chip--size-L { font-size:var(--font-size-body); height:40px; }
+      .dcds-Chip__icon { flex-shrink:0; }
+      .dcds-Chip--size-S .dcds-Chip__icon { width:14px; height:14px; }
+      .dcds-Chip--size-M .dcds-Chip__icon { width:16px; height:16px; }
+      .dcds-Chip--size-L .dcds-Chip__icon { width:24px; height:24px; }
+      .dcds-Chip--selected { background-color:var(--color-fill-primary-2); border:1px solid var(--color-stroke-focus); color:var(--color-text-primary); }
+      .dcds-Chip--unselected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) { background-color:var(--color-surface-2); }
+      .dcds-Chip--selected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) { background-color:var(--color-fill-primary-1); }
+      .dcds-Chip:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-Chip--unselected.dcds-Chip--state-Disabled, .dcds-Chip--unselected:disabled { background-color:var(--color-surface-1); border-color:var(--color-stroke-disabled); color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+      .dcds-Chip--selected.dcds-Chip--state-Disabled, .dcds-Chip--selected:disabled { opacity:0.5; cursor:not-allowed; pointer-events:none; }
+      .dcds-ChipGroup { display:flex; flex-wrap:wrap; gap:var(--gap-8); align-items:center; }
+
+      /* ============================================================
+       * Badge.css
+       * ============================================================ */
+      .dcds-Badge { display:inline-flex; align-items:center; gap:var(--gap-4); padding:var(--gap-4) var(--gap-8); border-radius:var(--rd-Max); font-family:var(--font-family); font-weight:var(--font-weight-regular); white-space:nowrap; line-height:1; }
+      .dcds-Badge--size-S { height:24px; font-size:var(--font-size-body-small); }
+      .dcds-Badge--size-M { height:32px; font-size:var(--font-size-label); }
+      .dcds-Badge--size-L { height:40px; font-size:var(--font-size-body); }
+      .dcds-Badge__icon { flex-shrink:0; }
+      .dcds-Badge--size-S .dcds-Badge__icon { width:14px; height:14px; }
+      .dcds-Badge--size-M .dcds-Badge__icon { width:16px; height:16px; }
+      .dcds-Badge--size-L .dcds-Badge__icon { width:24px; height:24px; }
+      .dcds-Badge--emphasis-subtle.dcds-Badge--state-neutral { background-color:var(--color-surface-2); border:1px solid var(--color-stroke-neutral); color:var(--color-text-neutral); }
+      .dcds-Badge--emphasis-subtle.dcds-Badge--state-info { background-color:var(--color-fill-light-info); border:1px solid var(--color-stroke-info); color:var(--color-text-info); }
+      .dcds-Badge--emphasis-subtle.dcds-Badge--state-warning { background-color:var(--color-fill-light-warning); border:1px solid var(--color-stroke-warning); color:var(--color-text-warning); }
+      .dcds-Badge--emphasis-subtle.dcds-Badge--state-error { background-color:var(--color-fill-light-error); border:1px solid var(--color-stroke-error); color:var(--color-text-error); }
+      .dcds-Badge--emphasis-subtle.dcds-Badge--state-success { background-color:var(--color-fill-light-success); border:1px solid var(--color-stroke-success); color:var(--color-text-success); }
+      .dcds-Badge--emphasis-intense.dcds-Badge--state-neutral { background-color:var(--color-icon-subdued); color:var(--color-text-invert); }
+      .dcds-Badge--emphasis-intense.dcds-Badge--state-info { background-color:var(--color-fill-invert-info); color:var(--color-text-invert); }
+      .dcds-Badge--emphasis-intense.dcds-Badge--state-warning { background-color:var(--color-fill-invert-warning); color:var(--color-text-invert); }
+      .dcds-Badge--emphasis-intense.dcds-Badge--state-error { background-color:var(--color-fill-invert-error); color:var(--color-text-invert); }
+      .dcds-Badge--emphasis-intense.dcds-Badge--state-success { background-color:var(--color-fill-invert-success); color:var(--color-text-invert); }
+
+      /* ============================================================
+       * Tag.css
+       * ============================================================ */
+      .dcds-Tag { display:inline-flex; align-items:center; gap:var(--gap-4); padding:var(--gap-4) var(--gap-8); border-radius:var(--rd-Max); background-color:var(--color-surface-4); color:var(--color-text-neutral); font-family:var(--font-family); font-weight:var(--font-weight-regular); white-space:nowrap; line-height:1; }
+      .dcds-Tag--size-S { height:24px; font-size:var(--font-size-body-small); }
+      .dcds-Tag--size-M { height:32px; font-size:var(--font-size-label); }
+      .dcds-Tag__icon { flex-shrink:0; }
+      .dcds-Tag--size-S .dcds-Tag__icon { width:14px; height:14px; }
+      .dcds-Tag--size-M .dcds-Tag__icon { width:16px; height:16px; }
+      .dcds-Tag__label { flex:1; min-width:0; }
+      .dcds-Tag__remove { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; background:none; border:none; padding:0; cursor:pointer; color:var(--color-text-neutral); border-radius:var(--rd-XS); transition:color 120ms ease,opacity 120ms ease; line-height:1; }
+      .dcds-Tag__remove:hover { opacity:0.6; }
+      .dcds-Tag__remove:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:1px; }
+      .dcds-Tag--size-S .dcds-Tag__remove { width:14px; height:14px; }
+      .dcds-Tag--size-M .dcds-Tag__remove { width:16px; height:16px; }
+      .dcds-Tag--state-Disabled { background-color:var(--color-surface-3); color:var(--color-text-disabled); cursor:not-allowed; }
+      .dcds-Tag--state-Disabled .dcds-Tag__remove { color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+
+      /* ============================================================
+       * Chip / Badge / Tag — stage helpers
+       * ============================================================ */
+      .chip-row { display:flex; flex-wrap:wrap; gap:var(--gap-8); align-items:center; padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+      .badge-grid { display:flex; flex-wrap:wrap; gap:var(--gap-8); align-items:center; padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+      .tag-row { display:flex; flex-wrap:wrap; gap:var(--gap-8); align-items:center; padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
     </style>
   </head>
   <body>
@@ -1846,6 +1912,417 @@
       const STATES = ['success', 'error', 'warning', 'info'];
 
       /* ============================================================
+       * Chip
+       * ============================================================ */
+      /* icons/src/linear/InfoCircleLinear */
+      const ChipIconLinear = () => (
+        <svg className="dcds-Chip__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 16L12 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12.0055 8L11.9965 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+      /* icons/src/bold/InfoCircleBold */
+      const ChipIconBold = () => (
+        <svg className="dcds-Chip__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22ZM12.75 16C12.75 16.41 12.41 16.75 12 16.75C11.59 16.75 11.25 16.41 11.25 16L11.25 11C11.25 10.59 11.59 10.25 12 10.25C12.41 10.25 12.75 10.59 12.75 11L12.75 16ZM11.08 7.62C11.13 7.49 11.2 7.39 11.29 7.29C11.39 7.2 11.5 7.13 11.62 7.08C11.74 7.03 11.87 7 12 7C12.13 7 12.26 7.03 12.38 7.08C12.5 7.13 12.61 7.2 12.71 7.29C12.8 7.39 12.87 7.49 12.92 7.62C12.97 7.74 13 7.87 13 8C13 8.13 12.97 8.26 12.92 8.38C12.87 8.5 12.8 8.61 12.71 8.71C12.61 8.8 12.5 8.87 12.38 8.92C12.14 9.02 11.86 9.02 11.62 8.92C11.5 8.87 11.39 8.8 11.29 8.71C11.2 8.61 11.13 8.5 11.08 8.38C11.03 8.26 11 8.13 11 8C11 7.87 11.03 7.74 11.08 7.62Z" fill="currentColor"/>
+        </svg>
+      );
+      function Chip({ children, size = 'M', isSelected = false, state = 'Default', showIcon = false, onClick, onChange, onKeyDown, onFocus, onBlur, onMouseEnter, onMouseLeave, tooltip, className, dataTestId, 'aria-label': ariaLabel }) {
+        const handleClick = (e) => {
+          if (state === 'Disabled') return;
+          onClick && onClick(e);
+          onChange && onChange(!isSelected, e);
+        };
+        const classes = ['dcds-Chip', `dcds-Chip--size-${size}`, `dcds-Chip--state-${state}`, isSelected ? 'dcds-Chip--selected' : 'dcds-Chip--unselected', className].filter(Boolean).join(' ');
+        return (
+          <button type="button" className={classes} disabled={state === 'Disabled'} aria-pressed={isSelected} aria-label={ariaLabel} title={tooltip} data-testid={dataTestId} onClick={handleClick} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {showIcon && (isSelected ? <ChipIconBold /> : <ChipIconLinear />)}
+            {children}
+          </button>
+        );
+      }
+
+      function ChipGroup({ children, className, dataTestId, role = 'group', 'aria-label': ariaLabel }) {
+        const classes = ['dcds-ChipGroup', className].filter(Boolean).join(' ');
+        return <div className={classes} role={role} aria-label={ariaLabel} data-testid={dataTestId}>{children}</div>;
+      }
+
+      /* ============================================================
+       * Badge
+       * ============================================================ */
+      /* icons/src/linear/Warning2Linear */
+      const BadgeIconNeutralSubtle = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 7.75V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M21.08 8.58003V15.42C21.08 16.54 20.4799 17.58 19.5099 18.15L13.5699 21.58C12.5999 22.14 11.3999 22.14 10.4199 21.58L4.47992 18.15C3.50992 17.59 2.90991 16.55 2.90991 15.42V8.58003C2.90991 7.46003 3.50992 6.41999 4.47992 5.84999L10.4199 2.42C11.3899 1.86 12.5899 1.86 13.5699 2.42L19.5099 5.84999C20.4799 6.41999 21.08 7.45003 21.08 8.58003Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 16.2V16.2999" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+      /* icons/src/linear/InfoCircleLinear */
+      const BadgeIconInfoSubtle = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 16L12 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12.0055 8L11.9965 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+      /* icons/src/linear/RefreshCircleLinear */
+      const BadgeIconWarningSubtle = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M8.00977 14.5099C8.18977 14.8099 8.40976 15.09 8.65976 15.34C10.4998 17.18 13.4898 17.18 15.3398 15.34C16.0898 14.59 16.5198 13.6399 16.6598 12.6699" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7.33984 11.3301C7.47984 10.3501 7.90985 9.41003 8.65985 8.66003C10.4999 6.82003 13.4898 6.82003 15.3398 8.66003C15.5998 8.92003 15.8098 9.20005 15.9898 9.49005" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7.82031 17.18V14.51H10.4903" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M16.1797 6.82007V9.49005H13.5098" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+      /* icons/src/linear/CloseCircleLinear */
+      const BadgeIconErrorSubtle = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M9.17004 14.83L14.83 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M14.83 14.83L9.17004 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+      /* icons/src/linear/TickCircleLinear */
+      const BadgeIconSuccessSubtle = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+      /* icons/src/bold/Warning2Bold */
+      const BadgeIconNeutralIntense = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M19.51 5.85L13.57 2.42C12.6 1.86 11.4 1.86 10.42 2.42L4.49004 5.85C3.52004 6.41 2.92004 7.45 2.92004 8.58V15.42C2.92004 16.54 3.52004 17.58 4.49004 18.15L10.43 21.58C11.4 22.14 12.6 22.14 13.58 21.58L19.52 18.15C20.49 17.59 21.09 16.55 21.09 15.42V8.58C21.08 7.45 20.48 6.42 19.51 5.85ZM11.25 7.75C11.25 7.34 11.59 7 12 7C12.41 7 12.75 7.34 12.75 7.75V13C12.75 13.41 12.41 13.75 12 13.75C11.59 13.75 11.25 13.41 11.25 13V7.75ZM12.92 16.63C12.87 16.75 12.8 16.86 12.71 16.96C12.52 17.15 12.27 17.25 12 17.25C11.87 17.25 11.74 17.22 11.62 17.17C11.49 17.12 11.39 17.05 11.29 16.96C11.2 16.86 11.13 16.75 11.07 16.63C11.02 16.51 11 16.38 11 16.25C11 15.99 11.1 15.73 11.29 15.54C11.39 15.45 11.49 15.38 11.62 15.33C11.99 15.17 12.43 15.26 12.71 15.54C12.8 15.64 12.87 15.74 12.92 15.87C12.97 15.99 13 16.12 13 16.25C13 16.38 12.97 16.51 12.92 16.63Z" fill="currentColor"/>
+        </svg>
+      );
+      /* icons/src/bold/InfoCircleBold */
+      const BadgeIconInfoIntense = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22ZM12.75 16C12.75 16.41 12.41 16.75 12 16.75C11.59 16.75 11.25 16.41 11.25 16L11.25 11C11.25 10.59 11.59 10.25 12 10.25C12.41 10.25 12.75 10.59 12.75 11L12.75 16ZM11.08 7.62C11.13 7.49 11.2 7.39 11.29 7.29C11.39 7.2 11.5 7.13 11.62 7.08C11.74 7.03 11.87 7 12 7C12.13 7 12.26 7.03 12.38 7.08C12.5 7.13 12.61 7.2 12.71 7.29C12.8 7.39 12.87 7.49 12.92 7.62C12.97 7.74 13 7.87 13 8C13 8.13 12.97 8.26 12.92 8.38C12.87 8.5 12.8 8.61 12.71 8.71C12.61 8.8 12.5 8.87 12.38 8.92C12.14 9.02 11.86 9.02 11.62 8.92C11.5 8.87 11.39 8.8 11.29 8.71C11.2 8.61 11.13 8.5 11.08 8.38C11.03 8.26 11 8.13 11 8C11 7.87 11.03 7.74 11.08 7.62Z" fill="currentColor"/>
+        </svg>
+      );
+      /* icons/src/bold/RefreshCircleBold */
+      const BadgeIconWarningIntense = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM6.6 11.23C6.77 10.04 7.3 8.97 8.13 8.13C10.13 6.14 13.28 6.03 15.42 7.77V6.82C15.42 6.41 15.76 6.07 16.17 6.07C16.58 6.07 16.92 6.41 16.92 6.82V9.49C16.92 9.9 16.58 10.24 16.17 10.24H13.5C13.09 10.24 12.75 9.9 12.75 9.49C12.75 9.08 13.09 8.74 13.5 8.74H14.25C12.7 7.66 10.56 7.81 9.18 9.19C8.58 9.79 8.2 10.57 8.07 11.44C8.02 11.81 7.7 12.08 7.33 12.08C7.29 12.08 7.26 12.08 7.22 12.07C6.83 12.02 6.54 11.64 6.6 11.23ZM15.87 15.87C14.8 16.94 13.4 17.47 12 17.47C10.78 17.47 9.57 17.04 8.57 16.23V17.17C8.57 17.58 8.23 17.92 7.82 17.92C7.41 17.92 7.07 17.58 7.07 17.17V14.5C7.07 14.09 7.41 13.75 7.82 13.75H10.49C10.9 13.75 11.24 14.09 11.24 14.5C11.24 14.91 10.9 15.25 10.49 15.25H9.74C11.29 16.33 13.43 16.18 14.81 14.8C15.41 14.2 15.79 13.42 15.92 12.55C15.98 12.14 16.35 11.85 16.77 11.91C17.18 11.97 17.46 12.35 17.41 12.76C17.23 13.97 16.7 15.04 15.87 15.87Z" fill="currentColor"/>
+        </svg>
+      );
+      /* icons/src/bold/CloseCircleBold */
+      const BadgeIconErrorIntense = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM15.36 14.3C15.65 14.59 15.65 15.07 15.36 15.36C15.21 15.51 15.02 15.58 14.83 15.58C14.64 15.58 14.45 15.51 14.3 15.36L12 13.06L9.7 15.36C9.55 15.51 9.36 15.58 9.17 15.58C8.98 15.58 8.79 15.51 8.64 15.36C8.35 15.07 8.35 14.59 8.64 14.3L10.94 12L8.64 9.7C8.35 9.41 8.35 8.93 8.64 8.64C8.93 8.35 9.41 8.35 9.7 8.64L12 10.94L14.3 8.64C14.59 8.35 15.07 8.35 15.36 8.64C15.65 8.93 15.65 9.41 15.36 9.7L13.06 12L15.36 14.3Z" fill="currentColor"/>
+        </svg>
+      );
+      /* icons/src/bold/TickCircleBold */
+      const BadgeIconSuccessIntense = () => (
+        <svg className="dcds-Badge__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/>
+        </svg>
+      );
+      const BADGE_ICONS_SUBTLE  = { neutral: BadgeIconNeutralSubtle,  info: BadgeIconInfoSubtle,  warning: BadgeIconWarningSubtle,  error: BadgeIconErrorSubtle,  success: BadgeIconSuccessSubtle  };
+      const BADGE_ICONS_INTENSE = { neutral: BadgeIconNeutralIntense, info: BadgeIconInfoIntense, warning: BadgeIconWarningIntense, error: BadgeIconErrorIntense, success: BadgeIconSuccessIntense };
+      function Badge({ children, size = 'M', emphasis = 'subtle', state = 'neutral', showIcon = true, className, dataTestId, 'aria-label': ariaLabel }) {
+        const classes = ['dcds-Badge', `dcds-Badge--size-${size}`, `dcds-Badge--emphasis-${emphasis}`, `dcds-Badge--state-${state}`, className].filter(Boolean).join(' ');
+        const iconMap = emphasis === 'intense' ? BADGE_ICONS_INTENSE : BADGE_ICONS_SUBTLE;
+        const IconComponent = iconMap[state];
+        return (
+          <span className={classes} data-testid={dataTestId} aria-label={ariaLabel}>
+            {showIcon && IconComponent && <IconComponent />}
+            {children}
+          </span>
+        );
+      }
+
+      /* ============================================================
+       * Tag
+       * ============================================================ */
+      {/* icons/src/linear/StarLinear */}
+      const TagStarIcon = () => (
+        <svg className="dcds-Tag__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M13.73 3.51014L15.49 7.03014C15.73 7.52014 16.37 7.99014 16.91 8.08014L20.1 8.61014C22.14 8.95014 22.62 10.4301 21.15 11.8901L18.67 14.3701C18.25 14.7901 18.02 15.6001 18.15 16.1801L18.86 19.2501C19.42 21.6801 18.13 22.6201 15.98 21.3501L12.99 19.5801C12.45 19.2601 11.56 19.2601 11.01 19.5801L8.02 21.3501C5.88 22.6201 4.58 21.6701 5.14 19.2501L5.85 16.1801C5.98 15.6001 5.75 14.7901 5.33 14.3701L2.85 11.8901C1.39 10.4301 1.86 8.95014 3.9 8.61014L7.09 8.08014C7.62 7.99014 8.26 7.52014 8.5 7.03014L10.26 3.51014C11.22 1.60014 12.78 1.60014 13.73 3.51014Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+      {/* icons/src/outline/CloseOutline */}
+      const TagCloseIcon = () => (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="currentColor"/>
+          <path d="M7.22706 16.7729C6.93715 16.483 6.93715 16.0022 7.22706 15.7123L15.7123 7.22699C16.0023 6.93707 16.4831 6.93707 16.773 7.22699C17.0629 7.5169 17.0629 7.99773 16.773 8.28765L8.28772 16.7729C7.99781 17.0628 7.51698 17.0628 7.22706 16.7729Z" fill="currentColor"/>
+        </svg>
+      );
+      function Tag({ children, size = 'M', state = 'Default', showIcon = true, onRemove, className, dataTestId, 'aria-label': ariaLabel }) {
+        const classes = ['dcds-Tag', `dcds-Tag--size-${size}`, `dcds-Tag--state-${state}`, className].filter(Boolean).join(' ');
+        const labelText = typeof children === 'string' ? children : 'tag';
+        return (
+          <span className={classes} data-testid={dataTestId} aria-label={ariaLabel}>
+            {showIcon && <TagStarIcon />}
+            <span className="dcds-Tag__label">{children}</span>
+            {onRemove && (
+              <button type="button" className="dcds-Tag__remove" onClick={state !== 'Disabled' ? onRemove : undefined} disabled={state === 'Disabled'} aria-label={`Remove ${labelText}`} tabIndex={state === 'Disabled' ? -1 : 0}>
+                <TagCloseIcon />
+              </button>
+            )}
+          </span>
+        );
+      }
+
+      /* ============================================================
+       * Chip filter bar demo — needs own state so extracted as component
+       * ============================================================ */
+      function ChipFilterBarDemo() {
+        const filters = ['All', 'Active', 'Pending', 'Closed', 'Rejected'];
+        const [active, setActive] = useState('All');
+        return (
+          <ChipGroup aria-label="Filter by status">
+            {filters.map((f) => (
+              <Chip key={f} size="M" showIcon isSelected={active === f} onChange={() => setActive(f)}>{f}</Chip>
+            ))}
+          </ChipGroup>
+        );
+      }
+
+      /* ============================================================
+       * ChipSection — self-contained chip playground (panel + stage)
+       * ============================================================ */
+      function ChipSection() {
+        const [chip, setChip] = useState({ size: 'M', state: 'Default', selected: false, showIcon: false, label: 'Active' });
+        const setChipSize     = (v) => setChip((p) => ({ ...p, size: v }));
+        const setChipState    = (v) => setChip((p) => ({ ...p, state: v }));
+        const setChipSelected = (v) => setChip((p) => ({ ...p, selected: v }));
+        const setChipShowIcon = (v) => setChip((p) => ({ ...p, showIcon: v }));
+        const setChipLabel    = (v) => setChip((p) => ({ ...p, label: v }));
+        const { size: chipSize, state: chipState, selected: chipSelected, showIcon: chipShowIcon, label: chipLabel } = chip;
+        const [chipLog, pushChipLog] = useEventLog();
+        return (
+          <>
+            <aside className="panel">
+              <h1>Props</h1>
+              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
+              <h2>Chip</h2>
+              <CtrlSelect label="size"       value={chipSize}       onChange={setChipSize}     options={['S', 'M', 'L']} />
+              <CtrlSelect label="state"      value={chipState}      onChange={setChipState}    options={['Default', 'Disabled']} />
+              <CtrlToggle label="isSelected" checked={chipSelected} onChange={setChipSelected} />
+              <CtrlToggle label="showIcon"   checked={chipShowIcon} onChange={setChipShowIcon} />
+              <CtrlText   label="label"      value={chipLabel}      onChange={setChipLabel} />
+            </aside>
+            <main className="stage">
+              <section>
+                <h2>Chip — Interactive Playground</h2>
+                <p className="stage-note">Adjust props in the left panel. Click the chip to toggle <code>isSelected</code> and fire events.</p>
+                <div className="preview">
+                  <Chip
+                    size={chipSize}
+                    state={chipState}
+                    isSelected={chipSelected}
+                    showIcon={chipShowIcon}
+                    tooltip={chipState === 'Disabled' ? 'This filter is unavailable' : undefined}
+                    onChange={(sel) => { setChipSelected(sel); pushChipLog(`onChange · isSelected=${sel}`); }}
+                    onClick={() => pushChipLog('onClick')}
+                    onFocus={() => pushChipLog('onFocus')}
+                    onBlur={() => pushChipLog('onBlur')}
+                    onKeyDown={(e) => pushChipLog(`onKeyDown · ${e.key}`)}
+                  >
+                    {chipLabel}
+                  </Chip>
+                </div>
+                <div className="events">{chipLog.length === 0 ? '— no events yet —' : chipLog.join('   ')}</div>
+              </section>
+              <section>
+                <h2>Chip — Sizes</h2>
+                <p className="stage-note">S (10px) / M (32px, 14px) / L (40px, 16px) — unselected and selected.</p>
+                <div className="chip-row" style={{ alignItems: 'center' }}>
+                  <Chip size="S" isSelected={false}>Small</Chip>
+                  <Chip size="S" isSelected={true}>Small</Chip>
+                  <Chip size="M" isSelected={false}>Medium</Chip>
+                  <Chip size="M" isSelected={true}>Medium</Chip>
+                  <Chip size="L" isSelected={false}>Large</Chip>
+                  <Chip size="L" isSelected={true}>Large</Chip>
+                </div>
+              </section>
+              <section>
+                <h2>Chip — With Icon</h2>
+                <p className="stage-note">Leading info-circle icon: linear (outline) when unselected, bold (filled) when selected.</p>
+                <div className="chip-row" style={{ alignItems: 'center' }}>
+                  <Chip size="S" showIcon isSelected={false}>Small</Chip>
+                  <Chip size="S" showIcon isSelected={true}>Small</Chip>
+                  <Chip size="M" showIcon isSelected={false}>Medium</Chip>
+                  <Chip size="M" showIcon isSelected={true}>Medium</Chip>
+                  <Chip size="L" showIcon isSelected={false}>Large</Chip>
+                  <Chip size="L" showIcon isSelected={true}>Large</Chip>
+                </div>
+              </section>
+              <section>
+                <h2>Chip — States</h2>
+                <p className="stage-note">Default / Disabled. Disabled chips require a <code>tooltip</code>.</p>
+                <div className="chip-row">
+                  <Chip size="M" state="Default" isSelected={false}>Default</Chip>
+                  <Chip size="M" state="Default" isSelected={true}>Selected</Chip>
+                  <Chip size="M" state="Disabled" tooltip="No data available for this filter">Disabled</Chip>
+                  <Chip size="M" state="Disabled" isSelected={true} tooltip="No data available">Disabled selected</Chip>
+                </div>
+              </section>
+              <section>
+                <h2>Chip — Filter Bar (ChipGroup)</h2>
+                <p className="stage-note">
+                  Use <code>ChipGroup</code> to wrap chips. Applies <code>gap-8</code> and <code>role="group"</code> automatically.
+                </p>
+                <div className="chip-row">
+                  <ChipFilterBarDemo />
+                </div>
+              </section>
+            </main>
+          </>
+        );
+      }
+
+      /* ============================================================
+       * BadgeSection — self-contained badge playground (panel + stage)
+       * ============================================================ */
+      function BadgeSection() {
+        const [badge, setBadge] = useState({ size: 'M', emphasis: 'subtle', state: 'success', showIcon: true, label: 'Active' });
+        const setBadgeSize     = (v) => setBadge((p) => ({ ...p, size: v }));
+        const setBadgeEmphasis = (v) => setBadge((p) => ({ ...p, emphasis: v }));
+        const setBadgeState    = (v) => setBadge((p) => ({ ...p, state: v }));
+        const setBadgeShowIcon = (v) => setBadge((p) => ({ ...p, showIcon: v }));
+        const setBadgeLabel    = (v) => setBadge((p) => ({ ...p, label: v }));
+        const { size: badgeSize, emphasis: badgeEmphasis, state: badgeState, showIcon: badgeShowIcon, label: badgeLabel } = badge;
+        return (
+          <>
+            <aside className="panel">
+              <h1>Props</h1>
+              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
+              <h2>Badge</h2>
+              <CtrlSelect label="size"     value={badgeSize}      onChange={setBadgeSize}     options={['S', 'M', 'L']} />
+              <CtrlSelect label="emphasis" value={badgeEmphasis}  onChange={setBadgeEmphasis} options={['subtle', 'intense']} />
+              <CtrlSelect label="state"    value={badgeState}     onChange={setBadgeState}    options={['neutral', 'info', 'warning', 'error', 'success']} />
+              <CtrlToggle label="showIcon" checked={badgeShowIcon} onChange={setBadgeShowIcon} />
+              <CtrlText   label="label"    value={badgeLabel}     onChange={setBadgeLabel} />
+            </aside>
+            <main className="stage">
+              <section>
+                <h2>Badge — Interactive Playground</h2>
+                <p className="stage-note">Adjust props in the left panel to preview any combination.</p>
+                <div className="preview">
+                  <Badge size={badgeSize} emphasis={badgeEmphasis} state={badgeState} showIcon={badgeShowIcon}>{badgeLabel}</Badge>
+                </div>
+              </section>
+              <section>
+                <h2>Badge — All States (subtle)</h2>
+                <p className="stage-note">Light tinted background + 1px colored border + state-colored text and icon.</p>
+                <div className="badge-grid">
+                  <Badge size="M" emphasis="subtle" state="neutral">Draft</Badge>
+                  <Badge size="M" emphasis="subtle" state="info">In review</Badge>
+                  <Badge size="M" emphasis="subtle" state="warning">Expiring soon</Badge>
+                  <Badge size="M" emphasis="subtle" state="error">Rejected</Badge>
+                  <Badge size="M" emphasis="subtle" state="success">Active</Badge>
+                </div>
+              </section>
+              <section>
+                <h2>Badge — All States (intense)</h2>
+                <p className="stage-note">Solid filled background + white icon and text. Use sparingly.</p>
+                <div className="badge-grid">
+                  <Badge size="M" emphasis="intense" state="neutral">Archived</Badge>
+                  <Badge size="M" emphasis="intense" state="info">Pending</Badge>
+                  <Badge size="M" emphasis="intense" state="warning">Overdue</Badge>
+                  <Badge size="M" emphasis="intense" state="error">Failed</Badge>
+                  <Badge size="M" emphasis="intense" state="success">Approved</Badge>
+                </div>
+              </section>
+              <section>
+                <h2>Badge — Sizes (S / M / L)</h2>
+                <p className="stage-note">S (24px) = tables · M (32px) = default · L (40px) = headers/hero only.</p>
+                <div className="badge-grid" style={{ alignItems: 'center' }}>
+                  <Badge size="S" emphasis="subtle" state="success">S Active</Badge>
+                  <Badge size="M" emphasis="subtle" state="success">M Active</Badge>
+                  <Badge size="L" emphasis="subtle" state="success">L Active</Badge>
+                  <Badge size="S" emphasis="intense" state="info">S Pending</Badge>
+                  <Badge size="M" emphasis="intense" state="info">M Pending</Badge>
+                  <Badge size="L" emphasis="intense" state="info">L Pending</Badge>
+                </div>
+              </section>
+            </main>
+          </>
+        );
+      }
+
+      /* ============================================================
+       * TagSection — self-contained tag playground (panel + stage)
+       * ============================================================ */
+      function TagSection() {
+        const [tag, setTag] = useState({ size: 'M', state: 'Default', showIcon: true, label: 'Status: Active', demoTags: ['Loans', 'Q1 2026', 'Approved', 'Mumbai'] });
+        const setTagSize     = (v) => setTag((p) => ({ ...p, size: v }));
+        const setTagState    = (v) => setTag((p) => ({ ...p, state: v }));
+        const setTagShowIcon = (v) => setTag((p) => ({ ...p, showIcon: v }));
+        const setTagLabel    = (v) => setTag((p) => ({ ...p, label: v }));
+        const setDemoTags    = (v) => setTag((p) => ({ ...p, demoTags: typeof v === 'function' ? v(p.demoTags) : v }));
+        const { size: tagSize, state: tagState, showIcon: tagShowIcon, label: tagLabel, demoTags } = tag;
+        const [tagLog, pushTagLog] = useEventLog();
+        return (
+          <>
+            <aside className="panel">
+              <h1>Props</h1>
+              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
+              <h2>Tag</h2>
+              <CtrlSelect label="size"     value={tagSize}      onChange={setTagSize}     options={['S', 'M']} />
+              <CtrlSelect label="state"    value={tagState}     onChange={setTagState}    options={['Default', 'Disabled']} />
+              <CtrlToggle label="showIcon" checked={tagShowIcon} onChange={setTagShowIcon} />
+              <CtrlText   label="label"    value={tagLabel}     onChange={setTagLabel} />
+            </aside>
+            <main className="stage">
+              <section>
+                <h2>Tag — Interactive Playground</h2>
+                <p className="stage-note">Adjust props in the left panel. Click × to fire <code>onRemove</code>.</p>
+                <div className="preview">
+                  <Tag size={tagSize} state={tagState} showIcon={tagShowIcon} onRemove={() => pushTagLog('onRemove')}>{tagLabel}</Tag>
+                </div>
+                <div className="events">{tagLog.length === 0 ? '— no events yet —' : tagLog.join('   ')}</div>
+              </section>
+              <section>
+                <h2>Tag — Sizes &amp; States</h2>
+                <p className="stage-note">S (24px) and M (32px). Default has <code>surface-4</code> bg; Disabled uses <code>surface-3</code>.</p>
+                <div className="tag-row" style={{ alignItems: 'center' }}>
+                  <Tag size="S" state="Default"  onRemove={() => {}}>Small</Tag>
+                  <Tag size="M" state="Default"  onRemove={() => {}}>Medium</Tag>
+                  <Tag size="S" state="Disabled" onRemove={() => {}}>Small disabled</Tag>
+                  <Tag size="M" state="Disabled" onRemove={() => {}}>Medium disabled</Tag>
+                </div>
+              </section>
+              <section>
+                <h2>Tag — With / Without Icon</h2>
+                <div className="tag-row">
+                  <Tag size="M" showIcon={true}  onRemove={() => {}}>With icon</Tag>
+                  <Tag size="M" showIcon={false} onRemove={() => {}}>No icon</Tag>
+                  <Tag size="S" showIcon={true}  onRemove={() => {}}>With icon S</Tag>
+                  <Tag size="S" showIcon={false} onRemove={() => {}}>No icon S</Tag>
+                </div>
+              </section>
+              <section>
+                <h2>Tag — Removable Filter Row</h2>
+                <p className="stage-note">Click × to remove a tag. Tags wrap onto new lines when the row is full.</p>
+                <div className="tag-row">
+                  {demoTags.map((t) => (
+                    <Tag key={t} size="M" state="Default" onRemove={() => setDemoTags((prev) => prev.filter((x) => x !== t))}>
+                      {t}
+                    </Tag>
+                  ))}
+                  {demoTags.length === 0 && (
+                    <span style={{ fontSize: 'var(--font-size-body-small)', color: 'var(--color-text-disabled)' }}>
+                      All tags removed —{' '}
+                      <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-action)', fontFamily: 'inherit', fontSize: 'inherit', padding: 0 }} onClick={() => setDemoTags(['Loans', 'Q1 2026', 'Approved', 'Mumbai'])}>
+                        restore
+                      </button>
+                    </span>
+                  )}
+                </div>
+              </section>
+            </main>
+          </>
+        );
+      }
+
+      /* ============================================================
        * The full playground
        * ============================================================ */
       function Playground() {
@@ -1865,6 +2342,9 @@
           { id: 'pagination',     label: 'Pagination'     },
           { id: 'tooltip',        label: 'Tooltip'        },
           { id: 'stepper',        label: 'Stepper'        },
+          { id: 'chip',           label: 'Chip'           },
+          { id: 'badge',          label: 'Badge'          },
+          { id: 'tag',            label: 'Tag'            },
         ];
 
         /* --- Button controls --- */
@@ -2036,9 +2516,16 @@
               </ul>
             </nav>
 
+            {/* Self-contained section components for Chip / Badge / Tag */}
+            {activeComponent === 'chip'  && <ChipSection />}
+            {activeComponent === 'badge' && <BadgeSection />}
+            {activeComponent === 'tag'   && <TagSection />}
+
             {/* ============================================================
-             * SECONDARY NAV — props panel
+             * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && <>
+
             <aside className="panel">
               <h1>Props</h1>
               <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
@@ -2179,6 +2666,7 @@
                   <CtrlToggle label="showActions" checked={alertShowActions} onChange={setAlertShowActions} />
                 </>
               )}
+
             </aside>
 
             {/* ============================================================
@@ -2905,7 +3393,11 @@
                   </section>
                 </>
               )}
+
+
             </main>
+
+            </> /* end aside+main conditional */}
 
             {/* ---- Toast overlay (fixed bottom-right) ---- */}
             <div className="toast-container" aria-live="polite" aria-atomic="false">

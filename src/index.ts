@@ -20,5 +20,8 @@ export * from './components/ButtonGroup';
 export * from './components/Switch';
 export * from './components/RadioButton';
 export * from './components/Checkbox';
+export * from './components/Chip';
+export * from './components/Badge';
+export * from './components/Tag';
 export * from './components/shared';
 export * from './theme';
