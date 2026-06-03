@@ -175,8 +175,13 @@
   --color-fill-invert-error: var(--dcds-zesty-orange-600);
   --color-fill-dark-error: var(--dcds-zesty-orange-700);
 
-  --color-fill-light-success: var(--dcds-wealthy-green-100);
-  --color-fill-invert-success: var(--dcds-spring-green-600);
+  --color-fill-light-success: var(--dcds-spring-green-100);   /* #b9dec8 ≈ Figma #b9ebc9 */
+  /*
+   * color/fill/invert-success: Figma SVG assets (tick-circle, connectors, compact bars)
+   * use fill/stroke "#0E8436" as the fallback value. This does not match dcds-spring-green-600
+   * (#0e5535). Overriding to the verified Figma value directly.
+   */
+  --color-fill-invert-success: #0e8436;
   --color-fill-dark-success: var(--dcds-spring-green-700);
 
   --color-fill-light-info: var(--dcds-sky-blue-100);

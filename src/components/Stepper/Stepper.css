@@ -1,0 +1,423 @@
+/* ======================================================================
+ * Stepper — token-driven styles
+ * Source: Figma node 776:61667 — Design Language System (Claude)
+ *
+ * Fixes applied from Figma design review:
+ *   1. Inactive connector = same colour as inactive ring (color/stroke/focus-subtle)
+ *   2. 4 px gap between the ring and the connector line
+ *   3. Active circle = outer white ring + Noble Blue-400 stroke + Noble Blue-500 inner disc
+ *   4. Active connector = Noble Blue-400 (color/stroke/focus), not Noble Blue-600
+ *   5. Complete circle bg = Spring Green-100 (dcds-spring-green-100 ≈ Figma #b9ebc9)
+ *   6. Pending icon = hexagonal warning-2 (changed in TSX, no CSS change needed)
+ *   7. Compact horizontal active bar → no border-radius (border-radius: 0)
+ *   8. Compact vertical bar → direct <li> child; height stretches with content
+ * ====================================================================== */
+
+/* ─── Stepper container ─────────────────────────────────────────────────── */
+
+.dcds-Stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* Horizontal — spans the full width of its container (AI doc rule 7) */
+.dcds-Stepper--Horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Vertical — stacks steps top-to-bottom */
+.dcds-Stepper--Vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/*
+ * Gap between step NODES in the Stepper container (Normal mode only).
+ * Source: Figma "gap-[var(--gap-4,4px)]" on the Stepper flex container —
+ * node 776:61663 (Horizontal Normal) and node 776:61665 (Vertical Normal).
+ * This creates a 4 px separation between the connector-end of step N
+ * and the circle-start of step N+1.
+ */
+.dcds-Stepper--Horizontal.dcds-Stepper--normal {
+  gap: var(--gap-4);
+}
+
+.dcds-Stepper--Vertical.dcds-Stepper--normal {
+  gap: var(--gap-4);
+}
+
+/* ─── Step base ─────────────────────────────────────────────────────────── */
+
+.dcds-Step {
+  display: flex;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * NORMAL MODE — full circles + connector lines
+ * ───────────────────────────────────────────────────────────────────────── */
+
+/* ── Normal + Horizontal ── */
+
+/*
+ * Each step node: flex-column, gap-8 between track row and label/description.
+ * Source: Figma BaseStepper "flex-col gap-[var(--gap-8,8px)]" — node 776:61663.
+ */
+.dcds-Stepper--Horizontal.dcds-Stepper--normal .dcds-Step {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  min-width: 0;
+}
+
+/* Last step in horizontal: auto-width (no connector to fill) */
+.dcds-Stepper--Horizontal.dcds-Stepper--normal .dcds-Step--last {
+  flex: 0 0 auto;
+}
+
+.dcds-Stepper--Horizontal.dcds-Stepper--normal .dcds-Step__track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 24px;
+  /* Fix #2 — 4 px gap between the circle ring and the connector line */
+  gap: var(--gap-4);
+}
+
+/* ── Normal + Vertical ── */
+
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--gap-8);
+}
+
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* stretch track height to match the content column */
+  align-self: stretch;
+  flex-shrink: 0;
+  /* Fix #2 — 4 px gap between the circle ring and the vertical connector line */
+  gap: var(--gap-4);
+}
+
+/* ─── Step circle (Normal mode) ─────────────────────────────────────────── */
+
+.dcds-Step__circle {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--rd-Max);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/*
+ * Active — white outer ring + Noble Blue-400 stroke + Noble Blue-500 inner disc.
+ * Recreated from Figma Frame26853/26854 asset (Fix #3).
+ * The SVG child provides all the visual; the wrapper is transparent.
+ */
+.dcds-Step__circle--active {
+  background: transparent;
+}
+
+/*
+ * Upcoming/Inactive — white bg + Noble Blue-200 (color/stroke/focus-subtle) border.
+ * Matches Figma: border-[var(--color/stroke/focus-subtle,#6ba8ee)].
+ */
+.dcds-Step__circle--upcoming {
+  background-color: var(--color-surface-1);
+  border: 1.5px solid var(--color-stroke-focus-subtle);
+}
+
+/*
+ * Completed — Spring Green-100 bg + checkmark icon.
+ * Fix #5: uses Spring Green-100 (--dcds-spring-green-100 = #b9dec8) which matches
+ * the Figma fallback value (#b9ebc9). The semantic token color/fill/light-success
+ * maps to Wealthy Green-100 (different hue) so the primitive is used here directly.
+ */
+.dcds-Step__circle--completed {
+  background-color: var(--dcds-spring-green-100);
+  padding: 3px;
+}
+
+/* Pending — Mustard Yellow-100 bg + hexagonal warning icon (Fix #6 in TSX) */
+.dcds-Step__circle--pending {
+  background-color: var(--color-fill-light-warning);
+  padding: 3px;
+}
+
+/* Disabled — transparent bg + subdued grey border */
+.dcds-Step__circle--disabled {
+  background: transparent;
+  border: 1.5px solid var(--color-stroke-subdued);
+}
+
+/* Icon wrapper inside circle (completed / pending) */
+.dcds-Step__circle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/*
+ * Completed checkmark — Spring Green-600 colour, matching the
+ * Figma compact-bar complete colour (color/fill/invert-success).
+ * Fix #5: consistent Spring Green (not Wealthy Green).
+ */
+.dcds-Step__circle-icon--completed {
+  color: var(--color-fill-invert-success);
+}
+
+/* Pending hex icon — Mustard Yellow-600 */
+.dcds-Step__circle-icon--pending {
+  color: var(--color-fill-invert-warning);
+}
+
+/* ─── Connector line (Normal mode) ─────────────────────────────────────── */
+
+.dcds-Step__connector {
+  border-radius: 0;
+}
+
+/* Horizontal connector: grows to fill the gap between circles */
+.dcds-Stepper--Horizontal .dcds-Step__connector {
+  flex: 1;
+  height: 1.5px; /* matches Figma connector image stroke thickness */
+  min-width: var(--gap-16);
+}
+
+/* Vertical connector: 1.5 px wide, fills height between circles */
+.dcds-Stepper--Vertical .dcds-Step__connector {
+  flex: 1;
+  width: 1.5px;
+  min-height: var(--gap-32);
+}
+
+/*
+ * Connector colours by step state.
+ *
+ * Fix #1 — Upcoming/inactive: same colour as the inactive ring border
+ *   → color/stroke/focus-subtle (Noble Blue-200 = #6ba8ee)
+ * Fix #4 — Active: Noble Blue-400 (color/stroke/focus = #1355a1),
+ *   verified from the Figma connector line asset (#1355a1).
+ */
+/*
+ * Connector colours — verified from Figma SVG line assets:
+ *
+ *  active    → Noble Blue-400 #1355A1       (color/stroke/focus)
+ *  completed → Wealthy Green-500 #26B67F    (color/stroke/action)
+ *              ↑ verified from node 759:13098 connector SVG asset
+ *              NOTE: the tick-circle icon (#0e8436) and compact bar use a
+ *              DIFFERENT green — connectors intentionally use action/stroke colour.
+ *  upcoming  → Noble Blue-200 #6BA8EE       (color/stroke/focus-subtle)
+ *  pending   → Mustard Yellow-600           (color/stroke/warning)
+ *  disabled  → Cool Grey-400               (color/stroke/disabled)
+ */
+.dcds-Step--active    .dcds-Step__connector { background-color: var(--color-stroke-focus); }
+.dcds-Step--completed .dcds-Step__connector { background-color: var(--color-stroke-action); }
+.dcds-Step--upcoming  .dcds-Step__connector { background-color: var(--color-stroke-focus-subtle); }
+.dcds-Step--pending   .dcds-Step__connector { background-color: var(--color-stroke-warning); }
+.dcds-Step--disabled  .dcds-Step__connector { background-color: var(--color-stroke-disabled); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * COMPACT MODE — thin coloured bars, no connector lines.
+ *
+ * Fix #7 — compact vertical: bar is rendered as a direct child of <li>
+ * (not wrapped in dcds-Step__track). This allows align-self: stretch on
+ * the bar to work within the row flex context, so the bar height matches
+ * the heading + description height automatically.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+/* ── Compact + Horizontal ── */
+
+.dcds-Stepper--Horizontal.dcds-Stepper--compact {
+  gap: var(--gap-8);
+  align-items: flex-start;
+}
+
+/*
+ * Compact horizontal step: flex-column, gap-8 between bar and label/description.
+ * Matches Figma BaseStepper "flex-col gap-[var(--gap-8,8px)]" for compact variant.
+ */
+.dcds-Stepper--Horizontal.dcds-Stepper--compact .dcds-Step {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  min-width: 0;
+}
+
+/* Compact horizontal bar — spans full step width, 4 px tall */
+.dcds-Stepper--Horizontal.dcds-Stepper--compact .dcds-Step__bar {
+  width: 100%;
+  height: 4px;
+  /*
+   * Fix #7 — active bar: border-radius: 0.
+   * Per Figma: `bg-[var(--color/fill/primary-9)] h-[4px] w-full`
+   * No rounded class applied on horizontal compact active bars.
+   */
+  border-radius: 0;
+}
+
+/* ── Compact + Vertical ── */
+
+.dcds-Stepper--Vertical.dcds-Stepper--compact {
+  gap: var(--gap-12);
+}
+
+.dcds-Stepper--Vertical.dcds-Stepper--compact .dcds-Step {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--gap-8);
+}
+
+/*
+ * Compact vertical bar — 4 px wide, stretches to content height.
+ * Fix #7: bar is a direct child of <li> (no wrapping track div).
+ * align-self: stretch overrides align-items: flex-start so the bar
+ * grows to exactly match the label + description column height.
+ */
+.dcds-Stepper--Vertical.dcds-Stepper--compact .dcds-Step__bar {
+  width: 4px;
+  align-self: stretch;
+  flex-shrink: 0;
+  border-radius: 0;
+}
+
+/* ── Compact bar colours by state ── */
+.dcds-Step__bar--active    { background-color: var(--color-fill-primary-9); }
+.dcds-Step__bar--completed { background-color: var(--color-fill-invert-success); }
+.dcds-Step__bar--upcoming  { background-color: var(--color-fill-primary-2); }
+.dcds-Step__bar--pending   { background-color: var(--color-fill-invert-warning); }
+.dcds-Step__bar--disabled  { background-color: var(--color-surface-disabled); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Step content — label + description (shared across modes and orientations)
+ * ───────────────────────────────────────────────────────────────────────── */
+
+.dcds-Step__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-0);
+}
+
+/*
+ * Vertical normal: optical 2 px top-padding aligns the text baseline with
+ * the circle top edge (since the 24 px circle has internal padding).
+ * Horizontal spacing is handled by gap-8 on the step container above.
+ */
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__content {
+  padding-top: 2px;
+}
+
+/* ── Label — 16 px, font-weight per state (from Figma render) ── */
+.dcds-Step__label {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);   /* 16 px */
+  font-weight: var(--font-weight-regular);
+  line-height: normal;
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+/*
+ * Active label: Bold ONLY in Normal mode.
+ * Source: Figma node 776:61663 — isStateAndHorizontalAndNormal uses font-bold,
+ *         but isActiveAndCompact uses font-normal (same as all other compact states).
+ */
+.dcds-Stepper--normal .dcds-Step--active .dcds-Step__label {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Compact active: explicitly Regular — overrides any inherited bold */
+.dcds-Stepper--compact .dcds-Step--active .dcds-Step__label {
+  font-weight: var(--font-weight-regular);
+}
+
+/* Disabled step label: muted */
+.dcds-Step--disabled .dcds-Step__label {
+  color: var(--color-text-disabled);
+}
+
+/*
+ * Description — 12 px Regular.
+ * Colour differs by orientation (verified from Figma node code):
+ *   Horizontal Normal + Compact (any) → color/icon/subdued (#737171, Cool Grey-600)
+ *   Vertical Normal only             → color/text/subdued  (#4b4b4b, Cool Grey-700)
+ */
+.dcds-Step__description {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-small); /* 12 px */
+  font-weight: var(--font-weight-regular);
+  line-height: normal;
+  color: var(--color-icon-subdued); /* default: horizontal & compact */
+  word-break: break-word;
+}
+
+/* Vertical normal only: darker subdued text per Figma `color/text/subdued` */
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__description {
+  color: var(--color-text-subdued);
+}
+
+/*
+ * Disabled description: both label AND description use color/text/disabled.
+ * Source: Figma node 749:13078 — the content container sets
+ * `text-[color:var(--color/text/disabled,#b5b5b5)]` and both <p> elements inherit it.
+ * NO separate description colour in disabled state.
+ *
+ * The second rule is required because `.dcds-Stepper--Vertical.dcds-Stepper--normal
+ * .dcds-Step__description` has specificity 0,3,0 which would override the base disabled
+ * rule (0,2,0). This matching-specificity rule comes later in the cascade and wins.
+ */
+.dcds-Step--disabled .dcds-Step__description {
+  color: var(--color-text-disabled);
+}
+
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step--disabled .dcds-Step__description {
+  color: var(--color-text-disabled);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Interaction — clickable steps
+ * ───────────────────────────────────────────────────────────────────────── */
+
+.dcds-Step[tabindex='0'] {
+  cursor: pointer;
+}
+
+.dcds-Step[tabindex='0']:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+  border-radius: var(--rd-XS);
+}
+
+/* Disabled steps: non-interactive */
+.dcds-Step--disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Reduced motion
+ * ───────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .dcds-Step__connector {
+    transition: none;
+  }
+}

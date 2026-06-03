@@ -139,8 +139,8 @@
   --color-fill-light-error: var(--dcds-zesty-orange-100);
   --color-fill-invert-error: var(--dcds-zesty-orange-600);
   --color-fill-dark-error: var(--dcds-zesty-orange-700);
-  --color-fill-light-success: var(--dcds-wealthy-green-100);
-  --color-fill-invert-success: var(--dcds-spring-green-600);
+  --color-fill-light-success: var(--dcds-spring-green-100);
+  --color-fill-invert-success: #0e8436; /* verified from Figma tick-circle + connector SVG assets */
   --color-fill-dark-success: var(--dcds-spring-green-700);
   --color-fill-light-info: var(--dcds-sky-blue-100);
   --color-fill-invert-info: var(--dcds-sky-blue-600);
@@ -421,6 +421,97 @@
 .dcds-Tooltip__arrow { display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-surface-4); }
 .dcds-Tooltip__info-trigger { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:none; border:none; padding:0; cursor:pointer; color:var(--color-icon-secondary); border-radius:var(--rd-XS); }
 .dcds-Tooltip__info-trigger:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+
+/* ============================================================
+ * Stepper.css — Figma node 776:61667
+ * Step states: active | completed | upcoming | pending | disabled
+ * Modes: normal (circles) | compact (bars)
+ * Orientations: Horizontal | Vertical
+ * ============================================================ */
+.dcds-Stepper { list-style:none; margin:0; padding:0; display:flex; }
+.dcds-Stepper--Horizontal { flex-direction:row; align-items:flex-start; width:100%; }
+.dcds-Stepper--Vertical { flex-direction:column; align-items:flex-start; }
+.dcds-Step { display:flex; position:relative; }
+
+/* Normal containers: gap-4 between step NODES (Figma "gap-[var(--gap-4)]" on Stepper flex container) */
+.dcds-Stepper--Horizontal.dcds-Stepper--normal { gap:var(--gap-4); }
+.dcds-Stepper--Vertical.dcds-Stepper--normal   { gap:var(--gap-4); }
+
+/* Normal + Horizontal: gap-8 between track row and label (Figma "flex-col gap-[var(--gap-8)]" on BaseStepper) */
+.dcds-Stepper--Horizontal.dcds-Stepper--normal .dcds-Step { flex:1; flex-direction:column; align-items:flex-start; gap:var(--gap-8); min-width:0; }
+.dcds-Stepper--Horizontal.dcds-Stepper--normal .dcds-Step--last { flex:0 0 auto; }
+.dcds-Stepper--Horizontal.dcds-Stepper--normal .dcds-Step__track { display:flex; flex-direction:row; align-items:center; width:100%; height:24px; gap:var(--gap-4); }
+
+/* Normal + Vertical: gap-8 between track column and content, gap-4 between circle and connector */
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step { flex-direction:row; align-items:flex-start; gap:var(--gap-8); }
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__track { display:flex; flex-direction:column; align-items:center; align-self:stretch; flex-shrink:0; gap:var(--gap-4); }
+
+/* Step circle (Normal mode) */
+.dcds-Step__circle { width:24px; height:24px; border-radius:var(--rd-Max); flex-shrink:0; overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative; }
+/* Fix #3 — Active: SVG provides the visual (white ring + NB-400 stroke + NB-500 disc) */
+.dcds-Step__circle--active { background:transparent; }
+/* Inactive: white bg + Noble Blue-200 border */
+.dcds-Step__circle--upcoming { background-color:var(--color-surface-1); border:1.5px solid var(--color-stroke-focus-subtle); }
+/* Fix #5 — Complete: Spring Green-100 bg (matches Figma fallback #b9ebc9 ≈ dcds-spring-green-100 #b9dec8) */
+.dcds-Step__circle--completed { background-color:var(--dcds-spring-green-100); padding:3px; }
+.dcds-Step__circle--pending { background-color:var(--color-fill-light-warning); padding:3px; }
+.dcds-Step__circle--disabled { background:transparent; border:1.5px solid var(--color-stroke-subdued); }
+.dcds-Step__circle-icon { display:flex; align-items:center; justify-content:center; width:18px; height:18px; flex-shrink:0; }
+/* Fix: complete icon uses #0e8436 (verified from Figma tick-circle SVG asset) */
+.dcds-Step__circle-icon--completed { color:var(--color-fill-invert-success); }
+.dcds-Step__circle-icon--pending { color:var(--color-fill-invert-warning); }
+
+/* Connector line (Normal mode) — 1.5 px matches Figma line asset stroke */
+.dcds-Stepper--Horizontal .dcds-Step__connector { flex:1; height:1.5px; min-width:var(--gap-16); }
+.dcds-Stepper--Vertical .dcds-Step__connector { flex:1; width:1.5px; min-height:var(--gap-32); }
+/* Connector colours — verified from Figma SVG line assets (node 759:13098 etc.) */
+.dcds-Step--active    .dcds-Step__connector { background-color:var(--color-stroke-focus); }   /* NB-400 #1355a1 */
+.dcds-Step--completed .dcds-Step__connector { background-color:var(--color-stroke-action); }  /* Wealthy Green-500 #26B67F */
+.dcds-Step--upcoming  .dcds-Step__connector { background-color:var(--color-stroke-focus-subtle); } /* NB-200 #6ba8ee */
+.dcds-Step--pending   .dcds-Step__connector { background-color:var(--color-stroke-warning); }
+.dcds-Step--disabled  .dcds-Step__connector { background-color:var(--color-stroke-disabled); }
+
+/* Compact + Horizontal: gap-8 between bar and label (matches Figma "flex-col gap-[var(--gap-8)]") */
+.dcds-Stepper--Horizontal.dcds-Stepper--compact { gap:var(--gap-8); align-items:flex-start; }
+.dcds-Stepper--Horizontal.dcds-Stepper--compact .dcds-Step { flex:1; flex-direction:column; align-items:flex-start; gap:var(--gap-8); min-width:0; }
+/* Fix #7 — horizontal compact bar: full width, 4 px tall, NO border-radius on any state */
+.dcds-Stepper--Horizontal.dcds-Stepper--compact .dcds-Step__bar { width:100%; height:4px; border-radius:0; }
+
+/* Compact + Vertical — Fix #7: bar is direct child of <li>, align-self:stretch grows with content */
+.dcds-Stepper--Vertical.dcds-Stepper--compact { gap:var(--gap-12); }
+.dcds-Stepper--Vertical.dcds-Stepper--compact .dcds-Step { flex-direction:row; align-items:flex-start; gap:var(--gap-8); }
+.dcds-Stepper--Vertical.dcds-Stepper--compact .dcds-Step__bar { width:4px; align-self:stretch; flex-shrink:0; border-radius:0; }
+
+/* Compact bar colours */
+.dcds-Step__bar--active    { background-color:var(--color-fill-primary-9); }
+.dcds-Step__bar--completed { background-color:var(--color-fill-invert-success); }
+.dcds-Step__bar--upcoming  { background-color:var(--color-fill-primary-2); }
+.dcds-Step__bar--pending   { background-color:var(--color-fill-invert-warning); }
+.dcds-Step__bar--disabled  { background-color:var(--color-surface-disabled); }
+
+/* Content — label + description. Spacing from track handled by gap-8 on the step container. */
+.dcds-Step__content { display:flex; flex-direction:column; gap:var(--gap-0); }
+/* Vertical normal: 2px optical alignment with circle top edge */
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__content { padding-top:2px; }
+/* Label — 16px Regular by default */
+.dcds-Step__label { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-text-primary); word-break:break-word; }
+/* Active Bold ONLY in Normal mode (Figma: compact active label = font-normal) */
+.dcds-Stepper--normal .dcds-Step--active .dcds-Step__label { font-weight:var(--font-weight-bold); }
+.dcds-Stepper--compact .dcds-Step--active .dcds-Step__label { font-weight:var(--font-weight-regular); }
+.dcds-Step--disabled .dcds-Step__label { color:var(--color-text-disabled); }
+/* Description — 12px Regular, colour varies by orientation */
+.dcds-Step__description { font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-icon-subdued); word-break:break-word; }
+/* Vertical Normal: darker text per Figma color/text/subdued (#4b4b4b) */
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__description { color:var(--color-text-subdued); }
+/* Disabled: BOTH label and description always use color/text/disabled.
+   Second rule needed: vertical-normal rule (0,3,0) would override base disabled rule (0,2,0) */
+.dcds-Step--disabled .dcds-Step__description { color:var(--color-text-disabled); }
+.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step--disabled .dcds-Step__description { color:var(--color-text-disabled); }
+
+/* Interaction */
+.dcds-Step[tabindex='0'] { cursor:pointer; }
+.dcds-Step[tabindex='0']:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
+.dcds-Step--disabled { cursor:default; pointer-events:none; }
     </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1586,6 +1677,171 @@
       }
 
       /* ============================================================
+       * Stepper — Figma node 776:61667
+       * States: active | completed | upcoming | pending | disabled
+       * Modes:  normal (circles) | compact (bars)
+       * ============================================================ */
+
+      /*
+       * Active step indicator — recreates Figma Frame26853/26854 assets (Fix #3).
+       * Verified from Figma asset pixel values:
+       *   Outer ring: white fill + Noble Blue-400 (#1355a1) stroke 1.5px
+       *   Inner disc: Noble Blue-500 (#0a2e57) = color/surface/inverse
+       */
+      function StepActiveCircle() {
+        return (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            {/* Outer ring: white fill, Noble Blue-400 stroke 1.5px — from raw Figma SVG asset Frame26853
+                fill="var(--fill-0, white)" stroke="var(--stroke-0, #1355A1)" stroke-width="1.5" */}
+            <circle cx="12" cy="12" r="11.25"
+              fill="var(--color-surface-1)"
+              stroke="var(--color-stroke-focus)"
+              strokeWidth="1.5" />
+            {/* Inner disc: Noble Blue-500, r=9.05 — from Figma: r="9.05138"
+                Leaves ~1.45px thin white ring between disc (r=9.05) and stroke inner edge (r=10.5) */}
+            <circle cx="12" cy="12" r="9.05" fill="var(--color-surface-inverse)" />
+          </svg>
+        );
+      }
+
+      /* Checkmark icon — vuesax bold/tick-circle, 18 px (path from icons/svg/bold/tick-circle.svg) */
+      function StepCheckIcon() {
+        return (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor" />
+          </svg>
+        );
+      }
+
+      /*
+       * Warning icon — vuesax bold/warning-2, 18 px (Fix #6).
+       * Path sourced from icons/svg/bold/warning-2.svg.
+       * Shape is HEXAGONAL (not circular) — a badge/shield with an exclamation mark.
+       */
+      function StepWarnIcon() {
+        return (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M19.51 5.85L13.57 2.42C12.6 1.86 11.4 1.86 10.42 2.42L4.49004 5.85C3.52004 6.41 2.92004 7.45 2.92004 8.58V15.42C2.92004 16.54 3.52004 17.58 4.49004 18.15L10.43 21.58C11.4 22.14 12.6 22.14 13.58 21.58L19.52 18.15C20.49 17.59 21.09 16.55 21.09 15.42V8.58C21.08 7.45 20.48 6.42 19.51 5.85ZM11.25 7.75C11.25 7.34 11.59 7 12 7C12.41 7 12.75 7.34 12.75 7.75V13C12.75 13.41 12.41 13.75 12 13.75C11.59 13.75 11.25 13.41 11.25 13V7.75ZM12.92 16.63C12.87 16.75 12.8 16.86 12.71 16.96C12.52 17.15 12.27 17.25 12 17.25C11.87 17.25 11.74 17.22 11.62 17.17C11.49 17.12 11.39 17.05 11.29 16.96C11.2 16.86 11.13 16.75 11.07 16.63C11.02 16.51 11 16.38 11 16.25C11 15.99 11.1 15.73 11.29 15.54C11.39 15.45 11.49 15.38 11.62 15.33C11.99 15.17 12.43 15.26 12.71 15.54C12.8 15.64 12.87 15.74 12.92 15.87C12.97 15.99 13 16.12 13 16.25C13 16.38 12.97 16.51 12.92 16.63Z" fill="currentColor" />
+          </svg>
+        );
+      }
+
+      /* Internal context — injected by Stepper into each Step */
+      const StepCtx = React.createContext(null);
+
+      /* Internal: renders the correct indicator (circle or compact bar) */
+      function StepIndicator({ state, isCompact }) {
+        if (isCompact) {
+          return <div className={`dcds-Step__bar dcds-Step__bar--${state}`} aria-hidden="true" />;
+        }
+        return (
+          <div className={`dcds-Step__circle dcds-Step__circle--${state}`} aria-hidden="true">
+            {state === 'active'    && <StepActiveCircle />}
+            {state === 'completed' && <span className="dcds-Step__circle-icon dcds-Step__circle-icon--completed"><StepCheckIcon /></span>}
+            {state === 'pending'   && <span className="dcds-Step__circle-icon dcds-Step__circle-icon--pending"><StepWarnIcon /></span>}
+          </div>
+        );
+      }
+
+      /**
+       * Step
+       * Individual step — must be a direct child of Stepper.
+       * Props: state, label, description, onClick, onMouseEnter, onMouseLeave
+       */
+      /**
+       * showDescription — mirrors Figma _BaseStepper `showDescription` prop (default: true).
+       * Hides the description text without clearing the value.
+       */
+      function Step({ state, label, description, showDescription = true, onClick, onMouseEnter, onMouseLeave }) {
+        const ctx = React.useContext(StepCtx);
+        if (!ctx) throw new Error('[dcds] <Step> must be inside <Stepper>.');
+        const { isCompact, stepIndex, totalSteps, showConnector, onStepClick } = ctx;
+        const stepNumber = stepIndex + 1;
+        const ariaLabel = `Step ${stepNumber} of ${totalSteps} — ${label} — ${state}`;
+        const isClickable = (!!onClick || !!onStepClick) && state !== 'disabled';
+
+        const liClasses = [
+          'dcds-Step',
+          `dcds-Step--${state}`,
+          isCompact ? 'dcds-Step--compact' : 'dcds-Step--normal',
+          !showConnector ? 'dcds-Step--last' : '',
+        ].filter(Boolean).join(' ');
+
+        return (
+          <li
+            className={liClasses}
+            role="listitem"
+            aria-current={state === 'active' ? 'step' : undefined}
+            aria-label={ariaLabel}
+            tabIndex={isClickable ? 0 : undefined}
+            onClick={isClickable ? () => { if (onClick) onClick(stepIndex, state); if (onStepClick) onStepClick(stepIndex, state); } : undefined}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            {isCompact ? (
+              /* Fix #7 — bar is a direct child of <li> (no track wrapper) so
+                 align-self:stretch on the bar grows it to match content height */
+              <>
+                <div className={`dcds-Step__bar dcds-Step__bar--${state}`} aria-hidden="true" />
+                <div className="dcds-Step__content">
+                  <span className="dcds-Step__label">{label}</span>
+                  {showDescription && description && <span className="dcds-Step__description">{description}</span>}
+                </div>
+              </>
+            ) : (
+              /* Normal mode — track wraps circle + connector */
+              <>
+                <div className="dcds-Step__track">
+                  <StepIndicator state={state} isCompact={isCompact} />
+                  {showConnector && (
+                    <div className={`dcds-Step__connector dcds-Step__connector--${state}`} aria-hidden="true" />
+                  )}
+                </div>
+                <div className="dcds-Step__content">
+                  <span className="dcds-Step__label">{label}</span>
+                  {showDescription && description && <span className="dcds-Step__description">{description}</span>}
+                </div>
+              </>
+            )}
+          </li>
+        );
+      }
+
+      /**
+       * Stepper
+       * Container for Step children. Injects context into each Step.
+       * Props: isCompact, Orientation, children, onStepClick, onMouseEnter, onMouseLeave
+       */
+      function Stepper({ isCompact = false, Orientation = 'Horizontal', children, onStepClick, onMouseEnter, onMouseLeave, className }) {
+        const stepChildren = React.Children.toArray(children);
+        const totalSteps = stepChildren.length;
+        const olClasses = [
+          'dcds-Stepper',
+          `dcds-Stepper--${Orientation}`,
+          isCompact ? 'dcds-Stepper--compact' : 'dcds-Stepper--normal',
+          className || '',
+        ].filter(Boolean).join(' ');
+
+        return (
+          <ol className={olClasses} role="list" aria-label="Progress steps"
+              onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {stepChildren.map((child, index) => (
+              <StepCtx.Provider key={index} value={{
+                isCompact,
+                orientation: Orientation,
+                stepIndex: index,
+                totalSteps,
+                showConnector: !isCompact && index < totalSteps - 1,
+                onStepClick,
+              }}>
+                {child}
+              </StepCtx.Provider>
+            ))}
+          </ol>
+        );
+      }
+
+      /* ============================================================
        * Reusable control widgets
        * ============================================================ */
       function CtrlSelect({ label, value, onChange, options }) {
@@ -2085,6 +2341,7 @@
           { id: 'breadcrumbs',    label: 'Breadcrumbs'    },
           { id: 'pagination',     label: 'Pagination'     },
           { id: 'tooltip',        label: 'Tooltip'        },
+          { id: 'stepper',        label: 'Stepper'        },
           { id: 'chip',           label: 'Chip'           },
           { id: 'badge',          label: 'Badge'          },
           { id: 'tag',            label: 'Tag'            },
@@ -2203,6 +2460,18 @@
         const [ttDisplayHeading,setTtDisplayHeading]= useState(true);
         const [ttDisplayBody,   setTtDisplayBody]   = useState(true);
         const [ttLog,           pushTtLog]          = useEventLog();
+
+        /* --- Stepper controls --- */
+        const [stIsCompact,       setStIsCompact]       = useState(false);
+        const [stOrientation,     setStOrientation]     = useState('Horizontal');
+        const [stShowDescription, setStShowDescription] = useState(true);
+        /* Per-step state — one entry per _BaseStepper, mirroring the Figma prop */
+        const [stStepStates, setStStepStates] = useState([
+          'completed', 'active', 'upcoming', 'upcoming', 'upcoming'
+        ]);
+        const setStepState = (idx, val) =>
+          setStStepStates(prev => prev.map((s, i) => i === idx ? val : s));
+        const [stLog, pushStLog] = useEventLog();
 
         /* --- Alert controls --- */
         const [alertState, setAlertState] = useState('info');
@@ -2362,6 +2631,25 @@
                   <CtrlText   label="heading"         value={ttHeading}            onChange={setTtHeading} />
                   <CtrlToggle label="displayBodyText" checked={ttDisplayBody}      onChange={setTtDisplayBody} />
                   <CtrlText   label="bodyText"        value={ttBody}               onChange={setTtBody} />
+                </>
+              )}
+
+              {activeComponent === 'stepper' && (
+                <>
+                  <h2>Stepper</h2>
+                  <CtrlToggle label="isCompact"   checked={stIsCompact}   onChange={setStIsCompact} />
+                  <CtrlSelect label="Orientation" value={stOrientation}   onChange={setStOrientation} options={['Horizontal', 'Vertical']} />
+                  <h2>Step (_BaseStepper)</h2>
+                  <CtrlToggle label="showDescription" checked={stShowDescription} onChange={setStShowDescription} />
+                  {['Personal Info','Employment','Documents','Review','Submit'].map((lbl, i) => (
+                    <CtrlSelect
+                      key={i}
+                      label={`Step ${i+1} state`}
+                      value={stStepStates[i]}
+                      onChange={(v) => setStepState(i, v)}
+                      options={['active','completed','upcoming','pending','disabled']}
+                    />
+                  ))}
                 </>
               )}
 
@@ -2844,6 +3132,114 @@
                   </section>
                 </>
               )}
+
+              {activeComponent === 'stepper' && (() => {
+                const STEP_LABELS = ['Personal Info', 'Employment', 'Documents', 'Review', 'Submit'];
+                const STEP_DESCS  = ['Basic details', 'Work history', 'Upload files', 'Check & confirm', 'Final step'];
+                return (
+                  <>
+                    <section>
+                      <h2>Stepper — Interactive Playground</h2>
+                      <p className="stage-note">
+                        Set each step's <code>state</code> individually via the left panel (mirrors Figma <code>_BaseStepper.state</code>).
+                        Toggle <code>showDescription</code> to hide descriptions without clearing them.
+                        Click any step to fire <code>onStepClick</code>.
+                      </p>
+                      <div className="preview" style={{ flexDirection:'column', alignItems:'stretch', padding:'var(--gap-24)' }}>
+                        <Stepper
+                          isCompact={stIsCompact}
+                          Orientation={stOrientation}
+                          onStepClick={(i, s) => pushStLog(`onStepClick: index=${i} state=${s}`)}
+                          onMouseEnter={() => pushStLog('onMouseEnter (container)')}
+                          onMouseLeave={() => pushStLog('onMouseLeave (container)')}
+                        >
+                          {STEP_LABELS.map((lbl, i) => (
+                            <Step
+                              key={i}
+                              state={stStepStates[i]}
+                              label={lbl}
+                              description={STEP_DESCS[i]}
+                              showDescription={stShowDescription}
+                              onMouseEnter={() => pushStLog(`step onMouseEnter: ${lbl}`)}
+                              onMouseLeave={() => pushStLog(`step onMouseLeave: ${lbl}`)}
+                            />
+                          ))}
+                        </Stepper>
+                      </div>
+                      <div className="events">
+                        {stLog.length === 0 ? '— click a step or hover to see events —' : stLog.join('\n')}
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2>Stepper — All Step States</h2>
+                      <p className="stage-note">Every <code>state</code> value across both orientations, <code>isCompact=false</code>.</p>
+                      <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-16)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                        {['Horizontal', 'Vertical'].map((orient) => (
+                          <div key={orient}>
+                            <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>
+                              <code>Orientation="{orient}" isCompact=false</code>
+                            </p>
+                            <div style={{ background:'var(--color-surface-1)', padding:'var(--gap-16)', borderRadius:'var(--rd-S)' }}>
+                              <Stepper isCompact={false} Orientation={orient}>
+                                <Step state="completed" label="Completed" description="Step done" />
+                                <Step state="active"    label="Active"    description="In progress" />
+                                <Step state="upcoming"  label="Upcoming"  description="Not started" />
+                                <Step state="pending"   label="Pending"   description="Needs review" />
+                                <Step state="disabled"  label="Disabled"  description="Unavailable" />
+                              </Stepper>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2>Stepper — Compact Mode</h2>
+                      <p className="stage-note"><code>isCompact=true</code> — bar indicators replace circles. Labels and descriptions still show.</p>
+                      <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-16)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                        {['Horizontal', 'Vertical'].map((orient) => (
+                          <div key={orient}>
+                            <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>
+                              <code>Orientation="{orient}" isCompact=true</code>
+                            </p>
+                            <div style={{ background:'var(--color-surface-1)', padding:'var(--gap-16)', borderRadius:'var(--rd-S)' }}>
+                              <Stepper isCompact={true} Orientation={orient}>
+                                <Step state="completed" label="Completed" description="Step done" />
+                                <Step state="active"    label="Active"    description="In progress" />
+                                <Step state="upcoming"  label="Upcoming"  description="Not started" />
+                                <Step state="pending"   label="Pending"   description="Needs review" />
+                                <Step state="disabled"  label="Disabled"  description="Unavailable" />
+                              </Stepper>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2>Stepper — Real-world Examples</h2>
+                      <p className="stage-note">Horizontal loan application (4 steps) + vertical sidebar wizard.</p>
+                      <div style={{ background:'var(--color-surface-1)', padding:'var(--gap-16)', borderRadius:'var(--rd-S)', marginBottom:'var(--gap-16)' }}>
+                        <Stepper isCompact={false} Orientation="Horizontal">
+                          <Step state="completed" label="Personal Info"  description="Verified" />
+                          <Step state="completed" label="Employment"     description="Confirmed" />
+                          <Step state="active"    label="Documents"      description="Upload files" />
+                          <Step state="upcoming"  label="Review"         description="Final check" />
+                        </Stepper>
+                      </div>
+                      <div style={{ background:'var(--color-surface-1)', padding:'var(--gap-16)', borderRadius:'var(--rd-S)', display:'inline-flex' }}>
+                        <Stepper isCompact={false} Orientation="Vertical">
+                          <Step state="completed" label="Account setup"  description="Profile ready" />
+                          <Step state="completed" label="Identity check" description="KYC passed" />
+                          <Step state="active"    label="Bank linking"   description="Connect account" />
+                          <Step state="upcoming"  label="Activation" />
+                        </Stepper>
+                      </div>
+                    </section>
+                  </>
+                );
+              })()}
 
               {activeComponent === 'pagination' && (
                 <>
