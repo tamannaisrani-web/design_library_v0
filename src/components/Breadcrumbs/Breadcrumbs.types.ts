@@ -33,8 +33,12 @@ export interface BreadcrumbItem {
    * not a link. Only the last item should carry `current: true`.
    */
   current?: boolean;
-  /** Click handler for ancestor link items and the home icon link. */
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  /** Fired when the user clicks this segment (ancestor links and home icon only). */
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  /** Fired when the pointer enters this segment — fires on all positions. */
+  onMouseEnter?: React.MouseEventHandler<HTMLElement>;
+  /** Fired when the pointer leaves this segment — fires on all positions. */
+  onMouseLeave?: React.MouseEventHandler<HTMLElement>;
 }
 
 /**

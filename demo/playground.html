@@ -1022,7 +1022,7 @@
        * Breadcrumbs
        * ============================================================ */
       /* ── _BaseHomeIcon — linear/home-2.svg (default) + bold/home-2.svg (hover) ── */
-      function _BaseHomeIcon({ position = 'Previous', href, onClick }) {
+      function _BaseHomeIcon({ position = 'Previous', href, onClick, onMouseEnter, onMouseLeave }) {
         const icons = (
           <>
             <span className="dcds-BaseHomeIcon__linear">
@@ -1042,24 +1042,36 @@
         );
 
         if (position === 'Current') {
-          return <div className="dcds-BaseHomeIcon--current" aria-label="Home">{icons}</div>;
+          return (
+            <div className="dcds-BaseHomeIcon--current" aria-label="Home"
+                 onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+              {icons}
+            </div>
+          );
         }
         return (
           <a className="dcds-BaseHomeIcon" href={href || '#'} aria-label="Home"
-             onClick={(e) => { e.preventDefault(); if (onClick) onClick(e); }}>
+             onClick={(e) => { e.preventDefault(); if (onClick) onClick(e); }}
+             onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             {icons}
           </a>
         );
       }
 
       /* ── _BaseBreadcrumbItems ── */
-      function _BaseBreadcrumbItems({ label, position, href, onClick }) {
+      function _BaseBreadcrumbItems({ label, position, href, onClick, onMouseEnter, onMouseLeave }) {
         if (position === 'Current') {
-          return <span className="dcds-BaseBreadcrumbItems--current" aria-current="page">{label}</span>;
+          return (
+            <span className="dcds-BaseBreadcrumbItems--current" aria-current="page"
+                  onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+              {label}
+            </span>
+          );
         }
         return (
           <a className="dcds-BaseBreadcrumbItems--previous" href={href || '#'}
-             onClick={(e) => { e.preventDefault(); if (onClick) onClick(e); }}>
+             onClick={(e) => { e.preventDefault(); if (onClick) onClick(e); }}
+             onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             {label}
           </a>
         );
@@ -1089,8 +1101,14 @@
                     {!isFirst && <Separator />}
                     <li>
                       {isFirst && showHome
-                        ? <_BaseHomeIcon position={position} href={item.href} onClick={item.onClick} />
-                        : <_BaseBreadcrumbItems label={item.label} position={position} href={item.href} onClick={item.onClick} />
+                        ? <_BaseHomeIcon position={position} href={item.href}
+                            onClick={item.onClick}
+                            onMouseEnter={item.onMouseEnter}
+                            onMouseLeave={item.onMouseLeave} />
+                        : <_BaseBreadcrumbItems label={item.label} position={position} href={item.href}
+                            onClick={item.onClick}
+                            onMouseEnter={item.onMouseEnter}
+                            onMouseLeave={item.onMouseLeave} />
                       }
                     </li>
                   </React.Fragment>
@@ -1237,29 +1255,43 @@
         const [bcItemCount, setBcItemCount] = useState('3');
         const [bcLog, pushBcLog] = useEventLog();
 
+        const mkItem = (label, href) => ({
+          label,
+          href,
+          onClick:      () => pushBcLog(`onClick: ${label}`),
+          onMouseEnter: () => pushBcLog(`onMouseEnter: ${label}`),
+          onMouseLeave: () => pushBcLog(`onMouseLeave: ${label}`),
+        });
+        const mkCurrent = (label) => ({
+          label,
+          current: true,
+          onMouseEnter: () => pushBcLog(`onMouseEnter: ${label}`),
+          onMouseLeave: () => pushBcLog(`onMouseLeave: ${label}`),
+        });
+
         const BC_ITEMS_MAP = {
-          '1': [{ label: 'Loan #1042', current: true }],
+          '1': [mkCurrent('Loan #1042')],
           '2': [
-            { label: 'Loans', href: '/loans', onClick: () => pushBcLog('onClick: Loans') },
-            { label: 'Loan #1042', current: true },
+            mkItem('Loans', '/loans'),
+            mkCurrent('Loan #1042'),
           ],
           '3': [
-            { label: 'Loans', href: '/loans', onClick: () => pushBcLog('onClick: Loans') },
-            { label: 'Active', href: '/loans/active', onClick: () => pushBcLog('onClick: Active') },
-            { label: 'Loan #1042', current: true },
+            mkItem('Loans', '/loans'),
+            mkItem('Active', '/loans/active'),
+            mkCurrent('Loan #1042'),
           ],
           '4': [
-            { label: 'Customers', href: '/customers', onClick: () => pushBcLog('onClick: Customers') },
-            { label: 'Retail', href: '/customers/retail', onClick: () => pushBcLog('onClick: Retail') },
-            { label: 'Active', href: '/loans/active', onClick: () => pushBcLog('onClick: Active') },
-            { label: 'Loan #1042', current: true },
+            mkItem('Customers', '/customers'),
+            mkItem('Retail', '/customers/retail'),
+            mkItem('Active', '/loans/active'),
+            mkCurrent('Loan #1042'),
           ],
           '5': [
-            { label: 'Customers', href: '/customers', onClick: () => pushBcLog('onClick: Customers') },
-            { label: 'Retail', href: '/customers/retail', onClick: () => pushBcLog('onClick: Retail') },
-            { label: 'Mumbai', href: '/customers/retail/mumbai', onClick: () => pushBcLog('onClick: Mumbai') },
-            { label: 'Active', href: '/loans/active', onClick: () => pushBcLog('onClick: Active') },
-            { label: 'Loan #1042', current: true },
+            mkItem('Customers', '/customers'),
+            mkItem('Retail', '/customers/retail'),
+            mkItem('Mumbai', '/customers/retail/mumbai'),
+            mkItem('Active', '/loans/active'),
+            mkCurrent('Loan #1042'),
           ],
         };
 

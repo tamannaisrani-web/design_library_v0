@@ -50,8 +50,10 @@ const HomeBoldSvg: React.FC = () => (
 export const _BaseHomeIcon: React.FC<{
   position?: 'Previous' | 'Current';
   href?: string;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
-}> = ({ position = 'Previous', href, onClick }) => {
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  onMouseEnter?: React.MouseEventHandler<HTMLElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLElement>;
+}> = ({ position = 'Previous', href, onClick, onMouseEnter, onMouseLeave }) => {
   const icons = (
     <>
       <span className="dcds-BaseHomeIcon__linear"><HomeLinearSvg /></span>
@@ -61,7 +63,12 @@ export const _BaseHomeIcon: React.FC<{
 
   if (position === 'Current') {
     return (
-      <div className="dcds-BaseHomeIcon--current" aria-label="Home">
+      <div
+        className="dcds-BaseHomeIcon--current"
+        aria-label="Home"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         {icons}
       </div>
     );
@@ -73,6 +80,8 @@ export const _BaseHomeIcon: React.FC<{
       href={href ?? '#'}
       aria-label="Home"
       onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {icons}
     </a>
@@ -96,11 +105,18 @@ export const _BaseBreadcrumbItems: React.FC<{
   label: string;
   position: 'Previous' | 'Current';
   href?: string;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
-}> = ({ label, position, href, onClick }) => {
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  onMouseEnter?: React.MouseEventHandler<HTMLElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLElement>;
+}> = ({ label, position, href, onClick, onMouseEnter, onMouseLeave }) => {
   if (position === 'Current') {
     return (
-      <span className="dcds-BaseBreadcrumbItems--current" aria-current="page">
+      <span
+        className="dcds-BaseBreadcrumbItems--current"
+        aria-current="page"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         {label}
       </span>
     );
@@ -111,6 +127,8 @@ export const _BaseBreadcrumbItems: React.FC<{
       className="dcds-BaseBreadcrumbItems--previous"
       href={href ?? '#'}
       onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {label}
     </a>
@@ -211,13 +229,21 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
               {!isFirst && <Separator />}
               <li>
                 {isFirst && showHome ? (
-                  <_BaseHomeIcon position={position} href={item.href} onClick={item.onClick} />
+                  <_BaseHomeIcon
+                    position={position}
+                    href={item.href}
+                    onClick={item.onClick}
+                    onMouseEnter={item.onMouseEnter}
+                    onMouseLeave={item.onMouseLeave}
+                  />
                 ) : (
                   <_BaseBreadcrumbItems
                     label={item.label}
                     position={position}
                     href={item.href}
                     onClick={item.onClick}
+                    onMouseEnter={item.onMouseEnter}
+                    onMouseLeave={item.onMouseLeave}
                   />
                 )}
               </li>
