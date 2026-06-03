@@ -34,6 +34,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   className,
   dataTestId,
   onChange,
+  onClick,
   onFocus,
   onBlur,
   onKeyDown,
@@ -93,6 +94,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         aria-checked={indeterminate ? 'mixed' : effectiveChecked}
         aria-disabled={isDisabled || undefined}
         onChange={handleChange}
+        onClick={onClick}
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={onKeyDown}

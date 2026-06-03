@@ -68,11 +68,12 @@ export const Alert: React.FC<AlertProps> = ({
     .filter(Boolean)
     .join(' ');
 
-  // When title is absent the icon should centre-align to the description instead of
-  // staying at flex-start (which creates visual misalignment on single-line messages).
-  const contentClasses = [
-    'dcds-Alert__content',
-    title ? '' : 'dcds-Alert__content--no-title',
+  // With title: use --has-title so the icon gets a taller container (20 px) that
+  // centres against the bolder 14 px title line-height (~20 px).
+  // Without title: default icon height (16 px) centres against the 12 px message line.
+  const headerClasses = [
+    'dcds-Alert__header',
+    title ? 'dcds-Alert__header--has-title' : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -93,17 +94,19 @@ export const Alert: React.FC<AlertProps> = ({
       onKeyUp={onKeyUp}
     >
       <div className="dcds-Alert__inner">
-        <div className={contentClasses}>
-          <span className="dcds-Alert__icon">{stateIcons[state]}</span>
-          <div className="dcds-Alert__body">
+        <div className="dcds-Alert__content">
+          {/* Header: icon + text in the same flex row so icon competes only with
+              text height, never with actions. */}
+          <div className={headerClasses}>
+            <span className="dcds-Alert__icon">{stateIcons[state]}</span>
             <div className="dcds-Alert__text">
               {title && <p className="dcds-Alert__title">{title}</p>}
               {children && <p className="dcds-Alert__message">{children}</p>}
             </div>
-            {actions && emphasis === 'subtle' && (
-              <div className="dcds-Alert__actions">{actions}</div>
-            )}
           </div>
+          {actions && emphasis === 'subtle' && (
+            <div className="dcds-Alert__actions">{actions}</div>
+          )}
         </div>
         {showClose && (
           <button

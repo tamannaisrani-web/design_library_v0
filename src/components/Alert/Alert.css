@@ -113,19 +113,6 @@
 }
 
 /* ===========================================================
- * Content alignment — title present vs absent
- *
- * When a title is visible the icon (16px inside a 20px container) sits at
- * flex-start so it naturally aligns with the title's first line.
- * When ONLY the description is shown the icon should vertically centre
- * against the smaller 12px message text.
- * =========================================================== */
-
-.dcds-Alert__content--no-title {
-  align-items: center;
-}
-
-/* ===========================================================
  * Inner layout — row: [content] [close-btn]
  * =========================================================== */
 
@@ -142,36 +129,35 @@
 }
 
 /* ===========================================================
- * Content — row: [icon] [body]
+ * Content — column (inline) or row (flag): [header] [actions?]
+ *
+ * Separating header (icon+text) from actions means the icon only ever
+ * competes with the text row height, never with the action buttons.
  * =========================================================== */
 
 .dcds-Alert__content {
   display: flex;
   flex: 1;
+  flex-direction: column;
   gap: var(--gap-8);
-  align-items: flex-start;
   min-width: 0;
 }
 
+/* Flag (toast): header and actions sit side-by-side in a single row,
+ * centred on the cross-axis so short text and tall buttons stay aligned. */
 .dcds-Alert--flag .dcds-Alert__content {
-  align-items: flex-start;
-}
-
-/* Icon (16 px wide, 20 px tall container — matches Figma spec) */
-.dcds-Alert__icon {
-  flex-shrink: 0;
-  width: 16px;
-  height: 20px;
-  display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
 }
 
 /* ===========================================================
- * Body — column (inline) or row (toast)
+ * Header — row: [icon] [text]
+ *
+ * Always flex-start so the icon top-aligns with the first text line.
+ * The icon container height is tuned per title/no-title below.
  * =========================================================== */
 
-.dcds-Alert__body {
+.dcds-Alert__header {
   display: flex;
   flex: 1;
   gap: var(--gap-8);
@@ -179,13 +165,26 @@
   min-width: 0;
 }
 
-.dcds-Alert:not(.dcds-Alert--flag) .dcds-Alert__body {
-  flex-direction: column;
+/* ===========================================================
+ * Icon container
+ *
+ * No title  → 16 px container: centres the 16 px SVG against the
+ *             12 px message line-height (≈16 px) → icon centre = 8 px ✓
+ * Has title → 20 px container: centres the 16 px SVG against the
+ *             14 px title line-height (≈20 px) → icon centre = 10 px ✓
+ * =========================================================== */
+
+.dcds-Alert__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.dcds-Alert--flag .dcds-Alert__body {
-  flex-direction: row;
-  align-items: center;
+.dcds-Alert__header--has-title .dcds-Alert__icon {
+  height: 20px;
 }
 
 /* ===========================================================
@@ -240,7 +239,7 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  align-self: flex-start;
+  align-self: flex-start; /* inline: pin to top when content is tall */
   background: none;
   border: none;
   cursor: pointer;
@@ -249,6 +248,7 @@
   border-radius: var(--rd-XS);
   transition: color 120ms ease;
 }
+
 
 .dcds-Alert__close:hover {
   color: var(--color-text-primary);

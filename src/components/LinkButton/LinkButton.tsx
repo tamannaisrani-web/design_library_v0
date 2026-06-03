@@ -69,15 +69,14 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
     'aria-label': isIconOnly ? ariaLabel : undefined,
   };
 
-  // Trailing send icon — shown by default on non-icon-only variants (Figma: figmaNode 868:3050).
-  // The icon is drawn from icons/svg/linear/send.svg; transform matches the Figma rotation.
-  const trailingIcon = showIcon && !isIconOnly
-    ? (
-      <span className="dcds-LinkButton__icon" aria-hidden="true" style={{ transform: 'scaleY(-1) rotate(180deg)' }}>
-        <SendLinear size={iconSize} />
-      </span>
-    )
-    : null;
+  // Send icon — Figma: figmaNode 868:3050. Transform matches the Figma ↗ rotation.
+  // Rendered when isIconOnly=true (the only content) OR when showIcon=true (trailing on text).
+  const icon = (
+    <span className="dcds-LinkButton__icon" aria-hidden="true" style={{ transform: 'scaleY(-1) rotate(180deg)' }}>
+      <SendLinear size={iconSize} />
+    </span>
+  );
+  const trailingIcon = (isIconOnly || showIcon) ? icon : null;
 
   if (href) {
     return (
