@@ -345,6 +345,26 @@
 .dcds-Breadcrumbs__separator { display:inline-flex; align-items:center; justify-content:center; width:5px; height:18px; font-size:12px; line-height:18px; color:var(--color-text-neutral); flex-shrink:0; user-select:none; }
 
 /* ============================================================
+ * Pagination.css
+ * ============================================================ */
+.dcds-Pagination { display:inline-flex; align-items:center; gap:var(--gap-4); }
+.dcds-Pagination__btn { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; padding:var(--gap-8); border:none; border-radius:var(--rd-S); cursor:pointer; flex-shrink:0; background:none; transition:background-color 120ms ease,color 120ms ease; color:var(--color-icon-primary); }
+.dcds-Pagination__btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-Pagination__nav { background-color:var(--color-surface-3); }
+.dcds-Pagination__nav:hover:not(:disabled):not([aria-disabled='true']) { background-color:var(--color-fill-secondary-0); }
+.dcds-Pagination__nav:active:not(:disabled):not([aria-disabled='true']) { background-color:var(--color-surface-3); }
+.dcds-Pagination__nav:active:not(:disabled):not([aria-disabled='true']) .dcds-Pagination__icon svg path { stroke-width:2; }
+.dcds-Pagination__nav:disabled, .dcds-Pagination__nav[aria-disabled='true'] { color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+.dcds-Pagination__page-numbers { display:inline-flex; align-items:center; gap:var(--gap-4); }
+.dcds-Pagination__page { background-color:var(--color-surface-1); color:var(--color-text-primary); font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); line-height:normal; }
+.dcds-Pagination__page:hover:not(:disabled) { background-color:var(--color-fill-secondary-0); }
+.dcds-Pagination__page--active { background-color:var(--color-fill-action); color:var(--color-text-invert); font-weight:var(--font-weight-bold); cursor:default; pointer-events:none; }
+.dcds-Pagination__page--active:hover { background-color:var(--color-fill-action); }
+.dcds-Pagination__truncation { background-color:var(--color-surface-1); color:var(--color-text-primary); cursor:default; pointer-events:none; }
+.dcds-Pagination__icon { display:flex; align-items:center; justify-content:center; width:16px; height:16px; flex-shrink:0; }
+.dcds-Pagination__icon svg { width:16px; height:16px; }
+
+/* ============================================================
  * Alert.css
  * ============================================================ */
 .dcds-Alert { display:flex; align-items:flex-start; padding:var(--gap-12); border-radius:var(--rd-S); font-family:var(--font-family); overflow:hidden; width:100%; }
@@ -1223,6 +1243,178 @@
       }
 
       /* ============================================================
+       * Pagination
+       * ============================================================ */
+      const ArrowLeftIcon = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M15 19.92L8.48 13.4C7.71 12.63 7.71 11.37 8.48 10.6L15 4.08"
+                stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"
+                strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+      const ArrowRightIcon = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M8.91 19.92L15.43 13.4C16.2 12.63 16.2 11.37 15.43 10.6L8.91 4.08"
+                stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"
+                strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+      // vuesax/linear/previous — left-pointing play-triangle + left vertical bar
+      // Path sourced from icons/svg/linear/previous.svg in this repository
+      const SkipFirstIcon = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M20.24 7.21999V16.79C20.24 18.75 18.11 19.98 16.41 19L12.26 16.61L8.10996 14.21C6.40996 13.23 6.40996 10.78 8.10996 9.79998L12.26 7.39998L16.41 5.01C18.11 4.03 20.24 5.24999 20.24 7.21999Z"
+                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M3.75977 18.1802V5.82025"
+                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+      // vuesax/linear/next — right-pointing play-triangle + right vertical bar
+      // Path sourced from icons/svg/linear/next.svg in this repository
+      const SkipLastIcon = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M3.75977 7.21999V16.79C3.75977 18.75 5.88975 19.98 7.58975 19L11.7397 16.61L15.8898 14.21C17.5898 13.23 17.5898 10.78 15.8898 9.79998L11.7397 7.39998L7.58975 5.01C5.88975 4.03 3.75977 5.24999 3.75977 7.21999Z"
+                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M20.2397 18.1802V5.82025"
+                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+      // Three horizontal hollow-ring dots — vuesax/outline/more style.
+      // Figma _Truncation node 640:9171 shows ○ ○ ○ (horizontal hollow circles).
+      // Each dot is a filled donut path (outer ring minus inner hole) at cy=12, cx=5/12/19.
+      const MoreIcon = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M2.25 12C2.25 10.48 3.48 9.25 5 9.25C6.52 9.25 7.75 10.48 7.75 12C7.75 13.52 6.52 14.75 5 14.75C3.48 14.75 2.25 13.52 2.25 12ZM6.25 12C6.25 11.31 5.69 10.75 5 10.75C4.31 10.75 3.75 11.31 3.75 12C3.75 12.69 4.31 13.25 5 13.25C5.69 13.25 6.25 12.69 6.25 12Z" fill="currentColor" />
+          <path d="M9.25 12C9.25 10.48 10.48 9.25 12 9.25C13.52 9.25 14.75 10.48 14.75 12C14.75 13.52 13.52 14.75 12 14.75C10.48 14.75 9.25 13.52 9.25 12ZM13.25 12C13.25 11.31 12.69 10.75 12 10.75C11.31 10.75 10.75 11.31 10.75 12C10.75 12.69 11.31 13.25 12 13.25C12.69 13.25 13.25 12.69 13.25 12Z" fill="currentColor" />
+          <path d="M16.25 12C16.25 10.48 17.48 9.25 19 9.25C20.52 9.25 21.75 10.48 21.75 12C21.75 13.52 20.52 14.75 19 14.75C17.48 14.75 16.25 13.52 16.25 12ZM20.25 12C20.25 11.31 19.69 10.75 19 10.75C18.31 10.75 17.75 11.31 17.75 12C17.75 12.69 18.31 13.25 19 13.25C19.69 13.25 20.25 12.69 20.25 12Z" fill="currentColor" />
+        </svg>
+      );
+
+      // Always 7 items for totalPages > 7. Three layout zones (Figma 640:9190 + user spec):
+      // - Near start  (page ≤ 4):        [1, 2, 3, 4, 5, ···, last]
+      // - Near end    (page ≥ last-3):   [1, ···, last-4, last-3, last-2, last-1, last]
+      // - Middle:                         [1, ···, current-1, current, current+1, ···, last]
+      // Truncation only placed where ≥2 pages are hidden; never adjacent to page 1 or last.
+      function buildPageItems(currentPage, totalPages) {
+        if (totalPages <= 1) return [1];
+        if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+        if (currentPage <= 4)
+          return [1, 2, 3, 4, 5, '...', totalPages];
+        if (currentPage >= totalPages - 3)
+          return [1, '...', totalPages-4, totalPages-3, totalPages-2, totalPages-1, totalPages];
+        return [1, '...', currentPage-1, currentPage, currentPage+1, '...', totalPages];
+      }
+
+      function PageNumber({ page, isActive, onClick, onMouseEnter, onMouseLeave }) {
+        const classes = [
+          'dcds-Pagination__btn', 'dcds-Pagination__page',
+          isActive ? 'dcds-Pagination__page--active' : '',
+        ].filter(Boolean).join(' ');
+        return (
+          <button type="button" className={classes}
+                  aria-current={isActive ? 'page' : undefined}
+                  aria-label={`Page ${page}`}
+                  onClick={() => onClick && onClick(page)}
+                  onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {page}
+          </button>
+        );
+      }
+
+      function PaginationTruncation({ side }) {
+        return (
+          <span className="dcds-Pagination__btn dcds-Pagination__truncation"
+                aria-hidden="true" data-side={side}>
+            <span className="dcds-Pagination__icon"><MoreIcon /></span>
+          </span>
+        );
+      }
+
+      function Pagination({
+        pageStatus = 'First page',
+        showPageNumber = true,
+        currentPage,
+        totalPages,
+        onPageChange,
+        onPageMouseEnter,
+        onPageMouseLeave,
+        onPrev,
+        onPrevMouseEnter,
+        onPrevMouseLeave,
+        onNext,
+        onNextMouseEnter,
+        onNextMouseLeave,
+        onSkipFirst,
+        onSkipFirstMouseEnter,
+        onSkipFirstMouseLeave,
+        onSkipLast,
+        onSkipLastMouseEnter,
+        onSkipLastMouseLeave,
+        className,
+      }) {
+        const isFirstPage  = pageStatus === 'First page';
+        const isLastPage   = pageStatus === 'Last pages';
+        const isUnknown    = pageStatus === '-';
+        const disabledPrev = isFirstPage || isUnknown;
+        const disabledNext = isLastPage  || isUnknown;
+
+        const resolvedCurrent = currentPage != null ? currentPage
+          : isFirstPage ? 1
+          : isLastPage  ? (totalPages || 1)
+          : 1;
+        const resolvedTotal = totalPages || 1;
+        const pageItems = showPageNumber && resolvedTotal > 0
+          ? buildPageItems(resolvedCurrent, resolvedTotal)
+          : [];
+
+        const classes = ['dcds-Pagination', className || ''].filter(Boolean).join(' ');
+        return (
+          <nav className={classes} aria-label="Pagination">
+            <button type="button" className="dcds-Pagination__btn dcds-Pagination__nav"
+                    aria-label="Skip to first page"
+                    disabled={disabledPrev} aria-disabled={disabledPrev || undefined}
+                    onClick={onSkipFirst}
+                    onMouseEnter={onSkipFirstMouseEnter} onMouseLeave={onSkipFirstMouseLeave}>
+              <span className="dcds-Pagination__icon"><SkipFirstIcon /></span>
+            </button>
+            <button type="button" className="dcds-Pagination__btn dcds-Pagination__nav"
+                    aria-label="Previous page"
+                    disabled={disabledPrev} aria-disabled={disabledPrev || undefined}
+                    onClick={onPrev}
+                    onMouseEnter={onPrevMouseEnter} onMouseLeave={onPrevMouseLeave}>
+              <span className="dcds-Pagination__icon"><ArrowLeftIcon /></span>
+            </button>
+            {showPageNumber && pageItems.length > 0 && (
+              <div className="dcds-Pagination__page-numbers">
+                {pageItems.map((item, i) =>
+                  item === '...'
+                    ? <PaginationTruncation key={`e-${i}`} side={i < pageItems.length / 2 ? 'left' : 'right'} />
+                    : <PageNumber key={item} page={item} isActive={item === resolvedCurrent}
+                                  onClick={onPageChange}
+                                  onMouseEnter={() => onPageMouseEnter && onPageMouseEnter(item)}
+                                  onMouseLeave={() => onPageMouseLeave && onPageMouseLeave(item)} />
+                )}
+              </div>
+            )}
+            <button type="button" className="dcds-Pagination__btn dcds-Pagination__nav"
+                    aria-label="Next page"
+                    disabled={disabledNext} aria-disabled={disabledNext || undefined}
+                    onClick={onNext}
+                    onMouseEnter={onNextMouseEnter} onMouseLeave={onNextMouseLeave}>
+              <span className="dcds-Pagination__icon"><ArrowRightIcon /></span>
+            </button>
+            <button type="button" className="dcds-Pagination__btn dcds-Pagination__nav"
+                    aria-label="Skip to last page"
+                    disabled={disabledNext} aria-disabled={disabledNext || undefined}
+                    onClick={onSkipLast}
+                    onMouseEnter={onSkipLastMouseEnter} onMouseLeave={onSkipLastMouseLeave}>
+              <span className="dcds-Pagination__icon"><SkipLastIcon /></span>
+            </button>
+          </nav>
+        );
+      }
+
+      /* ============================================================
        * Reusable control widgets
        * ============================================================ */
       function CtrlSelect({ label, value, onChange, options }) {
@@ -1309,6 +1501,7 @@
           { id: 'checkbox',       label: 'Checkbox'       },
           { id: 'alert',          label: 'Alert'          },
           { id: 'breadcrumbs',    label: 'Breadcrumbs'    },
+          { id: 'pagination',     label: 'Pagination'     },
         ];
 
         /* --- Button controls --- */
@@ -1407,6 +1600,13 @@
             mkCurrent('Loan #1042'),
           ],
         };
+
+        /* --- Pagination controls --- */
+        const [pgStatus, setPgStatus]           = useState('Middle pages');
+        const [pgShowNumbers, setPgShowNumbers] = useState(true);
+        const [pgCurrentPage, setPgCurrentPage] = useState(6);
+        const [pgTotalPages, setPgTotalPages]   = useState(12);
+        const [pgLog, pushPgLog]                = useEventLog();
 
         /* --- Alert controls --- */
         const [alertState, setAlertState] = useState('info');
@@ -1536,6 +1736,16 @@
                   <h2>Breadcrumbs</h2>
                   <CtrlSelect label="No of items" value={bcItemCount} onChange={setBcItemCount} options={['1', '2', '3', '4', '5']} />
                   <CtrlToggle label="showHome"    checked={bcShowHome}  onChange={setBcShowHome} />
+                </>
+              )}
+
+              {activeComponent === 'pagination' && (
+                <>
+                  <h2>Pagination</h2>
+                  <CtrlSelect label="pageStatus"    value={pgStatus}      onChange={(v) => { setPgStatus(v); if (v === 'First page') setPgCurrentPage(1); if (v === 'Last pages') setPgCurrentPage(pgTotalPages); }} options={['First page', 'Middle pages', 'Last pages', '-']} />
+                  <CtrlToggle label="showPageNumber" checked={pgShowNumbers} onChange={setPgShowNumbers} />
+                  <CtrlSelect label="currentPage"   value={String(pgCurrentPage)} onChange={(v) => setPgCurrentPage(Number(v))} options={Array.from({length: pgTotalPages}, (_, i) => String(i + 1))} />
+                  <CtrlSelect label="totalPages"    value={String(pgTotalPages)}  onChange={(v) => setPgTotalPages(Number(v))} options={['5', '10', '12', '20', '50']} />
                 </>
               )}
 
@@ -1938,6 +2148,68 @@
                     </div>
                   </section>
 
+                </>
+              )}
+
+              {activeComponent === 'pagination' && (
+                <>
+                  <section>
+                    <h2>Pagination — Interactive Playground</h2>
+                    <p className="stage-note">
+                      Adjust props in the left panel. All navigation buttons fire events logged below.
+                    </p>
+                    <div className="preview" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 'var(--gap-16)' }}>
+                      <Pagination
+                        pageStatus={pgStatus}
+                        showPageNumber={pgShowNumbers}
+                        currentPage={pgCurrentPage}
+                        totalPages={pgTotalPages}
+                        onPageChange={(p) => { setPgCurrentPage(p); pushPgLog(`onPageChange: ${p}`); if (p === 1) setPgStatus('First page'); else if (p === pgTotalPages) setPgStatus('Last pages'); else setPgStatus('Middle pages'); }}
+                        onPageMouseEnter={(p) => pushPgLog(`onPageMouseEnter: ${p}`)}
+                        onPageMouseLeave={(p) => pushPgLog(`onPageMouseLeave: ${p}`)}
+                        onPrev={() => { const p = Math.max(1, pgCurrentPage - 1); setPgCurrentPage(p); if (p === 1) setPgStatus('First page'); else setPgStatus('Middle pages'); pushPgLog('onPrev'); }}
+                        onPrevMouseEnter={() => pushPgLog('onPrevMouseEnter')}
+                        onPrevMouseLeave={() => pushPgLog('onPrevMouseLeave')}
+                        onNext={() => { const p = Math.min(pgTotalPages, pgCurrentPage + 1); setPgCurrentPage(p); if (p === pgTotalPages) setPgStatus('Last pages'); else setPgStatus('Middle pages'); pushPgLog('onNext'); }}
+                        onNextMouseEnter={() => pushPgLog('onNextMouseEnter')}
+                        onNextMouseLeave={() => pushPgLog('onNextMouseLeave')}
+                        onSkipFirst={() => { setPgCurrentPage(1); setPgStatus('First page'); pushPgLog('onSkipFirst'); }}
+                        onSkipFirstMouseEnter={() => pushPgLog('onSkipFirstMouseEnter')}
+                        onSkipFirstMouseLeave={() => pushPgLog('onSkipFirstMouseLeave')}
+                        onSkipLast={() => { setPgCurrentPage(pgTotalPages); setPgStatus('Last pages'); pushPgLog('onSkipLast'); }}
+                        onSkipLastMouseEnter={() => pushPgLog('onSkipLastMouseEnter')}
+                        onSkipLastMouseLeave={() => pushPgLog('onSkipLastMouseLeave')}
+                      />
+                    </div>
+                    <div className="events">
+                      {pgLog.length === 0 ? '— no events yet —' : pgLog.join('\n')}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>Pagination — All Variants</h2>
+                    <p className="stage-note">All pageStatus values × showPageNumber combinations.</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-16)', padding: 'var(--gap-16)', background: 'var(--color-surface-2)', borderRadius: 'var(--rd-S)' }}>
+                      {[
+                        { label: 'pageStatus="First page" · showPageNumber=true',  status: 'First page',   show: true,  cur: 1,  total: 12 },
+                        { label: 'pageStatus="Middle pages" · showPageNumber=true', status: 'Middle pages', show: true,  cur: 6,  total: 12 },
+                        { label: 'pageStatus="Last pages" · showPageNumber=true',   status: 'Last pages',  show: true,  cur: 12, total: 12 },
+                        { label: 'pageStatus="-" · showPageNumber=false',           status: '-',           show: false, cur: 1,  total: 12 },
+                        { label: 'pageStatus="Middle pages" · showPageNumber=false', status: 'Middle pages', show: false, cur: 6, total: 12 },
+                        { label: 'totalPages=5 · Middle page',                      status: 'Middle pages', show: true,  cur: 3,  total: 5  },
+                      ].map(({ label, status, show, cur, total }) => (
+                        <div key={label}>
+                          <p className="stage-note" style={{ marginBottom: 'var(--gap-8)' }}>{label}</p>
+                          <Pagination
+                            pageStatus={status}
+                            showPageNumber={show}
+                            currentPage={cur}
+                            totalPages={total}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </section>
                 </>
               )}
 
