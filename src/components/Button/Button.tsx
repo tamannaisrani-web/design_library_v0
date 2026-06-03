@@ -44,6 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
   leadingIcon,
   trailingIcon,
   children,
+  fixedWidth,
   onClick,
   onFocus,
   onBlur,
@@ -70,11 +71,18 @@ export const Button: React.FC<ButtonProps> = ({
     .filter(Boolean)
     .join(' ');
 
+  // ESOverride: fixedWidth is a sanctioned override — inline style is intentional here.
+  // eslint-disable-next-line react/forbid-component-props
+  const overrideStyle = fixedWidth != null
+    ? { width: typeof fixedWidth === 'number' ? `${fixedWidth}px` : fixedWidth }
+    : undefined;
+
   return (
     <button
       id={id}
       type={type}
       className={classes}
+      style={overrideStyle}
       disabled={isDisabled}
       aria-disabled={isDisabled || undefined}
       aria-busy={ariaBusy || undefined}

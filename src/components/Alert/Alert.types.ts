@@ -5,7 +5,7 @@
  */
 
 import type { ReactNode } from 'react';
-import type { BaseComponentProps } from '../shared/types';
+import type { BaseComponentProps, InteractiveEventHandlers } from '../shared/types';
 
 /** Semantic state of the Alert. Drives background colour, border, and icon. */
 export type AlertState = 'success' | 'error' | 'warning' | 'info';
@@ -36,7 +36,7 @@ export type AlertEmphasis = 'subtle' | 'subtler';
  * </Alert>
  * ```
  */
-export interface AlertProps extends BaseComponentProps {
+export interface AlertProps extends BaseComponentProps, InteractiveEventHandlers<HTMLDivElement> {
   /**
    * Semantic state. Determines background, border, and icon colour.
    */

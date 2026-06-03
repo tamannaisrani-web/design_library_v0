@@ -43,6 +43,13 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   const resolved = isControlled ? Boolean(checked) : internal;
   const isDisabled = State === 'Disabled';
 
+  // Either/or conditional: `indeterminate` and `checked` (true) are mutually exclusive.
+  // When indeterminate=true the visual state is the dash (mixed); the tick must not show.
+  // When resolved=true (checked) indeterminate is irrelevant — only the tick shows.
+  // We force the DOM input's checked to false while indeterminate is active so the
+  // :checked CSS selector never fires alongside the --indeterminate modifier class.
+  const effectiveChecked = indeterminate ? false : resolved;
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Indeterminate is not reflectable via HTML — set it imperatively on the DOM node.
@@ -80,10 +87,10 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         className="dcds-Checkbox__input"
         name={name}
         value={value}
-        checked={resolved}
+        checked={effectiveChecked}
         disabled={isDisabled}
         required={required}
-        aria-checked={indeterminate ? 'mixed' : resolved}
+        aria-checked={indeterminate ? 'mixed' : effectiveChecked}
         aria-disabled={isDisabled || undefined}
         onChange={handleChange}
         onFocus={onFocus}

@@ -113,6 +113,19 @@
 }
 
 /* ===========================================================
+ * Content alignment — title present vs absent
+ *
+ * When a title is visible the icon (16px inside a 20px container) sits at
+ * flex-start so it naturally aligns with the title's first line.
+ * When ONLY the description is shown the icon should vertically centre
+ * against the smaller 12px message text.
+ * =========================================================== */
+
+.dcds-Alert__content--no-title {
+  align-items: center;
+}
+
+/* ===========================================================
  * Inner layout — row: [content] [close-btn]
  * =========================================================== */
 

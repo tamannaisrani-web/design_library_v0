@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useId, useRef } from 'react';
-import { ChevronDownIcon } from '../../icons/ChevronDownIcon';
+import { ArrowDownLinear } from '../../../icons/src/linear/ArrowDownLinear';
 import { _BaseMenu } from './_BaseMenu';
 import type { DropdownButtonProps, DropdownMenuItem } from './DropdownButton.types';
 import './DropdownButton.css';
@@ -50,6 +50,7 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({
   id,
   dataTestId,
   children,
+  fixedWidth,
   onClick,
   onFocus,
   onBlur,
@@ -107,6 +108,12 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({
 
   const chevronSize = size === 'L' || size === 'M' ? 16 : 12;
 
+  // ESOverride: fixedWidth is a sanctioned override — inline style is intentional here.
+  // eslint-disable-next-line react/forbid-component-props
+  const overrideStyle = fixedWidth != null
+    ? { width: typeof fixedWidth === 'number' ? `${fixedWidth}px` : fixedWidth }
+    : undefined;
+
   const buttonClasses = [
     'dcds-DropdownButton',
     `dcds-DropdownButton--variant-${variant}`,
@@ -121,7 +128,7 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({
     .join(' ');
 
   return (
-    <div ref={wrapperRef} className={wrapperClasses}>
+    <div ref={wrapperRef} className={wrapperClasses} style={overrideStyle}>
       <button
         id={id}
         type="button"
@@ -142,7 +149,7 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({
       >
         <span>{children}</span>
         <span className="dcds-DropdownButton__chevron">
-          <ChevronDownIcon size={chevronSize} />
+          <ArrowDownLinear size={chevronSize} />
         </span>
       </button>
 
