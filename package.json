@@ -5,7 +5,10 @@
   "scripts": {
     "generate": "node scripts/generate-icons.mjs",
     "build": "npm run build --workspace=icons",
-    "export:figma": "node scripts/export-figma.mjs"
+    "export:figma": "node scripts/export-figma.mjs",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --max-warnings 0",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@svgr/core": "^8.1.0",
@@ -13,6 +16,14 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
   },
