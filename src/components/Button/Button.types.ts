@@ -88,4 +88,19 @@ export interface ButtonProps
 
   /** Label text (and/or arbitrary content). For icon-only buttons, pass the icon here instead. */
   children?: ReactNode;
+
+  /**
+   * ESOverride — sets a fixed pixel or CSS width on the button.
+   * Use only when a precise width is required (e.g. aligned action grids).
+   * Accepts any valid CSS width value (`'120px'`, `'8rem'`, etc.) or a raw
+   * number that is treated as pixels.
+   *
+   * @example
+   * ```tsx
+   * <Button fixedWidth={160}>Confirm</Button>
+   * <Button fixedWidth="50%">Submit</Button>
+   * ```
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  fixedWidth?: string | number;
 }

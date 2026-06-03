@@ -1,5 +1,6 @@
 import React from 'react';
 import type { LinkButtonProps } from './LinkButton.types';
+import { SendLinear } from '../../../icons/src/linear/SendLinear';
 import './LinkButton.css';
 
 /**
@@ -28,6 +29,8 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   id,
   dataTestId,
   children,
+  showIcon = true,
+  fixedWidth,
   onClick,
   onFocus,
   onBlur,
@@ -43,6 +46,15 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
 
   const isDisabled = state === 'Disabled';
 
+  // ESOverride: fixedWidth is a sanctioned override — inline style is intentional here.
+  // eslint-disable-next-line react/forbid-component-props
+  const overrideStyle = fixedWidth != null
+    ? { width: typeof fixedWidth === 'number' ? `${fixedWidth}px` : fixedWidth }
+    : undefined;
+
+  // Icon size matches the text size at each scale step (Figma spec: figmaNode 868:3050).
+  const iconSize = size === 'L' ? 16 : size === 'M' ? 14 : 12;
+
   const classes = [
     'dcds-LinkButton',
     `dcds-LinkButton--state-${state}`,
@@ -57,11 +69,21 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
     'aria-label': isIconOnly ? ariaLabel : undefined,
   };
 
+  // Send icon — Figma: figmaNode 868:3050. Transform matches the Figma ↗ rotation.
+  // Rendered when isIconOnly=true (the only content) OR when showIcon=true (trailing on text).
+  const icon = (
+    <span className="dcds-LinkButton__icon" aria-hidden="true" style={{ transform: 'scaleY(-1) rotate(180deg)' }}>
+      <SendLinear size={iconSize} />
+    </span>
+  );
+  const trailingIcon = (isIconOnly || showIcon) ? icon : null;
+
   if (href) {
     return (
       <a
         id={id}
         className={classes}
+        style={overrideStyle}
         href={isDisabled ? undefined : href}
         target={target}
         rel={rel}
@@ -76,6 +98,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
         {...ariaProps}
       >
         {children}
+        {trailingIcon}
       </a>
     );
   }
@@ -85,6 +108,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
       id={id}
       type="button"
       className={classes}
+      style={overrideStyle}
       disabled={isDisabled}
       data-testid={dataTestId}
       onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
@@ -97,6 +121,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
       {...ariaProps}
     >
       {children}
+      {trailingIcon}
     </button>
   );
 };

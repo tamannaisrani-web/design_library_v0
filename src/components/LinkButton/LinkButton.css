@@ -5,19 +5,20 @@
   align-items: center;
   gap: var(--gap-4);
   font-family: var(--font-family);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-regular);
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   color: var(--color-hyperlink-default);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
   transition: color 120ms ease;
 }
 
 .dcds-LinkButton:hover:not(:disabled):not([aria-disabled='true']) {
   color: var(--color-hyperlink-hover);
-  text-decoration: underline;
 }
 
 .dcds-LinkButton:focus-visible {
@@ -37,5 +38,18 @@
   color: var(--color-hyperlink-disabled);
   cursor: not-allowed;
   pointer-events: none;
-  text-decoration: none;
 }
+
+/* Trailing send icon — sourced from icons/svg/linear/send.svg (Figma: figmaNode 868:3050) */
+.dcds-LinkButton__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Inherits currentColor so the icon matches the link state colour automatically */
+}
+
+.dcds-LinkButton--size-L .dcds-LinkButton__icon { width: 16px; height: 16px; }
+.dcds-LinkButton--size-M .dcds-LinkButton__icon { width: 14px; height: 14px; }
+.dcds-LinkButton--size-S .dcds-LinkButton__icon { width: 12px; height: 12px; }
+.dcds-LinkButton--size-XS .dcds-LinkButton__icon { width: 12px; height: 12px; }

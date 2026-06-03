@@ -50,6 +50,7 @@ export interface CheckboxProps extends BaseComponentProps {
   /** Triggered when the user toggles the checkbox. */
   onChange?: (nextChecked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
 
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;

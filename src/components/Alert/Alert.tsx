@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import type { AlertProps } from './Alert.types';
-import { InfoCircleBold } from '../../assets/icons/bold/InfoCircleBold';
-import { CloseLinear } from '../../assets/icons/linear/CloseLinear';
+// Icons sourced from icons/src — correct relative paths from src/components/Alert/
+import { InfoCircleBold } from '../../../icons/src/bold/InfoCircleBold';
+import { CloseLinear } from '../../../icons/src/linear/CloseLinear';
 import './Alert.css';
 
 const TOAST_AUTO_DISMISS_MS = 5000;
@@ -24,7 +25,23 @@ export const Alert: React.FC<AlertProps> = ({
   className,
   id,
   dataTestId,
+  onClick,
+  onFocus,
+  onBlur,
+  onMouseEnter,
+  onMouseLeave,
+  onKeyDown,
+  onKeyUp,
 }) => {
+  // Dev-time guard: actions only render with emphasis="subtle". Warn if consumer
+  // passes actions with emphasis="subtler" to avoid silent no-op.
+  if (process.env.NODE_ENV !== 'production' && actions && emphasis === 'subtler') {
+    // eslint-disable-next-line no-console
+    console.warn(
+      '[dcds:Alert] `actions` is only rendered when emphasis="subtle". ' +
+      'Switch to emphasis="subtle" or remove the `actions` prop.'
+    );
+  }
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Auto-dismiss toast after timeout when onClose is provided
@@ -51,6 +68,16 @@ export const Alert: React.FC<AlertProps> = ({
     .filter(Boolean)
     .join(' ');
 
+  // With title: use --has-title so the icon gets a taller container (20 px) that
+  // centres against the bolder 14 px title line-height (~20 px).
+  // Without title: default icon height (16 px) centres against the 12 px message line.
+  const headerClasses = [
+    'dcds-Alert__header',
+    title ? 'dcds-Alert__header--has-title' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <div
       id={id}
@@ -58,19 +85,28 @@ export const Alert: React.FC<AlertProps> = ({
       role={role}
       aria-live={ariaLive}
       data-testid={dataTestId}
+      onClick={onClick}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
     >
       <div className="dcds-Alert__inner">
         <div className="dcds-Alert__content">
-          <span className="dcds-Alert__icon">{stateIcons[state]}</span>
-          <div className="dcds-Alert__body">
+          {/* Header: icon + text in the same flex row so icon competes only with
+              text height, never with actions. */}
+          <div className={headerClasses}>
+            <span className="dcds-Alert__icon">{stateIcons[state]}</span>
             <div className="dcds-Alert__text">
               {title && <p className="dcds-Alert__title">{title}</p>}
               {children && <p className="dcds-Alert__message">{children}</p>}
             </div>
-            {actions && emphasis === 'subtle' && (
-              <div className="dcds-Alert__actions">{actions}</div>
-            )}
           </div>
+          {actions && emphasis === 'subtle' && (
+            <div className="dcds-Alert__actions">{actions}</div>
+          )}
         </div>
         {showClose && (
           <button

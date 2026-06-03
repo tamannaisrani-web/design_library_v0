@@ -41,6 +41,7 @@ export interface RadioButtonProps extends BaseComponentProps {
   /** Triggered when the user selects this option. */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
