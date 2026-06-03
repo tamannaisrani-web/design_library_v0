@@ -10,6 +10,7 @@
 
 export * from './components/Alert';
 export * from './components/Breadcrumbs';
+export * from './components/Pagination';
 export * from './components/Button';
 export * from './components/LinkButton';
 export * from './components/DropdownButton';

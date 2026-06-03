@@ -1,0 +1,115 @@
+/* Pagination — token-driven styles. Never override colour or spacing tokens via className. */
+
+/* ── Wrapper ─────────────────────────────────────────────────────────────── */
+.dcds-Pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+}
+
+/* ── Shared button base ───────────────────────────────────────────────────── */
+.dcds-Pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: var(--gap-8);
+  border: none;
+  border-radius: var(--rd-S);
+  cursor: pointer;
+  flex-shrink: 0;
+  background: none;
+  transition: background-color 120ms ease, color 120ms ease;
+  color: var(--color-icon-primary);
+}
+
+.dcds-Pagination__btn:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* ── Navigation buttons (Prev / Next / Skip-First / Skip-Last) ────────────── */
+.dcds-Pagination__nav {
+  background-color: var(--color-surface-3);
+}
+
+.dcds-Pagination__nav:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-fill-secondary-0);
+}
+
+/* Figma Clicked state: back to surface/3 bg but with bold (linear) icon */
+.dcds-Pagination__nav:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-surface-3);
+}
+
+/* Bold icon on click — mirrors vuesax/linear arrow (thicker stroke) */
+.dcds-Pagination__nav:active:not(:disabled):not([aria-disabled='true']) .dcds-Pagination__icon svg path {
+  stroke-width: 2;
+}
+
+/* Disabled nav button */
+.dcds-Pagination__nav:disabled,
+.dcds-Pagination__nav[aria-disabled='true'] {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Page-number buttons ─────────────────────────────────────────────────── */
+.dcds-Pagination__page-numbers {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+}
+
+.dcds-Pagination__page {
+  background-color: var(--color-surface-1);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  line-height: normal;
+}
+
+.dcds-Pagination__page:hover:not(:disabled) {
+  background-color: var(--color-fill-secondary-0);
+}
+
+/* Active / selected page */
+.dcds-Pagination__page--active {
+  background-color: var(--color-fill-action);
+  color: var(--color-text-invert);
+  font-weight: var(--font-weight-bold);
+  cursor: default;
+  pointer-events: none;
+}
+
+.dcds-Pagination__page--active:hover {
+  background-color: var(--color-fill-action);
+}
+
+/* ── Truncation (…) indicator ─────────────────────────────────────────────── */
+/* Non-interactive display-only element — no hover or clicked states.
+   Icon colour: color/text/primary (Noble Blue-500) — confirmed from Figma node 640:9171. */
+.dcds-Pagination__truncation {
+  background-color: var(--color-surface-1);
+  color: var(--color-text-primary);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Icon wrapper inside every button ────────────────────────────────────── */
+.dcds-Pagination__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.dcds-Pagination__icon svg {
+  width: 16px;
+  height: 16px;
+}
