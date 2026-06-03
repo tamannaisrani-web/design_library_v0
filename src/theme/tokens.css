@@ -144,6 +144,8 @@
   --color-surface-3: var(--dcds-cool-grey-100);
   --color-surface-4: var(--dcds-cool-grey-200);
   --color-surface-disabled: var(--dcds-cool-grey-300);
+  /* Inverse surface — used by Tooltip bubble (Noble Blue-500) */
+  --color-surface-inverse: var(--dcds-noble-blue-500);
 
   /* OVERLAY */
   --color-overlay-50: rgba(18, 18, 18, 0.5);

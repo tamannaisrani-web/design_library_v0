@@ -9,6 +9,7 @@
  */
 
 export * from './components/Alert';
+export * from './components/Tooltip';
 export * from './components/Breadcrumbs';
 export * from './components/Pagination';
 export * from './components/Button';

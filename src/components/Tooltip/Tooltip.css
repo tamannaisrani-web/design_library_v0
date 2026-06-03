@@ -1,0 +1,141 @@
+/* Tooltip — token-driven styles.
+ * Source: Figma node 478:30949
+ * Background: color/surface/4 (#F0F0F0) · Text: color/text/primary (#0A2E57)
+ * Max-width: 224px · Padding: gap-16 · Border-radius: rd-S
+ */
+
+/* ===========================================================
+ * Wrapper — shrinks to trigger size; acts as positioning root
+ * =========================================================== */
+
+.dcds-Tooltip__wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===========================================================
+ * Overlay — absolutely-positioned container that holds
+ * the bubble + directional arrow in the correct order
+ * =========================================================== */
+
+.dcds-Tooltip__overlay {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms ease, visibility 120ms ease;
+}
+
+.dcds-Tooltip__overlay--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Top — bubble above, arrow below pointing down */
+.dcds-Tooltip__overlay--Top {
+  flex-direction: column;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Bottom — arrow above pointing up, bubble below */
+.dcds-Tooltip__overlay--Bottom {
+  flex-direction: column;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Left — bubble left, arrow to the right pointing right */
+.dcds-Tooltip__overlay--Left {
+  flex-direction: row;
+  right: calc(100% + 4px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Right — arrow to the left pointing left, bubble right */
+.dcds-Tooltip__overlay--Right {
+  flex-direction: row;
+  left: calc(100% + 4px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ===========================================================
+ * Bubble — light grey bg, navy text, 224px max width
+ * =========================================================== */
+
+.dcds-Tooltip__bubble {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-0);
+  width: 224px;
+  padding: var(--gap-16);
+  background-color: var(--color-surface-4);
+  color: var(--color-text-primary);
+  border-radius: var(--rd-S);
+  word-break: break-word;
+  line-height: normal;
+}
+
+/* Heading — Desktop/Body/Caption - Bold (18px Bold) */
+.dcds-Tooltip__heading {
+  font-family: var(--font-family);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  line-height: normal;
+  min-width: 100%;
+  margin: 0;
+}
+
+/* Body — Desktop/Body/Body - Regular (16px Regular) */
+.dcds-Tooltip__body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: normal;
+  margin: 0;
+}
+
+/* ===========================================================
+ * Arrow — inherits color from bubble via currentColor
+ * =========================================================== */
+
+.dcds-Tooltip__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-surface-4);
+}
+
+/* ===========================================================
+ * Default trigger — info-circle icon
+ * =========================================================== */
+
+.dcds-Tooltip__info-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-icon-secondary);
+  border-radius: var(--rd-XS);
+}
+
+.dcds-Tooltip__info-trigger:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
