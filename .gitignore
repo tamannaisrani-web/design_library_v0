@@ -9,3 +9,7 @@ dist/
 # Generated icon components — produced by scripts/generate-icons.mjs from icons/svg/
 # Do not commit; run `npm run generate` to rebuild
 icons/src/
+
+# Local dev tooling (preview server, Claude Code config)
+serve.py
+.claude/
