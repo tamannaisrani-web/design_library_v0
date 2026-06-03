@@ -31,6 +31,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
   className,
   dataTestId,
   onChange,
+  onClick,
   onFocus,
   onBlur,
   onKeyDown,
@@ -57,6 +58,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
         disabled={isDisabled}
         aria-disabled={isDisabled || undefined}
         onChange={onChange}
+        onClick={onClick}
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={onKeyDown}

@@ -49,4 +49,20 @@ export interface LinkButtonProps
 
   /** Label and/or icon content. */
   children?: ReactNode;
+
+  /**
+   * When `true` (default), the trailing `send` icon from `icons/svg/linear/send.svg`
+   * is rendered after the label — matching the Figma spec (figmaNode 868:3050).
+   * Set to `false` to suppress the icon (e.g. for plain-text link contexts).
+   * @default true
+   */
+  showIcon?: boolean;
+
+  /**
+   * ESOverride — sets a fixed pixel or CSS width on the link button.
+   * Accepts any valid CSS width value (`'120px'`, `'8rem'`, etc.) or a raw
+   * number that is treated as pixels.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  fixedWidth?: string | number;
 }

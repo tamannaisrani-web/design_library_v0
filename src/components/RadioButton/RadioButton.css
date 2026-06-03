@@ -45,7 +45,7 @@
 }
 
 .dcds-RadioButton:hover .dcds-RadioButton__indicator {
-  border-color: var(--color-stroke-focus);
+  border-color: var(--color-stroke-action);
 }
 
 .dcds-RadioButton__input:checked + .dcds-RadioButton__indicator {

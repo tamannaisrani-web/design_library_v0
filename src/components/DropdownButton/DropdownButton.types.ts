@@ -91,4 +91,12 @@ export interface DropdownButtonProps
 
   /** Button label (text and/or leading icon). The chevron is appended automatically. */
   children?: ReactNode;
+
+  /**
+   * ESOverride — sets a fixed pixel or CSS width on the dropdown wrapper.
+   * Accepts any valid CSS width value (`'150px'`, `'12rem'`, etc.) or a raw
+   * number that is treated as pixels.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  fixedWidth?: string | number;
 }

@@ -13,7 +13,8 @@
   font-family: var(--font-family);
   font-weight: var(--font-weight-bold);
   border-radius: var(--rd-S);
-  border: 2px solid transparent;
+  /* Figma spec (figmaNode 863:12173): Secondary variant uses a 1px solid stroke. */
+  border: 1px solid transparent;
   cursor: pointer;
   transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
   white-space: nowrap;
@@ -41,7 +42,7 @@
 
 /* Secondary (outlined) */
 .dcds-DropdownButton--variant-Secondary {
-  background-color: transparent;
+  background-color: var(--color-surface-1);
   border-color: var(--color-stroke-action);
   color: var(--color-text-action);
 }
@@ -59,14 +60,8 @@
   background-color: var(--color-fill-light-action);
 }
 
-/* Open state highlight */
-.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Primary {
-  background-color: var(--color-fill-dark-action);
-}
-.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Secondary,
-.dcds-DropdownButton--state-Open.dcds-DropdownButton--variant-Tertiary {
-  background-color: var(--color-fill-light-action);
-}
+/* Open state — no background change; only the chevron rotates (see --state-Open modifier above).
+ * Figma spec (node 863:12173): Open variants use the same fill as Default. */
 
 /* Disabled */
 .dcds-DropdownButton:disabled,
