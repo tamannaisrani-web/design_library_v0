@@ -1,0 +1,135 @@
+/* Chip — token-driven styles matching DCDS Figma spec (node 346:14776). */
+
+/* ===========================================================
+ * Base — pill, transparent bg, 0.5px neutral border, subdued text
+ * =========================================================== */
+
+.dcds-Chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-8);
+  padding: var(--gap-4) var(--gap-8);
+  border: 0.5px solid var(--color-stroke-neutral);
+  border-radius: var(--rd-Max);
+  background-color: var(--color-surface-1);
+  color: var(--color-text-subdued);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease,
+    opacity 120ms ease;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  line-height: 1;
+}
+
+/* ===========================================================
+ * Sizes
+ * =========================================================== */
+
+.dcds-Chip--size-S {
+  font-size: var(--font-size-validation); /* 10px */
+}
+
+.dcds-Chip--size-M {
+  font-size: var(--font-size-label); /* 14px */
+  height: 32px;
+}
+
+.dcds-Chip--size-L {
+  font-size: var(--font-size-body); /* 16px */
+  height: 40px;
+}
+
+/* ===========================================================
+ * Leading icon — sized per chip size
+ * =========================================================== */
+
+.dcds-Chip__icon {
+  flex-shrink: 0;
+}
+
+.dcds-Chip--size-S .dcds-Chip__icon {
+  width: 14px;
+  height: 14px;
+}
+
+.dcds-Chip--size-M .dcds-Chip__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.dcds-Chip--size-L .dcds-Chip__icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===========================================================
+ * Selected — primary blue fill, 1px focus border, primary text
+ * =========================================================== */
+
+.dcds-Chip--selected {
+  background-color: var(--color-fill-primary-2);
+  border: 1px solid var(--color-stroke-focus);
+  color: var(--color-text-primary);
+}
+
+/* ===========================================================
+ * Hover states
+ * =========================================================== */
+
+/* Unselected hover: subtle surface-2 bg, border stays neutral */
+.dcds-Chip--unselected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) {
+  background-color: var(--color-surface-2);
+}
+
+/* Selected hover: lighter primary-1 fill */
+.dcds-Chip--selected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) {
+  background-color: var(--color-fill-primary-1);
+}
+
+/* ===========================================================
+ * Focus ring
+ * =========================================================== */
+
+.dcds-Chip:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* ===========================================================
+ * Disabled — unselected
+ * =========================================================== */
+
+.dcds-Chip--unselected.dcds-Chip--state-Disabled,
+.dcds-Chip--unselected:disabled {
+  background-color: var(--color-surface-1);
+  border-color: var(--color-stroke-disabled);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===========================================================
+ * Disabled — selected (keeps blue fill, fades with opacity)
+ * =========================================================== */
+
+.dcds-Chip--selected.dcds-Chip--state-Disabled,
+.dcds-Chip--selected:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===========================================================
+ * ChipGroup — horizontal wrapping container, gap-8 between chips
+ * =========================================================== */
+
+.dcds-ChipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-8);
+  align-items: center;
+}

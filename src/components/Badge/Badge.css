@@ -1,0 +1,122 @@
+/* Badge — token-driven styles matching DCDS Figma spec (node 349:2470). */
+
+/* ===========================================================
+ * Base — pill, inline-flex, gap-4 between icon and label
+ * =========================================================== */
+
+.dcds-Badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  padding: var(--gap-4) var(--gap-8);
+  border-radius: var(--rd-Max);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ===========================================================
+ * Sizes — S / M / L
+ * =========================================================== */
+
+.dcds-Badge--size-S {
+  height: 24px;
+  font-size: var(--font-size-body-small); /* 12px */
+}
+
+.dcds-Badge--size-M {
+  height: 32px;
+  font-size: var(--font-size-label); /* 14px */
+}
+
+.dcds-Badge--size-L {
+  height: 40px;
+  font-size: var(--font-size-body); /* 16px */
+}
+
+/* ===========================================================
+ * Leading icon — sized per badge size
+ * =========================================================== */
+
+.dcds-Badge__icon {
+  flex-shrink: 0;
+}
+
+.dcds-Badge--size-S .dcds-Badge__icon {
+  width: 14px;
+  height: 14px;
+}
+
+.dcds-Badge--size-M .dcds-Badge__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.dcds-Badge--size-L .dcds-Badge__icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===========================================================
+ * Subtle emphasis — light tinted bg + 1px colored border + state text
+ * =========================================================== */
+
+.dcds-Badge--emphasis-subtle.dcds-Badge--state-neutral {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-stroke-neutral);
+  color: var(--color-text-neutral);
+}
+
+.dcds-Badge--emphasis-subtle.dcds-Badge--state-info {
+  background-color: var(--color-fill-light-info);
+  border: 1px solid var(--color-stroke-info);
+  color: var(--color-text-info);
+}
+
+.dcds-Badge--emphasis-subtle.dcds-Badge--state-warning {
+  background-color: var(--color-fill-light-warning);
+  border: 1px solid var(--color-stroke-warning);
+  color: var(--color-text-warning);
+}
+
+.dcds-Badge--emphasis-subtle.dcds-Badge--state-error {
+  background-color: var(--color-fill-light-error);
+  border: 1px solid var(--color-stroke-error);
+  color: var(--color-text-error);
+}
+
+.dcds-Badge--emphasis-subtle.dcds-Badge--state-success {
+  background-color: var(--color-fill-light-success);
+  border: 1px solid var(--color-stroke-success);
+  color: var(--color-text-success);
+}
+
+/* ===========================================================
+ * Intense emphasis — solid filled bg + white text
+ * =========================================================== */
+
+.dcds-Badge--emphasis-intense.dcds-Badge--state-neutral {
+  background-color: var(--color-icon-subdued);
+  color: var(--color-text-invert);
+}
+
+.dcds-Badge--emphasis-intense.dcds-Badge--state-info {
+  background-color: var(--color-fill-invert-info);
+  color: var(--color-text-invert);
+}
+
+.dcds-Badge--emphasis-intense.dcds-Badge--state-warning {
+  background-color: var(--color-fill-invert-warning);
+  color: var(--color-text-invert);
+}
+
+.dcds-Badge--emphasis-intense.dcds-Badge--state-error {
+  background-color: var(--color-fill-invert-error);
+  color: var(--color-text-invert);
+}
+
+.dcds-Badge--emphasis-intense.dcds-Badge--state-success {
+  background-color: var(--color-fill-invert-success);
+  color: var(--color-text-invert);
+}
