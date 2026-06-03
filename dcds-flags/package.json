@@ -1,0 +1,24 @@
+{
+  "name": "@dcds/flags",
+  "version": "0.1.0",
+  "description": "Design Language System — country flag SVGs",
+  "files": [
+    "flags/",
+    "manifest.json"
+  ],
+  "scripts": {
+    "export:figma": "node scripts/export-figma.mjs"
+  },
+  "keywords": [
+    "flags",
+    "svg",
+    "design-system",
+    "dcds"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tamannaisrani-web/design_library_v0.git",
+    "directory": "dcds-flags"
+  }
+}

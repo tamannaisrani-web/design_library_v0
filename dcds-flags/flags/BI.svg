@@ -1,0 +1,18 @@
+<svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_395_55578" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="18">
+<rect width="24" height="18" fill="white"/>
+</mask>
+<g mask="url(#mask0_395_55578)">
+<rect width="24" height="18" rx="2" fill="#5DAA22"/>
+<mask id="path-3-outside-1_395_55578" maskUnits="userSpaceOnUse" x="-8" y="-3" width="40" height="24" fill="black">
+<rect fill="white" x="-8" y="-3" width="40" height="24"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 9L24 0H0L12 9ZM12 9L0 18H24L12 9Z"/>
+</mask>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 9L24 0H0L12 9ZM12 9L0 18H24L12 9Z" fill="#DD2C2C"/>
+<path d="M24 0L25.5 2L31.5 -2.5H24V0ZM0 0V-2.5H-7.5L-1.5 2L0 0ZM0 18L-1.5 16L-7.5 20.5H0V18ZM24 18V20.5H31.5L25.5 16L24 18ZM24 0L22.5 -2L10.5 7L12 9L13.5 11L25.5 2L24 0ZM0 0V2.5H24V0V-2.5H0V0ZM12 9L13.5 7L1.5 -2L0 0L-1.5 2L10.5 11L12 9ZM12 9L10.5 7L-1.5 16L0 18L1.5 20L13.5 11L12 9ZM0 18V20.5H24V18V15.5H0V18ZM24 18L25.5 16L13.5 7L12 9L10.5 11L22.5 20L24 18Z" fill="white" mask="url(#path-3-outside-1_395_55578)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 13.5C14.4853 13.5 16.5 11.4853 16.5 9C16.5 6.51472 14.4853 4.5 12 4.5C9.51472 4.5 7.5 6.51472 7.5 9C7.5 11.4853 9.51472 13.5 12 13.5Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.5725 7.79047L10.7009 7.80001L11.145 7.05001L10.7009 6.30001L11.5725 6.30956L12 5.55001L12.4275 6.30956L13.299 6.30001L12.855 7.05001L13.299 7.80001L12.4275 7.79047L12 8.55001L11.5725 7.79047Z" fill="#DD2C2C" stroke="#5DAA22" stroke-width="0.25"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.69747 10.8654L8.82593 10.875L9.26997 10.125L8.82593 9.375L9.69747 9.38454L10.125 8.625L10.5525 9.38454L11.424 9.375L10.98 10.125L11.424 10.875L10.5525 10.8654L10.125 11.625L9.69747 10.8654Z" fill="#DD2C2C" stroke="#5DAA22" stroke-width="0.25"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.4475 10.8654L12.5759 10.875L13.02 10.125L12.5759 9.375L13.4475 9.38454L13.875 8.625L14.3025 9.38454L15.174 9.375L14.73 10.125L15.174 10.875L14.3025 10.8654L13.875 11.625L13.4475 10.8654Z" fill="#DD2C2C" stroke="#5DAA22" stroke-width="0.25"/>
+</g>
+</svg>
