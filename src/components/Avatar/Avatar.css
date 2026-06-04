@@ -1,0 +1,160 @@
+/* Avatar — token-driven styles. Figma node 440:6502.
+ * Never override background, border-radius, or font via className.
+ * Use className only for layout (margin / grid placement). */
+
+/* ===========================================================
+ * Base
+ * =========================================================== */
+
+.dcds-Avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  user-select: none;
+  position: relative;
+}
+
+.dcds-Avatar:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* ===========================================================
+ * Sizes — Small 24px · Medium 32px · Large 40px · Extra Large 48px
+ * =========================================================== */
+
+.dcds-Avatar--size-Small {
+  width: var(--gap-24);
+  height: var(--gap-24);
+  font-size: var(--font-size-validation); /* 10px */
+}
+
+.dcds-Avatar--size-Medium {
+  width: var(--gap-32);
+  height: var(--gap-32);
+  font-size: var(--font-size-body-small); /* 12px */
+}
+
+.dcds-Avatar--size-Large {
+  width: var(--gap-40);
+  height: var(--gap-40);
+  font-size: var(--font-size-body); /* 16px */
+}
+
+.dcds-Avatar--size-Extra-Large {
+  width: var(--gap-48);
+  height: var(--gap-48);
+  font-size: var(--font-size-h4); /* 20px */
+}
+
+/* ===========================================================
+ * Shapes — border radius
+ * Circles: rd-Max (1000px)
+ * Squares: rd-S (8px) — rd-XS (4px) for Small only
+ * =========================================================== */
+
+.dcds-Avatar--shape-Initial-Circle,
+.dcds-Avatar--shape-Icon-Circle,
+.dcds-Avatar--shape-Flag-Circle {
+  border-radius: var(--rd-Max);
+}
+
+.dcds-Avatar--shape-Initial-Square,
+.dcds-Avatar--shape-Icon-Square {
+  border-radius: var(--rd-S);
+}
+
+/* Small square uses tighter radius (Figma: rd-XS) */
+.dcds-Avatar--size-Small.dcds-Avatar--shape-Initial-Square,
+.dcds-Avatar--size-Small.dcds-Avatar--shape-Icon-Square {
+  border-radius: var(--rd-XS);
+}
+
+/* ===========================================================
+ * Background color
+ * All non-flag shapes: color/fill/secondary-2  Sky Blue-100  #daecf7
+ * =========================================================== */
+
+.dcds-Avatar--shape-Initial-Circle,
+.dcds-Avatar--shape-Initial-Square,
+.dcds-Avatar--shape-Icon-Circle,
+.dcds-Avatar--shape-Icon-Square {
+  background-color: var(--color-fill-secondary-2);
+}
+
+/* Flag Circle: no background — the flag SVG fills the circle */
+.dcds-Avatar--shape-Flag-Circle {
+  background-color: transparent;
+}
+
+/* ===========================================================
+ * Initials — text color (noble blue-500)
+ * =========================================================== */
+
+.dcds-Avatar__initials {
+  color: var(--color-text-primary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ===========================================================
+ * Icon — color and size per avatar size
+ * Icon color: color/icon/secondary (Sky Blue-500)
+ * =========================================================== */
+
+.dcds-Avatar__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Noble Blue-500 — matches Figma vuesax/bold/user rendered color */
+  color: var(--color-icon-primary);
+}
+
+.dcds-Avatar--size-Small .dcds-Avatar__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.dcds-Avatar--size-Medium .dcds-Avatar__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.dcds-Avatar--size-Large .dcds-Avatar__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.dcds-Avatar--size-Extra-Large .dcds-Avatar__icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* ===========================================================
+ * Flag — covers the full circle
+ * =========================================================== */
+
+.dcds-Avatar__flag {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===========================================================
+ * Interactive state — cursor pointer when role="button"
+ * =========================================================== */
+
+.dcds-Avatar[role='button'] {
+  cursor: pointer;
+}
+
+.dcds-Avatar[role='button']:hover {
+  opacity: 0.85;
+}
