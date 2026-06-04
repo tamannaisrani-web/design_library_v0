@@ -9,6 +9,9 @@
  */
 
 export * from './components/Alert';
+export * from './components/Avatar';
+export * from './components/AvatarGroup';
+export * from './components/Stepper';
 export * from './components/Tooltip';
 export * from './components/Breadcrumbs';
 export * from './components/Pagination';
