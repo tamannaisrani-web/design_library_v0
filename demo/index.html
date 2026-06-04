@@ -72,8 +72,8 @@
   --dcds-spring-green-300: #66a486;
   --dcds-spring-green-400: #3c8765;
   --dcds-spring-green-500: #126a43;
-  --dcds-spring-green-600: #0e5535;
-  --dcds-spring-green-700: #0b4028;
+  --dcds-spring-green-600: #0e8436;
+  --dcds-spring-green-700: #0b6328;
   --dcds-spring-green-800: #072b1b;
   --dcds-spring-green-900: #04150d;
   --dcds-cool-grey-0: #ffffff;
@@ -774,6 +774,103 @@
       .chip-row { display:flex; flex-wrap:wrap; gap:var(--gap-8); align-items:center; padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
       .badge-grid { display:flex; flex-wrap:wrap; gap:var(--gap-8); align-items:center; padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
       .tag-row { display:flex; flex-wrap:wrap; gap:var(--gap-8); align-items:center; padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+
+      /* ============================================================
+       * _BaseTabs — internal single-tab-item styles
+       * ============================================================ */
+      .dcds-BaseTabs { display:inline-flex; align-items:center; justify-content:flex-start; font-family:var(--font-family); background:transparent; border:none; cursor:pointer; position:relative; flex-shrink:0; outline:none; box-sizing:border-box; transition:background-color 120ms ease,border-color 120ms ease; -webkit-tap-highlight-color:transparent; }
+      .dcds-BaseTabs:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
+      .dcds-BaseTabs__content { display:flex; align-items:center; gap:var(--gap-8); pointer-events:none; }
+      .dcds-BaseTabs__icon { display:inline-flex; align-items:center; flex-shrink:0; width:16px; height:16px; transition:color 120ms ease; }
+      .dcds-BaseTabs__label { white-space:nowrap; line-height:normal; transition:color 120ms ease; }
+      .dcds-BaseTabs__badge { display:inline-flex; align-items:center; justify-content:center; height:16px; min-width:16px; padding:var(--gap-2) var(--gap-4); font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); line-height:1; white-space:nowrap; flex-shrink:0; }
+      .dcds-BaseTabs__badge--counter { border-radius:var(--rd-S); color:var(--color-text-invert); }
+      .dcds-BaseTabs__badge--tag { border-radius:var(--rd-Max); color:var(--color-text-invert); }
+
+      /* Borderless */
+      .dcds-BaseTabs--borderless { height:64px; padding:var(--gap-8); border-bottom:4px solid transparent; }
+      .dcds-BaseTabs--borderless .dcds-BaseTabs__label { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); }
+      .dcds-BaseTabs--borderless .dcds-BaseTabs__icon { color:var(--color-text-subdued); }
+      .dcds-BaseTabs--borderless .dcds-BaseTabs__badge { background-color:var(--color-fill-action); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--size-M .dcds-BaseTabs__label { font-size:var(--font-size-body); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--selected { border-bottom-color:var(--color-stroke-action); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--selected .dcds-BaseTabs__label { color:var(--color-text-action); font-weight:var(--font-weight-bold); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--selected .dcds-BaseTabs__icon { color:var(--color-text-action); }
+      .dcds-BaseTabs--borderless:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover .dcds-BaseTabs__label { color:var(--color-text-action); font-weight:var(--font-weight-bold); }
+      .dcds-BaseTabs--borderless:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover .dcds-BaseTabs__icon { color:var(--color-text-action); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--selected:not(.dcds-BaseTabs--disabled):hover { border-bottom-color:var(--color-stroke-success); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--selected:not(.dcds-BaseTabs--disabled):hover .dcds-BaseTabs__label { color:var(--color-text-success); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--selected:not(.dcds-BaseTabs--disabled):hover .dcds-BaseTabs__icon { color:var(--color-text-success); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--disabled { cursor:not-allowed; }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--disabled .dcds-BaseTabs__label { color:var(--color-text-disabled); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--disabled .dcds-BaseTabs__icon { color:var(--color-text-disabled); }
+      .dcds-BaseTabs--borderless.dcds-BaseTabs--disabled .dcds-BaseTabs__badge { background-color:var(--color-surface-disabled); }
+
+      /* Filled */
+      .dcds-BaseTabs--filled { padding:var(--gap-8) var(--gap-32); border-radius:var(--rd-S) var(--rd-S) 0 0; border:1px solid var(--color-stroke-focus-subtle); background:transparent; }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--size-S { height:32px; }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--size-M { height:48px; }
+      .dcds-BaseTabs--filled .dcds-BaseTabs__label { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--size-M .dcds-BaseTabs__label { font-size:var(--font-size-body); }
+      .dcds-BaseTabs--filled .dcds-BaseTabs__icon { color:var(--color-text-primary); }
+      .dcds-BaseTabs--filled .dcds-BaseTabs__badge { background-color:var(--color-fill-invert-info); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--selected { background-color:var(--color-fill-primary-9); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--selected .dcds-BaseTabs__label { color:var(--color-text-invert); font-weight:var(--font-weight-bold); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--selected .dcds-BaseTabs__icon { color:var(--color-text-invert); }
+      .dcds-BaseTabs--filled:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover { background-color:var(--color-fill-primary-1); }
+      .dcds-BaseTabs--filled:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover .dcds-BaseTabs__label { color:var(--color-text-primary); font-weight:var(--font-weight-bold); }
+      .dcds-BaseTabs--filled:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover .dcds-BaseTabs__icon { color:var(--color-text-primary); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--disabled { cursor:not-allowed; border-color:var(--color-stroke-disabled); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--disabled .dcds-BaseTabs__label { color:var(--color-text-disabled); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--disabled .dcds-BaseTabs__icon { color:var(--color-text-disabled); }
+      .dcds-BaseTabs--filled.dcds-BaseTabs--disabled .dcds-BaseTabs__badge { background-color:var(--color-surface-disabled); }
+
+      /* ============================================================
+       * Tabs — outer tablist container
+       * ============================================================ */
+      .dcds-Tabs { display:flex; align-items:center; position:relative; box-sizing:border-box; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; }
+      .dcds-Tabs::-webkit-scrollbar { display:none; }
+      .dcds-Tabs--borderless { gap:var(--gap-24); }
+      .dcds-Tabs--borderless.dcds-Tabs--fullwidth { width:100%; }
+      .dcds-Tabs--filled { gap:0; border-bottom:1px solid var(--color-stroke-focus-subtle); width:100%; }
+      .dcds-Tabs--filled.dcds-Tabs--fullwidth > .dcds-BaseTabs--filled { flex:1; justify-content:center; }
+
+      /* Tabs demo helpers */
+      .tabs-demo-row { display:flex; flex-direction:column; gap:var(--gap-16); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+
+      /* ============================================================
+       * Modal — overlay, dialog shell, and sub-component styles
+       * ============================================================ */
+      .dcds-Modal__overlay { position:fixed; inset:0; z-index:1000; background:var(--color-overlay-50); display:flex; align-items:center; justify-content:center; padding:var(--gap-24); }
+      .dcds-Modal__dialog { position:relative; background:var(--color-surface-1); border:1px solid var(--color-stroke-subdued); border-radius:var(--rd-S); box-shadow:var(--shadow-S); display:flex; flex-direction:column; max-height:calc(100vh - var(--gap-48)); width:100%; animation:dcds-modal-in 160ms ease-out; }
+      @keyframes dcds-modal-in { from { opacity:0; transform:translateY(-8px) scale(0.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+      .dcds-Modal__dialog--size-S { max-width:400px; }
+      .dcds-Modal__dialog--size-M { max-width:760px; }
+      .dcds-Modal__dialog--size-L { max-width:1024px; }
+      .dcds-Modal__dialog:focus { outline:none; }
+      .dcds-Modal__dialog:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-Modal__header { display:flex; align-items:center; justify-content:space-between; gap:var(--gap-16); padding:var(--gap-8) var(--gap-12); border-bottom:1px solid var(--color-stroke-subdued); flex-shrink:0; border-radius:var(--rd-S) var(--rd-S) 0 0; }
+      .dcds-Modal__header-left { display:flex; align-items:flex-start; gap:var(--gap-8); flex:1; min-width:0; }
+      .dcds-Modal__header-icon { display:flex; align-items:center; flex-shrink:0; color:var(--color-icon-subdued); height:var(--font-size-caption); margin-top:2px; }
+      .dcds-Modal__header-text { display:flex; flex-direction:column; min-width:0; }
+      .dcds-Modal__header-title { font-family:var(--font-family); font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; margin:0; }
+      .dcds-Modal__header-subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; margin:0; }
+      .dcds-Modal__header-end { display:flex; align-items:center; gap:var(--gap-4); flex-shrink:0; }
+      .dcds-Modal__header-badge { display:flex; align-items:center; }
+      .dcds-Modal__close-btn { display:flex; align-items:center; justify-content:center; width:40px; height:40px; flex-shrink:0; background:none; border:none; cursor:pointer; color:var(--color-icon-subdued); border-radius:var(--rd-S); transition:color 120ms ease,background-color 120ms ease; padding:0; }
+      .dcds-Modal__close-btn:hover { color:var(--color-icon-primary); background-color:var(--color-surface-3); }
+      .dcds-Modal__close-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-Modal__body { flex:1; overflow-y:auto; padding:var(--gap-12); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; min-height:0; }
+      .dcds-Modal__body--no-padding { padding:0; }
+      .dcds-Modal__body::-webkit-scrollbar { width:4px; }
+      .dcds-Modal__body::-webkit-scrollbar-track { background:transparent; }
+      .dcds-Modal__body::-webkit-scrollbar-thumb { background:var(--color-stroke-subdued); border-radius:var(--rd-Max); }
+      .dcds-Modal__footer { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); padding:var(--gap-12); border-top:1px solid var(--color-stroke-subdued); flex-shrink:0; border-radius:0 0 var(--rd-S) var(--rd-S); }
+      .dcds-Modal__footer-link { margin-right:auto; display:flex; align-items:center; }
+      .dcds-Modal__footer-actions { display:flex; align-items:center; gap:var(--gap-12); }
+
+      /* Modal demo helpers */
+      .modal-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
     </style>
   </head>
   <body>
@@ -2067,6 +2164,704 @@
       }
 
       /* ============================================================
+       * _BaseTabs — internal single-tab-item button
+       * ============================================================ */
+      /*
+       * _BaseTabs — internal single-tab button.
+       *
+       * Props:
+       *   leading  : { icon: ReactNode } — Leading slot (16×16). Icon sourced from
+       *              icons/svg/linear/tick-circle.svg (Borderless) or
+       *              icons/svg/bold/tick-circle.svg (Filled) via icons/src/ React wrappers.
+       *   trailing : { type: 'counter'|'tag', value: string|number } — Trailing badge slot.
+       *              'counter' = numeric (e.g. 33), 'tag' = keyword (e.g. 'new').
+       *
+       * showLeading / showTrailing (Figma prop names) map to: leading !== undefined / trailing !== undefined.
+       */
+      const _BaseTabs = React.memo(function _BaseTabs({ label, isSelected = false, isDisabled = false, tabStyle = 'Borderless', size = 'M', leading, trailing, onClick, onKeyDown, id, 'aria-controls': ariaControls, tabIndex = -1, dataTestId }) {
+        const isFilled = tabStyle === 'Filled';
+        const cls = [
+          'dcds-BaseTabs',
+          isFilled ? 'dcds-BaseTabs--filled' : 'dcds-BaseTabs--borderless',
+          `dcds-BaseTabs--size-${size}`,
+          isSelected  ? 'dcds-BaseTabs--selected'  : '',
+          isDisabled  ? 'dcds-BaseTabs--disabled'  : '',
+        ].filter(Boolean).join(' ');
+        return (
+          <button role="tab" type="button" id={id} aria-selected={isSelected} aria-controls={ariaControls} aria-disabled={isDisabled} disabled={isDisabled} tabIndex={tabIndex} className={cls} onClick={onClick} onKeyDown={onKeyDown} data-testid={dataTestId}>
+            <span className="dcds-BaseTabs__content">
+              {/* Leading slot — icon from icons/svg/{linear,bold}/tick-circle.svg */}
+              {leading !== undefined && <span className="dcds-BaseTabs__icon" aria-hidden="true">{leading.icon}</span>}
+              <span className="dcds-BaseTabs__label">{label}</span>
+              {/* Trailing slot — counter (numeric) or tag (text keyword) */}
+              {trailing !== undefined && <span className={`dcds-BaseTabs__badge dcds-BaseTabs__badge--${trailing.type}`}>{trailing.value}</span>}
+            </span>
+          </button>
+        );
+      });
+
+      /* ============================================================
+       * Tabs — public tablist component
+       * ============================================================ */
+      function Tabs({ tabs, activeIndex, defaultActiveIndex = 0, isFullwidth = false, tabStyle = 'Borderless', size = 'M', onChange, className, id, dataTestId }) {
+        const instanceId = React.useId();
+        const isControlled = activeIndex !== undefined;
+        const [internalActive, setInternalActive] = useState(defaultActiveIndex);
+        const currentActive = isControlled ? activeIndex : internalActive;
+        const enabledIndices = tabs.map((tab, i) => (tab.disabled ? -1 : i)).filter((i) => i !== -1);
+
+        const handleTabClick = React.useCallback((index, event) => {
+          if (!isControlled) setInternalActive(index);
+          onChange && onChange(index, event);
+        }, [isControlled, onChange]);
+
+        const handleKeyDown = React.useCallback((event) => {
+          const { key } = event;
+          if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
+          event.preventDefault();
+          const currentPos = enabledIndices.indexOf(currentActive);
+          let nextPos = currentPos;
+          if (key === 'ArrowRight' || key === 'ArrowDown') nextPos = (currentPos + 1) % enabledIndices.length;
+          else if (key === 'ArrowLeft' || key === 'ArrowUp') nextPos = (currentPos - 1 + enabledIndices.length) % enabledIndices.length;
+          else if (key === 'Home') nextPos = 0;
+          else if (key === 'End') nextPos = enabledIndices.length - 1;
+          const nextIndex = enabledIndices[nextPos];
+          if (!isControlled) setInternalActive(nextIndex);
+          onChange && onChange(nextIndex, event);
+          document.getElementById(`dcds-tab-${instanceId}-${nextIndex}`) && document.getElementById(`dcds-tab-${instanceId}-${nextIndex}`).focus();
+        }, [enabledIndices, currentActive, isControlled, onChange, instanceId]);
+
+        const containerClass = ['dcds-Tabs', `dcds-Tabs--${tabStyle.toLowerCase()}`, isFullwidth ? 'dcds-Tabs--fullwidth' : '', className].filter(Boolean).join(' ');
+
+        return (
+          <div role="tablist" id={id} className={containerClass} onKeyDown={handleKeyDown} data-testid={dataTestId}>
+            {tabs.map((tab, index) => (
+              <_BaseTabs
+                key={`${tab.label}-${index}`}
+                label={tab.label}
+                isSelected={currentActive === index}
+                isDisabled={tab.disabled}
+                tabStyle={tabStyle}
+                size={size}
+                leading={tab.leading}
+                trailing={tab.trailing}
+                onClick={(e) => handleTabClick(index, e)}
+                id={`dcds-tab-${instanceId}-${index}`}
+                aria-controls={`dcds-tabpanel-${instanceId}-${index}`}
+                tabIndex={currentActive === index ? 0 : -1}
+                dataTestId={tab.dataTestId}
+              />
+            ))}
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * TabsSection — self-contained playground section
+       * ============================================================ */
+      function TabsSection() {
+        const [tabStyle, setTabStyle]     = useState('Borderless');
+        const [size, setSize]             = useState('M');
+        const [isFullwidth, setFullwidth] = useState(false);
+        const [activeIdx, setActiveIdx]   = useState(0);
+        const [tabLog, pushTabLog]        = useEventLog();
+
+        /* ── Per-tab config (Leading / Trailing / Disabled editable individually) ── */
+        const initConfigs = () => [
+          { label: 'Overview',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Documents', disabled: false, showLeading: false, showTrailing: false, trailingType: 'counter', trailingValue: '3'   },
+          { label: 'Activity',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Settings',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+        ];
+        const [tabConfigs, setTabConfigs] = useState(initConfigs);
+        const [editingIdx, setEditingIdx] = useState(0);
+        const updateTab = (idx, key, val) =>
+          setTabConfigs(prev => prev.map((t, i) => i === idx ? { ...t, [key]: val } : t));
+
+        /* Icon: linear/tick-circle.svg (Borderless) or bold/tick-circle.svg (Filled) — inlined with currentColor */
+        const isFilled = tabStyle === 'Filled';
+        const tickIconBold   = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg>;
+        const tickIconLinear = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+        const tickIcon = isFilled ? tickIconBold : tickIconLinear;
+
+        /* Build tabs array from per-tab config */
+        const tabs = tabConfigs.map(cfg => ({
+          label:    cfg.label,
+          leading:  cfg.showLeading  ? { icon: tickIcon }                                          : undefined,
+          trailing: cfg.showTrailing ? { type: cfg.trailingType, value: cfg.trailingValue }        : undefined,
+          disabled: cfg.disabled || undefined,
+        }));
+
+        const editing = tabConfigs[editingIdx];
+
+        return (
+          <>
+            <aside className="panel">
+              <h1>Props</h1>
+              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
+
+              {/* ── Group-level props ── */}
+              <h2>Tabs</h2>
+              <CtrlSelect label="tabStyle"    value={tabStyle}    onChange={setTabStyle}    options={['Borderless', 'Filled']} />
+              <CtrlSelect label="size"        value={size}        onChange={setSize}        options={['S', 'M']} />
+              <CtrlToggle label="isFullwidth" checked={isFullwidth} onChange={setFullwidth} />
+
+              {/* ── Per-tab editor ── */}
+              <div style={{ marginTop: 'var(--gap-16)', borderTop: '1px solid var(--color-stroke-focus-subtle)', paddingTop: 'var(--gap-12)' }}>
+                <CtrlSelect
+                  label="edit tab"
+                  value={tabConfigs[editingIdx].label}
+                  onChange={v => setEditingIdx(tabConfigs.findIndex(t => t.label === v))}
+                  options={tabConfigs.map(t => t.label)}
+                />
+              </div>
+
+              {/* Per-tab props — isSelected (radio), Leading, Trailing, disabled */}
+              <div style={{ marginTop: 'var(--gap-8)' }}>
+                {/* isSelected — radio: setting true moves activeIdx here; only 1 can be true at a time */}
+                <CtrlToggle
+                  label="isSelected"
+                  checked={activeIdx === editingIdx}
+                  onChange={on => { if (on) setActiveIdx(editingIdx); }}
+                />
+                <p style={{ fontSize: 11, color: 'var(--color-text-subdued)', margin: '-4px 0 8px', paddingLeft: 2 }}>
+                  radio — only one tab selected at a time
+                </p>
+                <CtrlText   label="label"        value={editing.label}          onChange={v => updateTab(editingIdx, 'label', v)} />
+                <CtrlToggle label="disabled"     checked={editing.disabled}     onChange={v => updateTab(editingIdx, 'disabled', v)} />
+                <CtrlToggle label="showLeading"  checked={editing.showLeading}  onChange={v => updateTab(editingIdx, 'showLeading', v)} />
+                <CtrlToggle label="showTrailing" checked={editing.showTrailing} onChange={v => updateTab(editingIdx, 'showTrailing', v)} />
+                {editing.showTrailing && <>
+                  <CtrlSelect label="trailing.type"  value={editing.trailingType}  onChange={v => { updateTab(editingIdx, 'trailingType', v); updateTab(editingIdx, 'trailingValue', v === 'tag' ? 'new' : '3'); }}  options={['counter', 'tag']} />
+                  <CtrlText   label="trailing.value" value={String(editing.trailingValue)} onChange={v => updateTab(editingIdx, 'trailingValue', v)} />
+                </>}
+              </div>
+            </aside>
+            <main className="stage">
+              <section>
+                <h2>Tabs — Interactive Playground</h2>
+                <p className="stage-note">
+                  Select any tab in the left panel to edit its <strong>Leading</strong>, <strong>Trailing</strong>, and <strong>disabled</strong> props independently.
+                  {isFilled && ' Filled forces isFullwidth on.'}
+                </p>
+                <div className="preview">
+                  <Tabs
+                    tabs={tabs}
+                    tabStyle={tabStyle}
+                    size={size}
+                    isFullwidth={isFilled ? true : isFullwidth}
+                    activeIndex={activeIdx}
+                    onChange={(i) => { setActiveIdx(i); pushTabLog(`onChange · index=${i} · label=${tabConfigs[i].label}`); }}
+                  />
+                </div>
+                <div className="events">{tabLog.length === 0 ? '— no events yet —' : tabLog.join('   ')}</div>
+              </section>
+
+              <section>
+                <h2>Tabs — Borderless, Size M</h2>
+                <p className="stage-note">Default style. 64 px height, 4 px green bottom border on the active tab.</p>
+                <div className="tabs-demo-row">
+                  <Tabs
+                    tabs={[{ label: 'All loans' }, { label: 'Active' }, { label: 'Closed', disabled: true }]}
+                    tabStyle="Borderless"
+                    size="M"
+                  />
+                </div>
+              </section>
+
+              <section>
+                <h2>Tabs — Borderless, Size S</h2>
+                <p className="stage-note">Compact style — 14 px label text.</p>
+                <div className="tabs-demo-row">
+                  <Tabs
+                    tabs={[
+                      { label: 'Overview' },
+                      { label: 'Documents', trailing: { type: 'tag', value: '5' } },
+                      { label: 'Activity' },
+                    ]}
+                    tabStyle="Borderless"
+                    size="S"
+                  />
+                </div>
+              </section>
+
+              <section>
+                <h2>Tabs — Filled, Full-width, Size M</h2>
+                <p className="stage-note">Navy background on the active tab. Requires isFullwidth.</p>
+                <div className="tabs-demo-row">
+                  <Tabs
+                    tabs={[
+                      { label: 'Overview' },
+                      { label: 'Documents', trailing: { type: 'counter', value: 3 } },
+                      { label: 'Activity' },
+                    ]}
+                    tabStyle="Filled"
+                    size="M"
+                    isFullwidth
+                  />
+                </div>
+              </section>
+
+              <section>
+                <h2>Tabs — Filled, Full-width, Size S</h2>
+                <p className="stage-note">Compact filled tabs — 32 px height, 14 px label text.</p>
+                <div className="tabs-demo-row">
+                  <Tabs
+                    tabs={[{ label: 'Overview' }, { label: 'Documents' }, { label: 'Activity' }]}
+                    tabStyle="Filled"
+                    size="S"
+                    isFullwidth
+                  />
+                </div>
+              </section>
+
+              <section>
+                <h2>Tabs — With Leading Icons</h2>
+                <p className="stage-note">
+                  Icons sourced from <code>icons/svg/linear/tick-circle.svg</code> (Borderless) and
+                  <code>icons/svg/bold/tick-circle.svg</code> (Filled). Inlined with{' '}
+                  <code>currentColor</code> so colour updates per state automatically.
+                </p>
+                {/* Borderless — linear/tick-circle.svg */}
+                <div className="tabs-demo-row">
+                  <Tabs
+                    tabs={[
+                      { label: 'Overview',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> } },
+                      { label: 'Documents', leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> }, trailing: { type: 'tag', value: 'new' } },
+                      { label: 'Activity',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> }, disabled: true },
+                    ]}
+                    tabStyle="Borderless"
+                    size="M"
+                  />
+                </div>
+                {/* Filled — bold/tick-circle.svg */}
+                <div className="tabs-demo-row" style={{ marginTop: 'var(--gap-8)' }}>
+                  <Tabs
+                    tabs={[
+                      { label: 'Overview',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> } },
+                      { label: 'Documents', leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> }, trailing: { type: 'counter', value: 33 } },
+                      { label: 'Activity',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> } },
+                    ]}
+                    tabStyle="Filled"
+                    size="M"
+                    isFullwidth
+                  />
+                </div>
+              </section>
+            </main>
+          </>
+        );
+      }
+
+      /* ============================================================
+       * CloseIcon — inline SVG mirrored from icons/svg/linear/close.svg
+       * ============================================================ */
+      const CloseIcon = ({ size = 20 }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M5.00098 5L19 18.9991" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M4.99996 18.9991L18.999 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+
+      /* ============================================================
+       * Modal, ModalHeader, ModalBody, ModalFooter
+       * Mirrors src/components/Modal/Modal.tsx
+       * ============================================================ */
+      const ModalContext = React.createContext(null);
+
+      function Modal({ isOpen, size = 'M', onClose, closeOnBackdrop = true, closeOnEscape = true, children, id, dataTestId, className }) {
+        const instanceId = useId();
+        const headerId = `dcds-modal-header-${instanceId}`;
+        const bodyId   = `dcds-modal-body-${instanceId}`;
+        const dialogRef = useRef(null);
+
+        /* Prevent body scroll while open */
+        useEffect(() => {
+          if (!isOpen) return;
+          const prev = document.body.style.overflow;
+          document.body.style.overflow = 'hidden';
+          return () => { document.body.style.overflow = prev; };
+        }, [isOpen]);
+
+        /* Focus trap + Escape key */
+        useEffect(() => {
+          if (!isOpen) return;
+          const dialogEl = dialogRef.current;
+          if (!dialogEl) return;
+
+          const getFocusable = () => Array.from(
+            dialogEl.querySelectorAll(
+              'button:not(:disabled),[href],input:not(:disabled),select:not(:disabled),' +
+              'textarea:not(:disabled),[tabindex]:not([tabindex="-1"])'
+            )
+          );
+
+          const prevFocused = document.activeElement;
+          const focusable = getFocusable();
+          if (focusable.length > 0) focusable[0].focus();
+          else dialogEl.focus();
+
+          const handleKeyDown = (e) => {
+            if (e.key === 'Escape' && closeOnEscape) { onClose?.(); return; }
+            if (e.key === 'Tab') {
+              const els = getFocusable();
+              if (els.length === 0) { e.preventDefault(); return; }
+              const first = els[0];
+              const last = els[els.length - 1];
+              if (e.shiftKey) {
+                if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+              } else {
+                if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+              }
+            }
+          };
+
+          document.addEventListener('keydown', handleKeyDown);
+          return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            prevFocused?.focus();
+          };
+        }, [isOpen, closeOnEscape, onClose]);
+
+        if (!isOpen) return null;
+
+        const dialogClass = [
+          'dcds-Modal__dialog',
+          `dcds-Modal__dialog--size-${size}`,
+          className,
+        ].filter(Boolean).join(' ');
+
+        const handleOverlayClick = (e) => {
+          if (closeOnBackdrop && e.target === e.currentTarget) onClose?.();
+        };
+
+        return ReactDOM.createPortal(
+          <ModalContext.Provider value={{ headerId, bodyId, onClose }}>
+            <div className="dcds-Modal__overlay" onClick={handleOverlayClick}>
+              <div
+                ref={dialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={headerId}
+                aria-describedby={bodyId}
+                id={id}
+                data-testid={dataTestId}
+                className={dialogClass}
+                tabIndex={-1}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {children}
+              </div>
+            </div>
+          </ModalContext.Provider>,
+          document.body
+        );
+      }
+
+      function ModalHeader({ children, icon, subtitle, badge, onClose: onCloseProp, id: idProp, className }) {
+        const { headerId, onClose: ctxClose } = React.useContext(ModalContext);
+        const closeHandler = onCloseProp ?? ctxClose;
+        return (
+          <div className={['dcds-Modal__header', className].filter(Boolean).join(' ')}>
+            <div className="dcds-Modal__header-left">
+              {icon && <span className="dcds-Modal__header-icon">{icon}</span>}
+              <div className="dcds-Modal__header-text">
+                <h2 id={idProp ?? headerId} className="dcds-Modal__header-title">{children}</h2>
+                {subtitle && <p className="dcds-Modal__header-subtitle">{subtitle}</p>}
+              </div>
+            </div>
+            <div className="dcds-Modal__header-end">
+              {badge && <span className="dcds-Modal__header-badge">{badge}</span>}
+              {closeHandler && (
+                <button type="button" className="dcds-Modal__close-btn" aria-label="Close modal" onClick={closeHandler}>
+                  <CloseIcon size={20} />
+                </button>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      function ModalBody({ children, padding = true, id: idProp, className }) {
+        const { bodyId } = React.useContext(ModalContext);
+        return (
+          <div id={idProp ?? bodyId} className={['dcds-Modal__body', !padding && 'dcds-Modal__body--no-padding', className].filter(Boolean).join(' ')}>
+            {children}
+          </div>
+        );
+      }
+
+      function ModalFooter({ children, link, className }) {
+        return (
+          <div className={['dcds-Modal__footer', className].filter(Boolean).join(' ')}>
+            {link && <span className="dcds-Modal__footer-link">{link}</span>}
+            <div className="dcds-Modal__footer-actions">{children}</div>
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * ModalSection — self-contained Modal playground
+       * ============================================================ */
+      function ModalSection() {
+        const [size,             setSize]             = useState('M');
+        const [closeOnBackdrop,  setCloseOnBackdrop]  = useState(true);
+        const [closeOnEscape,    setCloseOnEscape]    = useState(true);
+        const [titleText,        setTitleText]        = useState('Modal title');
+        /* ModalHeader extras */
+        const [showIcon,         setShowIcon]         = useState(false);
+        const [subtitleText,     setSubtitleText]     = useState('Subtitle goes here');
+        const [showSubtitle,     setShowSubtitle]     = useState(false);
+        const [showBadge,        setShowBadge]        = useState(false);
+        const [badgeText,        setBadgeText]        = useState('Status');
+        const [badgeState,       setBadgeState]       = useState('neutral');
+        const [badgeEmphasis,    setBadgeEmphasis]    = useState('subtle');
+        /* ModalBody */
+        const [bodyText,         setBodyText]         = useState(
+          'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
+        );
+        const [bodyPadding,      setBodyPadding]      = useState(true);
+        /* ModalFooter */
+        const [showLink,         setShowLink]         = useState(false);
+        const [linkText,         setLinkText]         = useState('Learn more');
+        const [playgroundOpen,   setPlaygroundOpen]   = useState(false);
+
+        /* Variant modals (All Variants section) */
+        const [sOpen, setSOpen] = useState(false);
+        const [mOpen, setMOpen] = useState(false);
+        const [lOpen, setLOpen] = useState(false);
+
+        /* Destructive confirmation */
+        const [destructiveOpen, setDestructiveOpen] = useState(false);
+        const [deleteConfirmed, setDeleteConfirmed] = useState(false);
+
+        /* Short form */
+        const [formOpen, setFormOpen] = useState(false);
+
+        const [modalLog, pushModalLog] = useEventLog();
+
+        return (
+          <>
+            <aside className="panel">
+              <h1>Props</h1>
+              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
+                Adjust and see live on the right.
+              </p>
+              <h2>Modal</h2>
+              <CtrlSelect label="size"            value={size}           onChange={setSize}           options={['S', 'M', 'L']} />
+              <CtrlToggle label="closeOnBackdrop" checked={closeOnBackdrop} onChange={setCloseOnBackdrop} />
+              <CtrlToggle label="closeOnEscape"   checked={closeOnEscape}   onChange={setCloseOnEscape}   />
+
+              <h2>ModalHeader</h2>
+              <CtrlText   label="title"           value={titleText}        onChange={setTitleText}        />
+              <CtrlToggle label="showIcon"         checked={showIcon}       onChange={setShowIcon}         />
+              <CtrlToggle label="showSubtitle"     checked={showSubtitle}   onChange={setShowSubtitle}     />
+              {showSubtitle && (
+                <CtrlText label="subtitle"         value={subtitleText}     onChange={setSubtitleText}     />
+              )}
+              <CtrlToggle label="showBadge"        checked={showBadge}      onChange={setShowBadge}        />
+              {showBadge && (
+                <>
+                  <CtrlText   label="badge"        value={badgeText}        onChange={setBadgeText}        />
+                  <CtrlSelect label="badgeState"   value={badgeState}       onChange={setBadgeState}       options={['neutral','info','warning','error','success']} />
+                  <CtrlSelect label="badgeEmphasis" value={badgeEmphasis}   onChange={setBadgeEmphasis}    options={['subtle','intense']} />
+                </>
+              )}
+
+              <h2>ModalBody</h2>
+              <CtrlText   label="body"             value={bodyText}         onChange={setBodyText}         />
+              <CtrlToggle label="padding"          checked={bodyPadding}    onChange={setBodyPadding}      />
+
+              <h2>ModalFooter</h2>
+              <CtrlToggle label="showLink"         checked={showLink}       onChange={setShowLink}         />
+              {showLink && (
+                <CtrlText label="link"             value={linkText}         onChange={setLinkText}         />
+              )}
+            </aside>
+
+            <main className="stage">
+              {/* Playground */}
+              <section>
+                <h2>Modal — Interactive Playground</h2>
+                <p className="stage-note">
+                  Configure props in the left panel. Click <strong>Open modal</strong> to preview.
+                </p>
+                <div className="preview">
+                  <Button variant="Primary" color="Primary" size="M"
+                    onClick={() => { setPlaygroundOpen(true); pushModalLog('onOpen'); }}>
+                    Open modal
+                  </Button>
+                </div>
+                <div className="events">{modalLog.length === 0 ? '— no events yet —' : modalLog.join('\n')}</div>
+                <Modal
+                  isOpen={playgroundOpen}
+                  size={size}
+                  onClose={() => { setPlaygroundOpen(false); pushModalLog('onClose'); }}
+                  closeOnBackdrop={closeOnBackdrop}
+                  closeOnEscape={closeOnEscape}
+                >
+                  <ModalHeader
+                    icon={showIcon ? <InfoCircleIcon /> : undefined}
+                    subtitle={showSubtitle ? subtitleText : undefined}
+                    badge={showBadge ? (
+                      <Badge state={badgeState} emphasis={badgeEmphasis} showIcon={false}>{badgeText}</Badge>
+                    ) : undefined}
+                  >
+                    {titleText}
+                  </ModalHeader>
+                  <ModalBody padding={bodyPadding}>
+                    {bodyPadding ? bodyText : (
+                      <div style={{ background:'var(--color-surface-3)', height:'120px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--color-text-subdued)', fontSize:'var(--font-size-label)', fontFamily:'var(--font-family)' }}>
+                        Full-bleed slot (padding off)
+                      </div>
+                    )}
+                  </ModalBody>
+                  <ModalFooter
+                    link={showLink ? (
+                      <LinkButton onClick={(e) => { e.preventDefault(); pushModalLog('link clicked'); }} showIcon={false}>{linkText}</LinkButton>
+                    ) : undefined}
+                  >
+                    <Button variant="Secondary" color="Primary" size="M"
+                      onClick={() => { setPlaygroundOpen(false); pushModalLog('Cancel clicked'); }}>
+                      Cancel
+                    </Button>
+                    <Button variant="Primary" color="Primary" size="M"
+                      onClick={() => { setPlaygroundOpen(false); pushModalLog('Confirm clicked'); }}>
+                      Confirm
+                    </Button>
+                  </ModalFooter>
+                </Modal>
+              </section>
+
+              {/* All Sizes */}
+              <section>
+                <h2>Modal — All Sizes</h2>
+                <p className="stage-note">
+                  S ≈ 400 px · M ≈ 560 px · L ≈ 720 px. Open each to compare.
+                </p>
+                <div className="modal-variant-row">
+                  <Button variant="Secondary" color="Primary" size="M" onClick={() => setSOpen(true)}>
+                    Size S
+                  </Button>
+                  <Button variant="Secondary" color="Primary" size="M" onClick={() => setMOpen(true)}>
+                    Size M
+                  </Button>
+                  <Button variant="Secondary" color="Primary" size="M" onClick={() => setLOpen(true)}>
+                    Size L
+                  </Button>
+                </div>
+
+                <Modal isOpen={sOpen} size="S" onClose={() => setSOpen(false)}>
+                  <ModalHeader>Small modal (S)</ModalHeader>
+                  <ModalBody>Use S for short confirmations and simple prompts with at most 2 fields (~400 px wide).</ModalBody>
+                  <ModalFooter>
+                    <Button variant="Secondary" size="M" onClick={() => setSOpen(false)}>Cancel</Button>
+                    <Button variant="Primary"   size="M" onClick={() => setSOpen(false)}>Confirm</Button>
+                  </ModalFooter>
+                </Modal>
+
+                <Modal isOpen={mOpen} size="M" onClose={() => setMOpen(false)}>
+                  <ModalHeader>Medium modal (M)</ModalHeader>
+                  <ModalBody>Use M for standard forms and detail views with 3–5 fields (~560 px wide).</ModalBody>
+                  <ModalFooter>
+                    <Button variant="Secondary" size="M" onClick={() => setMOpen(false)}>Cancel</Button>
+                    <Button variant="Primary"   size="M" onClick={() => setMOpen(false)}>Confirm</Button>
+                  </ModalFooter>
+                </Modal>
+
+                <Modal isOpen={lOpen} size="L" onClose={() => setLOpen(false)}>
+                  <ModalHeader>Large modal (L)</ModalHeader>
+                  <ModalBody>Use L for complex forms, data-heavy content, or more than 5 fields/tables (~720 px wide).</ModalBody>
+                  <ModalFooter>
+                    <Button variant="Secondary" size="M" onClick={() => setLOpen(false)}>Cancel</Button>
+                    <Button variant="Primary"   size="M" onClick={() => setLOpen(false)}>Confirm</Button>
+                  </ModalFooter>
+                </Modal>
+              </section>
+
+              {/* Destructive confirmation */}
+              <section>
+                <h2>Modal — Destructive Confirmation (S)</h2>
+                <p className="stage-note">
+                  Error button on the right. Secondary cancel on the left. <code>closeOnBackdrop=false</code> prevents accidental dismissal.
+                </p>
+                <div className="modal-variant-row">
+                  <Button variant="Secondary" color="Error" size="M" onClick={() => { setDestructiveOpen(true); setDeleteConfirmed(false); }}>
+                    Delete loan record
+                  </Button>
+                  {deleteConfirmed && (
+                    <span style={{ fontSize: 'var(--font-size-label)', color: 'var(--color-text-error)' }}>
+                      ✓ Deletion confirmed (demo only)
+                    </span>
+                  )}
+                </div>
+                <Modal isOpen={destructiveOpen} size="S" onClose={() => setDestructiveOpen(false)} closeOnBackdrop={false}>
+                  <ModalHeader>Delete loan record?</ModalHeader>
+                  <ModalBody>
+                    This will permanently delete Loan #1042 and all associated data.
+                    This action cannot be undone.
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button variant="Secondary" color="Primary" size="M" onClick={() => setDestructiveOpen(false)}>
+                      Cancel
+                    </Button>
+                    <Button variant="Primary" color="Error" size="M"
+                      onClick={() => { setDestructiveOpen(false); setDeleteConfirmed(true); }}>
+                      Delete
+                    </Button>
+                  </ModalFooter>
+                </Modal>
+              </section>
+
+              {/* Short form */}
+              <section>
+                <h2>Modal — Short Form (M)</h2>
+                <p className="stage-note">
+                  Standard form modal with a text field inside the body.
+                </p>
+                <div className="modal-variant-row">
+                  <Button variant="Primary" color="Primary" size="M" onClick={() => setFormOpen(true)}>
+                    Add new customer
+                  </Button>
+                </div>
+                <Modal isOpen={formOpen} size="M" onClose={() => setFormOpen(false)}>
+                  <ModalHeader>Add new customer</ModalHeader>
+                  <ModalBody>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-16)' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-4)' }}>
+                        <label style={{ fontSize: 'var(--font-size-label)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)', fontFamily: 'var(--font-family)' }}>
+                          Full name
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Priya Sharma"
+                          style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', padding: 'var(--gap-12) var(--gap-16)', border: '1px solid var(--color-stroke-neutral)', borderRadius: 'var(--rd-S)', background: 'var(--color-surface-1)', color: 'var(--color-text-primary)', outline: 'none' }}
+                        />
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-4)' }}>
+                        <label style={{ fontSize: 'var(--font-size-label)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-text-primary)', fontFamily: 'var(--font-family)' }}>
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          placeholder="e.g. priya@example.com"
+                          style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', padding: 'var(--gap-12) var(--gap-16)', border: '1px solid var(--color-stroke-neutral)', borderRadius: 'var(--rd-S)', background: 'var(--color-surface-1)', color: 'var(--color-text-primary)', outline: 'none' }}
+                        />
+                      </div>
+                    </div>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button variant="Secondary" size="M" onClick={() => setFormOpen(false)}>Cancel</Button>
+                    <Button variant="Primary"   size="M" onClick={() => setFormOpen(false)}>Add customer</Button>
+                  </ModalFooter>
+                </Modal>
+              </section>
+            </main>
+          </>
+        );
+      }
+
+      /* ============================================================
        * The full playground
        * ============================================================ */
       function Playground() {
@@ -2088,6 +2883,8 @@
           { id: 'chip',           label: 'Chip'           },
           { id: 'badge',          label: 'Badge'          },
           { id: 'tag',            label: 'Tag'            },
+          { id: 'tabs',           label: 'Tabs'           },
+          { id: 'modal',          label: 'Modal'          },
         ];
 
         /* --- Button controls --- */
@@ -2247,15 +3044,17 @@
               </ul>
             </nav>
 
-            {/* Self-contained section components for Chip / Badge / Tag */}
+            {/* Self-contained section components for Chip / Badge / Tag / Tabs */}
             {activeComponent === 'chip'  && <ChipSection />}
             {activeComponent === 'badge' && <BadgeSection />}
             {activeComponent === 'tag'   && <TagSection />}
+            {activeComponent === 'tabs'  && <TabsSection />}
+            {activeComponent === 'modal' && <ModalSection />}
 
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && <>
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'modal' && <>
 
             <aside className="panel">
               <h1>Props</h1>
