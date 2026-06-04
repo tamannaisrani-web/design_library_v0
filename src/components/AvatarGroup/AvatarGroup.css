@@ -1,0 +1,134 @@
+/* AvatarGroup — token-driven styles. Figma node 645:9512 / variant frame 1671:9406.
+ * Never override background, radius, or font via className.
+ * Use className only for layout (margin / grid placement). */
+
+/* ===========================================================
+ * Wrapper — provides the positioning context for _BaseMenu
+ * =========================================================== */
+
+.dcds-AvatarGroup__wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* ===========================================================
+ * Base — button reset + flex row
+ * =========================================================== */
+
+.dcds-AvatarGroup {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: var(--gap-4) var(--gap-8);
+  gap: var(--gap-8);
+  border-radius: var(--rd-S);
+  border: none;
+  background-color: var(--color-surface-1);
+  cursor: pointer;
+  font-family: var(--font-family);
+  text-align: left;
+  transition: background-color 120ms ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dcds-AvatarGroup:hover,
+.dcds-AvatarGroup:focus-visible {
+  background-color: var(--color-fill-secondary-0);
+}
+
+.dcds-AvatarGroup:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* ===========================================================
+ * Avatar circle — 32 px Initial Circle, Sky Blue-100 bg
+ * =========================================================== */
+
+.dcds-AvatarGroup__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--gap-32);
+  height: var(--gap-32);
+  border-radius: var(--rd-Max);
+  background-color: var(--color-fill-secondary-2);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.dcds-AvatarGroup__initials {
+  font-size: var(--font-size-body-small); /* 12px */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ===========================================================
+ * Text block — name + designation
+ * Only rendered when displayName=true
+ * =========================================================== */
+
+.dcds-AvatarGroup__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 152px;
+  min-width: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  color: var(--color-text-primary);
+}
+
+.dcds-AvatarGroup__designation {
+  font-size: var(--font-size-body-small); /* 12px */
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-primary);
+}
+
+.dcds-AvatarGroup__name {
+  font-size: var(--font-size-body); /* 16px */
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-primary);
+}
+
+/* ===========================================================
+ * Expanded state — Bold text, arrow rotates to ↑
+ * =========================================================== */
+
+.dcds-AvatarGroup--expanded .dcds-AvatarGroup__designation {
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-AvatarGroup--expanded .dcds-AvatarGroup__name {
+  font-weight: var(--font-weight-bold);
+}
+
+/* ===========================================================
+ * Dropdown arrow icon — 24 px, rotates 180° when expanded
+ * =========================================================== */
+
+.dcds-AvatarGroup__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--gap-24);
+  height: var(--gap-24);
+  color: var(--color-icon-primary);
+  transition: transform 200ms ease;
+}
+
+.dcds-AvatarGroup--expanded .dcds-AvatarGroup__arrow {
+  transform: rotate(180deg);
+}
