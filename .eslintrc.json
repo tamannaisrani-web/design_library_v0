@@ -33,5 +33,5 @@
   "settings": {
     "react": { "version": "detect" }
   },
-  "ignorePatterns": ["node_modules", "dist", "demo"]
+  "ignorePatterns": ["node_modules", "dist", "demo", "icons"]
 }
