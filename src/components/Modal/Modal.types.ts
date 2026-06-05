@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { BaseComponentProps } from '../shared/types';
+import type { BaseComponentProps, IconComponent } from '../shared/types';
 
 /** Size variant matching Figma Property1: S | M | L */
 export type ModalSize = 'S' | 'M' | 'L';
@@ -140,10 +140,16 @@ export interface ModalHeaderProps {
 
   /**
    * Optional leading icon placed before the title block.
-   * Any icon component or element; sized and coloured by the header layout.
-   * Slot — any node can be substituted.
+   * Pass the component class from `icons/src/linear/` — rendered at 18 px internally
+   * to align with the H3-Bold title (`font-size-caption` = 18 px).
+   *
+   * @example
+   * ```tsx
+   * import { InfoCircleLinear } from '../../../icons/src/linear/InfoCircleLinear';
+   * <ModalHeader icon={InfoCircleLinear}>Title</ModalHeader>
+   * ```
    */
-  icon?: ReactNode;
+  icon?: IconComponent;
 
   /**
    * Optional subtitle rendered below the title in a smaller, subdued style.

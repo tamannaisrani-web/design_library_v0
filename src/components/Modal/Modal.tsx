@@ -218,7 +218,7 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({
   return (
     <div className={['dcds-Modal__header', className].filter(Boolean).join(' ')}>
       <div className="dcds-Modal__header-left">
-        {icon && <span className="dcds-Modal__header-icon">{icon}</span>}
+        {icon && <span className="dcds-Modal__header-icon"><icon size={18} /></span>}
         <div className="dcds-Modal__header-text">
           <h2 id={idProp ?? headerId} className="dcds-Modal__header-title">
             {children}

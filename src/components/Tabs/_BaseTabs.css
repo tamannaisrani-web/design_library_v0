@@ -1,0 +1,259 @@
+/* ==========================================================================
+   _BaseTabs — internal single-tab-item styles.
+   Token reference: src/theme/tokens.css
+   Do NOT import or reference these class names outside the Tabs component.
+   ========================================================================== */
+
+/* ── Reset / base ── */
+.dcds-BaseTabs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: var(--font-family);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  outline: none;
+  box-sizing: border-box;
+  transition: background-color 120ms ease, border-color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dcds-BaseTabs:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+  border-radius: var(--rd-XS);
+}
+
+/* ── Inner content row ── */
+.dcds-BaseTabs__content {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  pointer-events: none;
+}
+
+/* ── Leading icon slot ── */
+.dcds-BaseTabs__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  transition: color 120ms ease;
+}
+
+/* ── Label text ── */
+.dcds-BaseTabs__label {
+  white-space: nowrap;
+  line-height: normal;
+  transition: color 120ms ease;
+}
+
+/* ── Trailing badge (base) ── */
+.dcds-BaseTabs__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  min-width: 16px;
+  padding: var(--gap-2) var(--gap-4);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-small); /* 12px */
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* counter — slightly rounded pill, white text; bg comes from variant rules */
+.dcds-BaseTabs__badge--counter {
+  border-radius: var(--rd-S);
+  color: var(--color-text-invert);
+}
+
+/* tag — fully rounded pill, white text; bg still comes from variant rules */
+.dcds-BaseTabs__badge--tag {
+  border-radius: var(--rd-Max);
+  color: var(--color-text-invert);
+}
+
+/* ==========================================================================
+   BORDERLESS STYLE
+   Height 64px · Padding 8px · Active: 4px bottom border stroke-action
+   ========================================================================== */
+
+.dcds-BaseTabs--borderless {
+  height: 64px;
+  padding: var(--gap-8);
+  /* Reserve 4px at bottom for the active underline so height stays constant */
+  border-bottom: 4px solid transparent;
+}
+
+/* Default / unselected */
+.dcds-BaseTabs--borderless .dcds-BaseTabs__label {
+  font-size: var(--font-size-label); /* 14px — S default */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subdued);
+}
+
+.dcds-BaseTabs--borderless .dcds-BaseTabs__icon {
+  color: var(--color-text-subdued);
+}
+
+.dcds-BaseTabs--borderless .dcds-BaseTabs__badge {
+  background-color: var(--color-fill-action);
+}
+
+/* Size M: body text */
+.dcds-BaseTabs--borderless.dcds-BaseTabs--size-M .dcds-BaseTabs__label {
+  font-size: var(--font-size-body); /* 16px */
+}
+
+/* Selected */
+.dcds-BaseTabs--borderless.dcds-BaseTabs--selected {
+  border-bottom-color: var(--color-stroke-action);
+}
+
+.dcds-BaseTabs--borderless.dcds-BaseTabs--selected .dcds-BaseTabs__label {
+  color: var(--color-text-action);
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-BaseTabs--borderless.dcds-BaseTabs--selected .dcds-BaseTabs__icon {
+  color: var(--color-text-action);
+}
+
+/* Hover — unselected enabled: no bg, action text (green), bold */
+.dcds-BaseTabs--borderless:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover
+  .dcds-BaseTabs__label {
+  color: var(--color-text-action);
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-BaseTabs--borderless:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover
+  .dcds-BaseTabs__icon {
+  color: var(--color-text-action);
+}
+
+/* Hover — selected enabled: darker green underline + success text, no bg */
+.dcds-BaseTabs--borderless.dcds-BaseTabs--selected:not(.dcds-BaseTabs--disabled):hover {
+  border-bottom-color: var(--color-stroke-success);
+}
+
+.dcds-BaseTabs--borderless.dcds-BaseTabs--selected:not(.dcds-BaseTabs--disabled):hover
+  .dcds-BaseTabs__label {
+  color: var(--color-text-success);
+}
+
+.dcds-BaseTabs--borderless.dcds-BaseTabs--selected:not(.dcds-BaseTabs--disabled):hover
+  .dcds-BaseTabs__icon {
+  color: var(--color-text-success);
+}
+
+/* Disabled */
+.dcds-BaseTabs--borderless.dcds-BaseTabs--disabled {
+  cursor: not-allowed;
+}
+
+.dcds-BaseTabs--borderless.dcds-BaseTabs--disabled .dcds-BaseTabs__label {
+  color: var(--color-text-disabled);
+}
+
+.dcds-BaseTabs--borderless.dcds-BaseTabs--disabled .dcds-BaseTabs__icon {
+  color: var(--color-text-disabled);
+}
+
+.dcds-BaseTabs--borderless.dcds-BaseTabs--disabled .dcds-BaseTabs__badge {
+  background-color: var(--color-surface-disabled);
+}
+
+/* ==========================================================================
+   FILLED STYLE
+   Padding H 32px · Padding V 8px · Border-radius rd-S top only
+   S height 32px · M height 48px
+   ========================================================================== */
+
+.dcds-BaseTabs--filled {
+  padding: var(--gap-8) var(--gap-32);
+  border-radius: var(--rd-S) var(--rd-S) 0 0;
+  border: 1px solid var(--color-stroke-focus-subtle);
+  background: transparent;
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--size-S {
+  height: 32px;
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--size-M {
+  height: 48px;
+}
+
+/* Default / unselected */
+.dcds-BaseTabs--filled .dcds-BaseTabs__label {
+  font-size: var(--font-size-label); /* 14px — S */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--size-M .dcds-BaseTabs__label {
+  font-size: var(--font-size-body); /* 16px */
+}
+
+.dcds-BaseTabs--filled .dcds-BaseTabs__icon {
+  color: var(--color-text-primary);
+}
+
+.dcds-BaseTabs--filled .dcds-BaseTabs__badge {
+  background-color: var(--color-fill-invert-info);
+}
+
+/* Selected — Noble Blue-600 background, white text */
+.dcds-BaseTabs--filled.dcds-BaseTabs--selected {
+  background-color: var(--color-fill-primary-9);
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--selected .dcds-BaseTabs__label {
+  color: var(--color-text-invert);
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--selected .dcds-BaseTabs__icon {
+  color: var(--color-text-invert);
+}
+
+/* Hover — unselected enabled: fill-primary-1 bg (#dae9fb), primary text, bold */
+.dcds-BaseTabs--filled:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover {
+  background-color: var(--color-fill-primary-1);
+}
+
+.dcds-BaseTabs--filled:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover
+  .dcds-BaseTabs__label {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-BaseTabs--filled:not(.dcds-BaseTabs--selected):not(.dcds-BaseTabs--disabled):hover
+  .dcds-BaseTabs__icon {
+  color: var(--color-text-primary);
+}
+
+/* Disabled */
+.dcds-BaseTabs--filled.dcds-BaseTabs--disabled {
+  cursor: not-allowed;
+  border-color: var(--color-stroke-disabled);
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--disabled .dcds-BaseTabs__label {
+  color: var(--color-text-disabled);
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--disabled .dcds-BaseTabs__icon {
+  color: var(--color-text-disabled);
+}
+
+.dcds-BaseTabs--filled.dcds-BaseTabs--disabled .dcds-BaseTabs__badge {
+  background-color: var(--color-surface-disabled);
+}

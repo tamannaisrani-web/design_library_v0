@@ -679,6 +679,45 @@
       .control input[type='checkbox'] { transform: scale(1.1); }
 
       /* ------------------------------------------------------------------ */
+      /* Collapsible panel                                                    */
+      /* ------------------------------------------------------------------ */
+      .panel__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--gap-8);
+        margin-bottom: var(--gap-8);
+      }
+      .panel__toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: none;
+        border-radius: var(--rd-XS);
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-icon-subdued);
+      }
+      .panel__toggle-btn:hover {
+        background: var(--color-fill-primary-0);
+        color: var(--color-icon-primary);
+      }
+      .panel__toggle-btn svg {
+        transition: transform 200ms ease;
+      }
+      .panel--collapsed {
+        padding: var(--gap-12) var(--gap-8);
+        overflow: hidden;
+      }
+      .panel--collapsed .panel__header {
+        justify-content: center;
+      }
+
+      /* ------------------------------------------------------------------ */
       /* Stage (right panel)                                                  */
       /* ------------------------------------------------------------------ */
       .stage {
@@ -1015,6 +1054,32 @@
 
       /* Modal demo helpers */
       .modal-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+
+      /*
+       * Accordian — collapsible content panel.
+       * Mirrors src/components/Accordian/Accordian.css
+       */
+      .dcds-Accordian { background:var(--color-surface-1); display:flex; flex-direction:column; width:100%; min-width:360px; position:relative; }
+      .dcds-Accordian--rounded { border:0.5px solid var(--color-stroke-subdued); border-radius:var(--rd-S); overflow:hidden; }
+      .dcds-Accordian__header { display:flex; align-items:flex-start; gap:var(--gap-12); padding:var(--gap-12); width:100%; background:transparent; border:none; cursor:pointer; text-align:left; transition:background-color 120ms ease; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
+      .dcds-Accordian__header:hover { background-color:var(--color-fill-primary-0); }
+      .dcds-Accordian__header:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+      .dcds-Accordian:not(.dcds-Accordian--rounded) .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
+      .dcds-Accordian--rounded.dcds-Accordian--state-open .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
+      .dcds-Accordian__header-main { display:flex; align-items:flex-start; gap:var(--gap-8); flex:1; min-width:0; }
+      .dcds-Accordian__leading { display:flex; align-items:center; justify-content:center; width:24px; height:24px; flex-shrink:0; color:var(--color-icon-primary); }
+      .dcds-Accordian__header-content { display:flex; align-items:flex-start; gap:var(--gap-12); flex:1; min-width:0; }
+      .dcds-Accordian__text { display:flex; flex-direction:column; flex:1; min-width:0; word-break:break-word; text-align:left; }
+      .dcds-Accordian__title { font-family:var(--font-family); font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; }
+      .dcds-Accordian__subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; }
+      .dcds-Accordian__trailing { display:flex; align-items:center; gap:var(--gap-12); flex-shrink:0; }
+      .dcds-Accordian__actions { display:flex; align-items:center; flex-shrink:0; }
+      .dcds-Accordian__chevron { display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-primary); transition:transform 200ms ease; }
+      .dcds-Accordian--state-open .dcds-Accordian__chevron { transform:rotate(180deg); }
+      @media (prefers-reduced-motion:reduce) { .dcds-Accordian__chevron { transition:none; } }
+      .dcds-Accordian__body { padding:var(--gap-12); overflow:hidden; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; }
+      .dcds-Accordian__body[hidden] { display:none; }
+      .dcds-Accordian__body-slot { width:100%; }
     </style>
   </head>
   <body>
@@ -1250,11 +1315,22 @@
       }
 
       /* ============================================================
-       * ArrowDownLinearIcon (replaces ChevronDownIcon — Task 2)
+       * ArrowDownLinearIcon — path sourced from icons/src/linear/ArrowDownLinear.tsx
        * ============================================================ */
       const ArrowDownLinearIcon = ({ size = 16 }) => (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-          <path d="M19.9201 8.95007L13.4001 15.4701C12.6301 16.2401 11.3701 16.2401 10.6001 15.4701L4.08008 8.95007" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+
+      /* ============================================================
+       * GalleryLinearIcon — path sourced from icons/src/linear/GalleryLinear.tsx
+       * ============================================================ */
+      const GalleryLinearIcon = ({ size = 16 }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M2.66992 18.95L7.59992 15.64C8.38992 15.11 9.52992 15.17 10.2399 15.78L10.5699 16.07C11.3499 16.74 12.6099 16.74 13.3899 16.07L17.5499 12.5C18.3299 11.83 19.5899 11.83 20.3699 12.5L21.9999 13.9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
 
@@ -2288,6 +2364,45 @@
       }
 
       /* ============================================================
+       * PanelContext — shared collapse state across all sections
+       * ============================================================ */
+      const PanelContext = React.createContext({ open: true, setOpen: () => {} });
+
+      /* ============================================================
+       * PanelLayout — collapsible panel wrapper for all sections
+       * ============================================================ */
+      function PanelLayout({ panelContent, children }) {
+        const { open, setOpen } = React.useContext(PanelContext);
+        const chevron = (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            style={{ transform: open ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        );
+        return (
+          <div style={{ gridColumn: '2 / 4', display: 'grid', gridTemplateColumns: open ? '300px 1fr' : '44px 1fr', transition: 'grid-template-columns 200ms ease', height: '100%', overflow: 'hidden' }}>
+            <aside className={`panel${open ? '' : ' panel--collapsed'}`}>
+              <div className="panel__header">
+                {open && (
+                  <div>
+                    <h1 style={{ margin: 0 }}>Props</h1>
+                    <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: '4px 0 0' }}>Adjust and see live on the right.</p>
+                  </div>
+                )}
+                <button className="panel__toggle-btn" onClick={() => setOpen(p => !p)}
+                  aria-label={open ? 'Collapse panel' : 'Expand panel'}
+                  title={open ? 'Collapse panel' : 'Expand panel'}>
+                  {chevron}
+                </button>
+              </div>
+              {open && panelContent}
+            </aside>
+            {children}
+          </div>
+        );
+      }
+
+      /* ============================================================
        * ChipSection — self-contained chip playground (panel + stage)
        * ============================================================ */
       function ChipSection() {
@@ -2300,17 +2415,14 @@
         const { size: chipSize, state: chipState, selected: chipSelected, showIcon: chipShowIcon, label: chipLabel } = chip;
         const [chipLog, pushChipLog] = useEventLog();
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Chip</h2>
-              <CtrlSelect label="size"       value={chipSize}       onChange={setChipSize}     options={['S', 'M', 'L']} />
-              <CtrlSelect label="state"      value={chipState}      onChange={setChipState}    options={['Default', 'Disabled']} />
-              <CtrlToggle label="isSelected" checked={chipSelected} onChange={setChipSelected} />
-              <CtrlToggle label="showIcon"   checked={chipShowIcon} onChange={setChipShowIcon} />
-              <CtrlText   label="label"      value={chipLabel}      onChange={setChipLabel} />
-            </aside>
+          <PanelLayout panelContent={<>
+            <h2>Chip</h2>
+            <CtrlSelect label="size"       value={chipSize}       onChange={setChipSize}     options={['S', 'M', 'L']} />
+            <CtrlSelect label="state"      value={chipState}      onChange={setChipState}    options={['Default', 'Disabled']} />
+            <CtrlToggle label="isSelected" checked={chipSelected} onChange={setChipSelected} />
+            <CtrlToggle label="showIcon"   checked={chipShowIcon} onChange={setChipShowIcon} />
+            <CtrlText   label="label"      value={chipLabel}      onChange={setChipLabel} />
+          </>}>
             <main className="stage">
               <section>
                 <h2>Chip — Interactive Playground</h2>
@@ -2377,7 +2489,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2393,17 +2505,14 @@
         const setBadgeLabel    = (v) => setBadge((p) => ({ ...p, label: v }));
         const { size: badgeSize, emphasis: badgeEmphasis, state: badgeState, showIcon: badgeShowIcon, label: badgeLabel } = badge;
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Badge</h2>
-              <CtrlSelect label="size"     value={badgeSize}      onChange={setBadgeSize}     options={['S', 'M', 'L']} />
-              <CtrlSelect label="emphasis" value={badgeEmphasis}  onChange={setBadgeEmphasis} options={['subtle', 'intense']} />
-              <CtrlSelect label="state"    value={badgeState}     onChange={setBadgeState}    options={['neutral', 'info', 'warning', 'error', 'success']} />
-              <CtrlToggle label="showIcon" checked={badgeShowIcon} onChange={setBadgeShowIcon} />
-              <CtrlText   label="label"    value={badgeLabel}     onChange={setBadgeLabel} />
-            </aside>
+          <PanelLayout panelContent={<>
+            <h2>Badge</h2>
+            <CtrlSelect label="size"     value={badgeSize}      onChange={setBadgeSize}     options={['S', 'M', 'L']} />
+            <CtrlSelect label="emphasis" value={badgeEmphasis}  onChange={setBadgeEmphasis} options={['subtle', 'intense']} />
+            <CtrlSelect label="state"    value={badgeState}     onChange={setBadgeState}    options={['neutral', 'info', 'warning', 'error', 'success']} />
+            <CtrlToggle label="showIcon" checked={badgeShowIcon} onChange={setBadgeShowIcon} />
+            <CtrlText   label="label"    value={badgeLabel}     onChange={setBadgeLabel} />
+          </>}>
             <main className="stage">
               <section>
                 <h2>Badge — Interactive Playground</h2>
@@ -2447,7 +2556,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2464,16 +2573,13 @@
         const { size: tagSize, state: tagState, showIcon: tagShowIcon, label: tagLabel, demoTags } = tag;
         const [tagLog, pushTagLog] = useEventLog();
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Tag</h2>
-              <CtrlSelect label="size"     value={tagSize}      onChange={setTagSize}     options={['S', 'M']} />
-              <CtrlSelect label="state"    value={tagState}     onChange={setTagState}    options={['Default', 'Disabled']} />
-              <CtrlToggle label="showIcon" checked={tagShowIcon} onChange={setTagShowIcon} />
-              <CtrlText   label="label"    value={tagLabel}     onChange={setTagLabel} />
-            </aside>
+          <PanelLayout panelContent={<>
+            <h2>Tag</h2>
+            <CtrlSelect label="size"     value={tagSize}      onChange={setTagSize}     options={['S', 'M']} />
+            <CtrlSelect label="state"    value={tagState}     onChange={setTagState}    options={['Default', 'Disabled']} />
+            <CtrlToggle label="showIcon" checked={tagShowIcon} onChange={setTagShowIcon} />
+            <CtrlText   label="label"    value={tagLabel}     onChange={setTagLabel} />
+          </>}>
             <main className="stage">
               <section>
                 <h2>Tag — Interactive Playground</h2>
@@ -2522,7 +2628,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2554,7 +2660,7 @@
           <button role="tab" type="button" id={id} aria-selected={isSelected} aria-controls={ariaControls} aria-disabled={isDisabled} disabled={isDisabled} tabIndex={tabIndex} className={cls} onClick={onClick} onKeyDown={onKeyDown} data-testid={dataTestId}>
             <span className="dcds-BaseTabs__content">
               {/* Leading slot — icon from icons/svg/{linear,bold}/tick-circle.svg */}
-              {leading !== undefined && <span className="dcds-BaseTabs__icon" aria-hidden="true">{leading.icon}</span>}
+              {leading !== undefined && <span className="dcds-BaseTabs__icon" aria-hidden="true">{React.createElement(leading.icon, { size: 16 })}</span>}
               <span className="dcds-BaseTabs__label">{label}</span>
               {/* Trailing slot — counter (numeric) or tag (text keyword) */}
               {trailing !== undefined && <span className={`dcds-BaseTabs__badge dcds-BaseTabs__badge--${trailing.type}`}>{trailing.value}</span>}
@@ -2699,75 +2805,72 @@
 
         /* ── Per-tab config (Leading / Trailing / Disabled editable individually) ── */
         const initConfigs = () => [
-          { label: 'Overview',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
-          { label: 'Documents', disabled: false, showLeading: false, showTrailing: false, trailingType: 'counter', trailingValue: '3'   },
-          { label: 'Activity',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
-          { label: 'Settings',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Overview',  disabled: false, showLeading: false, leadingIconName: 'Home',       showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Documents', disabled: false, showLeading: false, leadingIconName: 'Document',   showTrailing: false, trailingType: 'counter', trailingValue: '3'   },
+          { label: 'Activity',  disabled: false, showLeading: false, leadingIconName: 'Chart',      showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Settings',  disabled: false, showLeading: false, leadingIconName: 'Setting',    showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
         ];
         const [tabConfigs, setTabConfigs] = useState(initConfigs);
         const [editingIdx, setEditingIdx] = useState(0);
         const updateTab = (idx, key, val) =>
           setTabConfigs(prev => prev.map((t, i) => i === idx ? { ...t, [key]: val } : t));
 
-        /* Icon: linear/tick-circle.svg (Borderless) or bold/tick-circle.svg (Filled) — inlined with currentColor */
         const isFilled = tabStyle === 'Filled';
-        const tickIconBold   = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg>;
-        const tickIconLinear = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;
-        const tickIcon = isFilled ? tickIconBold : tickIconLinear;
 
-        /* Build tabs array from per-tab config */
-        const tabs = tabConfigs.map(cfg => ({
-          label:    cfg.label,
-          leading:  cfg.showLeading  ? { icon: tickIcon }                                          : undefined,
-          trailing: cfg.showTrailing ? { type: cfg.trailingType, value: cfg.trailingValue }        : undefined,
-          disabled: cfg.disabled || undefined,
-        }));
+        /* Build tabs array from per-tab config — leading icon sourced from ICON_MAP */
+        const tabs = tabConfigs.map(cfg => {
+          const IconComp = cfg.showLeading ? (ICON_MAP[cfg.leadingIconName] || ICON_MAP['Home']) : null;
+          return {
+            label:    cfg.label,
+            leading:  IconComp ? { icon: IconComp } : undefined,
+            trailing: cfg.showTrailing ? { type: cfg.trailingType, value: cfg.trailingValue } : undefined,
+            disabled: cfg.disabled || undefined,
+          };
+        });
 
         const editing = tabConfigs[editingIdx];
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
+          <PanelLayout panelContent={<>
+            {/* ── Group-level props ── */}
+            <h2>Tabs</h2>
+            <CtrlSelect label="tabStyle"    value={tabStyle}    onChange={setTabStyle}    options={['Borderless', 'Filled']} />
+            <CtrlSelect label="size"        value={size}        onChange={setSize}        options={['S', 'M']} />
+            <CtrlToggle label="isFullwidth" checked={isFullwidth} onChange={setFullwidth} />
 
-              {/* ── Group-level props ── */}
-              <h2>Tabs</h2>
-              <CtrlSelect label="tabStyle"    value={tabStyle}    onChange={setTabStyle}    options={['Borderless', 'Filled']} />
-              <CtrlSelect label="size"        value={size}        onChange={setSize}        options={['S', 'M']} />
-              <CtrlToggle label="isFullwidth" checked={isFullwidth} onChange={setFullwidth} />
+            {/* ── Per-tab editor ── */}
+            <div style={{ marginTop: 'var(--gap-16)', borderTop: '1px solid var(--color-stroke-focus-subtle)', paddingTop: 'var(--gap-12)' }}>
+              <CtrlSelect
+                label="edit tab"
+                value={tabConfigs[editingIdx].label}
+                onChange={v => setEditingIdx(tabConfigs.findIndex(t => t.label === v))}
+                options={tabConfigs.map(t => t.label)}
+              />
+            </div>
 
-              {/* ── Per-tab editor ── */}
-              <div style={{ marginTop: 'var(--gap-16)', borderTop: '1px solid var(--color-stroke-focus-subtle)', paddingTop: 'var(--gap-12)' }}>
-                <CtrlSelect
-                  label="edit tab"
-                  value={tabConfigs[editingIdx].label}
-                  onChange={v => setEditingIdx(tabConfigs.findIndex(t => t.label === v))}
-                  options={tabConfigs.map(t => t.label)}
-                />
-              </div>
-
-              {/* Per-tab props — isSelected (radio), Leading, Trailing, disabled */}
-              <div style={{ marginTop: 'var(--gap-8)' }}>
-                {/* isSelected — radio: setting true moves activeIdx here; only 1 can be true at a time */}
-                <CtrlToggle
-                  label="isSelected"
-                  checked={activeIdx === editingIdx}
-                  onChange={on => { if (on) setActiveIdx(editingIdx); }}
-                />
-                <p style={{ fontSize: 11, color: 'var(--color-text-subdued)', margin: '-4px 0 8px', paddingLeft: 2 }}>
-                  radio — only one tab selected at a time
-                </p>
-                <CtrlText   label="label"        value={editing.label}          onChange={v => updateTab(editingIdx, 'label', v)} />
-                <CtrlToggle label="disabled"     checked={editing.disabled}     onChange={v => updateTab(editingIdx, 'disabled', v)} />
-                <CtrlToggle label="showLeading"  checked={editing.showLeading}  onChange={v => updateTab(editingIdx, 'showLeading', v)} />
-                <CtrlToggle label="showTrailing" checked={editing.showTrailing} onChange={v => updateTab(editingIdx, 'showTrailing', v)} />
-                {editing.showTrailing && <>
-                  <CtrlSelect label="trailing.type"  value={editing.trailingType}  onChange={v => { updateTab(editingIdx, 'trailingType', v); updateTab(editingIdx, 'trailingValue', v === 'tag' ? 'new' : '3'); }}  options={['counter', 'tag']} />
-                  <CtrlText   label="trailing.value" value={String(editing.trailingValue)} onChange={v => updateTab(editingIdx, 'trailingValue', v)} />
-                </>}
-              </div>
-            </aside>
+            {/* Per-tab props — isSelected (radio), Leading, Trailing, disabled */}
+            <div style={{ marginTop: 'var(--gap-8)' }}>
+              <CtrlToggle
+                label="isSelected"
+                checked={activeIdx === editingIdx}
+                onChange={on => { if (on) setActiveIdx(editingIdx); }}
+              />
+              <p style={{ fontSize: 11, color: 'var(--color-text-subdued)', margin: '-4px 0 8px', paddingLeft: 2 }}>
+                radio — only one tab selected at a time
+              </p>
+              <CtrlText   label="label"        value={editing.label}          onChange={v => updateTab(editingIdx, 'label', v)} />
+              <CtrlToggle label="disabled"     checked={editing.disabled}     onChange={v => updateTab(editingIdx, 'disabled', v)} />
+              <CtrlToggle label="showLeading"  checked={editing.showLeading}  onChange={v => updateTab(editingIdx, 'showLeading', v)} />
+              {editing.showLeading && (
+                <CtrlSelect label="leadingIcon" value={editing.leadingIconName} onChange={v => updateTab(editingIdx, 'leadingIconName', v)} options={Object.keys(ICON_MAP)} />
+              )}
+              <CtrlToggle label="showTrailing" checked={editing.showTrailing} onChange={v => updateTab(editingIdx, 'showTrailing', v)} />
+              {editing.showTrailing && <>
+                <CtrlSelect label="trailing.type"  value={editing.trailingType}  onChange={v => { updateTab(editingIdx, 'trailingType', v); updateTab(editingIdx, 'trailingValue', v === 'tag' ? 'new' : '3'); }}  options={['counter', 'tag']} />
+                <CtrlText   label="trailing.value" value={String(editing.trailingValue)} onChange={v => updateTab(editingIdx, 'trailingValue', v)} />
+              </>}
+            </div>
+          </>}>
             <main className="stage">
               <section>
                 <h2>Tabs — Interactive Playground</h2>
@@ -2853,25 +2956,25 @@
                   <code>icons/svg/bold/tick-circle.svg</code> (Filled). Inlined with{' '}
                   <code>currentColor</code> so colour updates per state automatically.
                 </p>
-                {/* Borderless — linear/tick-circle.svg */}
+                {/* Borderless — icons from ICON_MAP */}
                 <div className="tabs-demo-row">
                   <Tabs
                     tabs={[
-                      { label: 'Overview',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> } },
-                      { label: 'Documents', leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> }, trailing: { type: 'tag', value: 'new' } },
-                      { label: 'Activity',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> }, disabled: true },
+                      { label: 'Overview',  leading: { icon: ICON_MAP['Home'] } },
+                      { label: 'Documents', leading: { icon: ICON_MAP['Document'] }, trailing: { type: 'tag', value: 'new' } },
+                      { label: 'Activity',  leading: { icon: ICON_MAP['Chart'] }, disabled: true },
                     ]}
                     tabStyle="Borderless"
                     size="M"
                   />
                 </div>
-                {/* Filled — bold/tick-circle.svg */}
+                {/* Filled — icons from ICON_MAP */}
                 <div className="tabs-demo-row" style={{ marginTop: 'var(--gap-8)' }}>
                   <Tabs
                     tabs={[
-                      { label: 'Overview',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> } },
-                      { label: 'Documents', leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> }, trailing: { type: 'counter', value: 33 } },
-                      { label: 'Activity',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> } },
+                      { label: 'Overview',  leading: { icon: ICON_MAP['Home'] } },
+                      { label: 'Documents', leading: { icon: ICON_MAP['Document'] }, trailing: { type: 'counter', value: 33 } },
+                      { label: 'Activity',  leading: { icon: ICON_MAP['Chart'] } },
                     ]}
                     tabStyle="Filled"
                     size="M"
@@ -2880,7 +2983,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2899,17 +3002,13 @@
         const isInteractive = true;
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Avatar</h2>
-              <CtrlSelect label="shape"    value={avShape}    onChange={setAvShape}    options={['Initial Circle', 'Initial Square', 'Icon Circle', 'Icon Square', 'Flag Circle']} />
-              <CtrlSelect label="size"     value={avSize}     onChange={setAvSize}     options={['Small', 'Medium', 'Large', 'Extra Large']} />
-              {showInitials && <CtrlText label="initials" value={avInitials} onChange={setAvInitials} />}
-              {showCountry  && <CtrlText label="country"  value={avCountry}  onChange={setAvCountry} placeholder="e.g. IN, US, GB" />}
-            </aside>
-
+          <PanelLayout panelContent={<>
+            <h2>Avatar</h2>
+            <CtrlSelect label="shape"    value={avShape}    onChange={setAvShape}    options={['Initial Circle', 'Initial Square', 'Icon Circle', 'Icon Square', 'Flag Circle']} />
+            <CtrlSelect label="size"     value={avSize}     onChange={setAvSize}     options={['Small', 'Medium', 'Large', 'Extra Large']} />
+            {showInitials && <CtrlText label="initials" value={avInitials} onChange={setAvInitials} />}
+            {showCountry  && <CtrlText label="country"  value={avCountry}  onChange={setAvCountry} placeholder="e.g. IN, US, GB" />}
+          </>}>
             <main className="stage">
               <section>
                 <h2>Avatar — Interactive Playground</h2>
@@ -2991,7 +3090,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -3106,7 +3205,7 @@
         return (
           <div className={['dcds-Modal__header', className].filter(Boolean).join(' ')}>
             <div className="dcds-Modal__header-left">
-              {icon && <span className="dcds-Modal__header-icon">{icon}</span>}
+              {icon && <span className="dcds-Modal__header-icon">{React.createElement(icon, { size: 18 })}</span>}
               <div className="dcds-Modal__header-text">
                 <h2 id={idProp ?? headerId} className="dcds-Modal__header-title">{children}</h2>
                 {subtitle && <p className="dcds-Modal__header-subtitle">{subtitle}</p>}
@@ -3240,6 +3339,302 @@
       }
 
       /* ============================================================
+       * AccordianSection — self-contained Accordian playground
+       * ============================================================ */
+      function Accordian({ state = 'close', isRounded = false, title, subtitle, showLeading = true, showTitle = true, showSubtitle = true, showStatus = true, showAction = true, leadingIcon, statusConfig = {}, actionConfig = {}, children, onToggle, onClick, onFocus, onBlur, onKeyDown, onKeyUp, onMouseEnter, onMouseLeave, className, id, dataTestId }) {
+        const isOpen = state === 'open';
+        const rootClasses = ['dcds-Accordian', isRounded ? 'dcds-Accordian--rounded' : '', 'dcds-Accordian--state-' + state, className].filter(Boolean).join(' ');
+
+        const resolvedStatus = {
+          label: statusConfig.label ?? 'Status',
+          state: statusConfig.state ?? 'neutral',
+          emphasis: statusConfig.emphasis ?? 'subtle',
+          size: statusConfig.size ?? 'S',
+          showIcon: statusConfig.showIcon ?? false,
+          'aria-label': statusConfig['aria-label'],
+        };
+
+        const resolvedAction = {
+          label: actionConfig.label ?? 'Button',
+          variant: actionConfig.variant ?? 'Secondary',
+          color: actionConfig.color ?? 'Primary',
+          size: actionConfig.size ?? 'S',
+          isDisabled: actionConfig.isDisabled ?? false,
+          leadingIcon: actionConfig.leadingIcon,
+          trailingIcon: actionConfig.trailingIcon,
+          onClick: actionConfig.onClick,
+          onFocus: actionConfig.onFocus,
+          onBlur: actionConfig.onBlur,
+        };
+
+        const showLeadingSlot = showLeading && Boolean(leadingIcon);
+        const showTrailing = showStatus || showAction;
+
+        return (
+          React.createElement('div', { className: rootClasses, id, 'data-testid': dataTestId },
+            React.createElement('button', {
+              type: 'button',
+              className: 'dcds-Accordian__header',
+              'aria-expanded': isOpen,
+              onClick: (e) => { onToggle?.(!isOpen); onClick?.(e); },
+              onFocus, onBlur, onKeyDown, onKeyUp, onMouseEnter, onMouseLeave
+            },
+              React.createElement('div', { className: 'dcds-Accordian__header-main' },
+                showLeadingSlot && React.createElement('div', { className: 'dcds-Accordian__leading', 'aria-hidden': 'true' }, React.createElement(leadingIcon, { size: 16 })),
+                React.createElement('div', { className: 'dcds-Accordian__header-content' },
+                  (showTitle || showSubtitle) && React.createElement('div', { className: 'dcds-Accordian__text' },
+                    showTitle && title && React.createElement('span', { className: 'dcds-Accordian__title' }, title),
+                    showSubtitle && subtitle && React.createElement('span', { className: 'dcds-Accordian__subtitle' }, subtitle)
+                  ),
+                  showTrailing && React.createElement('div', { className: 'dcds-Accordian__trailing' },
+                    showStatus && React.createElement(Badge, { size: resolvedStatus.size, emphasis: resolvedStatus.emphasis, state: resolvedStatus.state, showIcon: resolvedStatus.showIcon, 'aria-label': resolvedStatus['aria-label'] }, resolvedStatus.label),
+                    showAction && React.createElement('div', { className: 'dcds-Accordian__actions' },
+                      React.createElement(Button, { variant: resolvedAction.variant, color: resolvedAction.color, size: resolvedAction.size, isDisabled: resolvedAction.isDisabled, onClick: resolvedAction.onClick, onFocus: resolvedAction.onFocus, onBlur: resolvedAction.onBlur }, resolvedAction.label)
+                    )
+                  )
+                )
+              ),
+              React.createElement('div', { className: 'dcds-Accordian__chevron', 'aria-hidden': 'true' },
+                React.createElement(ArrowDownLinearIcon, { size: 24 })
+              )
+            ),
+            React.createElement('div', { className: 'dcds-Accordian__body', role: 'region', 'aria-hidden': !isOpen, hidden: !isOpen ? true : undefined },
+              React.createElement('div', { className: 'dcds-Accordian__body-slot' }, children)
+            )
+          )
+        );
+      }
+
+      /* ============================================================
+       * ICON_MAP — keyed by display name.
+       * SVG paths sourced from icons/src/linear/ in the repo.
+       * Each icon renders at size=16 to sit inside the 24×24 leading container.
+       * ============================================================ */
+      const ICON_MAP = (() => {
+        const mk = (paths) => ({ size = 16 } = {}) =>
+          React.createElement('svg', { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': 'true', focusable: 'false' },
+            ...paths.map((p, i) => React.createElement('path', { key: i, stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round', ...p }))
+          );
+        return {
+          'Gallery':      mk([{ d: 'M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z' }, { d: 'M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z' }, { d: 'M2.66992 18.95L7.59992 15.64C8.38992 15.11 9.52992 15.17 10.2399 15.78L10.5699 16.07C11.3499 16.74 12.6099 16.74 13.3899 16.07L17.5499 12.5C18.3299 11.83 19.5899 11.83 20.3699 12.5L21.9999 13.9' }]),
+          'Document':     mk([{ d: 'M22 10V15C22 20 20 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H14' }, { d: 'M22 10H18C15 10 14 9 14 6V2L22 10Z' }]),
+          'Setting':      mk([{ d: 'M3 9.10986V14.8799C3 16.9999 3 16.9999 5 18.3499L10.5 21.5299C11.33 22.0099 12.68 22.0099 13.5 21.5299L19 18.3499C21 16.9999 21 16.9999 21 14.8899V9.10986C21 6.99986 21 6.99986 19 5.64986L13.5 2.46986C12.68 1.98986 11.33 1.98986 10.5 2.46986L5 5.64986C3 6.99986 3 6.99986 3 9.10986Z' }, { d: 'M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z' }]),
+          'InfoCircle':   mk([{ d: 'M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z' }, { d: 'M12 16L12 11' }, { d: 'M12.0055 8L11.9965 8', strokeWidth: '2' }]),
+          'Profile':      mk([{ d: 'M12.1596 10.87C12.0596 10.86 11.9396 10.86 11.8296 10.87C9.44957 10.79 7.55957 8.84 7.55957 6.44C7.55957 3.99 9.53957 2 11.9996 2C14.4496 2 16.4396 3.99 16.4396 6.44C16.4296 8.84 14.5396 10.79 12.1596 10.87Z' }, { d: 'M7.15973 14.56C4.73973 16.18 4.73973 18.82 7.15973 20.43C9.90973 22.27 14.4197 22.27 17.1697 20.43C19.5897 18.81 19.5897 16.17 17.1697 14.56C14.4297 12.73 9.91973 12.73 7.15973 14.56Z' }]),
+          'User':         mk([{ d: 'M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z' }, { d: 'M20.5901 22C20.5901 18.13 16.7402 15 12.0002 15C7.26015 15 3.41016 18.13 3.41016 22' }]),
+          'Home':         mk([{ d: 'M12 18V15' }, { d: 'M10.07 2.81997L3.14002 8.36997C2.36002 8.98997 1.86002 10.3 2.03002 11.28L3.36002 19.24C3.60002 20.66 4.96002 21.81 6.40002 21.81H17.6C19.03 21.81 20.4 20.65 20.64 19.24L21.97 11.28C22.13 10.3 21.63 8.98997 20.86 8.36997L13.93 2.82997C12.86 1.96997 11.13 1.96997 10.07 2.81997Z' }]),
+          'Star':         mk([{ d: 'M13.73 3.51014L15.49 7.03014C15.73 7.52014 16.37 7.99014 16.91 8.08014L20.1 8.61014C22.14 8.95014 22.62 10.4301 21.15 11.8901L18.67 14.3701C18.25 14.7901 18.02 15.6001 18.15 16.1801L18.86 19.2501C19.42 21.6801 18.13 22.6201 15.98 21.3501L12.99 19.5801C12.45 19.2601 11.56 19.2601 11.01 19.5801L8.02 21.3501C5.88 22.6201 4.58 21.6701 5.14 19.2501L5.85 16.1801C5.98 15.6001 5.75 14.7901 5.33 14.3701L2.85 11.8901C1.39 10.4301 1.86 8.95014 3.9 8.61014L7.09 8.08014C7.62 7.99014 8.26 7.52014 8.5 7.03014L10.26 3.51014C11.22 1.60014 12.78 1.60014 13.73 3.51014Z' }]),
+          'Calendar':     mk([{ d: 'M8 2V5' }, { d: 'M16 2V5' }, { d: 'M3.5 9.08984H20.5' }, { d: 'M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z' }]),
+          'Filter':       mk([{ d: 'M5.3999 2.09998H18.5999C19.6999 2.09998 20.5999 2.99998 20.5999 4.09998V6.29998C20.5999 7.09998 20.0999 8.09998 19.5999 8.59998L15.2999 12.4C14.6999 12.9 14.2999 13.9 14.2999 14.7V19C14.2999 19.6 13.8999 20.4 13.3999 20.7L11.9999 21.6C10.6999 22.4 8.8999 21.5 8.8999 19.9V14.6C8.8999 13.9 8.4999 13 8.0999 12.5L4.2999 8.49998C3.7999 7.99998 3.3999 7.09998 3.3999 6.49998V4.19998C3.3999 2.99998 4.2999 2.09998 5.3999 2.09998Z' }]),
+          'Chart':        mk([{ d: 'M7 10.7402V13.9402' }, { d: 'M12 9V15.68' }, { d: 'M17 10.7402V13.9402' }, { d: 'M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z' }]),
+          'Message':      mk([{ d: 'M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z' }]),
+          'Lock':         mk([{ d: 'M6 10V8C6 4.69 7 2 12 2C17 2 18 4.69 18 8V10' }, { d: 'M17 22H7C3 22 2 21 2 17V15C2 11 3 10 7 10H17C21 10 22 11 22 15V17C22 21 21 22 17 22Z' }]),
+          'Notification': mk([{ d: 'M19 8C20.6569 8 22 6.65685 22 5C22 3.34315 20.6569 2 19 2C17.3431 2 16 3.34315 16 5C16 6.65685 17.3431 8 19 8Z' }, { d: 'M14 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V10' }]),
+          'Category':     mk([{ d: 'M5 10H7C9 10 10 9 10 7V5C10 3 9 2 7 2H5C3 2 2 3 2 5V7C2 9 3 10 5 10Z' }, { d: 'M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z' }, { d: 'M17 22H19C21 22 22 21 22 19V17C22 15 21 14 19 14H17C15 14 14 15 14 17V19C14 21 15 22 17 22Z' }, { d: 'M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z' }]),
+          'TaskSquare':   mk([{ d: 'M12.3701 8.87988H17.6201' }, { d: 'M6.37988 8.87988L7.12988 9.62988L9.37988 7.37988' }, { d: 'M12.3701 15.8799H17.6201' }, { d: 'M6.37988 15.8799L7.12988 16.6299L9.37988 14.3799' }, { d: 'M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z' }]),
+          'Folder':       mk([{ d: 'M22 11V17C22 21 21 22 17 22H7C3 22 2 21 2 17V7C2 3 3 2 7 2H8.5C10 2 10.33 2.44 10.9 3.2L12.4 5.2C12.78 5.7 13 6 14 6H17C21 6 22 7 22 11Z', strokeMiterlimit: '10', strokeLinejoin: undefined }]),
+          'TickCircle':   mk([{ d: 'M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z' }, { d: 'M7.75 12L10.58 14.83L16.25 9.16998' }]),
+          'CloseCircle':  mk([{ d: 'M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z' }, { d: 'M9.17004 14.83L14.83 9.16998' }, { d: 'M14.83 14.83L9.17004 9.16998' }]),
+        };
+      })();
+
+      function AccordianSection() {
+        /* --- Props panel state --- */
+        const [acState,       setAcState]       = useState('close');
+        const [acRounded,     setAcRounded]     = useState(false);
+        const [acTitle,       setAcTitle]       = useState('What documents are required?');
+        const [acSubtitle,    setAcSubtitle]    = useState('Loan application checklist');
+        const [acShowTitle,   setAcShowTitle]   = useState(true);
+        const [acShowSubtitle,setAcShowSubtitle]= useState(true);
+        const [acShowLeading,    setAcShowLeading]    = useState(false);
+        const [acLeadingIconName,setAcLeadingIconName]= useState('Gallery');
+        const [acShowStatus,  setAcShowStatus]  = useState(true);
+        const [acShowAction,  setAcShowAction]  = useState(true);
+
+        /* statusConfig */
+        const [acStatusLabel,   setAcStatusLabel]   = useState('Status');
+        const [acStatusState,   setAcStatusState]   = useState('neutral');
+        const [acStatusEmphasis,setAcStatusEmphasis]= useState('subtle');
+        const [acStatusShowIcon,setAcStatusShowIcon]= useState(false);
+
+        /* actionConfig */
+        const [acActionLabel,   setAcActionLabel]   = useState('Edit');
+        const [acActionVariant, setAcActionVariant] = useState('Secondary');
+        const [acActionColor,   setAcActionColor]   = useState('Primary');
+        const [acActionSize,    setAcActionSize]     = useState('S');
+        const [acActionDisabled,setAcActionDisabled]= useState(false);
+
+        const [acLog, pushAcLog] = useEventLog();
+
+        /* Multi-item stage state */
+        const [stageStates, setStageStates] = useState({
+          flat1: 'close', flat2: 'close', flat3: 'close',
+          rd1:   'close', rd2:   'close', rd3:   'close',
+          st1:   'close', st2:   'close',
+        });
+        const toggle = (key) => setStageStates(prev => ({ ...prev, [key]: prev[key] === 'open' ? 'close' : 'open' }));
+        const toggleFlat = (key) => setStageStates(prev => ({
+          ...prev,
+          flat1: 'close', flat2: 'close', flat3: 'close',
+          [key]: prev[key] === 'open' ? 'close' : 'open',
+        }));
+
+        const LeadingIconComp = ICON_MAP[acLeadingIconName] || ICON_MAP['Gallery'];
+
+        return (
+          <PanelLayout panelContent={<>
+            <h2>Accordian</h2>
+            <CtrlSelect label="state"       value={acState}        onChange={setAcState}        options={['open', 'close']} />
+            <CtrlToggle label="isRounded"   checked={acRounded}    onChange={setAcRounded} />
+            <CtrlToggle label="showLeading" checked={acShowLeading} onChange={setAcShowLeading} />
+            {acShowLeading && (
+              <CtrlSelect label="leadingIcon" value={acLeadingIconName} onChange={setAcLeadingIconName} options={Object.keys(ICON_MAP)} />
+            )}
+            <CtrlToggle label="showTitle"   checked={acShowTitle}   onChange={setAcShowTitle} />
+            <CtrlToggle label="showSubtitle" checked={acShowSubtitle} onChange={setAcShowSubtitle} />
+            <CtrlText   label="title"       value={acTitle}        onChange={setAcTitle} />
+            <CtrlText   label="subtitle"    value={acSubtitle}     onChange={setAcSubtitle} />
+            <CtrlToggle label="showStatus"  checked={acShowStatus}  onChange={setAcShowStatus} />
+            <CtrlToggle label="showAction"  checked={acShowAction}  onChange={setAcShowAction} />
+
+            <h2>statusConfig</h2>
+            <CtrlText   label="label"    value={acStatusLabel}    onChange={setAcStatusLabel} />
+            <CtrlSelect label="state"    value={acStatusState}    onChange={setAcStatusState}    options={['neutral','info','warning','error','success']} />
+            <CtrlSelect label="emphasis" value={acStatusEmphasis} onChange={setAcStatusEmphasis} options={['subtle','intense']} />
+            <CtrlToggle label="showIcon" checked={acStatusShowIcon} onChange={setAcStatusShowIcon} />
+
+            <h2>actionConfig</h2>
+            <CtrlText   label="label"      value={acActionLabel}    onChange={setAcActionLabel} />
+            <CtrlSelect label="variant"    value={acActionVariant}  onChange={setAcActionVariant}  options={['Primary','Secondary','Tertiary']} />
+            <CtrlSelect label="color"      value={acActionColor}    onChange={setAcActionColor}    options={['Primary','Error','Warning']} />
+            <CtrlSelect label="size"       value={acActionSize}     onChange={setAcActionSize}     options={['L','M','S','XS']} />
+            <CtrlToggle label="isDisabled" checked={acActionDisabled} onChange={setAcActionDisabled} />
+          </>}>
+            <main className="stage">
+              {/* Playground */}
+              <section>
+                <h2>Accordian — Interactive Playground</h2>
+                <p className="stage-note">Configure props in the left panel. Click the header to toggle.</p>
+                <div className="preview">
+                  <Accordian
+                    state={acState}
+                    isRounded={acRounded}
+                    title={acTitle}
+                    subtitle={acSubtitle}
+                    showLeading={acShowLeading}
+                    showTitle={acShowTitle}
+                    showSubtitle={acShowSubtitle}
+                    showStatus={acShowStatus}
+                    showAction={acShowAction}
+                    leadingIcon={LeadingIconComp}
+                    statusConfig={{ label: acStatusLabel, state: acStatusState, emphasis: acStatusEmphasis, showIcon: acStatusShowIcon }}
+                    actionConfig={{ label: acActionLabel, variant: acActionVariant, color: acActionColor, size: acActionSize, isDisabled: acActionDisabled, onClick: () => pushAcLog('action clicked') }}
+                    onToggle={(open) => { setAcState(open ? 'open' : 'close'); pushAcLog('onToggle → ' + (open ? 'open' : 'close')); }}
+                    onClick={() => pushAcLog('onClick')}
+                  >
+                    <p style={{ margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' }}>
+                      PAN card, Aadhaar, last 3 months' bank statements, salary slips, and Form 16.
+                    </p>
+                  </Accordian>
+                </div>
+                <div className="events">{acLog.length === 0 ? '— click header / action to see events —' : acLog.join('   ')}</div>
+              </section>
+
+              {/* Flat (isRounded=false) list */}
+              <section>
+                <h2>Accordian — Flat list (isRounded=false)</h2>
+                <p className="stage-note">Default mode: always shows header border-bottom as a list separator.</p>
+                <div>
+                  {[
+                    { key: 'flat1', title: 'What is the interest rate?',     subtitle: 'Loan pricing details' },
+                    { key: 'flat2', title: 'How long does approval take?',   subtitle: 'Processing timelines' },
+                    { key: 'flat3', title: 'What documents are required?',   subtitle: 'KYC & income proof'   },
+                  ].map(({ key, title, subtitle }) => (
+                    React.createElement(Accordian, {
+                      key,
+                      state: stageStates[key],
+                      isRounded: false,
+                      title,
+                      subtitle,
+                      showLeading: false,
+                      showStatus: false,
+                      showAction: false,
+                      onToggle: () => toggleFlat(key),
+                    },
+                      React.createElement('p', { style: { margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' } },
+                        'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
+                      )
+                    )
+                  ))}
+                </div>
+              </section>
+
+              {/* Rounded (isRounded=true) standalone cards */}
+              <section>
+                <h2>Accordian — Rounded cards (isRounded=true)</h2>
+                <p className="stage-note">Card-like standalone items: rd-S border-radius + outer border. Divider appears only when open.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-12)' }}>
+                  {[
+                    { key: 'rd1', title: 'Eligibility criteria',   subtitle: 'Age, income, CIBIL requirements' },
+                    { key: 'rd2', title: 'Repayment schedule',      subtitle: 'EMI breakdown and tenure'         },
+                    { key: 'rd3', title: 'Prepayment charges',      subtitle: 'Foreclosure and part-payment'     },
+                  ].map(({ key, title, subtitle }) => (
+                    React.createElement(Accordian, {
+                      key,
+                      state: stageStates[key],
+                      isRounded: true,
+                      title,
+                      subtitle,
+                      showLeading: false,
+                      showStatus: true,
+                      statusConfig: { label: 'Active', state: 'success', emphasis: 'subtle' },
+                      showAction: false,
+                      onToggle: () => toggle(key),
+                    },
+                      React.createElement('p', { style: { margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' } },
+                        'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
+                      )
+                    )
+                  ))}
+                </div>
+              </section>
+
+              {/* With leading icon + action button */}
+              <section>
+                <h2>Accordian — With leading icon + action button</h2>
+                <p className="stage-note">showLeading=true + leadingIcon renders a 32×32 icon container. showAction=true shows the Button in the trailing area.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-12)' }}>
+                  {[
+                    { key: 'st1', title: 'Loan summary',    subtitle: 'Overview of current loan', status: 'info',    statusLabel: 'Pending'  },
+                    { key: 'st2', title: 'Document status', subtitle: 'KYC verification progress', status: 'warning', statusLabel: 'Review'   },
+                  ].map(({ key, title, subtitle, status, statusLabel }) => (
+                    React.createElement(Accordian, {
+                      key,
+                      state: stageStates[key],
+                      isRounded: true,
+                      title,
+                      subtitle,
+                      showLeading: true,
+                      leadingIcon: LeadingIconComp,
+                      showStatus: true,
+                      statusConfig: { label: statusLabel, state: status, emphasis: 'subtle' },
+                      showAction: true,
+                      actionConfig: { label: 'Edit', variant: 'Secondary', color: 'Primary', size: 'S', onClick: () => pushAcLog('action: Edit on ' + key) },
+                      onToggle: () => toggle(key),
+                    },
+                      React.createElement('p', { style: { margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' } },
+                        'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
+                      )
+                    )
+                  ))}
+                </div>
+              </section>
+            </main>
+          </PanelLayout>
+        );
+      }
+
+      /* ============================================================
        * ModalSection — self-contained Modal playground
        * ============================================================ */
       function ModalSection() {
@@ -3249,12 +3644,14 @@
         const [titleText,        setTitleText]        = useState('Modal title');
         /* ModalHeader extras */
         const [showIcon,         setShowIcon]         = useState(false);
+        const [modalIconName,    setModalIconName]    = useState('InfoCircle');
         const [subtitleText,     setSubtitleText]     = useState('Subtitle goes here');
         const [showSubtitle,     setShowSubtitle]     = useState(false);
         const [showBadge,        setShowBadge]        = useState(false);
         const [badgeText,        setBadgeText]        = useState('Status');
         const [badgeState,       setBadgeState]       = useState('neutral');
         const [badgeEmphasis,    setBadgeEmphasis]    = useState('subtle');
+        const [badgeShowIcon,    setBadgeShowIcon]    = useState(false);
         /* ModalBody */
         const [bodyText,         setBodyText]         = useState(
           'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
@@ -3280,44 +3677,42 @@
         const [modalLog, pushModalLog] = useEventLog();
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
-                Adjust and see live on the right.
-              </p>
-              <h2>Modal</h2>
-              <CtrlSelect label="size"            value={size}           onChange={setSize}           options={['S', 'M', 'L']} />
-              <CtrlToggle label="closeOnBackdrop" checked={closeOnBackdrop} onChange={setCloseOnBackdrop} />
-              <CtrlToggle label="closeOnEscape"   checked={closeOnEscape}   onChange={setCloseOnEscape}   />
+          <PanelLayout panelContent={<>
+            <h2>Modal</h2>
+            <CtrlSelect label="size"            value={size}           onChange={setSize}           options={['S', 'M', 'L']} />
+            <CtrlToggle label="closeOnBackdrop" checked={closeOnBackdrop} onChange={setCloseOnBackdrop} />
+            <CtrlToggle label="closeOnEscape"   checked={closeOnEscape}   onChange={setCloseOnEscape}   />
 
-              <h2>ModalHeader</h2>
-              <CtrlText   label="title"           value={titleText}        onChange={setTitleText}        />
-              <CtrlToggle label="showIcon"         checked={showIcon}       onChange={setShowIcon}         />
-              <CtrlToggle label="showSubtitle"     checked={showSubtitle}   onChange={setShowSubtitle}     />
-              {showSubtitle && (
-                <CtrlText label="subtitle"         value={subtitleText}     onChange={setSubtitleText}     />
-              )}
-              <CtrlToggle label="showBadge"        checked={showBadge}      onChange={setShowBadge}        />
-              {showBadge && (
-                <>
-                  <CtrlText   label="badge"        value={badgeText}        onChange={setBadgeText}        />
-                  <CtrlSelect label="badgeState"   value={badgeState}       onChange={setBadgeState}       options={['neutral','info','warning','error','success']} />
-                  <CtrlSelect label="badgeEmphasis" value={badgeEmphasis}   onChange={setBadgeEmphasis}    options={['subtle','intense']} />
-                </>
-              )}
+            <h2>ModalHeader</h2>
+            <CtrlText   label="title"           value={titleText}        onChange={setTitleText}        />
+            <CtrlToggle label="showIcon"         checked={showIcon}       onChange={setShowIcon}         />
+            {showIcon && (
+              <CtrlSelect label="icon" value={modalIconName} onChange={setModalIconName} options={Object.keys(ICON_MAP)} />
+            )}
+            <CtrlToggle label="showSubtitle"     checked={showSubtitle}   onChange={setShowSubtitle}     />
+            {showSubtitle && (
+              <CtrlText label="subtitle"         value={subtitleText}     onChange={setSubtitleText}     />
+            )}
+            <CtrlToggle label="showBadge"        checked={showBadge}      onChange={setShowBadge}        />
+            {showBadge && (
+              <>
+                <CtrlText   label="badge"        value={badgeText}        onChange={setBadgeText}        />
+                <CtrlSelect label="badgeState"   value={badgeState}       onChange={setBadgeState}       options={['neutral','info','warning','error','success']} />
+                <CtrlSelect label="badgeEmphasis" value={badgeEmphasis}   onChange={setBadgeEmphasis}    options={['subtle','intense']} />
+                <CtrlToggle label="showIcon"      checked={badgeShowIcon} onChange={setBadgeShowIcon} />
+              </>
+            )}
 
-              <h2>ModalBody</h2>
-              <CtrlText   label="body"             value={bodyText}         onChange={setBodyText}         />
-              <CtrlToggle label="padding"          checked={bodyPadding}    onChange={setBodyPadding}      />
+            <h2>ModalBody</h2>
+            <CtrlText   label="body"             value={bodyText}         onChange={setBodyText}         />
+            <CtrlToggle label="padding"          checked={bodyPadding}    onChange={setBodyPadding}      />
 
-              <h2>ModalFooter</h2>
-              <CtrlToggle label="showLink"         checked={showLink}       onChange={setShowLink}         />
-              {showLink && (
-                <CtrlText label="link"             value={linkText}         onChange={setLinkText}         />
-              )}
-            </aside>
-
+            <h2>ModalFooter</h2>
+            <CtrlToggle label="showLink"         checked={showLink}       onChange={setShowLink}         />
+            {showLink && (
+              <CtrlText label="link"             value={linkText}         onChange={setLinkText}         />
+            )}
+          </>}>
             <main className="stage">
               {/* Playground */}
               <section>
@@ -3340,10 +3735,10 @@
                   closeOnEscape={closeOnEscape}
                 >
                   <ModalHeader
-                    icon={showIcon ? <InfoCircleIcon /> : undefined}
+                    icon={showIcon ? React.createElement(ICON_MAP[modalIconName] || ICON_MAP['InfoCircle'], { size: 16 }) : undefined}
                     subtitle={showSubtitle ? subtitleText : undefined}
                     badge={showBadge ? (
-                      <Badge state={badgeState} emphasis={badgeEmphasis} showIcon={false}>{badgeText}</Badge>
+                      <Badge state={badgeState} emphasis={badgeEmphasis} showIcon={badgeShowIcon}>{badgeText}</Badge>
                     ) : undefined}
                   >
                     {titleText}
@@ -3496,7 +3891,7 @@
                 </Modal>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -3522,31 +3917,27 @@
         const AG_MENU_ITEMS = agMenuItems.map(it => ({ ...it, type: it.type || undefined, country: it.country || undefined, status: it.status || undefined }));
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>AvatarGroup</h2>
-              <CtrlText   label="initials"        value={agInitials}        onChange={setAgInitials} />
-              <CtrlText   label="name"             value={agName}            onChange={setAgName} />
-              <CtrlText   label="designation"      value={agDesignation}     onChange={setAgDesignation} />
-              <CtrlToggle label="displayName"      checked={agDisplayName}    onChange={setAgDisplayName} />
-              <CtrlToggle label="showDesignation"  checked={agShowDesignation} onChange={setAgShowDesignation} />
-              <CtrlToggle label="showDropdown"     checked={agShowDropdown}   onChange={setAgShowDropdown} />
-              <CtrlToggle label="isExpanded"       checked={agExpanded}       onChange={setAgExpanded} />
-              {agMenuItems.map((item, i) => (
-                <React.Fragment key={item.id}>
-                  <h2>Item {i + 1} (_BaseMenuItem)</h2>
-                  <CtrlText   label="label"      value={item.label}            onChange={v => setAgItem(i, { label: v })} />
-                  <CtrlSelect label="type"       value={item.type || 'none'}   onChange={v => setAgItem(i, { type: v === 'none' ? '' : v })} options={['none', 'Multi-Select', 'Single-Select', 'Flag']} />
-                  {item.type === 'Flag' && <CtrlText label="country" value={item.country} onChange={v => setAgItem(i, { country: v })} placeholder="e.g. IN, US" />}
-                  <CtrlToggle label="isSelected" checked={item.isSelected}     onChange={v => setAgItem(i, { isSelected: v })} />
-                  <CtrlToggle label="showStatus" checked={item.showStatus}     onChange={v => setAgItem(i, { showStatus: v })} />
-                  {item.showStatus && <CtrlText label="status" value={item.status} onChange={v => setAgItem(i, { status: v })} placeholder="e.g. Beta" />}
-                </React.Fragment>
-              ))}
-            </aside>
-
+          <PanelLayout panelContent={<>
+            <h2>AvatarGroup</h2>
+            <CtrlText   label="initials"        value={agInitials}        onChange={setAgInitials} />
+            <CtrlText   label="name"             value={agName}            onChange={setAgName} />
+            <CtrlText   label="designation"      value={agDesignation}     onChange={setAgDesignation} />
+            <CtrlToggle label="displayName"      checked={agDisplayName}    onChange={setAgDisplayName} />
+            <CtrlToggle label="showDesignation"  checked={agShowDesignation} onChange={setAgShowDesignation} />
+            <CtrlToggle label="showDropdown"     checked={agShowDropdown}   onChange={setAgShowDropdown} />
+            <CtrlToggle label="isExpanded"       checked={agExpanded}       onChange={setAgExpanded} />
+            {agMenuItems.map((item, i) => (
+              <React.Fragment key={item.id}>
+                <h2>Item {i + 1} (_BaseMenuItem)</h2>
+                <CtrlText   label="label"      value={item.label}            onChange={v => setAgItem(i, { label: v })} />
+                <CtrlSelect label="type"       value={item.type || 'none'}   onChange={v => setAgItem(i, { type: v === 'none' ? '' : v })} options={['none', 'Multi-Select', 'Single-Select', 'Flag']} />
+                {item.type === 'Flag' && <CtrlText label="country" value={item.country} onChange={v => setAgItem(i, { country: v })} placeholder="e.g. IN, US" />}
+                <CtrlToggle label="isSelected" checked={item.isSelected}     onChange={v => setAgItem(i, { isSelected: v })} />
+                <CtrlToggle label="showStatus" checked={item.showStatus}     onChange={v => setAgItem(i, { showStatus: v })} />
+                {item.showStatus && <CtrlText label="status" value={item.status} onChange={v => setAgItem(i, { status: v })} placeholder="e.g. Beta" />}
+              </React.Fragment>
+            ))}
+          </>}>
             <main className="stage">
               <section>
                 <h2>AvatarGroup — Interactive Playground</h2>
@@ -3700,7 +4091,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -3710,6 +4101,7 @@
       function Playground() {
         /* --- Navigation --- */
         const [activeComponent, setActiveComponent] = useState('button');
+        const [panelOpen, setPanelOpen] = useState(true);
 
         const NAV_ITEMS = [
           { id: 'button',         label: 'Button'         },
@@ -3729,6 +4121,7 @@
           { id: 'tag',            label: 'Tag'            },
           { id: 'tabs',           label: 'Tabs'           },
           { id: 'modal',          label: 'Modal'          },
+          { id: 'accordian',      label: 'Accordian'      },
           { id: 'avatar',         label: 'Avatar'         },
           { id: 'avatargroup',    label: 'AvatarGroup'    },
         ];
@@ -3888,6 +4281,7 @@
         }
 
         return (
+          <PanelContext.Provider value={{ open: panelOpen, setOpen: setPanelOpen }}>
           <div className="app">
             {/* ============================================================
              * PRIMARY NAV — component list
@@ -3916,19 +4310,15 @@
             {activeComponent === 'tag'         && <TagSection />}
             {activeComponent === 'tabs'        && <TabsSection />}
             {activeComponent === 'modal'       && <ModalSection />}
+            {activeComponent === 'accordian'   && <AccordianSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
 
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'modal' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && <>
-
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
-                Adjust and see live on the right.
-              </p>
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && (
+            <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
                 <>
@@ -4076,7 +4466,7 @@
                 </>
               )}
 
-            </aside>
+            </>}>
 
             {/* ============================================================
              * MAIN STAGE — previews
@@ -4806,7 +5196,7 @@
 
             </main>
 
-            </> /* end aside+main conditional */}
+            </PanelLayout>)}
 
             {/* ---- Toast overlay (fixed bottom-right) ---- */}
             <div className="toast-container" aria-live="polite" aria-atomic="false">
@@ -4817,6 +5207,7 @@
               ))}
             </div>
           </div>
+          </PanelContext.Provider>
         );
       }
 
