@@ -10,6 +10,8 @@
 
 export * from './components/Alert';
 export * from './components/Avatar';
+export * from './components/DeterminateLoader';
+export * from './components/IndeterminateLoader';
 export * from './components/AvatarGroup';
 export * from './components/Stepper';
 export * from './components/Tooltip';
