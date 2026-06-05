@@ -1015,6 +1015,29 @@
 
       /* Modal demo helpers */
       .modal-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+
+      /* ============================================================
+       * DeterminateLoader.css — Figma node 1764:705
+       * ============================================================ */
+      .dcds-DeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
+      .dcds-DeterminateLoader__track { width:100%; height:4px; background-color:var(--color-surface-4); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
+      .dcds-DeterminateLoader__fill { height:100%; background-color:var(--color-fill-primary-3); border-radius:var(--rd-XS); transition:width 200ms ease; position:relative; }
+      .dcds-DeterminateLoader__labels { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); width:100%; }
+      .dcds-DeterminateLoader__helper-text { flex:1 0 0; min-width:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-DeterminateLoader__percentage { flex-shrink:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; text-align:right; white-space:nowrap; }
+      @media (prefers-reduced-motion:reduce) { .dcds-DeterminateLoader__fill { transition:none; } }
+
+      /* ============================================================
+       * IndeterminateLoader.css — Figma node 1764:731
+       * ============================================================ */
+      .dcds-IndeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
+      .dcds-IndeterminateLoader__track { width:100%; background-color:var(--color-fill-primary-1); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
+      .dcds-IndeterminateLoader--size-Small .dcds-IndeterminateLoader__track { height:4px; }
+      .dcds-IndeterminateLoader--size-Medium .dcds-IndeterminateLoader__track { height:8px; }
+      @keyframes dcds-IndeterminateLoader__scan { from { left:-82px; } to { left:100%; } }
+      .dcds-IndeterminateLoader__segment { position:absolute; top:0; left:-82px; width:82px; height:100%; border-radius:var(--rd-XS); background-color:var(--color-fill-primary-3); animation:dcds-IndeterminateLoader__scan 3.5s linear infinite; }
+      .dcds-IndeterminateLoader__label { display:block; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; }
+      @media (prefers-reduced-motion:reduce) { .dcds-IndeterminateLoader__segment { animation:none; left:50%; transform:translateX(-50%); opacity:0.6; } }
     </style>
   </head>
   <body>
@@ -3705,6 +3728,70 @@
       }
 
       /* ============================================================
+       * DeterminateLoader — mirrors DeterminateLoader.tsx 1:1
+       * ============================================================ */
+      function DeterminateLoader({
+        progress, displayHelperText = true, displayPercentage = true,
+        helperText = 'Helper text...', 'aria-label': ariaLabel,
+        'aria-labelledby': ariaLabelledBy, onProgressComplete, onProgressChange,
+        onMouseEnter, onMouseLeave, onFocus, onBlur, className, id, dataTestId,
+      }) {
+        const clamped = Math.min(100, Math.max(0, Math.round(progress)));
+        const prevRef = useRef(clamped);
+        useEffect(() => {
+          if (clamped === 100 && prevRef.current < 100 && onProgressComplete) onProgressComplete();
+          prevRef.current = clamped;
+        }, [clamped, onProgressComplete]);
+        useEffect(() => { if (onProgressChange) onProgressChange(clamped); }, [clamped, onProgressChange]);
+        const resolvedAriaLabel = ariaLabel ?? `${clamped}% complete`;
+        return (
+          <div id={id} className={['dcds-DeterminateLoader', className].filter(Boolean).join(' ')}
+            data-testid={dataTestId} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
+            onFocus={onFocus} onBlur={onBlur}
+          >
+            <div role="progressbar" aria-valuenow={clamped} aria-valuemin={0} aria-valuemax={100}
+              aria-valuetext={resolvedAriaLabel}
+              aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : resolvedAriaLabel)}
+              aria-labelledby={ariaLabelledBy} className="dcds-DeterminateLoader__track"
+            >
+              <div className="dcds-DeterminateLoader__fill" style={{ width: `${clamped}%` }} />
+            </div>
+            {(displayHelperText || displayPercentage) && (
+              <div className="dcds-DeterminateLoader__labels">
+                {displayHelperText && <span className="dcds-DeterminateLoader__helper-text">{helperText}</span>}
+                {displayPercentage && <span className="dcds-DeterminateLoader__percentage" aria-hidden="true">{clamped}%</span>}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * IndeterminateLoader — mirrors IndeterminateLoader.tsx 1:1
+       * ============================================================ */
+      function IndeterminateLoader({
+        size = 'Small', helperText: showHelperText = true, label = 'Helper text...',
+        'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy,
+        onMouseEnter, onMouseLeave, onFocus, onBlur, className, id, dataTestId,
+      }) {
+        const resolvedAriaLabel = ariaLabel ?? (showHelperText ? label : 'Loading');
+        return (
+          <div id={id} className={['dcds-IndeterminateLoader', `dcds-IndeterminateLoader--size-${size}`, className].filter(Boolean).join(' ')}
+            data-testid={dataTestId} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
+            onFocus={onFocus} onBlur={onBlur}
+          >
+            <div role="progressbar" aria-busy="true"
+              aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : resolvedAriaLabel)}
+              aria-labelledby={ariaLabelledBy} className="dcds-IndeterminateLoader__track"
+            >
+              <div className="dcds-IndeterminateLoader__segment" aria-hidden="true" />
+            </div>
+            {showHelperText && <span className="dcds-IndeterminateLoader__label">{label}</span>}
+          </div>
+        );
+      }
+
+      /* ============================================================
        * The full playground
        * ============================================================ */
       function Playground() {
@@ -3730,7 +3817,8 @@
           { id: 'tabs',           label: 'Tabs'           },
           { id: 'modal',          label: 'Modal'          },
           { id: 'avatar',         label: 'Avatar'         },
-          { id: 'avatargroup',    label: 'AvatarGroup'    },
+          { id: 'avatargroup',  label: 'AvatarGroup'  },
+          { id: 'progressbar',  label: 'Progress Bar' },
         ];
 
         /* --- Button controls --- */
@@ -3876,6 +3964,31 @@
         const [alertShowClose, setAlertShowClose] = useState(true);
         const [alertShowActions, setAlertShowActions] = useState(false);
         const [alertClosed, setAlertClosed] = useState(false);
+
+        /* --- DeterminateLoader controls --- */
+        const [dlProgress,          setDlProgress]          = useState(0);
+        const [dlPlaying,           setDlPlaying]           = useState(true);
+        const [dlDisplayHelper,     setDlDisplayHelper]     = useState(true);
+        const [dlDisplayPercentage, setDlDisplayPercentage] = useState(true);
+        const [dlHelperText,        setDlHelperText]        = useState('Uploading statement.pdf');
+        const [dlLog,               pushDlLog]              = useEventLog();
+
+        /* Auto-increment: +1% every 80 ms → full cycle ~8 s, pause 900 ms at 100 then loop */
+        useEffect(() => {
+          if (!dlPlaying) return;
+          if (dlProgress >= 100) {
+            const t = setTimeout(() => setDlProgress(0), 900);
+            return () => clearTimeout(t);
+          }
+          const t = setTimeout(() => setDlProgress((p) => Math.min(100, p + 1)), 80);
+          return () => clearTimeout(t);
+        }, [dlPlaying, dlProgress]);
+
+        /* --- IndeterminateLoader controls --- */
+        const [ilSize,      setIlSize]      = useState('Small');
+        const [ilShowLabel, setIlShowLabel] = useState(true);
+        const [ilLabel,     setIlLabel]     = useState('Loading results…');
+        const [ilLog,       pushIlLog]      = useEventLog();
 
         /* --- Toast state --- */
         const [toasts, setToasts] = useState([]);
@@ -4059,6 +4172,21 @@
                       options={['active','completed','upcoming','pending','disabled']}
                     />
                   ))}
+                </>
+              )}
+
+              {activeComponent === 'progressbar' && (
+                <>
+                  <h2>DeterminateLoader</h2>
+                  <CtrlToggle label="animate"           checked={dlPlaying}           onChange={(v) => { setDlPlaying(v); if (!v) setDlProgress(0); }} />
+                  <CtrlText   label="progress (0–100)"  value={String(dlProgress)}    onChange={(v) => { setDlPlaying(false); const n = parseInt(v, 10); setDlProgress(isNaN(n) ? 0 : Math.min(100, Math.max(0, n))); }} />
+                  <CtrlToggle label="displayHelperText" checked={dlDisplayHelper}     onChange={setDlDisplayHelper} />
+                  <CtrlToggle label="displayPercentage" checked={dlDisplayPercentage} onChange={setDlDisplayPercentage} />
+                  <CtrlText   label="helperText"        value={dlHelperText}          onChange={setDlHelperText} />
+                  <h2 style={{ marginTop: 'var(--gap-16)' }}>IndeterminateLoader</h2>
+                  <CtrlSelect label="size"       value={ilSize}      onChange={setIlSize}      options={['Small', 'Medium']} />
+                  <CtrlToggle label="helperText" checked={ilShowLabel} onChange={setIlShowLabel} />
+                  <CtrlText   label="label"      value={ilLabel}     onChange={setIlLabel} />
                 </>
               )}
 
@@ -4338,6 +4466,92 @@
                     <Checkbox State="Enabled" label="Indeterminate (mixed)" indeterminate={true} />
                   </div>
                 </section>
+              )}
+
+              {activeComponent === 'progressbar' && (
+                <>
+                  {/* ── DeterminateLoader ── */}
+                  <section>
+                    <h2>DeterminateLoader — Interactive Playground</h2>
+                    <p className="stage-note">
+                      Toggle <code>animate</code> in the left panel to watch progress fill end-to-end and loop.
+                      Turn off <code>animate</code> to set a manual value.
+                    </p>
+                    <div className="preview" style={{ flexDirection:'column', alignItems:'stretch', padding:'var(--gap-24)' }}>
+                      <DeterminateLoader
+                        progress={dlProgress}
+                        displayHelperText={dlDisplayHelper}
+                        displayPercentage={dlDisplayPercentage}
+                        helperText={dlHelperText}
+                        aria-label={`${dlHelperText}: ${dlProgress}% complete`}
+                        onProgressComplete={() => pushDlLog('onProgressComplete')}
+                        onProgressChange={(p) => pushDlLog(`onProgressChange: ${p}%`)}
+                      />
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>DeterminateLoader — Label Variants</h2>
+                    <p className="stage-note">
+                      Both labels visible (default) · percentage hidden · helper text hidden.
+                      Do NOT set both to false — the bar alone gives insufficient context.
+                    </p>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>Both visible (default)</p>
+                        <DeterminateLoader progress={62} helperText="Uploading statement.pdf" aria-label="Upload progress: 62%" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>displayPercentage=false</code></p>
+                        <DeterminateLoader progress={62} helperText="Processing documents" displayPercentage={false} aria-label="Processing: 62% complete" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>displayHelperText=false</code></p>
+                        <DeterminateLoader progress={62} displayHelperText={false} aria-label="Loading: 62% complete" />
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* ── IndeterminateLoader ── */}
+                  <section>
+                    <h2>IndeterminateLoader — Interactive Playground</h2>
+                    <p className="stage-note">Adjust <code>size</code> and label props in the left panel.</p>
+                    <div className="preview" style={{ flexDirection:'column', alignItems:'stretch', padding:'var(--gap-24)' }}>
+                      <IndeterminateLoader size={ilSize} helperText={ilShowLabel} label={ilLabel} aria-label={ilLabel} />
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>IndeterminateLoader — Sizes</h2>
+                    <p className="stage-note">
+                      <code>Small</code> (4 px) and <code>Medium</code> (8 px) — same segment colour, different height.
+                    </p>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>size="Small"</code> — 4 px</p>
+                        <IndeterminateLoader size="Small" label="Loading results…" aria-label="Loading results" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>size="Medium"</code> — 8 px</p>
+                        <IndeterminateLoader size="Medium" label="Fetching your documents…" aria-label="Fetching documents" />
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>IndeterminateLoader — Label Variants</h2>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>With label (default)</p>
+                        <IndeterminateLoader size="Small" label="Loading results…" aria-label="Loading results" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>helperText=false</code> — bar only</p>
+                        <IndeterminateLoader size="Small" helperText={false} aria-label="Loading" />
+                      </div>
+                    </div>
+                  </section>
+                </>
               )}
 
               {activeComponent === 'alert' && (
