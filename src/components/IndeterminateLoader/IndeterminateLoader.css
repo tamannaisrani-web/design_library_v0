@@ -1,0 +1,113 @@
+/* IndeterminateLoader — token-driven styles.
+ * Figma node 1764:731 · Design Language System (Claude)
+ *
+ * Token mapping (verified against Figma — all four keyframe variants):
+ *   Track bg              → color/fill/primary-1  (Noble Blue-50  #dae9fb)
+ *   Segment (Small + Med) → color/fill/primary-3  (Noble Blue-200 #6ba8ee)
+ *   Helper text           → color/text/primary    (Noble Blue-500 #0A2E57)
+ *   Height Small     → 4px
+ *   Height Medium    → 8px
+ *   Radius           → --rd-XS (4px)
+ *   Segment width    → 82px (matches Figma keyframe spec)
+ *
+ * Never override background-color, border-radius, or font via className.
+ * Use className only for layout (margin / grid placement). */
+
+/* ===========================================================
+ * Root container
+ * =========================================================== */
+
+.dcds-IndeterminateLoader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  width: 100%;
+  position: relative;
+}
+
+/* ===========================================================
+ * Track — the light-blue background rail
+ * overflow: hidden clips the segment cleanly at both edges
+ * =========================================================== */
+
+.dcds-IndeterminateLoader__track {
+  width: 100%;
+  background-color: var(--color-fill-primary-1);
+  border-radius: var(--rd-XS);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ===========================================================
+ * Size variants — bar height
+ * =========================================================== */
+
+.dcds-IndeterminateLoader--size-Small .dcds-IndeterminateLoader__track {
+  height: 4px;
+}
+
+.dcds-IndeterminateLoader--size-Medium .dcds-IndeterminateLoader__track {
+  height: 8px;
+}
+
+/* ===========================================================
+ * Animated segment — 82px wide, sweeps end-to-end left-to-right
+ *
+ * WHY left-based animation instead of transform:
+ *   translateX(calc(100% + 82px)) uses 100% of the ELEMENT's own
+ *   width (82px), so the segment only moves 164px total — never
+ *   reaching the right edge of the track.
+ *   Animating `left` uses 100% of the PARENT's width, so the
+ *   segment correctly sweeps across the full bar regardless of
+ *   container width.
+ *
+ *   from: left -82px  → segment entirely off-screen left
+ *   to:   left 100%   → segment's left edge at parent right edge,
+ *                        entirely off-screen right (clipped by overflow:hidden)
+ * =========================================================== */
+
+@keyframes dcds-IndeterminateLoader__scan {
+  from { left: -82px; }
+  to   { left: 100%;  }
+}
+
+/* Both sizes use the same segment colour — only height differs (Figma verified).
+ * Track: color/fill/primary-1 (#dae9fb) · Segment: color/fill/primary-3 (#6ba8ee) */
+.dcds-IndeterminateLoader__segment {
+  position: absolute;
+  top: 0;
+  left: -82px; /* off-screen left at rest; also the animation start point */
+  width: 82px;
+  height: 100%;
+  border-radius: var(--rd-XS);
+  background-color: var(--color-fill-primary-3); /* Noble Blue-200 #6ba8ee */
+  animation: dcds-IndeterminateLoader__scan 3.5s linear infinite;
+}
+
+/* ===========================================================
+ * Helper text label below the bar
+ * Font: Desktop/Body/Body small - Regular (Nunito Sans 12px)
+ * =========================================================== */
+
+.dcds-IndeterminateLoader__label {
+  display: block;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-small); /* 12px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: normal;
+}
+
+/* ===========================================================
+ * Reduced motion — show static centred segment, no animation
+ * =========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .dcds-IndeterminateLoader__segment {
+    animation: none;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.6;
+  }
+}
