@@ -3,6 +3,35 @@
  */
 
 import type { ReactNode } from 'react';
+import type React from 'react';
+
+/**
+ * Props accepted by every icon component in `icons/src/linear/` and `icons/src/bold/`.
+ * Matches the local `IconProps` interface defined inside each generated icon file.
+ */
+export interface IconComponentProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+/**
+ * Type for any icon from the repo's `icons/src/` directory.
+ *
+ * Pass the **component class** — not a pre-rendered element.
+ * The receiving component renders it at the correct size internally.
+ *
+ * @example
+ * ```tsx
+ * import { GalleryLinear } from '../../../icons/src/linear/GalleryLinear';
+ * <Accordian leadingIcon={GalleryLinear} showLeading />
+ *
+ * import { DocumentLinear } from '../../../icons/src/linear/DocumentLinear';
+ * <Tabs tabs={[{ label: 'Docs', leading: { icon: DocumentLinear } }]} />
+ *
+ * import { InfoCircleLinear } from '../../../icons/src/linear/InfoCircleLinear';
+ * <ModalHeader icon={InfoCircleLinear}>Title</ModalHeader>
+ * ```
+ */
+export type IconComponent = React.ComponentType<IconComponentProps>;
 
 /**
  * Common props every component accepts.
