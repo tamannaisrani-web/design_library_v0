@@ -679,6 +679,45 @@
       .control input[type='checkbox'] { transform: scale(1.1); }
 
       /* ------------------------------------------------------------------ */
+      /* Collapsible panel                                                    */
+      /* ------------------------------------------------------------------ */
+      .panel__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--gap-8);
+        margin-bottom: var(--gap-8);
+      }
+      .panel__toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: none;
+        border-radius: var(--rd-XS);
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-icon-subdued);
+      }
+      .panel__toggle-btn:hover {
+        background: var(--color-fill-primary-0);
+        color: var(--color-icon-primary);
+      }
+      .panel__toggle-btn svg {
+        transition: transform 200ms ease;
+      }
+      .panel--collapsed {
+        padding: var(--gap-12) var(--gap-8);
+        overflow: hidden;
+      }
+      .panel--collapsed .panel__header {
+        justify-content: center;
+      }
+
+      /* ------------------------------------------------------------------ */
       /* Stage (right panel)                                                  */
       /* ------------------------------------------------------------------ */
       .stage {
@@ -1013,6 +1052,126 @@
 
       /* Modal demo helpers */
       .modal-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+
+      /*
+       * Accordian — collapsible content panel.
+       * Mirrors src/components/Accordian/Accordian.css
+       */
+      .dcds-Accordian { background:var(--color-surface-1); display:flex; flex-direction:column; width:100%; min-width:360px; position:relative; }
+      .dcds-Accordian--rounded { border:0.5px solid var(--color-stroke-subdued); border-radius:var(--rd-S); overflow:hidden; }
+      .dcds-Accordian__header { display:flex; align-items:flex-start; gap:var(--gap-12); padding:var(--gap-12); width:100%; background:transparent; border:none; cursor:pointer; text-align:left; transition:background-color 120ms ease; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
+      .dcds-Accordian__header:hover { background-color:var(--color-fill-primary-0); }
+      .dcds-Accordian__header:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+      .dcds-Accordian:not(.dcds-Accordian--rounded) .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
+      .dcds-Accordian--rounded.dcds-Accordian--state-open .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
+      .dcds-Accordian__header-main { display:flex; align-items:flex-start; gap:var(--gap-8); flex:1; min-width:0; }
+      .dcds-Accordian__leading { display:flex; align-items:center; justify-content:center; width:24px; height:24px; flex-shrink:0; color:var(--color-icon-primary); }
+      .dcds-Accordian__header-content { display:flex; align-items:flex-start; gap:var(--gap-12); flex:1; min-width:0; }
+      .dcds-Accordian__text { display:flex; flex-direction:column; flex:1; min-width:0; word-break:break-word; text-align:left; }
+      .dcds-Accordian__title { font-family:var(--font-family); font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; }
+      .dcds-Accordian__subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; }
+      .dcds-Accordian__trailing { display:flex; align-items:center; gap:var(--gap-12); flex-shrink:0; }
+      .dcds-Accordian__actions { display:flex; align-items:center; flex-shrink:0; }
+      .dcds-Accordian__chevron { display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-primary); transition:transform 200ms ease; }
+      .dcds-Accordian--state-open .dcds-Accordian__chevron { transform:rotate(180deg); }
+      @media (prefers-reduced-motion:reduce) { .dcds-Accordian__chevron { transition:none; } }
+      .dcds-Accordian__body { padding:var(--gap-12); overflow:hidden; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; }
+      .dcds-Accordian__body[hidden] { display:none; }
+      .dcds-Accordian__body-slot { width:100%; }
+
+      /* ============================================================
+       * DeterminateLoader.css — Figma node 1764:705
+       * ============================================================ */
+      .dcds-DeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
+      .dcds-DeterminateLoader__track { width:100%; height:4px; background-color:var(--color-surface-4); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
+      .dcds-DeterminateLoader__fill { height:100%; background-color:var(--color-fill-primary-3); border-radius:var(--rd-XS); transition:width 200ms ease; position:relative; }
+      .dcds-DeterminateLoader__labels { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); width:100%; }
+      .dcds-DeterminateLoader__helper-text { flex:1 0 0; min-width:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-DeterminateLoader__percentage { flex-shrink:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; text-align:right; white-space:nowrap; }
+      @media (prefers-reduced-motion:reduce) { .dcds-DeterminateLoader__fill { transition:none; } }
+
+      /* ============================================================
+       * IndeterminateLoader.css — Figma node 1764:731
+       * ============================================================ */
+      .dcds-IndeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
+      .dcds-IndeterminateLoader__track { width:100%; background-color:var(--color-fill-primary-1); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
+      .dcds-IndeterminateLoader--size-Small .dcds-IndeterminateLoader__track { height:4px; }
+      .dcds-IndeterminateLoader--size-Medium .dcds-IndeterminateLoader__track { height:8px; }
+      @keyframes dcds-IndeterminateLoader__scan { from { left:-82px; } to { left:100%; } }
+      .dcds-IndeterminateLoader__segment { position:absolute; top:0; left:-82px; width:82px; height:100%; border-radius:var(--rd-XS); background-color:var(--color-fill-primary-3); animation:dcds-IndeterminateLoader__scan 3.5s linear infinite; }
+      .dcds-IndeterminateLoader__label { display:block; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; }
+      @media (prefers-reduced-motion:reduce) { .dcds-IndeterminateLoader__segment { animation:none; left:50%; transform:translateX(-50%); opacity:0.6; } }
+
+      /* ============================================================
+       * UploadDragDrop.css
+       * ============================================================ */
+      .dcds-UploadDragDrop { display:inline-flex; flex-direction:column; gap:var(--gap-4); font-family:var(--font-family); }
+      .dcds-UploadDragDrop__label { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; }
+      .dcds-UploadDragDrop__zone { position:relative; width:350px; height:112px; display:flex; flex-direction:row; align-items:center; justify-content:center; gap:var(--gap-8); padding:var(--gap-12) var(--gap-24); border:2px dashed var(--color-stroke-action); border-radius:var(--rd-S); background-color:var(--color-surface-1); box-sizing:border-box; cursor:pointer; transition:background-color 120ms ease,border-color 120ms ease; }
+      .dcds-UploadDragDrop__zone:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-UploadDragDrop__input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+      .dcds-UploadDragDrop__icon-wrap { width:40px; height:40px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background-color:var(--color-surface-1); border-radius:var(--rd-S); }
+      .dcds-UploadDragDrop__icon-wrap--hover { background-color:transparent; }
+      .dcds-UploadDragDrop__icon-svg { color:var(--color-icon-action); }
+      .dcds-UploadDragDrop__icon-svg--disabled { color:var(--color-icon-disabled); }
+      .dcds-UploadDragDrop__content { display:flex; flex-direction:column; align-items:flex-start; gap:var(--gap-4); flex:1; min-width:0; }
+      .dcds-UploadDragDrop__cta-row { display:flex; align-items:center; gap:var(--gap-4); flex-wrap:wrap; }
+      .dcds-UploadDragDrop__cta-text { font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-neutral); line-height:normal; white-space:nowrap; }
+      .dcds-UploadDragDrop__cta-link { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); color:var(--color-text-action); line-height:normal; white-space:nowrap; cursor:pointer; background:none; border:none; padding:0; text-decoration:none; position:relative; z-index:1; }
+      .dcds-UploadDragDrop__requirements { font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-success); line-height:normal; }
+      .dcds-UploadDragDrop__validation { display:flex; align-items:center; gap:var(--gap-4); padding:0 var(--gap-4); }
+      .dcds-UploadDragDrop__validation-icon { flex-shrink:0; }
+      .dcds-UploadDragDrop__validation-text { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); line-height:normal; white-space:nowrap; }
+      .dcds-UploadDragDrop__validation--error .dcds-UploadDragDrop__validation-icon { color:var(--color-icon-error); }
+      .dcds-UploadDragDrop__validation--error .dcds-UploadDragDrop__validation-text { color:var(--color-text-error); }
+      .dcds-UploadDragDrop__validation--warning .dcds-UploadDragDrop__validation-icon { color:var(--color-icon-warning); }
+      .dcds-UploadDragDrop__validation--warning .dcds-UploadDragDrop__validation-text { color:var(--color-text-warning); }
+      .dcds-UploadDragDrop__validation--success .dcds-UploadDragDrop__validation-icon { color:var(--color-icon-success); }
+      .dcds-UploadDragDrop__validation--success .dcds-UploadDragDrop__validation-text { color:var(--color-text-success); }
+      .dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__zone { background-color:var(--dcds-wealthy-green-50,#e7faf2); }
+      .dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover { background-color:var(--dcds-wealthy-green-50,#e7faf2); }
+      .dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__icon-wrap { background-color:transparent; }
+      .dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__cta-text, .dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__cta-link { color:var(--color-text-primary); }
+      .dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__requirements { color:var(--color-text-info); }
+      .dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__cta-text, .dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__cta-link { color:var(--color-text-primary); }
+      .dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__requirements { color:var(--color-text-info); }
+      .dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__zone { background-color:var(--color-surface-disabled); border-color:var(--color-surface-4,#f0f0f0); cursor:not-allowed; pointer-events:none; }
+      .dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__cta-text, .dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__cta-link { color:var(--color-text-disabled); }
+      .dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__requirements { color:var(--color-text-disabled); }
+      .dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__label { color:var(--color-text-disabled); }
+      .dcds-UploadDragDrop--drag-over .dcds-UploadDragDrop__zone { background-color:var(--dcds-wealthy-green-50,#e7faf2); }
+      .dcds-UploadDragDrop--full-width .dcds-UploadDragDrop__zone { width:100%; }
+
+      /* ============================================================
+       * UploadCTA.css
+       * ============================================================ */
+      .dcds-UploadCTA { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:var(--gap-8); font-family:var(--font-family); font-weight:var(--font-weight-bold); border:1.5px dashed var(--color-stroke-action); background-color:var(--color-surface-1); color:var(--color-text-action); cursor:pointer; transition:background-color 120ms ease,border-color 120ms ease,color 120ms ease; white-space:nowrap; user-select:none; box-sizing:border-box; }
+      .dcds-UploadCTA:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-UploadCTA__input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+      .dcds-UploadCTA__icon { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; pointer-events:none; }
+      .dcds-UploadCTA__label { pointer-events:none; line-height:normal; }
+      .dcds-UploadCTA--size-XS { height:24px; padding:0 var(--gap-8); font-size:var(--font-size-body-small); border-radius:var(--rd-XS); }
+      .dcds-UploadCTA--size-XS .dcds-UploadCTA__icon { width:12px; height:12px; }
+      .dcds-UploadCTA--size-S { height:32px; padding:0 var(--gap-12); font-size:var(--font-size-body-small); border-radius:var(--rd-XS); }
+      .dcds-UploadCTA--size-S .dcds-UploadCTA__icon { width:12px; height:12px; }
+      .dcds-UploadCTA--size-M { height:40px; padding:0 var(--gap-16); font-size:var(--font-size-body); border-radius:var(--rd-S); }
+      .dcds-UploadCTA--size-M .dcds-UploadCTA__icon { width:16px; height:16px; }
+      .dcds-UploadCTA--size-L { height:48px; padding:0 var(--gap-20); font-size:var(--font-size-body); border-radius:var(--rd-S); }
+      .dcds-UploadCTA--size-L .dcds-UploadCTA__icon { width:16px; height:16px; }
+      .dcds-UploadCTA--full-width { width:100%; }
+      .dcds-UploadCTA--state-Hover, .dcds-UploadCTA:hover:not(:disabled):not([aria-disabled='true']) { background-color:var(--color-fill-light-action); }
+      .dcds-UploadCTA--state-Disabled, .dcds-UploadCTA:disabled, .dcds-UploadCTA[aria-disabled='true'] { background-color:var(--color-surface-disabled); border-color:var(--color-stroke-disabled); color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+
+      /* ============================================================
+       * UploadDocument.css
+       * ============================================================ */
+      .dcds-UploadDocument { display:flex; flex-direction:column; gap:var(--gap-8); width:560px; padding:var(--gap-4); font-family:var(--font-family); box-sizing:border-box; }
+      .dcds-UploadDocument--full-width { width:100%; }
+      .dcds-UploadDocument__row { display:flex; flex-direction:row; align-items:center; gap:var(--gap-8); width:100%; }
+      .dcds-UploadDocument__doc-icon { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:var(--color-icon-primary); }
+      .dcds-UploadDocument__name { flex:1; min-width:0; font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-UploadDocument__actions { display:inline-flex; flex-direction:row; align-items:center; gap:var(--gap-8); flex-shrink:0; }
+      .dcds-UploadDocument__loader { width:100%; }
     </style>
   </head>
   <body>
@@ -1258,11 +1417,11 @@
       }
 
       /* ============================================================
-       * ArrowDownLinearIcon (replaces ChevronDownIcon — Task 2)
+       * ArrowDownLinearIcon — path sourced from icons/src/linear/ArrowDownLinear.tsx
        * ============================================================ */
       const ArrowDownLinearIcon = ({ size = 16 }) => (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-          <path d="M19.9201 8.95007L13.4001 15.4701C12.6301 16.2401 11.3701 16.2401 10.6001 15.4701L4.08008 8.95007" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
 
@@ -2296,6 +2455,45 @@
       }
 
       /* ============================================================
+       * PanelContext — shared collapse state across all sections
+       * ============================================================ */
+      const PanelContext = React.createContext({ open: true, setOpen: () => {} });
+
+      /* ============================================================
+       * PanelLayout — collapsible panel wrapper for all sections
+       * ============================================================ */
+      function PanelLayout({ panelContent, children }) {
+        const { open, setOpen } = React.useContext(PanelContext);
+        const chevron = (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            style={{ transform: open ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        );
+        return (
+          <div style={{ gridColumn: '2 / 4', display: 'grid', gridTemplateColumns: open ? '300px 1fr' : '44px 1fr', transition: 'grid-template-columns 200ms ease', height: '100%', overflow: 'hidden' }}>
+            <aside className={`panel${open ? '' : ' panel--collapsed'}`}>
+              <div className="panel__header">
+                {open && (
+                  <div>
+                    <h1 style={{ margin: 0 }}>Props</h1>
+                    <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: '4px 0 0' }}>Adjust and see live on the right.</p>
+                  </div>
+                )}
+                <button className="panel__toggle-btn" onClick={() => setOpen(p => !p)}
+                  aria-label={open ? 'Collapse panel' : 'Expand panel'}
+                  title={open ? 'Collapse panel' : 'Expand panel'}>
+                  {chevron}
+                </button>
+              </div>
+              {open && panelContent}
+            </aside>
+            {children}
+          </div>
+        );
+      }
+
+      /* ============================================================
        * ChipSection — self-contained chip playground (panel + stage)
        * ============================================================ */
       function ChipSection() {
@@ -2308,17 +2506,14 @@
         const { size: chipSize, state: chipState, selected: chipSelected, showIcon: chipShowIcon, label: chipLabel } = chip;
         const [chipLog, pushChipLog] = useEventLog();
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Chip</h2>
-              <CtrlSelect label="size"       value={chipSize}       onChange={setChipSize}     options={['S', 'M', 'L']} />
-              <CtrlSelect label="state"      value={chipState}      onChange={setChipState}    options={['Default', 'Disabled']} />
-              <CtrlToggle label="isSelected" checked={chipSelected} onChange={setChipSelected} />
-              <CtrlToggle label="showIcon"   checked={chipShowIcon} onChange={setChipShowIcon} />
-              <CtrlText   label="label"      value={chipLabel}      onChange={setChipLabel} />
-            </aside>
+          <PanelLayout panelContent={<>
+            <h2>Chip</h2>
+            <CtrlSelect label="size"       value={chipSize}       onChange={setChipSize}     options={['S', 'M', 'L']} />
+            <CtrlSelect label="state"      value={chipState}      onChange={setChipState}    options={['Default', 'Disabled']} />
+            <CtrlToggle label="isSelected" checked={chipSelected} onChange={setChipSelected} />
+            <CtrlToggle label="showIcon"   checked={chipShowIcon} onChange={setChipShowIcon} />
+            <CtrlText   label="label"      value={chipLabel}      onChange={setChipLabel} />
+          </>}>
             <main className="stage">
               <section>
                 <h2>Chip — Interactive Playground</h2>
@@ -2385,7 +2580,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2401,17 +2596,14 @@
         const setBadgeLabel    = (v) => setBadge((p) => ({ ...p, label: v }));
         const { size: badgeSize, emphasis: badgeEmphasis, state: badgeState, showIcon: badgeShowIcon, label: badgeLabel } = badge;
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Badge</h2>
-              <CtrlSelect label="size"     value={badgeSize}      onChange={setBadgeSize}     options={['S', 'M', 'L']} />
-              <CtrlSelect label="emphasis" value={badgeEmphasis}  onChange={setBadgeEmphasis} options={['subtle', 'intense']} />
-              <CtrlSelect label="state"    value={badgeState}     onChange={setBadgeState}    options={['neutral', 'info', 'warning', 'error', 'success']} />
-              <CtrlToggle label="showIcon" checked={badgeShowIcon} onChange={setBadgeShowIcon} />
-              <CtrlText   label="label"    value={badgeLabel}     onChange={setBadgeLabel} />
-            </aside>
+          <PanelLayout panelContent={<>
+            <h2>Badge</h2>
+            <CtrlSelect label="size"     value={badgeSize}      onChange={setBadgeSize}     options={['S', 'M', 'L']} />
+            <CtrlSelect label="emphasis" value={badgeEmphasis}  onChange={setBadgeEmphasis} options={['subtle', 'intense']} />
+            <CtrlSelect label="state"    value={badgeState}     onChange={setBadgeState}    options={['neutral', 'info', 'warning', 'error', 'success']} />
+            <CtrlToggle label="showIcon" checked={badgeShowIcon} onChange={setBadgeShowIcon} />
+            <CtrlText   label="label"    value={badgeLabel}     onChange={setBadgeLabel} />
+          </>}>
             <main className="stage">
               <section>
                 <h2>Badge — Interactive Playground</h2>
@@ -2455,7 +2647,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2472,16 +2664,13 @@
         const { size: tagSize, state: tagState, showIcon: tagShowIcon, label: tagLabel, demoTags } = tag;
         const [tagLog, pushTagLog] = useEventLog();
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Tag</h2>
-              <CtrlSelect label="size"     value={tagSize}      onChange={setTagSize}     options={['S', 'M']} />
-              <CtrlSelect label="state"    value={tagState}     onChange={setTagState}    options={['Default', 'Disabled']} />
-              <CtrlToggle label="showIcon" checked={tagShowIcon} onChange={setTagShowIcon} />
-              <CtrlText   label="label"    value={tagLabel}     onChange={setTagLabel} />
-            </aside>
+          <PanelLayout panelContent={<>
+            <h2>Tag</h2>
+            <CtrlSelect label="size"     value={tagSize}      onChange={setTagSize}     options={['S', 'M']} />
+            <CtrlSelect label="state"    value={tagState}     onChange={setTagState}    options={['Default', 'Disabled']} />
+            <CtrlToggle label="showIcon" checked={tagShowIcon} onChange={setTagShowIcon} />
+            <CtrlText   label="label"    value={tagLabel}     onChange={setTagLabel} />
+          </>}>
             <main className="stage">
               <section>
                 <h2>Tag — Interactive Playground</h2>
@@ -2530,7 +2719,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2562,7 +2751,7 @@
           <button role="tab" type="button" id={id} aria-selected={isSelected} aria-controls={ariaControls} aria-disabled={isDisabled} disabled={isDisabled} tabIndex={tabIndex} className={cls} onClick={onClick} onKeyDown={onKeyDown} data-testid={dataTestId}>
             <span className="dcds-BaseTabs__content">
               {/* Leading slot — icon from icons/svg/{linear,bold}/tick-circle.svg */}
-              {leading !== undefined && <span className="dcds-BaseTabs__icon" aria-hidden="true">{leading.icon}</span>}
+              {leading !== undefined && <span className="dcds-BaseTabs__icon" aria-hidden="true">{React.createElement(leading.icon, { size: 16 })}</span>}
               <span className="dcds-BaseTabs__label">{label}</span>
               {/* Trailing slot — counter (numeric) or tag (text keyword) */}
               {trailing !== undefined && <span className={`dcds-BaseTabs__badge dcds-BaseTabs__badge--${trailing.type}`}>{trailing.value}</span>}
@@ -2691,75 +2880,72 @@
 
         /* ── Per-tab config (Leading / Trailing / Disabled editable individually) ── */
         const initConfigs = () => [
-          { label: 'Overview',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
-          { label: 'Documents', disabled: false, showLeading: false, showTrailing: false, trailingType: 'counter', trailingValue: '3'   },
-          { label: 'Activity',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
-          { label: 'Settings',  disabled: false, showLeading: false, showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Overview',  disabled: false, showLeading: false, leadingIconName: 'Home',       showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Documents', disabled: false, showLeading: false, leadingIconName: 'Document',   showTrailing: false, trailingType: 'counter', trailingValue: '3'   },
+          { label: 'Activity',  disabled: false, showLeading: false, leadingIconName: 'Chart',      showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
+          { label: 'Settings',  disabled: false, showLeading: false, leadingIconName: 'Setting',    showTrailing: false, trailingType: 'tag',     trailingValue: 'new' },
         ];
         const [tabConfigs, setTabConfigs] = useState(initConfigs);
         const [editingIdx, setEditingIdx] = useState(0);
         const updateTab = (idx, key, val) =>
           setTabConfigs(prev => prev.map((t, i) => i === idx ? { ...t, [key]: val } : t));
 
-        /* Icon: linear/tick-circle.svg (Borderless) or bold/tick-circle.svg (Filled) — inlined with currentColor */
         const isFilled = tabStyle === 'Filled';
-        const tickIconBold   = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg>;
-        const tickIconLinear = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;
-        const tickIcon = isFilled ? tickIconBold : tickIconLinear;
 
-        /* Build tabs array from per-tab config */
-        const tabs = tabConfigs.map(cfg => ({
-          label:    cfg.label,
-          leading:  cfg.showLeading  ? { icon: tickIcon }                                          : undefined,
-          trailing: cfg.showTrailing ? { type: cfg.trailingType, value: cfg.trailingValue }        : undefined,
-          disabled: cfg.disabled || undefined,
-        }));
+        /* Build tabs array from per-tab config — leading icon sourced from ICON_MAP */
+        const tabs = tabConfigs.map(cfg => {
+          const IconComp = cfg.showLeading ? (ICON_MAP[cfg.leadingIconName] || ICON_MAP['Home']) : null;
+          return {
+            label:    cfg.label,
+            leading:  IconComp ? { icon: IconComp } : undefined,
+            trailing: cfg.showTrailing ? { type: cfg.trailingType, value: cfg.trailingValue } : undefined,
+            disabled: cfg.disabled || undefined,
+          };
+        });
 
         const editing = tabConfigs[editingIdx];
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
+          <PanelLayout panelContent={<>
+            {/* ── Group-level props ── */}
+            <h2>Tabs</h2>
+            <CtrlSelect label="tabStyle"    value={tabStyle}    onChange={setTabStyle}    options={['Borderless', 'Filled']} />
+            <CtrlSelect label="size"        value={size}        onChange={setSize}        options={['S', 'M']} />
+            <CtrlToggle label="isFullwidth" checked={isFullwidth} onChange={setFullwidth} />
 
-              {/* ── Group-level props ── */}
-              <h2>Tabs</h2>
-              <CtrlSelect label="tabStyle"    value={tabStyle}    onChange={setTabStyle}    options={['Borderless', 'Filled']} />
-              <CtrlSelect label="size"        value={size}        onChange={setSize}        options={['S', 'M']} />
-              <CtrlToggle label="isFullwidth" checked={isFullwidth} onChange={setFullwidth} />
+            {/* ── Per-tab editor ── */}
+            <div style={{ marginTop: 'var(--gap-16)', borderTop: '1px solid var(--color-stroke-focus-subtle)', paddingTop: 'var(--gap-12)' }}>
+              <CtrlSelect
+                label="edit tab"
+                value={tabConfigs[editingIdx].label}
+                onChange={v => setEditingIdx(tabConfigs.findIndex(t => t.label === v))}
+                options={tabConfigs.map(t => t.label)}
+              />
+            </div>
 
-              {/* ── Per-tab editor ── */}
-              <div style={{ marginTop: 'var(--gap-16)', borderTop: '1px solid var(--color-stroke-focus-subtle)', paddingTop: 'var(--gap-12)' }}>
-                <CtrlSelect
-                  label="edit tab"
-                  value={tabConfigs[editingIdx].label}
-                  onChange={v => setEditingIdx(tabConfigs.findIndex(t => t.label === v))}
-                  options={tabConfigs.map(t => t.label)}
-                />
-              </div>
-
-              {/* Per-tab props — isSelected (radio), Leading, Trailing, disabled */}
-              <div style={{ marginTop: 'var(--gap-8)' }}>
-                {/* isSelected — radio: setting true moves activeIdx here; only 1 can be true at a time */}
-                <CtrlToggle
-                  label="isSelected"
-                  checked={activeIdx === editingIdx}
-                  onChange={on => { if (on) setActiveIdx(editingIdx); }}
-                />
-                <p style={{ fontSize: 11, color: 'var(--color-text-subdued)', margin: '-4px 0 8px', paddingLeft: 2 }}>
-                  radio — only one tab selected at a time
-                </p>
-                <CtrlText   label="label"        value={editing.label}          onChange={v => updateTab(editingIdx, 'label', v)} />
-                <CtrlToggle label="disabled"     checked={editing.disabled}     onChange={v => updateTab(editingIdx, 'disabled', v)} />
-                <CtrlToggle label="showLeading"  checked={editing.showLeading}  onChange={v => updateTab(editingIdx, 'showLeading', v)} />
-                <CtrlToggle label="showTrailing" checked={editing.showTrailing} onChange={v => updateTab(editingIdx, 'showTrailing', v)} />
-                {editing.showTrailing && <>
-                  <CtrlSelect label="trailing.type"  value={editing.trailingType}  onChange={v => { updateTab(editingIdx, 'trailingType', v); updateTab(editingIdx, 'trailingValue', v === 'tag' ? 'new' : '3'); }}  options={['counter', 'tag']} />
-                  <CtrlText   label="trailing.value" value={String(editing.trailingValue)} onChange={v => updateTab(editingIdx, 'trailingValue', v)} />
-                </>}
-              </div>
-            </aside>
+            {/* Per-tab props — isSelected (radio), Leading, Trailing, disabled */}
+            <div style={{ marginTop: 'var(--gap-8)' }}>
+              <CtrlToggle
+                label="isSelected"
+                checked={activeIdx === editingIdx}
+                onChange={on => { if (on) setActiveIdx(editingIdx); }}
+              />
+              <p style={{ fontSize: 11, color: 'var(--color-text-subdued)', margin: '-4px 0 8px', paddingLeft: 2 }}>
+                radio — only one tab selected at a time
+              </p>
+              <CtrlText   label="label"        value={editing.label}          onChange={v => updateTab(editingIdx, 'label', v)} />
+              <CtrlToggle label="disabled"     checked={editing.disabled}     onChange={v => updateTab(editingIdx, 'disabled', v)} />
+              <CtrlToggle label="showLeading"  checked={editing.showLeading}  onChange={v => updateTab(editingIdx, 'showLeading', v)} />
+              {editing.showLeading && (
+                <CtrlSelect label="leadingIcon" value={editing.leadingIconName} onChange={v => updateTab(editingIdx, 'leadingIconName', v)} options={Object.keys(ICON_MAP)} />
+              )}
+              <CtrlToggle label="showTrailing" checked={editing.showTrailing} onChange={v => updateTab(editingIdx, 'showTrailing', v)} />
+              {editing.showTrailing && <>
+                <CtrlSelect label="trailing.type"  value={editing.trailingType}  onChange={v => { updateTab(editingIdx, 'trailingType', v); updateTab(editingIdx, 'trailingValue', v === 'tag' ? 'new' : '3'); }}  options={['counter', 'tag']} />
+                <CtrlText   label="trailing.value" value={String(editing.trailingValue)} onChange={v => updateTab(editingIdx, 'trailingValue', v)} />
+              </>}
+            </div>
+          </>}>
             <main className="stage">
               <section>
                 <h2>Tabs — Interactive Playground</h2>
@@ -2845,25 +3031,25 @@
                   <code>icons/svg/bold/tick-circle.svg</code> (Filled). Inlined with{' '}
                   <code>currentColor</code> so colour updates per state automatically.
                 </p>
-                {/* Borderless — linear/tick-circle.svg */}
+                {/* Borderless — icons from ICON_MAP */}
                 <div className="tabs-demo-row">
                   <Tabs
                     tabs={[
-                      { label: 'Overview',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> } },
-                      { label: 'Documents', leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> }, trailing: { type: 'tag', value: 'new' } },
-                      { label: 'Activity',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.75 12L10.58 14.83L16.25 9.16998" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> }, disabled: true },
+                      { label: 'Overview',  leading: { icon: ICON_MAP['Home'] } },
+                      { label: 'Documents', leading: { icon: ICON_MAP['Document'] }, trailing: { type: 'tag', value: 'new' } },
+                      { label: 'Activity',  leading: { icon: ICON_MAP['Chart'] }, disabled: true },
                     ]}
                     tabStyle="Borderless"
                     size="M"
                   />
                 </div>
-                {/* Filled — bold/tick-circle.svg */}
+                {/* Filled — icons from ICON_MAP */}
                 <div className="tabs-demo-row" style={{ marginTop: 'var(--gap-8)' }}>
                   <Tabs
                     tabs={[
-                      { label: 'Overview',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> } },
-                      { label: 'Documents', leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> }, trailing: { type: 'counter', value: 33 } },
-                      { label: 'Activity',  leading: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor"/></svg> } },
+                      { label: 'Overview',  leading: { icon: ICON_MAP['Home'] } },
+                      { label: 'Documents', leading: { icon: ICON_MAP['Document'] }, trailing: { type: 'counter', value: 33 } },
+                      { label: 'Activity',  leading: { icon: ICON_MAP['Chart'] } },
                     ]}
                     tabStyle="Filled"
                     size="M"
@@ -2872,7 +3058,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -2888,17 +3074,13 @@
         const showCountry  = avShape === 'Flag Circle';
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>Avatar</h2>
-              <CtrlSelect label="shape"    value={avShape}    onChange={setAvShape}    options={['Initial Circle', 'Initial Square', 'Icon Circle', 'Icon Square', 'Flag Circle']} />
-              <CtrlSelect label="size"     value={avSize}     onChange={setAvSize}     options={['Small', 'Medium', 'Large', 'Extra Large']} />
-              {showInitials && <CtrlText label="initials" value={avInitials} onChange={setAvInitials} />}
-              {showCountry  && <CtrlText label="country"  value={avCountry}  onChange={setAvCountry} placeholder="e.g. IN, US, GB" />}
-            </aside>
-
+          <PanelLayout panelContent={<>
+            <h2>Avatar</h2>
+            <CtrlSelect label="shape"    value={avShape}    onChange={setAvShape}    options={['Initial Circle', 'Initial Square', 'Icon Circle', 'Icon Square', 'Flag Circle']} />
+            <CtrlSelect label="size"     value={avSize}     onChange={setAvSize}     options={['Small', 'Medium', 'Large', 'Extra Large']} />
+            {showInitials && <CtrlText label="initials" value={avInitials} onChange={setAvInitials} />}
+            {showCountry  && <CtrlText label="country"  value={avCountry}  onChange={setAvCountry} placeholder="e.g. IN, US, GB" />}
+          </>}>
             <main className="stage">
               <section>
                 <h2>Avatar — Playground</h2>
@@ -2955,7 +3137,7 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -3070,7 +3252,7 @@
         return (
           <div className={['dcds-Modal__header', className].filter(Boolean).join(' ')}>
             <div className="dcds-Modal__header-left">
-              {icon && <span className="dcds-Modal__header-icon">{icon}</span>}
+              {icon && <span className="dcds-Modal__header-icon">{React.createElement(icon, { size: 18 })}</span>}
               <div className="dcds-Modal__header-text">
                 <h2 id={idProp ?? headerId} className="dcds-Modal__header-title">{children}</h2>
                 {subtitle && <p className="dcds-Modal__header-subtitle">{subtitle}</p>}
@@ -3204,6 +3386,302 @@
       }
 
       /* ============================================================
+       * AccordianSection — self-contained Accordian playground
+       * ============================================================ */
+      function Accordian({ state = 'close', isRounded = false, title, subtitle, showLeading = true, showTitle = true, showSubtitle = true, showStatus = true, showAction = true, leadingIcon, statusConfig = {}, actionConfig = {}, children, onToggle, onClick, onFocus, onBlur, onKeyDown, onKeyUp, onMouseEnter, onMouseLeave, className, id, dataTestId }) {
+        const isOpen = state === 'open';
+        const rootClasses = ['dcds-Accordian', isRounded ? 'dcds-Accordian--rounded' : '', 'dcds-Accordian--state-' + state, className].filter(Boolean).join(' ');
+
+        const resolvedStatus = {
+          label: statusConfig.label ?? 'Status',
+          state: statusConfig.state ?? 'neutral',
+          emphasis: statusConfig.emphasis ?? 'subtle',
+          size: statusConfig.size ?? 'S',
+          showIcon: statusConfig.showIcon ?? false,
+          'aria-label': statusConfig['aria-label'],
+        };
+
+        const resolvedAction = {
+          label: actionConfig.label ?? 'Button',
+          variant: actionConfig.variant ?? 'Secondary',
+          color: actionConfig.color ?? 'Primary',
+          size: actionConfig.size ?? 'S',
+          isDisabled: actionConfig.isDisabled ?? false,
+          leadingIcon: actionConfig.leadingIcon,
+          trailingIcon: actionConfig.trailingIcon,
+          onClick: actionConfig.onClick,
+          onFocus: actionConfig.onFocus,
+          onBlur: actionConfig.onBlur,
+        };
+
+        const showLeadingSlot = showLeading && Boolean(leadingIcon);
+        const showTrailing = showStatus || showAction;
+
+        return (
+          React.createElement('div', { className: rootClasses, id, 'data-testid': dataTestId },
+            React.createElement('button', {
+              type: 'button',
+              className: 'dcds-Accordian__header',
+              'aria-expanded': isOpen,
+              onClick: (e) => { onToggle?.(!isOpen); onClick?.(e); },
+              onFocus, onBlur, onKeyDown, onKeyUp, onMouseEnter, onMouseLeave
+            },
+              React.createElement('div', { className: 'dcds-Accordian__header-main' },
+                showLeadingSlot && React.createElement('div', { className: 'dcds-Accordian__leading', 'aria-hidden': 'true' }, React.createElement(leadingIcon, { size: 16 })),
+                React.createElement('div', { className: 'dcds-Accordian__header-content' },
+                  (showTitle || showSubtitle) && React.createElement('div', { className: 'dcds-Accordian__text' },
+                    showTitle && title && React.createElement('span', { className: 'dcds-Accordian__title' }, title),
+                    showSubtitle && subtitle && React.createElement('span', { className: 'dcds-Accordian__subtitle' }, subtitle)
+                  ),
+                  showTrailing && React.createElement('div', { className: 'dcds-Accordian__trailing' },
+                    showStatus && React.createElement(Badge, { size: resolvedStatus.size, emphasis: resolvedStatus.emphasis, state: resolvedStatus.state, showIcon: resolvedStatus.showIcon, 'aria-label': resolvedStatus['aria-label'] }, resolvedStatus.label),
+                    showAction && React.createElement('div', { className: 'dcds-Accordian__actions' },
+                      React.createElement(Button, { variant: resolvedAction.variant, color: resolvedAction.color, size: resolvedAction.size, isDisabled: resolvedAction.isDisabled, onClick: resolvedAction.onClick, onFocus: resolvedAction.onFocus, onBlur: resolvedAction.onBlur }, resolvedAction.label)
+                    )
+                  )
+                )
+              ),
+              React.createElement('div', { className: 'dcds-Accordian__chevron', 'aria-hidden': 'true' },
+                React.createElement(ArrowDownLinearIcon, { size: 24 })
+              )
+            ),
+            React.createElement('div', { className: 'dcds-Accordian__body', role: 'region', 'aria-hidden': !isOpen, hidden: !isOpen ? true : undefined },
+              React.createElement('div', { className: 'dcds-Accordian__body-slot' }, children)
+            )
+          )
+        );
+      }
+
+      /* ============================================================
+       * ICON_MAP — keyed by display name.
+       * SVG paths sourced from icons/src/linear/ in the repo.
+       * Each icon renders at size=16 to sit inside the 24×24 leading container.
+       * ============================================================ */
+      const ICON_MAP = (() => {
+        const mk = (paths) => ({ size = 16 } = {}) =>
+          React.createElement('svg', { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': 'true', focusable: 'false' },
+            ...paths.map((p, i) => React.createElement('path', { key: i, stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round', ...p }))
+          );
+        return {
+          'Gallery':      mk([{ d: 'M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z' }, { d: 'M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z' }, { d: 'M2.66992 18.95L7.59992 15.64C8.38992 15.11 9.52992 15.17 10.2399 15.78L10.5699 16.07C11.3499 16.74 12.6099 16.74 13.3899 16.07L17.5499 12.5C18.3299 11.83 19.5899 11.83 20.3699 12.5L21.9999 13.9' }]),
+          'Document':     mk([{ d: 'M22 10V15C22 20 20 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H14' }, { d: 'M22 10H18C15 10 14 9 14 6V2L22 10Z' }]),
+          'Setting':      mk([{ d: 'M3 9.10986V14.8799C3 16.9999 3 16.9999 5 18.3499L10.5 21.5299C11.33 22.0099 12.68 22.0099 13.5 21.5299L19 18.3499C21 16.9999 21 16.9999 21 14.8899V9.10986C21 6.99986 21 6.99986 19 5.64986L13.5 2.46986C12.68 1.98986 11.33 1.98986 10.5 2.46986L5 5.64986C3 6.99986 3 6.99986 3 9.10986Z' }, { d: 'M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z' }]),
+          'InfoCircle':   mk([{ d: 'M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2Z' }, { d: 'M12 16L12 11' }, { d: 'M12.0055 8L11.9965 8', strokeWidth: '2' }]),
+          'Profile':      mk([{ d: 'M12.1596 10.87C12.0596 10.86 11.9396 10.86 11.8296 10.87C9.44957 10.79 7.55957 8.84 7.55957 6.44C7.55957 3.99 9.53957 2 11.9996 2C14.4496 2 16.4396 3.99 16.4396 6.44C16.4296 8.84 14.5396 10.79 12.1596 10.87Z' }, { d: 'M7.15973 14.56C4.73973 16.18 4.73973 18.82 7.15973 20.43C9.90973 22.27 14.4197 22.27 17.1697 20.43C19.5897 18.81 19.5897 16.17 17.1697 14.56C14.4297 12.73 9.91973 12.73 7.15973 14.56Z' }]),
+          'User':         mk([{ d: 'M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z' }, { d: 'M20.5901 22C20.5901 18.13 16.7402 15 12.0002 15C7.26015 15 3.41016 18.13 3.41016 22' }]),
+          'Home':         mk([{ d: 'M12 18V15' }, { d: 'M10.07 2.81997L3.14002 8.36997C2.36002 8.98997 1.86002 10.3 2.03002 11.28L3.36002 19.24C3.60002 20.66 4.96002 21.81 6.40002 21.81H17.6C19.03 21.81 20.4 20.65 20.64 19.24L21.97 11.28C22.13 10.3 21.63 8.98997 20.86 8.36997L13.93 2.82997C12.86 1.96997 11.13 1.96997 10.07 2.81997Z' }]),
+          'Star':         mk([{ d: 'M13.73 3.51014L15.49 7.03014C15.73 7.52014 16.37 7.99014 16.91 8.08014L20.1 8.61014C22.14 8.95014 22.62 10.4301 21.15 11.8901L18.67 14.3701C18.25 14.7901 18.02 15.6001 18.15 16.1801L18.86 19.2501C19.42 21.6801 18.13 22.6201 15.98 21.3501L12.99 19.5801C12.45 19.2601 11.56 19.2601 11.01 19.5801L8.02 21.3501C5.88 22.6201 4.58 21.6701 5.14 19.2501L5.85 16.1801C5.98 15.6001 5.75 14.7901 5.33 14.3701L2.85 11.8901C1.39 10.4301 1.86 8.95014 3.9 8.61014L7.09 8.08014C7.62 7.99014 8.26 7.52014 8.5 7.03014L10.26 3.51014C11.22 1.60014 12.78 1.60014 13.73 3.51014Z' }]),
+          'Calendar':     mk([{ d: 'M8 2V5' }, { d: 'M16 2V5' }, { d: 'M3.5 9.08984H20.5' }, { d: 'M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z' }]),
+          'Filter':       mk([{ d: 'M5.3999 2.09998H18.5999C19.6999 2.09998 20.5999 2.99998 20.5999 4.09998V6.29998C20.5999 7.09998 20.0999 8.09998 19.5999 8.59998L15.2999 12.4C14.6999 12.9 14.2999 13.9 14.2999 14.7V19C14.2999 19.6 13.8999 20.4 13.3999 20.7L11.9999 21.6C10.6999 22.4 8.8999 21.5 8.8999 19.9V14.6C8.8999 13.9 8.4999 13 8.0999 12.5L4.2999 8.49998C3.7999 7.99998 3.3999 7.09998 3.3999 6.49998V4.19998C3.3999 2.99998 4.2999 2.09998 5.3999 2.09998Z' }]),
+          'Chart':        mk([{ d: 'M7 10.7402V13.9402' }, { d: 'M12 9V15.68' }, { d: 'M17 10.7402V13.9402' }, { d: 'M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z' }]),
+          'Message':      mk([{ d: 'M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z' }]),
+          'Lock':         mk([{ d: 'M6 10V8C6 4.69 7 2 12 2C17 2 18 4.69 18 8V10' }, { d: 'M17 22H7C3 22 2 21 2 17V15C2 11 3 10 7 10H17C21 10 22 11 22 15V17C22 21 21 22 17 22Z' }]),
+          'Notification': mk([{ d: 'M19 8C20.6569 8 22 6.65685 22 5C22 3.34315 20.6569 2 19 2C17.3431 2 16 3.34315 16 5C16 6.65685 17.3431 8 19 8Z' }, { d: 'M14 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V10' }]),
+          'Category':     mk([{ d: 'M5 10H7C9 10 10 9 10 7V5C10 3 9 2 7 2H5C3 2 2 3 2 5V7C2 9 3 10 5 10Z' }, { d: 'M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z' }, { d: 'M17 22H19C21 22 22 21 22 19V17C22 15 21 14 19 14H17C15 14 14 15 14 17V19C14 21 15 22 17 22Z' }, { d: 'M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z' }]),
+          'TaskSquare':   mk([{ d: 'M12.3701 8.87988H17.6201' }, { d: 'M6.37988 8.87988L7.12988 9.62988L9.37988 7.37988' }, { d: 'M12.3701 15.8799H17.6201' }, { d: 'M6.37988 15.8799L7.12988 16.6299L9.37988 14.3799' }, { d: 'M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z' }]),
+          'Folder':       mk([{ d: 'M22 11V17C22 21 21 22 17 22H7C3 22 2 21 2 17V7C2 3 3 2 7 2H8.5C10 2 10.33 2.44 10.9 3.2L12.4 5.2C12.78 5.7 13 6 14 6H17C21 6 22 7 22 11Z', strokeMiterlimit: '10', strokeLinejoin: undefined }]),
+          'TickCircle':   mk([{ d: 'M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z' }, { d: 'M7.75 12L10.58 14.83L16.25 9.16998' }]),
+          'CloseCircle':  mk([{ d: 'M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z' }, { d: 'M9.17004 14.83L14.83 9.16998' }, { d: 'M14.83 14.83L9.17004 9.16998' }]),
+        };
+      })();
+
+      function AccordianSection() {
+        /* --- Props panel state --- */
+        const [acState,       setAcState]       = useState('close');
+        const [acRounded,     setAcRounded]     = useState(false);
+        const [acTitle,       setAcTitle]       = useState('What documents are required?');
+        const [acSubtitle,    setAcSubtitle]    = useState('Loan application checklist');
+        const [acShowTitle,   setAcShowTitle]   = useState(true);
+        const [acShowSubtitle,setAcShowSubtitle]= useState(true);
+        const [acShowLeading,    setAcShowLeading]    = useState(false);
+        const [acLeadingIconName,setAcLeadingIconName]= useState('Gallery');
+        const [acShowStatus,  setAcShowStatus]  = useState(true);
+        const [acShowAction,  setAcShowAction]  = useState(true);
+
+        /* statusConfig */
+        const [acStatusLabel,   setAcStatusLabel]   = useState('Status');
+        const [acStatusState,   setAcStatusState]   = useState('neutral');
+        const [acStatusEmphasis,setAcStatusEmphasis]= useState('subtle');
+        const [acStatusShowIcon,setAcStatusShowIcon]= useState(false);
+
+        /* actionConfig */
+        const [acActionLabel,   setAcActionLabel]   = useState('Edit');
+        const [acActionVariant, setAcActionVariant] = useState('Secondary');
+        const [acActionColor,   setAcActionColor]   = useState('Primary');
+        const [acActionSize,    setAcActionSize]     = useState('S');
+        const [acActionDisabled,setAcActionDisabled]= useState(false);
+
+        const [acLog, pushAcLog] = useEventLog();
+
+        /* Multi-item stage state */
+        const [stageStates, setStageStates] = useState({
+          flat1: 'close', flat2: 'close', flat3: 'close',
+          rd1:   'close', rd2:   'close', rd3:   'close',
+          st1:   'close', st2:   'close',
+        });
+        const toggle = (key) => setStageStates(prev => ({ ...prev, [key]: prev[key] === 'open' ? 'close' : 'open' }));
+        const toggleFlat = (key) => setStageStates(prev => ({
+          ...prev,
+          flat1: 'close', flat2: 'close', flat3: 'close',
+          [key]: prev[key] === 'open' ? 'close' : 'open',
+        }));
+
+        const LeadingIconComp = ICON_MAP[acLeadingIconName] || ICON_MAP['Gallery'];
+
+        return (
+          <PanelLayout panelContent={<>
+            <h2>Accordian</h2>
+            <CtrlSelect label="state"       value={acState}        onChange={setAcState}        options={['open', 'close']} />
+            <CtrlToggle label="isRounded"   checked={acRounded}    onChange={setAcRounded} />
+            <CtrlToggle label="showLeading" checked={acShowLeading} onChange={setAcShowLeading} />
+            {acShowLeading && (
+              <CtrlSelect label="leadingIcon" value={acLeadingIconName} onChange={setAcLeadingIconName} options={Object.keys(ICON_MAP)} />
+            )}
+            <CtrlToggle label="showTitle"   checked={acShowTitle}   onChange={setAcShowTitle} />
+            <CtrlToggle label="showSubtitle" checked={acShowSubtitle} onChange={setAcShowSubtitle} />
+            <CtrlText   label="title"       value={acTitle}        onChange={setAcTitle} />
+            <CtrlText   label="subtitle"    value={acSubtitle}     onChange={setAcSubtitle} />
+            <CtrlToggle label="showStatus"  checked={acShowStatus}  onChange={setAcShowStatus} />
+            <CtrlToggle label="showAction"  checked={acShowAction}  onChange={setAcShowAction} />
+
+            <h2>statusConfig</h2>
+            <CtrlText   label="label"    value={acStatusLabel}    onChange={setAcStatusLabel} />
+            <CtrlSelect label="state"    value={acStatusState}    onChange={setAcStatusState}    options={['neutral','info','warning','error','success']} />
+            <CtrlSelect label="emphasis" value={acStatusEmphasis} onChange={setAcStatusEmphasis} options={['subtle','intense']} />
+            <CtrlToggle label="showIcon" checked={acStatusShowIcon} onChange={setAcStatusShowIcon} />
+
+            <h2>actionConfig</h2>
+            <CtrlText   label="label"      value={acActionLabel}    onChange={setAcActionLabel} />
+            <CtrlSelect label="variant"    value={acActionVariant}  onChange={setAcActionVariant}  options={['Primary','Secondary','Tertiary']} />
+            <CtrlSelect label="color"      value={acActionColor}    onChange={setAcActionColor}    options={['Primary','Error','Warning']} />
+            <CtrlSelect label="size"       value={acActionSize}     onChange={setAcActionSize}     options={['L','M','S','XS']} />
+            <CtrlToggle label="isDisabled" checked={acActionDisabled} onChange={setAcActionDisabled} />
+          </>}>
+            <main className="stage">
+              {/* Playground */}
+              <section>
+                <h2>Accordian — Interactive Playground</h2>
+                <p className="stage-note">Configure props in the left panel. Click the header to toggle.</p>
+                <div className="preview">
+                  <Accordian
+                    state={acState}
+                    isRounded={acRounded}
+                    title={acTitle}
+                    subtitle={acSubtitle}
+                    showLeading={acShowLeading}
+                    showTitle={acShowTitle}
+                    showSubtitle={acShowSubtitle}
+                    showStatus={acShowStatus}
+                    showAction={acShowAction}
+                    leadingIcon={LeadingIconComp}
+                    statusConfig={{ label: acStatusLabel, state: acStatusState, emphasis: acStatusEmphasis, showIcon: acStatusShowIcon }}
+                    actionConfig={{ label: acActionLabel, variant: acActionVariant, color: acActionColor, size: acActionSize, isDisabled: acActionDisabled, onClick: () => pushAcLog('action clicked') }}
+                    onToggle={(open) => { setAcState(open ? 'open' : 'close'); pushAcLog('onToggle → ' + (open ? 'open' : 'close')); }}
+                    onClick={() => pushAcLog('onClick')}
+                  >
+                    <p style={{ margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' }}>
+                      PAN card, Aadhaar, last 3 months' bank statements, salary slips, and Form 16.
+                    </p>
+                  </Accordian>
+                </div>
+                <div className="events">{acLog.length === 0 ? '— click header / action to see events —' : acLog.join('   ')}</div>
+              </section>
+
+              {/* Flat (isRounded=false) list */}
+              <section>
+                <h2>Accordian — Flat list (isRounded=false)</h2>
+                <p className="stage-note">Default mode: always shows header border-bottom as a list separator.</p>
+                <div>
+                  {[
+                    { key: 'flat1', title: 'What is the interest rate?',     subtitle: 'Loan pricing details' },
+                    { key: 'flat2', title: 'How long does approval take?',   subtitle: 'Processing timelines' },
+                    { key: 'flat3', title: 'What documents are required?',   subtitle: 'KYC & income proof'   },
+                  ].map(({ key, title, subtitle }) => (
+                    React.createElement(Accordian, {
+                      key,
+                      state: stageStates[key],
+                      isRounded: false,
+                      title,
+                      subtitle,
+                      showLeading: false,
+                      showStatus: false,
+                      showAction: false,
+                      onToggle: () => toggleFlat(key),
+                    },
+                      React.createElement('p', { style: { margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' } },
+                        'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
+                      )
+                    )
+                  ))}
+                </div>
+              </section>
+
+              {/* Rounded (isRounded=true) standalone cards */}
+              <section>
+                <h2>Accordian — Rounded cards (isRounded=true)</h2>
+                <p className="stage-note">Card-like standalone items: rd-S border-radius + outer border. Divider appears only when open.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-12)' }}>
+                  {[
+                    { key: 'rd1', title: 'Eligibility criteria',   subtitle: 'Age, income, CIBIL requirements' },
+                    { key: 'rd2', title: 'Repayment schedule',      subtitle: 'EMI breakdown and tenure'         },
+                    { key: 'rd3', title: 'Prepayment charges',      subtitle: 'Foreclosure and part-payment'     },
+                  ].map(({ key, title, subtitle }) => (
+                    React.createElement(Accordian, {
+                      key,
+                      state: stageStates[key],
+                      isRounded: true,
+                      title,
+                      subtitle,
+                      showLeading: false,
+                      showStatus: true,
+                      statusConfig: { label: 'Active', state: 'success', emphasis: 'subtle' },
+                      showAction: false,
+                      onToggle: () => toggle(key),
+                    },
+                      React.createElement('p', { style: { margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' } },
+                        'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
+                      )
+                    )
+                  ))}
+                </div>
+              </section>
+
+              {/* With leading icon + action button */}
+              <section>
+                <h2>Accordian — With leading icon + action button</h2>
+                <p className="stage-note">showLeading=true + leadingIcon renders a 32×32 icon container. showAction=true shows the Button in the trailing area.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-12)' }}>
+                  {[
+                    { key: 'st1', title: 'Loan summary',    subtitle: 'Overview of current loan', status: 'info',    statusLabel: 'Pending'  },
+                    { key: 'st2', title: 'Document status', subtitle: 'KYC verification progress', status: 'warning', statusLabel: 'Review'   },
+                  ].map(({ key, title, subtitle, status, statusLabel }) => (
+                    React.createElement(Accordian, {
+                      key,
+                      state: stageStates[key],
+                      isRounded: true,
+                      title,
+                      subtitle,
+                      showLeading: true,
+                      leadingIcon: LeadingIconComp,
+                      showStatus: true,
+                      statusConfig: { label: statusLabel, state: status, emphasis: 'subtle' },
+                      showAction: true,
+                      actionConfig: { label: 'Edit', variant: 'Secondary', color: 'Primary', size: 'S', onClick: () => pushAcLog('action: Edit on ' + key) },
+                      onToggle: () => toggle(key),
+                    },
+                      React.createElement('p', { style: { margin: 0, fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body)', color: 'var(--color-text-primary)' } },
+                        'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
+                      )
+                    )
+                  ))}
+                </div>
+              </section>
+            </main>
+          </PanelLayout>
+        );
+      }
+
+      /* ============================================================
        * ModalSection — self-contained Modal playground
        * ============================================================ */
       function ModalSection() {
@@ -3213,12 +3691,14 @@
         const [titleText,        setTitleText]        = useState('Modal title');
         /* ModalHeader extras */
         const [showIcon,         setShowIcon]         = useState(false);
+        const [modalIconName,    setModalIconName]    = useState('InfoCircle');
         const [subtitleText,     setSubtitleText]     = useState('Subtitle goes here');
         const [showSubtitle,     setShowSubtitle]     = useState(false);
         const [showBadge,        setShowBadge]        = useState(false);
         const [badgeText,        setBadgeText]        = useState('Status');
         const [badgeState,       setBadgeState]       = useState('neutral');
         const [badgeEmphasis,    setBadgeEmphasis]    = useState('subtle');
+        const [badgeShowIcon,    setBadgeShowIcon]    = useState(false);
         /* ModalBody */
         const [bodyText,         setBodyText]         = useState(
           'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
@@ -3244,44 +3724,42 @@
         const [modalLog, pushModalLog] = useEventLog();
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
-                Adjust and see live on the right.
-              </p>
-              <h2>Modal</h2>
-              <CtrlSelect label="size"            value={size}           onChange={setSize}           options={['S', 'M', 'L']} />
-              <CtrlToggle label="closeOnBackdrop" checked={closeOnBackdrop} onChange={setCloseOnBackdrop} />
-              <CtrlToggle label="closeOnEscape"   checked={closeOnEscape}   onChange={setCloseOnEscape}   />
+          <PanelLayout panelContent={<>
+            <h2>Modal</h2>
+            <CtrlSelect label="size"            value={size}           onChange={setSize}           options={['S', 'M', 'L']} />
+            <CtrlToggle label="closeOnBackdrop" checked={closeOnBackdrop} onChange={setCloseOnBackdrop} />
+            <CtrlToggle label="closeOnEscape"   checked={closeOnEscape}   onChange={setCloseOnEscape}   />
 
-              <h2>ModalHeader</h2>
-              <CtrlText   label="title"           value={titleText}        onChange={setTitleText}        />
-              <CtrlToggle label="showIcon"         checked={showIcon}       onChange={setShowIcon}         />
-              <CtrlToggle label="showSubtitle"     checked={showSubtitle}   onChange={setShowSubtitle}     />
-              {showSubtitle && (
-                <CtrlText label="subtitle"         value={subtitleText}     onChange={setSubtitleText}     />
-              )}
-              <CtrlToggle label="showBadge"        checked={showBadge}      onChange={setShowBadge}        />
-              {showBadge && (
-                <>
-                  <CtrlText   label="badge"        value={badgeText}        onChange={setBadgeText}        />
-                  <CtrlSelect label="badgeState"   value={badgeState}       onChange={setBadgeState}       options={['neutral','info','warning','error','success']} />
-                  <CtrlSelect label="badgeEmphasis" value={badgeEmphasis}   onChange={setBadgeEmphasis}    options={['subtle','intense']} />
-                </>
-              )}
+            <h2>ModalHeader</h2>
+            <CtrlText   label="title"           value={titleText}        onChange={setTitleText}        />
+            <CtrlToggle label="showIcon"         checked={showIcon}       onChange={setShowIcon}         />
+            {showIcon && (
+              <CtrlSelect label="icon" value={modalIconName} onChange={setModalIconName} options={Object.keys(ICON_MAP)} />
+            )}
+            <CtrlToggle label="showSubtitle"     checked={showSubtitle}   onChange={setShowSubtitle}     />
+            {showSubtitle && (
+              <CtrlText label="subtitle"         value={subtitleText}     onChange={setSubtitleText}     />
+            )}
+            <CtrlToggle label="showBadge"        checked={showBadge}      onChange={setShowBadge}        />
+            {showBadge && (
+              <>
+                <CtrlText   label="badge"        value={badgeText}        onChange={setBadgeText}        />
+                <CtrlSelect label="badgeState"   value={badgeState}       onChange={setBadgeState}       options={['neutral','info','warning','error','success']} />
+                <CtrlSelect label="badgeEmphasis" value={badgeEmphasis}   onChange={setBadgeEmphasis}    options={['subtle','intense']} />
+                <CtrlToggle label="showIcon"      checked={badgeShowIcon} onChange={setBadgeShowIcon} />
+              </>
+            )}
 
-              <h2>ModalBody</h2>
-              <CtrlText   label="body"             value={bodyText}         onChange={setBodyText}         />
-              <CtrlToggle label="padding"          checked={bodyPadding}    onChange={setBodyPadding}      />
+            <h2>ModalBody</h2>
+            <CtrlText   label="body"             value={bodyText}         onChange={setBodyText}         />
+            <CtrlToggle label="padding"          checked={bodyPadding}    onChange={setBodyPadding}      />
 
-              <h2>ModalFooter</h2>
-              <CtrlToggle label="showLink"         checked={showLink}       onChange={setShowLink}         />
-              {showLink && (
-                <CtrlText label="link"             value={linkText}         onChange={setLinkText}         />
-              )}
-            </aside>
-
+            <h2>ModalFooter</h2>
+            <CtrlToggle label="showLink"         checked={showLink}       onChange={setShowLink}         />
+            {showLink && (
+              <CtrlText label="link"             value={linkText}         onChange={setLinkText}         />
+            )}
+          </>}>
             <main className="stage">
               {/* Playground */}
               <section>
@@ -3304,10 +3782,10 @@
                   closeOnEscape={closeOnEscape}
                 >
                   <ModalHeader
-                    icon={showIcon ? <InfoCircleIcon /> : undefined}
+                    icon={showIcon ? React.createElement(ICON_MAP[modalIconName] || ICON_MAP['InfoCircle'], { size: 16 }) : undefined}
                     subtitle={showSubtitle ? subtitleText : undefined}
                     badge={showBadge ? (
-                      <Badge state={badgeState} emphasis={badgeEmphasis} showIcon={false}>{badgeText}</Badge>
+                      <Badge state={badgeState} emphasis={badgeEmphasis} showIcon={badgeShowIcon}>{badgeText}</Badge>
                     ) : undefined}
                   >
                     {titleText}
@@ -3460,7 +3938,7 @@
                 </Modal>
               </section>
             </main>
-          </>
+          </PanelLayout>
         );
       }
 
@@ -3486,31 +3964,27 @@
         const AG_MENU_ITEMS = agMenuItems.map(it => ({ ...it, type: it.type || undefined, country: it.country || undefined, status: it.status || undefined }));
 
         return (
-          <>
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>Adjust and see live on the right.</p>
-              <h2>AvatarGroup</h2>
-              <CtrlText   label="initials"        value={agInitials}        onChange={setAgInitials} />
-              <CtrlText   label="name"             value={agName}            onChange={setAgName} />
-              <CtrlText   label="designation"      value={agDesignation}     onChange={setAgDesignation} />
-              <CtrlToggle label="displayName"      checked={agDisplayName}    onChange={setAgDisplayName} />
-              <CtrlToggle label="showDesignation"  checked={agShowDesignation} onChange={setAgShowDesignation} />
-              <CtrlToggle label="showDropdown"     checked={agShowDropdown}   onChange={setAgShowDropdown} />
-              <CtrlToggle label="isExpanded"       checked={agExpanded}       onChange={setAgExpanded} />
-              {agMenuItems.map((item, i) => (
-                <React.Fragment key={item.id}>
-                  <h2>Item {i + 1} (_BaseMenuItem)</h2>
-                  <CtrlText   label="label"      value={item.label}            onChange={v => setAgItem(i, { label: v })} />
-                  <CtrlSelect label="type"       value={item.type || 'none'}   onChange={v => setAgItem(i, { type: v === 'none' ? '' : v })} options={['none', 'Multi-Select', 'Single-Select', 'Flag']} />
-                  {item.type === 'Flag' && <CtrlText label="country" value={item.country} onChange={v => setAgItem(i, { country: v })} placeholder="e.g. IN, US" />}
-                  <CtrlToggle label="isSelected" checked={item.isSelected}     onChange={v => setAgItem(i, { isSelected: v })} />
-                  <CtrlToggle label="showStatus" checked={item.showStatus}     onChange={v => setAgItem(i, { showStatus: v })} />
-                  {item.showStatus && <CtrlText label="status" value={item.status} onChange={v => setAgItem(i, { status: v })} placeholder="e.g. Beta" />}
-                </React.Fragment>
-              ))}
-            </aside>
-
+          <PanelLayout panelContent={<>
+            <h2>AvatarGroup</h2>
+            <CtrlText   label="initials"        value={agInitials}        onChange={setAgInitials} />
+            <CtrlText   label="name"             value={agName}            onChange={setAgName} />
+            <CtrlText   label="designation"      value={agDesignation}     onChange={setAgDesignation} />
+            <CtrlToggle label="displayName"      checked={agDisplayName}    onChange={setAgDisplayName} />
+            <CtrlToggle label="showDesignation"  checked={agShowDesignation} onChange={setAgShowDesignation} />
+            <CtrlToggle label="showDropdown"     checked={agShowDropdown}   onChange={setAgShowDropdown} />
+            <CtrlToggle label="isExpanded"       checked={agExpanded}       onChange={setAgExpanded} />
+            {agMenuItems.map((item, i) => (
+              <React.Fragment key={item.id}>
+                <h2>Item {i + 1} (_BaseMenuItem)</h2>
+                <CtrlText   label="label"      value={item.label}            onChange={v => setAgItem(i, { label: v })} />
+                <CtrlSelect label="type"       value={item.type || 'none'}   onChange={v => setAgItem(i, { type: v === 'none' ? '' : v })} options={['none', 'Multi-Select', 'Single-Select', 'Flag']} />
+                {item.type === 'Flag' && <CtrlText label="country" value={item.country} onChange={v => setAgItem(i, { country: v })} placeholder="e.g. IN, US" />}
+                <CtrlToggle label="isSelected" checked={item.isSelected}     onChange={v => setAgItem(i, { isSelected: v })} />
+                <CtrlToggle label="showStatus" checked={item.showStatus}     onChange={v => setAgItem(i, { showStatus: v })} />
+                {item.showStatus && <CtrlText label="status" value={item.status} onChange={v => setAgItem(i, { status: v })} placeholder="e.g. Beta" />}
+              </React.Fragment>
+            ))}
+          </>}>
             <main className="stage">
               <section>
                 <h2>AvatarGroup — Interactive Playground</h2>
@@ -3664,16 +4138,382 @@
                 </div>
               </section>
             </main>
-          </>
+          </PanelLayout>
+        );
+      }
+
+      /* ============================================================
+       * DeterminateLoader — mirrors DeterminateLoader.tsx 1:1
+       * ============================================================ */
+      function DeterminateLoader({
+        progress, displayHelperText = true, displayPercentage = true,
+        helperText = 'Helper text...', 'aria-label': ariaLabel,
+        'aria-labelledby': ariaLabelledBy, onProgressComplete, onProgressChange,
+        onMouseEnter, onMouseLeave, onFocus, onBlur, className, id, dataTestId,
+      }) {
+        const clamped = Math.min(100, Math.max(0, Math.round(progress)));
+        const prevRef = useRef(clamped);
+        useEffect(() => {
+          if (clamped === 100 && prevRef.current < 100 && onProgressComplete) onProgressComplete();
+          prevRef.current = clamped;
+        }, [clamped, onProgressComplete]);
+        useEffect(() => { if (onProgressChange) onProgressChange(clamped); }, [clamped, onProgressChange]);
+        const resolvedAriaLabel = ariaLabel ?? `${clamped}% complete`;
+        return (
+          <div id={id} className={['dcds-DeterminateLoader', className].filter(Boolean).join(' ')}
+            data-testid={dataTestId} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
+            onFocus={onFocus} onBlur={onBlur}
+          >
+            <div role="progressbar" aria-valuenow={clamped} aria-valuemin={0} aria-valuemax={100}
+              aria-valuetext={resolvedAriaLabel}
+              aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : resolvedAriaLabel)}
+              aria-labelledby={ariaLabelledBy} className="dcds-DeterminateLoader__track"
+            >
+              <div className="dcds-DeterminateLoader__fill" style={{ width: `${clamped}%` }} />
+            </div>
+            {(displayHelperText || displayPercentage) && (
+              <div className="dcds-DeterminateLoader__labels">
+                {displayHelperText && <span className="dcds-DeterminateLoader__helper-text">{helperText}</span>}
+                {displayPercentage && <span className="dcds-DeterminateLoader__percentage" aria-hidden="true">{clamped}%</span>}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * IndeterminateLoader — mirrors IndeterminateLoader.tsx 1:1
+       * ============================================================ */
+      function IndeterminateLoader({
+        size = 'Small', helperText: showHelperText = true, label = 'Helper text...',
+        'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy,
+        onMouseEnter, onMouseLeave, onFocus, onBlur, className, id, dataTestId,
+      }) {
+        const resolvedAriaLabel = ariaLabel ?? (showHelperText ? label : 'Loading');
+        return (
+          <div id={id} className={['dcds-IndeterminateLoader', `dcds-IndeterminateLoader--size-${size}`, className].filter(Boolean).join(' ')}
+            data-testid={dataTestId} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
+            onFocus={onFocus} onBlur={onBlur}
+          >
+            <div role="progressbar" aria-busy="true"
+              aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : resolvedAriaLabel)}
+              aria-labelledby={ariaLabelledBy} className="dcds-IndeterminateLoader__track"
+            >
+              <div className="dcds-IndeterminateLoader__segment" aria-hidden="true" />
+            </div>
+            {showHelperText && <span className="dcds-IndeterminateLoader__label">{label}</span>}
+          </div>
         );
       }
 
       /* ============================================================
        * The full playground
        * ============================================================ */
+
+      /* ============================================================
+       * UploadDragDrop inline component
+       * ============================================================ */
+      function UploadDragDrop({
+        states = 'Default', showLabel = true, label = 'Label',
+        displayRequirements = true,
+        requirementsText = 'PDF format only, max 50MB, with no password protection or encryption',
+        displayValidation = true, validationText = 'Validation', validationType = 'error',
+        isDisabled = false, accept, multiple = false,
+        onFileSelect, onDragEnter, onDragLeave, onDrop, onClick, className, id,
+      }) {
+        const inputRef = React.useRef(null);
+        const [isDragOver, setIsDragOver] = React.useState(false);
+        const effectiveDisabled = isDisabled || states === 'Disabled';
+        const rootClasses = ['dcds-UploadDragDrop', `dcds-UploadDragDrop--state-${states}`, isDragOver && !effectiveDisabled ? 'dcds-UploadDragDrop--drag-over' : '', className].filter(Boolean).join(' ');
+        function handleDragOver(e) { e.preventDefault(); if (!effectiveDisabled) setIsDragOver(true); }
+        function handleDragEnter(e) { e.preventDefault(); if (effectiveDisabled) return; setIsDragOver(true); onDragEnter && onDragEnter(e); }
+        function handleDragLeave(e) { e.preventDefault(); if (effectiveDisabled) return; setIsDragOver(false); onDragLeave && onDragLeave(e); }
+        function handleDrop(e) { e.preventDefault(); if (effectiveDisabled) return; setIsDragOver(false); onDrop && onDrop(e); if (e.dataTransfer.files && e.dataTransfer.files.length) onFileSelect && onFileSelect(e.dataTransfer.files); }
+        function handleInputChange(e) { if (e.target.files && e.target.files.length) { onFileSelect && onFileSelect(e.target.files); e.target.value = ''; } }
+        function handleCtaClick(e) { if (effectiveDisabled) return; onClick && onClick(e); inputRef.current && inputRef.current.click(); }
+        return (
+          <div id={id} className={rootClasses}>
+            {showLabel && <span className="dcds-UploadDragDrop__label">{label}</span>}
+            <div className="dcds-UploadDragDrop__zone" role="region" aria-label={`${label} drop zone`} aria-disabled={effectiveDisabled || undefined}
+              onDragOver={handleDragOver} onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} onDrop={handleDrop}>
+              <input ref={inputRef} type="file" className="dcds-UploadDragDrop__input" accept={accept} multiple={multiple}
+                disabled={effectiveDisabled} aria-hidden="true" tabIndex={-1} onChange={handleInputChange} />
+              <div className={`dcds-UploadDragDrop__icon-wrap${states === 'Hover' ? ' dcds-UploadDragDrop__icon-wrap--hover' : ''}`} aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  className={`dcds-UploadDragDrop__icon-svg${effectiveDisabled ? ' dcds-UploadDragDrop__icon-svg--disabled' : ''}`}
+                  aria-hidden="true" focusable="false">
+                  <path d="M17 9.00195C19.175 9.01395 20.353 9.11095 21.121 9.87895C22 10.758 22 12.172 22 15V16C22 18.829 22 20.243 21.121 21.122C20.243 22 18.828 22 16 22H8C5.172 22 3.757 22 2.879 21.122C2 20.242 2 18.829 2 16V15C2 12.172 2 10.758 2.879 9.87895C3.647 9.11095 4.825 9.01395 7 9.00195" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M12 15V2M9 5.5L12 2L15 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div className="dcds-UploadDragDrop__content">
+                <div className="dcds-UploadDragDrop__cta-row">
+                  <span className="dcds-UploadDragDrop__cta-text">Drag files here or</span>
+                  <button type="button" className="dcds-UploadDragDrop__cta-link"
+                    disabled={effectiveDisabled} aria-disabled={effectiveDisabled || undefined} onClick={handleCtaClick}>
+                    Upload
+                  </button>
+                </div>
+                {displayRequirements && <span className="dcds-UploadDragDrop__requirements">{requirementsText}</span>}
+              </div>
+            </div>
+            {displayValidation && (
+              <div className={`dcds-UploadDragDrop__validation dcds-UploadDragDrop__validation--${validationType}`} role="alert">
+                <svg className="dcds-UploadDragDrop__validation-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  {validationType === 'success' ? (
+                    <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="currentColor" />
+                  ) : (
+                    <path d="M21.56 10.74L20.21 9.16002C19.96 8.86002 19.75 8.30002 19.75 7.90002V6.20002C19.75 5.14002 18.88 4.27002 17.82 4.27002H16.12C15.72 4.27002 15.15 4.06002 14.85 3.81002L13.27 2.46002C12.58 1.87002 11.45 1.87002 10.76 2.46002L9.16 3.81002C8.86 4.06002 8.3 4.27002 7.9 4.27002H6.17C5.11 4.27002 4.24 5.14002 4.24 6.20002V7.90002C4.24 8.29002 4.04 8.85002 3.79 9.15002L2.44 10.74C1.86 11.44 1.86 12.56 2.44 13.24L3.79 14.83C4.04 15.12 4.24 15.69 4.24 16.08V17.79C4.24 18.85 5.11 19.72 6.17 19.72H7.91C8.3 19.72 8.87 19.93 9.17 20.18L10.75 21.53C11.44 22.12 12.57 22.12 13.26 21.53L14.84 20.18C15.14 19.93 15.7 19.72 16.1 19.72H17.8C18.86 19.72 19.73 18.85 19.73 17.79V16.09C19.73 15.69 19.94 15.13 20.19 14.83L21.54 13.25C22.15 12.57 22.15 11.44 21.56 10.74ZM11.25 8.13002C11.25 7.72002 11.59 7.38002 12 7.38002C12.41 7.38002 12.75 7.72002 12.75 8.13002V12.96C12.75 13.37 12.41 13.71 12 13.71C11.59 13.71 11.25 13.37 11.25 12.96V8.13002ZM12 16.87C11.45 16.87 11 16.42 11 15.87C11 15.32 11.44 14.87 12 14.87C12.55 14.87 13 15.32 13 15.87C13 16.42 12.56 16.87 12 16.87Z" fill="currentColor" />
+                  )}
+                </svg>
+                <span className="dcds-UploadDragDrop__validation-text">{validationText || 'Validation'}</span>
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * UploadCTA inline component
+       * ============================================================ */
+      function UploadCTA({
+        size = 'L', state = 'Default', isDisabled = false, isFullWidth = true,
+        label = 'Upload', accept, multiple = false, onFileSelect, onClick,
+        onFocus, onBlur, onMouseEnter, onMouseLeave, className, id,
+      }) {
+        const inputRef = React.useRef(null);
+        const disabled = isDisabled || state === 'Disabled';
+        const classes = ['dcds-UploadCTA', `dcds-UploadCTA--size-${size}`, `dcds-UploadCTA--state-${state}`, isFullWidth ? 'dcds-UploadCTA--full-width' : '', className].filter(Boolean).join(' ');
+        function handleClick(e) { if (disabled) return; onClick && onClick(e); inputRef.current && inputRef.current.click(); }
+        function handleInputChange(e) { if (e.target.files && e.target.files.length) { onFileSelect && onFileSelect(e.target.files); e.target.value = ''; } }
+        return (
+          <button id={id} type="button" className={classes} disabled={disabled} aria-disabled={disabled || undefined}
+            onClick={handleClick} onFocus={onFocus} onBlur={onBlur} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <input ref={inputRef} type="file" className="dcds-UploadCTA__input" accept={accept} multiple={multiple}
+              disabled={disabled} aria-hidden="true" tabIndex={-1} onChange={handleInputChange} />
+            <span className="dcds-UploadCTA__label">{label}</span>
+            <span className="dcds-UploadCTA__icon" aria-hidden="true">
+              <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M17 9.00195C19.175 9.01395 20.353 9.11095 21.121 9.87895C22 10.758 22 12.172 22 15V16C22 18.829 22 20.243 21.121 21.122C20.243 22 18.828 22 16 22H8C5.172 22 3.757 22 2.879 21.122C2 20.242 2 18.829 2 16V15C2 12.172 2 10.758 2.879 9.87895C3.647 9.11095 4.825 9.01395 7 9.00195" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M12 15V2M9 5.5L12 2L15 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </button>
+        );
+      }
+
+      /* ============================================================
+       * UploadDocument inline component
+       * ============================================================ */
+      function UploadDocument({
+        status = 'Uploading', loaderType = 'Determinate',
+        documentName = 'Document Name', displayStatus = true,
+        statusText = 'Status', badgeState = 'neutral', badgeEmphasis = 'subtle',
+        showBadgeIcon = true, displayView = true, isViewDisabled = false,
+        displayDelete = true, isDeleteDisabled = false,
+        progress = 0, helperText, displayHelperText = true, displayPercentage = true, loaderSize = 'Small',
+        onView, onDelete, onFocus, onBlur, onMouseEnter, onMouseLeave, className, id,
+      }) {
+        const isUploading = status === 'Uploading';
+        const showDeterminate  = isUploading && loaderType === 'Determinate';
+        const showIndeterminate = isUploading && loaderType === 'Indeterminate';
+        const rootClasses = ['dcds-UploadDocument', className].filter(Boolean).join(' ');
+        return (
+          <div id={id} className={rootClasses} onFocus={onFocus} onBlur={onBlur} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <div className="dcds-UploadDocument__row">
+              <span className="dcds-UploadDocument__doc-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M21 7v10c0 3-1.5 5-5 5H8c-3.5 0-5-2-5-5V7c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5Z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M14.5 4.5v2c0 1.1.9 2 2 2h2M8 13h8M8 17h5" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span className="dcds-UploadDocument__name" title={documentName}>{documentName}</span>
+              <div className="dcds-UploadDocument__actions">
+                {displayStatus && (
+                  <Badge size="S" emphasis={badgeEmphasis} state={badgeState} showIcon={showBadgeIcon}>{statusText}</Badge>
+                )}
+                {displayView && (
+                  <button type="button"
+                    className={`dcds-Button dcds-Button--variant-Tertiary dcds-Button--color-Primary dcds-Button--size-XS dcds-Button--icon-only`}
+                    aria-label={`View ${documentName}`} disabled={isViewDisabled} aria-disabled={isViewDisabled || undefined}
+                    onClick={() => !isViewDisabled && onView && onView(documentName)}>
+                    <span className="dcds-Button__icon">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                        <path d="M11.9999 16.3299C9.60992 16.3299 7.66992 14.3899 7.66992 11.9999C7.66992 9.60992 9.60992 7.66992 11.9999 7.66992C14.3899 7.66992 16.3299 9.60992 16.3299 11.9999C16.3299 14.3899 14.3899 16.3299 11.9999 16.3299ZM11.9999 9.16992C10.4399 9.16992 9.16992 10.4399 9.16992 11.9999C9.16992 13.5599 10.4399 14.8299 11.9999 14.8299C13.5599 14.8299 14.8299 13.5599 14.8299 11.9999C14.8299 10.4399 13.5599 9.16992 11.9999 9.16992Z" fill="currentColor" />
+                        <path d="M12.0001 21.02C8.24008 21.02 4.69008 18.82 2.25008 15C1.19008 13.35 1.19008 10.66 2.25008 8.99998C4.70008 5.17998 8.25008 2.97998 12.0001 2.97998C15.7501 2.97998 19.3001 5.17998 21.7401 8.99998C22.8001 10.65 22.8001 13.34 21.7401 15C19.3001 18.82 15.7501 21.02 12.0001 21.02ZM12.0001 4.47998C8.77008 4.47998 5.68008 6.41998 3.52008 9.80998C2.77008 10.98 2.77008 13.02 3.52008 14.19C5.68008 17.58 8.77008 19.52 12.0001 19.52C15.2301 19.52 18.3201 17.58 20.4801 14.19C21.2301 13.02 21.2301 10.98 20.4801 9.80998C18.3201 6.41998 15.2301 4.47998 12.0001 4.47998Z" fill="currentColor" />
+                      </svg>
+                    </span>
+                  </button>
+                )}
+                {displayDelete && (
+                  <button type="button"
+                    className={`dcds-Button dcds-Button--variant-Tertiary dcds-Button--color-Error dcds-Button--size-XS dcds-Button--icon-only`}
+                    aria-label={`Delete ${documentName}`} disabled={isDeleteDisabled} aria-disabled={isDeleteDisabled || undefined}
+                    onClick={() => !isDeleteDisabled && onDelete && onDelete(documentName)}>
+                    <span className="dcds-Button__icon">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                        <path d="M21 6.72998C20.98 6.72998 20.95 6.72998 20.92 6.72998C15.63 6.19998 10.35 5.99998 5.12001 6.52998L3.08001 6.72998C2.66001 6.76998 2.29001 6.46998 2.25001 6.04998C2.21001 5.62998 2.51001 5.26998 2.92001 5.22998L4.96001 5.02998C10.28 4.48998 15.67 4.69998 21.07 5.22998C21.48 5.26998 21.78 5.63998 21.74 6.04998C21.71 6.43998 21.38 6.72998 21 6.72998Z" fill="currentColor" />
+                        <path d="M8.50001 5.72C8.46001 5.72 8.42001 5.72 8.37001 5.71C7.97001 5.64 7.69001 5.25 7.76001 4.85L7.98001 3.54C8.14001 2.58 8.36001 1.25 10.69 1.25H13.31C15.65 1.25 15.87 2.63 16.02 3.55L16.24 4.85C16.31 5.26 16.03 5.65 15.63 5.71C15.22 5.78 14.83 5.5 14.77 5.1L14.55 3.8C14.41 2.93 14.38 2.76 13.32 2.76H10.7C9.64001 2.76 9.62001 2.9 9.47001 3.79L9.24001 5.09C9.18001 5.46 8.86001 5.72 8.50001 5.72Z" fill="currentColor" />
+                        <path d="M15.21 22.75H8.78999C5.29999 22.75 5.15999 20.82 5.04999 19.26L4.39999 9.19001C4.36999 8.78001 4.68999 8.42001 5.09999 8.39001C5.51999 8.37001 5.86999 8.68001 5.89999 9.09001L6.54999 19.16C6.65999 20.68 6.69999 21.25 8.78999 21.25H15.21C17.31 21.25 17.35 20.68 17.45 19.16L18.1 9.09001C18.13 8.68001 18.49 8.37001 18.9 8.39001C19.31 8.42001 19.63 8.77001 19.6 9.19001L18.95 19.26C18.84 20.82 18.7 22.75 15.21 22.75Z" fill="currentColor" />
+                        <path d="M13.66 17.25H10.33C9.91999 17.25 9.57999 16.91 9.57999 16.5C9.57999 16.09 9.91999 15.75 10.33 15.75H13.66C14.07 15.75 14.41 16.09 14.41 16.5C14.41 16.91 14.07 17.25 13.66 17.25Z" fill="currentColor" />
+                        <path d="M14.5 13.25H9.5C9.09 13.25 8.75 12.91 8.75 12.5C8.75 12.09 9.09 11.75 9.5 11.75H14.5C14.91 11.75 15.25 12.09 15.25 12.5C15.25 12.91 14.91 13.25 14.5 13.25Z" fill="currentColor" />
+                      </svg>
+                    </span>
+                  </button>
+                )}
+              </div>
+            </div>
+            {showDeterminate && (
+              <div className="dcds-UploadDocument__loader">
+                <DeterminateLoader progress={progress} helperText={helperText || `Uploading ${documentName}…`} displayHelperText={displayHelperText} displayPercentage={displayPercentage} aria-label={`Uploading ${documentName}: ${Math.round(progress)}% complete`} />
+              </div>
+            )}
+            {showIndeterminate && (
+              <div className="dcds-UploadDocument__loader">
+                <IndeterminateLoader size={loaderSize} helperText={displayHelperText} label={helperText || `Uploading ${documentName}…`} aria-label={`Uploading ${documentName}`} />
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * Accordion Example — interactive, wired to all panel controls
+       * ============================================================ */
+      function AccordionExample({
+        ctaSize, ctaState, ctaIsDisabled, ctaLabel,
+        docStatus, docLoaderType, docName, docHelperText, docDisplayHelperText, docDisplayPercentage,
+        docDisplayStatus, docStatusText, docBadgeState, docBadgeEmphasis, docShowBadgeIcon,
+        docDisplayView, docIsViewDisabled, docDisplayDelete, docIsDeleteDisabled,
+        docProgress, docLoaderSize, pushFuLog, fuLog,
+      }) {
+        const [open, setOpen] = React.useState(true);
+        const docProps = {
+          status: docStatus, loaderType: docLoaderType, documentName: docName,
+          helperText: docHelperText, displayHelperText: docDisplayHelperText, displayPercentage: docDisplayPercentage,
+          displayStatus: docDisplayStatus, statusText: docStatusText,
+          badgeState: docBadgeState, badgeEmphasis: docBadgeEmphasis, showBadgeIcon: docShowBadgeIcon,
+          displayView: docDisplayView, isViewDisabled: docIsViewDisabled,
+          displayDelete: docDisplayDelete, isDeleteDisabled: docIsDeleteDisabled,
+          progress: docProgress, loaderSize: docLoaderSize,
+          className: 'dcds-UploadDocument--full-width',
+        };
+        return (
+          <section>
+            <h2>Example — Accordion with Upload CTA</h2>
+            <p className="stage-note">Interactive — all UploadCTA and UploadDocument props are driven by the left panel. Click the chevron to open/close.</p>
+            <div style={{ background:'var(--color-surface-1)', border:'0.5px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden', maxWidth:776 }}>
+              {/* Header */}
+              <button type="button" onClick={() => setOpen(o => !o)} style={{ width:'100%', background:'none', border:'none', borderBottom: open ? '0.5px solid var(--color-stroke-neutral)' : 'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--gap-12)', fontFamily:'var(--font-family)' }}>
+                <span style={{ fontSize:'var(--font-size-caption)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-primary)' }}>Title</span>
+                <div style={{ display:'flex', alignItems:'center', gap:'var(--gap-12)' }}>
+                  <UploadCTA
+                    size={ctaSize} state={ctaState} isDisabled={ctaIsDisabled}
+                    label={ctaLabel} isFullWidth={false}
+                    onClick={(e) => { e.stopPropagation(); pushFuLog('UploadCTA onClick'); }}
+                    onFileSelect={(files) => pushFuLog(`UploadCTA onFileSelect: ${files[0].name}`)}
+                  />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ color:'var(--color-icon-primary)', transform: open ? 'rotate(180deg)' : 'none', transition:'transform 150ms ease', flexShrink:0 }}>
+                    <path d="M19 8.5L12 15.5L5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </button>
+              {/* Body */}
+              {open && (
+                <div style={{ padding:'var(--gap-12)', display:'flex', flexDirection:'column', gap:'var(--gap-8)' }}>
+                  <UploadDocument {...docProps} onView={(n) => pushFuLog(`onView: ${n}`)} onDelete={(n) => pushFuLog(`onDelete: ${n}`)} />
+                  <UploadDocument {...docProps} onView={(n) => pushFuLog(`onView: ${n}`)} onDelete={(n) => pushFuLog(`onDelete: ${n}`)} />
+                </div>
+              )}
+            </div>
+            <div className="events">{fuLog.length === 0 ? '— interact with the accordion to see events —' : fuLog.join('\n')}</div>
+          </section>
+        );
+      }
+
+      /* ============================================================
+       * Modal Example — interactive, wired to all panel controls
+       * ============================================================ */
+      function ModalExample({
+        ddStates, ddIsDisabled, ddShowLabel, ddLabel, ddDisplayReqs, ddReqsText,
+        ddDisplayVal, ddValText, ddValType,
+        docStatus, docLoaderType, docName, docHelperText, docDisplayHelperText, docDisplayPercentage,
+        docDisplayStatus, docStatusText, docBadgeState, docBadgeEmphasis, docShowBadgeIcon,
+        docDisplayView, docIsViewDisabled, docDisplayDelete, docIsDeleteDisabled,
+        docProgress, docLoaderSize, pushFuLog, fuLog,
+      }) {
+        const [visible, setVisible] = React.useState(true);
+        const docProps = {
+          status: docStatus, loaderType: docLoaderType, documentName: docName,
+          helperText: docHelperText, displayHelperText: docDisplayHelperText, displayPercentage: docDisplayPercentage,
+          displayStatus: docDisplayStatus, statusText: docStatusText,
+          badgeState: docBadgeState, badgeEmphasis: docBadgeEmphasis, showBadgeIcon: docShowBadgeIcon,
+          displayView: docDisplayView, isViewDisabled: docIsViewDisabled,
+          displayDelete: docDisplayDelete, isDeleteDisabled: docIsDeleteDisabled,
+          progress: docProgress, loaderSize: docLoaderSize,
+          className: 'dcds-UploadDocument--full-width',
+        };
+        return (
+          <section>
+            <h2>Example — Modal with Upload DragDrop</h2>
+            <p className="stage-note">Interactive — all UploadDragDrop and UploadDocument props are driven by the left panel. Dismiss and reopen the modal with the buttons.</p>
+            {!visible && (
+              <button type="button" className="dcds-Button dcds-Button--variant-Secondary dcds-Button--color-Primary dcds-Button--size-S" onClick={() => setVisible(true)} style={{ marginBottom:'var(--gap-16)' }}>
+                Reopen modal
+              </button>
+            )}
+            {visible && (
+              <div style={{ background:'var(--color-surface-1)', borderRadius:'var(--rd-S)', overflow:'hidden', maxWidth:760, boxShadow:'var(--shadow-S)' }}>
+                {/* Header */}
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--gap-8) var(--gap-12)', borderBottom:'0.5px solid var(--color-stroke-subdued)' }}>
+                  <span style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-caption)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-primary)' }}>Title</span>
+                  <button type="button" onClick={() => setVisible(false)} style={{ background:'none', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', width:32, height:32, borderRadius:'var(--rd-S)', color:'var(--color-icon-primary)' }} aria-label="Close modal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                </div>
+                {/* Body */}
+                <div style={{ padding:'var(--gap-12)', display:'flex', flexDirection:'column', gap:'var(--gap-12)' }}>
+                  <UploadDragDrop
+                    states={ddStates} isDisabled={ddIsDisabled} showLabel={ddShowLabel} label={ddLabel}
+                    displayRequirements={ddDisplayReqs} requirementsText={ddReqsText}
+                    displayValidation={ddDisplayVal} validationText={ddValText} validationType={ddValType}
+                    className="dcds-UploadDragDrop--full-width"
+                    onFileSelect={(files) => pushFuLog(`UploadDragDrop onFileSelect: ${files[0].name}`)}
+                    onClick={() => pushFuLog('UploadDragDrop onClick')}
+                    onDragEnter={() => pushFuLog('UploadDragDrop onDragEnter')}
+                    onDrop={() => pushFuLog('UploadDragDrop onDrop')}
+                  />
+                  <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-8)' }}>
+                    {[1,2,3,4].map(i => (
+                      <UploadDocument key={i} {...docProps}
+                        documentName={`${docName.replace(/\.pdf$/, '')}_${i}.pdf`}
+                        onView={(n) => pushFuLog(`onView: ${n}`)}
+                        onDelete={(n) => pushFuLog(`onDelete: ${n}`)}
+                      />
+                    ))}
+                  </div>
+                </div>
+                {/* Footer */}
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'var(--gap-12)', borderTop:'0.5px solid var(--color-stroke-subdued)' }}>
+                  <span style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-label)', color:'var(--color-hyperlink-default)', cursor:'pointer', textDecoration:'underline' }}>Link</span>
+                  <div style={{ display:'flex', gap:'var(--gap-12)' }}>
+                    <button type="button" onClick={() => setVisible(false)} style={{ height:32, padding:'0 var(--gap-12)', background:'var(--color-surface-1)', border:'1px solid var(--color-stroke-action)', borderRadius:'var(--rd-XS)', fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-action)', cursor:'pointer' }}>Cancel</button>
+                    <button type="button" onClick={() => { pushFuLog('Primary button clicked'); setVisible(false); }} style={{ height:32, padding:'0 var(--gap-12)', background:'var(--color-fill-action)', border:'none', borderRadius:'var(--rd-XS)', fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-invert)', cursor:'pointer' }}>Upload</button>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className="events">{fuLog.length === 0 ? '— interact with the modal to see events —' : fuLog.join('\n')}</div>
+          </section>
+        );
+      }
+
       function Playground() {
         /* --- Navigation --- */
         const [activeComponent, setActiveComponent] = useState('button');
+        const [panelOpen, setPanelOpen] = useState(true);
 
         const NAV_ITEMS = [
           { id: 'button',         label: 'Button'         },
@@ -3693,8 +4533,11 @@
           { id: 'tag',            label: 'Tag'            },
           { id: 'tabs',           label: 'Tabs'           },
           { id: 'modal',          label: 'Modal'          },
+          { id: 'accordian',      label: 'Accordian'      },
           { id: 'avatar',         label: 'Avatar'         },
-          { id: 'avatargroup',    label: 'AvatarGroup'    },
+          { id: 'avatargroup',  label: 'AvatarGroup'  },
+          { id: 'progressbar',  label: 'Progress Bar' },
+          { id: 'fileupload',     label: 'File Upload'    },
         ];
 
         /* --- Button controls --- */
@@ -3841,6 +4684,31 @@
         const [alertShowActions, setAlertShowActions] = useState(false);
         const [alertClosed, setAlertClosed] = useState(false);
 
+        /* --- DeterminateLoader controls --- */
+        const [dlProgress,          setDlProgress]          = useState(0);
+        const [dlPlaying,           setDlPlaying]           = useState(true);
+        const [dlDisplayHelper,     setDlDisplayHelper]     = useState(true);
+        const [dlDisplayPercentage, setDlDisplayPercentage] = useState(true);
+        const [dlHelperText,        setDlHelperText]        = useState('Uploading statement.pdf');
+        const [dlLog,               pushDlLog]              = useEventLog();
+
+        /* Auto-increment: +1% every 80 ms → full cycle ~8 s, pause 900 ms at 100 then loop */
+        useEffect(() => {
+          if (!dlPlaying) return;
+          if (dlProgress >= 100) {
+            const t = setTimeout(() => setDlProgress(0), 900);
+            return () => clearTimeout(t);
+          }
+          const t = setTimeout(() => setDlProgress((p) => Math.min(100, p + 1)), 80);
+          return () => clearTimeout(t);
+        }, [dlPlaying, dlProgress]);
+
+        /* --- IndeterminateLoader controls --- */
+        const [ilSize,      setIlSize]      = useState('Small');
+        const [ilShowLabel, setIlShowLabel] = useState(true);
+        const [ilLabel,     setIlLabel]     = useState('Loading results…');
+        const [ilLog,       pushIlLog]      = useEventLog();
+
         /* --- Toast state --- */
         const [toasts, setToasts] = useState([]);
         function showToast(state) {
@@ -3851,7 +4719,46 @@
           setToasts((prev) => prev.filter((t) => t.id !== id));
         }
 
+        /* --- FileUpload / UploadDragDrop controls --- */
+        const [ddStates,           setDdStates]           = useState('Default');
+        const [ddShowLabel,        setDdShowLabel]        = useState(true);
+        const [ddLabel,            setDdLabel]            = useState('Upload Statement');
+        const [ddDisplayReqs,      setDdDisplayReqs]      = useState(true);
+        const [ddReqsText,         setDdReqsText]         = useState('PDF format only, max 50MB, no password protection');
+        const [ddDisplayVal,       setDdDisplayVal]       = useState(true);
+        const [ddValText,          setDdValText]          = useState('Validation');
+        const [ddValType,          setDdValType]          = useState('error');
+        const [ddIsDisabled,       setDdIsDisabled]       = useState(false);
+
+        /* --- FileUpload / UploadCTA controls --- */
+        const [ctaSize,            setCtaSize]            = useState('L');
+        const [ctaState,           setCtaState]           = useState('Default');
+        const [ctaIsDisabled,      setCtaIsDisabled]      = useState(false);
+        const [ctaIsFullWidth,     setCtaIsFullWidth]     = useState(true);
+        const [ctaLabel,           setCtaLabel]           = useState('Upload statement');
+
+        /* --- FileUpload / UploadDocument controls --- */
+        const [docStatus,          setDocStatus]          = useState('Uploaded');
+        const [docLoaderType,      setDocLoaderType]      = useState('Default');
+        const [docName,            setDocName]            = useState('statement_2024.pdf');
+        const [docDisplayStatus,   setDocDisplayStatus]   = useState(true);
+        const [docStatusText,      setDocStatusText]      = useState('Status');
+        const [docBadgeState,      setDocBadgeState]      = useState('neutral');
+        const [docBadgeEmphasis,   setDocBadgeEmphasis]   = useState('subtle');
+        const [docShowBadgeIcon,   setDocShowBadgeIcon]   = useState(true);
+        const [docDisplayView,     setDocDisplayView]     = useState(true);
+        const [docIsViewDisabled,  setDocIsViewDisabled]  = useState(false);
+        const [docDisplayDelete,   setDocDisplayDelete]   = useState(true);
+        const [docIsDeleteDisabled,setDocIsDeleteDisabled]= useState(false);
+        const [docProgress,        setDocProgress]        = useState(62);
+        const [docHelperText,      setDocHelperText]      = useState('Helper text...');
+        const [docDisplayHelperText, setDocDisplayHelperText] = useState(true);
+        const [docDisplayPercentage, setDocDisplayPercentage] = useState(true);
+        const [docLoaderSize,        setDocLoaderSize]        = useState('Small');
+        const [fuLog,              pushFuLog]             = useEventLog();
+
         return (
+          <PanelContext.Provider value={{ open: panelOpen, setOpen: setPanelOpen }}>
           <div className="app">
             {/* ============================================================
              * PRIMARY NAV — component list
@@ -3880,19 +4787,15 @@
             {activeComponent === 'tag'         && <TagSection />}
             {activeComponent === 'tabs'        && <TabsSection />}
             {activeComponent === 'modal'       && <ModalSection />}
+            {activeComponent === 'accordian'   && <AccordianSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
 
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'modal' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && <>
-
-            <aside className="panel">
-              <h1>Props</h1>
-              <p style={{ fontSize: 12, color: 'var(--color-text-subdued)', margin: 0 }}>
-                Adjust and see live on the right.
-              </p>
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && (
+            <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
                 <>
@@ -4026,6 +4929,21 @@
                 </>
               )}
 
+              {activeComponent === 'progressbar' && (
+                <>
+                  <h2>DeterminateLoader</h2>
+                  <CtrlToggle label="animate"           checked={dlPlaying}           onChange={(v) => { setDlPlaying(v); if (!v) setDlProgress(0); }} />
+                  <CtrlText   label="progress (0–100)"  value={String(dlProgress)}    onChange={(v) => { setDlPlaying(false); const n = parseInt(v, 10); setDlProgress(isNaN(n) ? 0 : Math.min(100, Math.max(0, n))); }} />
+                  <CtrlToggle label="displayHelperText" checked={dlDisplayHelper}     onChange={setDlDisplayHelper} />
+                  <CtrlToggle label="displayPercentage" checked={dlDisplayPercentage} onChange={setDlDisplayPercentage} />
+                  <CtrlText   label="helperText"        value={dlHelperText}          onChange={setDlHelperText} />
+                  <h2 style={{ marginTop: 'var(--gap-16)' }}>IndeterminateLoader</h2>
+                  <CtrlSelect label="size"       value={ilSize}      onChange={setIlSize}      options={['Small', 'Medium']} />
+                  <CtrlToggle label="helperText" checked={ilShowLabel} onChange={setIlShowLabel} />
+                  <CtrlText   label="label"      value={ilLabel}     onChange={setIlLabel} />
+                </>
+              )}
+
               {activeComponent === 'alert' && (
                 <>
                   <h2>Alert</h2>
@@ -4040,7 +4958,50 @@
                 </>
               )}
 
-            </aside>
+
+              {activeComponent === 'fileupload' && (
+                <>
+                  <h2>UploadDragDrop</h2>
+                  <CtrlSelect label="states"              value={ddStates}      onChange={(v) => { setDdStates(v); setDdIsDisabled(v === 'Disabled'); }} options={['Default', 'Hover', 'Disabled']} />
+                  <CtrlToggle label="isDisabled"          checked={ddIsDisabled} onChange={(v) => { setDdIsDisabled(v); setDdStates(v ? 'Disabled' : 'Default'); }} />
+                  <CtrlToggle label="showLabel"           checked={ddShowLabel}  onChange={setDdShowLabel} />
+                  <CtrlText   label="label"               value={ddLabel}        onChange={setDdLabel} />
+                  <CtrlToggle label="displayRequirements" checked={ddDisplayReqs} onChange={setDdDisplayReqs} />
+                  <CtrlText   label="requirementsText"    value={ddReqsText}     onChange={setDdReqsText} />
+                  <CtrlToggle label="displayValidation"   checked={ddDisplayVal} onChange={setDdDisplayVal} />
+                  <CtrlText   label="validationText"      value={ddValText}      onChange={setDdValText} />
+                  <CtrlSelect label="validationType"      value={ddValType}      onChange={setDdValType}      options={['error', 'warning', 'success']} />
+
+                  <h2 style={{ marginTop: 'var(--gap-16)' }}>UploadCTA</h2>
+                  <CtrlSelect label="size"        value={ctaSize}        onChange={setCtaSize}        options={['XS', 'S', 'M', 'L']} />
+                  <CtrlSelect label="state"       value={ctaState}       onChange={(v) => { setCtaState(v); setCtaIsDisabled(v === 'Disabled'); }} options={['Default', 'Hover', 'Disabled']} />
+                  <CtrlToggle label="isDisabled"  checked={ctaIsDisabled}  onChange={(v) => { setCtaIsDisabled(v); if (v) setCtaState('Disabled'); else if (ctaState === 'Disabled') setCtaState('Default'); }} />
+                  <CtrlToggle label="isFullWidth" checked={ctaIsFullWidth} onChange={setCtaIsFullWidth} />
+                  <CtrlText   label="label"       value={ctaLabel}       onChange={setCtaLabel} />
+
+                  <h2 style={{ marginTop: 'var(--gap-16)' }}>UploadDocument</h2>
+                  <CtrlSelect label="status"        value={docStatus}   onChange={(v) => { setDocStatus(v); if (v === 'Uploaded') setDocLoaderType('Default'); else setDocLoaderType('Determinate'); }} options={['Uploaded', 'Uploading']} />
+                  {docStatus === 'Uploading' && <CtrlSelect label="loaderType" value={docLoaderType} onChange={setDocLoaderType} options={['Determinate', 'Indeterminate']} />}
+                  {docStatus === 'Uploading' && docLoaderType === 'Determinate' && <CtrlText label="progress (0–100)" value={String(docProgress)} onChange={(v) => { const n = parseInt(v, 10); setDocProgress(isNaN(n) ? 0 : Math.min(100, Math.max(0, n))); }} />}
+                  <CtrlText   label="documentName"     value={docName}          onChange={setDocName} />
+                  <CtrlText   label="helperText"       value={docHelperText}    onChange={setDocHelperText} />
+                  <CtrlToggle label="displayHelperText" checked={docDisplayHelperText} onChange={setDocDisplayHelperText} />
+                  {docStatus === 'Uploading' && docLoaderType === 'Determinate' && <CtrlToggle label="displayPercentage" checked={docDisplayPercentage} onChange={setDocDisplayPercentage} />}
+                  {docStatus === 'Uploading' && docLoaderType === 'Indeterminate' && <CtrlSelect label="loaderSize" value={docLoaderSize} onChange={setDocLoaderSize} options={['Small', 'Medium']} />}
+                  <CtrlToggle label="displayStatus"    checked={docDisplayStatus} onChange={setDocDisplayStatus} />
+                  <CtrlText   label="statusText"       value={docStatusText}    onChange={setDocStatusText} />
+                  <CtrlSelect label="badgeState"       value={docBadgeState}    onChange={setDocBadgeState}    options={['neutral', 'success', 'warning', 'error', 'info']} />
+                  <CtrlSelect label="badgeEmphasis"    value={docBadgeEmphasis} onChange={setDocBadgeEmphasis} options={['subtle', 'intense']} />
+                  <CtrlToggle label="showBadgeIcon"    checked={docShowBadgeIcon} onChange={setDocShowBadgeIcon} />
+                  <CtrlToggle label="displayView"      checked={docDisplayView}   onChange={setDocDisplayView} />
+                  <CtrlToggle label="isViewDisabled"   checked={docIsViewDisabled}  onChange={setDocIsViewDisabled} />
+                  <CtrlToggle label="displayDelete"    checked={docDisplayDelete}  onChange={setDocDisplayDelete} />
+                  <CtrlToggle label="isDeleteDisabled" checked={docIsDeleteDisabled} onChange={setDocIsDeleteDisabled} />
+                </>
+              )}
+
+
+            </>}>
 
             {/* ============================================================
              * MAIN STAGE — previews
@@ -4302,6 +5263,92 @@
                     <Checkbox State="Enabled" label="Indeterminate (mixed)" indeterminate={true} />
                   </div>
                 </section>
+              )}
+
+              {activeComponent === 'progressbar' && (
+                <>
+                  {/* ── DeterminateLoader ── */}
+                  <section>
+                    <h2>DeterminateLoader — Interactive Playground</h2>
+                    <p className="stage-note">
+                      Toggle <code>animate</code> in the left panel to watch progress fill end-to-end and loop.
+                      Turn off <code>animate</code> to set a manual value.
+                    </p>
+                    <div className="preview" style={{ flexDirection:'column', alignItems:'stretch', padding:'var(--gap-24)' }}>
+                      <DeterminateLoader
+                        progress={dlProgress}
+                        displayHelperText={dlDisplayHelper}
+                        displayPercentage={dlDisplayPercentage}
+                        helperText={dlHelperText}
+                        aria-label={`${dlHelperText}: ${dlProgress}% complete`}
+                        onProgressComplete={() => pushDlLog('onProgressComplete')}
+                        onProgressChange={(p) => pushDlLog(`onProgressChange: ${p}%`)}
+                      />
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>DeterminateLoader — Label Variants</h2>
+                    <p className="stage-note">
+                      Both labels visible (default) · percentage hidden · helper text hidden.
+                      Do NOT set both to false — the bar alone gives insufficient context.
+                    </p>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>Both visible (default)</p>
+                        <DeterminateLoader progress={62} helperText="Uploading statement.pdf" aria-label="Upload progress: 62%" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>displayPercentage=false</code></p>
+                        <DeterminateLoader progress={62} helperText="Processing documents" displayPercentage={false} aria-label="Processing: 62% complete" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>displayHelperText=false</code></p>
+                        <DeterminateLoader progress={62} displayHelperText={false} aria-label="Loading: 62% complete" />
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* ── IndeterminateLoader ── */}
+                  <section>
+                    <h2>IndeterminateLoader — Interactive Playground</h2>
+                    <p className="stage-note">Adjust <code>size</code> and label props in the left panel.</p>
+                    <div className="preview" style={{ flexDirection:'column', alignItems:'stretch', padding:'var(--gap-24)' }}>
+                      <IndeterminateLoader size={ilSize} helperText={ilShowLabel} label={ilLabel} aria-label={ilLabel} />
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>IndeterminateLoader — Sizes</h2>
+                    <p className="stage-note">
+                      <code>Small</code> (4 px) and <code>Medium</code> (8 px) — same segment colour, different height.
+                    </p>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>size="Small"</code> — 4 px</p>
+                        <IndeterminateLoader size="Small" label="Loading results…" aria-label="Loading results" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>size="Medium"</code> — 8 px</p>
+                        <IndeterminateLoader size="Medium" label="Fetching your documents…" aria-label="Fetching documents" />
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>IndeterminateLoader — Label Variants</h2>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)', padding:'var(--gap-16)', background:'var(--color-surface-2)', borderRadius:'var(--rd-S)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>With label (default)</p>
+                        <IndeterminateLoader size="Small" label="Loading results…" aria-label="Loading results" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>helperText=false</code> — bar only</p>
+                        <IndeterminateLoader size="Small" helperText={false} aria-label="Loading" />
+                      </div>
+                    </div>
+                  </section>
+                </>
               )}
 
               {activeComponent === 'alert' && (
@@ -4767,10 +5814,151 @@
                 </>
               )}
 
+              {activeComponent === 'fileupload' && (
+                <>
+                  <section>
+                    <h2>UploadDragDrop — Interactive Playground</h2>
+                    <p className="stage-note">Adjust props in the left panel. Drag a file over the zone or click "Upload" to fire events.</p>
+                    <div className="preview">
+                      <UploadDragDrop
+                        states={ddStates}
+                        isDisabled={ddIsDisabled}
+                        showLabel={ddShowLabel}
+                        label={ddLabel}
+                        displayRequirements={ddDisplayReqs}
+                        requirementsText={ddReqsText}
+                        displayValidation={ddDisplayVal}
+                        validationText={ddValText}
+                        validationType={ddValType}
+                        onFileSelect={(files) => pushFuLog(`UploadDragDrop onFileSelect: ${files[0].name}`)}
+                        onDragEnter={() => pushFuLog('UploadDragDrop onDragEnter')}
+                        onDragLeave={() => pushFuLog('UploadDragDrop onDragLeave')}
+                        onDrop={() => pushFuLog('UploadDragDrop onDrop')}
+                        onClick={() => pushFuLog('UploadDragDrop onClick')}
+                      />
+                    </div>
+                    <div className="events">
+                      {fuLog.length === 0 ? '— interact with the drop zone to see events —' : fuLog.join('\n')}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>UploadDragDrop — All States</h2>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)' }}>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><strong>Default</strong></p>
+                        <UploadDragDrop states="Default" label="Upload Statement" requirementsText="PDF only, max 50MB, no password protection" validationText="Validation" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><strong>Hover</strong></p>
+                        <UploadDragDrop states="Hover" label="Upload Statement" requirementsText="PDF only, max 50MB, no password protection" validationText="Validation" />
+                      </div>
+                      <div>
+                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><strong>Disabled</strong> (isDisabled=true syncs state)</p>
+                        <UploadDragDrop states="Disabled" isDisabled={true} label="Upload Statement" requirementsText="PDF only, max 50MB, no password protection" validationText="Validation" />
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>UploadCTA — Interactive Playground</h2>
+                    <p className="stage-note">Adjust props in the left panel.</p>
+                    <div className="preview" style={{ maxWidth:360 }}>
+                      <UploadCTA
+                        size={ctaSize}
+                        state={ctaState}
+                        isDisabled={ctaIsDisabled}
+                        isFullWidth={ctaIsFullWidth}
+                        label={ctaLabel}
+                        onFileSelect={(files) => pushFuLog(`UploadCTA onFileSelect: ${files[0].name}`)}
+                        onClick={() => pushFuLog('UploadCTA onClick')}
+                      />
+                    </div>
+                    <div className="events">
+                      {fuLog.length === 0 ? '— interact with the button to see events —' : fuLog.join('\n')}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>UploadCTA — All Sizes × States</h2>
+                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)' }}>
+                      {['XS','S','M','L'].map((sz) => (
+                        <div key={sz} style={{ display:'flex', flexDirection:'column', gap:'var(--gap-12)' }}>
+                          <p className="stage-note"><strong>Size {sz}</strong></p>
+                          <div style={{ display:'flex', flexWrap:'wrap', gap:'var(--gap-16)', alignItems:'center' }}>
+                            <UploadCTA size={sz} state="Default"  label="Upload statement" isFullWidth={false} />
+                            <UploadCTA size={sz} state="Hover"    label="Upload statement" isFullWidth={false} />
+                            <UploadCTA size={sz} state="Disabled" label="Upload statement" isFullWidth={false} isDisabled />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2>UploadDocument — Interactive Playground</h2>
+                    <p className="stage-note">Adjust props in the left panel. Click view/delete to fire events.</p>
+                    <div className="preview" style={{ flexDirection:'column', alignItems:'flex-start' }}>
+                      <UploadDocument
+                        status={docStatus}
+                        loaderType={docLoaderType}
+                        documentName={docName}
+                        helperText={docHelperText}
+                        displayHelperText={docDisplayHelperText}
+                        displayPercentage={docDisplayPercentage}
+                        loaderSize={docLoaderSize}
+                        displayStatus={docDisplayStatus}
+                        statusText={docStatusText}
+                        badgeState={docBadgeState}
+                        badgeEmphasis={docBadgeEmphasis}
+                        showBadgeIcon={docShowBadgeIcon}
+                        displayView={docDisplayView}
+                        isViewDisabled={docIsViewDisabled}
+                        displayDelete={docDisplayDelete}
+                        isDeleteDisabled={docIsDeleteDisabled}
+                        progress={docProgress}
+                        onView={(name) => pushFuLog(`UploadDocument onView: ${name}`)}
+                        onDelete={(name) => pushFuLog(`UploadDocument onDelete: ${name}`)}
+                      />
+                    </div>
+                    <div className="events">
+                      {fuLog.length === 0 ? '— click view or delete to see events —' : fuLog.join('\n')}
+                    </div>
+                  </section>
+
+                  <AccordionExample
+                    ctaSize={ctaSize} ctaState={ctaState} ctaIsDisabled={ctaIsDisabled} ctaLabel={ctaLabel}
+                    docStatus={docStatus} docLoaderType={docLoaderType} docName={docName}
+                    docHelperText={docHelperText} docDisplayHelperText={docDisplayHelperText} docDisplayPercentage={docDisplayPercentage}
+                    docDisplayStatus={docDisplayStatus} docStatusText={docStatusText}
+                    docBadgeState={docBadgeState} docBadgeEmphasis={docBadgeEmphasis} docShowBadgeIcon={docShowBadgeIcon}
+                    docDisplayView={docDisplayView} docIsViewDisabled={docIsViewDisabled}
+                    docDisplayDelete={docDisplayDelete} docIsDeleteDisabled={docIsDeleteDisabled}
+                    docProgress={docProgress} docLoaderSize={docLoaderSize}
+                    pushFuLog={pushFuLog} fuLog={fuLog}
+                  />
+
+                  <ModalExample
+                    ddStates={ddStates} ddIsDisabled={ddIsDisabled} ddShowLabel={ddShowLabel} ddLabel={ddLabel}
+                    ddDisplayReqs={ddDisplayReqs} ddReqsText={ddReqsText}
+                    ddDisplayVal={ddDisplayVal} ddValText={ddValText} ddValType={ddValType}
+                    docStatus={docStatus} docLoaderType={docLoaderType} docName={docName}
+                    docHelperText={docHelperText} docDisplayHelperText={docDisplayHelperText} docDisplayPercentage={docDisplayPercentage}
+                    docDisplayStatus={docDisplayStatus} docStatusText={docStatusText}
+                    docBadgeState={docBadgeState} docBadgeEmphasis={docBadgeEmphasis} docShowBadgeIcon={docShowBadgeIcon}
+                    docDisplayView={docDisplayView} docIsViewDisabled={docIsViewDisabled}
+                    docDisplayDelete={docDisplayDelete} docIsDeleteDisabled={docIsDeleteDisabled}
+                    docProgress={docProgress} docLoaderSize={docLoaderSize}
+                    pushFuLog={pushFuLog} fuLog={fuLog}
+                  />
+                </>
+              )}
+
+
 
             </main>
 
-            </> /* end aside+main conditional */}
+            </PanelLayout>)}
 
             {/* ---- Toast overlay (fixed bottom-right) ---- */}
             <div className="toast-container" aria-live="polite" aria-atomic="false">
@@ -4781,6 +5969,7 @@
               ))}
             </div>
           </div>
+          </PanelContext.Provider>
         );
       }
 

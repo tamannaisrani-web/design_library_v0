@@ -1,0 +1,220 @@
+/* UploadDragDrop — token-driven styles. Never override colour or border via className. */
+
+.dcds-UploadDragDrop {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  font-family: var(--font-family);
+}
+
+/* Label above the drop zone */
+.dcds-UploadDragDrop__label {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: normal;
+}
+
+/* Drop zone container — fixed 350×112 px per Figma spec */
+.dcds-UploadDragDrop__zone {
+  position: relative;
+  width: 350px;
+  height: 112px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-8);
+  padding: var(--gap-12) var(--gap-24);
+  border: 2px dashed var(--color-stroke-action);
+  border-radius: var(--rd-S);
+  background-color: var(--color-surface-1);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.dcds-UploadDragDrop__zone:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* Hidden native file input — covers zone for click-to-browse */
+.dcds-UploadDragDrop__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Icon container — 40×40 px, white bg in Default/Disabled, transparent in Hover */
+.dcds-UploadDragDrop__icon-wrap {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-1);
+  border-radius: var(--rd-S);
+}
+
+/* Hover: no background on icon container */
+.dcds-UploadDragDrop__icon-wrap--hover {
+  background-color: transparent;
+}
+
+/* Icon SVG — green in Default/Hover, grey in Disabled */
+.dcds-UploadDragDrop__icon-svg {
+  color: var(--color-icon-action);
+}
+
+.dcds-UploadDragDrop__icon-svg--disabled {
+  color: var(--color-icon-disabled);
+}
+
+/* Right column: text content */
+.dcds-UploadDragDrop__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-4);
+  flex: 1;
+  min-width: 0;
+}
+
+/* "Drag files here or Upload" row */
+.dcds-UploadDragDrop__cta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+  flex-wrap: wrap;
+}
+
+/* "Drag files here or" — neutral near-black per Figma */
+.dcds-UploadDragDrop__cta-text {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-neutral);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* "Upload" — bold green, NO underline per Figma */
+.dcds-UploadDragDrop__cta-link {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-action);
+  line-height: normal;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+/* Requirements text */
+.dcds-UploadDragDrop__requirements {
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-success);
+  line-height: normal;
+}
+
+/* Validation row below the zone — icon + message */
+.dcds-UploadDragDrop__validation {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+  padding: 0 var(--gap-4);
+}
+
+.dcds-UploadDragDrop__validation-icon {
+  flex-shrink: 0;
+}
+
+.dcds-UploadDragDrop__validation-text {
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* Validation state colours — icon uses icon token, text uses text token (different tones per state) */
+.dcds-UploadDragDrop__validation--error .dcds-UploadDragDrop__validation-icon   { color: var(--color-icon-error); }
+.dcds-UploadDragDrop__validation--error .dcds-UploadDragDrop__validation-text   { color: var(--color-text-error); }
+
+.dcds-UploadDragDrop__validation--warning .dcds-UploadDragDrop__validation-icon { color: var(--color-icon-warning); }
+.dcds-UploadDragDrop__validation--warning .dcds-UploadDragDrop__validation-text { color: var(--color-text-warning); }
+
+.dcds-UploadDragDrop__validation--success .dcds-UploadDragDrop__validation-icon { color: var(--color-icon-success); }
+.dcds-UploadDragDrop__validation--success .dcds-UploadDragDrop__validation-text { color: var(--color-text-success); }
+
+/* ── State: Hover ──
+   Hover bg = color/fill/success = Wealthy Green-50 = #e7faf2
+   No semantic alias exists for this value; using the primitive directly. */
+.dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__zone {
+  background-color: var(--dcds-wealthy-green-50, #e7faf2);
+}
+
+/* Mouse-hover in Default state — mirrors the Hover state visuals via CSS :hover */
+.dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover {
+  background-color: var(--dcds-wealthy-green-50, #e7faf2);
+}
+
+.dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__icon-wrap {
+  background-color: transparent;
+}
+
+.dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__cta-text,
+.dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__cta-link {
+  color: var(--color-text-primary);
+}
+
+.dcds-UploadDragDrop--state-Default .dcds-UploadDragDrop__zone:hover .dcds-UploadDragDrop__requirements {
+  color: var(--color-text-info);
+}
+
+/* In Hover, text shifts to color/text/primary (navy) per Figma */
+.dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__cta-text,
+.dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__cta-link {
+  color: var(--color-text-primary);
+}
+
+.dcds-UploadDragDrop--state-Hover .dcds-UploadDragDrop__requirements {
+  color: var(--color-text-info);
+}
+
+/* ── State: Disabled ──
+   Disabled border = color/stroke/disabled fallback #f0f0f0 = color/surface/4 per Figma */
+.dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__zone {
+  background-color: var(--color-surface-disabled);
+  border-color: var(--color-surface-4, #f0f0f0);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__cta-text,
+.dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__cta-link {
+  color: var(--color-text-disabled);
+}
+
+.dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__requirements {
+  color: var(--color-text-disabled);
+}
+
+.dcds-UploadDragDrop--state-Disabled .dcds-UploadDragDrop__label {
+  color: var(--color-text-disabled);
+}
+
+/* Drag-over visual feedback from browser drag events */
+.dcds-UploadDragDrop--drag-over .dcds-UploadDragDrop__zone {
+  background-color: var(--dcds-wealthy-green-50, #e7faf2);
+}

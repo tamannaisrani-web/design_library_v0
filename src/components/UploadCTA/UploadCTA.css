@@ -1,0 +1,108 @@
+/* UploadCTA — token-driven styles. Never override colour or border via className. */
+
+.dcds-UploadCTA {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-8);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  border: 1.5px dashed var(--color-stroke-action);
+  background-color: var(--color-surface-1);
+  color: var(--color-text-action);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  white-space: nowrap;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.dcds-UploadCTA:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* Hidden file input overlaid on the button */
+.dcds-UploadCTA__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Icon slot */
+.dcds-UploadCTA__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* Label */
+.dcds-UploadCTA__label {
+  pointer-events: none;
+  line-height: normal;
+}
+
+/* ── Sizes ── */
+.dcds-UploadCTA--size-XS {
+  height: 24px;
+  padding: 0 var(--gap-8);
+  font-size: var(--font-size-body-small);
+  border-radius: var(--rd-XS);
+}
+.dcds-UploadCTA--size-XS .dcds-UploadCTA__icon { width: 12px; height: 12px; }
+
+.dcds-UploadCTA--size-S {
+  height: 32px;
+  padding: 0 var(--gap-12);
+  font-size: var(--font-size-body-small);
+  border-radius: var(--rd-XS);
+}
+.dcds-UploadCTA--size-S .dcds-UploadCTA__icon { width: 12px; height: 12px; }
+
+.dcds-UploadCTA--size-M {
+  height: 40px;
+  padding: 0 var(--gap-16);
+  font-size: var(--font-size-body);
+  border-radius: var(--rd-S);
+}
+.dcds-UploadCTA--size-M .dcds-UploadCTA__icon { width: 16px; height: 16px; }
+
+.dcds-UploadCTA--size-L {
+  height: 48px;
+  padding: 0 var(--gap-20);
+  font-size: var(--font-size-body);
+  border-radius: var(--rd-S);
+}
+.dcds-UploadCTA--size-L .dcds-UploadCTA__icon { width: 16px; height: 16px; }
+
+/* ── isFullWidth ── */
+.dcds-UploadCTA--full-width {
+  width: 100%;
+}
+
+/* ── State: Hover ── */
+.dcds-UploadCTA--state-Hover,
+.dcds-UploadCTA:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-fill-light-action);
+}
+
+/* ── State: Disabled ── */
+.dcds-UploadCTA--state-Disabled,
+.dcds-UploadCTA:disabled,
+.dcds-UploadCTA[aria-disabled='true'] {
+  background-color: var(--color-surface-disabled);
+  border-color: var(--color-stroke-disabled);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dcds-UploadCTA--state-Disabled .dcds-UploadCTA__input {
+  pointer-events: none;
+}

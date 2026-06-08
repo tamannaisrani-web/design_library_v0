@@ -10,6 +10,8 @@
 
 export * from './components/Alert';
 export * from './components/Avatar';
+export * from './components/DeterminateLoader';
+export * from './components/IndeterminateLoader';
 export * from './components/AvatarGroup';
 export * from './components/Stepper';
 export * from './components/Tooltip';
@@ -25,5 +27,8 @@ export * from './components/Checkbox';
 export * from './components/Chip';
 export * from './components/Badge';
 export * from './components/Tag';
+export * from './components/Tabs';
+export * from './components/Accordian';
+export * from './components/Modal';
 export * from './components/shared';
 export * from './theme';

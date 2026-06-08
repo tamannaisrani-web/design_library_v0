@@ -1,0 +1,226 @@
+/* ==========================================================================
+   Modal — backdrop overlay, dialog shell, and sub-component styles.
+   Token reference: src/theme/tokens.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Overlay + dialog shell
+   -------------------------------------------------------------------------- */
+
+.dcds-Modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--color-overlay-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gap-24);
+}
+
+.dcds-Modal__dialog {
+  position: relative;
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-stroke-subdued);
+  border-radius: var(--rd-S);
+  box-shadow: var(--shadow-S);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--gap-48));
+  width: 100%;
+  animation: dcds-modal-in 160ms ease-out;
+}
+
+@keyframes dcds-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Figma widths: S=400px · M=760px · L=1024px */
+.dcds-Modal__dialog--size-S { max-width: 400px; }
+.dcds-Modal__dialog--size-M { max-width: 760px; }
+.dcds-Modal__dialog--size-L { max-width: 1024px; }
+
+.dcds-Modal__dialog:focus {
+  outline: none;
+}
+
+.dcds-Modal__dialog:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   ModalHeader
+   -------------------------------------------------------------------------- */
+
+/* Figma: px=var(--gap-12) py=var(--gap-8), gap=var(--gap-16) between left and end */
+.dcds-Modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-16);
+  padding: var(--gap-8) var(--gap-12);
+  border-bottom: 1px solid var(--color-stroke-subdued);
+  flex-shrink: 0;
+  border-radius: var(--rd-S) var(--rd-S) 0 0;
+}
+
+/* Left block: icon + title stack, gap=var(--gap-8) between them */
+.dcds-Modal__header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Leading icon slot — 16px, aligned to first line of title */
+.dcds-Modal__header-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--color-icon-subdued);
+  height: var(--font-size-caption);
+  margin-top: 2px;
+}
+
+/* Title + subtitle stack */
+.dcds-Modal__header-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Caption-Bold · 18px · color/text/primary */
+.dcds-Modal__header-title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: normal;
+  margin: 0;
+}
+
+/* Label-Regular · 14px · color/text/subdued */
+.dcds-Modal__header-subtitle {
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subdued);
+  line-height: normal;
+  margin: 0;
+}
+
+/* Right-side actions area (badge + close button), gap=var(--gap-4) */
+.dcds-Modal__header-end {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+  flex-shrink: 0;
+}
+
+/* Badge slot wrapper — badge component provides its own styling */
+.dcds-Modal__header-badge {
+  display: flex;
+  align-items: center;
+}
+
+/* Close (X) button — 40×40, color/Icon/subdued */
+.dcds-Modal__close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-icon-subdued);
+  border-radius: var(--rd-S);
+  transition: color 120ms ease, background-color 120ms ease;
+  padding: 0;
+}
+
+.dcds-Modal__close-btn:hover {
+  color: var(--color-icon-primary);
+  background-color: var(--color-surface-3);
+}
+
+.dcds-Modal__close-btn:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   ModalBody
+   -------------------------------------------------------------------------- */
+
+/* Body/Body-Regular · 16px · color/text/primary · padding=var(--gap-12) */
+.dcds-Modal__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--gap-12);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  min-height: 0;
+}
+
+/* Full-bleed body — no padding, content sits flush against the edges */
+.dcds-Modal__body--no-padding {
+  padding: 0;
+}
+
+/* Custom scrollbar — thin, token-coloured */
+.dcds-Modal__body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dcds-Modal__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dcds-Modal__body::-webkit-scrollbar-thumb {
+  background: var(--color-stroke-subdued);
+  border-radius: var(--rd-Max);
+}
+
+/* --------------------------------------------------------------------------
+   ModalFooter
+   -------------------------------------------------------------------------- */
+
+/* Figma: p=var(--gap-12) all sides */
+.dcds-Modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gap-12);
+  padding: var(--gap-12);
+  border-top: 1px solid var(--color-stroke-subdued);
+  flex-shrink: 0;
+  border-radius: 0 0 var(--rd-S) var(--rd-S);
+}
+
+/* Tertiary link slot — pushes actions to the right */
+.dcds-Modal__footer-link {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Actions wrapper — keeps gap consistent between Cancel + primary button */
+.dcds-Modal__footer-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+}
