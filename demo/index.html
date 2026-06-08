@@ -4378,6 +4378,113 @@
       }
 
       /* ============================================================
+       * FileUploadLiveDemo — picks real files, simulates upload progress
+       * ============================================================ */
+      function FileUploadLiveDemo() {
+        const [files, setFiles] = React.useState([]);
+
+        /* Add newly selected files to the list */
+        function handleFileSelect(fileList) {
+          const newEntries = Array.from(fileList).map(f => ({
+            id: `${f.name}-${Date.now()}-${Math.random()}`,
+            name: f.name,
+            progress: 0,
+            status: 'Uploading',
+          }));
+          setFiles(prev => [...prev, ...newEntries]);
+        }
+
+        /* Auto-increment progress for every uploading file */
+        React.useEffect(() => {
+          const hasUploading = files.some(f => f.status === 'Uploading');
+          if (!hasUploading) return;
+          const timer = setTimeout(() => {
+            setFiles(prev => prev.map(f => {
+              if (f.status !== 'Uploading') return f;
+              /* Random 2–6% tick per ~80ms → ~2–5s full upload */
+              const inc = Math.random() * 4 + 2;
+              const next = Math.min(100, f.progress + inc);
+              return { ...f, progress: next, status: next >= 100 ? 'Uploaded' : 'Uploading' };
+            }));
+          }, 80);
+          return () => clearTimeout(timer);
+        }, [files]);
+
+        function removeFile(id) {
+          setFiles(prev => prev.filter(f => f.id !== id));
+        }
+
+        function clearAll() {
+          setFiles([]);
+        }
+
+        return (
+          <section>
+            <h2>Live Upload Demo</h2>
+            <p className="stage-note">
+              Select or drag real files onto the zone — each file appears as an
+              <strong> UploadDocument</strong> row with animated progress.
+              Progress auto-advances; rows switch to <em>Uploaded</em> at 100%.
+            </p>
+
+            <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-12)' }}>
+              {/* Drop zone */}
+              <UploadDragDrop
+                states="Default"
+                label="Upload files"
+                requirementsText="Any file type — progress is simulated"
+                displayValidation={false}
+                multiple={true}
+                onFileSelect={handleFileSelect}
+              />
+
+              {/* File rows */}
+              {files.length > 0 && (
+                <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-8)' }}>
+                  {files.map(f => (
+                    <UploadDocument
+                      key={f.id}
+                      status={f.status}
+                      loaderType={f.status === 'Uploading' ? 'Determinate' : 'Determinate'}
+                      documentName={f.name}
+                      progress={f.progress}
+                      helperText={f.status === 'Uploading' ? `Uploading ${f.name}…` : `${f.name} uploaded`}
+                      displayHelperText={true}
+                      displayPercentage={f.status === 'Uploading'}
+                      badgeState={f.status === 'Uploaded' ? 'success' : 'neutral'}
+                      statusText={f.status === 'Uploaded' ? 'Uploaded' : 'Uploading'}
+                      showBadgeIcon={true}
+                      displayView={f.status === 'Uploaded'}
+                      displayDelete={true}
+                      onDelete={() => removeFile(f.id)}
+                      onView={() => {}}
+                      style={{ width:'350px' }}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Clear button */}
+              {files.length > 0 && (
+                <div style={{ display:'flex', gap:'var(--gap-8)', alignItems:'center' }}>
+                  <button
+                    type="button"
+                    onClick={clearAll}
+                    style={{ height:32, padding:'0 var(--gap-12)', background:'var(--color-surface-1)', border:'1px solid var(--color-stroke-neutral)', borderRadius:'var(--rd-XS)', fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', fontWeight:'var(--font-weight-regular)', color:'var(--color-text-subdued)', cursor:'pointer' }}
+                  >
+                    Clear all
+                  </button>
+                  <span style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', color:'var(--color-text-subdued)' }}>
+                    {files.filter(f => f.status === 'Uploaded').length} / {files.length} uploaded
+                  </span>
+                </div>
+              )}
+            </div>
+          </section>
+        );
+      }
+
+      /* ============================================================
        * Accordion Example — interactive, wired to all panel controls
        * ============================================================ */
       function AccordionExample({
@@ -5816,6 +5923,8 @@
 
               {activeComponent === 'fileupload' && (
                 <>
+                  <FileUploadLiveDemo />
+
                   <section>
                     <h2>UploadDragDrop — Interactive Playground</h2>
                     <p className="stage-note">Adjust props in the left panel. Drag a file over the zone or click "Upload" to fire events.</p>
