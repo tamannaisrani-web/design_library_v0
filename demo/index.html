@@ -928,6 +928,16 @@
       a build step.
     -->
     <script type="text/babel" data-presets="react">
+      /* Resolves the dcds-flags base URL so flags load under both
+       * file:// (Chrome blocks ../ traversal) and http:// server access. */
+      const FLAGS_BASE_URL = (() => {
+        const href = window.location.href;
+        const base = href.includes('/demo/index.html')
+          ? href.replace(/\/demo\/index\.html.*$/, '')
+          : href.replace(/\/[^/]*$/, '').replace(/\/demo$/, '');
+        return base + '/dcds-flags/flags/';
+      })();
+
       const { useState, useEffect, useRef, useId } = React;
 
       /* ============================================================
@@ -1208,7 +1218,7 @@
         if (item.type === 'Flag' && item.country) {
           return (
             <span className="dcds-DropdownButton__menu-item-leading dcds-DropdownButton__menu-item-leading--flag">
-              <img src={`../dcds-flags/flags/${item.country.toUpperCase()}.svg`} alt={item.country} width="24" height="18" />
+              <img src={`${FLAGS_BASE_URL}${item.country.toUpperCase()}.svg`} alt={item.country} width="24" height="18" />
             </span>
           );
         }
@@ -2460,7 +2470,7 @@
         const isIcon    = shape === 'Icon Circle'    || shape === 'Icon Square';
         const isFlag    = shape === 'Flag Circle';
         const iconSize  = AVATAR_ICON_SIZES[size] || 16;
-        const resolvedFlagSrc = flagSrc || (country ? `../dcds-flags/flags/${country.toUpperCase()}.svg` : undefined);
+        const resolvedFlagSrc = flagSrc || (country ? `${FLAGS_BASE_URL}${country.toUpperCase()}.svg` : undefined);
         return (
           <div id={id} className={classes} aria-label={ariaLabel} data-testid={dataTestId}>
             {isInitial && <span className="dcds-Avatar__initials" aria-hidden="true">{initials}</span>}
