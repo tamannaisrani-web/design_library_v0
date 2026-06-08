@@ -618,9 +618,9 @@
       .primary-nav__item--active {
         color: var(--color-text-primary);
         font-weight: var(--font-weight-bold);
-        background: var(--color-surface-2);
-        border-left: 2px solid var(--color-stroke-action);
-        padding-left: calc(var(--gap-16) - 2px);
+        background: var(--dcds-wealthy-green-50);
+        border-left: 3px solid var(--color-stroke-action);
+        padding-left: calc(var(--gap-16) - 3px);
       }
       .primary-nav__item:focus-visible {
         outline: 2px solid var(--color-stroke-focus);
@@ -1058,30 +1058,31 @@
        * Mirrors src/components/Drawer/Drawer.css
        */
       .dcds-Drawer__overlay { position:fixed; inset:0; z-index:1000; background:var(--color-overlay-25); display:flex; align-items:stretch; justify-content:flex-end; }
-      .dcds-Drawer__overlay--full { background:transparent; }
-      .dcds-Drawer__panel { position:relative; background:var(--color-surface-1); border-radius:var(--rd-S) 0 0 var(--rd-S); box-shadow:-6px 0 6px rgba(10,46,87,0.2); display:flex; flex-direction:column; gap:var(--gap-12); padding:var(--gap-32); height:100%; overflow:hidden; animation:dcds-drawer-in 200ms ease-out; }
+      .dcds-Drawer__overlay--full { background:var(--color-overlay-25); }
+      .dcds-Drawer__panel { position:relative; background:var(--color-surface-1); border-radius:var(--rd-S) 0 0 var(--rd-S); box-shadow:-6px 0 6px rgba(10,46,87,0.2); display:flex; flex-direction:column; height:100%; overflow:hidden; animation:dcds-drawer-in 200ms ease-out; }
       @keyframes dcds-drawer-in { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
       @media (prefers-reduced-motion:reduce) { .dcds-Drawer__panel { animation:none; } }
-      .dcds-Drawer__panel--partial { width:clamp(360px, 42vw, 680px); }
-      .dcds-Drawer__panel--full { width:100%; border-radius:0; }
+      .dcds-Drawer__panel--partial { width:clamp(360px, 55vw, 800px); }
+      .dcds-Drawer__panel--full { width:75%; }
       .dcds-Drawer__panel:focus { outline:none; }
       .dcds-Drawer__panel:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
-      .dcds-Drawer__header { display:flex; align-items:center; justify-content:space-between; gap:var(--gap-16); flex-shrink:0; }
+      .dcds-Drawer__header { display:flex; align-items:center; justify-content:space-between; gap:var(--gap-16); padding:var(--gap-16) var(--gap-32); border-bottom:1px solid var(--color-stroke-subdued); border-radius:var(--rd-S) 0 0 0; flex-shrink:0; }
       .dcds-Drawer__header-left { display:flex; align-items:flex-start; gap:var(--gap-8); flex:1; min-width:0; }
-      .dcds-Drawer__header-icon { display:flex; align-items:center; flex-shrink:0; color:var(--color-icon-subdued); height:var(--font-size-h3); margin-top:2px; }
+      .dcds-Drawer__header-icon { display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-subdued); height:var(--font-size-h3); }
       .dcds-Drawer__header-text { display:flex; flex-direction:column; min-width:0; }
-      .dcds-Drawer__header-title { font-family:var(--font-family); font-size:var(--font-size-h3); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; margin:0; }
-      .dcds-Drawer__header-subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; margin:var(--gap-4) 0 0; }
+      .dcds-Drawer__header-title { font-family:var(--font-family); font-size:var(--font-size-h3); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:1; margin:0; }
+      .dcds-Drawer__header-subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; margin:2px 0 0; }
       .dcds-Drawer__header-end { display:flex; align-items:center; gap:var(--gap-4); flex-shrink:0; }
       .dcds-Drawer__header-badge { display:flex; align-items:center; }
       .dcds-Drawer__close-btn { display:flex; align-items:center; justify-content:center; width:40px; height:40px; flex-shrink:0; background:none; border:none; cursor:pointer; color:var(--color-icon-subdued); border-radius:var(--rd-S); transition:color 120ms ease,background-color 120ms ease; padding:0; }
       .dcds-Drawer__close-btn:hover { color:var(--color-icon-primary); background-color:var(--color-surface-3); }
       .dcds-Drawer__close-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
-      .dcds-Drawer__body { flex:1; overflow-y:auto; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; min-height:0; margin:0 calc(-1 * var(--gap-32)); padding:0 var(--gap-32); }
+      .dcds-Drawer__body { flex:1; overflow-y:auto; padding:var(--gap-24) var(--gap-32); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; min-height:0; }
+      .dcds-Drawer__body--no-padding { padding:0; }
       .dcds-Drawer__body::-webkit-scrollbar { width:4px; }
       .dcds-Drawer__body::-webkit-scrollbar-track { background:transparent; }
       .dcds-Drawer__body::-webkit-scrollbar-thumb { background:var(--color-stroke-subdued); border-radius:var(--rd-Max); }
-      .dcds-Drawer__footer { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); flex-shrink:0; }
+      .dcds-Drawer__footer { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); padding:var(--gap-16) var(--gap-32); border-top:1px solid var(--color-stroke-subdued); border-radius:0 0 0 var(--rd-S); flex-shrink:0; }
       .dcds-Drawer__footer-link { margin-right:auto; display:flex; align-items:center; }
       .dcds-Drawer__footer-actions { display:flex; align-items:center; gap:var(--gap-12); }
       /* Drawer demo helpers */
@@ -3976,7 +3977,7 @@
                 </div>
 
                 <Drawer isOpen={partialOpen} variant="Partial" onClose={() => setPartialOpen(false)}>
-                  <DrawerHeader>Loan #1042</DrawerHeader>
+                  <DrawerHeader icon={ICON_MAP['InfoCircle']} subtitle="Review details before saving">Loan #1042</DrawerHeader>
                   <DrawerBody>
                     <p style={{ margin: 0 }}>This is a <strong>Partial Drawer</strong>. The underlying page remains visible at ~55% of the viewport. Use this for record detail views, filter panels, and document previews.</p>
                     <br />
