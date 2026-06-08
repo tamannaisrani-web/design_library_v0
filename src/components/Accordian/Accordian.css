@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Accordian — collapsible content panel with configurable header.
+   Token reference: src/theme/tokens.css
+   Figma node: 443:547 (file P52nmDshYaKr963q1zBwQj)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Root wrapper
+   -------------------------------------------------------------------------- */
+
+.dcds-Accordian {
+  background: var(--color-surface-1);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 360px;
+  position: relative;
+}
+
+/* isRounded=true — card-like standalone item: rd-S (8 px) + subdued outer border */
+.dcds-Accordian--rounded {
+  border: 0.5px solid var(--color-stroke-subdued);
+  border-radius: var(--rd-S);
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Header button
+   -------------------------------------------------------------------------- */
+
+.dcds-Accordian__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-12);
+  padding: var(--gap-12);
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 120ms ease;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover state — CSS-driven, matches Figma color/fill/primary-0 (#eff6ff) */
+.dcds-Accordian__header:hover {
+  background-color: var(--color-fill-primary-0);
+}
+
+.dcds-Accordian__header:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}
+
+/* isRounded=false: header always has a bottom border as list separator */
+.dcds-Accordian:not(.dcds-Accordian--rounded) .dcds-Accordian__header {
+  border-bottom: 0.5px solid var(--color-stroke-neutral);
+}
+
+/* isRounded=true + open: add header bottom border as divider between header and body */
+.dcds-Accordian--rounded.dcds-Accordian--state-open .dcds-Accordian__header {
+  border-bottom: 0.5px solid var(--color-stroke-neutral);
+}
+
+/* --------------------------------------------------------------------------
+   Header main content row (leading + text + trailing)
+   -------------------------------------------------------------------------- */
+
+/* Flex row containing leading icon, text/trailing stack, and chevron */
+.dcds-Accordian__header-main {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Leading slot — 24×24 px, color/icon/primary */
+.dcds-Accordian__leading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--color-icon-primary);
+}
+
+/* Inner flex row: title/subtitle stack grows left, trailing area stays right */
+.dcds-Accordian__header-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-12);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Title + subtitle vertical stack */
+.dcds-Accordian__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Title — Desktop/Body/Caption - Bold: 18 px, weight 700, color/text/primary */
+.dcds-Accordian__title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: normal;
+}
+
+/* Subtitle — Desktop/Body/Label - Regular: 14 px, weight 400, color/text/subdued */
+.dcds-Accordian__subtitle {
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subdued);
+  line-height: normal;
+}
+
+/* Trailing area: Badge status chip + Button action, gap-12 between them */
+.dcds-Accordian__trailing {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+  flex-shrink: 0;
+}
+
+/* Actions wrapper (Button slot) */
+.dcds-Accordian__actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Chevron icon (24×24, rotates 180° on open)
+   -------------------------------------------------------------------------- */
+
+.dcds-Accordian__chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-icon-primary);
+  transition: transform 200ms ease;
+}
+
+.dcds-Accordian--state-open .dcds-Accordian__chevron {
+  transform: rotate(180deg);
+}
+
+/* Respect prefers-reduced-motion — disable chevron rotation animation */
+@media (prefers-reduced-motion: reduce) {
+  .dcds-Accordian__chevron {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Body panel (visible only when state=open)
+   -------------------------------------------------------------------------- */
+
+.dcds-Accordian__body {
+  padding: var(--gap-12);
+  overflow: hidden;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* CSS hidden attribute override — ensures panel collapses completely */
+.dcds-Accordian__body[hidden] {
+  display: none;
+}
+
+/* Content slot — grows to wrap children */
+.dcds-Accordian__body-slot {
+  width: 100%;
+}
