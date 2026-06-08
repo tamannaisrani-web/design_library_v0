@@ -1055,6 +1055,55 @@
       /* Modal demo helpers */
       .modal-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
 
+      /*
+       * Accordian — collapsible content panel.
+       * Mirrors src/components/Accordian/Accordian.css
+       */
+      .dcds-Accordian { background:var(--color-surface-1); display:flex; flex-direction:column; width:100%; min-width:360px; position:relative; }
+      .dcds-Accordian--rounded { border:0.5px solid var(--color-stroke-subdued); border-radius:var(--rd-S); overflow:hidden; }
+      .dcds-Accordian__header { display:flex; align-items:flex-start; gap:var(--gap-12); padding:var(--gap-12); width:100%; background:transparent; border:none; cursor:pointer; text-align:left; transition:background-color 120ms ease; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
+      .dcds-Accordian__header:hover { background-color:var(--color-fill-primary-0); }
+      .dcds-Accordian__header:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+      .dcds-Accordian:not(.dcds-Accordian--rounded) .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
+      .dcds-Accordian--rounded.dcds-Accordian--state-open .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
+      .dcds-Accordian__header-main { display:flex; align-items:flex-start; gap:var(--gap-8); flex:1; min-width:0; }
+      .dcds-Accordian__leading { display:flex; align-items:center; justify-content:center; width:24px; height:24px; flex-shrink:0; color:var(--color-icon-primary); }
+      .dcds-Accordian__header-content { display:flex; align-items:flex-start; gap:var(--gap-12); flex:1; min-width:0; }
+      .dcds-Accordian__text { display:flex; flex-direction:column; flex:1; min-width:0; word-break:break-word; text-align:left; }
+      .dcds-Accordian__title { font-family:var(--font-family); font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; }
+      .dcds-Accordian__subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; }
+      .dcds-Accordian__trailing { display:flex; align-items:center; gap:var(--gap-12); flex-shrink:0; }
+      .dcds-Accordian__actions { display:flex; align-items:center; flex-shrink:0; }
+      .dcds-Accordian__chevron { display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-primary); transition:transform 200ms ease; }
+      .dcds-Accordian--state-open .dcds-Accordian__chevron { transform:rotate(180deg); }
+      @media (prefers-reduced-motion:reduce) { .dcds-Accordian__chevron { transition:none; } }
+      .dcds-Accordian__body { padding:var(--gap-12); overflow:hidden; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; }
+      .dcds-Accordian__body[hidden] { display:none; }
+      .dcds-Accordian__body-slot { width:100%; }
+
+      /* ============================================================
+       * DeterminateLoader.css — Figma node 1764:705
+       * ============================================================ */
+      .dcds-DeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
+      .dcds-DeterminateLoader__track { width:100%; height:4px; background-color:var(--color-surface-4); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
+      .dcds-DeterminateLoader__fill { height:100%; background-color:var(--color-fill-primary-3); border-radius:var(--rd-XS); transition:width 200ms ease; position:relative; }
+      .dcds-DeterminateLoader__labels { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); width:100%; }
+      .dcds-DeterminateLoader__helper-text { flex:1 0 0; min-width:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-DeterminateLoader__percentage { flex-shrink:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; text-align:right; white-space:nowrap; }
+      @media (prefers-reduced-motion:reduce) { .dcds-DeterminateLoader__fill { transition:none; } }
+
+      /* ============================================================
+       * IndeterminateLoader.css — Figma node 1764:731
+       * ============================================================ */
+      .dcds-IndeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
+      .dcds-IndeterminateLoader__track { width:100%; background-color:var(--color-fill-primary-1); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
+      .dcds-IndeterminateLoader--size-Small .dcds-IndeterminateLoader__track { height:4px; }
+      .dcds-IndeterminateLoader--size-Medium .dcds-IndeterminateLoader__track { height:8px; }
+      @keyframes dcds-IndeterminateLoader__scan { from { left:-82px; } to { left:100%; } }
+      .dcds-IndeterminateLoader__segment { position:absolute; top:0; left:-82px; width:82px; height:100%; border-radius:var(--rd-XS); background-color:var(--color-fill-primary-3); animation:dcds-IndeterminateLoader__scan 3.5s linear infinite; }
+      .dcds-IndeterminateLoader__label { display:block; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; }
+      @media (prefers-reduced-motion:reduce) { .dcds-IndeterminateLoader__segment { animation:none; left:50%; transform:translateX(-50%); opacity:0.6; } }
+
       /* ============================================================
        * UploadDragDrop.css
        * ============================================================ */
@@ -1125,55 +1174,6 @@
       .dcds-UploadDocument__name { flex:1; min-width:0; font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
       .dcds-UploadDocument__actions { display:inline-flex; flex-direction:row; align-items:center; gap:var(--gap-8); flex-shrink:0; }
       .dcds-UploadDocument__loader { width:100%; }
-
-      /*
-       * Accordian — collapsible content panel.
-       * Mirrors src/components/Accordian/Accordian.css
-       */
-      .dcds-Accordian { background:var(--color-surface-1); display:flex; flex-direction:column; width:100%; min-width:360px; position:relative; }
-      .dcds-Accordian--rounded { border:0.5px solid var(--color-stroke-subdued); border-radius:var(--rd-S); overflow:hidden; }
-      .dcds-Accordian__header { display:flex; align-items:flex-start; gap:var(--gap-12); padding:var(--gap-12); width:100%; background:transparent; border:none; cursor:pointer; text-align:left; transition:background-color 120ms ease; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
-      .dcds-Accordian__header:hover { background-color:var(--color-fill-primary-0); }
-      .dcds-Accordian__header:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
-      .dcds-Accordian:not(.dcds-Accordian--rounded) .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
-      .dcds-Accordian--rounded.dcds-Accordian--state-open .dcds-Accordian__header { border-bottom:0.5px solid var(--color-stroke-neutral); }
-      .dcds-Accordian__header-main { display:flex; align-items:flex-start; gap:var(--gap-8); flex:1; min-width:0; }
-      .dcds-Accordian__leading { display:flex; align-items:center; justify-content:center; width:24px; height:24px; flex-shrink:0; color:var(--color-icon-primary); }
-      .dcds-Accordian__header-content { display:flex; align-items:flex-start; gap:var(--gap-12); flex:1; min-width:0; }
-      .dcds-Accordian__text { display:flex; flex-direction:column; flex:1; min-width:0; word-break:break-word; text-align:left; }
-      .dcds-Accordian__title { font-family:var(--font-family); font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; }
-      .dcds-Accordian__subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; }
-      .dcds-Accordian__trailing { display:flex; align-items:center; gap:var(--gap-12); flex-shrink:0; }
-      .dcds-Accordian__actions { display:flex; align-items:center; flex-shrink:0; }
-      .dcds-Accordian__chevron { display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-primary); transition:transform 200ms ease; }
-      .dcds-Accordian--state-open .dcds-Accordian__chevron { transform:rotate(180deg); }
-      @media (prefers-reduced-motion:reduce) { .dcds-Accordian__chevron { transition:none; } }
-      .dcds-Accordian__body { padding:var(--gap-12); overflow:hidden; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; }
-      .dcds-Accordian__body[hidden] { display:none; }
-      .dcds-Accordian__body-slot { width:100%; }
-
-      /* ============================================================
-       * DeterminateLoader.css — Figma node 1764:705
-       * ============================================================ */
-      .dcds-DeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
-      .dcds-DeterminateLoader__track { width:100%; height:4px; background-color:var(--color-surface-4); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
-      .dcds-DeterminateLoader__fill { height:100%; background-color:var(--color-fill-primary-3); border-radius:var(--rd-XS); transition:width 200ms ease; position:relative; }
-      .dcds-DeterminateLoader__labels { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); width:100%; }
-      .dcds-DeterminateLoader__helper-text { flex:1 0 0; min-width:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-      .dcds-DeterminateLoader__percentage { flex-shrink:0; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; text-align:right; white-space:nowrap; }
-      @media (prefers-reduced-motion:reduce) { .dcds-DeterminateLoader__fill { transition:none; } }
-
-      /* ============================================================
-       * IndeterminateLoader.css — Figma node 1764:731
-       * ============================================================ */
-      .dcds-IndeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
-      .dcds-IndeterminateLoader__track { width:100%; background-color:var(--color-fill-primary-1); border-radius:var(--rd-XS); overflow:hidden; position:relative; flex-shrink:0; }
-      .dcds-IndeterminateLoader--size-Small .dcds-IndeterminateLoader__track { height:4px; }
-      .dcds-IndeterminateLoader--size-Medium .dcds-IndeterminateLoader__track { height:8px; }
-      @keyframes dcds-IndeterminateLoader__scan { from { left:-82px; } to { left:100%; } }
-      .dcds-IndeterminateLoader__segment { position:absolute; top:0; left:-82px; width:82px; height:100%; border-radius:var(--rd-XS); background-color:var(--color-fill-primary-3); animation:dcds-IndeterminateLoader__scan 3.5s linear infinite; }
-      .dcds-IndeterminateLoader__label { display:block; font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; }
-      @media (prefers-reduced-motion:reduce) { .dcds-IndeterminateLoader__segment { animation:none; left:50%; transform:translateX(-50%); opacity:0.6; } }
     </style>
   </head>
   <body>
@@ -4243,57 +4243,8 @@
       }
 
       /* ============================================================
-       * DeterminateLoader / IndeterminateLoader stubs
-       * (simple progress bar + spinner — used by UploadDocument)
+       * The full playground
        * ============================================================ */
-      function DeterminateLoader({ progress = 0, helperText, displayHelperText = true, displayPercentage = true, 'aria-label': ariaLabel }) {
-        const clamped = Math.min(100, Math.max(0, Math.round(progress)));
-        return (
-          <div style={{ display:'flex', flexDirection:'column', gap:'4px', width:'100%' }}
-               role="progressbar" aria-valuenow={clamped} aria-valuemin={0} aria-valuemax={100} aria-label={ariaLabel}>
-            {/* Track + fill — exact Figma tokens: track=color/surface/4, fill=color/fill/primary-3 */}
-            <div style={{ width:'100%', height:4, background:'var(--color-surface-4)', borderRadius:'var(--rd-XS)', overflow:'hidden', flexShrink:0 }}>
-              <div style={{ width:`${clamped}%`, height:'100%', background:'var(--color-fill-primary-3)', borderRadius:'var(--rd-XS)', transition:'width 200ms ease' }} />
-            </div>
-            {(displayHelperText || displayPercentage) && (
-              <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end', gap:'var(--gap-12)', width:'100%' }}>
-                {displayHelperText && <span style={{ flex:'1 0 0', minWidth:0, fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', fontWeight:'var(--font-weight-regular)', color:'var(--color-text-primary)', lineHeight:'normal', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{helperText || 'Helper text...'}</span>}
-                {displayPercentage && <span aria-hidden="true" style={{ flexShrink:0, fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', fontWeight:'var(--font-weight-regular)', color:'var(--color-text-primary)', lineHeight:'normal', textAlign:'right', whiteSpace:'nowrap' }}>{clamped}%</span>}
-              </div>
-            )}
-          </div>
-        );
-      }
-      function IndeterminateLoader({ size = 'Small', helperText: showHelperText = true, label = 'Helper text...', 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy }) {
-        /* Exact Figma spec (node 1811:931 / 1764:731):
-           Track:   color/fill/primary-1 (#dae9fb) — Noble Blue-50
-           Segment: color/fill/primary-3 (#6ba8ee) — Noble Blue-200, 82px wide, sweeps left→right
-           Height:  4px (Small) · 8px (Medium) · rd-XS radius · overflow hidden
-           Text:    color/text/primary, 12px Nunito Sans, full-width below bar */
-        const barHeight = size === 'Medium' ? 8 : 4;
-        const resolvedAriaLabel = ariaLabel ?? (showHelperText ? label : 'Loading');
-        return (
-          <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-4)', width:'100%' }}>
-            <style>{`@keyframes dcds-IndeterminateLoader-scan { from { left:-82px; } to { left:100%; } }`}</style>
-            {/* Track — overflow hidden so segment clips at edges */}
-            <div role="progressbar"
-              aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : resolvedAriaLabel)}
-              aria-labelledby={ariaLabelledBy}
-              aria-busy="true"
-              style={{ width:'100%', height:barHeight, background:'var(--color-fill-primary-1)', borderRadius:'var(--rd-XS)', overflow:'hidden', position:'relative', flexShrink:0 }}>
-              {/* Animated 82px segment — sweeps left-to-right */}
-              <div aria-hidden="true"
-                style={{ position:'absolute', top:0, left:'-82px', width:82, height:'100%', background:'var(--color-fill-primary-3)', borderRadius:'var(--rd-XS)', animation:'dcds-IndeterminateLoader-scan 3.5s linear infinite' }} />
-            </div>
-            {/* Optional label below bar */}
-            {showHelperText && (
-              <span style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', fontWeight:'var(--font-weight-regular)', color:'var(--color-text-primary)', lineHeight:'normal', display:'block', width:'100%' }}>
-                {label}
-              </span>
-            )}
-          </div>
-        );
-      }
 
       /* ============================================================
        * UploadDragDrop inline component
@@ -4595,9 +4546,6 @@
         );
       }
 
-      /* ============================================================
-       * The full playground
-       * ============================================================ */
       function Playground() {
         /* --- Navigation --- */
         const [activeComponent, setActiveComponent] = useState('button');
@@ -4623,8 +4571,8 @@
           { id: 'modal',          label: 'Modal'          },
           { id: 'accordian',      label: 'Accordian'      },
           { id: 'avatar',         label: 'Avatar'         },
-          { id: 'avatargroup',    label: 'AvatarGroup'    },
-          { id: 'progressbar',    label: 'Progress Bar'   },
+          { id: 'avatargroup',  label: 'AvatarGroup'  },
+          { id: 'progressbar',  label: 'Progress Bar' },
           { id: 'fileupload',     label: 'File Upload'    },
         ];
 
@@ -4806,27 +4754,6 @@
         function dismissToast(id) {
           setToasts((prev) => prev.filter((t) => t.id !== id));
         }
-
-        /* --- DeterminateLoader controls --- */
-        const [dlProgress,          setDlProgress]          = useState(25);
-        const [dlPlaying,           setDlPlaying]           = useState(true);
-        const [dlDisplayHelper,     setDlDisplayHelper]     = useState(true);
-        const [dlDisplayPercentage, setDlDisplayPercentage] = useState(true);
-        const [dlHelperText,        setDlHelperText]        = useState('Helper text...');
-        const [dlLog,               pushDlLog]              = useEventLog();
-
-        useEffect(() => {
-          if (!dlPlaying) return;
-          if (dlProgress >= 100) { const t = setTimeout(() => setDlProgress(0), 900); return () => clearTimeout(t); }
-          const t = setTimeout(() => setDlProgress((p) => Math.min(100, p + 1)), 80);
-          return () => clearTimeout(t);
-        }, [dlPlaying, dlProgress]);
-
-        /* --- IndeterminateLoader controls --- */
-        const [ilSize,      setIlSize]      = useState('Small');
-        const [ilShowLabel, setIlShowLabel] = useState(true);
-        const [ilLabel,     setIlLabel]     = useState('Helper text...');
-        const [ilLog,       pushIlLog]      = useEventLog();
 
         /* --- FileUpload / UploadDragDrop controls --- */
         const [ddStates,           setDdStates]           = useState('Default');
@@ -5067,21 +4994,6 @@
                 </>
               )}
 
-              {activeComponent === 'progressbar' && (
-                <>
-                  <h2>DeterminateLoader</h2>
-                  <CtrlToggle label="animate"           checked={dlPlaying}           onChange={(v) => { setDlPlaying(v); if (!v) setDlProgress(0); }} />
-                  <CtrlText   label="progress (0–100)"  value={String(dlProgress)}    onChange={(v) => { setDlPlaying(false); const n = parseInt(v, 10); setDlProgress(isNaN(n) ? 0 : Math.min(100, Math.max(0, n))); }} />
-                  <CtrlToggle label="displayHelperText" checked={dlDisplayHelper}     onChange={setDlDisplayHelper} />
-                  <CtrlToggle label="displayPercentage" checked={dlDisplayPercentage} onChange={setDlDisplayPercentage} />
-                  <CtrlText   label="helperText"        value={dlHelperText}          onChange={setDlHelperText} />
-
-                  <h2 style={{ marginTop: 'var(--gap-16)' }}>IndeterminateLoader</h2>
-                  <CtrlSelect label="size"       value={ilSize}      onChange={setIlSize}      options={['Small', 'Medium']} />
-                  <CtrlToggle label="helperText" checked={ilShowLabel} onChange={setIlShowLabel} />
-                  <CtrlText   label="label"      value={ilLabel}     onChange={setIlLabel} />
-                </>
-              )}
 
               {activeComponent === 'fileupload' && (
                 <>
@@ -5124,7 +5036,8 @@
                 </>
               )}
 
-            </aside>
+
+            </>}>
 
             {/* ============================================================
              * MAIN STAGE — previews
@@ -5937,82 +5850,6 @@
                 </>
               )}
 
-
-              {activeComponent === 'progressbar' && (
-                <>
-                  <section>
-                    <h2>DeterminateLoader — Interactive Playground</h2>
-                    <p className="stage-note">Adjust props in the left panel. Toggle "animate" to watch the bar fill automatically.</p>
-                    <div className="preview" style={{ flexDirection:'column', alignItems:'stretch' }}>
-                      <DeterminateLoader
-                        progress={dlProgress}
-                        displayHelperText={dlDisplayHelper}
-                        displayPercentage={dlDisplayPercentage}
-                        helperText={dlHelperText}
-                        aria-label={`Progress: ${dlProgress}%`}
-                        onProgressComplete={() => pushDlLog('onProgressComplete fired')}
-                        onProgressChange={(p) => pushDlLog(`onProgressChange: ${p}%`)}
-                      />
-                    </div>
-                    <div className="events">
-                      {dlLog.length === 0 ? '— watch progress reach 100% to fire onProgressComplete —' : dlLog.join('\n')}
-                    </div>
-                  </section>
-
-                  <section>
-                    <h2>DeterminateLoader — Label Variants</h2>
-                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)' }}>
-                      <div>
-                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>Helper text + percentage (default)</p>
-                        <DeterminateLoader progress={62} helperText="Uploading statement.pdf" aria-label="Upload progress: 62%" />
-                      </div>
-                      <div>
-                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>displayPercentage=false</code> — text only</p>
-                        <DeterminateLoader progress={62} helperText="Processing documents" displayPercentage={false} aria-label="Processing: 62% complete" />
-                      </div>
-                      <div>
-                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>displayHelperText=false</code> — percentage only</p>
-                        <DeterminateLoader progress={62} displayHelperText={false} aria-label="Loading: 62% complete" />
-                      </div>
-                    </div>
-                  </section>
-
-                  <section>
-                    <h2>IndeterminateLoader — Interactive Playground</h2>
-                    <p className="stage-note">Adjust props in the left panel.</p>
-                    <div className="preview" style={{ flexDirection:'column', alignItems:'stretch' }}>
-                      <IndeterminateLoader
-                        size={ilSize}
-                        helperText={ilShowLabel}
-                        label={ilLabel}
-                        aria-label={ilLabel}
-                      />
-                    </div>
-                    <div className="events">
-                      {ilLog.length === 0 ? '— no events —' : ilLog.join('\n')}
-                    </div>
-                  </section>
-
-                  <section>
-                    <h2>IndeterminateLoader — Sizes</h2>
-                    <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-24)' }}>
-                      <div>
-                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><strong>Small</strong> — 4px bar (default)</p>
-                        <IndeterminateLoader size="Small" helperText={true} label="Loading results…" aria-label="Loading results" />
-                      </div>
-                      <div>
-                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><strong>Medium</strong> — 8px bar</p>
-                        <IndeterminateLoader size="Medium" helperText={true} label="Fetching your documents…" aria-label="Fetching documents" />
-                      </div>
-                      <div>
-                        <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}><code>helperText=false</code> — bar only</p>
-                        <IndeterminateLoader size="Small" helperText={false} aria-label="Loading" />
-                      </div>
-                    </div>
-                  </section>
-                </>
-              )}
-
               {activeComponent === 'fileupload' && (
                 <>
                   <section>
@@ -6152,6 +5989,8 @@
                   />
                 </>
               )}
+
+
 
             </main>
 
