@@ -30,5 +30,6 @@ export * from './components/Tag';
 export * from './components/Tabs';
 export * from './components/Accordian';
 export * from './components/Modal';
+export * from './components/Drawer';
 export * from './components/shared';
 export * from './theme';
