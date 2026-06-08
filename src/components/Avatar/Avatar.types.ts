@@ -9,7 +9,8 @@
  * ❌ NOT for file-type icons — use an icon from the icon library.
  */
 
-import type { BaseComponentProps, InteractiveEventHandlers } from '../shared/types';
+import type { ReactNode } from 'react';
+import type { BaseComponentProps } from '../shared/types';
 
 /**
  * Visual shape of the Avatar.
@@ -60,18 +61,6 @@ export type AvatarSize = 'Small' | 'Medium' | 'Large' | 'Extra Large';
  * <Avatar shape="Icon Circle" size="Medium" icon={<MyUserIcon />} />
  * ```
  *
- * @example Interactive (opens profile drawer)
- * ```tsx
- * <Avatar
- *   shape="Initial Circle"
- *   size="Large"
- *   initials="RK"
- *   role="button"
- *   ariaLabel="View profile of Rajesh Kumar"
- *   onClick={openProfileDrawer}
- * />
- * ```
- *
  * @example Table name cell (always use Small in table cells)
  * ```tsx
  * <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-8)' }}>
@@ -80,7 +69,7 @@ export type AvatarSize = 'Small' | 'Medium' | 'Large' | 'Extra Large';
  * </div>
  * ```
  */
-export interface AvatarProps extends BaseComponentProps, InteractiveEventHandlers<HTMLDivElement> {
+export interface AvatarProps extends BaseComponentProps {
   /**
    * Visual shape and semantic role of the avatar.
    * Circles → people/individuals. Squares → organisations/entities.
@@ -91,7 +80,7 @@ export interface AvatarProps extends BaseComponentProps, InteractiveEventHandler
   /**
    * Pixel footprint. Match to context:
    * - Small → table cells / chips
-   * - Medium → lists / comments / chips (default)
+   * - Medium → lists / comments (default)
    * - Large → profile cards / detail views
    * - Extra Large → page headers / hero sections
    * @default 'Medium'
@@ -108,9 +97,8 @@ export interface AvatarProps extends BaseComponentProps, InteractiveEventHandler
   /**
    * Custom icon ReactNode for `Icon Circle` / `Icon Square` shapes.
    * When omitted the built-in user icon (icons/svg/bold/user.svg) is rendered.
-   * Also accepted as a fallback for `Flag Circle` when no `country` / `flagSrc` is given.
    */
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 
   /**
    * ISO 3166-1 alpha-2 country code (e.g. `"IN"`, `"US"`) used with `Flag Circle`.
@@ -127,16 +115,8 @@ export interface AvatarProps extends BaseComponentProps, InteractiveEventHandler
 
   /**
    * Accessible label for the avatar element.
-   * - Interactive avatar: `"View profile of Rajesh Kumar"`
    * - Flag Circle: full country name, e.g. `"India"` (not the ISO code)
    * - Omit when the full name appears in adjacent visible text.
    */
   ariaLabel?: string;
-
-  /**
-   * ARIA role override.
-   * Set to `"button"` when the avatar triggers an action (e.g. opens a profile drawer).
-   * When set, the component receives `tabIndex={0}` automatically.
-   */
-  role?: string;
 }

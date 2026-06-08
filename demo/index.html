@@ -923,7 +923,7 @@
       .dcds-Avatar--shape-Initial-Square,.dcds-Avatar--shape-Icon-Square { border-radius:var(--rd-S); }
       .dcds-Avatar--size-Small.dcds-Avatar--shape-Initial-Square,.dcds-Avatar--size-Small.dcds-Avatar--shape-Icon-Square { border-radius:var(--rd-XS); }
       .dcds-Avatar--shape-Initial-Circle,.dcds-Avatar--shape-Initial-Square,.dcds-Avatar--shape-Icon-Circle,.dcds-Avatar--shape-Icon-Square { background-color:var(--color-fill-secondary-2); }
-      .dcds-Avatar--shape-Flag-Circle { background-color:transparent; }
+      .dcds-Avatar--shape-Flag-Circle { background-color:transparent; box-shadow:inset 0 0 0 0.5px var(--color-stroke-subdued); }
       .dcds-Avatar__initials { color:var(--color-text-primary); text-align:center; white-space:nowrap; }
       .dcds-Avatar__icon { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-primary); }
       .dcds-Avatar--size-Small .dcds-Avatar__icon { width:16px; height:16px; }
@@ -931,8 +931,6 @@
       .dcds-Avatar--size-Large .dcds-Avatar__icon { width:24px; height:24px; }
       .dcds-Avatar--size-Extra-Large .dcds-Avatar__icon { width:32px; height:32px; }
       .dcds-Avatar__flag { width:100%; height:100%; object-fit:cover; display:block; }
-      .dcds-Avatar[role='button'] { cursor:pointer; }
-      .dcds-Avatar[role='button']:hover { opacity:0.85; }
 
       /* ============================================================
        * AvatarGroup.css — Figma node 645:9512 / variant frame 1671:9406
@@ -2830,17 +2828,9 @@
         country,
         flagSrc,
         ariaLabel,
-        role,
         className,
         id,
         dataTestId,
-        onClick,
-        onFocus,
-        onBlur,
-        onMouseEnter,
-        onMouseLeave,
-        onKeyDown,
-        onKeyUp,
       }) {
         const shapeKey = shape.replace(/ /g, '-');
         const sizeKey  = size.replace(/ /g, '-');
@@ -2850,16 +2840,8 @@
         const isFlag    = shape === 'Flag Circle';
         const iconSize  = AVATAR_ICON_SIZES[size] || 16;
         const resolvedFlagSrc = flagSrc || (country ? `../dcds-flags/flags/${country.toUpperCase()}.svg` : undefined);
-        const isInteractive   = !!(onClick || role === 'button');
-        const resolvedRole    = role || (isInteractive ? 'button' : undefined);
         return (
-          <div
-            id={id} className={classes} role={resolvedRole} aria-label={ariaLabel}
-            data-testid={dataTestId} tabIndex={isInteractive ? 0 : undefined}
-            onClick={onClick} onFocus={onFocus} onBlur={onBlur}
-            onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
-            onKeyDown={onKeyDown} onKeyUp={onKeyUp}
-          >
+          <div id={id} className={classes} aria-label={ariaLabel} data-testid={dataTestId}>
             {isInitial && <span className="dcds-Avatar__initials" aria-hidden="true">{initials}</span>}
             {isIcon && (
               <span className="dcds-Avatar__icon" aria-hidden="true">
@@ -3078,11 +3060,8 @@
         const [avSize,     setAvSize]     = useState('Medium');
         const [avInitials, setAvInitials] = useState('AM');
         const [avCountry,  setAvCountry]  = useState('US');
-        const [avLog,      pushAvLog]     = useEventLog();
-
         const showInitials = avShape === 'Initial Circle' || avShape === 'Initial Square';
         const showCountry  = avShape === 'Flag Circle';
-        const isInteractive = true;
 
         return (
           <PanelLayout panelContent={<>
@@ -3094,25 +3073,17 @@
           </>}>
             <main className="stage">
               <section>
-                <h2>Avatar — Interactive Playground</h2>
-                <p className="stage-note">Adjust shape, size, and content in the left panel. Click the avatar to see events.</p>
+                <h2>Avatar — Playground</h2>
+                <p className="stage-note">Adjust shape, size, and content in the left panel.</p>
                 <div className="preview">
                   <Avatar
                     shape={avShape}
                     size={avSize}
                     initials={avInitials}
                     country={avCountry}
-                    role="button"
                     ariaLabel={showCountry ? avCountry : undefined}
-                    onClick={() => pushAvLog('onClick')}
-                    onFocus={() => pushAvLog('onFocus')}
-                    onBlur={() => pushAvLog('onBlur')}
-                    onMouseEnter={() => pushAvLog('onMouseEnter')}
-                    onMouseLeave={() => pushAvLog('onMouseLeave')}
-                    onKeyDown={(e) => pushAvLog(`onKeyDown · ${e.key}`)}
                   />
                 </div>
-                <div className="events">{avLog.length === 0 ? '— hover / click / focus to see events —' : avLog.join('   ')}</div>
               </section>
 
               <section>
@@ -3122,11 +3093,11 @@
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-16)' }}>
                   {[
-                    { label: 'Initial Circle (people)',        shape: 'Initial Circle',  initials: 'AM' },
-                    { label: 'Icon Circle (no initials)',       shape: 'Icon Circle',     initials: null },
-                    { label: 'Flag Circle (country)',           shape: 'Flag Circle',     initials: null, country: 'US' },
-                    { label: 'Initial Square (organisations)', shape: 'Initial Square',  initials: 'AM' },
-                    { label: 'Icon Square (entity icon)',       shape: 'Icon Square',     initials: null },
+                    { label: 'Initial Circle (people)',         shape: 'Initial Circle',  initials: 'AM' },
+                    { label: 'Icon Circle (no initials)',        shape: 'Icon Circle',     initials: null },
+                    { label: 'Flag Circle (country)',            shape: 'Flag Circle',     initials: null, country: 'US' },
+                    { label: 'Initial Square (organisations)',  shape: 'Initial Square',  initials: 'AM' },
+                    { label: 'Icon Square (entity icon)',        shape: 'Icon Square',     initials: null },
                   ].map(({ label, shape, initials: ini, country: ctry }) => (
                     <div key={shape}>
                       <p className="stage-note" style={{ marginBottom: 'var(--gap-8)' }}>{label}</p>
@@ -3153,23 +3124,6 @@
                       {name}
                     </div>
                   ))}
-                </div>
-              </section>
-
-              <section>
-                <h2>Avatar — Interactive (role="button")</h2>
-                <p className="stage-note">
-                  Wrap in <code>role="button"</code> with <code>ariaLabel</code> only when the avatar triggers an action. Tab + Enter/Space to activate.
-                </p>
-                <div className="preview">
-                  <Avatar
-                    shape="Initial Circle"
-                    size="Large"
-                    initials="RK"
-                    role="button"
-                    ariaLabel="View profile of Rajesh Kumar"
-                    onClick={() => pushAvLog('profile click: RK')}
-                  />
                 </div>
               </section>
             </main>
