@@ -1054,6 +1054,40 @@
       .modal-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
 
       /*
+       * Drawer — backdrop overlay, panel shell, and sub-component styles.
+       * Mirrors src/components/Drawer/Drawer.css
+       */
+      .dcds-Drawer__overlay { position:fixed; inset:0; z-index:1000; background:var(--color-overlay-25); display:flex; align-items:stretch; justify-content:flex-end; }
+      .dcds-Drawer__overlay--full { background:transparent; }
+      .dcds-Drawer__panel { position:relative; background:var(--color-surface-1); border-radius:var(--rd-S) 0 0 var(--rd-S); box-shadow:-6px 0 6px rgba(10,46,87,0.2); display:flex; flex-direction:column; gap:var(--gap-12); padding:var(--gap-32); height:100%; overflow:hidden; animation:dcds-drawer-in 200ms ease-out; }
+      @keyframes dcds-drawer-in { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+      @media (prefers-reduced-motion:reduce) { .dcds-Drawer__panel { animation:none; } }
+      .dcds-Drawer__panel--partial { width:clamp(360px, 42vw, 680px); }
+      .dcds-Drawer__panel--full { width:100%; border-radius:0; }
+      .dcds-Drawer__panel:focus { outline:none; }
+      .dcds-Drawer__panel:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+      .dcds-Drawer__header { display:flex; align-items:center; justify-content:space-between; gap:var(--gap-16); flex-shrink:0; }
+      .dcds-Drawer__header-left { display:flex; align-items:flex-start; gap:var(--gap-8); flex:1; min-width:0; }
+      .dcds-Drawer__header-icon { display:flex; align-items:center; flex-shrink:0; color:var(--color-icon-subdued); height:var(--font-size-h3); margin-top:2px; }
+      .dcds-Drawer__header-text { display:flex; flex-direction:column; min-width:0; }
+      .dcds-Drawer__header-title { font-family:var(--font-family); font-size:var(--font-size-h3); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; margin:0; }
+      .dcds-Drawer__header-subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; margin:var(--gap-4) 0 0; }
+      .dcds-Drawer__header-end { display:flex; align-items:center; gap:var(--gap-4); flex-shrink:0; }
+      .dcds-Drawer__header-badge { display:flex; align-items:center; }
+      .dcds-Drawer__close-btn { display:flex; align-items:center; justify-content:center; width:40px; height:40px; flex-shrink:0; background:none; border:none; cursor:pointer; color:var(--color-icon-subdued); border-radius:var(--rd-S); transition:color 120ms ease,background-color 120ms ease; padding:0; }
+      .dcds-Drawer__close-btn:hover { color:var(--color-icon-primary); background-color:var(--color-surface-3); }
+      .dcds-Drawer__close-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-Drawer__body { flex:1; overflow-y:auto; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.5; min-height:0; margin:0 calc(-1 * var(--gap-32)); padding:0 var(--gap-32); }
+      .dcds-Drawer__body::-webkit-scrollbar { width:4px; }
+      .dcds-Drawer__body::-webkit-scrollbar-track { background:transparent; }
+      .dcds-Drawer__body::-webkit-scrollbar-thumb { background:var(--color-stroke-subdued); border-radius:var(--rd-Max); }
+      .dcds-Drawer__footer { display:flex; align-items:center; justify-content:flex-end; gap:var(--gap-12); flex-shrink:0; }
+      .dcds-Drawer__footer-link { margin-right:auto; display:flex; align-items:center; }
+      .dcds-Drawer__footer-actions { display:flex; align-items:center; gap:var(--gap-12); }
+      /* Drawer demo helpers */
+      .drawer-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
+
+      /*
        * Accordian — collapsible content panel.
        * Mirrors src/components/Accordian/Accordian.css
        */
@@ -3682,6 +3716,297 @@
       }
 
       /* ============================================================
+       * Drawer, DrawerHeader, DrawerBody, DrawerFooter
+       * Mirrors src/components/Drawer/Drawer.tsx
+       * ============================================================ */
+      const DrawerContext = React.createContext(null);
+
+      function Drawer({ isOpen, variant = 'Partial', onClose, closeOnBackdrop, closeOnEscape = true, children, id, dataTestId, className }) {
+        const instanceId = React.useId();
+        const headerId = `dcds-drawer-header-${instanceId}`;
+        const bodyId   = `dcds-drawer-body-${instanceId}`;
+        const panelRef = React.useRef(null);
+        const resolvedCloseOnBackdrop = closeOnBackdrop !== undefined ? closeOnBackdrop : variant === 'Partial';
+
+        React.useEffect(() => {
+          if (!isOpen) return;
+          const prev = document.body.style.overflow;
+          document.body.style.overflow = 'hidden';
+          return () => { document.body.style.overflow = prev; };
+        }, [isOpen]);
+
+        React.useEffect(() => {
+          if (!isOpen) return;
+          const panelEl = panelRef.current;
+          if (!panelEl) return;
+          const getFocusable = () => Array.from(panelEl.querySelectorAll(
+            'button:not(:disabled),[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled),[tabindex]:not([tabindex="-1"])'
+          ));
+          const prevFocused = document.activeElement;
+          const focusable = getFocusable();
+          if (focusable.length > 0) focusable[0].focus(); else panelEl.focus();
+          const handleKeyDown = (e) => {
+            if (e.key === 'Escape' && closeOnEscape) { onClose?.(); return; }
+            if (e.key === 'Tab') {
+              const els = getFocusable();
+              if (!els.length) { e.preventDefault(); return; }
+              const first = els[0], last = els[els.length - 1];
+              if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+              else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+            }
+          };
+          document.addEventListener('keydown', handleKeyDown);
+          return () => { document.removeEventListener('keydown', handleKeyDown); prevFocused?.focus(); };
+        }, [isOpen, closeOnEscape, onClose]);
+
+        if (!isOpen) return null;
+        const overlayClass = ['dcds-Drawer__overlay', variant === 'Full' && 'dcds-Drawer__overlay--full'].filter(Boolean).join(' ');
+        const panelClass   = ['dcds-Drawer__panel', variant === 'Partial' ? 'dcds-Drawer__panel--partial' : 'dcds-Drawer__panel--full', className].filter(Boolean).join(' ');
+        const handleOverlayClick = (e) => { if (resolvedCloseOnBackdrop && e.target === e.currentTarget) onClose?.(); };
+
+        return ReactDOM.createPortal(
+          React.createElement(DrawerContext.Provider, { value: { headerId, bodyId, onClose } },
+            React.createElement('div', { className: overlayClass, onClick: handleOverlayClick },
+              React.createElement('div', {
+                ref: panelRef, role: 'dialog', 'aria-modal': 'true',
+                'aria-labelledby': headerId, 'aria-describedby': bodyId,
+                id, 'data-testid': dataTestId, className: panelClass, tabIndex: -1,
+                onClick: (e) => e.stopPropagation(),
+              }, children)
+            )
+          ),
+          document.body
+        );
+      }
+
+      function DrawerHeader({ children, icon, subtitle, badge, onClose: onCloseProp, id: idProp, className }) {
+        const { headerId, onClose: ctxClose } = React.useContext(DrawerContext);
+        const closeHandler = onCloseProp ?? ctxClose;
+        return (
+          <div className={['dcds-Drawer__header', className].filter(Boolean).join(' ')}>
+            <div className="dcds-Drawer__header-left">
+              {icon && <span className="dcds-Drawer__header-icon">{React.createElement(icon, { size: 20, 'aria-hidden': true })}</span>}
+              <div className="dcds-Drawer__header-text">
+                <h2 id={idProp ?? headerId} className="dcds-Drawer__header-title">{children}</h2>
+                {subtitle && <p className="dcds-Drawer__header-subtitle">{subtitle}</p>}
+              </div>
+            </div>
+            <div className="dcds-Drawer__header-end">
+              {badge && <span className="dcds-Drawer__header-badge">{badge}</span>}
+              {closeHandler && (
+                <button type="button" className="dcds-Drawer__close-btn" aria-label="Close drawer" onClick={closeHandler}>
+                  <CloseIcon size={20} />
+                </button>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      function DrawerBody({ children, padding = true, id: idProp, className }) {
+        const { bodyId } = React.useContext(DrawerContext);
+        return (
+          <div id={idProp ?? bodyId} className={['dcds-Drawer__body', !padding && 'dcds-Drawer__body--no-padding', className].filter(Boolean).join(' ')}>
+            {children}
+          </div>
+        );
+      }
+
+      function DrawerFooter({ children, link, className }) {
+        return (
+          <div className={['dcds-Drawer__footer', className].filter(Boolean).join(' ')}>
+            {link && <span className="dcds-Drawer__footer-link">{link}</span>}
+            <div className="dcds-Drawer__footer-actions">{children}</div>
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * DrawerSection — self-contained Drawer playground
+       * ============================================================ */
+      function DrawerSection() {
+        const [variant,          setVariant]          = useState('Partial');
+        const [closeOnBackdrop,  setCloseOnBackdrop]  = useState(true);
+        const [closeOnEscape,    setCloseOnEscape]    = useState(true);
+        const [titleText,        setTitleText]        = useState('Loan #1042');
+        const [showSubtitle,     setShowSubtitle]     = useState(false);
+        const [subtitleText,     setSubtitleText]     = useState('Review details before saving');
+        const [showIcon,         setShowIcon]         = useState(false);
+        const [drawerIconName,   setDrawerIconName]   = useState('InfoCircle');
+        const [showBadge,        setShowBadge]        = useState(false);
+        const [badgeText,        setBadgeText]        = useState('Pending');
+        const [badgeState,       setBadgeState]       = useState('info');
+        const [badgeEmphasis,    setBadgeEmphasis]    = useState('subtle');
+        const [bodyText,         setBodyText]         = useState('Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.');
+        const [bodyPadding,      setBodyPadding]      = useState(true);
+        /* DrawerFooter */
+        const [showFooter,       setShowFooter]       = useState(true);
+        const [showFooterLink,   setShowFooterLink]   = useState(false);
+        const [footerLinkText,   setFooterLinkText]   = useState('Learn more');
+        const [cancelLabel,      setCancelLabel]      = useState('Cancel');
+        const [cancelVariant,    setCancelVariant]    = useState('Secondary');
+        const [cancelColor,      setCancelColor]      = useState('Primary');
+        const [cancelSize,       setCancelSize]       = useState('M');
+        const [confirmLabel,     setConfirmLabel]     = useState('Save changes');
+        const [confirmVariant,   setConfirmVariant]   = useState('Primary');
+        const [confirmColor,     setConfirmColor]     = useState('Primary');
+        const [confirmSize,      setConfirmSize]      = useState('M');
+        const [playgroundOpen,   setPlaygroundOpen]   = useState(false);
+        const [partialOpen,      setPartialOpen]      = useState(false);
+        const [fullOpen,         setFullOpen]         = useState(false);
+        const [drawerLog, pushDrawerLog] = useEventLog();
+
+        return (
+          <PanelLayout panelContent={<>
+            <h2>Drawer</h2>
+            <CtrlSelect label="variant"          value={variant}         onChange={setVariant}         options={['Partial', 'Full']} />
+            <CtrlToggle label="closeOnBackdrop"  checked={closeOnBackdrop} onChange={setCloseOnBackdrop} />
+            <CtrlToggle label="closeOnEscape"    checked={closeOnEscape}   onChange={setCloseOnEscape}   />
+
+            <h2>DrawerHeader</h2>
+            <CtrlText   label="title"            value={titleText}       onChange={setTitleText}       />
+            <CtrlToggle label="showIcon"         checked={showIcon}      onChange={setShowIcon}        />
+            {showIcon && (
+              <CtrlSelect label="icon"           value={drawerIconName}  onChange={setDrawerIconName}  options={Object.keys(ICON_MAP)} />
+            )}
+            <CtrlToggle label="showSubtitle"     checked={showSubtitle}  onChange={setShowSubtitle}    />
+            {showSubtitle && (
+              <CtrlText label="subtitle"         value={subtitleText}    onChange={setSubtitleText}    />
+            )}
+            <CtrlToggle label="showBadge"        checked={showBadge}     onChange={setShowBadge}       />
+            {showBadge && (
+              <>
+                <CtrlText   label="badge"        value={badgeText}       onChange={setBadgeText}       />
+                <CtrlSelect label="badgeState"   value={badgeState}      onChange={setBadgeState}      options={['neutral','info','warning','error','success']} />
+                <CtrlSelect label="badgeEmphasis" value={badgeEmphasis}  onChange={setBadgeEmphasis}   options={['subtle','intense']} />
+              </>
+            )}
+
+            <h2>DrawerBody</h2>
+            <CtrlText   label="body"             value={bodyText}        onChange={setBodyText}        />
+            <CtrlToggle label="padding"          checked={bodyPadding}   onChange={setBodyPadding}     />
+
+            <h2>DrawerFooter</h2>
+            <CtrlToggle label="showFooter"       checked={showFooter}      onChange={setShowFooter}      />
+            {showFooter && (<>
+              <CtrlToggle label="showLink"       checked={showFooterLink}  onChange={setShowFooterLink}  />
+              {showFooterLink && (
+                <CtrlText label="link"           value={footerLinkText}    onChange={setFooterLinkText}  />
+              )}
+              <CtrlText   label="cancelLabel"    value={cancelLabel}       onChange={setCancelLabel}      />
+              <CtrlSelect label="cancelVariant"  value={cancelVariant}     onChange={setCancelVariant}    options={['Primary','Secondary','Tertiary']} />
+              <CtrlSelect label="cancelColor"    value={cancelColor}       onChange={setCancelColor}      options={['Primary','Error','Warning']} />
+              <CtrlSelect label="cancelSize"     value={cancelSize}        onChange={setCancelSize}       options={['L','M','S','XS']} />
+              <CtrlText   label="confirmLabel"   value={confirmLabel}      onChange={setConfirmLabel}     />
+              <CtrlSelect label="confirmVariant" value={confirmVariant}    onChange={setConfirmVariant}   options={['Primary','Secondary','Tertiary']} />
+              <CtrlSelect label="confirmColor"   value={confirmColor}      onChange={setConfirmColor}     options={['Primary','Error','Warning']} />
+              <CtrlSelect label="confirmSize"    value={confirmSize}       onChange={setConfirmSize}      options={['L','M','S','XS']} />
+            </>)}
+          </>}>
+            <main className="stage">
+              {/* Playground */}
+              <section>
+                <h2>Drawer — Interactive Playground</h2>
+                <p className="stage-note">
+                  Configure props in the left panel. Click <strong>Open drawer</strong> to preview.
+                </p>
+                <div className="preview">
+                  <Button variant="Primary" color="Primary" size="M"
+                    onClick={() => { setPlaygroundOpen(true); pushDrawerLog('onOpen'); }}>
+                    Open drawer
+                  </Button>
+                </div>
+                <div className="events">{drawerLog.length === 0 ? '— no events yet —' : drawerLog.join('\n')}</div>
+                <Drawer
+                  isOpen={playgroundOpen}
+                  variant={variant}
+                  onClose={() => { setPlaygroundOpen(false); pushDrawerLog('onClose'); }}
+                  closeOnBackdrop={closeOnBackdrop}
+                  closeOnEscape={closeOnEscape}
+                >
+                  <DrawerHeader
+                    icon={showIcon ? ICON_MAP[drawerIconName] || ICON_MAP['InfoCircle'] : undefined}
+                    subtitle={showSubtitle ? subtitleText : undefined}
+                    badge={showBadge ? (
+                      <Badge state={badgeState} emphasis={badgeEmphasis}>{badgeText}</Badge>
+                    ) : undefined}
+                  >
+                    {titleText}
+                  </DrawerHeader>
+                  <DrawerBody padding={bodyPadding}>
+                    {bodyPadding ? bodyText : (
+                      <div style={{ background:'var(--color-surface-3)', height:'160px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--color-text-subdued)', fontSize:'var(--font-size-label)', fontFamily:'var(--font-family)' }}>
+                        Full-bleed slot (padding off)
+                      </div>
+                    )}
+                  </DrawerBody>
+                  {showFooter && (
+                    <DrawerFooter
+                      link={showFooterLink ? (
+                        <LinkButton onClick={(e) => { e.preventDefault(); pushDrawerLog('link clicked'); }} showIcon={false}>{footerLinkText}</LinkButton>
+                      ) : undefined}
+                    >
+                      <Button variant={cancelVariant} color={cancelColor} size={cancelSize}
+                        onClick={() => { setPlaygroundOpen(false); pushDrawerLog(`${cancelLabel} clicked`); }}>
+                        {cancelLabel}
+                      </Button>
+                      <Button variant={confirmVariant} color={confirmColor} size={confirmSize}
+                        onClick={() => { setPlaygroundOpen(false); pushDrawerLog(`${confirmLabel} clicked`); }}>
+                        {confirmLabel}
+                      </Button>
+                    </DrawerFooter>
+                  )}
+                </Drawer>
+              </section>
+
+              {/* Both variants */}
+              <section>
+                <h2>Drawer — Partial vs Full</h2>
+                <p className="stage-note">
+                  <strong>Partial</strong> covers ~45% of the viewport — underlying page stays visible.<br />
+                  <strong>Full</strong> covers 100% of the viewport — for mobile or complex forms.
+                </p>
+                <div className="drawer-variant-row">
+                  <Button variant="Secondary" color="Primary" size="M" onClick={() => setPartialOpen(true)}>
+                    Partial Drawer
+                  </Button>
+                  <Button variant="Secondary" color="Primary" size="M" onClick={() => setFullOpen(true)}>
+                    Full Drawer
+                  </Button>
+                </div>
+
+                <Drawer isOpen={partialOpen} variant="Partial" onClose={() => setPartialOpen(false)}>
+                  <DrawerHeader>Loan #1042</DrawerHeader>
+                  <DrawerBody>
+                    <p style={{ margin: 0 }}>This is a <strong>Partial Drawer</strong>. The underlying page remains visible at ~55% of the viewport. Use this for record detail views, filter panels, and document previews.</p>
+                    <br />
+                    <p style={{ margin: 0, color: 'var(--color-text-subdued)', fontSize: 'var(--font-size-label)', fontFamily: 'var(--font-family)' }}>Click the backdrop or press Escape to close.</p>
+                  </DrawerBody>
+                  <DrawerFooter>
+                    <Button variant="Secondary" size="M" onClick={() => setPartialOpen(false)}>Cancel</Button>
+                    <Button variant="Primary"   size="M" onClick={() => setPartialOpen(false)}>Save changes</Button>
+                  </DrawerFooter>
+                </Drawer>
+
+                <Drawer isOpen={fullOpen} variant="Full" onClose={() => setFullOpen(false)}>
+                  <DrawerHeader>Edit customer profile</DrawerHeader>
+                  <DrawerBody>
+                    <p style={{ margin: 0 }}>This is a <strong>Full Drawer</strong>. It covers the entire viewport width. Use sparingly — only for mobile viewports or very complex multi-field forms.</p>
+                    <br />
+                    <p style={{ margin: 0, color: 'var(--color-text-subdued)', fontSize: 'var(--font-size-label)', fontFamily: 'var(--font-family)' }}>Press Escape to close (backdrop click disabled by default on Full Drawer).</p>
+                  </DrawerBody>
+                  <DrawerFooter>
+                    <Button variant="Secondary" size="M" onClick={() => setFullOpen(false)}>Cancel</Button>
+                    <Button variant="Primary"   size="M" type="submit" onClick={() => setFullOpen(false)}>Save</Button>
+                  </DrawerFooter>
+                </Drawer>
+              </section>
+            </main>
+          </PanelLayout>
+        );
+      }
+
+      /* ============================================================
        * ModalSection — self-contained Modal playground
        * ============================================================ */
       function ModalSection() {
@@ -3705,8 +4030,17 @@
         );
         const [bodyPadding,      setBodyPadding]      = useState(true);
         /* ModalFooter */
+        const [showFooter,       setShowFooter]       = useState(true);
         const [showLink,         setShowLink]         = useState(false);
         const [linkText,         setLinkText]         = useState('Learn more');
+        const [cancelLabel,      setCancelLabel]      = useState('Cancel');
+        const [cancelVariant,    setCancelVariant]    = useState('Secondary');
+        const [cancelColor,      setCancelColor]      = useState('Primary');
+        const [cancelSize,       setCancelSize]       = useState('M');
+        const [confirmLabel,     setConfirmLabel]     = useState('Confirm');
+        const [confirmVariant,   setConfirmVariant]   = useState('Primary');
+        const [confirmColor,     setConfirmColor]     = useState('Primary');
+        const [confirmSize,      setConfirmSize]      = useState('M');
         const [playgroundOpen,   setPlaygroundOpen]   = useState(false);
 
         /* Variant modals (All Variants section) */
@@ -3755,10 +4089,21 @@
             <CtrlToggle label="padding"          checked={bodyPadding}    onChange={setBodyPadding}      />
 
             <h2>ModalFooter</h2>
-            <CtrlToggle label="showLink"         checked={showLink}       onChange={setShowLink}         />
-            {showLink && (
-              <CtrlText label="link"             value={linkText}         onChange={setLinkText}         />
-            )}
+            <CtrlToggle label="showFooter"       checked={showFooter}      onChange={setShowFooter}       />
+            {showFooter && (<>
+              <CtrlToggle label="showLink"       checked={showLink}        onChange={setShowLink}         />
+              {showLink && (
+                <CtrlText label="link"           value={linkText}          onChange={setLinkText}         />
+              )}
+              <CtrlText   label="cancelLabel"    value={cancelLabel}       onChange={setCancelLabel}      />
+              <CtrlSelect label="cancelVariant"  value={cancelVariant}     onChange={setCancelVariant}    options={['Primary','Secondary','Tertiary']} />
+              <CtrlSelect label="cancelColor"    value={cancelColor}       onChange={setCancelColor}      options={['Primary','Error','Warning']} />
+              <CtrlSelect label="cancelSize"     value={cancelSize}        onChange={setCancelSize}       options={['L','M','S','XS']} />
+              <CtrlText   label="confirmLabel"   value={confirmLabel}      onChange={setConfirmLabel}     />
+              <CtrlSelect label="confirmVariant" value={confirmVariant}    onChange={setConfirmVariant}   options={['Primary','Secondary','Tertiary']} />
+              <CtrlSelect label="confirmColor"   value={confirmColor}      onChange={setConfirmColor}     options={['Primary','Error','Warning']} />
+              <CtrlSelect label="confirmSize"    value={confirmSize}       onChange={setConfirmSize}      options={['L','M','S','XS']} />
+            </>)}
           </>}>
             <main className="stage">
               {/* Playground */}
@@ -3797,20 +4142,22 @@
                       </div>
                     )}
                   </ModalBody>
+                  {showFooter && (
                   <ModalFooter
                     link={showLink ? (
                       <LinkButton onClick={(e) => { e.preventDefault(); pushModalLog('link clicked'); }} showIcon={false}>{linkText}</LinkButton>
                     ) : undefined}
                   >
-                    <Button variant="Secondary" color="Primary" size="M"
-                      onClick={() => { setPlaygroundOpen(false); pushModalLog('Cancel clicked'); }}>
-                      Cancel
+                    <Button variant={cancelVariant} color={cancelColor} size={cancelSize}
+                      onClick={() => { setPlaygroundOpen(false); pushModalLog(`${cancelLabel} clicked`); }}>
+                      {cancelLabel}
                     </Button>
-                    <Button variant="Primary" color="Primary" size="M"
-                      onClick={() => { setPlaygroundOpen(false); pushModalLog('Confirm clicked'); }}>
-                      Confirm
+                    <Button variant={confirmVariant} color={confirmColor} size={confirmSize}
+                      onClick={() => { setPlaygroundOpen(false); pushModalLog(`${confirmLabel} clicked`); }}>
+                      {confirmLabel}
                     </Button>
                   </ModalFooter>
+                  )}
                 </Modal>
               </section>
 
@@ -4516,28 +4863,29 @@
         const [panelOpen, setPanelOpen] = useState(true);
 
         const NAV_ITEMS = [
-          { id: 'button',         label: 'Button'         },
-          { id: 'linkbutton',     label: 'LinkButton'     },
-          { id: 'dropdownbutton', label: 'DropdownButton' },
-          { id: 'buttongroup',    label: 'ButtonGroup'    },
-          { id: 'switch',         label: 'Switch'         },
-          { id: 'radiobutton',    label: 'RadioButton'    },
-          { id: 'checkbox',       label: 'Checkbox'       },
-          { id: 'alert',          label: 'Alert'          },
-          { id: 'breadcrumbs',    label: 'Breadcrumbs'    },
-          { id: 'pagination',     label: 'Pagination'     },
-          { id: 'tooltip',        label: 'Tooltip'        },
-          { id: 'stepper',        label: 'Stepper'        },
-          { id: 'chip',           label: 'Chip'           },
-          { id: 'badge',          label: 'Badge'          },
-          { id: 'tag',            label: 'Tag'            },
-          { id: 'tabs',           label: 'Tabs'           },
-          { id: 'modal',          label: 'Modal'          },
           { id: 'accordian',      label: 'Accordian'      },
+          { id: 'alert',          label: 'Alert'          },
           { id: 'avatar',         label: 'Avatar'         },
-          { id: 'avatargroup',  label: 'AvatarGroup'  },
-          { id: 'progressbar',  label: 'Progress Bar' },
+          { id: 'avatargroup',    label: 'AvatarGroup'    },
+          { id: 'badge',          label: 'Badge'          },
+          { id: 'breadcrumbs',    label: 'Breadcrumbs'    },
+          { id: 'button',         label: 'Button'         },
+          { id: 'buttongroup',    label: 'ButtonGroup'    },
+          { id: 'checkbox',       label: 'Checkbox'       },
+          { id: 'chip',           label: 'Chip'           },
+          { id: 'drawer',         label: 'Drawer'         },
+          { id: 'dropdownbutton', label: 'DropdownButton' },
           { id: 'fileupload',     label: 'File Upload'    },
+          { id: 'linkbutton',     label: 'LinkButton'     },
+          { id: 'modal',          label: 'Modal'          },
+          { id: 'pagination',     label: 'Pagination'     },
+          { id: 'progressbar',    label: 'Progress Bar'   },
+          { id: 'radiobutton',    label: 'RadioButton'    },
+          { id: 'stepper',        label: 'Stepper'        },
+          { id: 'switch',         label: 'Switch'         },
+          { id: 'tabs',           label: 'Tabs'           },
+          { id: 'tag',            label: 'Tag'            },
+          { id: 'tooltip',        label: 'Tooltip'        },
         ];
 
         /* --- Button controls --- */
@@ -4786,6 +5134,7 @@
             {activeComponent === 'badge'       && <BadgeSection />}
             {activeComponent === 'tag'         && <TagSection />}
             {activeComponent === 'tabs'        && <TabsSection />}
+            {activeComponent === 'drawer'       && <DrawerSection />}
             {activeComponent === 'modal'       && <ModalSection />}
             {activeComponent === 'accordian'   && <AccordianSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
@@ -4794,7 +5143,7 @@
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && (
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && (
             <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
