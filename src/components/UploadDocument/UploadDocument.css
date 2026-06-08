@@ -1,0 +1,65 @@
+/* UploadDocument — token-driven styles. Never override colour or border via className. */
+
+.dcds-UploadDocument {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+  width: 560px;
+  padding: var(--gap-4);
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+/* Main file row */
+.dcds-UploadDocument__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-8);
+  width: 100%;
+}
+
+/* Document icon container */
+.dcds-UploadDocument__doc-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-icon-primary);
+}
+
+/* Filename */
+.dcds-UploadDocument__name {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Actions slot (badge + icon buttons) */
+.dcds-UploadDocument__actions {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-8);
+  flex-shrink: 0;
+}
+
+/* Status badge — rendered by the shared Badge component (size="S" emphasis="subtle").
+   No custom badge styles needed here; Badge.css owns all badge tokens. */
+
+/* Icon action buttons — now rendered as Button (Tertiary, XS, isIconOnly). */
+/* View = color="Primary" (green), Delete = color="Error" (red). */
+/* Button.css owns all styling for these elements. */
+
+/* Loader area below the row */
+.dcds-UploadDocument__loader {
+  width: 100%;
+}
