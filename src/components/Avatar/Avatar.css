@@ -19,6 +19,11 @@
   position: relative;
 }
 
+.dcds-Avatar:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
 /* ===========================================================
  * Sizes — Small 24px · Medium 32px · Large 40px · Extra Large 48px
  * =========================================================== */
@@ -82,16 +87,13 @@
   background-color: var(--color-fill-secondary-2);
 }
 
-/* Flag Circle: no background — the flag SVG fills the circle.
- * 0.5px inset stroke: color/stroke/subdued (Cool Grey-300).
- * Figma node 440:6829. */
+/* Flag Circle: no background — the flag SVG fills the circle */
 .dcds-Avatar--shape-Flag-Circle {
   background-color: transparent;
-  box-shadow: inset 0 0 0 0.5px var(--color-stroke-subdued);
 }
 
 /* ===========================================================
- * Initials — text color (Noble Blue-500)
+ * Initials — text color (noble blue-500)
  * =========================================================== */
 
 .dcds-Avatar__initials {
@@ -102,7 +104,7 @@
 
 /* ===========================================================
  * Icon — color and size per avatar size
- * Icon color: color/icon/primary (Noble Blue-500)
+ * Icon color: color/icon/secondary (Sky Blue-500)
  * =========================================================== */
 
 .dcds-Avatar__icon {
@@ -110,6 +112,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  /* Noble Blue-500 — matches Figma vuesax/bold/user rendered color */
   color: var(--color-icon-primary);
 }
 
@@ -142,4 +145,16 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* ===========================================================
+ * Interactive state — cursor pointer when role="button"
+ * =========================================================== */
+
+.dcds-Avatar[role='button'] {
+  cursor: pointer;
+}
+
+.dcds-Avatar[role='button']:hover {
+  opacity: 0.85;
 }

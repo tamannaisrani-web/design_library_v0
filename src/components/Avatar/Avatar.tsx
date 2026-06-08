@@ -4,7 +4,7 @@ import './Avatar.css';
 
 /**
  * Default user icon — path from icons/svg/bold/user.svg.
- * Uses currentColor to inherit --color-icon-primary token.
+ * Uses currentColor so it inherits the parent's --color-icon-secondary token.
  */
 const UserIcon = ({ size }: { size: number }) => (
   <svg
@@ -74,6 +74,18 @@ const ICON_SIZES: Record<string, number> = {
  * <Avatar shape="Icon Circle" size="Medium" icon={<MyUserIcon />} />
  * ```
  *
+ * @example Interactive — opens profile drawer
+ * ```tsx
+ * <Avatar
+ *   shape="Initial Circle"
+ *   size="Large"
+ *   initials="RK"
+ *   role="button"
+ *   ariaLabel="View profile of Rajesh Kumar"
+ *   onClick={openProfileDrawer}
+ * />
+ * ```
+ *
  * @example Table name cell (always Small in table cells)
  * ```tsx
  * <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gap-8)' }}>
@@ -90,9 +102,17 @@ export const Avatar: React.FC<AvatarProps> = ({
   country,
   flagSrc,
   ariaLabel,
+  role,
   className,
   id,
   dataTestId,
+  onClick,
+  onFocus,
+  onBlur,
+  onMouseEnter,
+  onMouseLeave,
+  onKeyDown,
+  onKeyUp,
 }) => {
   // BEM modifiers: spaces in shape/size names become hyphens
   const shapeKey = shape.replace(/ /g, '-');
@@ -117,12 +137,25 @@ export const Avatar: React.FC<AvatarProps> = ({
   const resolvedFlagSrc =
     flagSrc ?? (country ? `dcds-flags/flags/${country.toUpperCase()}.svg` : undefined);
 
+  // Interactive avatars become focusable
+  const isInteractive = !!(onClick || role === 'button');
+  const resolvedRole = role ?? (isInteractive ? 'button' : undefined);
+
   return (
     <div
       id={id}
       className={classes}
+      role={resolvedRole}
       aria-label={ariaLabel}
       data-testid={dataTestId}
+      tabIndex={isInteractive ? 0 : undefined}
+      onClick={onClick}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
     >
       {/* Initial shapes — text initials, aria-hidden (name is in adjacent text or ariaLabel) */}
       {isInitial && (
@@ -138,7 +171,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         </span>
       )}
 
-      {/* Flag Circle — img from dcds-flags/flags/ */}
+      {/* Flag Circle — img from dcds-flags/flags/, or icon fallback when no src */}
       {isFlag && resolvedFlagSrc && (
         <img
           className="dcds-Avatar__flag"
