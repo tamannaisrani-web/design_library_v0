@@ -108,7 +108,7 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  gap: 0;
+  gap: var(--gap-8);
   width: 100%;
 }
 
@@ -238,16 +238,22 @@
    Search button — full-height action button trailing the search input
    -------------------------------------------------------------------------- */
 
+/* Search box — overflow hidden to clip the internal button */
+.dcds-InputFields__box--search {
+  overflow: hidden;
+  padding-right: 0;
+}
+
 .dcds-InputFields__search-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  align-self: stretch;
   padding: 0 var(--gap-16);
   background: var(--color-fill-action);
   color: var(--color-text-invert);
   border: none;
-  border-radius: 0 var(--rd-S) var(--rd-S) 0;
+  border-radius: 0 calc(var(--rd-S) - 1px) calc(var(--rd-S) - 1px) 0;
   font-family: var(--font-family);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
@@ -255,6 +261,7 @@
   white-space: nowrap;
   flex-shrink: 0;
   transition: background-color 120ms ease;
+  margin: 0;
 }
 
 .dcds-InputFields__search-btn:hover:not(:disabled) {
@@ -263,12 +270,7 @@
 
 .dcds-InputFields__search-btn:focus-visible {
   outline: 2px solid var(--color-stroke-focus);
-  outline-offset: 2px;
-}
-
-/* When search type, the box loses its right radius */
-.dcds-InputFields--type-search .dcds-InputFields__box {
-  border-radius: var(--rd-S) 0 0 var(--rd-S);
+  outline-offset: -2px;
 }
 
 /* --------------------------------------------------------------------------
@@ -359,8 +361,7 @@
   height: 48px;
   padding: 0 var(--gap-12);
   border: 0.5px solid var(--color-stroke-neutral);
-  border-right: none;
-  border-radius: var(--rd-S) 0 0 var(--rd-S);
+  border-radius: var(--rd-S);
   background: var(--color-surface-1);
   cursor: pointer;
   box-sizing: border-box;
@@ -380,14 +381,12 @@
 /* Open state — 1 px stroke-focus-subtle border */
 .dcds-BaseElemFront--open {
   border: 1px solid var(--color-stroke-focus-subtle);
-  border-right: none;
 }
 
 /* Disabled state — surface-3 bg, stroke-disabled border, no interaction */
 .dcds-BaseElemFront--disabled {
   background: var(--color-surface-3);
   border: 1px solid var(--color-stroke-disabled);
-  border-right: none;
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -400,16 +399,10 @@
 .dcds-BaseElemFront--readonly {
   background: var(--color-surface-2);
   border: 1px solid var(--color-stroke-disabled);
-  border-right: none;
 }
 
 .dcds-BaseElemFront--readonly .dcds-BaseElemFront__code {
   color: var(--color-text-neutral);
-}
-
-/* When ElemFront present, the adjacent box loses its left radius */
-.dcds-InputFields__field-row .dcds-InputFields__box {
-  border-radius: 0 var(--rd-S) var(--rd-S) 0;
 }
 
 /* Inner group: flag + code text */

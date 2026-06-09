@@ -695,18 +695,16 @@ export const InputFields: React.FC<InputFieldsProps> = ({
       >
         {renderLabelRow()}
         {renderHelpText()}
-        <div className="dcds-InputFields__field-row">
-          <div className="dcds-InputFields__box">
-            <div className="dcds-InputFields__box-left">
-              {showLeading && (
-                <_BaseLeading property1={leadingProperty ?? 'icon'} country={prefixCountry} />
-              )}
-              <input
-                {...commonInputProps}
-                type="text"
-                onClick={onClick as React.MouseEventHandler<HTMLInputElement>}
-              />
-            </div>
+        <div className="dcds-InputFields__box dcds-InputFields__box--search">
+          <div className="dcds-InputFields__box-left">
+            {showLeading && (
+              <_BaseLeading property1={leadingProperty ?? 'icon'} country={prefixCountry} />
+            )}
+            <input
+              {...commonInputProps}
+              type="text"
+              onClick={onClick as React.MouseEventHandler<HTMLInputElement>}
+            />
           </div>
           <button
             type="button"
