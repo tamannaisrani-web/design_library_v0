@@ -1115,6 +1115,87 @@
       .dcds-Accordian__body-slot { width:100%; }
 
       /* ============================================================
+       * InputFields.css
+       * ============================================================ */
+      .dcds-InputFields { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; min-width:240px; font-family:var(--font-family); }
+      .dcds-InputFields__label-row { display:flex; align-items:center; gap:var(--gap-4); }
+      .dcds-InputFields__label { font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; }
+      .dcds-InputFields__mandatory { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; flex-shrink:0; }
+      .dcds-InputFields__tooltip-trigger { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:none; border:none; padding:0; cursor:pointer; color:var(--color-icon-subdued); flex-shrink:0; }
+      .dcds-InputFields__tooltip-trigger:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
+      .dcds-InputFields__tooltip-wrap { position:relative; display:inline-flex; align-items:center; }
+      .dcds-InputFields__tooltip-popover { position:absolute; z-index:20; top:calc(100% + var(--gap-4)); left:0; background:var(--color-surface-inverse); color:var(--color-text-invert); border-radius:var(--rd-S); padding:var(--gap-8) var(--gap-12); min-width:180px; max-width:280px; box-shadow:var(--shadow-S); pointer-events:none; }
+      .dcds-InputFields__tooltip-heading { font-size:var(--font-size-label); font-weight:var(--font-weight-bold); margin:0 0 var(--gap-4) 0; }
+      .dcds-InputFields__tooltip-body { font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); margin:0; }
+      .dcds-InputFields__field-row { display:flex; flex-direction:row; align-items:stretch; width:100%; }
+      .dcds-InputFields__box { display:flex; flex-direction:row; align-items:center; justify-content:space-between; flex:1 1 auto; height:48px; padding:0 var(--gap-12); gap:0; border:0.5px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); transition:border-color 120ms ease,background-color 120ms ease; box-sizing:border-box; cursor:text; }
+      .dcds-InputFields__box-left { display:flex; align-items:center; align-self:stretch; gap:var(--gap-12); flex:1; min-width:0; }
+      .dcds-InputFields__box:focus-within { border:1px solid var(--color-stroke-focus-subtle); outline:none; }
+      .dcds-InputFields__input { flex:1; min-width:0; height:100%; background:transparent; border:none; outline:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); padding:0; }
+      .dcds-InputFields__input::placeholder { color:var(--color-text-disabled); }
+      .dcds-InputFields__leading { display:flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:var(--color-icon-primary); }
+      .dcds-InputFields__leading img { width:16px; height:12px; object-fit:cover; border-radius:1px; display:block; }
+      .dcds-InputFields__leading-symbol { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-neutral); line-height:1; white-space:nowrap; }
+      .dcds-InputFields__trailing { display:flex; align-items:center; justify-content:center; flex-shrink:0; width:24px; height:24px; color:var(--color-icon-primary); cursor:pointer; background:none; border:none; padding:0; }
+      .dcds-InputFields__trailing:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
+      .dcds-InputFields__search-btn { display:flex; align-items:center; justify-content:center; height:48px; padding:0 var(--gap-16); background:var(--color-fill-action); color:var(--color-text-invert); border:none; border-radius:0 var(--rd-S) var(--rd-S) 0; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); cursor:pointer; white-space:nowrap; flex-shrink:0; transition:background-color 120ms ease; }
+      .dcds-InputFields__search-btn:hover:not(:disabled) { background-color:var(--color-fill-dark-action); }
+      .dcds-InputFields__search-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-InputFields--type-search .dcds-InputFields__box { border-radius:var(--rd-S) 0 0 var(--rd-S); }
+      .dcds-InputFields__otp-row { display:flex; flex-direction:row; gap:var(--gap-12); width:100%; }
+      .dcds-InputFields__otp-box { flex:1; height:48px; border:0.5px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); display:flex; align-items:center; justify-content:center; transition:border-color 120ms ease,background-color 120ms ease; min-width:0; }
+      .dcds-InputFields__otp-input { width:100%; height:100%; background:transparent; border:none; outline:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); text-align:center; padding:0; }
+      .dcds-InputFields__otp-box:focus-within { border:1px solid var(--color-stroke-focus-subtle); }
+      .dcds-InputFields__otp-box--filled .dcds-InputFields__otp-input { color:var(--color-text-info); }
+      .dcds-InputFields__otp-box--error { border:1px solid var(--color-stroke-error); background:var(--color-fill-light-error); }
+      .dcds-InputFields__otp-box--disabled { background:var(--color-surface-disabled); pointer-events:none; }
+      .dcds-InputFields__otp-box--disabled .dcds-InputFields__otp-input { color:var(--color-text-disabled); }
+      .dcds-BaseElemFront__wrap { position:relative; flex-shrink:0; }
+      .dcds-BaseElemFront { display:flex; flex-direction:row; align-items:center; justify-content:space-between; width:120px; min-width:120px; height:48px; padding:0 var(--gap-12); border:0.5px solid var(--color-stroke-neutral); border-right:none; border-radius:var(--rd-S) 0 0 var(--rd-S); background:var(--color-surface-1); cursor:pointer; box-sizing:border-box; outline:none; transition:background-color 120ms ease; }
+      .dcds-BaseElemFront:hover { background-color:var(--color-fill-primary-0); }
+      .dcds-BaseElemFront:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+      .dcds-BaseElemFront--open { border:1px solid var(--color-stroke-focus-subtle); border-right:none; }
+      .dcds-BaseElemFront--disabled { background:var(--color-surface-3); border:1px solid var(--color-stroke-disabled); border-right:none; cursor:not-allowed; pointer-events:none; }
+      .dcds-BaseElemFront--disabled .dcds-BaseElemFront__code { color:var(--color-text-disabled); }
+      .dcds-BaseElemFront--readonly { background:var(--color-surface-2); border:1px solid var(--color-stroke-disabled); border-right:none; }
+      .dcds-BaseElemFront--readonly .dcds-BaseElemFront__code { color:var(--color-text-neutral); }
+      .dcds-InputFields__field-row .dcds-InputFields__box { border-radius:0 var(--rd-S) var(--rd-S) 0; }
+      .dcds-BaseElemFront__inner { display:flex; align-items:center; gap:var(--gap-12); min-width:0; }
+      .dcds-BaseElemFront__flag { width:16px; height:12px; object-fit:cover; border-radius:1px; flex-shrink:0; }
+      .dcds-BaseElemFront__code { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-BaseElemFront__arrow { display:flex; align-items:center; color:var(--color-icon-primary); flex-shrink:0; transition:transform 120ms ease; }
+      .dcds-BaseElemFront__arrow--open { transform:rotate(180deg); }
+      .dcds-BaseElemFront__menu { position:absolute; top:calc(100% + var(--gap-4)); left:0; min-width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:var(--shadow-S); max-height:288px; overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; z-index:10; animation:dcds-BaseElemFront__menu-in 120ms ease-out; }
+      @keyframes dcds-BaseElemFront__menu-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+      .dcds-BaseElemFront__menu-item-row { border-bottom:0.5px solid var(--color-stroke-subdued); }
+      .dcds-BaseElemFront__menu-item-row:last-child { border-bottom:none; }
+      .dcds-BaseElemFront__menu-item { display:flex; align-items:center; gap:var(--gap-12); width:100%; padding:var(--gap-12) var(--gap-16); background:none; border:none; text-align:left; cursor:pointer; transition:background-color 120ms ease; }
+      .dcds-BaseElemFront__menu-item:hover { background-color:var(--color-fill-primary-1); }
+      .dcds-BaseElemFront__menu-item:focus-visible { outline:none; background-color:var(--color-fill-primary-1); box-shadow:inset 0 0 0 2px var(--color-stroke-focus); }
+      .dcds-BaseElemFront__menu-item-leading { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:24px; height:18px; }
+      .dcds-BaseElemFront__menu-item-leading img { width:24px; height:18px; object-fit:cover; border-radius:2px; display:block; }
+      .dcds-BaseElemFront__menu-code { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-BaseHelpText { max-height:0; opacity:0; overflow:hidden; transition:max-height 200ms linear,opacity 150ms linear; }
+      .dcds-InputFields:focus-within .dcds-BaseHelpText, .dcds-InputFields--state-focus .dcds-BaseHelpText, .dcds-InputFields--state-typing .dcds-BaseHelpText, .dcds-BaseHelpText--open { max-height:120px; opacity:1; }
+      .dcds-BaseHelpText__inner { display:flex; flex-direction:row; gap:var(--gap-8); align-items:flex-end; padding:var(--gap-4) 0; }
+      .dcds-BaseHelpText__bar { width:4px; min-width:4px; align-self:stretch; border-radius:var(--rd-XS); background:var(--color-stroke-focus-subtle); flex-shrink:0; }
+      .dcds-BaseHelpText__text { flex:1 0 0; margin:0; font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.4; }
+      .dcds-BaseValidation { display:flex; flex-direction:row; align-items:flex-start; gap:var(--gap-4); }
+      .dcds-BaseValidation__icon { display:flex; align-items:center; justify-content:center; width:16px; height:16px; flex-shrink:0; }
+      .dcds-BaseValidation__text { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); line-height:1.3; }
+      .dcds-BaseValidation--error .dcds-BaseValidation__icon, .dcds-BaseValidation--error .dcds-BaseValidation__text { color:var(--color-text-error); }
+      .dcds-BaseValidation--warning .dcds-BaseValidation__icon, .dcds-BaseValidation--warning .dcds-BaseValidation__text { color:var(--color-text-warning); }
+      .dcds-BaseValidation--success .dcds-BaseValidation__icon, .dcds-BaseValidation--success .dcds-BaseValidation__text { color:var(--color-text-success); }
+      .dcds-InputFields--state-focus .dcds-InputFields__box, .dcds-InputFields--state-typing .dcds-InputFields__box { border:1px solid var(--color-stroke-focus-subtle); }
+      .dcds-InputFields--state-error .dcds-InputFields__box { border:1px solid var(--color-stroke-error); background:var(--color-fill-light-error); }
+      .dcds-InputFields--state-disabled .dcds-InputFields__box { background:var(--color-surface-disabled); border-color:var(--color-stroke-disabled); pointer-events:none; cursor:not-allowed; }
+      .dcds-InputFields--state-disabled .dcds-InputFields__input { color:var(--color-text-disabled); cursor:not-allowed; }
+      .dcds-InputFields--state-disabled .dcds-InputFields__input::placeholder { color:var(--color-text-disabled); }
+      .dcds-InputFields--state-disabled .dcds-InputFields__leading, .dcds-InputFields--state-disabled .dcds-InputFields__trailing { color:var(--color-icon-disabled); }
+      .dcds-InputFields--state-read-only .dcds-InputFields__box { background:var(--color-surface-1); border-color:var(--color-stroke-neutral); cursor:default; }
+      @media (prefers-reduced-motion:reduce) { .dcds-InputFields__box, .dcds-BaseHelpText, .dcds-BaseElemFront, .dcds-InputFields__search-btn { transition:none; } }
+
+      /* ============================================================
        * DeterminateLoader.css — Figma node 1764:705
        * ============================================================ */
       .dcds-DeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
@@ -4008,6 +4089,475 @@
       }
 
       /* ============================================================
+       * InputFieldsSection — self-contained InputFields playground
+       * ============================================================ */
+      function InputFields({
+        Type = 'Default', State = 'Default',
+        label, isMandatory = true, showLabel = true,
+        showTooltip = false, tooltipHeading, tooltipBody,
+        showHelpText = false, helpText,
+        placeholder, value, name, id,
+        showLeading = true, leadingProperty, showTrailing = true, trailingProperty, trailingIcon,
+        showValidation = false, validationMessage, validationProperty = 'error',
+        prefixCountry, prefixCode = '', prefixMenuItems,
+        otpValues: otpValuesProp,
+        searchButtonLabel = 'Search',
+        'aria-label': ariaLabel, 'aria-describedby': ariaDescribedBy,
+        onChange, onOtpChange, onFocus, onBlur, onClick, onKeyDown, onKeyUp,
+        onMouseEnter, onMouseLeave, onSearchClick, onDropdownClick, onPrefixClick, onPrefixMenuItemSelect, onTrailingClick,
+        className, dataTestId,
+      }) {
+        const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+        const [tooltipVisible, setTooltipVisible] = React.useState(false);
+        const [isPrefixOpen, setIsPrefixOpen] = React.useState(false);
+        const [internalOtpValues, setInternalOtpValues] = React.useState(['','','','','','']);
+        const isOtpControlled = otpValuesProp !== undefined;
+        const otpValues = isOtpControlled ? otpValuesProp : internalOtpValues;
+        const prefixWrapRef = React.useRef(null);
+        const otpRefs = React.useRef([]);
+
+        React.useEffect(() => {
+          if (!isPrefixOpen) return;
+          const handleOutside = (e) => {
+            if (prefixWrapRef.current && !prefixWrapRef.current.contains(e.target)) setIsPrefixOpen(false);
+          };
+          const handleKey = (e) => { if (e.key === 'Escape') setIsPrefixOpen(false); };
+          document.addEventListener('mousedown', handleOutside);
+          document.addEventListener('keydown', handleKey);
+          return () => { document.removeEventListener('mousedown', handleOutside); document.removeEventListener('keydown', handleKey); };
+        }, [isPrefixOpen]);
+
+        const isDisabled = State === 'Disabled';
+        const isReadOnly = State === 'Read-only';
+        const isError = State === 'Error';
+        const isFilled = State === 'Filled' || (value != null && value !== '' && State !== 'Error');
+        const resolvedShowValidation = Type !== 'Dropdown' && (isError || showValidation);
+
+        const validationId = id ? id + '-validation' : undefined;
+        const helpTextId = id ? id + '-helptext' : undefined;
+        const inputId = id;
+
+        const describedByParts = [ariaDescribedBy, resolvedShowValidation && validationId, showHelpText && helpTextId].filter(Boolean);
+        const resolvedAriaDescribedBy = describedByParts.length ? describedByParts.join(' ') : undefined;
+
+        const typeSlug = Type.toLowerCase().replace(/\s/g, '-').replace(/\./g, '-');
+        const stateSlug = State.toLowerCase().replace(/-/g, '-');
+
+        const rootClasses = ['dcds-InputFields', 'dcds-InputFields--type-' + typeSlug, 'dcds-InputFields--state-' + stateSlug, isFilled ? 'dcds-InputFields--state-filled' : '', className].filter(Boolean).join(' ');
+
+        const prefixState = isDisabled ? 'Disabled' : isReadOnly ? 'Read-Only' : isPrefixOpen ? 'Open' : 'Default';
+
+        const handleOtpChange = (digit, index) => {
+          const next = [...otpValues];
+          next[index] = digit;
+          if (!isOtpControlled) setInternalOtpValues(next);
+          onOtpChange && onOtpChange(next, index);
+          if (digit && index < 5) { const el = otpRefs.current[index + 1]; if (el) el.focus(); }
+        };
+
+        const handleOtpKeyDown = (e, index) => {
+          if (e.key === 'Backspace' && !otpValues[index] && index > 0) {
+            const el = otpRefs.current[index - 1]; if (el) el.focus();
+          }
+        };
+
+        const commonInputProps = {
+          id: inputId, name, value, placeholder,
+          disabled: isDisabled, readOnly: isReadOnly,
+          'aria-required': isMandatory ? true : undefined,
+          'aria-invalid': isError ? true : undefined,
+          'aria-readonly': isReadOnly ? true : undefined,
+          'aria-disabled': isDisabled ? true : undefined,
+          'aria-label': ariaLabel,
+          'aria-describedby': resolvedAriaDescribedBy,
+          className: 'dcds-InputFields__input',
+          onChange: (e) => onChange && onChange(e.target.value, e),
+          onFocus, onBlur, onKeyDown, onKeyUp,
+        };
+
+        function renderLabelRow() {
+          if (!showLabel) return null;
+          return React.createElement('div', { className: 'dcds-InputFields__label-row' },
+            label && React.createElement('label', { className: 'dcds-InputFields__label', htmlFor: inputId }, label),
+            isMandatory && React.createElement('span', { className: 'dcds-InputFields__mandatory', 'aria-label': 'required' }, '*'),
+            showTooltip && React.createElement('div', { className: 'dcds-InputFields__tooltip-wrap' },
+              React.createElement('button', {
+                type: 'button', className: 'dcds-InputFields__tooltip-trigger',
+                'aria-label': tooltipHeading || 'More information',
+                onClick: () => setTooltipVisible(v => !v), onBlur: () => setTooltipVisible(false),
+              }, React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 },
+                React.createElement('circle', { cx: 12, cy: 12, r: 10 }),
+                React.createElement('line', { x1: 12, y1: 8, x2: 12, y2: 8 }),
+                React.createElement('line', { x1: 12, y1: 12, x2: 12, y2: 16 })
+              )),
+              tooltipVisible && (tooltipHeading || tooltipBody) && React.createElement('div', { className: 'dcds-InputFields__tooltip-popover', role: 'tooltip' },
+                tooltipHeading && React.createElement('p', { className: 'dcds-InputFields__tooltip-heading' }, tooltipHeading),
+                tooltipBody && React.createElement('p', { className: 'dcds-InputFields__tooltip-body' }, tooltipBody)
+              )
+            )
+          );
+        }
+
+        function renderHelpText() {
+          if (!showHelpText) return null;
+          return React.createElement('div', { id: helpTextId },
+            React.createElement('div', { className: 'dcds-BaseHelpText' },
+              React.createElement('div', { className: 'dcds-BaseHelpText__inner' },
+                React.createElement('div', { className: 'dcds-BaseHelpText__bar', 'aria-hidden': 'true' }),
+                React.createElement('p', { className: 'dcds-BaseHelpText__text' }, helpText || '')
+              )
+            )
+          );
+        }
+
+        function renderValidation() {
+          if (!resolvedShowValidation) return null;
+          const isSuccess = validationProperty === 'success';
+          const iconSvg = isSuccess
+            ? React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'currentColor' }, React.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.58L18 8.5l-8 8z' }))
+            : React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'currentColor' }, React.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z' }));
+          return React.createElement('div', { id: validationId },
+            React.createElement('div', { className: 'dcds-BaseValidation dcds-BaseValidation--' + (validationProperty || 'error'), role: 'alert', 'aria-live': 'polite' },
+              React.createElement('span', { className: 'dcds-BaseValidation__icon', 'aria-hidden': 'true' }, iconSvg),
+              React.createElement('span', { className: 'dcds-BaseValidation__text' }, validationMessage || '')
+            )
+          );
+        }
+
+        function renderTrailingBtn(prop1, onClickFn) {
+          const icons = {
+            'eye-slash': React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 }, React.createElement('path', { d: 'M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24' }), React.createElement('line', { x1: 1, y1: 1, x2: 23, y2: 23 })),
+            'eye':       React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 }, React.createElement('path', { d: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z' }), React.createElement('circle', { cx: 12, cy: 12, r: 3 })),
+            'arrow-down': React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 }, React.createElement('polyline', { points: '6 9 12 15 18 9' })),
+            'calendar-2': React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 }, React.createElement('rect', { x: 3, y: 4, width: 18, height: 18, rx: 2 }), React.createElement('line', { x1: 16, y1: 2, x2: 16, y2: 6 }), React.createElement('line', { x1: 8, y1: 2, x2: 8, y2: 6 }), React.createElement('line', { x1: 3, y1: 10, x2: 21, y2: 10 })),
+          };
+          return React.createElement('button', { type: 'button', className: 'dcds-InputFields__trailing', onClick: onClickFn, 'aria-label': prop1, tabIndex: -1 }, icons[prop1]);
+        }
+
+        function renderElemFront() {
+          const flagSrc = 'dcds-flags/flags/' + (prefixCountry || 'IN').toUpperCase() + '.svg';
+          const arrowSize = 16;
+          const arrowIcon = React.createElement('svg', { width: arrowSize, height: arrowSize, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, style: { transform: isPrefixOpen ? 'rotate(180deg)' : 'none', transition: 'transform 120ms ease' } }, React.createElement('polyline', { points: '6 9 12 15 18 9' }));
+          const accessLabel = (Type === 'Phone No.' ? 'Dial code selector: ' : 'Currency selector: ') + prefixCode;
+          const btnClass = ['dcds-BaseElemFront', isPrefixOpen ? 'dcds-BaseElemFront--open' : '', isDisabled ? 'dcds-BaseElemFront--disabled' : '', isReadOnly ? 'dcds-BaseElemFront--readonly' : ''].filter(Boolean).join(' ');
+          const items = prefixMenuItems || [];
+          return React.createElement('div', { className: 'dcds-BaseElemFront__wrap', ref: prefixWrapRef },
+            React.createElement('button', {
+              type: 'button', className: btnClass,
+              onClick: () => { if (!isDisabled && !isReadOnly) { setIsPrefixOpen(v => !v); onPrefixClick && onPrefixClick(); } },
+              disabled: isDisabled, 'aria-label': accessLabel,
+              'aria-expanded': isPrefixOpen, 'aria-haspopup': 'menu',
+              tabIndex: isDisabled ? -1 : 0,
+            },
+              React.createElement('span', { className: 'dcds-BaseElemFront__inner' },
+                React.createElement('img', { className: 'dcds-BaseElemFront__flag', src: flagSrc, width: 16, height: 12, alt: '', 'aria-hidden': 'true' }),
+                React.createElement('span', { className: 'dcds-BaseElemFront__code' }, prefixCode)
+              ),
+              React.createElement('span', { className: 'dcds-BaseElemFront__arrow' + (isPrefixOpen ? ' dcds-BaseElemFront__arrow--open' : ''), 'aria-hidden': 'true' }, arrowIcon)
+            ),
+            isPrefixOpen && items.length > 0 && React.createElement('div', { className: 'dcds-BaseElemFront__menu', role: 'menu', 'aria-label': accessLabel },
+              items.map((item, i) =>
+                React.createElement('div', { key: item.country + '-' + i, role: 'none', className: 'dcds-BaseElemFront__menu-item-row' },
+                  React.createElement('button', {
+                    type: 'button', role: 'menuitem', className: 'dcds-BaseElemFront__menu-item',
+                    onClick: () => { setIsPrefixOpen(false); onPrefixMenuItemSelect && onPrefixMenuItemSelect(item, i); },
+                  },
+                    React.createElement('span', { className: 'dcds-BaseElemFront__menu-item-leading' },
+                      React.createElement('img', { src: 'dcds-flags/flags/' + item.country.toUpperCase() + '.svg', width: 24, height: 18, alt: item.country })
+                    ),
+                    React.createElement('span', { className: 'dcds-BaseElemFront__menu-code' }, item.code)
+                  )
+                )
+              )
+            )
+          );
+        }
+
+        if (Type === 'OTP') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', { className: 'dcds-InputFields__otp-row', role: 'group', 'aria-label': label || 'OTP' },
+              Array.from({ length: 6 }).map((_, i) => {
+                const v = otpValues[i] || '';
+                const isFill = v.length > 0;
+                const boxClass = ['dcds-InputFields__otp-box', isFill && !isError ? 'dcds-InputFields__otp-box--filled' : '', isError ? 'dcds-InputFields__otp-box--error' : '', isDisabled ? 'dcds-InputFields__otp-box--disabled' : ''].filter(Boolean).join(' ');
+                return React.createElement('div', { key: i, className: boxClass },
+                  React.createElement('input', {
+                    type: 'text', inputMode: 'numeric', maxLength: 1, pattern: '[0-9]*',
+                    value: v, disabled: isDisabled, 'aria-label': 'Digit ' + (i + 1) + ' of 6',
+                    className: 'dcds-InputFields__otp-input',
+                    ref: el => { otpRefs.current[i] = el; },
+                    onChange: e => { const raw = e.target.value.replace(/[^0-9]/g, ''); handleOtpChange(raw.slice(-1), i); },
+                    onKeyDown: e => handleOtpKeyDown(e, i),
+                    autoComplete: 'one-time-code',
+                  })
+                );
+              })
+            ),
+            renderValidation()
+          );
+        }
+
+        if (Type === 'Currency' || Type === 'Phone No.') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', { className: 'dcds-InputFields__field-row' },
+              renderElemFront(),
+              React.createElement('div', { className: 'dcds-InputFields__box' },
+                React.createElement('div', { className: 'dcds-InputFields__box-left' },
+                  React.createElement('input', { ...commonInputProps, type: 'text', onClick })
+                )
+              )
+            ),
+            renderValidation()
+          );
+        }
+
+        // Resolve leading element
+        function renderLeading(defaultProp) {
+          const prop = leadingProperty || defaultProp;
+          if (prop === 'INR') return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, React.createElement('span', { className: 'dcds-InputFields__leading-symbol' }, '₹'));
+          if (prop === 'USD') return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, React.createElement('span', { className: 'dcds-InputFields__leading-symbol' }, '$'));
+          if (prop === 'Flag') {
+            const flagSrc = 'dcds-flags/flags/' + (prefixCountry || 'IN').toUpperCase() + '.svg';
+            return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, React.createElement('img', { src: flagSrc, width: 16, height: 12, alt: '' }));
+          }
+          // default: icon (search)
+          const searchIcon = React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 }, React.createElement('circle', { cx: 11, cy: 11, r: 8 }), React.createElement('line', { x1: 21, y1: 21, x2: 16.65, y2: 16.65 }));
+          return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, searchIcon);
+        }
+
+        // Resolve trailing variant
+        function resolveTrailingProp(defaultProp) {
+          return trailingProperty || defaultProp;
+        }
+
+        if (Type === 'Search') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', { className: 'dcds-InputFields__field-row' },
+              React.createElement('div', { className: 'dcds-InputFields__box' },
+                React.createElement('div', { className: 'dcds-InputFields__box-left' },
+                  showLeading && renderLeading('icon'),
+                  React.createElement('input', { ...commonInputProps, type: 'text', onClick })
+                )
+              ),
+              React.createElement('button', {
+                type: 'button', className: 'dcds-InputFields__search-btn',
+                onClick: onSearchClick, disabled: isDisabled, 'aria-label': searchButtonLabel,
+              }, searchButtonLabel)
+            ),
+            renderValidation()
+          );
+        }
+
+        if (Type === 'Dropdown') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', {
+              className: 'dcds-InputFields__box', role: 'combobox',
+              'aria-expanded': false, 'aria-haspopup': 'listbox',
+              tabIndex: isDisabled ? -1 : 0,
+              'aria-label': ariaLabel || label,
+              'aria-disabled': isDisabled ? true : undefined,
+              onClick: onDropdownClick,
+              onKeyDown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onDropdownClick && onDropdownClick(); } },
+            },
+              React.createElement('div', { className: 'dcds-InputFields__box-left' },
+                showLeading && leadingProperty && renderLeading(leadingProperty),
+                React.createElement('span', { className: 'dcds-InputFields__input', style: { display: 'flex', alignItems: 'center', lineHeight: 1 } },
+                  value || React.createElement('span', { style: { color: 'var(--color-text-disabled)' } }, placeholder)
+                )
+              ),
+              showTrailing && renderTrailingBtn(resolveTrailingProp('arrow-down'), onDropdownClick)
+            )
+          );
+        }
+
+        // Default
+        const inputTypeAttr = isPasswordVisible ? 'text' : 'password';
+        const resolvedTrailing = resolveTrailingProp(isPasswordVisible ? 'eye' : 'eye-slash');
+        const isPasswordToggle = !trailingProperty && Type === 'Default';
+        return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+          renderLabelRow(),
+          renderHelpText(),
+          React.createElement('div', { className: 'dcds-InputFields__box' },
+            React.createElement('div', { className: 'dcds-InputFields__box-left' },
+              showLeading && leadingProperty && renderLeading(leadingProperty),
+              React.createElement('input', { ...commonInputProps, type: isPasswordToggle ? inputTypeAttr : 'text', onClick })
+            ),
+            showTrailing && renderTrailingBtn(resolvedTrailing, isPasswordToggle ? () => { setIsPasswordVisible(v => !v); onTrailingClick && onTrailingClick(); } : onTrailingClick)
+          ),
+          renderValidation()
+        );
+      }
+
+      function InputFieldsSection() {
+        const [ifType,          setIfType]          = React.useState('Default');
+        const [ifState,         setIfState]         = React.useState('Default');
+        const [ifLabel,         setIfLabel]         = React.useState('Account number');
+        const [ifPlaceholder,   setIfPlaceholder]   = React.useState('Enter value');
+        const [ifValue,         setIfValue]         = React.useState('');
+        const [ifMandatory,     setIfMandatory]     = React.useState(true);
+        const [ifShowLabel,     setIfShowLabel]     = React.useState(true);
+        const [ifShowLeading,      setIfShowLeading]      = React.useState(true);
+        const [ifLeadingProperty,  setIfLeadingProperty]  = React.useState('none');
+        const [ifShowTrailing,     setIfShowTrailing]     = React.useState(true);
+        const [ifTrailingProperty, setIfTrailingProperty] = React.useState('none');
+        const [ifShowHelpText,  setIfShowHelpText]  = React.useState(false);
+        const [ifHelpText,      setIfHelpText]      = React.useState('This field is required for verification');
+        const [ifShowValidation,setIfShowValidation]= React.useState(false);
+        const [ifValMsg,        setIfValMsg]        = React.useState('This field is required');
+        const [ifValProp,       setIfValProp]       = React.useState('error');
+        const [ifShowTooltip,   setIfShowTooltip]   = React.useState(false);
+        const [ifPrefixCountry, setIfPrefixCountry] = React.useState('IN');
+        const [ifPrefixCode,    setIfPrefixCode]    = React.useState('+91');
+        const [ifSearchLabel,   setIfSearchLabel]   = React.useState('Search');
+        const [ifOtp,           setIfOtp]           = React.useState(['','','','','','']);
+        const [ifLog,           pushIfLog]          = useEventLog();
+
+        const ALL_TYPES  = ['Default','Dropdown','Currency','Phone No.','OTP','Search'];
+        const ALL_STATES = ['Default','Focus','Typing','Filled','Error','Disabled','Read-only'];
+
+        const sharedProps = {
+          Type: ifType, State: ifState,
+          label: ifLabel, placeholder: ifPlaceholder,
+          value: ifValue, isMandatory: ifMandatory,
+          showLabel: ifShowLabel,
+          showLeading: ifShowLeading,
+          leadingProperty: ifLeadingProperty !== 'none' ? ifLeadingProperty : undefined,
+          showTrailing: ifShowTrailing,
+          trailingProperty: ifTrailingProperty !== 'none' ? ifTrailingProperty : undefined,
+          showHelpText: ifShowHelpText, helpText: ifHelpText,
+          showValidation: ifShowValidation, validationMessage: ifValMsg, validationProperty: ifValProp,
+          showTooltip: ifShowTooltip, tooltipHeading: 'About this field', tooltipBody: 'Provide the value as shown on your document.',
+          prefixCountry: ifPrefixCountry, prefixCode: ifPrefixCode,
+          searchButtonLabel: ifSearchLabel,
+          otpValues: ifOtp,
+          onChange: (v) => { setIfValue(v); pushIfLog('onChange: ' + v); },
+          onOtpChange: (vals) => { setIfOtp(vals); pushIfLog('onOtpChange: ' + vals.join('')); },
+          onFocus: () => pushIfLog('onFocus'),
+          onBlur: () => pushIfLog('onBlur'),
+          onSearchClick: () => pushIfLog('onSearchClick'),
+          onDropdownClick: () => pushIfLog('onDropdownClick'),
+          onPrefixClick: () => pushIfLog('onPrefixClick'),
+          onTrailingClick: () => pushIfLog('onTrailingClick'),
+        };
+
+        return React.createElement(PanelLayout, {
+          panelContent: React.createElement(React.Fragment, null,
+            React.createElement('h2', null, 'InputFields'),
+            React.createElement(CtrlSelect, { label: 'Type',  value: ifType,  onChange: setIfType,  options: ALL_TYPES }),
+            React.createElement(CtrlSelect, { label: 'State', value: ifState, onChange: setIfState, options: ALL_STATES }),
+            React.createElement(CtrlText,   { label: 'label',       value: ifLabel,      onChange: setIfLabel }),
+            React.createElement(CtrlText,   { label: 'placeholder', value: ifPlaceholder,onChange: setIfPlaceholder }),
+            React.createElement(CtrlText,   { label: 'value',       value: ifValue,      onChange: setIfValue }),
+            React.createElement(CtrlToggle, { label: 'isMandatory',    checked: ifMandatory,     onChange: setIfMandatory }),
+            React.createElement(CtrlToggle, { label: 'showLabel',      checked: ifShowLabel,     onChange: setIfShowLabel }),
+            React.createElement(CtrlToggle, { label: 'showLeading',       checked: ifShowLeading,      onChange: setIfShowLeading }),
+            ifShowLeading && React.createElement(CtrlSelect, { label: 'leadingProperty', value: ifLeadingProperty, onChange: setIfLeadingProperty, options: ['none', 'icon', 'INR', 'USD', 'Flag'] }),
+            React.createElement(CtrlToggle, { label: 'showTrailing',      checked: ifShowTrailing,     onChange: setIfShowTrailing }),
+            ifShowTrailing && React.createElement(CtrlSelect, { label: 'trailingProperty', value: ifTrailingProperty, onChange: setIfTrailingProperty, options: ['none', 'eye-slash', 'eye', 'calendar-2', 'arrow-down'] }),
+            React.createElement(CtrlToggle, { label: 'showHelpText',   checked: ifShowHelpText,  onChange: setIfShowHelpText }),
+            React.createElement(CtrlText,   { label: 'helpText',       value: ifHelpText,        onChange: setIfHelpText }),
+            React.createElement(CtrlToggle, { label: 'showValidation', checked: ifShowValidation,onChange: setIfShowValidation }),
+            React.createElement(CtrlText,   { label: 'validationMessage', value: ifValMsg,       onChange: setIfValMsg }),
+            React.createElement(CtrlSelect, { label: 'validationProperty', value: ifValProp,     onChange: setIfValProp, options: ['error','warning','success'] }),
+            React.createElement(CtrlToggle, { label: 'showTooltip',    checked: ifShowTooltip,   onChange: setIfShowTooltip }),
+            React.createElement('h2', null, 'Prefix (Currency / Phone)'),
+            React.createElement(CtrlText,   { label: 'prefixCountry', value: ifPrefixCountry, onChange: setIfPrefixCountry, placeholder: 'e.g. IN, US' }),
+            React.createElement(CtrlText,   { label: 'prefixCode',    value: ifPrefixCode,    onChange: setIfPrefixCode,    placeholder: 'e.g. +91, INR' }),
+            React.createElement('h2', null, 'Search'),
+            React.createElement(CtrlText,   { label: 'searchButtonLabel', value: ifSearchLabel, onChange: setIfSearchLabel })
+          )
+        },
+          React.createElement('main', { className: 'stage' },
+
+            React.createElement('section', null,
+              React.createElement('h2', null, 'InputFields — Interactive Playground'),
+              React.createElement('p', { className: 'stage-note' }, 'Configure props in the left panel.'),
+              React.createElement('div', { className: 'preview', style: { maxWidth: 480 } },
+                React.createElement(InputFields, sharedProps)
+              ),
+              React.createElement('div', { className: 'events' }, ifLog.length === 0 ? '— interact to see events —' : ifLog.join('   '))
+            ),
+
+            React.createElement('section', null,
+              React.createElement('h2', null, 'All Types — Default state'),
+              React.createElement('p', { className: 'stage-note' }, 'One example of each input type.'),
+              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-24)', maxWidth: 480 } },
+                React.createElement(InputFields, { Type: 'Default',   label: 'Password',       placeholder: 'Enter password',    showHelpText: true, helpText: 'Min 8 characters' }),
+                React.createElement(InputFields, { Type: 'Dropdown',  label: 'Select state',   placeholder: 'Choose a state',    value: '' }),
+                React.createElement(InputFields, { Type: 'Currency',  label: 'Loan amount',    placeholder: '0.00',        prefixCountry: 'IN', prefixCode: 'INR',
+                  prefixMenuItems: [
+                    { country: 'IN', code: 'INR', label: 'Indian Rupee',        value: 'INR' },
+                    { country: 'US', code: 'USD', label: 'US Dollar',           value: 'USD' },
+                    { country: 'GB', code: 'GBP', label: 'British Pound',       value: 'GBP' },
+                    { country: 'EU', code: 'EUR', label: 'Euro',                value: 'EUR' },
+                    { country: 'AE', code: 'AED', label: 'UAE Dirham',          value: 'AED' },
+                    { country: 'SG', code: 'SGD', label: 'Singapore Dollar',    value: 'SGD' },
+                    { country: 'JP', code: 'JPY', label: 'Japanese Yen',        value: 'JPY' },
+                    { country: 'AU', code: 'AUD', label: 'Australian Dollar',   value: 'AUD' },
+                    { country: 'CA', code: 'CAD', label: 'Canadian Dollar',     value: 'CAD' },
+                    { country: 'CH', code: 'CHF', label: 'Swiss Franc',         value: 'CHF' },
+                    { country: 'CN', code: 'CNY', label: 'Chinese Yuan',        value: 'CNY' },
+                    { country: 'HK', code: 'HKD', label: 'Hong Kong Dollar',    value: 'HKD' },
+                    { country: 'SE', code: 'SEK', label: 'Swedish Krona',       value: 'SEK' },
+                    { country: 'NZ', code: 'NZD', label: 'New Zealand Dollar',  value: 'NZD' },
+                    { country: 'ZA', code: 'ZAR', label: 'South African Rand',  value: 'ZAR' },
+                  ],
+                  onPrefixMenuItemSelect: (item) => console.log('currency selected', item.value) }),
+                React.createElement(InputFields, { Type: 'Phone No.', label: 'Mobile number',  placeholder: '98765 43210', prefixCountry: 'IN', prefixCode: '+91',
+                  prefixMenuItems: [
+                    { country: 'IN', code: '+91',  label: 'India',           value: '+91'  },
+                    { country: 'US', code: '+1',   label: 'United States',   value: '+1'   },
+                    { country: 'GB', code: '+44',  label: 'United Kingdom',  value: '+44'  },
+                    { country: 'AE', code: '+971', label: 'UAE',             value: '+971' },
+                    { country: 'SG', code: '+65',  label: 'Singapore',       value: '+65'  },
+                    { country: 'AU', code: '+61',  label: 'Australia',       value: '+61'  },
+                    { country: 'CA', code: '+1',   label: 'Canada',          value: '+1'   },
+                    { country: 'DE', code: '+49',  label: 'Germany',         value: '+49'  },
+                    { country: 'FR', code: '+33',  label: 'France',          value: '+33'  },
+                    { country: 'JP', code: '+81',  label: 'Japan',           value: '+81'  },
+                    { country: 'CN', code: '+86',  label: 'China',           value: '+86'  },
+                    { country: 'NG', code: '+234', label: 'Nigeria',         value: '+234' },
+                    { country: 'BR', code: '+55',  label: 'Brazil',          value: '+55'  },
+                    { country: 'ZA', code: '+27',  label: 'South Africa',    value: '+27'  },
+                    { country: 'NZ', code: '+64',  label: 'New Zealand',     value: '+64'  },
+                  ],
+                  onPrefixMenuItemSelect: (item) => console.log('dial code selected', item.value) }),
+                React.createElement(InputFields, { Type: 'OTP',       label: 'Enter OTP' }),
+                React.createElement(InputFields, { Type: 'Search',    label: 'IFSC code',      placeholder: 'e.g. SBIN0001234',  searchButtonLabel: 'Search' })
+              )
+            ),
+
+            React.createElement('section', null,
+              React.createElement('h2', null, 'All States — Default type'),
+              React.createElement('p', { className: 'stage-note' }, 'Every visual state of the Default input type.'),
+              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-20)', maxWidth: 480 } },
+                ALL_STATES.map(s =>
+                  React.createElement('div', { key: s },
+                    React.createElement('p', { className: 'stage-note', style: { marginBottom: 'var(--gap-4)' } }, React.createElement('strong', null, s)),
+                    React.createElement(InputFields, {
+                      Type: 'Default', State: s,
+                      label: s + ' state', placeholder: 'Placeholder text',
+                      value: s === 'Filled' ? 'Some filled value' : '',
+                      showValidation: s === 'Error', validationMessage: 'This field is required',
+                    })
+                  )
+                )
+              )
+            )
+
+          )
+        );
+      }
+
+      /* ============================================================
        * ModalSection — self-contained Modal playground
        * ============================================================ */
       function ModalSection() {
@@ -4877,6 +5427,7 @@
           { id: 'drawer',         label: 'Drawer'         },
           { id: 'dropdownbutton', label: 'DropdownButton' },
           { id: 'fileupload',     label: 'File Upload'    },
+          { id: 'inputfields',    label: 'Input Fields'   },
           { id: 'linkbutton',     label: 'LinkButton'     },
           { id: 'modal',          label: 'Modal'          },
           { id: 'pagination',     label: 'Pagination'     },
@@ -5138,13 +5689,14 @@
             {activeComponent === 'drawer'       && <DrawerSection />}
             {activeComponent === 'modal'       && <ModalSection />}
             {activeComponent === 'accordian'   && <AccordianSection />}
+            {activeComponent === 'inputfields' && <InputFieldsSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
 
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && (
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'inputfields' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && (
             <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (

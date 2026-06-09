@@ -22,6 +22,7 @@ export * from './components/DeterminateLoader';
 export * from './components/Drawer';
 export * from './components/DropdownButton';
 export * from './components/IndeterminateLoader';
+export * from './components/InputFields';
 export * from './components/LinkButton';
 export * from './components/Modal';
 export * from './components/Pagination';
