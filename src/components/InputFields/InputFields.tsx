@@ -650,12 +650,40 @@ export const InputFields: React.FC<InputFieldsProps> = ({
           />
           <div className="dcds-InputFields__box">
             <div className="dcds-InputFields__box-left">
+              {showLeading && leadingProperty && (
+                <_BaseLeading property1={leadingProperty} country={prefixCountry} />
+              )}
               <input
                 {...commonInputProps}
                 type="text"
                 onClick={onClick as React.MouseEventHandler<HTMLInputElement>}
               />
             </div>
+            {showTrailing && (
+              trailingIcon
+                ? (() => {
+                    const CustomIcon = trailingIcon;
+                    return (
+                      <button
+                        type="button"
+                        className="dcds-InputFields__trailing"
+                        onClick={onTrailingClick}
+                        tabIndex={-1}
+                        aria-label="trailing action"
+                      >
+                        <CustomIcon size={16} />
+                      </button>
+                    );
+                  })()
+                : (
+                  <_BaseTrailng
+                    property1={resolveTrailingProperty()}
+                    onClick={() => {
+                      onTrailingClick?.();
+                    }}
+                  />
+                )
+            )}
           </div>
         </div>
         {renderValidation()}
