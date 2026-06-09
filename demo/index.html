@@ -4527,7 +4527,8 @@
               React.createElement('p', { className: 'stage-note' }, 'One example of each input type.'),
               React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-24)', maxWidth: 600 } },
                 React.createElement(InputFields, { Type: 'Default',   label: 'Password',       placeholder: 'Enter password',    showHelpText: true, helpText: 'Min 8 characters' }),
-                React.createElement(InputFields, { Type: 'Dropdown',  label: 'Select state',   placeholder: 'Choose a state',    value: '' }),
+                // Dropdown variant intentionally hidden here — will be showcased in the Dropdowns component
+                // React.createElement(InputFields, { Type: 'Dropdown',  label: 'Select state',   placeholder: 'Choose a state',    value: '' }),
                 React.createElement(InputFields, { Type: 'Currency',  label: 'Loan amount',    placeholder: '0.00',        prefixCountry: 'IN', prefixCode: 'INR',
                   prefixMenuItems: [
                     { country: 'IN', code: 'INR', label: 'Indian Rupee',        value: 'INR' },
