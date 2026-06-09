@@ -1,0 +1,288 @@
+/*
+ * Grid.css — Figma node 1922:12350
+ *
+ * Visualisation component for the DCDS responsive grid spec.
+ * The viewport frame renders at the breakpoint's canonical pixel width.
+ * All proportional ratios (margin %, gutter %, nav %) are computed in
+ * Grid.tsx and injected as inline styles.
+ */
+
+/* ── Root ─────────────────────────────────────────────────── */
+.dcds-Grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Section label ─────────────────────────────────────────── */
+.dcds-Grid__section-label {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-neutral);
+  line-height: normal;
+  margin: 0;
+}
+
+/* ── Spec list ─────────────────────────────────────────────── */
+.dcds-Grid__spec-list {
+  margin: 0;
+  padding: 0 0 0 var(--gap-20);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Viewport frame ────────────────────────────────────────── */
+/* width and height are set via inline style in Grid.tsx */
+.dcds-Grid__viewport {
+  position: relative;
+  height: 300px;
+  border: 0.5px solid var(--color-text-secondary);
+  background-color: var(--color-surface-1);
+  overflow: hidden;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* ── Width ruler (mobile / tablet only) ────────────────────── */
+.dcds-Grid__ruler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.dcds-Grid__ruler-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-text-secondary);
+  transform: translateY(-50%);
+}
+
+.dcds-Grid__ruler-value {
+  position: relative;
+  background-color: var(--color-surface-1);
+  padding: 0 var(--gap-8);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* ── Nav bar (top — tablet / desktop) ──────────────────────── */
+.dcds-Grid__topbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 32px; /* sits directly below the ruler */
+  height: 64px;
+  background-color: var(--color-fill-primary-2);
+  border-bottom: 0.5px solid var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--gap-16);
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.dcds-Grid__topbar-label {
+  font-size: var(--font-size-validation);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Bottom nav bar (mobile only) ──────────────────────────── */
+.dcds-Grid__bottombar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  background-color: var(--color-fill-primary-2);
+  border-top: 0.5px solid var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.dcds-Grid__bottombar-label {
+  font-size: var(--font-size-validation);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Body: nav sidebar + content area ──────────────────────── */
+/* top offset is set via inline style (ruler + topbar heights) */
+.dcds-Grid__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+}
+
+/* ── Nav sidebar (desktop only) ────────────────────────────── */
+.dcds-Grid__nav-sidebar {
+  flex-shrink: 0;
+  background-color: var(--color-fill-primary-1);
+  border-right: 0.5px solid var(--color-text-secondary);
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gap-12) var(--gap-4) var(--gap-8);
+  transition: background-color 120ms ease;
+}
+
+/* Clickable variant — shown when onNavToggle is provided */
+.dcds-Grid__nav-sidebar--clickable {
+  cursor: pointer;
+}
+.dcds-Grid__nav-sidebar--clickable:hover {
+  background-color: var(--color-fill-primary-2);
+}
+
+.dcds-Grid__nav-label {
+  font-size: var(--font-size-validation);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* Collapse / expand chevron inside the sidebar */
+.dcds-Grid__nav-chevron {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  opacity: 0.5;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ── Content area ───────────────────────────────────────────── */
+.dcds-Grid__content-area {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ── Content-area width ruler (desktop only) ────────────────── */
+.dcds-Grid__content-ruler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.dcds-Grid__content-ruler-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-text-secondary);
+  transform: translateY(-50%);
+}
+
+.dcds-Grid__content-ruler-value {
+  position: relative;
+  background-color: var(--color-surface-1);
+  padding: 0 var(--gap-4);
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* ── Column grid ────────────────────────────────────────────── */
+/* position, gridTemplateColumns, columnGap, paddingInline set inline */
+.dcds-Grid__cols {
+  display: grid;
+  position: absolute;
+  left: 0;
+  right: 0;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* Individual column fill — Sky Blue-50 */
+.dcds-Grid__col {
+  background-color: var(--color-fill-secondary-1);
+}
+
+/* ── Content-width ruler (green) ─────────────────────────────
+ * Shows: viewport − 2 × margin − navWidth
+ * Color: color/text/success
+ * ────────────────────────────────────────────────────────── */
+.dcds-Grid__content-width-ruler {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.dcds-Grid__content-width-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-text-success);
+  transform: translateY(-50%);
+}
+
+.dcds-Grid__content-width-value {
+  position: relative;
+  background-color: var(--color-surface-1);
+  padding: 0 var(--gap-4);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-success);
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* ── Dimension labels (margin px, gutter px) ────────────────── */
+.dcds-Grid__dim-label {
+  position: absolute;
+  font-size: var(--font-size-validation);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 5;
+}
