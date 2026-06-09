@@ -19,12 +19,12 @@
 }
 
 .dcds-Drawer__overlay--full {
-  background: transparent;
+  background: var(--color-overlay-25);
 }
 
 /* --------------------------------------------------------------------------
    Panel shell — slides in from the right edge.
-   Figma: padding=32px, gap=12px between rows, left corners rd-S (8px).
+   No panel-level padding — each sub-component owns its own padding.
    Shadow: Noble Blue tinted, pointing left (-6px 0 6px).
    -------------------------------------------------------------------------- */
 
@@ -37,8 +37,6 @@
   box-shadow: -6px 0 6px rgba(10, 46, 87, 0.2);
   display: flex;
   flex-direction: column;
-  gap: var(--gap-12);
-  padding: var(--gap-32);
   height: 100%;
   overflow: hidden;
   animation: dcds-drawer-in 200ms ease-out;
@@ -61,15 +59,14 @@
   }
 }
 
-/* Partial Drawer: ~42% of viewport width (604px at 1440px reference), min 360px */
+/* Partial Drawer: ~55% of viewport width, min 360px */
 .dcds-Drawer__panel--partial {
-  width: clamp(360px, 42vw, 680px);
+  width: clamp(360px, 55vw, 800px);
 }
 
-/* Full Drawer: full viewport width, no left-corner rounding */
+/* Full Drawer: 75% viewport width, same left-corner rounding as Partial */
 .dcds-Drawer__panel--full {
-  width: 100%;
-  border-radius: 0;
+  width: 75%;
 }
 
 .dcds-Drawer__panel:focus {
@@ -83,7 +80,7 @@
 
 /* --------------------------------------------------------------------------
    DrawerHeader — flex row: title left, close button right.
-   No own padding — panel's gap-32 + gap-12 handles spacing.
+   Own padding + bottom border, like ModalHeader.
    -------------------------------------------------------------------------- */
 
 .dcds-Drawer__header {
@@ -91,6 +88,9 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--gap-16);
+  padding: var(--gap-16) var(--gap-32);
+  border-bottom: 1px solid var(--color-stroke-subdued);
+  border-radius: var(--rd-S) 0 0 0;
   flex-shrink: 0;
 }
 
@@ -105,10 +105,11 @@
 .dcds-Drawer__header-icon {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   color: var(--color-icon-subdued);
+  /* Match the title's line height so the icon centers against the title only */
   height: var(--font-size-h3);
-  margin-top: 2px;
 }
 
 .dcds-Drawer__header-text {
@@ -123,7 +124,7 @@
   font-size: var(--font-size-h3);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
-  line-height: normal;
+  line-height: 1;
   margin: 0;
 }
 
@@ -134,7 +135,7 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-text-subdued);
   line-height: normal;
-  margin: var(--gap-4) 0 0;
+  margin: 2px 0 0;
 }
 
 .dcds-Drawer__header-end {
@@ -178,21 +179,24 @@
 
 /* --------------------------------------------------------------------------
    DrawerBody — flex-1 scrollable content area.
-   No own padding — inherits from the panel's padding-32.
+   Own padding like ModalBody; --no-padding modifier makes content full-bleed.
    -------------------------------------------------------------------------- */
 
 .dcds-Drawer__body {
   flex: 1;
   overflow-y: auto;
+  padding: var(--gap-24) var(--gap-32);
   font-family: var(--font-family);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-primary);
   line-height: 1.5;
   min-height: 0;
-  /* Negative margin + padding so scrollable content reaches panel edges */
-  margin: 0 calc(-1 * var(--gap-32));
-  padding: 0 var(--gap-32);
+}
+
+/* Full-bleed body — no padding, content sits flush against the edges */
+.dcds-Drawer__body--no-padding {
+  padding: 0;
 }
 
 .dcds-Drawer__body::-webkit-scrollbar {
@@ -210,7 +214,7 @@
 
 /* --------------------------------------------------------------------------
    DrawerFooter — action area, flex-end row.
-   No own padding — inherits from the panel's padding-32.
+   Own padding + top border, like ModalFooter.
    -------------------------------------------------------------------------- */
 
 .dcds-Drawer__footer {
@@ -218,6 +222,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--gap-12);
+  padding: var(--gap-16) var(--gap-32);
+  border-top: 1px solid var(--color-stroke-subdued);
+  border-radius: 0 0 0 var(--rd-S);
   flex-shrink: 0;
 }
 
