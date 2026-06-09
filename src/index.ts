@@ -21,6 +21,7 @@ export * from './components/Chip';
 export * from './components/DeterminateLoader';
 export * from './components/Drawer';
 export * from './components/DropdownButton';
+export * from './components/Grid';
 export * from './components/IndeterminateLoader';
 export * from './components/LinkButton';
 export * from './components/Modal';
