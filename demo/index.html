@@ -4497,7 +4497,7 @@
             React.createElement('section', null,
               React.createElement('h2', null, 'InputFields — Interactive Playground'),
               React.createElement('p', { className: 'stage-note' }, 'Configure props in the left panel.'),
-              React.createElement('div', { className: 'preview', style: { maxWidth: 480 } },
+              React.createElement('div', { className: 'preview', style: { maxWidth: 600 } },
                 React.createElement(InputFields, sharedProps)
               ),
               React.createElement('div', { className: 'events' }, ifLog.length === 0 ? '— interact to see events —' : ifLog.join('   '))
@@ -4506,7 +4506,7 @@
             React.createElement('section', null,
               React.createElement('h2', null, 'All Types — Default state'),
               React.createElement('p', { className: 'stage-note' }, 'One example of each input type.'),
-              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-24)', maxWidth: 480 } },
+              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-24)', maxWidth: 600 } },
                 React.createElement(InputFields, { Type: 'Default',   label: 'Password',       placeholder: 'Enter password',    showHelpText: true, helpText: 'Min 8 characters' }),
                 React.createElement(InputFields, { Type: 'Dropdown',  label: 'Select state',   placeholder: 'Choose a state',    value: '' }),
                 React.createElement(InputFields, { Type: 'Currency',  label: 'Loan amount',    placeholder: '0.00',        prefixCountry: 'IN', prefixCode: 'INR',
@@ -4555,7 +4555,7 @@
             React.createElement('section', null,
               React.createElement('h2', null, 'All States — Default type'),
               React.createElement('p', { className: 'stage-note' }, 'Every visual state of the Default input type.'),
-              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-20)', maxWidth: 480 } },
+              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-20)', maxWidth: 600 } },
                 ALL_STATES.map(s =>
                   React.createElement('div', { key: s },
                     React.createElement('p', { className: 'stage-note', style: { marginBottom: 'var(--gap-4)' } }, React.createElement('strong', null, s)),
