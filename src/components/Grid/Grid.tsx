@@ -30,8 +30,10 @@ interface GridConfig {
 const CONFIGS: Record<GridBreakpoint, GridConfig> = {
   'Mobile':              { viewport: 360,  columns:  4, gutter: 16, margin: 20, navWidth: 0,   navHeight: 56, contentArea: 360,  label: 'Mobile layout'  },
   'Tablet':              { viewport: 576,  columns: 12, gutter: 16, margin: 24, navWidth: 0,   navHeight: 64, contentArea: 576,  label: 'Tablet layout'  },
+  'Desktop-S-No-Nav':    { viewport: 992,  columns: 12, gutter: 16, margin: 24, navWidth: 0,   navHeight: 64, contentArea: 992,  label: 'Desktop Layout'  },
   'Desktop-S-Expanded':  { viewport: 992,  columns: 12, gutter: 16, margin: 24, navWidth: 240, navHeight: 64, contentArea: 752,  label: 'Desktop Layout'  },
   'Desktop-S-Collapsed': { viewport: 992,  columns: 12, gutter: 16, margin: 24, navWidth: 56,  navHeight: 64, contentArea: 936,  label: 'Desktop Layout'  },
+  'Desktop-L-No-Nav':    { viewport: 1200, columns: 12, gutter: 16, margin: 24, navWidth: 0,   navHeight: 64, contentArea: 1200, label: 'Desktop Layout'  },
   'Desktop-L-Expanded':  { viewport: 1200, columns: 12, gutter: 16, margin: 24, navWidth: 240, navHeight: 64, contentArea: 960,  label: 'Desktop Layout'  },
   'Desktop-L-Collapsed': { viewport: 1200, columns: 12, gutter: 16, margin: 24, navWidth: 56,  navHeight: 64, contentArea: 1144, label: 'Desktop Layout'  },
 };
@@ -39,10 +41,12 @@ const CONFIGS: Record<GridBreakpoint, GridConfig> = {
 const SPEC_LABELS: Record<GridBreakpoint, string[]> = {
   'Mobile':              ['Width: 360px',  'Columns: 4',  'Gutter: 16px', 'Margin: 20px', 'Nav bar height: 56px', 'Content width: 320px'],
   'Tablet':              ['Width: 576px',  'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Content width: 528px'],
-  'Desktop-S-Expanded':  ['Width: 992px',  'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 240px', 'Content width: 704px'],
-  'Desktop-S-Collapsed': ['Width: 992px',  'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 56px',  'Content width: 888px'],
-  'Desktop-L-Expanded':  ['Width: 1200px', 'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 240px', 'Content width: 912px'],
-  'Desktop-L-Collapsed': ['Width: 1200px', 'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 56px',  'Content width: 1096px'],
+  'Desktop-S-No-Nav':    ['Width: 992px',  'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'No sidebar',        'Content width: 944px'],
+  'Desktop-S-Expanded':  ['Width: 992px',  'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 240px',  'Content width: 704px'],
+  'Desktop-S-Collapsed': ['Width: 992px',  'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 56px',   'Content width: 888px'],
+  'Desktop-L-No-Nav':    ['Width: 1200px', 'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'No sidebar',        'Content width: 1152px'],
+  'Desktop-L-Expanded':  ['Width: 1200px', 'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 240px',  'Content width: 912px'],
+  'Desktop-L-Collapsed': ['Width: 1200px', 'Columns: 12', 'Gutter: 16px', 'Margin: 24px', 'Nav bar height: 64px', 'Nav width: 56px',   'Content width: 1096px'],
 };
 
 const FRAME_HEIGHT = 300; // px — fixed viewport frame height

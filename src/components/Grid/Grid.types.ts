@@ -8,8 +8,10 @@
 export type GridBreakpoint =
   | 'Mobile'
   | 'Tablet'
+  | 'Desktop-S-No-Nav'
   | 'Desktop-S-Expanded'
   | 'Desktop-S-Collapsed'
+  | 'Desktop-L-No-Nav'
   | 'Desktop-L-Expanded'
   | 'Desktop-L-Collapsed';
 

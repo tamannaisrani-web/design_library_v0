@@ -4909,18 +4909,22 @@
       const GRID_CONFIGS = {
         'Mobile':              { viewport:360,  columns:4,  gutter:16, margin:20, navWidth:0,   navHeight:56, contentArea:360,  label:'Mobile layout'  },
         'Tablet':              { viewport:576,  columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:576,  label:'Tablet layout'  },
+        'Desktop-S-No-Nav':    { viewport:992,  columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:992,  label:'Desktop Layout'  },
         'Desktop-S-Expanded':  { viewport:992,  columns:12, gutter:16, margin:24, navWidth:240, navHeight:64, contentArea:752,  label:'Desktop Layout'  },
         'Desktop-S-Collapsed': { viewport:992,  columns:12, gutter:16, margin:24, navWidth:56,  navHeight:64, contentArea:936,  label:'Desktop Layout'  },
+        'Desktop-L-No-Nav':    { viewport:1200, columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:1200, label:'Desktop Layout'  },
         'Desktop-L-Expanded':  { viewport:1200, columns:12, gutter:16, margin:24, navWidth:240, navHeight:64, contentArea:960,  label:'Desktop Layout'  },
         'Desktop-L-Collapsed': { viewport:1200, columns:12, gutter:16, margin:24, navWidth:56,  navHeight:64, contentArea:1144, label:'Desktop Layout'  },
       };
       const GRID_SPEC_ITEMS = {
         'Mobile':              ['Width: 360px', 'Columns: 4',  'Gutter: 16px','Margin: 20px','Nav bar height: 56px','Content width: 320px'],
         'Tablet':              ['Width: 576px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Content width: 528px'],
-        'Desktop-S-Expanded':  ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px','Content width: 704px'],
-        'Desktop-S-Collapsed': ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px', 'Content width: 888px'],
-        'Desktop-L-Expanded':  ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px','Content width: 912px'],
-        'Desktop-L-Collapsed': ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px', 'Content width: 1096px'],
+        'Desktop-S-No-Nav':    ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','No sidebar',       'Content width: 944px'],
+        'Desktop-S-Expanded':  ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px', 'Content width: 704px'],
+        'Desktop-S-Collapsed': ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px',  'Content width: 888px'],
+        'Desktop-L-No-Nav':    ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','No sidebar',       'Content width: 1152px'],
+        'Desktop-L-Expanded':  ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px', 'Content width: 912px'],
+        'Desktop-L-Collapsed': ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px',  'Content width: 1096px'],
       };
       const FRAME_H = 300;
 
@@ -5044,17 +5048,20 @@
        * GridSection — self-contained section with resize playground
        * ============================================================ */
       const GRID_BREAKPOINTS = [
-        { id:'Mobile',              label:'Mobile',              sub:'360px · 4 cols' },
-        { id:'Tablet',              label:'Tablet',              sub:'576px · 12 cols' },
+        { id:'Mobile',              label:'Mobile',                sub:'360px · 4 cols'     },
+        { id:'Tablet',              label:'Tablet',                sub:'576px · 12 cols'    },
+        { id:'Desktop-S-No-Nav',    label:'Desktop S — No Nav',    sub:'992px · no sidebar' },
         { id:'Desktop-S-Expanded',  label:'Desktop S — Expanded',  sub:'992px · nav 240px'  },
         { id:'Desktop-S-Collapsed', label:'Desktop S — Collapsed', sub:'992px · nav 56px'   },
+        { id:'Desktop-L-No-Nav',    label:'Desktop L — No Nav',    sub:'1200px · no sidebar'},
         { id:'Desktop-L-Expanded',  label:'Desktop L — Expanded',  sub:'1200px · nav 240px' },
         { id:'Desktop-L-Collapsed', label:'Desktop L — Collapsed', sub:'1200px · nav 56px'  },
       ];
 
-      function getBpForWidth(w, navExpanded) {
+      function getBpForWidth(w, navExpanded, noNav) {
         if (w < 576)  return 'Mobile';
         if (w < 992)  return 'Tablet';
+        if (noNav) return w < 1200 ? 'Desktop-S-No-Nav' : 'Desktop-L-No-Nav';
         const exp = navExpanded !== false;
         if (w < 1200) return exp ? 'Desktop-S-Expanded' : 'Desktop-S-Collapsed';
         return exp ? 'Desktop-L-Expanded' : 'Desktop-L-Collapsed';
@@ -5065,16 +5072,17 @@
         const [resizeWidth,  setResizeWidth]  = useState(360);
         const [isResizing,   setIsResizing]   = useState(false);
         const [navExpanded,  setNavExpanded]  = useState(true);
+        const [noNav,        setNoNav]        = useState(false);
         const { setOpen } = React.useContext(PanelContext);
-        const isDesktop = resizeWidth >= 992;
-        const autoBp = getBpForWidth(resizeWidth, navExpanded);
+        const isDesktop = resizeWidth >= 992 && !noNav;
+        const autoBp = getBpForWidth(resizeWidth, navExpanded, noNav);
 
         const startResize = (e) => {
           e.preventDefault();
           const startX = e.clientX;
           const startW = resizeWidth;
           const onMove = (me) => {
-            const next = Math.round(Math.max(320, Math.min(1440, startW + me.clientX - startX)));
+            const next = Math.round(Math.max(320, Math.min(1920, startW + me.clientX - startX)));
             setResizeWidth(next);
           };
           const onUp = () => {
@@ -5095,6 +5103,7 @@
                 onClick={() => {
                 setActiveBp(bp.id);
                 setResizeWidth(GRID_CONFIGS[bp.id].viewport);
+                setNoNav(bp.id.includes('No-Nav'));
                 setNavExpanded(!bp.id.includes('Collapsed'));
                 setOpen(false);
               }}>
@@ -5139,7 +5148,7 @@
                     <Grid
                       breakpoint={autoBp}
                       viewportWidth={resizeWidth}
-                      onNavToggle={isDesktop ? () => setNavExpanded(e => !e) : undefined}
+                      onNavToggle={isDesktop ? () => { setNoNav(false); setNavExpanded(e => !e); } : undefined}
                     />
                     <div
                       className="grid-resize-handle"
