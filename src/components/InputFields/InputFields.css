@@ -610,7 +610,7 @@
 
 /* Read-only state — focusable, neutral border, no interaction cues */
 .dcds-InputFields--state-read-only .dcds-InputFields__box {
-  background: var(--color-surface-1);
+  background: var(--color-surface-2);
   border-color: var(--color-stroke-neutral);
   cursor: default;
 }
