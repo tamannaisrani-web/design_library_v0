@@ -4153,6 +4153,9 @@
           if (e.key === 'Backspace' && !otpValues[index] && index > 0) {
             const el = otpRefs.current[index - 1]; if (el) el.focus();
           }
+          const allowed = new Set(['Backspace','Delete','Tab','ArrowLeft','ArrowRight','Home','End']);
+          const isCtrl = e.ctrlKey || e.metaKey;
+          if (!allowed.has(e.key) && !isCtrl && !/^[0-9]$/.test(e.key)) e.preventDefault();
         };
 
         const commonInputProps = {
@@ -4308,7 +4311,21 @@
               React.createElement('div', { className: 'dcds-InputFields__box' },
                 React.createElement('div', { className: 'dcds-InputFields__box-left' },
                   showLeading && leadingProperty && renderLeading(leadingProperty),
-                  React.createElement('input', { ...commonInputProps, type: 'text', onClick })
+                  React.createElement('input', {
+                    ...commonInputProps,
+                    type: 'text',
+                    inputMode: Type === 'Currency' ? 'decimal' : 'numeric',
+                    pattern: Type === 'Currency' ? '[0-9]*[.,]?[0-9]*' : '[0-9]*',
+                    onKeyDown: (e) => {
+                      const allowed = new Set(['Backspace','Delete','Tab','Enter','Escape','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End']);
+                      const isCtrl = e.ctrlKey || e.metaKey;
+                      const isDecimal = Type === 'Currency' && (e.key === '.' || e.key === ',');
+                      const isDigit = /^[0-9]$/.test(e.key);
+                      if (!allowed.has(e.key) && !isCtrl && !isDecimal && !isDigit) e.preventDefault();
+                      onKeyDown && onKeyDown(e);
+                    },
+                    onClick,
+                  })
                 )
               )
             ),

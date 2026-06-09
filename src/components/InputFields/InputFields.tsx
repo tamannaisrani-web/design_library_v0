@@ -513,6 +513,30 @@ export const InputFields: React.FC<InputFieldsProps> = ({
         otpRefs.current[index - 1]?.focus();
       }
     }
+    const allowed = new Set(['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']);
+    const isCtrl = e.ctrlKey || e.metaKey;
+    if (!allowed.has(e.key) && !isCtrl && !/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+    }
+  };
+
+  /* ---------------------------------------------------------------------- */
+  /* Numeric-only key filter (Currency / Phone No.)                          */
+  /* ---------------------------------------------------------------------- */
+  const numericOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const allowed = new Set([
+      'Backspace', 'Delete', 'Tab', 'Enter', 'Escape',
+      'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+      'Home', 'End',
+    ]);
+    // Allow: control combos (Ctrl+A/C/V/X/Z), decimal point for Currency
+    const isCtrl  = e.ctrlKey || e.metaKey;
+    const isDecimal = Type === 'Currency' && (e.key === '.' || e.key === ',');
+    const isDigit = /^[0-9]$/.test(e.key);
+    if (!allowed.has(e.key) && !isCtrl && !isDecimal && !isDigit) {
+      e.preventDefault();
+    }
+    onKeyDown?.(e);
   };
 
   /* ---------------------------------------------------------------------- */
@@ -656,6 +680,9 @@ export const InputFields: React.FC<InputFieldsProps> = ({
               <input
                 {...commonInputProps}
                 type="text"
+                inputMode={Type === 'Currency' ? 'decimal' : 'numeric'}
+                pattern={Type === 'Currency' ? '[0-9]*[.,]?[0-9]*' : '[0-9]*'}
+                onKeyDown={numericOnKeyDown}
                 onClick={onClick as React.MouseEventHandler<HTMLInputElement>}
               />
             </div>
