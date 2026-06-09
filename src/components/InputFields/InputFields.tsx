@@ -92,10 +92,10 @@ const _BaseLeading: React.FC<_BaseLeadingProps> = ({ property1, country }) => {
  */
 const _BaseTrailng: React.FC<_BaseTrailngProps> = ({ property1, onClick }) => {
   const icons: Record<_BaseTrailngProps['property1'], React.ReactElement> = {
-    'eye-slash':   <EyeSlashLinear size={24} />,
-    'eye':         <EyeLinear size={24} />,
-    'calendar-2':  <Calendar2Linear size={24} />,
-    'arrow-down':  <ArrowDownLinear size={24} />,
+    'eye-slash':   <EyeSlashLinear size={16} />,
+    'eye':         <EyeLinear size={16} />,
+    'calendar-2':  <Calendar2Linear size={16} />,
+    'arrow-down':  <ArrowDownLinear size={16} />,
   };
   return (
     <button
