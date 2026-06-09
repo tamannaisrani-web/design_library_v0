@@ -358,6 +358,75 @@
 .dcds-Breadcrumbs__separator { display:inline-flex; align-items:center; justify-content:center; width:5px; height:18px; font-size:12px; line-height:18px; color:var(--color-text-neutral); flex-shrink:0; user-select:none; }
 
 /* ============================================================
+ * BaseNav.css
+ * ============================================================ */
+.dcds-BaseNav { display:flex; align-items:center; width:100%; padding:var(--gap-12) var(--gap-24) var(--gap-12) var(--gap-48); font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); background:transparent; border:none; cursor:pointer; text-align:left; user-select:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-decoration:none; transition:background-color 120ms ease; }
+.dcds-BaseNav:hover { background:var(--color-fill-secondary-1); }
+.dcds-BaseNav--selected { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
+.dcds-BaseNav--selected:hover { background:var(--color-surface-3); }
+.dcds-BaseNav:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+
+/* ============================================================
+ * NavElement.css
+ * ============================================================ */
+/* NavElement — fixed: overflow:visible prevents accordion clipping */
+.dcds-NavElement { display:flex; flex-direction:column; align-items:stretch; width:240px; background:transparent; border:none; cursor:pointer; font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); text-align:left; user-select:none; transition:background-color 120ms ease; overflow:visible; text-decoration:none; }
+.dcds-NavElement:not(.dcds-NavElement--selected):hover { background:var(--color-fill-secondary-1); }
+.dcds-NavElement--selected { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
+/* Row: space-between → [__content flex:1] … [__arrow] (matches Figma) */
+.dcds-NavElement__row { display:flex; align-items:center; justify-content:space-between; width:100%; padding:var(--gap-12) var(--gap-16) var(--gap-12) var(--gap-32); }
+/* Icon+label group — gap only between icon and label, not between label and arrow */
+.dcds-NavElement__content { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
+.dcds-NavElement__icon { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:inherit; }
+.dcds-NavElement__label { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dcds-NavElement__arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:inherit; transition:transform 200ms ease; }
+.dcds-NavElement--accordion-open .dcds-NavElement__arrow { transform:rotate(180deg); }
+.dcds-NavElement__accordion { display:flex; flex-direction:column; width:100%; }
+.dcds-NavElement--collapsed { width:56px; }
+.dcds-NavElement--collapsed .dcds-NavElement__row { padding:var(--gap-12) var(--gap-16); justify-content:center; }
+.dcds-NavElement--collapsed .dcds-NavElement__content { flex:none; gap:0; }
+.dcds-NavElement:not(.dcds-NavElement--has-dropdown):not(.dcds-NavElement--selected):hover { background:var(--color-fill-secondary-1); }
+.dcds-NavElement:not(.dcds-NavElement--has-dropdown).dcds-NavElement--selected { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
+/* Trigger: align-items:center keeps icon+label vertically centred */
+.dcds-NavElement__trigger { display:flex; align-items:center; width:100%; background:transparent; border:none; cursor:pointer; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; text-align:left; padding:0; transition:background-color 120ms ease; }
+.dcds-NavElement:not(.dcds-NavElement--selected) .dcds-NavElement__trigger:hover { background:var(--color-fill-secondary-1); }
+.dcds-NavElement--selected .dcds-NavElement__trigger { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
+.dcds-NavElement--selected .dcds-NavElement__trigger:hover { background:var(--color-surface-3); }
+.dcds-NavElement__trigger:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+
+/* ============================================================
+ * SideBar.css — overflow-x:hidden clips labels in collapsed mode;
+ * overflow-y:auto lets accordion rows scroll rather than be clipped
+ * ============================================================ */
+.dcds-SideBar { display:flex; flex-direction:column; background:var(--color-surface-1); padding:var(--gap-40) 0; gap:var(--gap-4); width:240px; box-shadow:4px 0 15px rgba(0,0,0,0.11); overflow-x:hidden; overflow-y:auto; flex-shrink:0; transition:width 200ms ease,box-shadow 200ms ease; }
+.dcds-SideBar--collapsed { width:56px; box-shadow:4px 0 7.5px rgba(0,0,0,0.11); }
+
+/* ============================================================
+ * TopBar.css
+ * ============================================================ */
+.dcds-TopBar { display:flex; align-items:center; justify-content:space-between; background:var(--color-surface-1); border-bottom:1px solid var(--color-stroke-subdued); width:100%; overflow:hidden; }
+.dcds-TopBar__left { display:flex; align-items:center; flex-shrink:0; }
+/* dcds-TopBar__logo is a transparent flex wrapper only — Logo provides its own 240×64 */
+.dcds-TopBar__logo { display:flex; flex-shrink:0; }
+.dcds-TopBar__logo-placeholder { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); letter-spacing:0.02em; }
+.dcds-TopBar__divider { width:1px; height:62px; background:var(--color-stroke-subdued); flex-shrink:0; }
+.dcds-TopBar__nav { display:flex; align-items:center; gap:var(--gap-24); padding:0 var(--gap-12); }
+.dcds-TopBar__tab { display:flex; align-items:center; gap:var(--gap-8); height:64px; padding:var(--gap-8); background:none; border:none; border-bottom:4px solid transparent; cursor:pointer; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); white-space:nowrap; text-decoration:none; transition:color 120ms ease,border-bottom-color 120ms ease; }
+.dcds-TopBar__tab:hover:not(.dcds-TopBar__tab--active) { color:var(--color-text-primary); }
+.dcds-TopBar__tab--active { font-weight:var(--font-weight-bold); color:var(--color-text-action); border-bottom-color:var(--color-stroke-action); }
+.dcds-TopBar__tab-arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:inherit; }
+.dcds-TopBar__tab:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+.dcds-TopBar__right { display:flex; align-items:center; gap:var(--gap-12); padding-right:var(--gap-16); flex-shrink:0; }
+.dcds-TopBar__selector-btn { display:flex; align-items:center; gap:var(--gap-8); height:48px; padding:var(--gap-4) var(--gap-8); background:var(--color-surface-1); border:none; border-radius:var(--rd-S); cursor:pointer; font-family:var(--font-family); transition:background-color 120ms ease; }
+.dcds-TopBar__selector-btn:hover { background:var(--color-surface-2); }
+.dcds-TopBar__selector-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+.dcds-TopBar__avatar { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:var(--rd-Max); background:var(--color-fill-secondary-2); font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-primary); flex-shrink:0; }
+.dcds-TopBar__avatar--square { border-radius:var(--rd-S); }
+.dcds-TopBar__avatar-icon { display:flex; align-items:center; justify-content:center; width:16px; height:16px; color:var(--color-icon-primary); }
+.dcds-TopBar__company-name { font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); max-width:152px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.dcds-TopBar__chevron { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:24px; height:24px; color:var(--color-icon-primary); }
+
+/* ============================================================
  * Pagination.css
  * ============================================================ */
 .dcds-Pagination { display:inline-flex; align-items:center; gap:var(--gap-4); }
@@ -4858,10 +4927,826 @@
         );
       }
 
+      /* ============================================================
+       * Arrow down icon — linear style, used inside NavElement
+       * ============================================================ */
+      const ArrowDownLinear = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995"
+            stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+
+      /* ── Figma icon image URLs (bold style, 16×16, Noble Blue #0a2e57) ─── */
+      const ICON_HOME     = 'https://www.figma.com/api/mcp/asset/a6eb12d9-10b3-4dd8-abc3-05e5c9c329b0';
+      const ICON_INVOICES = 'https://www.figma.com/api/mcp/asset/9471dc08-41a8-4263-b532-db2ab1a4633a';
+      const ICON_PEOPLE   = 'https://www.figma.com/api/mcp/asset/2778bbc7-c907-407a-8743-96bb663d7d01';
+      const ICON_PAYMENTS = 'https://www.figma.com/api/mcp/asset/3e173395-245f-4098-bb49-cf433e3ea0ee';
+      const ICON_RESOURCES= 'https://www.figma.com/api/mcp/asset/3e1065e0-65af-4e80-bc22-628fba9cf59b';
+      const ICON_REPORTS  = 'https://www.figma.com/api/mcp/asset/6dd54cc6-ba97-4390-a3c8-72a380c0f1ce';
+      const ICON_ACCOUNT  = 'https://www.figma.com/api/mcp/asset/c96e92ac-31d7-4956-a8b2-244e069ce3f5';
+
+      /* Icon component: renders a 16×16 img using the Figma asset URL */
+      const FigmaIcon = ({ src, alt = '' }) => (
+        <img src={src} alt={alt} width="16" height="16" style={{ display:'block', flexShrink:0 }} />
+      );
+      const IconHome      = () => <FigmaIcon src={ICON_HOME}      alt="Dashboard" />;
+      const IconInvoices  = () => <FigmaIcon src={ICON_INVOICES}  alt="Invoices" />;
+      const IconPeople    = () => <FigmaIcon src={ICON_PEOPLE}    alt="Suppliers" />;
+      const IconMoney     = () => <FigmaIcon src={ICON_PAYMENTS}  alt="Payments" />;
+      const IconFolder    = () => <FigmaIcon src={ICON_RESOURCES} alt="Resources" />;
+      const IconDoc       = () => <FigmaIcon src={ICON_REPORTS}   alt="Reports" />;
+      const IconUser      = () => <FigmaIcon src={ICON_ACCOUNT}   alt="My Account" />;
+
+      /* ============================================================
+       * BaseNav
+       * ============================================================ */
+      function BaseNav({ property1 = 'Default', name = 'SubSection', href, onClick, onFocus, onBlur, onMouseEnter, onMouseLeave, className }) {
+        const isSelected = property1 === 'Selected';
+        const classes = ['dcds-BaseNav', isSelected ? 'dcds-BaseNav--selected' : '', className || ''].filter(Boolean).join(' ');
+        const sharedProps = { className: classes, 'aria-current': isSelected ? 'page' : undefined, onFocus, onBlur, onMouseEnter, onMouseLeave };
+        if (href) return <a {...sharedProps} href={href} onClick={onClick}>{name}</a>;
+        return <button {...sharedProps} type="button" onClick={onClick}>{name}</button>;
+      }
+
+      /* ============================================================
+       * NavElement
+       * ============================================================ */
+      function NavElement({ style = 'Default', showDropdown = true, showIcon = true, name = 'Content', icon: Icon, isCollapsed = false, isOpen, children, className, onClick, onFocus, onBlur, onMouseEnter, onMouseLeave, onKeyDown }) {
+        const isSelected = style === 'Selected';
+        /* isOpen prop overrides default "Selected → open" behaviour */
+        const accordionOpen = (isOpen !== undefined ? isOpen : isSelected) && showDropdown;
+        const classes = [
+          'dcds-NavElement',
+          isSelected ? 'dcds-NavElement--selected' : '',
+          showDropdown && !isCollapsed ? 'dcds-NavElement--has-dropdown' : '',
+          accordionOpen && !isCollapsed ? 'dcds-NavElement--accordion-open' : '',
+          isCollapsed ? 'dcds-NavElement--collapsed' : '',
+          className || '',
+        ].filter(Boolean).join(' ');
+
+        const rowContent = (
+          <span className="dcds-NavElement__row">
+            <span className="dcds-NavElement__content">
+              {showIcon && Icon && <span className="dcds-NavElement__icon" aria-hidden="true"><Icon /></span>}
+              {!isCollapsed && <span className="dcds-NavElement__label">{name}</span>}
+            </span>
+            {showDropdown && !isCollapsed && <span className="dcds-NavElement__arrow" aria-hidden="true"><ArrowDownLinear /></span>}
+          </span>
+        );
+
+        /* Dropdown variant: outer <div> + inner <button> trigger to avoid button-in-button */
+        if (showDropdown && !isCollapsed) {
+          return (
+            <div className={classes}>
+              <button type="button" className="dcds-NavElement__trigger"
+                aria-current={isSelected ? 'page' : undefined}
+                aria-expanded={accordionOpen}
+                onClick={onClick} onFocus={onFocus} onBlur={onBlur}
+                onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onKeyDown={onKeyDown}
+              >
+                {rowContent}
+              </button>
+              {accordionOpen && children && (
+                <span className="dcds-NavElement__accordion">{children}</span>
+              )}
+            </div>
+          );
+        }
+
+        /* Direct-link / collapsed variant: simple <button> */
+        return (
+          <button type="button" className={classes}
+            aria-current={isSelected ? 'page' : undefined}
+            onClick={onClick} onFocus={onFocus} onBlur={onBlur}
+            onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onKeyDown={onKeyDown}
+          >
+            {rowContent}
+          </button>
+        );
+      }
+
+      /* ============================================================
+       * SideBar
+       * ============================================================ */
+      function SideBar({ state = 'Expanded', children, className }) {
+        const isCollapsed = state === 'Collapsed';
+        const classes = ['dcds-SideBar', isCollapsed ? 'dcds-SideBar--collapsed' : '', className || ''].filter(Boolean).join(' ');
+        return (
+          <nav className={classes} aria-label="Primary navigation">
+            {React.Children.map(children, (child) =>
+              React.isValidElement(child)
+                ? React.cloneElement(child, { isCollapsed })
+                : child
+            )}
+          </nav>
+        );
+      }
+
+      /* ============================================================
+       * BaseNavSection
+       * ============================================================ */
+      function BaseNavSection({ bnProperty1, bnName }) {
+        return (
+          <>
+            <section>
+              <h2>BaseNav — Interactive Playground</h2>
+              <p className="stage-note">Subsection row for use inside an expanded NavElement accordion. Text uses <code>color/text/subdued</code> (#4b4b4b).</p>
+              <div className="preview" style={{ flexDirection: 'column', alignItems: 'flex-start', padding: 0, background: 'var(--color-surface-1)', border: '1px solid var(--color-stroke-subdued)', borderRadius: 'var(--rd-S)', overflow: 'hidden', gap: 0 }}>
+                <BaseNav property1={bnProperty1} name={bnName} />
+              </div>
+            </section>
+            <section>
+              <h2>BaseNav — All States</h2>
+              <div className="preview" style={{ flexDirection: 'column', alignItems: 'flex-start', padding: 0, background: 'var(--color-surface-1)', border: '1px solid var(--color-stroke-subdued)', borderRadius: 'var(--rd-S)', overflow: 'hidden', gap: 0 }}>
+                <BaseNav property1="Default" name="Monthly" />
+                <BaseNav property1="Default" name="Quarterly (hover to see hover state)" />
+                <BaseNav property1="Selected" name="Annual" />
+              </div>
+            </section>
+          </>
+        );
+      }
+
+      /* ============================================================
+       * NavElementSection
+       * ============================================================ */
+      function NavElementSection({ neStyle, neShowDropdown, neShowIcon, neName, neCollapsed, pushNeLog }) {
+        return (
+          <>
+            <section>
+              <h2>NavElement — Interactive Playground</h2>
+              <p className="stage-note">Click to fire all event handlers. Hover to see hover state (CSS-driven — never set style="Hover" in code).</p>
+              <div className="preview" style={{ flexDirection: 'column', alignItems: 'flex-start', padding: 0, background: 'var(--color-surface-1)', border: '1px solid var(--color-stroke-subdued)', borderRadius: 'var(--rd-S)', overflow: 'hidden', gap: 0 }}>
+                <NavElement
+                  style={neStyle}
+                  showDropdown={neShowDropdown}
+                  showIcon={neShowIcon}
+                  name={neName}
+                  isCollapsed={neCollapsed}
+                  icon={IconHome}
+                  onClick={() => pushNeLog('onClick')}
+                  onFocus={() => pushNeLog('onFocus')}
+                  onBlur={() => pushNeLog('onBlur')}
+                  onMouseEnter={() => pushNeLog('onMouseEnter')}
+                  onMouseLeave={() => pushNeLog('onMouseLeave')}
+                  onKeyDown={(e) => pushNeLog(`onKeyDown: ${e.key}`)}
+                >
+                  <BaseNav property1="Default" name="Monthly" />
+                  <BaseNav property1="Selected" name="Quarterly" />
+                  <BaseNav property1="Default" name="Annual" />
+                </NavElement>
+              </div>
+            </section>
+            <section>
+              <h2>NavElement — All Variants</h2>
+              <p className="stage-note">Default/Selected × showDropdown × showIcon — all combinations per Figma spec.</p>
+              <div style={{ display:'flex', gap:'var(--gap-24)', flexWrap:'wrap', alignItems:'flex-start' }}>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>Default · no dropdown</p>
+                  <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden' }}>
+                    <NavElement style="Default" showDropdown={false} name="Dashboard" icon={IconHome} />
+                  </div>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>Default · with dropdown</p>
+                  <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden' }}>
+                    <NavElement style="Default" showDropdown={true} name="Payments" icon={IconMoney} />
+                  </div>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>Selected · no dropdown</p>
+                  <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden' }}>
+                    <NavElement style="Selected" showDropdown={false} name="Invoices" icon={IconDoc} />
+                  </div>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>Selected · with dropdown open + BaseNavs</p>
+                  <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden' }}>
+                    <NavElement style="Selected" showDropdown={true} name="Payments" icon={IconMoney}>
+                      <BaseNav property1="Default" name="Monthly" />
+                      <BaseNav property1="Selected" name="Quarterly" />
+                      <BaseNav property1="Default" name="Annual" />
+                    </NavElement>
+                  </div>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>Collapsed · Default</p>
+                  <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden', display:'inline-block' }}>
+                    <NavElement style="Default" showDropdown={false} name="Dashboard" icon={IconHome} isCollapsed={true} />
+                  </div>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>Collapsed · Selected</p>
+                  <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden', display:'inline-block' }}>
+                    <NavElement style="Selected" showDropdown={false} name="Invoices" icon={IconDoc} isCollapsed={true} />
+                  </div>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>No icon</p>
+                  <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-S)', overflow:'hidden' }}>
+                    <NavElement style="Default" showDropdown={false} showIcon={false} name="Reports" />
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        );
+      }
+
+      /* ============================================================
+       * SideBarSection
+       * ============================================================ */
+      function SideBarSection({ sbState, sbActive, sbSub }) {
+        return (
+          <>
+            <section>
+              <h2>SideBar — Interactive Playground</h2>
+              <p className="stage-note">
+                Toggle <code>state</code> between Expanded (240px) and Collapsed (56px).
+                Change <code>activeRoute</code> to update which NavElement is selected.
+                When "payments" is selected, the accordion opens and <code>activeSubRoute</code> controls which BaseNav is selected.
+              </p>
+              <div className="preview" style={{ alignItems:'flex-start', padding:'var(--gap-16)', background:'var(--color-surface-2)' }}>
+                <SideBar state={sbState}>
+                  <NavElement style={sbActive === 'dashboard' ? 'Selected' : 'Default'} showDropdown={false} name="Dashboard" icon={IconHome} />
+                  <NavElement style={sbActive === 'invoices' ? 'Selected' : 'Default'} showDropdown={false} name="Invoices" icon={IconMoney} />
+                  <NavElement style={sbActive === 'suppliers' ? 'Selected' : 'Default'} showDropdown={false} name="Suppliers" icon={IconPeople} />
+                  <NavElement style={sbActive === 'payments' ? 'Selected' : 'Default'} showDropdown={true} name="Payments" icon={IconMoney}>
+                    <BaseNav property1={sbSub === 'monthly' ? 'Selected' : 'Default'} name="Monthly" />
+                    <BaseNav property1={sbSub === 'quarterly' ? 'Selected' : 'Default'} name="Quarterly" />
+                    <BaseNav property1={sbSub === 'annual' ? 'Selected' : 'Default'} name="Annual" />
+                  </NavElement>
+                  <NavElement style={sbActive === 'resources' ? 'Selected' : 'Default'} showDropdown={true} name="Resources" icon={IconFolder} />
+                  <NavElement style={sbActive === 'reports' ? 'Selected' : 'Default'} showDropdown={false} name="Reports" icon={IconDoc} />
+                  <NavElement style={sbActive === 'myaccount' ? 'Selected' : 'Default'} showDropdown={false} name="My Account" icon={IconUser} />
+                </SideBar>
+              </div>
+            </section>
+            <section>
+              <h2>SideBar — Expanded vs Collapsed</h2>
+              <div className="preview" style={{ alignItems:'flex-start', padding:'var(--gap-16)', background:'var(--color-surface-2)', gap:'var(--gap-32)' }}>
+                <div>
+                  <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>Expanded (240px)</p>
+                  <SideBar state="Expanded">
+                    <NavElement style="Selected" showDropdown={false} name="Dashboard" icon={IconHome} />
+                    <NavElement style="Default" showDropdown={false} name="Invoices" icon={IconMoney} />
+                    <NavElement style="Default" showDropdown={false} name="Suppliers" icon={IconPeople} />
+                    <NavElement style="Default" showDropdown={true} name="Payments" icon={IconMoney} />
+                    <NavElement style="Default" showDropdown={false} name="Reports" icon={IconDoc} />
+                  </SideBar>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>Collapsed (56px)</p>
+                  <SideBar state="Collapsed">
+                    <NavElement style="Selected" showDropdown={false} name="Dashboard" icon={IconHome} />
+                    <NavElement style="Default" showDropdown={false} name="Invoices" icon={IconMoney} />
+                    <NavElement style="Default" showDropdown={false} name="Suppliers" icon={IconPeople} />
+                    <NavElement style="Default" showDropdown={true} name="Payments" icon={IconMoney} />
+                    <NavElement style="Default" showDropdown={false} name="Reports" icon={IconDoc} />
+                  </SideBar>
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom:'var(--gap-8)' }}>Expanded · with open accordion</p>
+                  <SideBar state="Expanded">
+                    <NavElement style="Default" showDropdown={false} name="Dashboard" icon={IconHome} />
+                    <NavElement style="Default" showDropdown={false} name="Invoices" icon={IconMoney} />
+                    <NavElement style="Selected" showDropdown={true} name="Payments" icon={IconMoney}>
+                      <BaseNav property1="Default" name="Monthly" />
+                      <BaseNav property1="Selected" name="Quarterly" />
+                      <BaseNav property1="Default" name="Annual" />
+                    </NavElement>
+                    <NavElement style="Default" showDropdown={false} name="Reports" icon={IconDoc} />
+                  </SideBar>
+                </div>
+              </div>
+            </section>
+          </>
+        );
+      }
+
+      /* ============================================================
+       * TopBar helper icons (inline SVG)
+       * ============================================================ */
+      const ChevronDownBold = ({ size = 24 }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M17.9202 8.17993H11.6902H6.08024C5.12024 8.17993 4.64024 9.33993 5.32024 10.0199L10.5002 15.1999C11.3302 16.0299 12.6802 16.0299 13.5102 15.1999L15.4802 13.2299L18.6902 10.0199C19.3602 9.33993 18.8802 8.17993 17.9202 8.17993Z" fill="currentColor" />
+        </svg>
+      );
+      const TabDropdownArrow = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+      const BuildingIcon = () => (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M1 22H23" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M14.02 2H9.98C8.07 2 7.01 3.07 7.01 4.97V22H16.99V4.97C16.98 3.07 15.93 2 14.02 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M3.01 8.96H7.01V22H3.01C2.46 22 2.01 21.55 2.01 21V9.96C2.01 9.41 2.46 8.96 3.01 8.96Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M20.99 8.96H16.99V22H20.99C21.54 22 21.99 21.55 21.99 21V9.96C21.99 9.41 21.54 8.96 20.99 8.96Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M10 8H14M10 11.5H14M10 15H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+
+      /* ============================================================
+       * TopBar
+       * ============================================================ */
+      const DEFAULT_TABS = [
+        { id: 'opt-1', label: 'Option' },
+        { id: 'opt-2', label: 'Option', isActive: true },
+        { id: 'opt-3', label: 'Option' },
+        { id: 'opt-4', label: 'Option', hasDropdown: true },
+        { id: 'opt-5', label: 'Option', hasDropdown: true },
+      ];
+
+      function TopBar({ showNavigation = true, showCompany = true, showUser = true, logoSlot, navigationTabs, companyName = 'Company Name', userInitials = 'AM', onTabClick, onCompanyClick, onUserClick, companyMenuItems, userMenuItems, className }) {
+        const [companyOpen, setCompanyOpen] = useState(false);
+        const [userOpen,    setUserOpen]    = useState(false);
+        const tabs = navigationTabs || DEFAULT_TABS;
+        const classes = ['dcds-TopBar', className || ''].filter(Boolean).join(' ');
+
+        /* Close menus when clicking outside */
+        React.useEffect(() => {
+          if (!companyOpen && !userOpen) return;
+          const handler = (e) => {
+            if (!e.target.closest('.dcds-AvatarGroup__wrapper')) {
+              setCompanyOpen(false);
+              setUserOpen(false);
+            }
+          };
+          document.addEventListener('mousedown', handler);
+          return () => document.removeEventListener('mousedown', handler);
+        }, [companyOpen, userOpen]);
+        return (
+          <header className={classes}>
+            <div className="dcds-TopBar__left">
+              <div className="dcds-TopBar__logo">
+                {logoSlot || <span className="dcds-TopBar__logo-placeholder">DCDS</span>}
+              </div>
+              <div className="dcds-TopBar__divider" aria-hidden="true" />
+              {showNavigation && (
+                <nav className="dcds-TopBar__nav" aria-label="Site navigation">
+                  {tabs.map((tab) => (
+                    <button key={tab.id} type="button"
+                      className={['dcds-TopBar__tab', tab.isActive ? 'dcds-TopBar__tab--active' : ''].filter(Boolean).join(' ')}
+                      aria-current={tab.isActive ? 'page' : undefined}
+                      onClick={(e) => { if (tab.onClick) tab.onClick(e); if (onTabClick) onTabClick(tab.id); }}
+                    >
+                      {tab.label}
+                      {tab.hasDropdown && <span className="dcds-TopBar__tab-arrow"><TabDropdownArrow /></span>}
+                    </button>
+                  ))}
+                </nav>
+              )}
+            </div>
+            <div className="dcds-TopBar__right">
+              {showCompany && (
+                <AvatarGroup
+                  initials={companyName.slice(0, 2).toUpperCase()}
+                  name={companyName}
+                  displayName={true}
+                  showDesignation={false}
+                  showDropdown={true}
+                  isExpanded={companyOpen}
+                  menuItems={companyMenuItems || []}
+                  ariaLabel={`Switch company: ${companyName}`}
+                  onClick={() => { setCompanyOpen(p => !p); setUserOpen(false); if (onCompanyClick) onCompanyClick(); }}
+                  onSelect={() => setCompanyOpen(false)}
+                />
+              )}
+              {showUser && (
+                <AvatarGroup
+                  initials={userInitials}
+                  displayName={false}
+                  showDropdown={true}
+                  isExpanded={userOpen}
+                  menuItems={userMenuItems || []}
+                  ariaLabel="Open user menu"
+                  onClick={() => { setUserOpen(p => !p); setCompanyOpen(false); if (onUserClick) onUserClick(); }}
+                  onSelect={() => setUserOpen(false)}
+                />
+              )}
+            </div>
+          </header>
+        );
+      }
+
+      /* ============================================================
+       * TopBarSection
+       * ============================================================ */
+      function TopBarSection({ tbShowNav, tbShowCompany, tbShowUser, tbCompany, tbInitials, tbActiveTab, tbLog, pushTbLog }) {
+        const tabs = [
+          { id: 'overview',  label: 'Overview',  isActive: tbActiveTab === 'overview'  },
+          { id: 'invoices',  label: 'Invoices',  isActive: tbActiveTab === 'invoices'  },
+          { id: 'payments',  label: 'Payments',  isActive: tbActiveTab === 'payments',  hasDropdown: true },
+          { id: 'suppliers', label: 'Suppliers', isActive: tbActiveTab === 'suppliers', hasDropdown: true },
+          { id: 'reports',   label: 'Reports',   isActive: tbActiveTab === 'reports'   },
+        ];
+        return (
+          <>
+            <section>
+              <h2>TopBar — Interactive Playground</h2>
+              <p className="stage-note">
+                Toggle <code>showNavigation</code>, <code>showCompany</code>, <code>showUser</code>. Click tabs, company, or user to see events. The active tab has bold green text + 4 px green underline.
+              </p>
+              <div className="preview" style={{ padding: 0, background: 'var(--color-surface-2)', alignItems: 'stretch', flexDirection: 'column', overflow: 'hidden', borderRadius: 'var(--rd-S)' }}>
+                <TopBar
+                  showNavigation={tbShowNav}
+                  showCompany={tbShowCompany}
+                  showUser={tbShowUser}
+                  companyName={tbCompany}
+                  userInitials={tbInitials}
+                  navigationTabs={tabs}
+                  onTabClick={(id) => pushTbLog(`onTabClick: ${id}`)}
+                  onCompanyClick={() => pushTbLog('onCompanyClick')}
+                  onUserClick={() => pushTbLog('onUserClick')}
+                />
+              </div>
+              <div className="events">{tbLog.length === 0 ? '— no events yet —' : tbLog.join('\n')}</div>
+            </section>
+            <section>
+              <h2>TopBar — All Slot Combinations</h2>
+              <p className="stage-note">
+                Shows all three boolean props in isolation against the default logo placeholder.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-12)', background: 'var(--color-surface-2)', padding: 'var(--gap-16)', borderRadius: 'var(--rd-S)' }}>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>showNavigation=true · showCompany=true · showUser=true (default)</p>
+                  <TopBar navigationTabs={tabs} companyName="Acme Corp" userInitials="AC" />
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>showNavigation=false</p>
+                  <TopBar showNavigation={false} companyName="Acme Corp" userInitials="AC" />
+                </div>
+                <div>
+                  <p className="stage-note" style={{ marginBottom: 'var(--gap-4)' }}>showCompany=false · showUser=false</p>
+                  <TopBar navigationTabs={tabs} showCompany={false} showUser={false} />
+                </div>
+              </div>
+            </section>
+          </>
+        );
+      }
+
+      /* ── Figma logo image URLs ────────────────────────────────────────── */
+      /* ── Fresh Figma asset URLs (node 673:16477, fetched 2026-06-09) ── */
+      /* Drip wordmarks — rendered in a FIXED 118.205×40px box (not aspect-ratio) */
+      const LOGO_DRIP_BLUE       = 'https://www.figma.com/api/mcp/asset/d982c53f-d866-4719-992e-fa86c06832ae';
+      const LOGO_DRIP_GREEN      = 'https://www.figma.com/api/mcp/asset/b9b4d8cc-8ce5-44f8-abbe-b3df6bb5806b';
+      const LOGO_DRIP_WHITE      = 'https://www.figma.com/api/mcp/asset/7127df7b-8e63-434f-ac50-debdf1475c8d';
+      /* Drip lockups — rendered with aspect-ratio wrapper */
+      const LOGO_DRIP_RF         = 'https://www.figma.com/api/mcp/asset/2712d8bc-6190-4fd8-a2ff-c70a5c66cbdb';
+      const LOGO_DRIP_SCF        = 'https://www.figma.com/api/mcp/asset/d3d844c4-77b6-4a75-9b8d-e5a57070f1ea';
+      /* Voyager — mark image + wordmark text */
+      const LOGO_VOYAGER_DARK    = 'https://www.figma.com/api/mcp/asset/dbe393f4-b159-4489-aed4-2c1ab6894885';
+      const LOGO_VOYAGER_LIGHT   = 'https://www.figma.com/api/mcp/asset/82f405af-3e7c-4f10-bfb9-232ba1950775';
+
+      /*
+       * Logo — Figma-exact rendering (node 673:16477).
+       *
+       * Outer container: 240×64, flex-col, items-start, pl-24 pr-12 py-12, overflow-hidden.
+       *
+       * Per-variant Figma structures:
+       *
+       * drip / SCF  — aspect-[488/93] flex:1 wrapper → img absolute inset-0 object-cover max-w-none
+       * drip / RF   — aspect-[130/50] flex:1 wrapper → img absolute inset-0 object-cover max-w-none
+       * drip / Blue, Green, White — FIXED 118.205×40px box → img absolute inset-0 size-full max-w-none
+       *   (NOT width:auto — the fixed box prevents stretching)
+       *
+       * voyager / ZOHO — flex-row: 44×38.9px mark img + wordmark text
+       * voyager / Blue — same as ZOHO light (simplified; full vector SVG omitted)
+       *
+       * portal → onWhite logic (Figma + user request):
+       *   Blue / Green / White → onWhite=false
+       *   SCF / RF             → onWhite=true
+       *   ZOHO (voyager)       → onWhite stays (user controls)
+       */
+      function Logo({ company = 'drip', onWhite = true, portal = 'SCF' }) {
+        const container = {
+          display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
+          width: 240, height: 64, padding: '12px 12px 12px 24px',
+          overflow: 'hidden', flexShrink: 0,
+        };
+        const imgFill = { position:'absolute', inset:0, width:'100%', height:'100%', maxWidth:'none', pointerEvents:'none' };
+
+        /* ── Voyager ──
+         * Figma structure (node 673:16469 / 673:16470):
+         *   outer: 240×64, flex-col, pl-24 pr-12 py-12, overflow-hidden
+         *     inner: flex:1 0 0 (fills 40px height), w-full, flex-row, gap-8, items-center
+         *       mark div: 44.444×38.889px, shrink-0, relative
+         *         img: absolute inset-0, size-full, max-w-none, object-cover
+         *       text p: whitespace-nowrap, overflow-hidden, text-ellipsis, shrink-0
+         *
+         * onWhite=false (dark bg) → VOYAGER_DARK mark + 21.88px white text
+         * onWhite=true  (light bg) → VOYAGER_LIGHT mark + 20.22px #0a2e57 text
+         */
+        if (company === 'voyager') {
+          const markSrc = !onWhite ? LOGO_VOYAGER_DARK : LOGO_VOYAGER_LIGHT;
+          return (
+            <div style={container}>
+              {/* inner flex-1 wrapper — fills slot height (40px) at full inner width (204px) */}
+              <div style={{
+                flex:'1 0 0', minHeight:1, width:'100%',
+                display:'flex', alignItems:'center', gap:8,
+              }}>
+                {/* Mark image — fixed Figma dimensions, shrink-0 */}
+                <div style={{ position:'relative', height:38.889, width:44.444, flexShrink:0 }}>
+                  <img src={markSrc} alt="" aria-hidden="true"
+                    style={{ ...imgFill, objectFit:'contain' }} />
+                </div>
+                {/* Wordmark — flex:1 minWidth:0 allows proper truncation.
+                    Font size uses 18px (browser renders Nunito Sans 20.22px at
+                    154px wide, 2px over the 152px available — 18px fits cleanly). */}
+                <span style={{
+                  fontFamily:'var(--font-family)', fontWeight:600,
+                  fontSize: 18,
+                  color: !onWhite ? 'white' : 'var(--color-text-primary)',
+                  whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis',
+                  flex:1, minWidth:0,
+                }}>Voyager Trading</span>
+              </div>
+            </div>
+          );
+        }
+
+        /* ── Drip / SCF — aspect-ratio wrapper (488:93 ≈ 5.25:1) ── */
+        if (portal === 'SCF') {
+          return (
+            <div style={container}>
+              <div style={{ aspectRatio:'488/93', flex:'1 0 0', minHeight:1, position:'relative' }}>
+                <img src={LOGO_DRIP_SCF} alt="Drip Capital SCF" style={{ ...imgFill, objectFit:'cover' }} />
+              </div>
+            </div>
+          );
+        }
+
+        /* ── Drip / RF — aspect-ratio wrapper (130:50 = 2.6:1) ── */
+        if (portal === 'RF') {
+          return (
+            <div style={container}>
+              <div style={{ aspectRatio:'130/50', flex:'1 0 0', minHeight:1, position:'relative' }}>
+                <img src={LOGO_DRIP_RF} alt="Drip Capital RF" style={{ ...imgFill, objectFit:'cover' }} />
+              </div>
+            </div>
+          );
+        }
+
+        /* ── Drip / Blue | Green | White — FIXED 118.205×40px box ── */
+        /* The image fills a fixed box; NOT width:auto which stretches */
+        const wordmarkSrc = portal === 'Green' ? LOGO_DRIP_GREEN
+                          : portal === 'White' ? LOGO_DRIP_WHITE
+                          : LOGO_DRIP_BLUE; /* Blue */
+        return (
+          <div style={container}>
+            <div style={{ position:'relative', width:118.205, height:40, flexShrink:0 }}>
+              <img src={wordmarkSrc} alt="Drip Capital" style={{ ...imgFill, objectFit:'fill' }} />
+            </div>
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * NavigationSection — unified Navigation playground
+       * ============================================================ */
+      /*
+       * NavigationSection — self-contained interactive playground.
+       *
+       * All navigation state (active route, active sub-route, active tab) is local
+       * to this component and driven by clicking directly in the preview.
+       * The props panel controls only structural/visual props:
+       *   TopBar  → showNavigation, showCompany, showUser, logo, companyName, userInitials
+       *   SideBar → state (Expanded / Collapsed)
+       */
+      function NavigationSection({ sbState, setSbState, sbActive, setSbActive, sbSub, setSbSub, tbShowNav, tbShowCompany, tbShowUser, tbCompany, tbInitials, logoCompany, logoOnWhite, logoPortal }) {
+        const [activeTab, setActiveTab] = useState('invoices');
+        const [log, setLog] = useState([]);
+        const pushLog = (msg) => setLog(prev => [`${new Date().toLocaleTimeString()}  ${msg}`, ...prev.slice(0, 9)]);
+        const activeRoute = sbActive;
+        const activeSub   = sbSub;
+        const setActiveRoute = (r) => { setSbActive(r); };
+        const setActiveSub   = (s) => { setSbSub(s); };
+
+        /* Route metadata */
+        const routeLabels = {
+          dashboard: 'Dashboard',   invoices: 'Invoices',
+          suppliers: 'Suppliers',   payments: 'Payments',
+          resources: 'Resources',   reports:  'Reports',
+          myaccount: 'My Account',
+        };
+        const subLabels = { monthly: 'Monthly', quarterly: 'Quarterly', annual: 'Annual' };
+
+        const navTabs = [
+          { id: 'overview',  label: 'Overview',  isActive: activeTab === 'overview'  },
+          { id: 'invoices',  label: 'Invoices',  isActive: activeTab === 'invoices'  },
+          { id: 'payments',  label: 'Payments',  isActive: activeTab === 'payments',  hasDropdown: true },
+          { id: 'suppliers', label: 'Suppliers', isActive: activeTab === 'suppliers', hasDropdown: true },
+          { id: 'reports',   label: 'Reports',   isActive: activeTab === 'reports'   },
+        ];
+
+        /* openAccordion tracks which dropdown section is expanded independently of selection.
+         * Clicking an already-open dropdown collapses it; clicking any other dropdown opens it. */
+        const [openAccordion, setOpenAccordion] = useState('payments');
+
+        /* Navigate: select route. For dropdown routes, toggle the accordion. */
+        const goTo = (route, hasDropdown = false) => {
+          setActiveRoute(route);
+          if (hasDropdown) {
+            setOpenAccordion(prev => prev === route ? null : route);
+          } else {
+            setOpenAccordion(null);
+          }
+          pushLog(`Nav → ${routeLabels[route]}`);
+        };
+        const goToSub = (sub) => { setActiveSub(sub); pushLog(`Sub → ${subLabels[sub]}`); };
+
+        return (
+          <section>
+            <h2>Navigation — Interactive Playground</h2>
+            <p className="stage-note">
+              Click <strong>TopBar tabs</strong>, <strong>SideBar items</strong>, and
+              <strong> sub-sections</strong> to navigate. Toggle structural props in the left panel.
+              The SideBar collapses to 56 px icon-only mode when <code>state="Collapsed"</code>.
+            </p>
+
+            {/* ── App frame ─────────────────────────────────────────────────── */}
+            <div style={{
+              border: '1px solid var(--color-stroke-subdued)',
+              borderRadius: 'var(--rd-M)',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              height: 900,
+            }}>
+
+              {/* TopBar */}
+              <TopBar
+                showNavigation={tbShowNav}
+                showCompany={tbShowCompany}
+                showUser={tbShowUser}
+                logoSlot={<Logo company={logoCompany} onWhite={logoOnWhite} portal={logoPortal} />}
+                navigationTabs={navTabs.map(t => ({
+                  ...t,
+                  isActive: t.id === activeTab,
+                  onClick: () => { setActiveTab(t.id); pushLog(`TopBar → ${t.label}`); },
+                }))}
+                companyName={tbCompany}
+                userInitials={tbInitials}
+                onTabClick={(id) => { setActiveTab(id); }}
+                onCompanyClick={() => pushLog('Company selector')}
+                onUserClick={() => pushLog('User menu')}
+                  companyMenuItems={[
+                    { id: 'drip-scf', label: 'Drip Capital SCF' },
+                    { id: 'drip-rf',  label: 'Drip Capital RF'  },
+                    { id: 'voyager',  label: 'Voyager Trading'  },
+                  ]}
+                  userMenuItems={[
+                    { id: 'profile',  label: 'My Profile'  },
+                    { id: 'settings', label: 'Settings'    },
+                    { id: 'logout',   label: 'Log out'     },
+                  ]}
+                />
+
+              {/* Body: SideBar + Content — minHeight:0 lets SideBar scroll internally */}
+              <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+
+                {/* SideBar */}
+                <SideBar state={sbState}>
+                  {/* Collapse toggle — click to expand/collapse */}
+                  <button
+                    type="button"
+                    onClick={() => { setSbState(sbState === 'Expanded' ? 'Collapsed' : 'Expanded'); pushLog(sbState === 'Expanded' ? 'SideBar collapsed' : 'SideBar expanded'); }}
+                    title={sbState === 'Expanded' ? 'Collapse sidebar' : 'Expand sidebar'}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: sbState === 'Collapsed' ? 'center' : 'flex-end',
+                      width: '100%', padding: sbState === 'Collapsed' ? '8px 16px' : '8px 16px 8px 32px',
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      color: 'var(--color-text-subdued)', marginBottom: 'var(--gap-4)',
+                      transition: 'background-color 120ms ease',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--color-fill-secondary-1)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      {sbState === 'Expanded'
+                        ? <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        : <path d="M9 6l6 6-6 6"  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      }
+                    </svg>
+                  </button>
+                  <NavElement style={activeRoute === 'dashboard' ? 'Selected' : 'Default'}
+                    showDropdown={false} name="Dashboard" icon={IconHome}
+                    onClick={() => goTo('dashboard', false)} />
+                  <NavElement style={activeRoute === 'invoices' ? 'Selected' : 'Default'}
+                    showDropdown={false} name="Invoices" icon={IconInvoices}
+                    onClick={() => goTo('invoices', false)} />
+                  <NavElement style={activeRoute === 'suppliers' ? 'Selected' : 'Default'}
+                    showDropdown={false} name="Suppliers" icon={IconPeople}
+                    onClick={() => goTo('suppliers', false)} />
+                  {/* Payments — isOpen driven by openAccordion, not by style */}
+                  <NavElement style={activeRoute === 'payments' ? 'Selected' : 'Default'}
+                    showDropdown={true} name="Payments" icon={IconMoney}
+                    isOpen={openAccordion === 'payments'}
+                    onClick={() => goTo('payments', true)}>
+                    <BaseNav property1={activeSub === 'monthly'   ? 'Selected' : 'Default'}
+                      name="Monthly"   onClick={() => { setSbActive('payments'); setSbSub('monthly');   setOpenAccordion('payments'); pushLog('Sub → Monthly'); }} />
+                    <BaseNav property1={activeSub === 'quarterly' ? 'Selected' : 'Default'}
+                      name="Quarterly" onClick={() => { setSbActive('payments'); setSbSub('quarterly'); setOpenAccordion('payments'); pushLog('Sub → Quarterly'); }} />
+                    <BaseNav property1={activeSub === 'annual'    ? 'Selected' : 'Default'}
+                      name="Annual"    onClick={() => { setSbActive('payments'); setSbSub('annual');    setOpenAccordion('payments'); pushLog('Sub → Annual'); }} />
+                  </NavElement>
+                  {/* Resources — has dropdown but no sub-sections; toggle opens/closes */}
+                  <NavElement style={activeRoute === 'resources' ? 'Selected' : 'Default'}
+                    showDropdown={true} name="Resources" icon={IconFolder}
+                    isOpen={openAccordion === 'resources'}
+                    onClick={() => goTo('resources', true)} />
+                  <NavElement style={activeRoute === 'reports' ? 'Selected' : 'Default'}
+                    showDropdown={false} name="Reports" icon={IconDoc}
+                    onClick={() => goTo('reports', false)} />
+                  <NavElement style={activeRoute === 'myaccount' ? 'Selected' : 'Default'}
+                    showDropdown={false} name="My Account" icon={IconUser}
+                    onClick={() => goTo('myaccount', false)} />
+                </SideBar>
+
+                {/* Content area */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'var(--color-surface-2)', overflow: 'hidden' }}>
+                  {/* Breadcrumb strip */}
+                  <div style={{ padding: '10px var(--gap-24)', borderBottom: '1px solid var(--color-stroke-subdued)', background: 'var(--color-surface-1)', display: 'flex', alignItems: 'center', gap: 'var(--gap-8)', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body-small)', color: 'var(--color-text-subdued)', flexShrink: 0 }}>
+                    <span>Home</span>
+                    <span>/</span>
+                    <span style={{ color: 'var(--color-text-primary)', fontWeight: 700 }}>{routeLabels[activeRoute]}</span>
+                    {activeRoute === 'payments' && (
+                      <><span>/</span><span style={{ color: 'var(--color-text-primary)' }}>{subLabels[activeSub]}</span></>
+                    )}
+                  </div>
+                  {/* Page body */}
+                  <div style={{ flex: 1, padding: 'var(--gap-24)', overflow: 'auto', display: 'flex', flexDirection: 'column', gap: 'var(--gap-16)' }}>
+                    <div style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-h4)', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 'normal' }}>
+                      {routeLabels[activeRoute]}{activeRoute === 'payments' ? ` · ${subLabels[activeSub]}` : ''}
+                    </div>
+                    {/* Skeleton stat cards */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-12)' }}>
+                      {['Total', 'Active', 'Pending'].map(label => (
+                        <div key={label} style={{ background: 'var(--color-surface-1)', borderRadius: 'var(--rd-S)', padding: 'var(--gap-16)', fontFamily: 'var(--font-family)' }}>
+                          <div style={{ fontSize: 'var(--font-size-body-small)', color: 'var(--color-text-subdued)', marginBottom: 4 }}>{label}</div>
+                          <div style={{ fontSize: 'var(--font-size-h4)', fontWeight: 700, color: 'var(--color-text-primary)' }}>—</div>
+                        </div>
+                      ))}
+                    </div>
+                    {/* Skeleton text lines */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-8)' }}>
+                      {[75, 90, 55].map((w, i) => (
+                        <div key={i} style={{ height: 10, width: `${w}%`, background: 'var(--color-surface-3)', borderRadius: 'var(--rd-XS)' }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Event log */}
+            <div className="events" style={{ marginTop: 'var(--gap-8)' }}>
+              {log.length === 0 ? '— click any nav item or tab to see events —' : log.join('\n')}
+            </div>
+          </section>
+        );
+      }
+
       function Playground() {
         /* --- Navigation --- */
         const [activeComponent, setActiveComponent] = useState('button');
         const [panelOpen, setPanelOpen] = useState(true);
+
+        /* --- BaseNav controls --- */
+        const [bnProperty1, setBnProperty1] = useState('Default');
+        const [bnName, setBnName] = useState('SubSection');
+
+        /* --- NavElement controls --- */
+        const [neStyle, setNeStyle] = useState('Default');
+        const [neShowDropdown, setNeShowDropdown] = useState(true);
+        const [neShowIcon, setNeShowIcon] = useState(true);
+        const [neName, setNeName] = useState('Dashboard');
+        const [neCollapsed, setNeCollapsed] = useState(false);
+        const [neLog, pushNeLog] = useEventLog();
+
+        /* --- SideBar controls --- */
+        const [sbState, setSbState] = useState('Expanded');
+        const [sbActive, setSbActive] = useState('dashboard');
+        const [sbSub, setSbSub] = useState('quarterly');
+
+        /* --- Navigation (unified) controls --- */
+        const [logoCompany, setLogoCompany]   = useState('drip');
+        const [logoOnWhite, setLogoOnWhite]   = useState(true);
+        const [logoPortal,  setLogoPortal]    = useState('SCF');
+
+        /* --- TopBar controls --- */
+        const [tbShowNav, setTbShowNav] = useState(true);
+        const [tbShowCompany, setTbShowCompany] = useState(true);
+        const [tbShowUser, setTbShowUser] = useState(true);
+        const [tbCompany, setTbCompany] = useState('Drip Capital');
+        const [tbInitials, setTbInitials] = useState('AM');
+        const [tbActiveTab, setTbActiveTab] = useState('invoices');
+        const [tbLog, pushTbLog] = useEventLog();
 
         const NAV_ITEMS = [
           { id: 'accordian',      label: 'Accordian'      },
@@ -4879,6 +5764,7 @@
           { id: 'fileupload',     label: 'File Upload'    },
           { id: 'linkbutton',     label: 'LinkButton'     },
           { id: 'modal',          label: 'Modal'          },
+          { id: 'navigation',     label: 'Navigation'     },
           { id: 'pagination',     label: 'Pagination'     },
           { id: 'progressbar',    label: 'Progress Bar'   },
           { id: 'radiobutton',    label: 'RadioButton'    },
@@ -5350,6 +6236,52 @@
                 </>
               )}
 
+              {activeComponent === 'navigation' && (
+                <>
+                  <h2>TopBar</h2>
+                  <CtrlToggle label="showNavigation" checked={tbShowNav}     onChange={setTbShowNav} />
+                  <CtrlToggle label="showCompany"    checked={tbShowCompany} onChange={setTbShowCompany} />
+                  <CtrlToggle label="showUser"       checked={tbShowUser}    onChange={setTbShowUser} />
+                  {/* Company — changing resets portal + onWhite to valid defaults */}
+                  <CtrlSelect label="logo company" value={logoCompany} onChange={(v) => {
+                    setLogoCompany(v);
+                    if (v === 'drip')    { setLogoPortal('SCF');  setLogoOnWhite(true);  }
+                    else                 { setLogoPortal('ZOHO'); setLogoOnWhite(true);  }
+                  }} options={['drip','voyager']} />
+
+                  {/* Portal — drives onWhite automatically (Figma logic):
+                      drip  Blue/Green/White → onWhite=false
+                      drip  SCF/RF          → onWhite=true
+                      voyager Blue          → onWhite=true
+                      voyager ZOHO          → onWhite stays (can be either) */}
+                  <CtrlSelect label="logo portal" value={logoPortal} onChange={(v) => {
+                    setLogoPortal(v);
+                    /* Auto-derive onWhite from portal (Figma logic + user request):
+                       Blue / Green / White → dark bg → uncheck onWhite
+                       SCF / RF             → light bg → check onWhite
+                       ZOHO (voyager)       → user controls onWhite manually */
+                    if (['Blue','Green','White'].includes(v)) setLogoOnWhite(false);
+                    else if (['SCF','RF'].includes(v))        setLogoOnWhite(true);
+                    /* ZOHO: leave onWhite unchanged */
+                  }} options={logoCompany === 'drip' ? ['SCF','RF','Blue','Green','White'] : ['ZOHO','Blue']} />
+
+                  {/* onWhite — manual override (auto-set by portal above for most variants) */}
+                  <CtrlToggle label="logo onWhite" checked={logoOnWhite} onChange={setLogoOnWhite} />
+                  <CtrlText   label="companyName"   value={tbCompany}   onChange={setTbCompany} />
+                  <CtrlText   label="userInitials"  value={tbInitials}  onChange={setTbInitials} />
+
+                  <h2>SideBar</h2>
+                  <CtrlSelect label="state" value={sbState} onChange={setSbState} options={['Expanded', 'Collapsed']} />
+
+                  <h2>Section (NavElement)</h2>
+                  <CtrlSelect label="activeSection" value={sbActive} onChange={setSbActive}
+                    options={['dashboard','invoices','suppliers','payments','resources','reports','myaccount']} />
+
+                  <h2>Subsection (BaseNav)</h2>
+                  <CtrlSelect label="activeSub (Payments)" value={sbSub} onChange={setSbSub}
+                    options={['monthly','quarterly','annual']} />
+                </>
+              )}
 
             </>}>
 
@@ -6304,7 +7236,7 @@
                 </>
               )}
 
-
+              {activeComponent === 'navigation' && <NavigationSection sbState={sbState} setSbState={setSbState} sbActive={sbActive} setSbActive={setSbActive} sbSub={sbSub} setSbSub={setSbSub} tbShowNav={tbShowNav} tbShowCompany={tbShowCompany} tbShowUser={tbShowUser} tbCompany={tbCompany} tbInitials={tbInitials} logoCompany={logoCompany} logoOnWhite={logoOnWhite} logoPortal={logoPortal} />}
 
             </main>
 

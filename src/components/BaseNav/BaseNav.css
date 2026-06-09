@@ -1,0 +1,53 @@
+/* =============================================================================
+ * BaseNav — token-driven styles
+ * Figma spec: NavElement.ai.md · BaseNav section · node 694:17486
+ *
+ * Width: 192px (sits inside 240px NavElement, creating 48px left indent)
+ * Padding: left gap-48 (48px) | right gap-24 (24px) | vertical gap-12 (12px)
+ * Text: Desktop/Body/Body small — Nunito Sans 12px Regular/Bold
+ * Color: color/text/subdued (#4b4b4b) — NOT color/text/primary
+ * ============================================================================= */
+
+.dcds-BaseNav {
+  display: flex;
+  align-items: center;
+  /* 192px fills the 240px parent; the 48px left padding creates the visual indent */
+  width: 100%;
+  padding: var(--gap-12) var(--gap-24) var(--gap-12) var(--gap-48);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-small); /* 12px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subdued); /* #4b4b4b — NEVER use color/text/primary */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+}
+
+/* Hover — CSS-driven; never set property1="Hover" in code */
+.dcds-BaseNav:hover {
+  background: var(--color-fill-secondary-1); /* #ecf5fb */
+}
+
+/* Selected — active sub-route: grey bg + bold text */
+.dcds-BaseNav--selected {
+  background: var(--color-surface-3); /* #f5f5f5 */
+  font-weight: var(--font-weight-bold);
+}
+
+/* Selected overrides hover background */
+.dcds-BaseNav--selected:hover {
+  background: var(--color-surface-3);
+}
+
+/* Focus ring */
+.dcds-BaseNav:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}

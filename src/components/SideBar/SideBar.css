@@ -1,0 +1,36 @@
+/* =============================================================================
+ * SideBar — token-driven styles
+ * Figma spec: NavElement.ai.md · SideBar Context section
+ *             Figma node 694:17643 (Expanded) · 1937:6590 (Collapsed)
+ *
+ * Expanded: 240px wide, shadow 4px 0 15px rgba(0,0,0,0.11)
+ * Collapsed: 56px wide, shadow 4px 0 7.5px rgba(0,0,0,0.11)
+ * Background: color/surface/1 (white)
+ * Padding: gap-40 top and bottom
+ * Gap between items: gap-4 (per Figma)
+ * ============================================================================= */
+
+.dcds-SideBar {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-1); /* white */
+  padding: var(--gap-40) 0;
+  gap: var(--gap-4); /* 4px gap between NavElement items */
+  width: 240px;
+  /* Figma shadow: 4px 0 15px rgba(0,0,0,0.11) — right-side drop shadow */
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.11);
+  /*
+   * overflow-x: hidden — clips labels that stick out in collapsed (56px) mode.
+   * overflow-y: auto   — allows accordion items to scroll rather than be clipped.
+   */
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex-shrink: 0;
+  transition: width 200ms ease, box-shadow 200ms ease;
+}
+
+/* Collapsed state: narrow to 56px, lighter shadow */
+.dcds-SideBar--collapsed {
+  width: 56px;
+  box-shadow: 4px 0 7.5px rgba(0, 0, 0, 0.11);
+}

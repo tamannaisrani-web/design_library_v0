@@ -1,0 +1,199 @@
+/* =============================================================================
+ * TopBar — token-driven styles
+ * Figma spec: node 673:16869 · DripDesign.md Rule 8 · Navigation · TopBar
+ *
+ * Height: 64px (implicit from children)
+ * Background: color/surface/1 (white)
+ * Border: 1px solid color/stroke/subdued on bottom
+ *
+ * Three zones left→right:
+ *   1. Logo slot (240px)
+ *   2. Tab navigation (optional)
+ *   3. Right utilities: company selector + user avatar
+ * ============================================================================= */
+
+/* ── Root ──────────────────────────────────────────────────────────────────── */
+.dcds-TopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-surface-1);
+  border-bottom: 1px solid var(--color-stroke-subdued);
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Left section (logo + divider + tabs) ──────────────────────────────────── */
+.dcds-TopBar__left {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Logo zone: 240px × 64px, matches Figma SideBar expanded width */
+.dcds-TopBar__logo {
+  display: flex;
+  align-items: center;
+  width: 240px;
+  height: 64px;
+  padding: var(--gap-12) var(--gap-12) var(--gap-12) var(--gap-24);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Placeholder logo rendered when no logoSlot is provided */
+.dcds-TopBar__logo-placeholder {
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+}
+
+/* Vertical divider between logo and tabs */
+.dcds-TopBar__divider {
+  width: 1px;
+  height: 62px;
+  background: var(--color-stroke-subdued);
+  flex-shrink: 0;
+}
+
+/* Tab navigation strip */
+.dcds-TopBar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-24);
+  padding: 0 var(--gap-12);
+}
+
+/* ── Individual tab button ─────────────────────────────────────────────────── */
+.dcds-TopBar__tab {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  height: 64px;
+  padding: var(--gap-8);
+  background: none;
+  border: none;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body); /* 16px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subdued);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 120ms ease, border-bottom-color 120ms ease;
+}
+
+.dcds-TopBar__tab:hover:not(.dcds-TopBar__tab--active) {
+  color: var(--color-text-primary);
+}
+
+/* Active/selected tab: green text + 4px green bottom border */
+.dcds-TopBar__tab--active {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-action); /* #26b67f */
+  border-bottom-color: var(--color-stroke-action); /* #26b67f */
+}
+
+/* Dropdown arrow inside tab */
+.dcds-TopBar__tab-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.dcds-TopBar__tab:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}
+
+/* ── Right utility zone ────────────────────────────────────────────────────── */
+.dcds-TopBar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+  padding-right: var(--gap-16);
+  flex-shrink: 0;
+}
+
+/* Shared button wrapper for company + user selectors */
+.dcds-TopBar__selector-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  height: 48px;
+  padding: var(--gap-4) var(--gap-8);
+  background: var(--color-surface-1);
+  border: none;
+  border-radius: var(--rd-S);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: background-color 120ms ease;
+}
+
+.dcds-TopBar__selector-btn:hover {
+  background: var(--color-surface-2);
+}
+
+.dcds-TopBar__selector-btn:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* Avatar — 32×32 circle (user) */
+.dcds-TopBar__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--rd-Max);
+  background: var(--color-fill-secondary-2); /* Sky Blue-100 #daecf7 */
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  flex-shrink: 0;
+}
+
+/* Avatar — square variant (company) */
+.dcds-TopBar__avatar--square {
+  border-radius: var(--rd-S);
+}
+
+/* Company icon inside square avatar */
+.dcds-TopBar__avatar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--color-icon-primary);
+}
+
+/* Company name text */
+.dcds-TopBar__company-name {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  max-width: 152px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Chevron / arrow icon (24×24) */
+.dcds-TopBar__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-icon-primary);
+}
