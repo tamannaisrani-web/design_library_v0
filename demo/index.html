@@ -4235,7 +4235,7 @@
         function renderElemFront() {
           const flagSrc = 'dcds-flags/flags/' + (prefixCountry || 'IN').toUpperCase() + '.svg';
           const arrowSize = 16;
-          const arrowIcon = React.createElement('svg', { width: arrowSize, height: arrowSize, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, style: { transform: isPrefixOpen ? 'rotate(180deg)' : 'none', transition: 'transform 120ms ease' } }, React.createElement('polyline', { points: '6 9 12 15 18 9' }));
+          const arrowIcon = React.createElement('svg', { width: arrowSize, height: arrowSize, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': 'true', focusable: 'false', style: { transform: isPrefixOpen ? 'rotate(180deg)' : 'none', transition: 'transform 120ms ease' } }, React.createElement('path', { d: 'M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995', stroke: 'currentColor', strokeWidth: '1.5', strokeMiterlimit: '10', strokeLinecap: 'round', strokeLinejoin: 'round' }));
           const accessLabel = (Type === 'Phone No.' ? 'Dial code selector: ' : 'Currency selector: ') + prefixCode;
           const btnClass = ['dcds-BaseElemFront', isPrefixOpen ? 'dcds-BaseElemFront--open' : '', isDisabled ? 'dcds-BaseElemFront--disabled' : '', isReadOnly ? 'dcds-BaseElemFront--readonly' : ''].filter(Boolean).join(' ');
           const items = prefixMenuItems || [];
