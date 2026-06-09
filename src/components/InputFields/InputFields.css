@@ -531,8 +531,9 @@
 .dcds-BaseValidation {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--gap-4);
+  padding: 0 var(--gap-4);
 }
 
 .dcds-BaseValidation__icon {
@@ -547,7 +548,8 @@
 .dcds-BaseValidation__text {
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-regular);
-  line-height: 1.3;
+  line-height: normal;
+  font-variation-settings: '"YTLC" 500, "wdth" 100';
 }
 
 /* Validation colour variants */
