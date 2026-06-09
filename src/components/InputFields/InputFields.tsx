@@ -6,7 +6,7 @@ import { ArrowDownLinear } from '../../../icons/src/linear/ArrowDownLinear';
 import { SearchNormalLinear } from '../../../icons/src/linear/SearchNormalLinear';
 import { InformationBold } from '../../../icons/src/bold/InformationBold';
 import { TickCircleBold } from '../../../icons/src/bold/TickCircleBold';
-import { InfoCircleLinear } from '../../../icons/src/linear/InfoCircleLinear';
+import { Tooltip } from '../Tooltip';
 import type {
   InputFieldsProps,
   _BaseValidationProps,
@@ -403,7 +403,6 @@ export const InputFields: React.FC<InputFieldsProps> = ({
   /* Internal state                                                           */
   /* ---------------------------------------------------------------------- */
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
   const [isPrefixOpen, setIsPrefixOpen] = React.useState(false);
   const [internalOtpValues, setInternalOtpValues] = React.useState(['', '', '', '', '', '']);
 
@@ -559,27 +558,7 @@ export const InputFields: React.FC<InputFieldsProps> = ({
           </span>
         )}
         {showTooltip && (
-          <div className="dcds-InputFields__tooltip-wrap">
-            <button
-              type="button"
-              className="dcds-InputFields__tooltip-trigger"
-              aria-label={tooltipHeading ?? 'More information'}
-              onClick={() => setTooltipVisible((v) => !v)}
-              onBlur={() => setTooltipVisible(false)}
-            >
-              <InfoCircleLinear size={16} />
-            </button>
-            {tooltipVisible && (tooltipHeading ?? tooltipBody) && (
-              <div className="dcds-InputFields__tooltip-popover" role="tooltip">
-                {tooltipHeading && (
-                  <p className="dcds-InputFields__tooltip-heading">{tooltipHeading}</p>
-                )}
-                {tooltipBody && (
-                  <p className="dcds-InputFields__tooltip-body">{tooltipBody}</p>
-                )}
-              </div>
-            )}
-          </div>
+          <Tooltip heading={tooltipHeading} bodyText={tooltipBody} Placement="Bottom" />
         )}
       </div>
     );
