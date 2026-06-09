@@ -553,15 +553,11 @@
 }
 
 /* Validation colour variants */
-.dcds-BaseValidation--error .dcds-BaseValidation__icon,
-.dcds-BaseValidation--error .dcds-BaseValidation__text {
-  color: var(--color-text-error);
-}
+.dcds-BaseValidation--error .dcds-BaseValidation__icon { color: var(--color-icon-error); }
+.dcds-BaseValidation--error .dcds-BaseValidation__text { color: var(--color-text-error); }
 
-.dcds-BaseValidation--warning .dcds-BaseValidation__icon,
-.dcds-BaseValidation--warning .dcds-BaseValidation__text {
-  color: var(--color-text-warning);
-}
+.dcds-BaseValidation--warning .dcds-BaseValidation__icon { color: var(--color-icon-warning); }
+.dcds-BaseValidation--warning .dcds-BaseValidation__text { color: var(--color-text-warning); }
 
 .dcds-BaseValidation--success .dcds-BaseValidation__icon,
 .dcds-BaseValidation--success .dcds-BaseValidation__text {
