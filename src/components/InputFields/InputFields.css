@@ -97,13 +97,14 @@
   font-family: var(--font-family);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
-  color: var(--color-text-primary);
+  color: var(--color-text-info);
   font-variation-settings: '"YTLC" 500, "wdth" 100';
   padding: 0;
 }
 
 .dcds-InputFields__input::placeholder {
   color: var(--color-text-disabled);
+  font-variation-settings: '"YTLC" 500, "wdth" 100';
 }
 
 /* Remove webkit autofill background flash */
