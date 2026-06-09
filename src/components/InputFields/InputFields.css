@@ -13,7 +13,7 @@
   flex-direction: column;
   gap: var(--gap-4);
   width: 100%;
-  min-width: 240px;
+  min-width: 360px;
   font-family: var(--font-family);
 }
 
