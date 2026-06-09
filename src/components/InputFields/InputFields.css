@@ -588,7 +588,7 @@
 
 /* Disabled state — grey bg, no pointer events */
 .dcds-InputFields--state-disabled .dcds-InputFields__box {
-  background: var(--color-surface-disabled);
+  background: var(--color-surface-3);
   border-color: var(--color-stroke-disabled);
   pointer-events: none;
   cursor: not-allowed;
