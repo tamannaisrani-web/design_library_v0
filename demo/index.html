@@ -4436,7 +4436,8 @@
         const [ifOtp,           setIfOtp]           = React.useState(['','','','','','']);
         const [ifLog,           pushIfLog]          = useEventLog();
 
-        const ALL_TYPES  = ['Default','Dropdown','Currency','Phone No.','OTP','Search'];
+        // 'Dropdown' intentionally excluded — will be showcased in the Dropdowns component
+        const ALL_TYPES  = ['Default','Currency','Phone No.','OTP','Search'];
         const ALL_STATES = ['Default','Focus','Typing','Filled','Error','Disabled','Read-only'];
 
         const sharedProps = {
