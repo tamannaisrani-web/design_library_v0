@@ -524,7 +524,64 @@
 .dcds-Step[tabindex='0'] { cursor:pointer; }
 .dcds-Step[tabindex='0']:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
 .dcds-Step--disabled { cursor:default; pointer-events:none; }
-    </style>
+    
+/* ── Foundation pages ───────────────────────────────────────── */
+.fnd-stage { padding: 32px; overflow-y: auto; }
+.fnd-section { margin-bottom: 48px; }
+.fnd-section h2 { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary, #6b7280); margin: 0 0 16px; }
+
+/* Typography */
+.type-scale { display: flex; flex-direction: column; gap: 6px; }
+.type-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 12px; border-radius: 8px; background: var(--color-surface-secondary, #f9fafb); }
+.type-token { font-size: 11px; font-family: monospace; color: var(--color-text-secondary, #6b7280); min-width: 180px; flex-shrink: 0; }
+.type-meta  { font-size: 11px; color: var(--color-text-tertiary, #9ca3af); min-width: 120px; flex-shrink: 0; }
+.type-sample { color: var(--color-text-primary, #111827); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Spacing */
+.gap-rows { display: flex; flex-direction: column; gap: 4px; }
+.gap-row { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+.gap-label { font-size: 11px; font-family: monospace; min-width: 100px; color: var(--color-text-secondary, #6b7280); }
+.gap-val   { font-size: 11px; color: var(--color-text-tertiary, #9ca3af); min-width: 40px; }
+.gap-bar   { height: 12px; background: var(--color-fill-brand, #6366f1); border-radius: 3px; min-width: 2px; }
+.rd-grid   { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+.rd-box    { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.rd-swatch { width: 48px; height: 48px; background: var(--color-fill-brand, #6366f1); }
+.rd-name   { font-size: 11px; font-family: monospace; color: var(--color-text-secondary, #6b7280); }
+.rd-val    { font-size: 10px; color: var(--color-text-tertiary, #9ca3af); }
+.tc-rows   { display: flex; flex-direction: column; gap: 4px; }
+.tc-row    { display: flex; align-items: center; gap: 12px; }
+.tc-label  { font-size: 11px; font-family: monospace; min-width: 80px; color: var(--color-text-secondary, #6b7280); }
+.tc-bar    { height: 10px; background: var(--color-fill-secondary, #e5e7eb); border-radius: 3px; }
+
+/* Colors */
+.color-grid  { display: flex; flex-wrap: wrap; gap: 10px; }
+.color-swatch { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; cursor: default; min-width: 120px; }
+.color-dot   { width: 100%; height: 48px; border-radius: 8px; border: 1px solid rgba(0,0,0,.08); }
+.color-cname { font-size: 11px; font-weight: 600; color: var(--color-text-primary, #121212); word-break: break-all; }
+.color-hex   { font-size: 10px; font-family: monospace; color: var(--color-text-subdued, #4b4b4b); }
+.color-grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+
+/* Icons */
+.icon-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.icon-chip  { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 10px; border-radius: 8px; background: var(--color-surface-secondary, #f9fafb); min-width: 72px; }
+.icon-chip svg { width: 24px; height: 24px; }
+.icon-name  { font-size: 9px; font-family: monospace; color: var(--color-text-secondary, #6b7280); text-align: center; }
+
+/* Flags */
+.flag-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.flag-item { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; background: var(--color-surface-secondary, #f9fafb); min-width: 160px; }
+.flag-code { font-size: 11px; font-family: monospace; font-weight: 600; color: var(--color-text-primary, #111827); min-width: 36px; }
+.flag-cname { font-size: 11px; color: var(--color-text-secondary, #6b7280); }
+
+/* Panel filter helpers */
+.fnd-filter-group { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; border-bottom: 1px solid var(--color-stroke-secondary, #e5e7eb); }
+.fnd-filter-group:last-child { border-bottom: none; }
+.fnd-filter-label { font-size: 11px; font-weight: 600; color: var(--color-text-tertiary, #9ca3af); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.fnd-chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.fnd-chip { padding: 3px 8px; border-radius: 20px; font-size: 11px; cursor: pointer; border: 1px solid var(--color-stroke-secondary, #e5e7eb); background: transparent; color: var(--color-text-secondary, #6b7280); }
+.fnd-chip.active { background: var(--color-fill-brand, #6366f1); color: #fff; border-color: var(--color-fill-brand, #6366f1); }
+
+</style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -6142,7 +6199,459 @@
         return exp ? 'Desktop-L-Expanded' : 'Desktop-L-Collapsed';
       }
 
-      function GridSection() {
+      
+// ═══════════════════════════════════════════════════════════════════
+// FOUNDATION SECTIONS
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Typography ────────────────────────────────────────────────────
+const DESKTOP_SCALE = [
+  { token: 'Desktop/Heading/H1',                size: '--font-size-h1',       weight: '--font-weight-bold',    px: '44px', bold: true  },
+  { token: 'Desktop/Heading/H2 - Bold',         size: '--font-size-h2',       weight: '--font-weight-bold',    px: '32px', bold: true  },
+  { token: 'Desktop/Heading/H2 - Regular',      size: '--font-size-h2',       weight: '--font-weight-regular', px: '32px', bold: false },
+  { token: 'Desktop/Heading/H3 - Bold',         size: '--font-size-h3',       weight: '--font-weight-bold',    px: '24px', bold: true  },
+  { token: 'Desktop/Heading/H3 - Regular',      size: '--font-size-h3',       weight: '--font-weight-regular', px: '24px', bold: false },
+  { token: 'Desktop/Heading/H4 - Bold',         size: '--font-size-h4',       weight: '--font-weight-bold',    px: '20px', bold: true  },
+  { token: 'Desktop/Heading/H4 - Regular',      size: '--font-size-h4',       weight: '--font-weight-regular', px: '20px', bold: false },
+  { token: 'Desktop/Body/Caption - Bold',       size: '--font-size-caption',  weight: '--font-weight-bold',    px: '18px', bold: true  },
+  { token: 'Desktop/Body/Body - Bold',          size: '--font-size-body',     weight: '--font-weight-bold',    px: '16px', bold: true  },
+  { token: 'Desktop/Body/Body - Regular',       size: '--font-size-body',     weight: '--font-weight-regular', px: '16px', bold: false },
+  { token: 'Desktop/Body/Label - Bold',         size: '--font-size-label',    weight: '--font-weight-bold',    px: '14px', bold: true  },
+  { token: 'Desktop/Body/Label - Regular',      size: '--font-size-label',    weight: '--font-weight-regular', px: '14px', bold: false },
+  { token: 'Desktop/Body/Body small - Bold',    size: '--font-size-body-small', weight: '--font-weight-bold',  px: '12px', bold: true  },
+  { token: 'Desktop/Body/Body small - Regular', size: '--font-size-body-small', weight: '--font-weight-regular', px: '12px', bold: false },
+  { token: 'Desktop/Body/Validation - Bold',    size: '--font-size-validation', weight: '--font-weight-bold',  px: '10px', bold: true  },
+  { token: 'Desktop/Body/Validation - Regular', size: '--font-size-validation', weight: '--font-weight-regular', px: '10px', bold: false },
+];
+const MOBILE_SCALE = [
+  { token: 'Mobile/Mobile - H1',         size: '--font-size-h2',   weight: '--font-weight-bold',    px: '32px', bold: true  },
+  { token: 'Mobile/Mobile - H2 Bold',    size: '--font-size-h3',   weight: '--font-weight-bold',    px: '28px', bold: true  },
+  { token: 'Mobile/Mobile - H2 Regular', size: '--font-size-h3',   weight: '--font-weight-regular', px: '28px', bold: false },
+  { token: 'Mobile/Mobile - H3 Bold',    size: '--font-size-h4',   weight: '--font-weight-bold',    px: '22px', bold: true  },
+  { token: 'Mobile/Mobile - H3 Regular', size: '--font-size-h4',   weight: '--font-weight-regular', px: '22px', bold: false },
+  { token: 'Mobile/Mobile - H4 Bold',    size: '--font-size-h4',   weight: '--font-weight-bold',    px: '20px', bold: true  },
+  { token: 'Mobile/Mobile - H4 Regular', size: '--font-size-h4',   weight: '--font-weight-regular', px: '20px', bold: false },
+];
+
+function TypographySection() {
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Typography</h2>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>typeface</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'var(--font-family)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>Nunito Sans</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>line height</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',color:'var(--color-text-primary)'}}>AUTO</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>letter spacing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',color:'var(--color-text-primary)'}}>0%</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>🅰 ・ Typography</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
+          <h2>Desktop Type Scale</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {DESKTOP_SCALE.map(r => (
+              <div key={r.token} style={{padding:'var(--gap-12) var(--gap-16)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <span style={{fontSize:`var(${r.size})`,fontWeight:`var(${r.weight})`,fontFamily:'var(--font-family)',color:'var(--color-text-primary)',lineHeight:1.2}}>The quick brown fox</span>
+                <div style={{display:'flex',gap:'var(--gap-8)',flexWrap:'wrap'}}>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:'var(--font-weight-bold)'}}>{r.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Mobile Type Scale</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {MOBILE_SCALE.map(r => (
+              <div key={r.token} style={{padding:'var(--gap-12) var(--gap-16)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <span style={{fontSize:`var(${r.size})`,fontWeight:`var(${r.weight})`,fontFamily:'var(--font-family)',color:'var(--color-text-primary)',lineHeight:1.2}}>The quick brown fox</span>
+                <div style={{display:'flex',gap:'var(--gap-8)',flexWrap:'wrap'}}>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:'var(--font-weight-bold)'}}>{r.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Spacing ───────────────────────────────────────────────────────
+const GAP_TOKENS = [
+  { token: 'gap-0',   px: 0,   note: 'no gap'              },
+  { token: 'gap-2',   px: 2,   note: 'hairline'             },
+  { token: 'gap-4',   px: 4,   note: 'icon-to-label, tight' },
+  { token: 'gap-8',   px: 8,   note: 'compact padding'      },
+  { token: 'gap-12',  px: 12,  note: 'small padding'        },
+  { token: 'gap-16',  px: 16,  note: 'default gap / padding'},
+  { token: 'gap-20',  px: 20,  note: ''                     },
+  { token: 'gap-24',  px: 24,  note: 'card / section padding'},
+  { token: 'gap-32',  px: 32,  note: ''                     },
+  { token: 'gap-40',  px: 40,  note: ''                     },
+  { token: 'gap-48',  px: 48,  note: ''                     },
+  { token: 'gap-56',  px: 56,  note: ''                     },
+  { token: 'gap-64',  px: 64,  note: ''                     },
+  { token: 'gap-80',  px: 80,  note: ''                     },
+  { token: 'gap-108', px: 108, note: ''                     },
+];
+const RD_TOKENS = [
+  { token: 'rd-Nil', px: 0,    note: 'square / no rounding'           },
+  { token: 'rd-XS',  px: 4,    note: 'subtle (inputs, small chips)'   },
+  { token: 'rd-S',   px: 8,    note: 'default (buttons, badges, tags)'},
+  { token: 'rd-M',   px: 12,   note: 'medium (cards, panels)'         },
+  { token: 'rd-L',   px: 24,   note: 'large (modals, drawers)'        },
+  { token: 'rd-XL',  px: 40,   note: 'extra large / pill-adjacent'    },
+  { token: 'rd-Max', px: 1000, note: 'full pill (avatars, toggles)'   },
+];
+const TC_TOKENS = [
+  { token: 'tc-XXS',  px: 24,  note: 'icon-only column'      },
+  { token: 'tc-XS',   px: 48,  note: 'status dot, checkbox'  },
+  { token: 'tc-S',    px: 112, note: 'short text column'      },
+  { token: 'tc-M',    px: 192, note: 'standard column'        },
+  { token: 'tc-L',    px: 288, note: 'wide column'            },
+  { token: 'tc-Full', px: 300, note: 'maximum/full-width'     },
+];
+
+function SpacingSection() {
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Spacing</h2>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>collections</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>gap-* · rd-* · tc-*</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>rule</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.5}}>Never hardcode px — always use a token</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>↔ ・ Spacing</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
+          <h2>Spacing — gap-*</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {GAP_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'72px'}}>{t.token}</span>
+                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
+                <div style={{height:'10px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.max(2,t.px)+'px',flexShrink:0}} />
+                {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Border Radius — rd-*</h2>
+          <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-16)'}}>
+            {RD_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-8)',padding:'var(--gap-16)',background:'var(--color-surface-2)',borderRadius:'var(--rd-S)',minWidth:'96px'}}>
+                <div style={{width:'56px',height:'56px',background:'var(--color-fill-action)',borderRadius:Math.min(t.px,28)+'px'}} />
+                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)'}}>{t.token}</span>
+                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{t.px >= 1000 ? '1000px' : t.px+'px'}</span>
+                <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',textAlign:'center'}}>{t.note}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Table Columns — tc-*</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-12)'}}>
+            {TC_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <div style={{display:'flex',alignItems:'center',gap:'var(--gap-12)'}}>
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'64px'}}>{t.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
+                  {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
+                </div>
+                <div style={{height:'8px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.min(t.px,500)+'px'}} />
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Color Tokens ──────────────────────────────────────────────────
+const COLOR_CATS = {
+  text: [
+    'primary','secondary','action','neutral','subdued','invert','disabled',
+    'warning','invert-warning','error','invert-error','success','invert-success','info','invert-info',
+  ],
+  icon: [
+    'primary','secondary','action','neutral','subdued','invert','disabled',
+    'warning','invert-warning','error','invert-error','success','invert-success','info','invert-info',
+  ],
+  surface: ['1','2','3','4','disabled'],
+  overlay: ['50','25'],
+  fill: [
+    'light-action','action','dark-action',
+    'primary-0','primary-1','primary-2','primary-3','primary-9',
+    'secondary-0','secondary-1','secondary-2','secondary-3',
+    'light-warning','invert-warning','dark-warning',
+    'light-error','invert-error','dark-error',
+    'light-success','invert-success','dark-success',
+    'light-info','invert-info','dark-info',
+  ],
+  stroke: ['focus','focus-subtle','action','neutral','subdued','invert','disabled','warning','error','success','info'],
+  hyperlink: ['default','hover','disabled'],
+};
+
+function ColorSection() {
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Color Tokens</h2>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>tier system</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.5}}>Primitives → Semantics. Always use semantic tokens.</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>categories</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',lineHeight:1.8}}>{Object.keys(COLOR_CATS).join(' · ')}</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>✸ ・ Color Tokens</span>
+      </div>
+    </>}>
+      <main className="stage">
+        {Object.entries(COLOR_CATS).map(([cat, roles]) => (
+          <section key={cat}>
+            <h2>color / {cat}</h2>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))',gap:'var(--gap-12)'}}>
+              {roles.map(role => {
+                const varName = `--color-${cat}-${role}`;
+                return (
+                  <div key={role} style={{display:'flex',flexDirection:'column',gap:'var(--gap-8)'}}>
+                    <div style={{height:'48px',borderRadius:'var(--rd-S)',border:'1px solid var(--color-stroke-subdued)',background:`var(${varName})`}} title={varName} />
+                    <span style={{fontSize:'var(--font-size-body-small)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>{role}</span>
+                    <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{varName}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Icons ─────────────────────────────────────────────────────────
+const ICON_CATS = {
+  'Money & Finance': ['empty-wallet', 'empty-wallet-remove', 'personalcard', 'receipt-discount', 'receipt-item', 'receipt-square', 'simcard', 'simcard-2', 'wallet-add', 'wallet-check'],
+  'Arrows': ['arrange-circle', 'arrange-circle-2', 'arrange-square', 'arrange-square-2', 'arrow', 'arrow-2', 'arrow-3', 'arrow-bottom', 'arrow-circle-down', 'arrow-circle-left', 'arrow-circle-right', 'arrow-circle-up', 'arrow-down', 'arrow-left', 'arrow-right', 'arrow-square', 'arrow-square-down', 'arrow-square-left', 'arrow-square-right', 'arrow-square-up', 'arrow-swap', 'arrow-swap-horizontal', 'arrow-up', 'back-square', 'call-received', 'clipboard-export', 'clipboard-import', 'convert', 'convertshape', 'convertshape-2', 'direct-send', 'directbox-receive', 'directbox-send', 'driver-refresh', 'export', 'forward-square', 'gallery-export', 'gallery-import', 'global-refresh', 'import', 'login', 'logout', 'programming-arrow', 'programming-arrows', 'receive-square', 'receive-square-2', 'received', 'recovery-convert', 'redo', 'refresh', 'refresh-2', 'refresh-circle', 'refresh-left-square', 'refresh-right-square', 'refresh-square-2', 'repeat', 'repeat-circle', 'repeate-music', 'repeate-one', 'rotate-left', 'rotate-right', 'send', 'send-2', 'send-sqaure-2', 'send-square', 'undo'],
+  'Users & Profiles': ['people', 'profile', 'profile-2user', 'profile-add', 'profile-circle', 'profile-delete', 'profile-remove', 'profile-tick', 'security-user', 'tag-user', 'user', 'user-add', 'user-cirlce-add', 'user-edit', 'user-minus', 'user-octagon', 'user-remove', 'user-search', 'user-square', 'user-tag', 'user-tick'],
+  'Messages': ['device-message', 'direct', 'direct-down', 'direct-inbox', 'direct-left', 'direct-normal', 'direct-notification', 'direct-right', 'direct-up', 'directbox-default', 'directbox-default-2', 'message', 'message-2', 'message-add', 'message-circle', 'message-edit', 'message-favorite', 'message-minus', 'message-notif', 'message-programming', 'message-question', 'message-remove', 'message-search', 'message-square', 'message-text', 'message-tick', 'message-time', 'messages', 'messages-2', 'messages-3', 'sms', 'sms-edit', 'sms-notification', 'sms-search', 'sms-star', 'sms-tracking'],
+  'Security': ['alarm', 'clock', 'eye', 'eye-slash', 'finger-cricle', 'finger-scan', 'key', 'key-square', 'keyboard', 'keyboard-open', 'lock', 'lock-circle', 'lock-slash', 'password-check', 'radar', 'radar-2', 'scan', 'scan-barcode', 'scanner', 'scanning', 'security', 'security-safe', 'security-time', 'shield', 'shield-cross', 'shield-search', 'shield-security', 'shield-slash', 'shield-tick', 'text-block', 'unlock'],
+  'Documents': ['archive', 'archive-add', 'archive-book', 'archive-minus', 'archive-slash', 'archive-tick', 'bill', 'book', 'book-saved', 'book-square', 'bookmark', 'bookmark-2', 'calendar-edit', 'clipboard', 'clipboard-close', 'clipboard-text', 'clipboard-tick', 'document', 'document-cloud', 'document-code', 'document-code-2', 'document-copy', 'document-download', 'document-favorite', 'document-filter', 'document-forward', 'document-like', 'document-normal', 'document-previous', 'document-sketch', 'document-text', 'document-upload', 'download', 'edit', 'edit-2', 'filter-edit', 'folder', 'folder-add', 'folder-connection', 'folder-cross', 'folder-favorite', 'folder-minus', 'gallery-edit', 'global-edit', 'grid-edit', 'heart-edit', 'musicnote', 'note', 'note-2', 'note-add', 'note-favorite', 'note-remove', 'note-square', 'note-text', 'paperclip', 'paperclip-2', 'stickynote', 'task', 'task-square', 'upload'],
+  'Settings & UI': ['add', 'add-circle', 'add-square', 'additem', 'bag-tick', 'bag-tick-2', 'brifecase-tick', 'calendar-add', 'calendar-tick', 'call-add', 'call-minus', 'candle', 'candle-2', 'category', 'category-2', 'close', 'close-circle', 'close-square', 'cloud-add', 'cloud-minus', 'colorfilter', 'cpu-setting', 'filter', 'filter-add', 'filter-remove', 'filter-search', 'filter-square', 'filter-tick', 'gallery-add', 'gallery-tick', 'grid-eraser', 'heart-add', 'heart-tick', 'location-add', 'location-minus', 'location-tick', 'menu', 'menu-board', 'minus', 'minus-cirlce', 'minus-square', 'more', 'more-2', 'more-circle', 'more-square', 'music-filter', 'music-square-add', 'pen-add', 'pen-close', 'play-add', 'save-add', 'save-minus', 'setting', 'setting-2', 'setting-3', 'setting-4', 'setting-5', 'settings', 'shop-add', 'sort', 'sticker', 'tick-circle', 'tick-square', 'toggle-off', 'toggle-off-circle', 'toggle-on', 'toggle-on-circle', 'video-tick'],
+  'Location & Maps': ['discover', 'global', 'global-search', 'gps', 'gps-slash', 'location', 'location-cross', 'location-slash', 'map', 'picture-frame', 'route-square', 'routing', 'routing-2'],
+  'Time & Calendar': ['bag-timer', 'brifecase-timer', 'calendar', 'calendar-2', 'calendar-circle', 'calendar-remove', 'calendar-search', 'timer', 'timer-pause', 'timer-start'],
+  'Notifications': ['lamp', 'lamp-charge', 'lamp-on', 'lamp-slash', 'notification', 'notification-bing', 'notification-circle', 'notification-favorite', 'notification-status'],
+  'Charts & Business': ['activity', 'chart', 'chart-2', 'chart-fail', 'chart-success', 'diagram', 'favorite-chart', 'graph', 'hashtag', 'hashtag-down', 'hashtag-up', 'health', 'home-hashtag', 'home-trend-down', 'home-trend-up', 'pharagraphspacing', 'presention-chart', 'status-up', 'trend-down', 'trend-up'],
+  'Grid & Layout': ['align-bottom', 'align-horizontally', 'align-left', 'align-right', 'align-top', 'align-vertically', 'crop', 'element-1', 'element-2', 'element-3', 'element-4', 'element-equal', 'element-plus', 'fatrows', 'format-circle', 'format-square', 'grid-1', 'grid-2', 'grid-3', 'grid-4', 'grid-5', 'grid-6', 'grid-7', 'grid-8', 'grid-9', 'information', 'kanban', 'maximize', 'maximize-2', 'maximize-3', 'maximize-4', 'maximize-circle', 'microphone', 'microphone-2', 'row-horizontal', 'row-vertical', 'scroll', 'sidebar-bottom', 'sidebar-left', 'sidebar-right', 'sidebar-top', 'slider', 'slider-horizontal', 'slider-vertical', 'textalign-center', 'textalign-justifycenter', 'textalign-justifyleft', 'textalign-justifyright', 'textalign-left', 'textalign-right'],
+  'Search': ['heart-search', 'music-square-search'],
+  'Shop & Delivery': ['bag', 'bag-2', 'bag-cross', 'bag-happy', 'barcode', 'box-2', 'shop', 'shop-remove', 'shopping-bag', 'shopping-cart'],
+  'Media': ['audio-square', 'camera', 'camera-slash', 'gallery', 'gallery-favorite', 'gallery-remove', 'gallery-slash', 'image', 'monitor-recorder', 'music', 'music-circle', 'music-dashboard', 'music-library-2', 'music-play', 'music-playlist', 'music-square', 'music-square-remove', 'pause', 'pause-circle', 'play', 'play-circle', 'play-cricle', 'play-remove', 'record', 'record-circle', 'stop', 'stop-circle', 'video', 'video-circle', 'video-horizontal', 'video-octagon', 'video-play', 'video-remove', 'video-slash', 'video-square', 'video-time', 'video-vertical', 'volume', 'volume-cross', 'volume-high', 'volume-low', 'volume-mute', 'volume-slash', 'volume-up'],
+  'Devices': ['airpod', 'airpods', 'bluetooth', 'bluetooth-2', 'bluetooth-circle', 'bluetooth-rectangle', 'cloud', 'cloud-change', 'cloud-connection', 'cloud-cross', 'cloud-drizzle', 'cloud-fog', 'cloud-lightning', 'cloud-notif', 'cloud-plus', 'cloud-remove', 'cloud-snow', 'cloud-sunny', 'cpu', 'cpu-charge', 'devices', 'driver', 'grammerly', 'headphone', 'headphones', 'home-wifi', 'instagram', 'mobile-programming', 'monitor', 'monitor-mobbile ', 'mouse', 'mouse-circle', 'mouse-square', 'printer', 'printer-slash', 'ram', 'ram-2', 'speaker', 'wifi', 'wifi-square'],
+  'Call': ['call', 'call-calling', 'call-incoming', 'call-outgoing', 'call-remove', 'call-slash'],
+  'Support & Social': ['24-support', 'award', 'dislike', 'heart', 'heart-circle', 'heart-remove', 'heart-slash', 'like', 'like-dislike', 'like-shapes', 'like-tag', 'magic-star', 'medal', 'medal-star', 'smileys', 'star', 'star-slash', 'unlimited'],
+  'Design Tools': ['bezier', 'blend', 'blend-2', 'blur', 'brush', 'brush-2', 'brush-4', 'brush-square', 'bucket', 'bucket-circle', 'bucket-square', 'colors-square', 'copy', 'copy-success', 'copyright', 'designtools', 'eraser', 'layer', 'magicpen', 'mask', 'paintbucket', 'path', 'path-2', 'path-square', 'pen-remove', 'pen-tool', 'pen-tool-2', 'ruler', 'ruler&amp;pen', 'scissor', 'shapes'],
+  'Programming': ['code', 'code-circle', 'command', 'command-square', 'data', 'data-2', 'hierarchy', 'hierarchy-2', 'hierarchy-3', 'hierarchy-square', 'hierarchy-square-2', 'hierarchy-square-3'],
+  'Weather': ['airdrop', 'drop', 'flash', 'flash-circle', 'flash-slash', 'moon', 'sun', 'sun-fog', 'wind', 'wind-2'],
+  'Typography Tools': ['firstline', 'language-circle', 'language-square', 'link', 'link-2', 'link-circle', 'link-square', 'quote-down', 'quote-down-circle', 'quote-down-square', 'quote-up', 'quote-up-circle', 'quote-up-square', 'smallcaps', 'text', 'text-bold', 'text-italic', 'text-underline', 'translate'],
+  'Transport': ['airplane', 'airplane-square', 'bus', 'car', 'driving', 'gas-station', 'ship', 'smart-car'],
+  'Essential': ['battery-2', 'battery-charging', 'battery-disable', 'battery-empty', 'battery-empty 2', 'battery-full', 'crown', 'crown-2', 'cup', 'emoji-happy', 'emoji-normal', 'emoji-sad', 'flag', 'flag-2', 'happyemoji', 'home', 'home-2', 'safe-home', 'share', 'slash', 'smart-home', 'sound', 'speedometer', 'trash', 'warning-2', '3dcube', '3square', 'Snow', 'aquarius', 'attach-circle', 'attach-square', 'auto-brightness', 'backward', 'backward-10-seconds', 'backward-15-seconds', 'backward-5-seconds', 'backward-item', 'bank', 'briefcase', 'brifecase-cross', 'broom', 'bubble', 'building', 'building-3', 'buildings', 'buildings-2', 'buliding', 'cake', 'calculator', 'cd', 'check', 'chrome', 'coffee', 'color-swatch', 'component', 'computing', 'courthouse', 'creative-commons', 'danger', 'diamonds', 'electricity', 'external-drive', 'forbidden', 'forbidden-2', 'forward', 'forward-10-seconds', 'forward-15-seconds', 'forward-5-seconds', 'forward-item', 'game', 'gameboy', 'gemini', 'gemini-2', 'ghost', 'gift', 'glass', 'hospital', 'house', 'house-2', 'info-circle', 'judge', 'level', 'lifebuoy', 'lovely', 'main-component', 'microscope', 'milk', 'mirror', 'mirroring-screen', 'next', 'omega-circle', 'omega-square', 'pet', 'previous', 'radio', 'ranking', 'reserve', 'save-2', 'save-remove', 'screenmirroring', 'shuffle', 'signpost', 'size', 'status', 'story', 'tag-cross', 'tag-right', 'teacher', 'tree', 'triangle', 'trush-square', 'verify', 'voice-cricle', 'voice-square', 'vuesax', 'watch', 'watch-status', 'weight', 'woman'],
+};
+const ICON_STYLES = ['linear', 'bold', 'outline'];
+
+
+function IconsSection() {
+  const [style, setStyle] = React.useState('linear');
+  const [search, setSearch] = React.useState('');
+  const filtered = React.useMemo(() => {
+    if (!search) return ICON_CATS;
+    const q = search.toLowerCase();
+    const result = {};
+    Object.entries(ICON_CATS).forEach(([cat, names]) => {
+      const matches = names.filter(n => n.includes(q));
+      if (matches.length) result[cat] = matches;
+    });
+    return result;
+  }, [search, style]);
+  const total = Object.values(filtered).reduce((s,v)=>s+v.length,0);
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Icons</h2>
+      <CtrlSelect label="style" value={style} onChange={setStyle} options={ICON_STYLES} />
+      <CtrlText   label="search" value={search} onChange={setSearch} placeholder="filter icons..." />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>showing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{total} icons</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>import</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>{"import { IconName } from '@dcds/icons'"}</span>
+      </div>
+    </>}>
+      <main className="stage">
+        {Object.entries(filtered).map(([cat, names]) => (
+          <section key={cat}>
+            <h2>{cat} ({names.length})</h2>
+            <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-8)'}}>
+              {names.map(n => (
+                <div key={n} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-4)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',minWidth:'72px',cursor:'default'}} title={n}>
+                  <img src={`src/icons/svg/${style}/${n}.svg`} alt={n} width={24} height={24} style={{opacity:.9}} onError={e=>{e.currentTarget.style.display='none'}} />
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',textAlign:'center',maxWidth:'80px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{n}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Flags ─────────────────────────────────────────────────────────
+const FLAG_REGIONS = {
+  'Africa': [
+    {code:'AO',name:'Angola'},{code:'BJ',name:'Benin'},{code:'BW',name:'Botswana'},{code:'BF',name:'Burkina Faso'},
+    {code:'BI',name:'Burundi'},{code:'CM',name:'Cameroon'},{code:'CV',name:'Cabo Verde'},{code:'CF',name:'C. African Rep.'},
+    {code:'TD',name:'Chad'},{code:'KM',name:'Comoros'},{code:'CD',name:'D.R. Congo'},{code:'CG',name:'R. Congo'},
+    {code:'CI',name:"Cote d'Ivoire"},{code:'DJ',name:'Djibouti'},{code:'EG',name:'Egypt'},{code:'ER',name:'Eritrea'},
+    {code:'ET',name:'Ethiopia'},{code:'GA',name:'Gabon'},{code:'GM',name:'Gambia'},{code:'GH',name:'Ghana'},
+    {code:'GN',name:'Guinea'},{code:'GQ',name:'Eq. Guinea'},{code:'GW',name:'Guinea-Bissau'},{code:'KE',name:'Kenya'},
+    {code:'LS',name:'Lesotho'},{code:'LR',name:'Liberia'},{code:'LY',name:'Libya'},{code:'MG',name:'Madagascar'},
+    {code:'MW',name:'Malawi'},{code:'ML',name:'Mali'},{code:'MR',name:'Mauritania'},{code:'MU',name:'Mauritius'},
+    {code:'MA',name:'Morocco'},{code:'MZ',name:'Mozambique'},{code:'NA',name:'Namibia'},{code:'NE',name:'Niger'},
+    {code:'NG',name:'Nigeria'},{code:'RW',name:'Rwanda'},{code:'SC',name:'Seychelles'},{code:'SL',name:'Sierra Leone'},
+    {code:'SO',name:'Somalia'},{code:'ZA',name:'South Africa'},{code:'SS',name:'South Sudan'},{code:'SD',name:'Sudan'},
+    {code:'SZ',name:'Swaziland'},{code:'TZ',name:'Tanzania'},{code:'TG',name:'Togo'},{code:'TN',name:'Tunisia'},
+    {code:'UG',name:'Uganda'},{code:'ZM',name:'Zambia'},{code:'ZW',name:'Zimbabwe'},
+  ],
+  'Asia': [
+    {code:'AF',name:'Afghanistan'},{code:'AM',name:'Armenia'},{code:'AZ',name:'Azerbaijan'},{code:'BD',name:'Bangladesh'},
+    {code:'BT',name:'Bhutan'},{code:'BN',name:'Brunei'},{code:'KH',name:'Cambodia'},{code:'CN',name:'China'},
+    {code:'GE',name:'Georgia'},{code:'HK',name:'Hong Kong'},{code:'IN',name:'India'},{code:'ID',name:'Indonesia'},
+    {code:'JP',name:'Japan'},{code:'KZ',name:'Kazakhstan'},{code:'KG',name:'Kyrgyzstan'},{code:'LA',name:'Laos'},
+    {code:'MO',name:'Macao'},{code:'MY',name:'Malaysia'},{code:'MV',name:'Maldives'},{code:'MN',name:'Mongolia'},
+    {code:'MM',name:'Myanmar'},{code:'NP',name:'Nepal'},{code:'KP',name:'North Korea'},{code:'PK',name:'Pakistan'},
+    {code:'PH',name:'Philippines'},{code:'RU',name:'Russia'},{code:'SG',name:'Singapore'},{code:'KR',name:'South Korea'},
+    {code:'LK',name:'Sri Lanka'},{code:'TW',name:'Taiwan'},{code:'TJ',name:'Tajikistan'},{code:'TH',name:'Thailand'},
+    {code:'TL',name:'Timor-Leste'},{code:'TM',name:'Turkmenistan'},{code:'TR',name:'Turkey'},{code:'UZ',name:'Uzbekistan'},
+    {code:'VN',name:'Vietnam'},
+  ],
+  'Europe': [
+    {code:'AL',name:'Albania'},{code:'AD',name:'Andorra'},{code:'AT',name:'Austria'},{code:'BY',name:'Belarus'},
+    {code:'BE',name:'Belgium'},{code:'BA',name:'Bosnia'},{code:'BG',name:'Bulgaria'},{code:'HR',name:'Croatia'},
+    {code:'CY',name:'Cyprus'},{code:'CZ',name:'Czech Republic'},{code:'DK',name:'Denmark'},{code:'EE',name:'Estonia'},
+    {code:'FI',name:'Finland'},{code:'FR',name:'France'},{code:'DE',name:'Germany'},{code:'GR',name:'Greece'},
+    {code:'HU',name:'Hungary'},{code:'IS',name:'Iceland'},{code:'IE',name:'Ireland'},{code:'IT',name:'Italy'},
+    {code:'LV',name:'Latvia'},{code:'LI',name:'Liechtenstein'},{code:'LT',name:'Lithuania'},{code:'LU',name:'Luxembourg'},
+    {code:'MT',name:'Malta'},{code:'MD',name:'Moldova'},{code:'MC',name:'Monaco'},{code:'ME',name:'Montenegro'},
+    {code:'NL',name:'Netherlands'},{code:'MK',name:'North Macedonia'},{code:'NO',name:'Norway'},{code:'PL',name:'Poland'},
+    {code:'PT',name:'Portugal'},{code:'RO',name:'Romania'},{code:'SM',name:'San Marino'},{code:'RS',name:'Serbia'},
+    {code:'SK',name:'Slovakia'},{code:'SI',name:'Slovenia'},{code:'ES',name:'Spain'},{code:'SE',name:'Sweden'},
+    {code:'CH',name:'Switzerland'},{code:'UA',name:'Ukraine'},{code:'GB',name:'England'},{code:'GB-UKM',name:'United Kingdom'},
+    {code:'GB-SCT',name:'Scotland'},{code:'GB-WLS',name:'Wales'},{code:'GB-NIR',name:'N. Ireland'},{code:'VA',name:'Vatican'},
+  ],
+  'Americas': [
+    {code:'AG',name:'Antigua & Barbuda'},{code:'AR',name:'Argentina'},{code:'AW',name:'Aruba'},{code:'BS',name:'Bahamas'},
+    {code:'BB',name:'Barbados'},{code:'BZ',name:'Belize'},{code:'BO',name:'Bolivia'},{code:'BR',name:'Brazil'},
+    {code:'CA',name:'Canada'},{code:'CL',name:'Chile'},{code:'CO',name:'Colombia'},{code:'CR',name:'Costa Rica'},
+    {code:'CU',name:'Cuba'},{code:'DM',name:'Dominica'},{code:'DO',name:'Dominican Rep.'},{code:'EC',name:'Ecuador'},
+    {code:'SV',name:'El Salvador'},{code:'GD',name:'Grenada'},{code:'GT',name:'Guatemala'},{code:'GY',name:'Guyana'},
+    {code:'HT',name:'Haiti'},{code:'HN',name:'Honduras'},{code:'JM',name:'Jamaica'},{code:'MX',name:'Mexico'},
+    {code:'NI',name:'Nicaragua'},{code:'PA',name:'Panama'},{code:'PY',name:'Paraguay'},{code:'PE',name:'Peru'},
+    {code:'PR',name:'Puerto Rico'},{code:'KN',name:'Saint Kitts'},{code:'LC',name:'Saint Lucia'},{code:'VC',name:'St Vincent'},
+    {code:'SR',name:'Suriname'},{code:'TT',name:'Trinidad'},{code:'US',name:'United States'},{code:'UY',name:'Uruguay'},
+    {code:'VE',name:'Venezuela'},
+  ],
+  'Oceania': [
+    {code:'AU',name:'Australia'},{code:'FJ',name:'Fiji'},{code:'KI',name:'Kiribati'},{code:'MH',name:'Marshall Islands'},
+    {code:'FM',name:'Micronesia'},{code:'NR',name:'Nauru'},{code:'NZ',name:'New Zealand'},{code:'PW',name:'Palau'},
+    {code:'PG',name:'Papua New Guinea'},{code:'WS',name:'Samoa'},{code:'SB',name:'Solomon Islands'},{code:'TO',name:'Tonga'},
+    {code:'TV',name:'Tuvalu'},{code:'VU',name:'Vanuatu'},
+  ],
+  'Middle East': [
+    {code:'AE',name:'UAE'},{code:'BH',name:'Bahrain'},{code:'IR',name:'Iran'},{code:'IQ',name:'Iraq'},
+    {code:'IL',name:'Israel'},{code:'JO',name:'Jordan'},{code:'KW',name:'Kuwait'},{code:'LB',name:'Lebanon'},
+    {code:'OM',name:'Oman'},{code:'PS',name:'Palestine'},{code:'QA',name:'Qatar'},{code:'SA',name:'Saudi Arabia'},
+    {code:'SY',name:'Syria'},{code:'YE',name:'Yemen'},
+  ],
+};
+
+function FlagsSection() {
+  const [search, setSearch] = React.useState('');
+  const filtered = React.useMemo(() => {
+    if (!search) return FLAG_REGIONS;
+    const q = search.toLowerCase();
+    const result = {};
+    Object.entries(FLAG_REGIONS).forEach(([region, flags]) => {
+      const matches = flags.filter(f => f.name.toLowerCase().includes(q) || f.code.toLowerCase().includes(q));
+      if (matches.length) result[region] = matches;
+    });
+    return result;
+  }, [search]);
+  const total = Object.values(filtered).reduce((s,v)=>s+v.length,0);
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Flags</h2>
+      <CtrlText label="search" value={search} onChange={setSearch} placeholder="country or code..." />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>showing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{total} countries</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>dimensions</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>24 × 18 px (fixed)</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>usage</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>{'<Flag Country="IN" />'}</span>
+      </div>
+    </>}>
+      <main className="stage">
+        {Object.entries(filtered).map(([region, flags]) => (
+          <section key={region}>
+            <h2>{region} ({flags.length})</h2>
+            <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+              {flags.map(f => (
+                <div key={f.code} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                  <img src={`src/dcds-flags/flags/${f.code}.svg`} alt={f.name} width={24} height={18} style={{borderRadius:'2px',border:'1px solid var(--color-stroke-subdued)',flexShrink:0}} onError={e=>{e.currentTarget.style.display='none'}} />
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)',minWidth:'40px'}}>{f.code}</span>
+                  <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-subdued)'}}>{f.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </main>
+    </PanelLayout>
+  );
+}
+
+function GridSection() {
         const [activeBp,     setActiveBp]     = useState('Mobile');
         const [resizeWidth,  setResizeWidth]  = useState(360);
         const [isResizing,   setIsResizing]   = useState(false);
@@ -6255,33 +6764,56 @@
         const [panelOpen, setPanelOpen] = useState(true);
 
         const NAV_ITEMS = [
-          { id: 'accordian',      label: 'Accordian'      },
-          { id: 'alert',          label: 'Alert'          },
-          { id: 'avatar',         label: 'Avatar'         },
-          { id: 'avatargroup',    label: 'AvatarGroup'    },
-          { id: 'badge',          label: 'Badge'          },
-          { id: 'breadcrumbs',    label: 'Breadcrumbs'    },
-          { id: 'button',         label: 'Button'         },
-          { id: 'buttongroup',    label: 'ButtonGroup'    },
-          { id: 'checkbox',       label: 'Checkbox'       },
-          { id: 'chip',           label: 'Chip'           },
-          { id: 'drawer',         label: 'Drawer'         },
-          { id: 'datepicker',     label: 'Datepicker'     },
-          { id: 'dropdownbutton', label: 'DropdownButton' },
-          { id: 'dropdownmenu',   label: 'DropdownMenu'   },
-          { id: 'fileupload',     label: 'File Upload'    },
-          { id: 'inputfields',    label: 'Input Fields'   },
-          { id: 'linkbutton',     label: 'LinkButton'     },
-          { id: 'modal',          label: 'Modal'          },
-          { id: 'pagination',     label: 'Pagination'     },
-          { id: 'progressbar',    label: 'Progress Bar'   },
-          { id: 'radiobutton',    label: 'RadioButton'    },
-          { id: 'stepper',        label: 'Stepper'        },
-          { id: 'switch',         label: 'Switch'         },
-          { id: 'tabs',           label: 'Tabs'           },
-          { id: 'tag',            label: 'Tag'            },
-          { id: 'tooltip',        label: 'Tooltip'        },
-          { id: 'grids',          label: 'Grids'          },
+          { id: '__sep_foundations__', label: 'Foundations'        },
+          { id: 'typography',         label: 'Typography'          },
+          { id: 'spacing',            label: 'Spacing'             },
+          { id: 'colors',             label: 'Colors'              },
+          { id: 'icons',              label: 'Icons'               },
+          { id: 'flags',              label: 'Flags'               },
+
+          { id: '__sep_actions__',    label: 'Actions'             },
+          { id: 'button',             label: 'Button'              },
+          { id: 'buttongroup',        label: 'ButtonGroup'         },
+          { id: 'linkbutton',         label: 'LinkButton'          },
+          { id: 'dropdownbutton',     label: 'DropdownButton'      },
+
+          { id: '__sep_inputs__',     label: 'Inputs'              },
+          { id: 'checkbox',           label: 'Checkbox'            },
+          { id: 'radiobutton',        label: 'RadioButton'         },
+          { id: 'switch',             label: 'Switch'              },
+          { id: 'inputfields',        label: 'Input Fields'        },
+          { id: 'fileupload',         label: 'File Upload'         },
+          { id: 'datepicker',         label: 'Datepicker'          },
+
+          { id: '__sep_selection__',  label: 'Selection'           },
+          { id: 'chip',               label: 'Chip'                },
+          { id: 'tag',                label: 'Tag'                 },
+          { id: 'badge',              label: 'Badge'               },
+          { id: 'tabs',               label: 'Tabs'                },
+
+          { id: '__sep_overlay__',    label: 'Overlay & Feedback'  },
+          { id: 'modal',              label: 'Modal'               },
+          { id: 'drawer',             label: 'Drawer'              },
+          { id: 'tooltip',            label: 'Tooltip'             },
+          { id: 'alert',              label: 'Alert'               },
+          { id: 'progressbar',        label: 'Progress Bar'        },
+          { id: 'stepper',            label: 'Stepper'             },
+
+          { id: '__sep_nav__',        label: 'Navigation'          },
+          { id: 'breadcrumbs',        label: 'Breadcrumbs'         },
+          { id: 'pagination',         label: 'Pagination'          },
+          { id: 'grids',              label: 'Grids'               },
+          { id: 'sidenav',            label: 'Side Navigation'     },
+          { id: 'topnav',             label: 'Top Navigation'      },
+
+          { id: '__sep_display__',    label: 'Display'             },
+          { id: 'accordian',          label: 'Accordian'           },
+          { id: 'avatar',             label: 'Avatar'              },
+          { id: 'avatargroup',        label: 'AvatarGroup'         },
+          { id: 'dropdownmenu',       label: 'DropdownMenu'        },
+          { id: 'card',               label: 'Card'                },
+          { id: 'table',              label: 'Table'               },
+
         ];
 
         /* --- DropdownMenu controls --- */
@@ -6601,6 +7133,11 @@
               <span className="primary-nav__brand">DCDS Playground</span>
               <ul className="primary-nav__list">
                 {NAV_ITEMS.map((item) => (
+                  item.id.startsWith('__sep') ? (
+                    <li key={item.id} style={{padding:'12px 12px 4px',fontSize:'10px',fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:'#9ca3af',listStyle:'none'}}>
+                      {item.label}
+                    </li>
+                  ) : (
                   <li key={item.id}>
                     <button
                       className={`primary-nav__item${activeComponent === item.id ? ' primary-nav__item--active' : ''}`}
@@ -6610,6 +7147,7 @@
                       {item.label}
                     </button>
                   </li>
+                  )
                 ))}
               </ul>
             </nav>
@@ -6627,11 +7165,16 @@
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
             {activeComponent === 'grids'       && <GridSection />}
+            {activeComponent === 'typography'  && <TypographySection />}
+            {activeComponent === 'spacing'     && <SpacingSection />}
+            {activeComponent === 'colors'      && <ColorSection />}
+            {activeComponent === 'icons'       && <IconsSection />}
+            {activeComponent === 'flags'       && <FlagsSection />}
 
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'inputfields' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'grids' && (
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'inputfields' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'grids' && activeComponent !== 'typography' && activeComponent !== 'spacing' && activeComponent !== 'colors' && activeComponent !== 'icons' && activeComponent !== 'flags' && (
             <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
