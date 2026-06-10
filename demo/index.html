@@ -6237,67 +6237,52 @@ function TypographySection() {
   const [platform, setPlatform] = React.useState('desktop');
   const rows = platform === 'desktop' ? DESKTOP_SCALE : MOBILE_SCALE;
   return (
-    <PanelLayout
-      panelContent={
-        <div style={{padding:'16px'}}>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Platform</div>
-            <div className="fnd-chip-row">
-              {['desktop','mobile'].map(p => (
-                <button key={p} className={'fnd-chip'+(platform===p?' active':'')} onClick={()=>setPlatform(p)}>
-                  {p.charAt(0).toUpperCase()+p.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Typeface</div>
-            <div style={{fontSize:'12px',color:'var(--color-text-subdued)',fontFamily:'var(--font-family)'}}>Nunito Sans</div>
-          </div>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Line Height</div>
-            <div style={{fontSize:'11px',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>AUTO</div>
-          </div>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Letter Spacing</div>
-            <div style={{fontSize:'11px',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>0%</div>
-          </div>
-        </div>
-      }
-    >
-      <div className="fnd-stage">
-        <div className="fnd-section">
-          <h2>{platform === 'desktop' ? 'Desktop' : 'Mobile'} Type Scale ({rows.length} styles)</h2>
-          <div className="type-scale">
+    <PanelLayout panelContent={<>
+      <h2>Typography</h2>
+      <CtrlSelect label="platform" value={platform} onChange={setPlatform} options={['desktop','mobile']} />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>typeface</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)',fontFamily:'var(--font-family)',fontWeight:'var(--font-weight-bold)'}}>Nunito Sans</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>line height</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',color:'var(--color-text-primary)'}}>AUTO</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>letter spacing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',color:'var(--color-text-primary)'}}>0%</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>styles</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{rows.length} styles</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
+          <h2>{platform === 'desktop' ? 'Desktop' : 'Mobile'} Type Scale</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
             {rows.map(r => (
-              <div key={r.token} className="type-row" style={{flexDirection:'column', alignItems:'flex-start', gap:'4px'}}>
-                <span
-                  style={{
-                    fontSize: `var(${r.size})`,
-                    fontWeight: `var(${r.weight})`,
-                    fontFamily: 'var(--font-family)',
-                    color: 'var(--color-text-primary)',
-                    lineHeight: 1.2,
-                    display: 'block',
-                    width: '100%',
-                  }}
-                >
-                  The quick brown fox
-                </span>
-                <div style={{display:'flex', gap:'10px', alignItems:'center', flexWrap:'wrap'}}>
-                  <span style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:600}}>{r.token}</span>
-                  <span style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
-                  <span style={{fontSize:'10px',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
+              <div key={r.token} style={{padding:'var(--gap-12) var(--gap-16)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <span style={{
+                  fontSize:`var(${r.size})`,
+                  fontWeight:`var(${r.weight})`,
+                  fontFamily:'var(--font-family)',
+                  color:'var(--color-text-primary)',
+                  lineHeight:1.2,
+                }}>The quick brown fox</span>
+                <div style={{display:'flex',gap:'var(--gap-8)',alignItems:'center',flexWrap:'wrap'}}>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:'var(--font-weight-bold)'}}>{r.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </PanelLayout>
   );
 }
-
 
 // ── Spacing ───────────────────────────────────────────────────────
 const GAP_TOKENS = [
@@ -6338,72 +6323,65 @@ const TC_TOKENS = [
 function SpacingSection() {
   const [view, setView] = React.useState('gap');
   return (
-    <PanelLayout
-      panelContent={
-        <div style={{padding:'16px'}}>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Collection</div>
-            <div className="fnd-chip-row">
-              {['gap','rd','tc'].map(v => (
-                <button key={v} className={'fnd-chip'+(view===v?' active':'')} onClick={()=>setView(v)}>
-                  {v === 'gap' ? 'Spacing' : v === 'rd' ? 'Border Radius' : 'Table Cols'}
-                </button>
+    <PanelLayout panelContent={<>
+      <h2>Spacing</h2>
+      <CtrlSelect label="collection" value={view} onChange={setView} options={['gap','rd','tc']} />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>description</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.4}}>
+          {view === 'gap' ? 'Use gap-* for padding, gap, margin' : view === 'rd' ? 'Use rd-* for all border-radius' : 'Use tc-* for Table column widths'}
+        </span>
+      </div>
+    </>}>
+      <main className="stage">
+        {view === 'gap' && (
+          <section>
+            <h2>Spacing Tokens — gap-*</h2>
+            <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+              {GAP_TOKENS.map(t => (
+                <div key={t.token} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'72px'}}>{t.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
+                  <div style={{height:'10px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.max(2,t.px)+'px',flexShrink:0}} />
+                  {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
+                </div>
               ))}
             </div>
-          </div>
-        </div>
-      }
-    >
-
-        <div className="fnd-stage">
-          {view === 'gap' && (
-            <div className="fnd-section">
-              <h2>Spacing Tokens (gap-*)</h2>
-              <div className="gap-rows">
-                {GAP_TOKENS.map(t => (
-                  <div key={t.token} className="gap-row">
-                    <span className="gap-label">{t.token}</span>
-                    <span className="gap-val">{t.px}px</span>
-                    <div className="gap-bar" style={{width: Math.max(2, t.px)+'px'}} />
-                    {t.note && <span style={{fontSize:'10px',color:'var(--color-text-subdued)',opacity:.8}}>{t.note}</span>}
-                  </div>
-                ))}
-              </div>
+          </section>
+        )}
+        {view === 'rd' && (
+          <section>
+            <h2>Border Radius — rd-*</h2>
+            <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-16)'}}>
+              {RD_TOKENS.map(t => (
+                <div key={t.token} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-8)',padding:'var(--gap-16)',background:'var(--color-surface-2)',borderRadius:'var(--rd-S)',minWidth:'96px'}}>
+                  <div style={{width:'56px',height:'56px',background:'var(--color-fill-action)',borderRadius:Math.min(t.px,28)+'px'}} />
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)'}}>{t.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{t.px >= 1000 ? '1000px' : t.px+'px'}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',textAlign:'center'}}>{t.note}</span>
+                </div>
+              ))}
             </div>
-          )}
-          {view === 'rd' && (
-            <div className="fnd-section">
-              <h2>Border Radius Tokens (rd-*)</h2>
-              <div className="rd-grid">
-                {RD_TOKENS.map(t => (
-                  <div key={t.token} className="rd-box">
-                    <div className="rd-swatch" style={{borderRadius: Math.min(t.px, 48)+'px'}} />
-                    <span className="rd-name">{t.token}</span>
-                    <span className="rd-val">{t.px >= 1000 ? '1000px (pill)' : t.px+'px'}</span>
-                    <span style={{fontSize:'9px',color:'var(--color-text-subdued)',textAlign:'center',maxWidth:'72px'}}>{t.note}</span>
+          </section>
+        )}
+        {view === 'tc' && (
+          <section>
+            <h2>Table Column Widths — tc-*</h2>
+            <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-8)'}}>
+              {TC_TOKENS.map(t => (
+                <div key={t.token} style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:'var(--gap-12)'}}>
+                    <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'64px'}}>{t.token}</span>
+                    <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
+                    {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
                   </div>
-                ))}
-              </div>
+                  <div style={{height:'8px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.min(t.px,500)+'px'}} />
+                </div>
+              ))}
             </div>
-          )}
-          {view === 'tc' && (
-            <div className="fnd-section">
-              <h2>Table Column Tokens (tc-*)</h2>
-              <div className="tc-rows">
-                {TC_TOKENS.map(t => (
-                  <div key={t.token} className="tc-row" style={{flexDirection:'column',alignItems:'flex-start',gap:'2px',marginBottom:'8px'}}>
-                    <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
-                      <span className="tc-label">{t.token}</span>
-                      <span className="gap-val">{t.px}px</span>
-                      {t.note && <span style={{fontSize:'10px',color:'var(--color-text-subdued)'}}>{t.note}</span>}
-                    </div>
-                    <div className="tc-bar" style={{width: Math.min(t.px, 400)+'px'}} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+          </section>
+        )}
+      </main>
     </PanelLayout>
   );
 }
@@ -6437,47 +6415,35 @@ function ColorSection() {
   const [cat, setCat] = React.useState('text');
   const tokens = COLOR_CATS[cat] || [];
   return (
-    <PanelLayout
-      panelContent={
-        <div style={{padding:'16px'}}>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Category</div>
-            <div className="fnd-chip-row">
-              {Object.keys(COLOR_CATS).map(c => (
-                <button key={c} className={'fnd-chip'+(cat===c?' active':'')} onClick={()=>setCat(c)}>{c}</button>
-              ))}
-            </div>
-          </div>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">CSS variable</div>
-            <div style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>
-              --color-{cat}-*
-            </div>
-          </div>
-        </div>
-      }
-    >
-      <div className="fnd-stage">
-        <div className="fnd-section">
+    <PanelLayout panelContent={<>
+      <h2>Color Tokens</h2>
+      <CtrlSelect label="category" value={cat} onChange={setCat} options={Object.keys(COLOR_CATS)} />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>css variable</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>--color-{cat}-*</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>tokens</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{tokens.length}</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
           <h2>color / {cat}</h2>
-          <div className="color-grid">
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))',gap:'var(--gap-12)'}}>
             {tokens.map(role => {
               const varName = `--color-${cat}-${role}`;
               return (
-                <div key={role} className="color-swatch">
-                  <div
-                    className="color-dot"
-                    style={{background: `var(${varName})`}}
-                    title={varName}
-                  />
-                  <span className="color-cname">{role}</span>
-                  <span className="color-hex">{varName}</span>
+                <div key={role} style={{display:'flex',flexDirection:'column',gap:'var(--gap-8)'}}>
+                  <div style={{height:'48px',borderRadius:'var(--rd-S)',border:'1px solid var(--color-stroke-subdued)',background:`var(${varName})`}} title={varName} />
+                  <span style={{fontSize:'var(--font-size-body-small)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>{role}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{varName}</span>
                 </div>
               );
             })}
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </PanelLayout>
   );
 }
@@ -6515,62 +6481,39 @@ function IconsSection() {
   const allNames = ICON_CATS[cat] || [];
   const names = search ? allNames.filter(n => n.includes(search.toLowerCase())) : allNames;
   return (
-    <PanelLayout
-      panelContent={
-        <div style={{padding:'16px'}}>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Category</div>
-            <div className="fnd-chip-row">
-              {Object.keys(ICON_CATS).map(c => (
-                <button key={c} className={'fnd-chip'+(cat===c?' active':'')} onClick={()=>setCat(c)}>{c}</button>
-              ))}
-            </div>
-          </div>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Style</div>
-            <div className="fnd-chip-row">
-              {ICON_STYLES.map(s => (
-                <button key={s} className={'fnd-chip'+(style===s?' active':'')} onClick={()=>setStyle(s)}>{s}</button>
-              ))}
-            </div>
-          </div>
-          <div className="fnd-filter-group">
-            <input
-              placeholder="Search icon..."
-              value={search}
-              onChange={e=>setSearch(e.target.value)}
-              style={{width:'100%',padding:'6px 10px',borderRadius:'6px',border:'1px solid var(--color-stroke-secondary,#e5e7eb)',fontSize:'12px',boxSizing:'border-box'}}
-            />
-          </div>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Import</div>
-            <div style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-secondary)',wordBreak:'break-all'}}>
-              {'import { IconName } from \'@dcds/icons\''}
-            </div>
-          </div>
-        </div>
-      }
-    >
-      <div className="fnd-stage">
-        <div className="fnd-section">
+    <PanelLayout panelContent={<>
+      <h2>Icons</h2>
+      <CtrlSelect label="category" value={cat} onChange={v=>{setCat(v);setSearch('');}} options={Object.keys(ICON_CATS)} />
+      <CtrlSelect label="style"    value={style} onChange={setStyle} options={ICON_STYLES} />
+      <CtrlText   label="search"   value={search} onChange={setSearch} placeholder="filter icons..." />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>showing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{names.length} icons</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>import</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>{"import { IconName } from '@dcds/icons'"}</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
           <h2>{cat} — {style} ({names.length})</h2>
-          <div className="icon-chips">
+          <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-8)'}}>
             {names.map(n => (
-              <div key={n} className="icon-chip">
+              <div key={n} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-4)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',minWidth:'72px',cursor:'default'}} title={n}>
                 <img
                   src={`icons/svg/${style}/${n}.svg`}
                   alt={n}
-                  width={24}
-                  height={24}
-                  style={{opacity:0.85}}
+                  width={24} height={24}
+                  style={{color:'var(--color-icon-primary)',opacity:.9}}
                   onError={e=>{e.currentTarget.style.display='none'}}
                 />
-                <span className="icon-name">{n}</span>
+                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',textAlign:'center',maxWidth:'80px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{n}</span>
               </div>
             ))}
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </PanelLayout>
   );
 }
@@ -6651,54 +6594,43 @@ function FlagsSection() {
     !search || f.name.toLowerCase().includes(search.toLowerCase()) || f.code.toLowerCase().includes(search.toLowerCase())
   );
   return (
-    <PanelLayout
-      panelContent={
-        <div style={{padding:'16px'}}>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Region</div>
-            <div className="fnd-chip-row">
-              {Object.keys(FLAG_REGIONS).map(r => (
-                <button key={r} className={'fnd-chip'+(region===r?' active':'')} onClick={()=>setRegion(r)}>{r}</button>
-              ))}
-            </div>
+    <PanelLayout panelContent={<>
+      <h2>Flags</h2>
+      <CtrlSelect label="region" value={region} onChange={v=>{setRegion(v);setSearch('');}} options={Object.keys(FLAG_REGIONS)} />
+      <CtrlText   label="search" value={search} onChange={setSearch} placeholder="country or code..." />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>showing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{flags.length} countries</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>dimensions</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>24 × 18 px (fixed)</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>usage</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>{'<Flag Country="IN" />'}</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
+          <h2>{region} — {flags.length} countries</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {flags.map(f => (
+              <div key={f.code} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                <img
+                  src={`dcds-flags/flags/${f.code}.svg`}
+                  alt={f.name}
+                  width={24} height={18}
+                  style={{borderRadius:'2px',border:'1px solid var(--color-stroke-subdued)',flexShrink:0}}
+                  onError={e=>{e.currentTarget.style.display='none'}}
+                />
+                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)',minWidth:'40px'}}>{f.code}</span>
+                <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-subdued)'}}>{f.name}</span>
+              </div>
+            ))}
           </div>
-          <div className="fnd-filter-group">
-            <input
-              placeholder="Search country..."
-              value={search}
-              onChange={e=>setSearch(e.target.value)}
-              style={{width:'100%',padding:'6px 10px',borderRadius:'6px',border:'1px solid var(--color-stroke-secondary,#e5e7eb)',fontSize:'12px',boxSizing:'border-box'}}
-            />
-          </div>
-          <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Dimensions</div>
-            <div style={{fontSize:'11px',color:'var(--color-text-secondary)'}}>24 x 18 px (fixed)</div>
-          </div>
-        </div>
-      }
-    >
-
-        <div className="fnd-stage">
-          <div className="fnd-section">
-            <h2>{region} ({flags.length} countries)</h2>
-            <div className="flag-grid">
-              {flags.map(f => (
-                <div key={f.code} className="flag-item">
-                  <img
-                    src={`dcds-flags/flags/${f.code}.svg`}
-                    alt={f.name}
-                    width={24}
-                    height={18}
-                    style={{flexShrink:0,borderRadius:'2px',border:'1px solid rgba(0,0,0,.08)'}}
-                    onError={e=>{e.currentTarget.style.display='none'}}
-                  />
-                  <span className="flag-code">{f.code}</span>
-                  <span className="flag-cname">{f.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        </section>
+      </main>
     </PanelLayout>
   );
 }
