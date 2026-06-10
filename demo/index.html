@@ -555,10 +555,11 @@
 
 /* Colors */
 .color-grid  { display: flex; flex-wrap: wrap; gap: 10px; }
-.color-swatch { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: default; }
-.color-dot   { width: 40px; height: 40px; border-radius: 8px; border: 1px solid rgba(0,0,0,.08); }
-.color-cname { font-size: 10px; font-family: monospace; color: var(--color-text-secondary, #6b7280); max-width: 72px; text-align: center; word-break: break-all; }
-.color-hex   { font-size: 9px; color: var(--color-text-tertiary, #9ca3af); }
+.color-swatch { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; cursor: default; min-width: 120px; }
+.color-dot   { width: 100%; height: 48px; border-radius: 8px; border: 1px solid rgba(0,0,0,.08); }
+.color-cname { font-size: 11px; font-weight: 600; color: var(--color-text-primary, #121212); word-break: break-all; }
+.color-hex   { font-size: 10px; font-family: monospace; color: var(--color-text-subdued, #4b4b4b); }
+.color-grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
 
 /* Icons */
 .icon-chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -6205,85 +6206,70 @@
 
 // ── Typography ────────────────────────────────────────────────────
 const DESKTOP_SCALE = [
-  { token: 'dcds-typography-desktop-display-1', size: '44px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-display-2', size: '36px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-heading-1', size: '32px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-heading-2', size: '28px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-heading-3', size: '24px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-heading-4', size: '22px', weight: 600, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-heading-5', size: '20px', weight: 600, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-heading-6', size: '18px', weight: 600, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-subtitle-1', size: '16px', weight: 600, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-subtitle-2', size: '14px', weight: 600, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-body-1',    size: '16px', weight: 400, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-body-2',    size: '14px', weight: 400, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-label-1',   size: '14px', weight: 500, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-label-2',   size: '12px', weight: 500, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-caption',   size: '12px', weight: 400, lh: 'AUTO' },
-  { token: 'dcds-typography-desktop-overline',  size: '10px', weight: 600, lh: 'AUTO' },
-];
-const MOBILE_SCALE = [
-  { token: 'dcds-typography-mobile-display-1',  size: '36px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-mobile-display-2',  size: '30px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-mobile-heading-1',  size: '26px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-mobile-heading-2',  size: '22px', weight: 700, lh: 'AUTO' },
-  { token: 'dcds-typography-mobile-body-1',     size: '14px', weight: 400, lh: 'AUTO' },
-  { token: 'dcds-typography-mobile-body-2',     size: '12px', weight: 400, lh: 'AUTO' },
-  { token: 'dcds-typography-mobile-caption',    size: '10px', weight: 400, lh: 'AUTO' },
+  { varName: '--font-size-h1',          weight: '--font-weight-bold',    label: 'h1 / display',    px: '44px' },
+  { varName: '--font-size-h2',          weight: '--font-weight-bold',    label: 'h2 / heading-lg', px: '32px' },
+  { varName: '--font-size-h3',          weight: '--font-weight-bold',    label: 'h3 / heading-md', px: '24px' },
+  { varName: '--font-size-h4',          weight: '--font-weight-bold',    label: 'h4 / heading-sm', px: '20px' },
+  { varName: '--font-size-caption',     weight: '--font-weight-bold',    label: 'caption / title', px: '18px' },
+  { varName: '--font-size-body',        weight: '--font-weight-regular', label: 'body',             px: '16px' },
+  { varName: '--font-size-label',       weight: '--font-weight-regular', label: 'label',            px: '14px' },
+  { varName: '--font-size-body-small',  weight: '--font-weight-regular', label: 'body-small',       px: '12px' },
+  { varName: '--font-size-validation',  weight: '--font-weight-regular', label: 'validation / xs',  px: '10px' },
 ];
 
 function TypographySection() {
-  const [scale, setScale] = React.useState('desktop');
-  const rows = scale === 'desktop' ? DESKTOP_SCALE : MOBILE_SCALE;
   return (
     <PanelLayout
       panelContent={
         <div style={{padding:'16px'}}>
           <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Scale</div>
-            <div className="fnd-chip-row">
-              {['desktop','mobile'].map(s => (
-                <button key={s} className={'fnd-chip' + (scale===s?' active':'')} onClick={()=>setScale(s)}>
-                  {s.charAt(0).toUpperCase()+s.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="fnd-filter-group">
             <div className="fnd-filter-label">Typeface</div>
-            <div style={{fontSize:'12px',color:'var(--color-text-secondary)'}}>Nunito Sans</div>
+            <div style={{fontSize:'12px',color:'var(--color-text-subdued)',fontFamily:'var(--font-family)'}}>Nunito Sans</div>
           </div>
           <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Line Height</div>
-            <div style={{fontSize:'12px',color:'var(--color-text-secondary)'}}>AUTO</div>
+            <div className="fnd-filter-label">CSS variable</div>
+            <div style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>--font-size-*</div>
           </div>
           <div className="fnd-filter-group">
-            <div className="fnd-filter-label">Letter Spacing</div>
-            <div style={{fontSize:'12px',color:'var(--color-text-secondary)'}}>0%</div>
+            <div className="fnd-filter-label">Font family</div>
+            <div style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>--font-family</div>
           </div>
         </div>
       }
     >
-
-        <div className="fnd-stage">
-          <div className="fnd-section">
-            <h2>{scale === 'desktop' ? 'Desktop' : 'Mobile'} Type Scale</h2>
-            <div className="type-scale">
-              {rows.map(r => (
-                <div key={r.token} className="type-row">
-                  <span className="type-token">{r.token}</span>
-                  <span className="type-meta">{r.size} / w{r.weight}</span>
-                  <span className="type-sample" style={{fontSize:r.size, fontWeight:r.weight, fontFamily:'Nunito Sans, sans-serif'}}>
-                    The quick brown fox
-                  </span>
+      <div className="fnd-stage">
+        <div className="fnd-section">
+          <h2>Type Scale</h2>
+          <div className="type-scale">
+            {DESKTOP_SCALE.map(r => (
+              <div key={r.varName} className="type-row" style={{flexDirection:'column', alignItems:'flex-start', gap:'4px'}}>
+                <span
+                  style={{
+                    fontSize: `var(${r.varName})`,
+                    fontWeight: `var(${r.weight})`,
+                    fontFamily: 'var(--font-family)',
+                    color: 'var(--color-text-primary)',
+                    lineHeight: 1.2,
+                    display: 'block',
+                    width: '100%',
+                  }}
+                >
+                  The quick brown fox
+                </span>
+                <div style={{display:'flex', gap:'12px', alignItems:'center'}}>
+                  <span style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.varName}</span>
+                  <span style={{fontSize:'10px',color:'var(--color-text-subdued)'}}>{r.px}</span>
+                  <span style={{fontSize:'10px',color:'var(--color-text-subdued)',opacity:.7}}>{r.label}</span>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
     </PanelLayout>
   );
 }
+
 
 // ── Spacing ───────────────────────────────────────────────────────
 const GAP_TOKENS = [
@@ -6392,61 +6378,31 @@ function SpacingSection() {
 // ── Color Tokens ──────────────────────────────────────────────────
 const COLOR_CATS = {
   text: [
-    { name: 'primary',       hex: '#1C1C1E' },
-    { name: 'secondary',     hex: '#3C3C43' },
-    { name: 'tertiary',      hex: '#636366' },
-    { name: 'quaternary',    hex: '#8E8E93' },
-    { name: 'disabled',      hex: '#C7C7CC' },
-    { name: 'inverse',       hex: '#FFFFFF' },
-    { name: 'brand',         hex: '#007AFF' },
-    { name: 'success',       hex: '#34C759' },
-    { name: 'warning',       hex: '#FF9500' },
-    { name: 'error',         hex: '#FF3B30' },
-    { name: 'info',          hex: '#5AC8FA' },
-    { name: 'on-color',      hex: '#FFFFFF' },
-    { name: 'placeholder',   hex: '#AEAEB2' },
-    { name: 'link',          hex: '#007AFF' },
-    { name: 'always-dark',   hex: '#1C1C1E' },
+    'primary','secondary','action','neutral','subdued','invert','disabled',
+    'warning','invert-warning','error','invert-error','success','invert-success','info','invert-info',
   ],
-  surface: [
-    { name: 'primary',     hex: '#FFFFFF' },
-    { name: 'secondary',   hex: '#F2F2F7' },
-    { name: 'tertiary',    hex: '#E5E5EA' },
-    { name: 'inverse',     hex: '#1C1C1E' },
-    { name: 'brand',       hex: '#007AFF' },
+  icon: [
+    'primary','secondary','action','neutral','subdued','invert','disabled',
+    'warning','error','success','info',
   ],
+  surface: ['1','2','3','4','disabled','inverse'],
+  overlay: ['50','25'],
   fill: [
-    { name: 'brand',        hex: '#007AFF' },
-    { name: 'brand-subtle', hex: '#E5F0FF' },
-    { name: 'success',      hex: '#34C759' },
-    { name: 'success-subtle', hex: '#E8F8ED' },
-    { name: 'warning',      hex: '#FF9500' },
-    { name: 'warning-subtle', hex: '#FFF4E5' },
-    { name: 'error',        hex: '#FF3B30' },
-    { name: 'error-subtle', hex: '#FFE5E4' },
-    { name: 'info',         hex: '#5AC8FA' },
-    { name: 'info-subtle',  hex: '#E5F5FF' },
-    { name: 'neutral',      hex: '#8E8E93' },
-    { name: 'neutral-subtle', hex: '#F2F2F7' },
+    'light-action','action','dark-action',
+    'primary-0','primary-1','primary-2','primary-3','primary-9',
+    'secondary-0','secondary-1','secondary-2','secondary-3',
+    'light-warning','invert-warning','dark-warning',
+    'light-error','invert-error','dark-error',
+    'light-success','invert-success','dark-success',
+    'light-info','invert-info','dark-info',
   ],
-  stroke: [
-    { name: 'primary',   hex: '#C6C6C8' },
-    { name: 'secondary', hex: '#E5E5EA' },
-    { name: 'tertiary',  hex: '#F2F2F7' },
-    { name: 'brand',     hex: '#007AFF' },
-    { name: 'success',   hex: '#34C759' },
-    { name: 'warning',   hex: '#FF9500' },
-    { name: 'error',     hex: '#FF3B30' },
-    { name: 'info',      hex: '#5AC8FA' },
-    { name: 'inverse',   hex: '#FFFFFF' },
-    { name: 'focus',     hex: '#007AFF' },
-    { name: 'disabled',  hex: '#E5E5EA' },
-  ],
+  stroke: ['focus','focus-subtle','action','neutral','subdued','invert','disabled','warning','error','success','info'],
+  hyperlink: ['default','hover','disabled'],
 };
 
 function ColorSection() {
   const [cat, setCat] = React.useState('text');
-  const swatches = COLOR_CATS[cat] || [];
+  const tokens = COLOR_CATS[cat] || [];
   return (
     <PanelLayout
       panelContent={
@@ -6455,36 +6411,40 @@ function ColorSection() {
             <div className="fnd-filter-label">Category</div>
             <div className="fnd-chip-row">
               {Object.keys(COLOR_CATS).map(c => (
-                <button key={c} className={'fnd-chip'+(cat===c?' active':'')} onClick={()=>setCat(c)}>
-                  {c}
-                </button>
+                <button key={c} className={'fnd-chip'+(cat===c?' active':'')} onClick={()=>setCat(c)}>{c}</button>
               ))}
             </div>
           </div>
-          <div className="fnd-filter-group" style={{marginTop:'8px'}}>
-            <div className="fnd-filter-label">Token prefix</div>
-            <div style={{fontSize:'11px',fontFamily:'monospace',color:'var(--color-text-secondary)'}}>
-              color/{cat}/*
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">CSS variable</div>
+            <div style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>
+              --color-{cat}-*
             </div>
           </div>
         </div>
       }
     >
-
-        <div className="fnd-stage">
-          <div className="fnd-section">
-            <h2>color / {cat}</h2>
-            <div className="color-grid">
-              {swatches.map(s => (
-                <div key={s.name} className="color-swatch">
-                  <div className="color-dot" style={{background: s.hex}} title={s.hex} />
-                  <span className="color-cname">{s.name}</span>
-                  <span className="color-hex">{s.hex}</span>
+      <div className="fnd-stage">
+        <div className="fnd-section">
+          <h2>color / {cat}</h2>
+          <div className="color-grid">
+            {tokens.map(role => {
+              const varName = `--color-${cat}-${role}`;
+              return (
+                <div key={role} className="color-swatch">
+                  <div
+                    className="color-dot"
+                    style={{background: `var(${varName})`}}
+                    title={varName}
+                  />
+                  <span className="color-cname">{role}</span>
+                  <span className="color-hex">{varName}</span>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
+      </div>
     </PanelLayout>
   );
 }
