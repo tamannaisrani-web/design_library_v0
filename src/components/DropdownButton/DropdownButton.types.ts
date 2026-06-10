@@ -13,6 +13,7 @@ import type {
   BaseComponentProps,
   InteractiveEventHandlers,
 } from '../shared/types';
+import type { BadgeSize, BadgeEmphasis, BadgeState } from '../Badge/Badge.types';
 
 /** Visual/interactive state. */
 export type DropdownButtonState = 'Default' | 'Open' | 'Disabled';
@@ -69,16 +70,40 @@ export interface DropdownMenuItem {
   showLeading?: boolean;
 
   /**
-   * Show a trailing status Badge (pill with label).
+   * Show a trailing status Badge on this item.
    * @default false
    */
   showStatus?: boolean;
 
   /**
-   * Text displayed inside the trailing status badge when `showStatus=true`.
+   * Text label shown inside the status badge when `showStatus=true`.
    * @default 'Status'
    */
   status?: string;
+
+  /**
+   * Size of the status badge. Mirrors `Badge.size`.
+   * @default 'S'
+   */
+  statusSize?: BadgeSize;
+
+  /**
+   * Visual emphasis of the status badge. Mirrors `Badge.emphasis`.
+   * @default 'subtle'
+   */
+  statusEmphasis?: BadgeEmphasis;
+
+  /**
+   * Semantic state driving badge colour. Mirrors `Badge.state`.
+   * @default 'neutral'
+   */
+  statusState?: BadgeState;
+
+  /**
+   * Show the leading state icon inside the badge. Mirrors `Badge.showIcon`.
+   * @default true
+   */
+  statusShowIcon?: boolean;
 
   /**
    * Custom leading ReactNode — overrides the type-based auto-leading.
