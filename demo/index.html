@@ -6663,6 +6663,14 @@ function FlagsSection() {
             <div className="flag-grid">
               {flags.map(f => (
                 <div key={f.code} className="flag-item">
+                  <img
+                    src={`dcds-flags/flags/${f.code}.svg`}
+                    alt={f.name}
+                    width={24}
+                    height={18}
+                    style={{flexShrink:0,borderRadius:'2px',border:'1px solid rgba(0,0,0,.08)'}}
+                    onError={e=>{e.currentTarget.style.display='none'}}
+                  />
                   <span className="flag-code">{f.code}</span>
                   <span className="flag-cname">{f.name}</span>
                 </div>
