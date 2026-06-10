@@ -1,7 +1,7 @@
 {
   "name": "dcds-design-library",
   "private": true,
-  "workspaces": ["icons"],
+  "workspaces": ["src/icons"],
   "scripts": {
     "generate": "node scripts/generate-icons.mjs",
     "build": "npm run build --workspace=icons",

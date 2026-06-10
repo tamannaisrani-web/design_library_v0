@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Generates React TSX components from SVG files in icons/svg/.
+ * Generates React TSX components from SVG files in src/icons/svg/.
  * Run after export-figma.mjs.
  *
  * Usage: node scripts/generate-icons.mjs
@@ -57,10 +57,10 @@ const svgrConfig = {
 const variantExports = Object.fromEntries(VARIANTS.map(v => [v, []]))
 
 for (const variant of VARIANTS) {
-  const svgDir = path.join(ROOT, 'icons/svg', variant)
+  const svgDir = path.join(ROOT, 'src/icons/svg', variant)
 
   if (!existsSync(svgDir)) {
-    console.warn(`[${variant}] No SVGs found at icons/svg/${variant}, skipping`)
+    console.warn(`[${variant}] No SVGs found at src/icons/svg/${variant}, skipping`)
     continue
   }
 
@@ -73,7 +73,7 @@ for (const variant of VARIANTS) {
 
   console.log(`[${variant}] Generating ${files.length} components...`)
 
-  const outDir = path.join(ROOT, 'icons/src', variant)
+  const outDir = path.join(ROOT, 'src/icons/src', variant)
   await mkdir(outDir, { recursive: true })
 
   for (const file of files) {
@@ -103,7 +103,7 @@ for (const variant of VARIANTS) {
 const activeVariants = VARIANTS.filter(v => variantExports[v].length > 0)
 
 await writeFile(
-  path.join(ROOT, 'icons/src/index.ts'),
+  path.join(ROOT, 'src/icons/src/index.ts'),
   activeVariants.map(v => `export * from './${v}'`).join('\n') + '\n',
   'utf-8'
 )

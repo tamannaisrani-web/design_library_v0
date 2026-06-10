@@ -64,7 +64,7 @@ async function downloadSvg(url, retries = 3) {
 }
 
 for (const variant of VARIANTS) {
-  await mkdir(path.join(ROOT, 'packages/components/assets/icons', variant), { recursive: true })
+  await mkdir(path.join(ROOT, 'src/icons/svg', variant), { recursive: true })
 }
 
 let totalSaved = 0
@@ -98,7 +98,7 @@ for (const variant of VARIANTS) {
 
           try {
             const svg = await downloadSvg(svgUrl)
-            const outPath = path.join(ROOT, 'packages/components/assets/icons', variant, `${icon.name}.svg`)
+            const outPath = path.join(ROOT, 'src/icons/svg', variant, `${icon.name}.svg`)
             await writeFile(outPath, svg, 'utf-8')
             totalSaved++
           } catch (e) {
