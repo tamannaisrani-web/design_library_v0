@@ -524,7 +524,63 @@
 .dcds-Step[tabindex='0'] { cursor:pointer; }
 .dcds-Step[tabindex='0']:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
 .dcds-Step--disabled { cursor:default; pointer-events:none; }
-    </style>
+    
+/* ── Foundation pages ───────────────────────────────────────── */
+.fnd-stage { padding: 32px; overflow-y: auto; }
+.fnd-section { margin-bottom: 48px; }
+.fnd-section h2 { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary, #6b7280); margin: 0 0 16px; }
+
+/* Typography */
+.type-scale { display: flex; flex-direction: column; gap: 6px; }
+.type-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 12px; border-radius: 8px; background: var(--color-surface-secondary, #f9fafb); }
+.type-token { font-size: 11px; font-family: monospace; color: var(--color-text-secondary, #6b7280); min-width: 180px; flex-shrink: 0; }
+.type-meta  { font-size: 11px; color: var(--color-text-tertiary, #9ca3af); min-width: 120px; flex-shrink: 0; }
+.type-sample { color: var(--color-text-primary, #111827); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Spacing */
+.gap-rows { display: flex; flex-direction: column; gap: 4px; }
+.gap-row { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+.gap-label { font-size: 11px; font-family: monospace; min-width: 100px; color: var(--color-text-secondary, #6b7280); }
+.gap-val   { font-size: 11px; color: var(--color-text-tertiary, #9ca3af); min-width: 40px; }
+.gap-bar   { height: 12px; background: var(--color-fill-brand, #6366f1); border-radius: 3px; min-width: 2px; }
+.rd-grid   { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+.rd-box    { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.rd-swatch { width: 48px; height: 48px; background: var(--color-fill-brand, #6366f1); }
+.rd-name   { font-size: 11px; font-family: monospace; color: var(--color-text-secondary, #6b7280); }
+.rd-val    { font-size: 10px; color: var(--color-text-tertiary, #9ca3af); }
+.tc-rows   { display: flex; flex-direction: column; gap: 4px; }
+.tc-row    { display: flex; align-items: center; gap: 12px; }
+.tc-label  { font-size: 11px; font-family: monospace; min-width: 80px; color: var(--color-text-secondary, #6b7280); }
+.tc-bar    { height: 10px; background: var(--color-fill-secondary, #e5e7eb); border-radius: 3px; }
+
+/* Colors */
+.color-grid  { display: flex; flex-wrap: wrap; gap: 10px; }
+.color-swatch { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: default; }
+.color-dot   { width: 40px; height: 40px; border-radius: 8px; border: 1px solid rgba(0,0,0,.08); }
+.color-cname { font-size: 10px; font-family: monospace; color: var(--color-text-secondary, #6b7280); max-width: 72px; text-align: center; word-break: break-all; }
+.color-hex   { font-size: 9px; color: var(--color-text-tertiary, #9ca3af); }
+
+/* Icons */
+.icon-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.icon-chip  { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 10px; border-radius: 8px; background: var(--color-surface-secondary, #f9fafb); min-width: 72px; }
+.icon-chip svg { width: 24px; height: 24px; }
+.icon-name  { font-size: 9px; font-family: monospace; color: var(--color-text-secondary, #6b7280); text-align: center; }
+
+/* Flags */
+.flag-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.flag-item { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; background: var(--color-surface-secondary, #f9fafb); min-width: 160px; }
+.flag-code { font-size: 11px; font-family: monospace; font-weight: 600; color: var(--color-text-primary, #111827); min-width: 36px; }
+.flag-cname { font-size: 11px; color: var(--color-text-secondary, #6b7280); }
+
+/* Panel filter helpers */
+.fnd-filter-group { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; border-bottom: 1px solid var(--color-stroke-secondary, #e5e7eb); }
+.fnd-filter-group:last-child { border-bottom: none; }
+.fnd-filter-label { font-size: 11px; font-weight: 600; color: var(--color-text-tertiary, #9ca3af); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.fnd-chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.fnd-chip { padding: 3px 8px; border-radius: 20px; font-size: 11px; cursor: pointer; border: 1px solid var(--color-stroke-secondary, #e5e7eb); background: transparent; color: var(--color-text-secondary, #6b7280); }
+.fnd-chip.active { background: var(--color-fill-brand, #6366f1); color: #fff; border-color: var(--color-fill-brand, #6366f1); }
+
+</style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -6142,7 +6198,483 @@
         return exp ? 'Desktop-L-Expanded' : 'Desktop-L-Collapsed';
       }
 
-      function GridSection() {
+      
+// ═══════════════════════════════════════════════════════════════════
+// FOUNDATION SECTIONS
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Typography ────────────────────────────────────────────────────
+const DESKTOP_SCALE = [
+  { token: 'dcds-typography-desktop-display-1', size: '44px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-display-2', size: '36px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-heading-1', size: '32px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-heading-2', size: '28px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-heading-3', size: '24px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-heading-4', size: '22px', weight: 600, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-heading-5', size: '20px', weight: 600, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-heading-6', size: '18px', weight: 600, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-subtitle-1', size: '16px', weight: 600, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-subtitle-2', size: '14px', weight: 600, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-body-1',    size: '16px', weight: 400, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-body-2',    size: '14px', weight: 400, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-label-1',   size: '14px', weight: 500, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-label-2',   size: '12px', weight: 500, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-caption',   size: '12px', weight: 400, lh: 'AUTO' },
+  { token: 'dcds-typography-desktop-overline',  size: '10px', weight: 600, lh: 'AUTO' },
+];
+const MOBILE_SCALE = [
+  { token: 'dcds-typography-mobile-display-1',  size: '36px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-mobile-display-2',  size: '30px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-mobile-heading-1',  size: '26px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-mobile-heading-2',  size: '22px', weight: 700, lh: 'AUTO' },
+  { token: 'dcds-typography-mobile-body-1',     size: '14px', weight: 400, lh: 'AUTO' },
+  { token: 'dcds-typography-mobile-body-2',     size: '12px', weight: 400, lh: 'AUTO' },
+  { token: 'dcds-typography-mobile-caption',    size: '10px', weight: 400, lh: 'AUTO' },
+];
+
+function TypographySection() {
+  const [scale, setScale] = React.useState('desktop');
+  const rows = scale === 'desktop' ? DESKTOP_SCALE : MOBILE_SCALE;
+  return (
+    <PanelLayout
+      panelContent={
+        <div style={{padding:'16px'}}>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Scale</div>
+            <div className="fnd-chip-row">
+              {['desktop','mobile'].map(s => (
+                <button key={s} className={'fnd-chip' + (scale===s?' active':'')} onClick={()=>setScale(s)}>
+                  {s.charAt(0).toUpperCase()+s.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Typeface</div>
+            <div style={{fontSize:'12px',color:'var(--color-text-secondary)'}}>Nunito Sans</div>
+          </div>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Line Height</div>
+            <div style={{fontSize:'12px',color:'var(--color-text-secondary)'}}>AUTO</div>
+          </div>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Letter Spacing</div>
+            <div style={{fontSize:'12px',color:'var(--color-text-secondary)'}}>0%</div>
+          </div>
+        </div>
+      }
+    >
+
+        <div className="fnd-stage">
+          <div className="fnd-section">
+            <h2>{scale === 'desktop' ? 'Desktop' : 'Mobile'} Type Scale</h2>
+            <div className="type-scale">
+              {rows.map(r => (
+                <div key={r.token} className="type-row">
+                  <span className="type-token">{r.token}</span>
+                  <span className="type-meta">{r.size} / w{r.weight}</span>
+                  <span className="type-sample" style={{fontSize:r.size, fontWeight:r.weight, fontFamily:'Nunito Sans, sans-serif'}}>
+                    The quick brown fox
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+    </PanelLayout>
+  );
+}
+
+// ── Spacing ───────────────────────────────────────────────────────
+const GAP_TOKENS = [
+  { token: 'gap-0',   px: 0   },
+  { token: 'gap-1',   px: 2   },
+  { token: 'gap-2',   px: 4   },
+  { token: 'gap-3',   px: 6   },
+  { token: 'gap-4',   px: 8   },
+  { token: 'gap-5',   px: 10  },
+  { token: 'gap-6',   px: 12  },
+  { token: 'gap-7',   px: 16  },
+  { token: 'gap-8',   px: 20  },
+  { token: 'gap-9',   px: 24  },
+  { token: 'gap-10',  px: 32  },
+  { token: 'gap-11',  px: 40  },
+  { token: 'gap-12',  px: 48  },
+  { token: 'gap-13',  px: 64  },
+  { token: 'gap-14',  px: 108 },
+];
+const RD_TOKENS = [
+  { token: 'rd-nil', px: 0,   name: 'Nil'  },
+  { token: 'rd-xs',  px: 2,   name: 'XS'   },
+  { token: 'rd-s',   px: 4,   name: 'S'    },
+  { token: 'rd-m',   px: 8,   name: 'M'    },
+  { token: 'rd-l',   px: 12,  name: 'L'    },
+  { token: 'rd-xl',  px: 16,  name: 'XL'   },
+  { token: 'rd-max', px: 9999,name: 'Max'  },
+];
+const TC_TOKENS = [
+  { token: 'tc-xs',  px: 24  },
+  { token: 'tc-s',   px: 48  },
+  { token: 'tc-m',   px: 96  },
+  { token: 'tc-l',   px: 144 },
+  { token: 'tc-xl',  px: 200 },
+  { token: 'tc-xxl', px: 300 },
+];
+
+function SpacingSection() {
+  const [view, setView] = React.useState('gap');
+  return (
+    <PanelLayout
+      panelContent={
+        <div style={{padding:'16px'}}>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Collection</div>
+            <div className="fnd-chip-row">
+              {['gap','rd','tc'].map(v => (
+                <button key={v} className={'fnd-chip'+(view===v?' active':'')} onClick={()=>setView(v)}>
+                  {v === 'gap' ? 'Spacing' : v === 'rd' ? 'Border Radius' : 'Table Cols'}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      }
+    >
+
+        <div className="fnd-stage">
+          {view === 'gap' && (
+            <div className="fnd-section">
+              <h2>Spacing Tokens (gap-*)</h2>
+              <div className="gap-rows">
+                {GAP_TOKENS.map(t => (
+                  <div key={t.token} className="gap-row">
+                    <span className="gap-label">{t.token}</span>
+                    <span className="gap-val">{t.px}px</span>
+                    <div className="gap-bar" style={{width: Math.max(2, t.px * 2)+'px'}} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {view === 'rd' && (
+            <div className="fnd-section">
+              <h2>Border Radius Tokens (rd-*)</h2>
+              <div className="rd-grid">
+                {RD_TOKENS.map(t => (
+                  <div key={t.token} className="rd-box">
+                    <div className="rd-swatch" style={{borderRadius: Math.min(t.px, 24)+'px'}} />
+                    <span className="rd-name">{t.token}</span>
+                    <span className="rd-val">{t.px === 9999 ? '50%' : t.px+'px'}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {view === 'tc' && (
+            <div className="fnd-section">
+              <h2>Table Column Tokens (tc-*)</h2>
+              <div className="tc-rows">
+                {TC_TOKENS.map(t => (
+                  <div key={t.token} className="tc-row">
+                    <span className="tc-label">{t.token}</span>
+                    <span className="gap-val">{t.px}px</span>
+                    <div className="tc-bar" style={{width: t.px+'px'}} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+    </PanelLayout>
+  );
+}
+
+// ── Color Tokens ──────────────────────────────────────────────────
+const COLOR_CATS = {
+  text: [
+    { name: 'primary',       hex: '#1C1C1E' },
+    { name: 'secondary',     hex: '#3C3C43' },
+    { name: 'tertiary',      hex: '#636366' },
+    { name: 'quaternary',    hex: '#8E8E93' },
+    { name: 'disabled',      hex: '#C7C7CC' },
+    { name: 'inverse',       hex: '#FFFFFF' },
+    { name: 'brand',         hex: '#007AFF' },
+    { name: 'success',       hex: '#34C759' },
+    { name: 'warning',       hex: '#FF9500' },
+    { name: 'error',         hex: '#FF3B30' },
+    { name: 'info',          hex: '#5AC8FA' },
+    { name: 'on-color',      hex: '#FFFFFF' },
+    { name: 'placeholder',   hex: '#AEAEB2' },
+    { name: 'link',          hex: '#007AFF' },
+    { name: 'always-dark',   hex: '#1C1C1E' },
+  ],
+  surface: [
+    { name: 'primary',     hex: '#FFFFFF' },
+    { name: 'secondary',   hex: '#F2F2F7' },
+    { name: 'tertiary',    hex: '#E5E5EA' },
+    { name: 'inverse',     hex: '#1C1C1E' },
+    { name: 'brand',       hex: '#007AFF' },
+  ],
+  fill: [
+    { name: 'brand',        hex: '#007AFF' },
+    { name: 'brand-subtle', hex: '#E5F0FF' },
+    { name: 'success',      hex: '#34C759' },
+    { name: 'success-subtle', hex: '#E8F8ED' },
+    { name: 'warning',      hex: '#FF9500' },
+    { name: 'warning-subtle', hex: '#FFF4E5' },
+    { name: 'error',        hex: '#FF3B30' },
+    { name: 'error-subtle', hex: '#FFE5E4' },
+    { name: 'info',         hex: '#5AC8FA' },
+    { name: 'info-subtle',  hex: '#E5F5FF' },
+    { name: 'neutral',      hex: '#8E8E93' },
+    { name: 'neutral-subtle', hex: '#F2F2F7' },
+  ],
+  stroke: [
+    { name: 'primary',   hex: '#C6C6C8' },
+    { name: 'secondary', hex: '#E5E5EA' },
+    { name: 'tertiary',  hex: '#F2F2F7' },
+    { name: 'brand',     hex: '#007AFF' },
+    { name: 'success',   hex: '#34C759' },
+    { name: 'warning',   hex: '#FF9500' },
+    { name: 'error',     hex: '#FF3B30' },
+    { name: 'info',      hex: '#5AC8FA' },
+    { name: 'inverse',   hex: '#FFFFFF' },
+    { name: 'focus',     hex: '#007AFF' },
+    { name: 'disabled',  hex: '#E5E5EA' },
+  ],
+};
+
+function ColorSection() {
+  const [cat, setCat] = React.useState('text');
+  const swatches = COLOR_CATS[cat] || [];
+  return (
+    <PanelLayout
+      panelContent={
+        <div style={{padding:'16px'}}>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Category</div>
+            <div className="fnd-chip-row">
+              {Object.keys(COLOR_CATS).map(c => (
+                <button key={c} className={'fnd-chip'+(cat===c?' active':'')} onClick={()=>setCat(c)}>
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="fnd-filter-group" style={{marginTop:'8px'}}>
+            <div className="fnd-filter-label">Token prefix</div>
+            <div style={{fontSize:'11px',fontFamily:'monospace',color:'var(--color-text-secondary)'}}>
+              color/{cat}/*
+            </div>
+          </div>
+        </div>
+      }
+    >
+
+        <div className="fnd-stage">
+          <div className="fnd-section">
+            <h2>color / {cat}</h2>
+            <div className="color-grid">
+              {swatches.map(s => (
+                <div key={s.name} className="color-swatch">
+                  <div className="color-dot" style={{background: s.hex}} title={s.hex} />
+                  <span className="color-cname">{s.name}</span>
+                  <span className="color-hex">{s.hex}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+    </PanelLayout>
+  );
+}
+
+// ── Icons ─────────────────────────────────────────────────────────
+const ICON_CATS = {
+  'Navigation': ['Home','Menu','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ChevronLeft','ChevronRight','ChevronUp','ChevronDown'],
+  'Actions': ['Add','Edit','Delete','Search','Filter','Sort','Refresh','Download','Upload','Share'],
+  'Communication': ['Message','Mail','Phone','Notification','Bell','Chat','Send','Inbox'],
+  'Media': ['Play','Pause','Stop','Volume','Mute','Image','Video','Music','Camera'],
+  'Status': ['Check','Close','Warning','Info','Error','Success','Loading','Clock','Calendar'],
+  'Interface': ['Settings','Lock','Unlock','Eye','EyeSlash','Heart','Star','Bookmark','Link'],
+};
+const ICON_STYLES = ['linear','bold','outline','twotone','bulk','broken'];
+
+function IconsSection() {
+  const [cat, setCat] = React.useState('Navigation');
+  const [style, setStyle] = React.useState('linear');
+  const names = ICON_CATS[cat] || [];
+  return (
+    <PanelLayout
+      panelContent={
+        <div style={{padding:'16px'}}>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Category</div>
+            <div className="fnd-chip-row">
+              {Object.keys(ICON_CATS).map(c => (
+                <button key={c} className={'fnd-chip'+(cat===c?' active':'')} onClick={()=>setCat(c)}>{c}</button>
+              ))}
+            </div>
+          </div>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Style</div>
+            <div className="fnd-chip-row">
+              {ICON_STYLES.map(s => (
+                <button key={s} className={'fnd-chip'+(style===s?' active':'')} onClick={()=>setStyle(s)}>{s}</button>
+              ))}
+            </div>
+          </div>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Import</div>
+            <div style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-secondary)',wordBreak:'break-all'}}>
+              import {"{ IconName }"} from '@dcds/icons'
+            </div>
+          </div>
+        </div>
+      }
+    >
+
+        <div className="fnd-stage">
+          <div className="fnd-section">
+            <h2>{cat} — {style}</h2>
+            <div className="icon-chips">
+              {names.map(n => (
+                <div key={n} className="icon-chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="3" opacity=".3"/>
+                    <text x="12" y="16" textAnchor="middle" fontSize="8" stroke="none" fill="currentColor">{n.slice(0,3)}</text>
+                  </svg>
+                  <span className="icon-name">{n}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+    </PanelLayout>
+  );
+}
+
+// ── Flags ─────────────────────────────────────────────────────────
+const FLAG_REGIONS = {
+  'Africa': [
+    {code:'AO',name:'Angola'},{code:'BJ',name:'Benin'},{code:'BW',name:'Botswana'},{code:'BF',name:'Burkina Faso'},
+    {code:'BI',name:'Burundi'},{code:'CM',name:'Cameroon'},{code:'CV',name:'Cabo Verde'},{code:'CF',name:'C. African Rep.'},
+    {code:'TD',name:'Chad'},{code:'KM',name:'Comoros'},{code:'CD',name:'D.R. Congo'},{code:'CG',name:'R. Congo'},
+    {code:'CI',name:"Cote d'Ivoire"},{code:'DJ',name:'Djibouti'},{code:'EG',name:'Egypt'},{code:'ER',name:'Eritrea'},
+    {code:'ET',name:'Ethiopia'},{code:'GA',name:'Gabon'},{code:'GM',name:'Gambia'},{code:'GH',name:'Ghana'},
+    {code:'GN',name:'Guinea'},{code:'GQ',name:'Eq. Guinea'},{code:'GW',name:'Guinea-Bissau'},{code:'KE',name:'Kenya'},
+    {code:'LS',name:'Lesotho'},{code:'LR',name:'Liberia'},{code:'LY',name:'Libya'},{code:'MG',name:'Madagascar'},
+    {code:'MW',name:'Malawi'},{code:'ML',name:'Mali'},{code:'MR',name:'Mauritania'},{code:'MU',name:'Mauritius'},
+    {code:'MA',name:'Morocco'},{code:'MZ',name:'Mozambique'},{code:'NA',name:'Namibia'},{code:'NE',name:'Niger'},
+    {code:'NG',name:'Nigeria'},{code:'RW',name:'Rwanda'},{code:'SC',name:'Seychelles'},{code:'SL',name:'Sierra Leone'},
+    {code:'SO',name:'Somalia'},{code:'ZA',name:'South Africa'},{code:'SS',name:'South Sudan'},{code:'SD',name:'Sudan'},
+    {code:'SZ',name:'Swaziland'},{code:'TZ',name:'Tanzania'},{code:'TG',name:'Togo'},{code:'TN',name:'Tunisia'},
+    {code:'UG',name:'Uganda'},{code:'ZM',name:'Zambia'},{code:'ZW',name:'Zimbabwe'},
+  ],
+  'Asia': [
+    {code:'AF',name:'Afghanistan'},{code:'AM',name:'Armenia'},{code:'AZ',name:'Azerbaijan'},{code:'BD',name:'Bangladesh'},
+    {code:'BT',name:'Bhutan'},{code:'BN',name:'Brunei'},{code:'KH',name:'Cambodia'},{code:'CN',name:'China'},
+    {code:'GE',name:'Georgia'},{code:'HK',name:'Hong Kong'},{code:'IN',name:'India'},{code:'ID',name:'Indonesia'},
+    {code:'JP',name:'Japan'},{code:'KZ',name:'Kazakhstan'},{code:'KG',name:'Kyrgyzstan'},{code:'LA',name:'Laos'},
+    {code:'MO',name:'Macao'},{code:'MY',name:'Malaysia'},{code:'MV',name:'Maldives'},{code:'MN',name:'Mongolia'},
+    {code:'MM',name:'Myanmar'},{code:'NP',name:'Nepal'},{code:'KP',name:'North Korea'},{code:'PK',name:'Pakistan'},
+    {code:'PH',name:'Philippines'},{code:'RU',name:'Russia'},{code:'SG',name:'Singapore'},{code:'KR',name:'South Korea'},
+    {code:'LK',name:'Sri Lanka'},{code:'TW',name:'Taiwan'},{code:'TJ',name:'Tajikistan'},{code:'TH',name:'Thailand'},
+    {code:'TL',name:'Timor-Leste'},{code:'TM',name:'Turkmenistan'},{code:'TR',name:'Turkey'},{code:'UZ',name:'Uzbekistan'},
+    {code:'VN',name:'Vietnam'},
+  ],
+  'Europe': [
+    {code:'AL',name:'Albania'},{code:'AD',name:'Andorra'},{code:'AT',name:'Austria'},{code:'BY',name:'Belarus'},
+    {code:'BE',name:'Belgium'},{code:'BA',name:'Bosnia'},{code:'BG',name:'Bulgaria'},{code:'HR',name:'Croatia'},
+    {code:'CY',name:'Cyprus'},{code:'CZ',name:'Czech Republic'},{code:'DK',name:'Denmark'},{code:'EE',name:'Estonia'},
+    {code:'FI',name:'Finland'},{code:'FR',name:'France'},{code:'DE',name:'Germany'},{code:'GR',name:'Greece'},
+    {code:'HU',name:'Hungary'},{code:'IS',name:'Iceland'},{code:'IE',name:'Ireland'},{code:'IT',name:'Italy'},
+    {code:'LV',name:'Latvia'},{code:'LI',name:'Liechtenstein'},{code:'LT',name:'Lithuania'},{code:'LU',name:'Luxembourg'},
+    {code:'MT',name:'Malta'},{code:'MD',name:'Moldova'},{code:'MC',name:'Monaco'},{code:'ME',name:'Montenegro'},
+    {code:'NL',name:'Netherlands'},{code:'MK',name:'North Macedonia'},{code:'NO',name:'Norway'},{code:'PL',name:'Poland'},
+    {code:'PT',name:'Portugal'},{code:'RO',name:'Romania'},{code:'SM',name:'San Marino'},{code:'RS',name:'Serbia'},
+    {code:'SK',name:'Slovakia'},{code:'SI',name:'Slovenia'},{code:'ES',name:'Spain'},{code:'SE',name:'Sweden'},
+    {code:'CH',name:'Switzerland'},{code:'UA',name:'Ukraine'},{code:'GB',name:'England'},{code:'GB-UKM',name:'United Kingdom'},
+    {code:'GB-SCT',name:'Scotland'},{code:'GB-WLS',name:'Wales'},{code:'GB-NIR',name:'N. Ireland'},{code:'VA',name:'Vatican'},
+  ],
+  'Americas': [
+    {code:'AG',name:'Antigua & Barbuda'},{code:'AR',name:'Argentina'},{code:'AW',name:'Aruba'},{code:'BS',name:'Bahamas'},
+    {code:'BB',name:'Barbados'},{code:'BZ',name:'Belize'},{code:'BO',name:'Bolivia'},{code:'BR',name:'Brazil'},
+    {code:'CA',name:'Canada'},{code:'CL',name:'Chile'},{code:'CO',name:'Colombia'},{code:'CR',name:'Costa Rica'},
+    {code:'CU',name:'Cuba'},{code:'DM',name:'Dominica'},{code:'DO',name:'Dominican Rep.'},{code:'EC',name:'Ecuador'},
+    {code:'SV',name:'El Salvador'},{code:'GD',name:'Grenada'},{code:'GT',name:'Guatemala'},{code:'GY',name:'Guyana'},
+    {code:'HT',name:'Haiti'},{code:'HN',name:'Honduras'},{code:'JM',name:'Jamaica'},{code:'MX',name:'Mexico'},
+    {code:'NI',name:'Nicaragua'},{code:'PA',name:'Panama'},{code:'PY',name:'Paraguay'},{code:'PE',name:'Peru'},
+    {code:'PR',name:'Puerto Rico'},{code:'KN',name:'Saint Kitts'},{code:'LC',name:'Saint Lucia'},{code:'VC',name:'St Vincent'},
+    {code:'SR',name:'Suriname'},{code:'TT',name:'Trinidad'},{code:'US',name:'United States'},{code:'UY',name:'Uruguay'},
+    {code:'VE',name:'Venezuela'},
+  ],
+  'Oceania': [
+    {code:'AU',name:'Australia'},{code:'FJ',name:'Fiji'},{code:'KI',name:'Kiribati'},{code:'MH',name:'Marshall Islands'},
+    {code:'FM',name:'Micronesia'},{code:'NR',name:'Nauru'},{code:'NZ',name:'New Zealand'},{code:'PW',name:'Palau'},
+    {code:'PG',name:'Papua New Guinea'},{code:'WS',name:'Samoa'},{code:'SB',name:'Solomon Islands'},{code:'TO',name:'Tonga'},
+    {code:'TV',name:'Tuvalu'},{code:'VU',name:'Vanuatu'},
+  ],
+  'Middle East': [
+    {code:'AE',name:'UAE'},{code:'BH',name:'Bahrain'},{code:'IR',name:'Iran'},{code:'IQ',name:'Iraq'},
+    {code:'IL',name:'Israel'},{code:'JO',name:'Jordan'},{code:'KW',name:'Kuwait'},{code:'LB',name:'Lebanon'},
+    {code:'OM',name:'Oman'},{code:'PS',name:'Palestine'},{code:'QA',name:'Qatar'},{code:'SA',name:'Saudi Arabia'},
+    {code:'SY',name:'Syria'},{code:'YE',name:'Yemen'},
+  ],
+};
+
+function FlagsSection() {
+  const [region, setRegion] = React.useState('Asia');
+  const [search, setSearch] = React.useState('');
+  const flags = (FLAG_REGIONS[region] || []).filter(f =>
+    !search || f.name.toLowerCase().includes(search.toLowerCase()) || f.code.toLowerCase().includes(search.toLowerCase())
+  );
+  return (
+    <PanelLayout
+      panelContent={
+        <div style={{padding:'16px'}}>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Region</div>
+            <div className="fnd-chip-row">
+              {Object.keys(FLAG_REGIONS).map(r => (
+                <button key={r} className={'fnd-chip'+(region===r?' active':'')} onClick={()=>setRegion(r)}>{r}</button>
+              ))}
+            </div>
+          </div>
+          <div className="fnd-filter-group">
+            <input
+              placeholder="Search country..."
+              value={search}
+              onChange={e=>setSearch(e.target.value)}
+              style={{width:'100%',padding:'6px 10px',borderRadius:'6px',border:'1px solid var(--color-stroke-secondary,#e5e7eb)',fontSize:'12px',boxSizing:'border-box'}}
+            />
+          </div>
+          <div className="fnd-filter-group">
+            <div className="fnd-filter-label">Dimensions</div>
+            <div style={{fontSize:'11px',color:'var(--color-text-secondary)'}}>24 x 18 px (fixed)</div>
+          </div>
+        </div>
+      }
+    >
+
+        <div className="fnd-stage">
+          <div className="fnd-section">
+            <h2>{region} ({flags.length} countries)</h2>
+            <div className="flag-grid">
+              {flags.map(f => (
+                <div key={f.code} className="flag-item">
+                  <span className="flag-code">{f.code}</span>
+                  <span className="flag-cname">{f.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+    </PanelLayout>
+  );
+}
+
+function GridSection() {
         const [activeBp,     setActiveBp]     = useState('Mobile');
         const [resizeWidth,  setResizeWidth]  = useState(360);
         const [isResizing,   setIsResizing]   = useState(false);
@@ -6282,6 +6814,12 @@
           { id: 'tag',            label: 'Tag'            },
           { id: 'tooltip',        label: 'Tooltip'        },
           { id: 'grids',          label: 'Grids'          },
+          { id: '__sep__',        label: 'Foundations'    },
+          { id: 'typography',     label: 'Typography'     },
+          { id: 'spacing',        label: 'Spacing'        },
+          { id: 'colors',         label: 'Colors'         },
+          { id: 'icons',          label: 'Icons'          },
+          { id: 'flags',          label: 'Flags'          },
         ];
 
         /* --- DropdownMenu controls --- */
@@ -6601,6 +7139,11 @@
               <span className="primary-nav__brand">DCDS Playground</span>
               <ul className="primary-nav__list">
                 {NAV_ITEMS.map((item) => (
+                  item.id === '__sep__' ? (
+                    <li key={item.id} style={{padding:'12px 12px 4px',fontSize:'10px',fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',color:'#9ca3af',listStyle:'none'}}>
+                      {item.label}
+                    </li>
+                  ) : (
                   <li key={item.id}>
                     <button
                       className={`primary-nav__item${activeComponent === item.id ? ' primary-nav__item--active' : ''}`}
@@ -6610,6 +7153,7 @@
                       {item.label}
                     </button>
                   </li>
+                  )
                 ))}
               </ul>
             </nav>
@@ -6627,11 +7171,16 @@
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
             {activeComponent === 'grids'       && <GridSection />}
+            {activeComponent === 'typography'  && <TypographySection />}
+            {activeComponent === 'spacing'     && <SpacingSection />}
+            {activeComponent === 'colors'      && <ColorSection />}
+            {activeComponent === 'icons'       && <IconsSection />}
+            {activeComponent === 'flags'       && <FlagsSection />}
 
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'inputfields' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'grids' && (
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'inputfields' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'grids' && activeComponent !== 'typography' && activeComponent !== 'spacing' && activeComponent !== 'colors' && activeComponent !== 'icons' && activeComponent !== 'flags' && (
             <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
