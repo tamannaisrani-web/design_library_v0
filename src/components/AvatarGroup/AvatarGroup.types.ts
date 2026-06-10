@@ -157,4 +157,15 @@ export interface AvatarGroupProps extends BaseComponentProps, InteractiveEventHa
    * Wire to the trigger button via `aria-controls` when you need explicit linkage.
    */
   menuId?: string;
+
+  /**
+   * Visual theme variant.
+   * - `Default` — white background, dark text (standard use on light surfaces).
+   * - `Inverse` — dark navy (`color/fill/primary-9`) background, white text.
+   *   Use when placing the AvatarGroup on an Inverse (dark) TopBar.
+   *
+   * @default 'Default'
+   * @see Figma variant frame 1671:9461 — AvatarGroup type=Inverse
+   */
+  type?: 'Default' | 'Inverse';
 }

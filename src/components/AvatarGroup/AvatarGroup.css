@@ -103,6 +103,61 @@
 }
 
 /* ===========================================================
+ * Inverse type — dark navy bg, white name/designation text
+ * Figma variant frame 1671:9461, type=Inverse
+ *
+ * Key rules from Figma:
+ * - Resting bg:  color/fill/primary-9 (#082546 dark navy)
+ * - Hover bg:    color/fill/secondary-0 (#f1f9ff) — SAME as Default hover
+ * - Initials:    stay dark (color/text/primary) — avatar circle unchanged
+ * - Name/desg:   white (color/text/invert)
+ * - Arrow:       white (color/text/invert)
+ * =========================================================== */
+
+.dcds-AvatarGroup--inverse {
+  background-color: var(--color-fill-primary-9); /* #082546 */
+}
+
+/* Hover reverts to the same light bg AND dark text as Default type */
+.dcds-AvatarGroup--inverse:hover,
+.dcds-AvatarGroup--inverse:focus-visible {
+  background-color: var(--color-fill-secondary-0); /* same as Default hover */
+}
+
+/* On hover: all text/icons revert to dark navy (same as Default hover state) */
+.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__info,
+.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__info {
+  color: var(--color-text-primary);
+}
+
+.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__designation,
+.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__name,
+.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__designation,
+.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__name {
+  color: var(--color-text-primary); /* dark navy */
+}
+
+.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__arrow,
+.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__arrow {
+  color: var(--color-icon-primary); /* dark navy */
+}
+
+/* initials NOT overridden — stay dark (sky-blue avatar, dark text) */
+
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__info {
+  color: var(--color-text-invert);
+}
+
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__designation,
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__name {
+  color: var(--color-text-invert); /* white */
+}
+
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__arrow {
+  color: var(--color-text-invert); /* white chevron */
+}
+
+/* ===========================================================
  * Expanded state — Bold text, arrow rotates to ↑
  * =========================================================== */
 

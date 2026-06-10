@@ -272,6 +272,30 @@
 .dcds-DropdownButton__menu-item-status { display:inline-flex; align-items:center; gap:var(--gap-4); height:24px; padding:var(--gap-4) var(--gap-8); background-color:var(--color-surface-2); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-Max); font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-neutral); white-space:nowrap; flex-shrink:0; line-height:1; }
 
 /* ============================================================
+ * _BaseMenuItem.css — Figma node 788:68291
+ * ============================================================ */
+.dcds-BaseMenuItem { display:flex; align-items:center; justify-content:space-between; width:100%; padding:var(--gap-12) var(--gap-16); background:var(--color-surface-1); border:none; border-bottom:0.5px solid var(--color-stroke-subdued); cursor:pointer; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); text-align:left; transition:background-color 120ms ease; }
+.dcds-BaseMenuItem:hover:not(.dcds-BaseMenuItem--disabled) { background:var(--color-fill-secondary-0); }
+.dcds-BaseMenuItem--selected { background:var(--color-fill-light-action); font-weight:var(--font-weight-bold); }
+.dcds-BaseMenuItem--selected:hover { background:var(--color-fill-light-action); }
+.dcds-BaseMenuItem--disabled { background:var(--color-surface-3); color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+.dcds-BaseMenuItem__inner { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
+.dcds-BaseMenuItem__leading { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:24px; height:24px; }
+.dcds-BaseMenuItem__checkbox { width:24px; height:24px; border:2px solid var(--color-stroke-action); border-radius:var(--rd-XS); background:var(--color-surface-1); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.dcds-BaseMenuItem--selected .dcds-BaseMenuItem__checkbox { background:var(--color-fill-action); border-color:var(--color-fill-action); }
+.dcds-BaseMenuItem__radio { width:24px; height:24px; border:2px solid var(--color-stroke-action); border-radius:var(--rd-Max); background:var(--color-surface-1); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.dcds-BaseMenuItem--selected .dcds-BaseMenuItem__radio { border-color:var(--color-fill-action); }
+.dcds-BaseMenuItem--selected .dcds-BaseMenuItem__radio::after { content:''; width:10px; height:10px; border-radius:var(--rd-Max); background:var(--color-fill-action); }
+.dcds-BaseMenuItem__checkmark { display:none; }
+.dcds-BaseMenuItem--selected .dcds-BaseMenuItem__checkmark { display:block; }
+.dcds-BaseMenuItem__label { font-family:var(--font-family); font-size:var(--font-size-body); line-height:normal; }
+.dcds-BaseMenuItem__status { background:var(--color-surface-2); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-Max); padding:var(--gap-4) var(--gap-8); font-size:var(--font-size-body-small); color:var(--color-text-neutral); flex-shrink:0; }
+/* Tab dropdown container */
+.dcds-TopBar__tab-dropdown { position:absolute; top:100%; left:0; min-width:200px; background:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:var(--shadow-S); z-index:100; overflow:hidden; animation:dcds-dropdown-in 120ms ease-out; }
+@keyframes dcds-dropdown-in { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+.dcds-TopBar__tab-wrap { position:relative; }
+
+/* ============================================================
  * ButtonGroup.css
  * ============================================================ */
 .dcds-ButtonGroup { display:inline-flex; flex-direction:row; align-items:center; gap:var(--gap-16); }
@@ -361,18 +385,21 @@
  * BaseNav.css
  * ============================================================ */
 .dcds-BaseNav { display:flex; align-items:center; width:100%; padding:var(--gap-12) var(--gap-24) var(--gap-12) var(--gap-48); font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); background:transparent; border:none; cursor:pointer; text-align:left; user-select:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-decoration:none; transition:background-color 120ms ease; }
-.dcds-BaseNav:hover { background:var(--color-fill-secondary-1); }
-.dcds-BaseNav--selected { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
-.dcds-BaseNav--selected:hover { background:var(--color-surface-3); }
+/* Figma: BaseNav hover=color/surface/3 (grey #f5f5f5) · selected=color/fill/secondary-1 (sky blue #ecf5fb) */
+.dcds-BaseNav:hover { background:var(--color-surface-3); }
+.dcds-BaseNav--selected { background:var(--color-fill-secondary-1); font-weight:var(--font-weight-bold); }
+.dcds-BaseNav--selected:hover { background:var(--color-fill-secondary-1); }
 .dcds-BaseNav:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
 
 /* ============================================================
  * NavElement.css
  * ============================================================ */
 /* NavElement — fixed: overflow:visible prevents accordion clipping */
-.dcds-NavElement { display:flex; flex-direction:column; align-items:stretch; width:240px; background:transparent; border:none; cursor:pointer; font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); text-align:left; user-select:none; transition:background-color 120ms ease; overflow:visible; text-decoration:none; }
-.dcds-NavElement:not(.dcds-NavElement--selected):hover { background:var(--color-fill-secondary-1); }
-.dcds-NavElement--selected { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
+/* padding:0 resets browser default <button> padding so icons align identically whether showDropdown=true (div+trigger) or false (button) */
+.dcds-NavElement { display:flex; flex-direction:column; align-items:stretch; width:240px; padding:0; background:transparent; border:none; cursor:pointer; font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); text-align:left; user-select:none; transition:background-color 120ms ease; overflow:visible; text-decoration:none; }
+/* Figma: Hover=color/surface/3 (#f5f5f5 grey) · Selected=color/fill/secondary-1 (#ecf5fb sky blue) */
+.dcds-NavElement:not(.dcds-NavElement--selected):hover { background:var(--color-surface-3); }
+.dcds-NavElement--selected { background:var(--color-fill-secondary-1); font-weight:var(--font-weight-bold); }
 /* Row: space-between → [__content flex:1] … [__arrow] (matches Figma) */
 .dcds-NavElement__row { display:flex; align-items:center; justify-content:space-between; width:100%; padding:var(--gap-12) var(--gap-16) var(--gap-12) var(--gap-32); }
 /* Icon+label group — gap only between icon and label, not between label and arrow */
@@ -381,30 +408,53 @@
 .dcds-NavElement__label { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .dcds-NavElement__arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:inherit; transition:transform 200ms ease; }
 .dcds-NavElement--accordion-open .dcds-NavElement__arrow { transform:rotate(180deg); }
-.dcds-NavElement__accordion { display:flex; flex-direction:column; width:100%; }
+/* Accordion resets background to white so subsections aren't tinted by the parent's selected sky-blue */
+.dcds-NavElement__accordion { display:flex; flex-direction:column; width:100%; background:var(--color-surface-1); }
 .dcds-NavElement--collapsed { width:56px; }
 .dcds-NavElement--collapsed .dcds-NavElement__row { padding:var(--gap-12) var(--gap-16); justify-content:center; }
 .dcds-NavElement--collapsed .dcds-NavElement__content { flex:none; gap:0; }
-.dcds-NavElement:not(.dcds-NavElement--has-dropdown):not(.dcds-NavElement--selected):hover { background:var(--color-fill-secondary-1); }
-.dcds-NavElement:not(.dcds-NavElement--has-dropdown).dcds-NavElement--selected { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
+.dcds-NavElement:not(.dcds-NavElement--has-dropdown):not(.dcds-NavElement--selected):hover { background:var(--color-surface-3); }
+.dcds-NavElement:not(.dcds-NavElement--has-dropdown).dcds-NavElement--selected { background:var(--color-fill-secondary-1); font-weight:var(--font-weight-bold); }
 /* Trigger: align-items:center keeps icon+label vertically centred */
 .dcds-NavElement__trigger { display:flex; align-items:center; width:100%; background:transparent; border:none; cursor:pointer; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; text-align:left; padding:0; transition:background-color 120ms ease; }
-.dcds-NavElement:not(.dcds-NavElement--selected) .dcds-NavElement__trigger:hover { background:var(--color-fill-secondary-1); }
-.dcds-NavElement--selected .dcds-NavElement__trigger { background:var(--color-surface-3); font-weight:var(--font-weight-bold); }
-.dcds-NavElement--selected .dcds-NavElement__trigger:hover { background:var(--color-surface-3); }
+.dcds-NavElement:not(.dcds-NavElement--selected) .dcds-NavElement__trigger:hover { background:var(--color-surface-3); }
+.dcds-NavElement--selected .dcds-NavElement__trigger { background:var(--color-fill-secondary-1); font-weight:var(--font-weight-bold); }
+.dcds-NavElement--selected .dcds-NavElement__trigger:hover { background:var(--color-fill-secondary-1); }
 .dcds-NavElement__trigger:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
 
 /* ============================================================
  * SideBar.css — overflow-x:hidden clips labels in collapsed mode;
  * overflow-y:auto lets accordion rows scroll rather than be clipped
  * ============================================================ */
-.dcds-SideBar { display:flex; flex-direction:column; background:var(--color-surface-1); padding:var(--gap-40) 0; gap:var(--gap-4); width:240px; box-shadow:4px 0 15px rgba(0,0,0,0.11); overflow-x:hidden; overflow-y:auto; flex-shrink:0; transition:width 200ms ease,box-shadow 200ms ease; }
+/* position:relative allows absolute-positioned collapse arrow; overflow-x:hidden clips label bleed in collapsed mode */
+/* SideBar restores overflow-x:hidden — toggle is now a sibling (outside SideBar), not a child */
+.dcds-SideBar { display:flex; flex-direction:column; background:var(--color-surface-1); padding:var(--gap-40) 0; gap:var(--gap-4); width:240px; box-shadow:4px 0 15px rgba(0,0,0,0.11); overflow-x:hidden; overflow-y:auto; flex-shrink:0; position:relative; transition:width 200ms ease,box-shadow 200ms ease; }
+/* Sidebar wrapper — simple container (toggle is now INSIDE the sidebar, no overflow tricks) */
+.dcds-SideBar-wrapper { flex-shrink:0; height:100%; }
+.dcds-SideBar-wrapper .dcds-SideBar { height:100%; }
+/* Collapse/expand button — Figma CollapsibleButton spec (node 1716:6768):
+   32×32, rd-S, bg=color/fill/secondary-3 (#b5d8f0), hover=color/fill/secondary-2 (#daecf7)
+   arrow-left (collapse) / arrow-right (expand), linear style, 16×16 */
+.dcds-SideBar__toggle { width:32px; height:32px; border-radius:var(--rd-S); background:var(--color-fill-secondary-3); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--color-text-primary); transition:background-color 120ms ease; padding:0; flex-shrink:0; }
+.dcds-SideBar__toggle:hover { background:var(--color-fill-secondary-2); }
+.dcds-SideBar__toggle:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+/* Toggle alignment wrapper — right-aligned in expanded (pl-32 pr-16 justify-end), centered in collapsed */
+.dcds-SideBar__toggle-wrap-expanded { display:flex; justify-content:flex-end; width:100%; padding:0 var(--gap-16) 0 var(--gap-32); }
+.dcds-SideBar__toggle-wrap-collapsed { display:flex; justify-content:center; width:100%; }
 .dcds-SideBar--collapsed { width:56px; box-shadow:4px 0 7.5px rgba(0,0,0,0.11); }
 
 /* ============================================================
  * TopBar.css
  * ============================================================ */
-.dcds-TopBar { display:flex; align-items:center; justify-content:space-between; background:var(--color-surface-1); border-bottom:1px solid var(--color-stroke-subdued); width:100%; overflow:hidden; }
+/* overflow:visible — allows tab/company/user dropdown menus to escape the bar */
+.dcds-TopBar { display:flex; align-items:center; justify-content:space-between; background:var(--color-surface-1); border-bottom:1px solid var(--color-stroke-subdued); width:100%; overflow:visible; position:relative; padding-right:var(--gap-24); transition:background-color 200ms ease; }
+.dcds-TopBar--inverse { background:var(--color-fill-primary-9); border-bottom-color:rgba(255,255,255,0.15); }
+.dcds-TopBar--inverse .dcds-TopBar__tab { color:var(--color-text-invert); }
+.dcds-TopBar--inverse .dcds-TopBar__tab--active { color:var(--color-text-action); border-bottom-color:var(--color-stroke-action); }
+.dcds-TopBar--inverse .dcds-TopBar__tab:hover:not(.dcds-TopBar__tab--active) { color:rgba(255,255,255,0.7); }
+.dcds-TopBar--inverse .dcds-TopBar__divider { background:rgba(255,255,255,0.2); }
+/* Inverse TopBar: AvatarGroup keeps its default styling (white bg, dark text) per Figma design.
+   The white button naturally contrasts against the dark navy background. */
 .dcds-TopBar__left { display:flex; align-items:center; flex-shrink:0; }
 /* dcds-TopBar__logo is a transparent flex wrapper only — Logo provides its own 240×64 */
 .dcds-TopBar__logo { display:flex; flex-shrink:0; }
@@ -416,7 +466,8 @@
 .dcds-TopBar__tab--active { font-weight:var(--font-weight-bold); color:var(--color-text-action); border-bottom-color:var(--color-stroke-action); }
 .dcds-TopBar__tab-arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:inherit; }
 .dcds-TopBar__tab:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
-.dcds-TopBar__right { display:flex; align-items:center; gap:var(--gap-12); padding-right:var(--gap-16); flex-shrink:0; }
+/* No padding-right — TopBar container's pr-24 provides the right edge spacing */
+.dcds-TopBar__right { display:flex; align-items:center; gap:var(--gap-12); flex-shrink:0; }
 .dcds-TopBar__selector-btn { display:flex; align-items:center; gap:var(--gap-8); height:48px; padding:var(--gap-4) var(--gap-8); background:var(--color-surface-1); border:none; border-radius:var(--rd-S); cursor:pointer; font-family:var(--font-family); transition:background-color 120ms ease; }
 .dcds-TopBar__selector-btn:hover { background:var(--color-surface-2); }
 .dcds-TopBar__selector-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
@@ -1009,6 +1060,10 @@
       .dcds-AvatarGroup:hover,.dcds-AvatarGroup:focus-visible { background-color:var(--color-fill-secondary-0); }
       .dcds-AvatarGroup:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
       .dcds-AvatarGroup__avatar { display:inline-flex; align-items:center; justify-content:center; width:var(--gap-32); height:var(--gap-32); border-radius:var(--rd-Max); background-color:var(--color-fill-secondary-2); flex-shrink:0; overflow:hidden; }
+      /* Icon-square avatar variant — used for company selector in TopBar */
+      .dcds-AvatarGroup__avatar--square { border-radius:var(--rd-S); }
+      .dcds-AvatarGroup__avatar--square .dcds-AvatarGroup__initials { display:none; }
+      .dcds-AvatarGroup__avatar--square .dcds-AvatarGroup__avatar-icon { display:flex; align-items:center; justify-content:center; width:16px; height:16px; color:var(--color-icon-primary); }
       .dcds-AvatarGroup__initials { font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:1; white-space:nowrap; }
       .dcds-AvatarGroup__info { display:flex; flex-direction:column; justify-content:center; width:152px; min-width:0; flex-shrink:0; overflow:hidden; color:var(--color-text-primary); }
       .dcds-AvatarGroup__designation { font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--color-text-primary); }
@@ -1017,6 +1072,17 @@
       .dcds-AvatarGroup--expanded .dcds-AvatarGroup__name { font-weight:var(--font-weight-bold); }
       .dcds-AvatarGroup__arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:var(--gap-24); height:var(--gap-24); color:var(--color-icon-primary); transition:transform 200ms ease; }
       .dcds-AvatarGroup--expanded .dcds-AvatarGroup__arrow { transform:rotate(180deg); }
+      /* Inverse: dark navy resting; hover bg+text both revert to Default; initials stay dark */
+      .dcds-AvatarGroup--inverse { background-color:var(--color-fill-primary-9); }
+      .dcds-AvatarGroup--inverse:hover,.dcds-AvatarGroup--inverse:focus-visible { background-color:var(--color-fill-secondary-0); }
+      /* On hover: revert text to dark navy (same as Default hover) */
+      .dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__info,.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__info { color:var(--color-text-primary); }
+      .dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__designation,.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__name,.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__designation,.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__name { color:var(--color-text-primary); }
+      .dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__arrow,.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__arrow { color:var(--color-icon-primary); }
+      /* Resting state: white text/arrow; initials NOT overridden (stay dark) */
+      .dcds-AvatarGroup--inverse .dcds-AvatarGroup__info { color:var(--color-text-invert); }
+      .dcds-AvatarGroup--inverse .dcds-AvatarGroup__designation,.dcds-AvatarGroup--inverse .dcds-AvatarGroup__name { color:var(--color-text-invert); }
+      .dcds-AvatarGroup--inverse .dcds-AvatarGroup__arrow { color:var(--color-text-invert); }
 
       /* ============================================================
        * Chip / Badge / Tag — stage helpers
@@ -3412,6 +3478,7 @@
         showDesignation = true,
         showDropdown = true,
         isExpanded = false,
+        type = 'Default',
         menuItems,
         onSelect,
         menuId,
@@ -3432,6 +3499,7 @@
         const classes = [
           'dcds-AvatarGroup',
           isExpanded ? 'dcds-AvatarGroup--expanded' : '',
+          type === 'Inverse' ? 'dcds-AvatarGroup--inverse' : '',
           className,
         ].filter(Boolean).join(' ');
         const resolvedAriaExpanded = ariaExpanded != null ? ariaExpanded : isExpanded;
@@ -4938,13 +5006,14 @@
       );
 
       /* ── Figma icon image URLs (bold style, 16×16, Noble Blue #0a2e57) ─── */
-      const ICON_HOME     = 'https://www.figma.com/api/mcp/asset/a6eb12d9-10b3-4dd8-abc3-05e5c9c329b0';
-      const ICON_INVOICES = 'https://www.figma.com/api/mcp/asset/9471dc08-41a8-4263-b532-db2ab1a4633a';
-      const ICON_PEOPLE   = 'https://www.figma.com/api/mcp/asset/2778bbc7-c907-407a-8743-96bb663d7d01';
-      const ICON_PAYMENTS = 'https://www.figma.com/api/mcp/asset/3e173395-245f-4098-bb49-cf433e3ea0ee';
-      const ICON_RESOURCES= 'https://www.figma.com/api/mcp/asset/3e1065e0-65af-4e80-bc22-628fba9cf59b';
-      const ICON_REPORTS  = 'https://www.figma.com/api/mcp/asset/6dd54cc6-ba97-4390-a3c8-72a380c0f1ce';
-      const ICON_ACCOUNT  = 'https://www.figma.com/api/mcp/asset/c96e92ac-31d7-4956-a8b2-244e069ce3f5';
+      const ICON_HOME      = 'https://www.figma.com/api/mcp/asset/01190bdb-ea1c-45eb-b5e3-9fd676a00525';
+      const ICON_INVOICES  = 'https://www.figma.com/api/mcp/asset/6f518475-96f3-491c-b8e6-c8faf6cbd3ec';
+      const ICON_PEOPLE    = 'https://www.figma.com/api/mcp/asset/c9a1fc1a-1b76-413a-b2da-789f7b77aed0';
+      const ICON_PAYMENTS  = 'https://www.figma.com/api/mcp/asset/054229c1-f1d3-45f0-96fa-5f7b179eab20';
+      const ICON_RESOURCES = 'https://www.figma.com/api/mcp/asset/0a839565-fc94-46d1-a6bb-76cd5a544b74';
+      const ICON_REPORTS   = 'https://www.figma.com/api/mcp/asset/d22b390c-289f-4ef8-89a5-3fc379f004bf';
+      const ICON_ACCOUNT   = 'https://www.figma.com/api/mcp/asset/63cae1a0-6303-4657-bcc8-c1cd6c3d3f9f';
+      const ARROW_LINEAR   = 'https://www.figma.com/api/mcp/asset/b5cc2071-2c0d-49cf-9efc-278094c64e70';
 
       /* Icon component: renders a 16×16 img using the Figma asset URL */
       const FigmaIcon = ({ src, alt = '' }) => (
@@ -5259,24 +5328,71 @@
         { id: 'opt-5', label: 'Option', hasDropdown: true },
       ];
 
-      function TopBar({ showNavigation = true, showCompany = true, showUser = true, logoSlot, navigationTabs, companyName = 'Company Name', userInitials = 'AM', onTabClick, onCompanyClick, onUserClick, companyMenuItems, userMenuItems, className }) {
+      function TopBar({ type = 'Default', showNavigation = true, showCompany = true, showUser = true, logoSlot, navigationTabs, companyName = 'Company Name', userInitials = 'AM', onTabClick, onCompanyClick, onUserClick, companyMenuItems, userMenuItems, bmState = 'Default', bmType = 'Multi-Select', bmShowLeading = true, bmShowStatus = false, activeRoute, activeSub, className }) {
         const [companyOpen, setCompanyOpen] = useState(false);
         const [userOpen,    setUserOpen]    = useState(false);
+        const [tabMenuOpen, setTabMenuOpen] = useState(null);
         const tabs = navigationTabs || DEFAULT_TABS;
-        const classes = ['dcds-TopBar', className || ''].filter(Boolean).join(' ');
+        const isInverse = type === 'Inverse';
+        const classes = ['dcds-TopBar', isInverse ? 'dcds-TopBar--inverse' : '', className || ''].filter(Boolean).join(' ');
 
-        /* Close menus when clicking outside */
+        /* Close all menus on outside click */
         React.useEffect(() => {
-          if (!companyOpen && !userOpen) return;
+          if (!companyOpen && !userOpen && !tabMenuOpen) return;
           const handler = (e) => {
-            if (!e.target.closest('.dcds-AvatarGroup__wrapper')) {
-              setCompanyOpen(false);
-              setUserOpen(false);
+            if (!e.target.closest('.dcds-AvatarGroup__wrapper') && !e.target.closest('.dcds-TopBar__tab-wrap')) {
+              setCompanyOpen(false); setUserOpen(false); setTabMenuOpen(null);
             }
           };
           document.addEventListener('mousedown', handler);
           return () => document.removeEventListener('mousedown', handler);
-        }, [companyOpen, userOpen]);
+        }, [companyOpen, userOpen, tabMenuOpen]);
+
+        /* Contextual menu items per tab */
+        const TAB_MENUS = {
+          payments: [
+            { id: 'monthly',   label: 'Monthly',   isSelected: activeRoute === 'payments' && activeSub === 'monthly' },
+            { id: 'quarterly', label: 'Quarterly', isSelected: activeRoute === 'payments' && activeSub === 'quarterly' },
+            { id: 'annual',    label: 'Annual',    isSelected: activeRoute === 'payments' && activeSub === 'annual' },
+          ],
+          suppliers: [
+            { id: 'all',      label: 'All Suppliers' },
+            { id: 'active',   label: 'Active' },
+            { id: 'inactive', label: 'Inactive' },
+            { id: 'mine',     label: 'My Suppliers' },
+          ],
+        };
+
+        /* _BaseMenuItem renderer */
+        const renderMenuItem = (item, type, showLeading, showStatus) => {
+          const isSelected = !!item.isSelected || bmState === 'Variant4';
+          const isDisabled = !!item.isDisabled || bmState === 'Disabled';
+          const cls = ['dcds-BaseMenuItem', isSelected ? 'dcds-BaseMenuItem--selected' : '', isDisabled ? 'dcds-BaseMenuItem--disabled' : ''].filter(Boolean).join(' ');
+          return (
+            <button key={item.id} type="button" className={cls} disabled={isDisabled}
+              onClick={() => { if (!isDisabled) setTabMenuOpen(null); }}>
+              <span className="dcds-BaseMenuItem__inner">
+                {showLeading && (
+                  <span className="dcds-BaseMenuItem__leading">
+                    {type === 'Multi-Select' && (
+                      <span className="dcds-BaseMenuItem__checkbox">
+                        {isSelected && (
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                            <path d="M2 7L5.5 10.5L12 3.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        )}
+                      </span>
+                    )}
+                    {type === 'Single-Select' && <span className="dcds-BaseMenuItem__radio" />}
+                  </span>
+                )}
+                <span className="dcds-BaseMenuItem__label">{item.label}</span>
+              </span>
+              {showStatus && item.status && <span className="dcds-BaseMenuItem__status">{item.status}</span>}
+            </button>
+          );
+        };
+
         return (
           <header className={classes}>
             <div className="dcds-TopBar__left">
@@ -5286,33 +5402,82 @@
               <div className="dcds-TopBar__divider" aria-hidden="true" />
               {showNavigation && (
                 <nav className="dcds-TopBar__nav" aria-label="Site navigation">
-                  {tabs.map((tab) => (
-                    <button key={tab.id} type="button"
-                      className={['dcds-TopBar__tab', tab.isActive ? 'dcds-TopBar__tab--active' : ''].filter(Boolean).join(' ')}
-                      aria-current={tab.isActive ? 'page' : undefined}
-                      onClick={(e) => { if (tab.onClick) tab.onClick(e); if (onTabClick) onTabClick(tab.id); }}
-                    >
-                      {tab.label}
-                      {tab.hasDropdown && <span className="dcds-TopBar__tab-arrow"><TabDropdownArrow /></span>}
-                    </button>
-                  ))}
+                  {tabs.map((tab) => {
+                    const tabCls = ['dcds-TopBar__tab', tab.isActive ? 'dcds-TopBar__tab--active' : ''].filter(Boolean).join(' ');
+                    const menuItems = TAB_MENUS[tab.id] || [];
+                    const isMenuOpen = tabMenuOpen === tab.id;
+                    if (tab.hasDropdown && menuItems.length > 0) {
+                      return (
+                        <div key={tab.id} className="dcds-TopBar__tab-wrap">
+                          <button type="button" className={tabCls}
+                            aria-haspopup="menu" aria-expanded={isMenuOpen}
+                            aria-current={tab.isActive ? 'page' : undefined}
+                            onClick={() => {
+                              setTabMenuOpen(isMenuOpen ? null : tab.id);
+                              if (onTabClick) onTabClick(tab.id);
+                            }}
+                          >
+                            {tab.label}
+                            <span className="dcds-TopBar__tab-arrow" style={{ transform: isMenuOpen ? 'rotate(180deg)' : undefined, transition:'transform 150ms ease' }}>
+                              <TabDropdownArrow />
+                            </span>
+                          </button>
+                          {isMenuOpen && (
+                            <div role="menu" className="dcds-TopBar__tab-dropdown">
+                              {menuItems.map(item => renderMenuItem(item, bmType, bmShowLeading, bmShowStatus))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
+                    return (
+                      <button key={tab.id} type="button" className={tabCls}
+                        aria-current={tab.isActive ? 'page' : undefined}
+                        onClick={(e) => { if (tab.onClick) tab.onClick(e); if (onTabClick) onTabClick(tab.id); }}
+                      >
+                        {tab.label}
+                        {tab.hasDropdown && <span className="dcds-TopBar__tab-arrow"><TabDropdownArrow /></span>}
+                      </button>
+                    );
+                  })}
                 </nav>
               )}
             </div>
             <div className="dcds-TopBar__right">
               {showCompany && (
-                <AvatarGroup
-                  initials={companyName.slice(0, 2).toUpperCase()}
-                  name={companyName}
-                  displayName={true}
-                  showDesignation={false}
-                  showDropdown={true}
-                  isExpanded={companyOpen}
-                  menuItems={companyMenuItems || []}
-                  ariaLabel={`Switch company: ${companyName}`}
-                  onClick={() => { setCompanyOpen(p => !p); setUserOpen(false); if (onCompanyClick) onCompanyClick(); }}
-                  onSelect={() => setCompanyOpen(false)}
-                />
+                <div className="dcds-AvatarGroup__wrapper">
+                  <button type="button" className={['dcds-AvatarGroup', companyOpen ? 'dcds-AvatarGroup--expanded' : '', isInverse ? 'dcds-AvatarGroup--inverse' : ''].filter(Boolean).join(' ')}
+                    aria-label={`Switch company: ${companyName}`}
+                    aria-haspopup="menu" aria-expanded={companyOpen}
+                    onClick={() => { setCompanyOpen(p => !p); setUserOpen(false); setTabMenuOpen(null); if (onCompanyClick) onCompanyClick(); }}>
+                    {/* Icon square avatar with building icon */}
+                    <span className="dcds-AvatarGroup__avatar dcds-AvatarGroup__avatar--square" aria-hidden="true">
+                      <span className="dcds-AvatarGroup__avatar-icon">
+                        <BuildingIcon />
+                      </span>
+                    </span>
+                    <span className="dcds-AvatarGroup__info">
+                      <span className="dcds-AvatarGroup__name">{companyName}</span>
+                    </span>
+                    <span className="dcds-AvatarGroup__arrow"><AvatarGroupChevronIcon /></span>
+                  </button>
+                  {companyOpen && (companyMenuItems || []).length > 0 && (
+                    <div role="menu" className="dcds-DropdownButton__menu dcds-AvatarGroup__menu">
+                      {(companyMenuItems || []).map((item) => {
+                        const cls = ['dcds-DropdownButton__menu-item', item.isSelected ? 'dcds-DropdownButton__menu-item--selected' : '', item.disabled ? 'dcds-DropdownButton__menu-item--disabled' : ''].filter(Boolean).join(' ');
+                        return (
+                          <div role="none" key={item.id} className="dcds-DropdownButton__menu-item-row">
+                            <button type="button" role="menuitem" className={cls}
+                              disabled={item.disabled} aria-disabled={item.disabled || undefined}
+                              onClick={() => { if (!item.disabled) { if (item.onClick) item.onClick(); setCompanyOpen(false); } }}>
+                              <span className="dcds-DropdownButton__menu-item-label">{item.label}</span>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               )}
               {showUser && (
                 <AvatarGroup
@@ -5320,9 +5485,10 @@
                   displayName={false}
                   showDropdown={true}
                   isExpanded={userOpen}
+                  type={isInverse ? 'Inverse' : 'Default'}
                   menuItems={userMenuItems || []}
                   ariaLabel="Open user menu"
-                  onClick={() => { setUserOpen(p => !p); setCompanyOpen(false); if (onUserClick) onUserClick(); }}
+                  onClick={() => { setUserOpen(p => !p); setCompanyOpen(false); setTabMenuOpen(null); if (onUserClick) onUserClick(); }}
                   onSelect={() => setUserOpen(false)}
                 />
               )}
@@ -5389,87 +5555,84 @@
       }
 
       /* ── Figma logo image URLs ────────────────────────────────────────── */
-      /* ── Fresh Figma asset URLs (node 673:16477, fetched 2026-06-09) ── */
-      /* Drip wordmarks — rendered in a FIXED 118.205×40px box (not aspect-ratio) */
-      const LOGO_DRIP_BLUE       = 'https://www.figma.com/api/mcp/asset/d982c53f-d866-4719-992e-fa86c06832ae';
-      const LOGO_DRIP_GREEN      = 'https://www.figma.com/api/mcp/asset/b9b4d8cc-8ce5-44f8-abbe-b3df6bb5806b';
-      const LOGO_DRIP_WHITE      = 'https://www.figma.com/api/mcp/asset/7127df7b-8e63-434f-ac50-debdf1475c8d';
-      /* Drip lockups — rendered with aspect-ratio wrapper */
-      const LOGO_DRIP_RF         = 'https://www.figma.com/api/mcp/asset/2712d8bc-6190-4fd8-a2ff-c70a5c66cbdb';
-      const LOGO_DRIP_SCF        = 'https://www.figma.com/api/mcp/asset/d3d844c4-77b6-4a75-9b8d-e5a57070f1ea';
+      /* ── Fresh Figma asset URLs (node 1716:6602, fetched 2026-06-10) ── */
+      /* Drip lockups — SCF (488:93), RF (130:50), Blue/Green/White (fixed 118.205×40) */
+      const LOGO_DRIP_SCF        = 'https://www.figma.com/api/mcp/asset/0e7da9b8-fae8-49d5-8255-103f372ac952';
+      const LOGO_DRIP_RF         = 'https://www.figma.com/api/mcp/asset/3678dadd-d40b-47a8-967f-947821149b2a';
+      const LOGO_DRIP_BLUE       = 'https://www.figma.com/api/mcp/asset/53e726c7-1f83-4abc-becc-5b5feed3367a';
+      const LOGO_DRIP_GREEN      = 'https://www.figma.com/api/mcp/asset/7fc96a01-6ada-41f2-a640-5b7e38eddf79';
+      const LOGO_DRIP_WHITE      = 'https://www.figma.com/api/mcp/asset/d2089f7b-76cb-44da-b512-e268b8c46e78';
       /* Voyager — mark image + wordmark text */
-      const LOGO_VOYAGER_DARK    = 'https://www.figma.com/api/mcp/asset/dbe393f4-b159-4489-aed4-2c1ab6894885';
-      const LOGO_VOYAGER_LIGHT   = 'https://www.figma.com/api/mcp/asset/82f405af-3e7c-4f10-bfb9-232ba1950775';
+      const LOGO_VOYAGER_LIGHT   = 'https://www.figma.com/api/mcp/asset/e76710c5-0e85-4f28-a2de-15d872aeda45';
+      const LOGO_VOYAGER_DARK    = 'https://www.figma.com/api/mcp/asset/3177f0bf-5da3-422b-9ac1-86b9a758a605';
 
       /*
-       * Logo — Figma-exact rendering (node 673:16477).
-       *
-       * Outer container: 240×64, flex-col, items-start, pl-24 pr-12 py-12, overflow-hidden.
-       *
-       * Per-variant Figma structures:
-       *
-       * drip / SCF  — aspect-[488/93] flex:1 wrapper → img absolute inset-0 object-cover max-w-none
-       * drip / RF   — aspect-[130/50] flex:1 wrapper → img absolute inset-0 object-cover max-w-none
-       * drip / Blue, Green, White — FIXED 118.205×40px box → img absolute inset-0 size-full max-w-none
-       *   (NOT width:auto — the fixed box prevents stretching)
-       *
-       * voyager / ZOHO — flex-row: 44×38.9px mark img + wordmark text
-       * voyager / Blue — same as ZOHO light (simplified; full vector SVG omitted)
-       *
-       * portal → onWhite logic (Figma + user request):
-       *   Blue / Green / White → onWhite=false
-       *   SCF / RF             → onWhite=true
-       *   ZOHO (voyager)       → onWhite stays (user controls)
+       * Logo — Figma-accurate rendering.
+       * LogoOnWhite portals: drip→SCF,RF,Blue  |  voyager→ZOHO,Blue
+       * LogoOnInverse portals: drip→White,Green  |  voyager→ZOHO
        */
-      function Logo({ company = 'drip', onWhite = true, portal = 'SCF' }) {
+      function Logo({ company = 'drip', portal = 'SCF', type = 'Default' }) {
+        const isInverse = type === 'Inverse';
         const container = {
-          display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
-          width: 240, height: 64, padding: '12px 12px 12px 24px',
-          overflow: 'hidden', flexShrink: 0,
+          display:'flex', flexDirection:'column', alignItems:'flex-start',
+          width:240, height:64, padding:'12px 12px 12px 24px',
+          overflow:'hidden', flexShrink:0,
         };
         const imgFill = { position:'absolute', inset:0, width:'100%', height:'100%', maxWidth:'none', pointerEvents:'none' };
 
-        /* ── Voyager ──
-         * Figma structure (node 673:16469 / 673:16470):
-         *   outer: 240×64, flex-col, pl-24 pr-12 py-12, overflow-hidden
-         *     inner: flex:1 0 0 (fills 40px height), w-full, flex-row, gap-8, items-center
-         *       mark div: 44.444×38.889px, shrink-0, relative
-         *         img: absolute inset-0, size-full, max-w-none, object-cover
-         *       text p: whitespace-nowrap, overflow-hidden, text-ellipsis, shrink-0
-         *
-         * onWhite=false (dark bg) → VOYAGER_DARK mark + 21.88px white text
-         * onWhite=true  (light bg) → VOYAGER_LIGHT mark + 20.22px #0a2e57 text
-         */
+        /* ── Voyager Blue — rasterized PNG from Figma node 673:16471 (240×64, exact match) ── */
+        if (company === 'voyager' && portal === 'Blue') {
+          return (
+            <img
+              src="https://www.figma.com/api/mcp/asset/c153f4cd-981f-4d61-9a8d-3b1aefb9bcd7"
+              alt="Voyager Trading"
+              style={{ width:240, height:64, display:'block', flexShrink:0 }}
+            />
+          );
+        }
+
+        /* ── Voyager ZOHO Inverse — rasterized PNG from Figma node 2112:6388 (exact 240×64) ── */
+        if (company === 'voyager' && isInverse) {
+          return (
+            <img
+              src="https://www.figma.com/api/mcp/asset/44767f3a-9542-44b9-9ce3-f28ef9618be0"
+              alt="Voyager Trading"
+              style={{ width:240, height:64, display:'block', flexShrink:0 }}
+            />
+          );
+        }
+
+        /* ── Voyager ZOHO Default — mark + wordmark (light) ── */
         if (company === 'voyager') {
-          const markSrc = !onWhite ? LOGO_VOYAGER_DARK : LOGO_VOYAGER_LIGHT;
           return (
             <div style={container}>
-              {/* inner flex-1 wrapper — fills slot height (40px) at full inner width (204px) */}
-              <div style={{
-                flex:'1 0 0', minHeight:1, width:'100%',
-                display:'flex', alignItems:'center', gap:8,
-              }}>
-                {/* Mark image — fixed Figma dimensions, shrink-0 */}
+              <div style={{ flex:'1 0 0', minHeight:1, width:'100%', display:'flex', alignItems:'center', gap:8 }}>
                 <div style={{ position:'relative', height:38.889, width:44.444, flexShrink:0 }}>
-                  <img src={markSrc} alt="" aria-hidden="true"
-                    style={{ ...imgFill, objectFit:'contain' }} />
+                  <img src={LOGO_VOYAGER_LIGHT} alt="" aria-hidden="true" style={{ ...imgFill, objectFit:'contain' }} />
                 </div>
-                {/* Wordmark — flex:1 minWidth:0 allows proper truncation.
-                    Font size uses 18px (browser renders Nunito Sans 20.22px at
-                    154px wide, 2px over the 152px available — 18px fits cleanly). */}
                 <span style={{
-                  fontFamily:'var(--font-family)', fontWeight:600,
-                  fontSize: 18,
-                  color: !onWhite ? 'white' : 'var(--color-text-primary)',
-                  whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis',
-                  flex:1, minWidth:0,
+                  fontFamily:'var(--font-family)', fontWeight:600, fontSize:18,
+                  color:'var(--color-text-primary)',
+                  whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', flex:1, minWidth:0,
                 }}>Voyager Trading</span>
               </div>
             </div>
           );
         }
 
-        /* ── Drip / SCF — aspect-ratio wrapper (488:93 ≈ 5.25:1) ── */
+        /* ── Drip Inverse: White or Green wordmarks (fixed 118.205×40 box) ── */
+        if (isInverse) {
+          const src = portal === 'Green' ? LOGO_DRIP_GREEN : LOGO_DRIP_WHITE;
+          return (
+            <div style={container}>
+              <div style={{ position:'relative', width:118.205, height:40, flexShrink:0 }}>
+                <img src={src} alt="Drip Capital" style={{ ...imgFill, objectFit:'fill' }} />
+              </div>
+            </div>
+          );
+        }
+
+        /* ── Drip Default: SCF (488:93), RF (130:50), Blue (118×40 fixed) ── */
         if (portal === 'SCF') {
           return (
             <div style={container}>
@@ -5479,8 +5642,6 @@
             </div>
           );
         }
-
-        /* ── Drip / RF — aspect-ratio wrapper (130:50 = 2.6:1) ── */
         if (portal === 'RF') {
           return (
             <div style={container}>
@@ -5490,16 +5651,11 @@
             </div>
           );
         }
-
-        /* ── Drip / Blue | Green | White — FIXED 118.205×40px box ── */
-        /* The image fills a fixed box; NOT width:auto which stretches */
-        const wordmarkSrc = portal === 'Green' ? LOGO_DRIP_GREEN
-                          : portal === 'White' ? LOGO_DRIP_WHITE
-                          : LOGO_DRIP_BLUE; /* Blue */
+        /* Blue — dark wordmark on white */
         return (
           <div style={container}>
             <div style={{ position:'relative', width:118.205, height:40, flexShrink:0 }}>
-              <img src={wordmarkSrc} alt="Drip Capital" style={{ ...imgFill, objectFit:'fill' }} />
+              <img src={LOGO_DRIP_BLUE} alt="Drip Capital" style={{ ...imgFill, objectFit:'fill' }} />
             </div>
           </div>
         );
@@ -5517,31 +5673,81 @@
        *   TopBar  → showNavigation, showCompany, showUser, logo, companyName, userInitials
        *   SideBar → state (Expanded / Collapsed)
        */
-      function NavigationSection({ sbState, setSbState, sbActive, setSbActive, sbSub, setSbSub, tbShowNav, tbShowCompany, tbShowUser, tbCompany, tbInitials, logoCompany, logoOnWhite, logoPortal }) {
+      /* ═══════════════════════════════════════════════════════════════
+       * Navigation Enum Definitions
+       * These represent the full set of valid navigation item IDs.
+       * A backend would send a subset of these IDs to define which
+       * items appear. The component maps IDs → labels / icons / config.
+       * ═══════════════════════════════════════════════════════════════ */
+
+      /* TopBarTabId — valid tab identifiers for the horizontal nav bar */
+      const TOPBAR_TABS_ENUM = [
+        { id: 'overview',  label: 'Overview'                    },
+        { id: 'invoices',  label: 'Invoices'                    },
+        { id: 'payments',  label: 'Payments',  hasDropdown: true },
+        { id: 'suppliers', label: 'Suppliers', hasDropdown: true },
+        { id: 'reports',   label: 'Reports'                     },
+      ];
+
+      /* SideBarSectionId — valid section identifiers for the sidebar */
+      const SIDEBAR_SECTIONS_ENUM = [
+        { id: 'dashboard', name: 'Dashboard',  hasDropdown: false },
+        { id: 'invoices',  name: 'Invoices',   hasDropdown: false },
+        { id: 'suppliers', name: 'Suppliers',  hasDropdown: false },
+        { id: 'payments',  name: 'Payments',   hasDropdown: true  },
+        { id: 'resources', name: 'Resources',  hasDropdown: true  },
+        { id: 'reports',   name: 'Reports',    hasDropdown: false },
+        { id: 'myaccount', name: 'My Account', hasDropdown: false },
+      ];
+
+      /* PaymentsSubsectionId — valid sub-items for the Payments section */
+      const PAYMENTS_SUBSECTIONS_ENUM = [
+        { id: 'monthly',   name: 'Monthly'   },
+        { id: 'quarterly', name: 'Quarterly' },
+        { id: 'annual',    name: 'Annual'    },
+      ];
+
+      /* Icon map used by NavigationSection to look up icon by section id */
+      const SECTION_ICONS = {
+        dashboard: IconHome, invoices: IconInvoices, suppliers: IconPeople,
+        payments: IconMoney, resources: IconFolder, reports: IconDoc, myaccount: IconUser,
+      };
+
+      function NavigationSection({ sbState, setSbState, sections = [], updateSection, enabledTabIds = [], enabledSectionIds = [], toggleTabId, toggleSectionId, enabledSubIds = [], activeSubId = 'quarterly', setActiveSubId, tbType = 'Default', tbShowNav, tbShowCompany, tbShowUser, tbCompany, tbInitials, logoPortal, setLogoPortal, bmState = 'Default', bmType = 'Multi-Select', bmShowLeading = false, bmShowStatus = false }) {
+        const logoCompany = 'drip'; /* always drip — Voyager options removed */
         const [activeTab, setActiveTab] = useState('invoices');
         const [log, setLog] = useState([]);
         const pushLog = (msg) => setLog(prev => [`${new Date().toLocaleTimeString()}  ${msg}`, ...prev.slice(0, 9)]);
-        const activeRoute = sbActive;
-        const activeSub   = sbSub;
-        const setActiveRoute = (r) => { setSbActive(r); };
-        const setActiveSub   = (s) => { setSbSub(s); };
 
-        /* Route metadata */
-        const routeLabels = {
-          dashboard: 'Dashboard',   invoices: 'Invoices',
-          suppliers: 'Suppliers',   payments: 'Payments',
-          resources: 'Resources',   reports:  'Reports',
-          myaccount: 'My Account',
+        /* Derive active lists — enum filtered by enabled IDs, props from sections config */
+        const activeTabs = TOPBAR_TABS_ENUM.filter(t => enabledTabIds.includes(t.id));
+        const activeSections = SIDEBAR_SECTIONS_ENUM
+          .filter(s => enabledSectionIds.includes(s.id))
+          .map(enumSection => {
+            const cfg = sections.find(s => s.id === enumSection.id) || {};
+            return { ...enumSection, style: cfg.style || 'Default', showDropdown: cfg.showDropdown !== undefined ? cfg.showDropdown : enumSection.hasDropdown, showIcon: cfg.showIcon !== false, name: cfg.name || enumSection.name };
+          });
+        const activeSubsections = PAYMENTS_SUBSECTIONS_ENUM.filter(s => enabledSubIds.includes(s.id));
+
+        /* activeRoute derived from sections (panel-controlled) */
+        const activeRoute = sections.find(s => s.style === 'Selected' && enabledSectionIds.includes(s.id))?.id || null;
+
+        /* Set one section to Selected, all others to Default */
+        const setActiveRoute = (id) => {
+          updateSection && sections.forEach(s =>
+            updateSection(s.id, { style: s.id === id ? 'Selected' : 'Default' })
+          );
         };
-        const subLabels = { monthly: 'Monthly', quarterly: 'Quarterly', annual: 'Annual' };
 
-        const navTabs = [
-          { id: 'overview',  label: 'Overview',  isActive: activeTab === 'overview'  },
-          { id: 'invoices',  label: 'Invoices',  isActive: activeTab === 'invoices'  },
-          { id: 'payments',  label: 'Payments',  isActive: activeTab === 'payments',  hasDropdown: true },
-          { id: 'suppliers', label: 'Suppliers', isActive: activeTab === 'suppliers', hasDropdown: true },
-          { id: 'reports',   label: 'Reports',   isActive: activeTab === 'reports'   },
-        ];
+        const activeSub = activeSubId;
+        const setActiveSub = (id) => { if (setActiveSubId) setActiveSubId(id); };
+
+        /* Route metadata — labels from enum definitions */
+        const routeLabels = Object.fromEntries(SIDEBAR_SECTIONS_ENUM.map(s => [s.id, s.name]));
+        const subLabels   = Object.fromEntries(PAYMENTS_SUBSECTIONS_ENUM.map(s => [s.id, s.name]));
+
+        /* Build navTabs from the enabled subset of the TopBarTabId enum */
+        const navTabs = activeTabs.map(t => ({ ...t, isActive: t.id === activeTab }));
 
         /* openAccordion tracks which dropdown section is expanded independently of selection.
          * Clicking an already-open dropdown collapses it; clicking any other dropdown opens it. */
@@ -5549,9 +5755,16 @@
 
         /* Navigate: select route. For dropdown routes, toggle the accordion. */
         const goTo = (route, hasDropdown = false) => {
+          const wasAlreadyActive = activeRoute === route;
           setActiveRoute(route);
           if (hasDropdown) {
-            setOpenAccordion(prev => prev === route ? null : route);
+            if (wasAlreadyActive) {
+              /* Re-clicking an already-active dropdown section: toggle open/close */
+              setOpenAccordion(prev => prev === route ? null : route);
+            } else {
+              /* Newly selecting a dropdown section: always open its accordion */
+              setOpenAccordion(route);
+            }
           } else {
             setOpenAccordion(null);
           }
@@ -5560,155 +5773,177 @@
         const goToSub = (sub) => { setActiveSub(sub); pushLog(`Sub → ${subLabels[sub]}`); };
 
         return (
-          <section>
-            <h2>Navigation — Interactive Playground</h2>
-            <p className="stage-note">
-              Click <strong>TopBar tabs</strong>, <strong>SideBar items</strong>, and
-              <strong> sub-sections</strong> to navigate. Toggle structural props in the left panel.
-              The SideBar collapses to 56 px icon-only mode when <code>state="Collapsed"</code>.
-            </p>
-
-            {/* ── App frame ─────────────────────────────────────────────────── */}
-            <div style={{
-              border: '1px solid var(--color-stroke-subdued)',
-              borderRadius: 'var(--rd-M)',
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
-              height: 900,
-            }}>
-
-              {/* TopBar */}
-              <TopBar
-                showNavigation={tbShowNav}
-                showCompany={tbShowCompany}
-                showUser={tbShowUser}
-                logoSlot={<Logo company={logoCompany} onWhite={logoOnWhite} portal={logoPortal} />}
-                navigationTabs={navTabs.map(t => ({
-                  ...t,
-                  isActive: t.id === activeTab,
-                  onClick: () => { setActiveTab(t.id); pushLog(`TopBar → ${t.label}`); },
-                }))}
-                companyName={tbCompany}
-                userInitials={tbInitials}
-                onTabClick={(id) => { setActiveTab(id); }}
-                onCompanyClick={() => pushLog('Company selector')}
-                onUserClick={() => pushLog('User menu')}
+          <>
+            {/* ═══════════════════════════════════════════════════════════
+              * PLAYGROUND 1: TopBar Navigation
+              * Full-width TopBar with navigation tabs only — no SideBar.
+              * ═══════════════════════════════════════════════════════════ */}
+            <section>
+              <h2>TopBar Navigation — Interactive Playground</h2>
+              <p className="stage-note">
+                Click <strong>tabs</strong> to navigate. Click <strong>Payments ↓</strong> and <strong>Suppliers ↓</strong> to open tab dropdowns. Click the <strong>company</strong> or <strong>user</strong> buttons to open their menus.
+              </p>
+              {/* overflow:visible + minHeight lets tab dropdowns show below the TopBar */}
+              <div style={{ border:'1px solid var(--color-stroke-subdued)', borderRadius:'var(--rd-M)', overflow:'visible', minHeight:220, position:'relative' }}>
+                <TopBar
+                  type={tbType}
+                  showNavigation={true}
+                  showCompany={tbShowCompany}
+                  showUser={tbShowUser}
+                  logoSlot={<Logo company={logoCompany} portal={logoPortal} type={tbType} />}
+                  navigationTabs={navTabs.map(t => ({
+                    ...t,
+                    isActive: t.id === activeTab,
+                    onClick: () => { setActiveTab(t.id); pushLog(`TopBar tab: ${t.label}`); },
+                  }))}
+                  companyName={tbCompany}
+                  userInitials={tbInitials}
+                  onTabClick={(id) => { setActiveTab(id); }}
+                  onCompanyClick={() => pushLog('Company selector')}
+                  onUserClick={() => pushLog('User menu')}
                   companyMenuItems={[
-                    { id: 'drip-scf', label: 'Drip Capital SCF' },
-                    { id: 'drip-rf',  label: 'Drip Capital RF'  },
-                    { id: 'voyager',  label: 'Voyager Trading'  },
+                    { id: 'tamanna-textiles', label: 'Tamanna Textiles', isSelected: true  },
+                    { id: 'tamanna-fabrics',  label: 'Tamanna Fabrics',  isSelected: false },
                   ]}
                   userMenuItems={[
                     { id: 'profile',  label: 'My Profile'  },
                     { id: 'settings', label: 'Settings'    },
                     { id: 'logout',   label: 'Log out'     },
                   ]}
+                  bmState={bmState} bmType={bmType} bmShowLeading={bmShowLeading} bmShowStatus={bmShowStatus}
+                  activeRoute={activeRoute} activeSub={activeSub}
+                />
+              </div>
+              <div className="events" style={{ marginTop:'var(--gap-8)' }}>
+                {log.length === 0 ? '— click tabs or buttons to see events —' : log.join('\n')}
+              </div>
+            </section>
+
+            {/* ═══════════════════════════════════════════════════════════
+              * PLAYGROUND 2: SideBar Navigation
+              * TopBar (no tabs) + collapsible SideBar with full nav items.
+              * ═══════════════════════════════════════════════════════════ */}
+            <section>
+              <h2>SideBar Navigation — Interactive Playground</h2>
+              <p className="stage-note">
+                Click <strong>SideBar items</strong> and <strong>sub-sections</strong> to navigate. Use the <strong>collapse toggle</strong> (chevron) at the top of the sidebar to expand/collapse. Use the props panel to configure sections.
+              </p>
+
+              <div style={{
+                border: '1px solid var(--color-stroke-subdued)',
+                borderRadius: 'var(--rd-M)',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                height: 'calc(100vh - 64px)',
+              }}>
+                {/* TopBar — navigation hidden in SideBar playground */}
+                <TopBar
+                  type={tbType}
+                  showNavigation={false}
+                  showCompany={tbShowCompany}
+                  showUser={tbShowUser}
+                  logoSlot={<Logo company={logoCompany} portal={logoPortal} type={tbType} />}
+                  navigationTabs={[]}
+                  companyName={tbCompany}
+                  userInitials={tbInitials}
+                  onCompanyClick={() => pushLog('Company selector')}
+                  onUserClick={() => pushLog('User menu')}
+                  companyMenuItems={[
+                    { id: 'tamanna-textiles', label: 'Tamanna Textiles', isSelected: true  },
+                    { id: 'tamanna-fabrics',  label: 'Tamanna Fabrics',  isSelected: false },
+                  ]}
+                  userMenuItems={[
+                    { id: 'profile',  label: 'My Profile'  },
+                    { id: 'settings', label: 'Settings'    },
+                    { id: 'logout',   label: 'Log out'     },
+                  ]}
+                  bmState={bmState} bmType={bmType} bmShowLeading={bmShowLeading} bmShowStatus={bmShowStatus}
                 />
 
-              {/* Body: SideBar + Content — minHeight:0 lets SideBar scroll internally */}
-              <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+                {/* App body */}
+                <div style={{ display:'flex', flex:1, minHeight:0, overflow:'hidden' }}>
+                  <div className="dcds-SideBar-wrapper">
+                    <SideBar state={sbState}>
+                      {/* CollapsibleButton — inside sidebar, aligned per Figma spec:
+                          Expanded → right-aligned (pl-32 pr-16);  Collapsed → centred */}
+                      <div className={sbState === 'Expanded' ? 'dcds-SideBar__toggle-wrap-expanded' : 'dcds-SideBar__toggle-wrap-collapsed'}>
+                        <button
+                          type="button"
+                          className="dcds-SideBar__toggle"
+                          title={sbState === 'Expanded' ? 'Collapse sidebar' : 'Expand sidebar'}
+                          aria-label={sbState === 'Expanded' ? 'Collapse sidebar' : 'Expand sidebar'}
+                          onClick={() => { setSbState(sbState === 'Expanded' ? 'Collapsed' : 'Expanded'); pushLog(sbState === 'Expanded' ? 'SideBar collapsed' : 'SideBar expanded'); }}>
+                          {/* arrow-left (collapse) / arrow-right (expand) — vuesax/linear, 16×16 */}
+                          {sbState === 'Expanded'
+                            ? <img src="https://www.figma.com/api/mcp/asset/32a136fa-1a2f-4d3b-bb1a-eb8682fa02f8" width="16" height="16" alt="" aria-hidden="true" style={{ display:'block' }} />
+                            : <img src="https://www.figma.com/api/mcp/asset/f7cd3edd-ac62-418a-a419-9459c611088c" width="16" height="16" alt="" aria-hidden="true" style={{ display:'block' }} />
+                          }
+                        </button>
+                      </div>
 
-                {/* SideBar */}
-                <SideBar state={sbState}>
-                  {/* Collapse toggle — click to expand/collapse */}
-                  <button
-                    type="button"
-                    onClick={() => { setSbState(sbState === 'Expanded' ? 'Collapsed' : 'Expanded'); pushLog(sbState === 'Expanded' ? 'SideBar collapsed' : 'SideBar expanded'); }}
-                    title={sbState === 'Expanded' ? 'Collapse sidebar' : 'Expand sidebar'}
-                    style={{
-                      display: 'flex', alignItems: 'center', justifyContent: sbState === 'Collapsed' ? 'center' : 'flex-end',
-                      width: '100%', padding: sbState === 'Collapsed' ? '8px 16px' : '8px 16px 8px 32px',
-                      background: 'none', border: 'none', cursor: 'pointer',
-                      color: 'var(--color-text-subdued)', marginBottom: 'var(--gap-4)',
-                      transition: 'background-color 120ms ease',
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'var(--color-fill-secondary-1)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      {sbState === 'Expanded'
-                        ? <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        : <path d="M9 6l6 6-6 6"  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      }
-                    </svg>
-                  </button>
-                  <NavElement style={activeRoute === 'dashboard' ? 'Selected' : 'Default'}
-                    showDropdown={false} name="Dashboard" icon={IconHome}
-                    onClick={() => goTo('dashboard', false)} />
-                  <NavElement style={activeRoute === 'invoices' ? 'Selected' : 'Default'}
-                    showDropdown={false} name="Invoices" icon={IconInvoices}
-                    onClick={() => goTo('invoices', false)} />
-                  <NavElement style={activeRoute === 'suppliers' ? 'Selected' : 'Default'}
-                    showDropdown={false} name="Suppliers" icon={IconPeople}
-                    onClick={() => goTo('suppliers', false)} />
-                  {/* Payments — isOpen driven by openAccordion, not by style */}
-                  <NavElement style={activeRoute === 'payments' ? 'Selected' : 'Default'}
-                    showDropdown={true} name="Payments" icon={IconMoney}
-                    isOpen={openAccordion === 'payments'}
-                    onClick={() => goTo('payments', true)}>
-                    <BaseNav property1={activeSub === 'monthly'   ? 'Selected' : 'Default'}
-                      name="Monthly"   onClick={() => { setSbActive('payments'); setSbSub('monthly');   setOpenAccordion('payments'); pushLog('Sub → Monthly'); }} />
-                    <BaseNav property1={activeSub === 'quarterly' ? 'Selected' : 'Default'}
-                      name="Quarterly" onClick={() => { setSbActive('payments'); setSbSub('quarterly'); setOpenAccordion('payments'); pushLog('Sub → Quarterly'); }} />
-                    <BaseNav property1={activeSub === 'annual'    ? 'Selected' : 'Default'}
-                      name="Annual"    onClick={() => { setSbActive('payments'); setSbSub('annual');    setOpenAccordion('payments'); pushLog('Sub → Annual'); }} />
-                  </NavElement>
-                  {/* Resources — has dropdown but no sub-sections; toggle opens/closes */}
-                  <NavElement style={activeRoute === 'resources' ? 'Selected' : 'Default'}
-                    showDropdown={true} name="Resources" icon={IconFolder}
-                    isOpen={openAccordion === 'resources'}
-                    onClick={() => goTo('resources', true)} />
-                  <NavElement style={activeRoute === 'reports' ? 'Selected' : 'Default'}
-                    showDropdown={false} name="Reports" icon={IconDoc}
-                    onClick={() => goTo('reports', false)} />
-                  <NavElement style={activeRoute === 'myaccount' ? 'Selected' : 'Default'}
-                    showDropdown={false} name="My Account" icon={IconUser}
-                    onClick={() => goTo('myaccount', false)} />
-                </SideBar>
+                      {/* NavElements — enum filtered by enabled IDs, props from sections config */}
+                      {activeSections.map(section => {
+                        const Icon = SECTION_ICONS[section.id];
+                        return (
+                          <NavElement key={section.id}
+                            style={section.style}
+                            showDropdown={section.showDropdown}
+                            showIcon={section.showIcon}
+                            name={section.name}
+                            icon={Icon}
+                            isOpen={section.hasDropdown ? openAccordion === section.id : undefined}
+                            onClick={() => goTo(section.id, section.hasDropdown)}>
+                            {section.id === 'payments' && activeSubsections.map(sub => (
+                              <BaseNav key={sub.id}
+                                property1={activeSub === sub.id ? 'Selected' : 'Default'}
+                                name={sub.name}
+                                onClick={() => { setActiveRoute('payments'); setActiveSub(sub.id); setOpenAccordion('payments'); pushLog(`Sub → ${sub.name}`); }} />
+                            ))}
+                          </NavElement>
+                        );
+                      })}
+                    </SideBar>
+                  </div>{/* end .dcds-SideBar-wrapper */}
 
-                {/* Content area */}
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'var(--color-surface-2)', overflow: 'hidden' }}>
-                  {/* Breadcrumb strip */}
-                  <div style={{ padding: '10px var(--gap-24)', borderBottom: '1px solid var(--color-stroke-subdued)', background: 'var(--color-surface-1)', display: 'flex', alignItems: 'center', gap: 'var(--gap-8)', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-body-small)', color: 'var(--color-text-subdued)', flexShrink: 0 }}>
-                    <span>Home</span>
-                    <span>/</span>
-                    <span style={{ color: 'var(--color-text-primary)', fontWeight: 700 }}>{routeLabels[activeRoute]}</span>
-                    {activeRoute === 'payments' && (
-                      <><span>/</span><span style={{ color: 'var(--color-text-primary)' }}>{subLabels[activeSub]}</span></>
-                    )}
-                  </div>
-                  {/* Page body */}
-                  <div style={{ flex: 1, padding: 'var(--gap-24)', overflow: 'auto', display: 'flex', flexDirection: 'column', gap: 'var(--gap-16)' }}>
-                    <div style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-h4)', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 'normal' }}>
-                      {routeLabels[activeRoute]}{activeRoute === 'payments' ? ` · ${subLabels[activeSub]}` : ''}
+                  {/* Content area */}
+                  <div style={{ flex:1, display:'flex', flexDirection:'column', background:'var(--color-surface-2)', overflow:'hidden' }}>
+                    {/* Breadcrumbs component from repo */}
+                    <div style={{ padding:'12px var(--gap-24)', borderBottom:'1px solid var(--color-stroke-subdued)', background:'var(--color-surface-1)', flexShrink:0 }}>
+                      <Breadcrumbs
+                        showHome={true}
+                        items={[
+                          { label: 'Home' },
+                          ...(activeRoute ? [{ label: routeLabels[activeRoute] || '—', current: !(activeRoute === 'payments' && activeSub) }] : []),
+                          ...(activeRoute === 'payments' && activeSub ? [{ label: subLabels[activeSub], current: true }] : []),
+                        ]}
+                      />
                     </div>
-                    {/* Skeleton stat cards */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap-12)' }}>
-                      {['Total', 'Active', 'Pending'].map(label => (
-                        <div key={label} style={{ background: 'var(--color-surface-1)', borderRadius: 'var(--rd-S)', padding: 'var(--gap-16)', fontFamily: 'var(--font-family)' }}>
-                          <div style={{ fontSize: 'var(--font-size-body-small)', color: 'var(--color-text-subdued)', marginBottom: 4 }}>{label}</div>
-                          <div style={{ fontSize: 'var(--font-size-h4)', fontWeight: 700, color: 'var(--color-text-primary)' }}>—</div>
-                        </div>
-                      ))}
-                    </div>
-                    {/* Skeleton text lines */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-8)' }}>
-                      {[75, 90, 55].map((w, i) => (
-                        <div key={i} style={{ height: 10, width: `${w}%`, background: 'var(--color-surface-3)', borderRadius: 'var(--rd-XS)' }} />
-                      ))}
+                    <div style={{ flex:1, padding:'var(--gap-24)', overflow:'auto', display:'flex', flexDirection:'column', gap:'var(--gap-16)' }}>
+                      <div style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-h4)', fontWeight:700, color:'var(--color-text-primary)', lineHeight:'normal' }}>
+                        {routeLabels[activeRoute] || 'Select a section'}{activeRoute === 'payments' && activeSub ? ` · ${subLabels[activeSub]}` : ''}
+                      </div>
+                      <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'var(--gap-12)' }}>
+                        {['Total','Active','Pending'].map(label => (
+                          <div key={label} style={{ background:'var(--color-surface-1)', borderRadius:'var(--rd-S)', padding:'var(--gap-16)', fontFamily:'var(--font-family)' }}>
+                            <div style={{ fontSize:'var(--font-size-body-small)', color:'var(--color-text-subdued)', marginBottom:4 }}>{label}</div>
+                            <div style={{ fontSize:'var(--font-size-h4)', fontWeight:700, color:'var(--color-text-primary)' }}>—</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-8)' }}>
+                        {[75,90,55].map((w,i) => (<div key={i} style={{ height:10, width:`${w}%`, background:'var(--color-surface-3)', borderRadius:'var(--rd-XS)' }} />))}
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
-            </div>
 
-            {/* Event log */}
-            <div className="events" style={{ marginTop: 'var(--gap-8)' }}>
-              {log.length === 0 ? '— click any nav item or tab to see events —' : log.join('\n')}
-            </div>
-          </section>
+              <div className="events" style={{ marginTop:'var(--gap-8)' }}>
+                {log.length === 0 ? '— click any nav item or button to see events —' : log.join('\n')}
+              </div>
+            </section>
+          </>
         );
       }
 
@@ -5731,14 +5966,52 @@
 
         /* --- SideBar controls --- */
         const [sbState, setSbState] = useState('Expanded');
-        const [sbActive, setSbActive] = useState('dashboard');
-        const [sbSub, setSbSub] = useState('quarterly');
+        /* Per-subsection BaseNav config */
+        /* Payments subsections — enum-driven */
+        const [enabledSubIds, setEnabledSubIds] = useState(
+          PAYMENTS_SUBSECTIONS_ENUM.map(s => s.id)
+        );
+        const [activeSubId, setActiveSubId] = useState(null); /* null = no pre-selected subsection */
+        const toggleSubId = (id, on) =>
+          setEnabledSubIds(prev => on ? [...prev, id] : prev.filter(x => x !== id));
+
+        /* Per-section NavElement config — matches Figma NavElement props exactly */
+        /* Enum-driven navigation — arrays of enabled IDs (backend sends these) */
+        const [enabledTabIds, setEnabledTabIds] = useState(
+          TOPBAR_TABS_ENUM.map(t => t.id)   /* default: all tabs enabled */
+        );
+        const [enabledSectionIds, setEnabledSectionIds] = useState(
+          SIDEBAR_SECTIONS_ENUM.map(s => s.id)  /* default: all sections enabled */
+        );
+        const toggleTabId = (id, on) =>
+          setEnabledTabIds(prev => on ? [...prev, id] : prev.filter(x => x !== id));
+        const toggleSectionId = (id, on) =>
+          setEnabledSectionIds(prev => on ? [...prev, id] : prev.filter(x => x !== id));
+
+        /* Per-section config (style, showDropdown, showIcon, name) */
+        const [sections, setSections] = useState([
+          { id:'dashboard', name:'Dashboard',  style:'Default', showDropdown:false, showIcon:true },
+          { id:'invoices',  name:'Invoices',   style:'Default', showDropdown:false, showIcon:true },
+          { id:'suppliers', name:'Suppliers',  style:'Default', showDropdown:false, showIcon:true },
+          { id:'payments',  name:'Payments',   style:'Default', showDropdown:true,  showIcon:true },
+          { id:'resources', name:'Resources',  style:'Default', showDropdown:true,  showIcon:true },
+          { id:'reports',   name:'Reports',    style:'Default', showDropdown:false, showIcon:true },
+          { id:'myaccount', name:'My Account', style:'Default', showDropdown:false, showIcon:true },
+        ]);
+        const updateSection = (id, updates) =>
+          setSections(prev => prev.map(s => s.id === id ? { ...s, ...updates } : s));
 
         /* --- Navigation (unified) controls --- */
-        const [logoCompany, setLogoCompany]   = useState('drip');
-        const [logoOnWhite, setLogoOnWhite]   = useState(true);
+        /* Logo company is always drip — Voyager options removed */
         const [logoPortal,  setLogoPortal]    = useState('SCF');
 
+        /* --- _BaseMenuItem controls --- */
+        const [bmState, setBmState]           = useState('Default');
+        const [bmType, setBmType]             = useState('Multi-Select');
+        const [bmShowLeading, setBmShowLeading] = useState(false); /* default: showLeading unchecked */
+        const [bmShowStatus, setBmShowStatus]   = useState(false);
+
+        const [tbType, setTbType]             = useState('Default');
         /* --- TopBar controls --- */
         const [tbShowNav, setTbShowNav] = useState(true);
         const [tbShowCompany, setTbShowCompany] = useState(true);
@@ -6239,47 +6512,69 @@
               {activeComponent === 'navigation' && (
                 <>
                   <h2>TopBar</h2>
-                  <CtrlToggle label="showNavigation" checked={tbShowNav}     onChange={setTbShowNav} />
-                  <CtrlToggle label="showCompany"    checked={tbShowCompany} onChange={setTbShowCompany} />
-                  <CtrlToggle label="showUser"       checked={tbShowUser}    onChange={setTbShowUser} />
-                  {/* Company — changing resets portal + onWhite to valid defaults */}
-                  <CtrlSelect label="logo company" value={logoCompany} onChange={(v) => {
-                    setLogoCompany(v);
-                    if (v === 'drip')    { setLogoPortal('SCF');  setLogoOnWhite(true);  }
-                    else                 { setLogoPortal('ZOHO'); setLogoOnWhite(true);  }
-                  }} options={['drip','voyager']} />
-
-                  {/* Portal — drives onWhite automatically (Figma logic):
-                      drip  Blue/Green/White → onWhite=false
-                      drip  SCF/RF          → onWhite=true
-                      voyager Blue          → onWhite=true
-                      voyager ZOHO          → onWhite stays (can be either) */}
-                  <CtrlSelect label="logo portal" value={logoPortal} onChange={(v) => {
+                  <CtrlSelect label="type" value={tbType} onChange={(v) => {
+                    setTbType(v);
+                    /* Reset logo to first valid option for the new type (Drip only) */
+                    setLogoPortal(v === 'Inverse' ? 'White' : 'SCF');
+                  }} options={['Default','Inverse']} />
+                  <CtrlToggle label="showCompany" checked={tbShowCompany} onChange={setTbShowCompany} />
+                  <CtrlToggle label="showUser"    checked={tbShowUser}    onChange={setTbShowUser} />
+                  {/* Single logo selector — Drip variants only */}
+                  <CtrlSelect label="logo" value={logoPortal} onChange={(v) => {
                     setLogoPortal(v);
-                    /* Auto-derive onWhite from portal (Figma logic + user request):
-                       Blue / Green / White → dark bg → uncheck onWhite
-                       SCF / RF             → light bg → check onWhite
-                       ZOHO (voyager)       → user controls onWhite manually */
-                    if (['Blue','Green','White'].includes(v)) setLogoOnWhite(false);
-                    else if (['SCF','RF'].includes(v))        setLogoOnWhite(true);
-                    /* ZOHO: leave onWhite unchanged */
-                  }} options={logoCompany === 'drip' ? ['SCF','RF','Blue','Green','White'] : ['ZOHO','Blue']} />
+                  }} options={tbType === 'Inverse' ? ['White','Green'] : ['SCF','RF','Blue']} />
 
-                  {/* onWhite — manual override (auto-set by portal above for most variants) */}
-                  <CtrlToggle label="logo onWhite" checked={logoOnWhite} onChange={setLogoOnWhite} />
                   <CtrlText   label="companyName"   value={tbCompany}   onChange={setTbCompany} />
                   <CtrlText   label="userInitials"  value={tbInitials}  onChange={setTbInitials} />
 
                   <h2>SideBar</h2>
                   <CtrlSelect label="state" value={sbState} onChange={setSbState} options={['Expanded', 'Collapsed']} />
 
-                  <h2>Section (NavElement)</h2>
-                  <CtrlSelect label="activeSection" value={sbActive} onChange={setSbActive}
-                    options={['dashboard','invoices','suppliers','payments','resources','reports','myaccount']} />
+                  {/* ── Navigation Tabs — TopBarTabId enum ── */}
+                  <h2>Navigation Tabs</h2>
+                  <p style={{ fontSize:'var(--font-size-validation)', color:'var(--color-text-subdued)', margin:'2px 0 var(--gap-8)', lineHeight:1.5 }}>
+                    <code>TopBarTabId</code> enum — toggle to enable/disable
+                  </p>
+                  {TOPBAR_TABS_ENUM.map(tab => (
+                    <CtrlToggle key={tab.id} label={tab.label + (tab.hasDropdown ? ' ↓' : '')}
+                      checked={enabledTabIds.includes(tab.id)}
+                      onChange={v => toggleTabId(tab.id, v)} />
+                  ))}
 
-                  <h2>Subsection (BaseNav)</h2>
-                  <CtrlSelect label="activeSub (Payments)" value={sbSub} onChange={setSbSub}
-                    options={['monthly','quarterly','annual']} />
+                  {/* ── Sidebar Sections — SideBarSectionId enum ── */}
+                  <h2>Sidebar Sections</h2>
+                  <p style={{ fontSize:'var(--font-size-validation)', color:'var(--color-text-subdued)', margin:'2px 0 var(--gap-8)', lineHeight:1.5 }}>
+                    <code>SideBarSectionId</code> enum — toggle to enable/disable
+                  </p>
+                  {SIDEBAR_SECTIONS_ENUM.map(section => (
+                    <CtrlToggle key={section.id} label={section.name + (section.hasDropdown ? ' ↓' : '')}
+                      checked={enabledSectionIds.includes(section.id)}
+                      onChange={v => toggleSectionId(section.id, v)} />
+                  ))}
+
+                  {/* Per-section props for each enabled section */}
+                  {sections.filter(s => enabledSectionIds.includes(s.id)).map((section, i) => (
+                    <React.Fragment key={section.id}>
+                      <p style={{ fontSize:'var(--font-size-body-small)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-primary)', margin:'var(--gap-12) 0 var(--gap-4) 0' }}>
+                        Section {i + 1}
+                      </p>
+                      <CtrlSelect label="Style"        value={section.style}        onChange={v => updateSection(section.id, { style: v })}        options={['Default','Selected']} />
+                      <CtrlToggle label="showDropdown" checked={section.showDropdown} onChange={v => updateSection(section.id, { showDropdown: v })} />
+                      <CtrlToggle label="showIcon"     checked={section.showIcon}     onChange={v => updateSection(section.id, { showIcon: v })} />
+                      <CtrlText   label="Name"         value={section.name}          onChange={v => updateSection(section.id, { name: v })} />
+                    </React.Fragment>
+                  ))}
+
+                  {/* ── Payments Subsections — PaymentsSubsectionId enum ── */}
+                  <h2>Payments Subsections</h2>
+                  <p style={{ fontSize:'var(--font-size-validation)', color:'var(--color-text-subdued)', margin:'2px 0 var(--gap-8)', lineHeight:1.5 }}>
+                    <code>PaymentsSubsectionId</code> enum — toggle to enable/disable
+                  </p>
+                  {PAYMENTS_SUBSECTIONS_ENUM.map(sub => (
+                    <CtrlToggle key={sub.id} label={sub.name}
+                      checked={enabledSubIds.includes(sub.id)}
+                      onChange={v => toggleSubId(sub.id, v)} />
+                  ))}
                 </>
               )}
 
@@ -7236,7 +7531,7 @@
                 </>
               )}
 
-              {activeComponent === 'navigation' && <NavigationSection sbState={sbState} setSbState={setSbState} sbActive={sbActive} setSbActive={setSbActive} sbSub={sbSub} setSbSub={setSbSub} tbShowNav={tbShowNav} tbShowCompany={tbShowCompany} tbShowUser={tbShowUser} tbCompany={tbCompany} tbInitials={tbInitials} logoCompany={logoCompany} logoOnWhite={logoOnWhite} logoPortal={logoPortal} />}
+              {activeComponent === 'navigation' && <NavigationSection sbState={sbState} setSbState={setSbState} sections={sections} updateSection={updateSection} enabledTabIds={enabledTabIds} enabledSectionIds={enabledSectionIds} toggleTabId={toggleTabId} toggleSectionId={toggleSectionId} enabledSubIds={enabledSubIds} activeSubId={activeSubId} setActiveSubId={setActiveSubId} tbType={tbType} tbShowCompany={tbShowCompany} tbShowUser={tbShowUser} tbCompany={tbCompany} tbInitials={tbInitials} logoPortal={logoPortal} setLogoPortal={setLogoPortal} bmState={bmState} bmType={bmType} bmShowLeading={bmShowLeading} bmShowStatus={bmShowStatus} />}
 
             </main>
 

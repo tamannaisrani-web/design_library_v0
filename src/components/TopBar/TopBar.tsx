@@ -221,7 +221,7 @@ export const TopBar: React.FC<TopBarProps> = ({
 
       {/* ── Right: company selector + user avatar ── */}
       <div className="dcds-TopBar__right">
-        {/* Company selector — AvatarGroup with name display (240px variant) */}
+        {/* Company selector — AvatarGroup with name display; Inverse type on dark TopBar */}
         {showCompany && (
           <AvatarGroup
             initials={companyName.slice(0, 2).toUpperCase()}
@@ -229,17 +229,19 @@ export const TopBar: React.FC<TopBarProps> = ({
             displayName={true}
             showDesignation={false}
             showDropdown={true}
+            type={type === 'Inverse' ? 'Inverse' : 'Default'}
             ariaLabel={`Switch company: ${companyName}`}
             onClick={onCompanyClick}
           />
         )}
 
-        {/* User avatar — AvatarGroup compact (no name, ~80px variant) */}
+        {/* User avatar — AvatarGroup compact; Inverse type on dark TopBar */}
         {showUser && (
           <AvatarGroup
             initials={userInitials}
             displayName={false}
             showDropdown={true}
+            type={type === 'Inverse' ? 'Inverse' : 'Default'}
             ariaLabel="Open user menu"
             onClick={onUserClick}
           />

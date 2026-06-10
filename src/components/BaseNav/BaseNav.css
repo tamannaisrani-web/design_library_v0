@@ -31,19 +31,20 @@
 }
 
 /* Hover — CSS-driven; never set property1="Hover" in code */
+/* Figma: Hover=color/surface/3 (#f5f5f5 grey) · Selected=color/fill/secondary-1 (#ecf5fb sky blue) */
 .dcds-BaseNav:hover {
-  background: var(--color-fill-secondary-1); /* #ecf5fb */
+  background: var(--color-surface-3); /* #f5f5f5 grey */
 }
 
-/* Selected — active sub-route: grey bg + bold text */
+/* Selected — active sub-route: sky blue bg + bold text */
 .dcds-BaseNav--selected {
-  background: var(--color-surface-3); /* #f5f5f5 */
+  background: var(--color-fill-secondary-1); /* #ecf5fb sky blue */
   font-weight: var(--font-weight-bold);
 }
 
 /* Selected overrides hover background */
 .dcds-BaseNav--selected:hover {
-  background: var(--color-surface-3);
+  background: var(--color-fill-secondary-1);
 }
 
 /* Focus ring */

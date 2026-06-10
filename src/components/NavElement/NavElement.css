@@ -19,6 +19,7 @@
   flex-direction: column; /* column to support the accordion content below the row */
   align-items: stretch;
   width: 240px;
+  padding: 0; /* reset browser default <button> padding — icon alignment lives in __row */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -155,10 +156,12 @@
 }
 
 /* ── Accordion content (BaseNav rows) ──────────────────────────────────────── */
+/* background: white resets sky-blue inherited from dcds-NavElement--selected on the parent div */
 .dcds-NavElement__accordion {
   display: flex;
   flex-direction: column;
   width: 100%;
+  background: var(--color-surface-1); /* white — subsections always start on clean white bg */
 }
 
 /* ── Collapsed (icon-only) mode — injected by SideBar context ─────────────── */

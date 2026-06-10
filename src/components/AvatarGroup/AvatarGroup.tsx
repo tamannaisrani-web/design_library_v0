@@ -86,6 +86,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   showDesignation = true,
   showDropdown = true,
   isExpanded = false,
+  type = 'Default',
   ariaLabel,
   ariaHasPopup = 'menu',
   ariaExpanded,
@@ -106,6 +107,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   const classes = [
     'dcds-AvatarGroup',
     isExpanded ? 'dcds-AvatarGroup--expanded' : '',
+    type === 'Inverse' ? 'dcds-AvatarGroup--inverse' : '',
     className,
   ]
     .filter(Boolean)

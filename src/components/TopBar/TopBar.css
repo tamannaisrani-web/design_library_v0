@@ -114,11 +114,11 @@
 }
 
 /* ── Right utility zone ────────────────────────────────────────────────────── */
+/* No padding here — the TopBar container's pr-24 provides the right edge spacing */
 .dcds-TopBar__right {
   display: flex;
   align-items: center;
   gap: var(--gap-12);
-  padding-right: var(--gap-16);
   flex-shrink: 0;
 }
 
