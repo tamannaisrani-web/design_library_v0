@@ -6491,19 +6491,27 @@ function ColorSection() {
 
 // ── Icons ─────────────────────────────────────────────────────────
 const ICON_CATS = {
-  'Navigation': ['Home','Menu','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ChevronLeft','ChevronRight','ChevronUp','ChevronDown'],
-  'Actions': ['Add','Edit','Delete','Search','Filter','Sort','Refresh','Download','Upload','Share'],
-  'Communication': ['Message','Mail','Phone','Notification','Bell','Chat','Send','Inbox'],
-  'Media': ['Play','Pause','Stop','Volume','Mute','Image','Video','Music','Camera'],
-  'Status': ['Check','Close','Warning','Info','Error','Success','Loading','Clock','Calendar'],
-  'Interface': ['Settings','Lock','Unlock','Eye','EyeSlash','Heart','Star','Bookmark','Link'],
+  'Arrows': ['arrow', 'arrow-2', 'arrow-3', 'arrow-bottom', 'arrow-circle-down', 'arrow-circle-left', 'arrow-circle-right', 'arrow-circle-up', 'arrow-down', 'arrow-left', 'arrow-right', 'arrow-square', 'arrow-square-down', 'arrow-square-left', 'arrow-square-right', 'arrow-square-up', 'arrow-swap', 'arrow-swap-horizontal', 'arrow-up', 'programming-arrow', 'programming-arrows'],
+  'Add & Edit': ['add', 'add-circle', 'add-square', 'brush', 'brush-2', 'copy', 'edit', 'edit-2', 'eraser', 'magicpen', 'minus', 'minus-cirlce', 'minus-square', 'pen-add', 'pen-tool', 'pen-tool-2', 'scissor', 'trash', 'user-add', 'user-edit', 'user-minus'],
+  'Files': ['archive', 'archive-book', 'archive-tick', 'book', 'book-saved', 'bookmark', 'bookmark-2', 'clipboard', 'clipboard-text', 'clipboard-tick', 'document', 'document-cloud', 'document-code', 'document-download', 'document-favorite', 'document-text', 'document-upload', 'folder', 'folder-add', 'folder-favorite', 'note', 'note-2', 'note-text', 'paperclip', 'paperclip-2', 'stickynote'],
+  'Communication': ['bluetooth', 'bluetooth-2', 'call', 'call-calling', 'call-incoming', 'call-outgoing', 'call-slash', 'device-message', 'direct-send', 'headphone', 'message', 'message-2', 'message-circle', 'message-favorite', 'message-square', 'message-text', 'message-tick', 'messages', 'microphone', 'microphone-2', 'notification', 'notification-bing', 'send', 'send-2', 'sms', 'sms-tracking', 'speaker', 'wifi', 'wifi-square'],
+  'Media': ['camera', 'camera-slash', 'gallery', 'gallery-favorite', 'gallery-slash', 'image', 'music', 'music-circle', 'music-play', 'music-square', 'pause', 'pause-circle', 'play', 'play-circle', 'record', 'record-circle', 'stop', 'stop-circle', 'video', 'video-circle', 'video-play', 'video-slash', 'volume', 'volume-cross', 'volume-high', 'volume-low', 'volume-mute', 'volume-slash'],
+  'People': ['award', 'gift', 'heart', 'heart-circle', 'heart-slash', 'heart-tick', 'like', 'like-dislike', 'medal-star', 'people', 'personalcard', 'profile', 'profile-2user', 'profile-circle', 'profile-tick', 'star', 'user', 'user-octagon', 'user-remove', 'user-search', 'user-square', 'user-tag', 'user-tick'],
+  'UI': ['align-bottom', 'align-horizontally', 'align-left', 'align-right', 'align-top', 'close', 'close-circle', 'close-square', 'eye', 'eye-slash', 'filter', 'filter-remove', 'filter-search', 'filter-tick', 'grid-1', 'grid-2', 'grid-3', 'grid-4', 'grid-5', 'grid-6', 'grid-7', 'grid-8', 'grid-9', 'menu', 'menu-board', 'refresh', 'refresh-2', 'refresh-circle', 'rotate-left', 'rotate-right', 'sidebar-bottom', 'sidebar-left', 'sidebar-right', 'sidebar-top', 'sort'],
+  'Security': ['clock', 'key', 'key-square', 'keyboard', 'lock', 'lock-circle', 'lock-slash', 'password-check', 'security', 'security-safe', 'shield', 'shield-cross', 'shield-security', 'shield-slash', 'shield-tick', 'unlock'],
+  'Location': ['gps', 'gps-slash', 'location', 'location-cross', 'location-slash', 'location-tick', 'map'],
+  'Commerce': ['bag', 'bag-2', 'bag-cross', 'bag-happy', 'bag-tick', 'bank', 'empty-wallet', 'receipt-discount', 'receipt-item', 'shop', 'tag-cross', 'tag-right', 'wallet-check'],
+  'Status': ['calendar', 'calendar-2', 'calendar-circle', 'calendar-tick', 'chart-success', 'check', 'danger', 'info-circle', 'tick-circle', 'tick-square', 'timer', 'warning-2'],
+  'Settings': ['cpu', 'cpu-setting', 'designtools', 'devices', 'monitor', 'mouse', 'setting', 'setting-2', 'setting-3', 'setting-4', 'settings'],
 };
-const ICON_STYLES = ['linear','bold','outline','twotone','bulk','broken'];
+const ICON_STYLES = ['linear', 'bold', 'outline'];
 
 function IconsSection() {
-  const [cat, setCat] = React.useState('Navigation');
+  const [cat, setCat] = React.useState('Arrows');
   const [style, setStyle] = React.useState('linear');
-  const names = ICON_CATS[cat] || [];
+  const [search, setSearch] = React.useState('');
+  const allNames = ICON_CATS[cat] || [];
+  const names = search ? allNames.filter(n => n.includes(search.toLowerCase())) : allNames;
   return (
     <PanelLayout
       panelContent={
@@ -6525,31 +6533,42 @@ function IconsSection() {
             </div>
           </div>
           <div className="fnd-filter-group">
+            <input
+              placeholder="Search icon..."
+              value={search}
+              onChange={e=>setSearch(e.target.value)}
+              style={{width:'100%',padding:'6px 10px',borderRadius:'6px',border:'1px solid var(--color-stroke-secondary,#e5e7eb)',fontSize:'12px',boxSizing:'border-box'}}
+            />
+          </div>
+          <div className="fnd-filter-group">
             <div className="fnd-filter-label">Import</div>
             <div style={{fontSize:'10px',fontFamily:'monospace',color:'var(--color-text-secondary)',wordBreak:'break-all'}}>
-              import {"{ IconName }"} from '@dcds/icons'
+              {'import { IconName } from \'@dcds/icons\''}
             </div>
           </div>
         </div>
       }
     >
-
-        <div className="fnd-stage">
-          <div className="fnd-section">
-            <h2>{cat} — {style}</h2>
-            <div className="icon-chips">
-              {names.map(n => (
-                <div key={n} className="icon-chip">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <rect x="3" y="3" width="18" height="18" rx="3" opacity=".3"/>
-                    <text x="12" y="16" textAnchor="middle" fontSize="8" stroke="none" fill="currentColor">{n.slice(0,3)}</text>
-                  </svg>
-                  <span className="icon-name">{n}</span>
-                </div>
-              ))}
-            </div>
+      <div className="fnd-stage">
+        <div className="fnd-section">
+          <h2>{cat} — {style} ({names.length})</h2>
+          <div className="icon-chips">
+            {names.map(n => (
+              <div key={n} className="icon-chip">
+                <img
+                  src={`icons/svg/${style}/${n}.svg`}
+                  alt={n}
+                  width={24}
+                  height={24}
+                  style={{opacity:0.85}}
+                  onError={e=>{e.currentTarget.style.display='none'}}
+                />
+                <span className="icon-name">{n}</span>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
     </PanelLayout>
   );
 }
