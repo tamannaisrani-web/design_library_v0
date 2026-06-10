@@ -13,7 +13,7 @@
   flex-direction: column;
   gap: var(--gap-4);
   width: 100%;
-  min-width: 360px;
+  min-width: 240px;
   font-family: var(--font-family);
 }
 
@@ -69,7 +69,7 @@
   height: 48px;
   padding: 0 var(--gap-12);
   gap: 0;
-  border: 0.5px solid var(--color-stroke-neutral);
+  border: 1px solid var(--color-stroke-neutral);
   border-radius: var(--rd-S);
   background: var(--color-surface-1);
   transition: border-color 120ms ease, background-color 120ms ease;
@@ -233,7 +233,7 @@
 .dcds-InputFields__otp-box {
   flex: 1;
   height: 48px;
-  border: 0.5px solid var(--color-stroke-neutral);
+  border: 1px solid var(--color-stroke-neutral);
   border-radius: var(--rd-S);
   background: var(--color-surface-1);
   display: flex;
@@ -272,7 +272,6 @@
 /* OTP box error */
 .dcds-InputFields__otp-box--error {
   border: 1px solid var(--color-stroke-error);
-  background: var(--color-fill-light-error);
 }
 
 /* OTP box disabled */
@@ -305,7 +304,7 @@
   min-width: 120px;
   height: 48px;
   padding: 0 var(--gap-12);
-  border: 0.5px solid var(--color-stroke-neutral);
+  border: 1px solid var(--color-stroke-neutral);
   border-radius: var(--rd-S);
   background: var(--color-surface-1);
   cursor: pointer;
@@ -576,10 +575,9 @@
 
 /* Filled state — neutral border unchanged (no border color change per Figma) */
 
-/* Error state — thicker 1 px red border + light red bg */
+/* Error state — thicker 1 px red border */
 .dcds-InputFields--state-error .dcds-InputFields__box {
   border: 1px solid var(--color-stroke-error);
-  background: var(--color-fill-light-error);
 }
 
 .dcds-InputFields--state-error .dcds-InputFields__input {
@@ -616,6 +614,13 @@
 }
 
 .dcds-InputFields--state-read-only .dcds-InputFields__input {
+  cursor: default;
+}
+
+.dcds-InputFields--state-read-only .dcds-InputFields__leading,
+.dcds-InputFields--state-read-only .dcds-InputFields__trailing {
+  color: var(--color-icon-disabled);
+  pointer-events: none;
   cursor: default;
 }
 

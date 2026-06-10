@@ -350,6 +350,14 @@ export interface InputFieldsProps extends BaseComponentProps {
 
   /** Fires when the trailing icon element is clicked. */
   onTrailingClick?: () => void;
+
+  /**
+   * Override the `aria-expanded` attribute on the Dropdown box.
+   * Only used when `Type='Dropdown'`. Allows composing components (e.g. Datepicker)
+   * to drive the open/closed aria state externally.
+   * @default false
+   */
+  ariaExpanded?: boolean;
 }
 
 /* --------------------------------------------------------------------------

@@ -260,8 +260,8 @@
 .dcds-DropdownButton__menu-item:hover:not(:disabled) { background-color:var(--color-fill-primary-1); }
 .dcds-DropdownButton__menu-item:focus-visible { outline:none; background-color:var(--color-fill-primary-1); box-shadow:inset 0 0 0 2px var(--color-stroke-focus); }
 .dcds-DropdownButton__menu-item:disabled, .dcds-DropdownButton__menu-item[aria-disabled='true'] { color:var(--color-text-disabled); cursor:not-allowed; }
-.dcds-DropdownButton__menu-item-leading { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:24px; height:24px; color:var(--color-icon-action); }
-.dcds-DropdownButton__menu-item-leading--flag { height:18px; align-self:center; }
+.dcds-DropdownButton__menu-item-leading { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:var(--color-icon-action); }
+.dcds-DropdownButton__menu-item-leading--flag { width:16px; height:12px; align-self:center; }
 .dcds-DropdownButton__menu-item-label { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .dcds-DropdownButton__menu-item--selected { background-color:var(--color-fill-light-action); }
 .dcds-DropdownButton__menu-item--selected .dcds-DropdownButton__menu-item-label { font-weight:var(--font-weight-bold); }
@@ -269,7 +269,7 @@
 .dcds-DropdownButton__menu-item:hover:not(:disabled) .dcds-DropdownButton__menu-item-leading { color:var(--color-icon-success); }
 .dcds-DropdownButton__menu-item--disabled { background-color:var(--color-surface-3); color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
 .dcds-DropdownButton__menu-item--disabled .dcds-DropdownButton__menu-item-leading { color:var(--color-icon-disabled); }
-.dcds-DropdownButton__menu-item-status { display:inline-flex; align-items:center; gap:var(--gap-4); height:24px; padding:var(--gap-4) var(--gap-8); background-color:var(--color-surface-2); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-Max); font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-neutral); white-space:nowrap; flex-shrink:0; line-height:1; }
+/* Status badge uses Badge component — see .dcds-Badge* styles above */
 
 /* ============================================================
  * ButtonGroup.css
@@ -854,7 +854,7 @@
       /* ============================================================
        * Chip.css
        * ============================================================ */
-      .dcds-Chip { display:inline-flex; align-items:center; justify-content:center; gap:var(--gap-8); padding:var(--gap-4) var(--gap-8); border:0.5px solid var(--color-stroke-neutral); border-radius:var(--rd-Max); background-color:var(--color-surface-1); color:var(--color-text-subdued); font-family:var(--font-family); font-weight:var(--font-weight-regular); cursor:pointer; transition:background-color 120ms ease,border-color 120ms ease,color 120ms ease,opacity 120ms ease; white-space:nowrap; user-select:none; outline:none; line-height:1; }
+      .dcds-Chip { display:inline-flex; align-items:center; justify-content:center; gap:var(--gap-8); padding:var(--gap-4) var(--gap-8); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-Max); background-color:var(--color-surface-1); color:var(--color-text-subdued); font-family:var(--font-family); font-weight:var(--font-weight-regular); cursor:pointer; transition:background-color 120ms ease,border-color 120ms ease,color 120ms ease,opacity 120ms ease; white-space:nowrap; user-select:none; outline:none; line-height:1; }
       .dcds-Chip--size-S { font-size:var(--font-size-validation); }
       .dcds-Chip--size-M { font-size:var(--font-size-label); height:32px; }
       .dcds-Chip--size-L { font-size:var(--font-size-body); height:40px; }
@@ -1093,7 +1093,7 @@
        * Mirrors src/components/Accordian/Accordian.css
        */
       .dcds-Accordian { background:var(--color-surface-1); display:flex; flex-direction:column; width:100%; min-width:360px; position:relative; }
-      .dcds-Accordian--rounded { border:0.5px solid var(--color-stroke-subdued); border-radius:var(--rd-S); overflow:hidden; }
+      .dcds-Accordian--rounded { border:1px solid var(--color-stroke-subdued); border-radius:var(--rd-S); overflow:hidden; }
       .dcds-Accordian__header { display:flex; align-items:flex-start; gap:var(--gap-12); padding:var(--gap-12); width:100%; background:transparent; border:none; cursor:pointer; text-align:left; transition:background-color 120ms ease; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
       .dcds-Accordian__header:hover { background-color:var(--color-fill-primary-0); }
       .dcds-Accordian__header:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
@@ -1115,14 +1115,85 @@
       .dcds-Accordian__body-slot { width:100%; }
 
       /* ============================================================
+       * DropdownMenu.css
+       * ============================================================ */
+      .dcds-DropdownMenu { position:relative; display:flex; flex-direction:column; gap:var(--gap-4); width:100%; font-family:var(--font-family); }
+      .dcds-DropdownMenu__label-row { display:flex; align-items:center; gap:var(--gap-4); }
+      .dcds-DropdownMenu__label { font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-neutral); line-height:1.2; }
+      .dcds-DropdownMenu__mandatory { color:var(--color-text-error); font-size:var(--font-size-label); line-height:1; }
+      .dcds-DropdownMenu__trigger { display:flex; align-items:center; justify-content:space-between; height:48px; padding:0 var(--gap-16); background-color:var(--color-surface-1); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); cursor:pointer; width:100%; text-align:left; transition:border-color 120ms ease; gap:var(--gap-8); outline:none; }
+      .dcds-DropdownMenu__trigger:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-DropdownMenu--open .dcds-DropdownMenu__trigger { border-width:1px; border-color:var(--color-stroke-focus-subtle); }
+      .dcds-DropdownMenu--disabled .dcds-DropdownMenu__trigger { background-color:var(--color-surface-3); border-color:var(--color-stroke-disabled); color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+      .dcds-DropdownMenu__value-wrap { display:flex; align-items:center; gap:var(--gap-8); flex:1; min-width:0; overflow:hidden; }
+      .dcds-DropdownMenu__value { min-width:0; font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-neutral); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1; }
+      .dcds-DropdownMenu__value--placeholder { color:var(--color-text-disabled); }
+      .dcds-DropdownMenu__arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-neutral); transition:transform 150ms ease; background:none; border:none; padding:0; cursor:pointer; pointer-events:none; }
+      .dcds-DropdownMenu--open .dcds-DropdownMenu__arrow { transform:rotate(180deg); }
+      .dcds-DropdownMenu__helptext { overflow:hidden; max-height:0; opacity:0; transition:max-height 150ms ease,opacity 150ms ease; }
+      .dcds-DropdownMenu--open .dcds-DropdownMenu__helptext { max-height:80px; opacity:1; }
+      .dcds-DropdownMenu__helptext-inner { display:flex; align-items:flex-start; gap:var(--gap-8); padding:var(--gap-4) 0; }
+      .dcds-DropdownMenu__helptext-bar { width:4px; min-width:4px; height:16px; border-radius:var(--rd-Max); background-color:var(--color-stroke-focus-subtle); margin-top:2px; flex-shrink:0; }
+      .dcds-DropdownMenu__helptext-text { margin:0; font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:1.4; }
+      .dcds-DropdownMenu__panel { position:absolute; top:calc(100% + var(--gap-4)); left:0; min-width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:var(--shadow-S); z-index:10; overflow:hidden; animation:dcds-DropdownMenu__panel-in 120ms ease-out; }
+      @keyframes dcds-DropdownMenu__panel-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+      .dcds-DropdownMenu__menu { margin:0; padding:0; }
+      .dcds-DropdownMenu__menu-label { background-color:var(--color-surface-4); padding:var(--gap-4) var(--gap-16); font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-subdued); line-height:normal; white-space:nowrap; }
+      .dcds-DropdownMenu__menu-item-row { border-bottom:0.5px solid var(--color-stroke-subdued); }
+      .dcds-DropdownMenu__menu-item-row:last-child { border-bottom:none; }
+      .dcds-DropdownMenu__menu-item { display:flex; align-items:center; gap:var(--gap-12); width:100%; text-align:left; padding:var(--gap-12) var(--gap-16); background:none; border:none; color:var(--color-text-primary); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); cursor:pointer; transition:background-color 120ms ease; }
+      .dcds-DropdownMenu__menu-item:hover:not(:disabled) { background-color:var(--color-fill-secondary-0); }
+      .dcds-DropdownMenu__menu-item:focus-visible { outline:none; background-color:var(--color-fill-secondary-0); box-shadow:inset 0 0 0 2px var(--color-stroke-focus); }
+      .dcds-DropdownMenu__menu-item:disabled, .dcds-DropdownMenu__menu-item[aria-disabled='true'] { color:var(--color-text-disabled); background-color:var(--color-surface-3); cursor:not-allowed; pointer-events:none; }
+      .dcds-DropdownMenu__menu-item--selected { background-color:var(--color-fill-light-action); }
+      .dcds-DropdownMenu__menu-item--selected .dcds-DropdownMenu__menu-item-label { font-weight:var(--font-weight-bold); }
+      .dcds-DropdownMenu__menu-item--selected:hover:not(:disabled) { background-color:var(--color-fill-secondary-0); }
+      .dcds-DropdownMenu__menu-item:hover:not(:disabled) .dcds-DropdownMenu__menu-item-leading { color:var(--color-icon-success); }
+      .dcds-DropdownMenu__menu-item-leading { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:var(--color-icon-action); }
+      .dcds-DropdownMenu__menu-item-leading--flag { width:16px; height:12px; align-self:center; }
+      .dcds-DropdownMenu__menu-item-label { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      /* Status badge uses Badge component — see .dcds-Badge* styles */
+
+      /* ============================================================
+       * Datepicker.css
+       * ============================================================ */
+      .dcds-Datepicker { display:inline-block; width:100%; font-family:var(--font-family); }
+      .dcds-Datepicker__trigger-wrap { position:relative; width:100%; }
+      .dcds-Datepicker__panel { position:absolute; top:calc(100% + var(--gap-4)); left:0; min-width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:4px 4px 8px rgba(0,0,0,0.08); padding:24px; display:flex; flex-direction:column; gap:var(--gap-8); z-index:10; animation:dcds-Datepicker__panel-in 120ms ease-out; }
+      @keyframes dcds-Datepicker__panel-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+      .dcds-Datepicker__nav { display:flex; align-items:center; gap:var(--gap-8); margin-bottom:var(--gap-4); }
+      .dcds-Datepicker__nav-btn-wrap { flex:1; position:relative; }
+      .dcds-Datepicker__nav-btn { width:100%; display:flex; align-items:center; justify-content:space-between; padding:var(--gap-12); background-color:var(--color-surface-1); border:1px solid var(--color-stroke-focus-subtle); border-radius:var(--rd-S); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); color:var(--color-text-primary); cursor:pointer; gap:var(--gap-4); transition:background-color 120ms ease; }
+      .dcds-Datepicker__nav-btn:hover { background-color:var(--color-fill-secondary-0); }
+      .dcds-Datepicker__nav-btn-icon { display:inline-flex; align-items:center; color:var(--color-icon-neutral); transition:transform 150ms ease; }
+      .dcds-Datepicker__nav-btn-icon--open { transform:rotate(180deg); }
+      .dcds-Datepicker__nav-arrows { display:flex; align-items:center; gap:var(--gap-4); }
+      .dcds-Datepicker__arrow-btn { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; background:none; border:none; border-radius:var(--rd-S); cursor:pointer; color:var(--color-icon-neutral); transition:background-color 120ms ease; }
+      .dcds-Datepicker__arrow-btn:hover { background-color:var(--color-fill-secondary-0); }
+      .dcds-Datepicker__week-header { display:grid; grid-template-columns:repeat(7,1fr); gap:var(--gap-4); padding-bottom:var(--gap-8); border-bottom:1px solid var(--color-stroke-neutral); }
+      .dcds-Datepicker__week-day { display:flex; align-items:center; justify-content:center; font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); height:32px; }
+      .dcds-Datepicker__days { display:grid; grid-template-columns:repeat(7,1fr); row-gap:var(--gap-8); column-gap:0; }
+      .dcds-Datepicker__day { display:flex; align-items:center; justify-content:center; height:32px; border-radius:var(--rd-S); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); background:none; border:none; cursor:pointer; transition:background-color 120ms ease; }
+      .dcds-Datepicker__day:hover:not(.dcds-Datepicker__day--outside):not(.dcds-Datepicker__day--disabled) { background-color:var(--color-fill-secondary-0); font-weight:var(--font-weight-bold); }
+      .dcds-Datepicker__day--outside { color:var(--color-stroke-neutral); cursor:default; pointer-events:none; }
+      .dcds-Datepicker__day--selected { background-color:var(--color-fill-action); color:var(--color-text-invert); font-weight:var(--font-weight-bold); }
+      .dcds-Datepicker__day--selected:hover { background-color:var(--color-fill-action); }
+      .dcds-Datepicker__day--disabled { color:var(--color-text-disabled); background-color:var(--color-surface-3); cursor:not-allowed; pointer-events:none; }
+      .dcds-Datepicker__month-overlay { position:absolute; left:0; top:calc(100% + 4px); width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); border:1px solid var(--color-fill-primary-1); box-shadow:0 6px 12px rgba(10,46,87,0.2); z-index:20; max-height:240px; overflow-y:auto; animation:dcds-Datepicker__panel-in 120ms ease-out; }
+      .dcds-Datepicker__month-option { display:flex; align-items:center; width:100%; padding:var(--gap-12) var(--gap-16); background:none; border:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); cursor:pointer; border-bottom:0.5px solid var(--color-stroke-subdued); transition:background-color 120ms ease; }
+      .dcds-Datepicker__month-option:last-child { border-bottom:none; }
+      .dcds-Datepicker__month-option--current { background-color:var(--color-fill-light-action); font-weight:var(--font-weight-bold); color:var(--color-text-neutral); }
+      .dcds-Datepicker__month-option:hover { background-color:var(--color-fill-secondary-0); }
+
+      /* ============================================================
        * InputFields.css
        * ============================================================ */
-      .dcds-InputFields { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; min-width:360px; font-family:var(--font-family); }
+      .dcds-InputFields { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; min-width:240px; font-family:var(--font-family); }
       .dcds-InputFields__label-row { display:flex; align-items:center; gap:var(--gap-4); }
       .dcds-InputFields__label { font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; }
       .dcds-InputFields__mandatory { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; flex-shrink:0; }
       .dcds-InputFields__field-row { display:flex; flex-direction:row; align-items:stretch; gap:var(--gap-8); width:100%; }
-      .dcds-InputFields__box { display:flex; flex-direction:row; align-items:center; justify-content:space-between; flex:1 1 auto; height:48px; padding:0 var(--gap-12); gap:0; border:0.5px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); transition:border-color 120ms ease,background-color 120ms ease; box-sizing:border-box; cursor:text; }
+      .dcds-InputFields__box { display:flex; flex-direction:row; align-items:center; justify-content:space-between; flex:1 1 auto; height:48px; padding:0 var(--gap-12); gap:0; border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); transition:border-color 120ms ease,background-color 120ms ease; box-sizing:border-box; cursor:text; }
       .dcds-InputFields__box-left { display:flex; align-items:center; align-self:stretch; gap:var(--gap-12); flex:1; min-width:0; }
       .dcds-InputFields__box:focus-within { border:1px solid var(--color-stroke-focus-subtle); outline:none; }
       .dcds-InputFields__input { flex:1; min-width:0; height:100%; background:transparent; border:none; outline:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-info); font-variation-settings:'"YTLC" 500, "wdth" 100'; padding:0; }
@@ -1137,15 +1208,15 @@
       .dcds-InputFields__search-btn:hover:not(:disabled) { background-color:var(--color-fill-dark-action); }
       .dcds-InputFields__search-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
       .dcds-InputFields__otp-row { display:flex; flex-direction:row; gap:var(--gap-12); width:100%; }
-      .dcds-InputFields__otp-box { flex:1; height:48px; border:0.5px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); display:flex; align-items:center; justify-content:center; transition:border-color 120ms ease,background-color 120ms ease; min-width:0; }
+      .dcds-InputFields__otp-box { flex:1; height:48px; border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); display:flex; align-items:center; justify-content:center; transition:border-color 120ms ease,background-color 120ms ease; min-width:0; }
       .dcds-InputFields__otp-input { width:100%; height:100%; background:transparent; border:none; outline:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); text-align:center; padding:0; }
       .dcds-InputFields__otp-box:focus-within { border:1px solid var(--color-stroke-focus-subtle); }
       .dcds-InputFields__otp-box--filled .dcds-InputFields__otp-input { color:var(--color-text-info); }
-      .dcds-InputFields__otp-box--error { border:1px solid var(--color-stroke-error); background:var(--color-fill-light-error); }
+      .dcds-InputFields__otp-box--error { border:1px solid var(--color-stroke-error); }
       .dcds-InputFields__otp-box--disabled { background:var(--color-surface-disabled); pointer-events:none; }
       .dcds-InputFields__otp-box--disabled .dcds-InputFields__otp-input { color:var(--color-text-disabled); }
       .dcds-BaseElemFront__wrap { position:relative; flex-shrink:0; }
-      .dcds-BaseElemFront { display:flex; flex-direction:row; align-items:center; justify-content:space-between; width:120px; min-width:120px; height:48px; padding:0 var(--gap-12); border:0.5px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); cursor:pointer; box-sizing:border-box; outline:none; transition:background-color 120ms ease; }
+      .dcds-BaseElemFront { display:flex; flex-direction:row; align-items:center; justify-content:space-between; width:120px; min-width:120px; height:48px; padding:0 var(--gap-12); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); cursor:pointer; box-sizing:border-box; outline:none; transition:background-color 120ms ease; }
       .dcds-BaseElemFront:hover { background-color:var(--color-fill-primary-0); }
       .dcds-BaseElemFront:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
       .dcds-BaseElemFront--open { border:1px solid var(--color-stroke-focus-subtle); }
@@ -1182,12 +1253,13 @@
       .dcds-BaseValidation--warning .dcds-BaseValidation__text { color:var(--color-text-warning); }
       .dcds-BaseValidation--success .dcds-BaseValidation__icon, .dcds-BaseValidation--success .dcds-BaseValidation__text { color:var(--color-text-success); }
       .dcds-InputFields--state-focus .dcds-InputFields__box, .dcds-InputFields--state-typing .dcds-InputFields__box { border:1px solid var(--color-stroke-focus-subtle); }
-      .dcds-InputFields--state-error .dcds-InputFields__box { border:1px solid var(--color-stroke-error); background:var(--color-fill-light-error); }
+      .dcds-InputFields--state-error .dcds-InputFields__box { border:1px solid var(--color-stroke-error); }
       .dcds-InputFields--state-disabled .dcds-InputFields__box { background:var(--color-surface-3); border-color:var(--color-stroke-disabled); pointer-events:none; cursor:not-allowed; }
       .dcds-InputFields--state-disabled .dcds-InputFields__input { color:var(--color-text-disabled); cursor:not-allowed; }
       .dcds-InputFields--state-disabled .dcds-InputFields__input::placeholder { color:var(--color-text-disabled); }
       .dcds-InputFields--state-disabled .dcds-InputFields__leading, .dcds-InputFields--state-disabled .dcds-InputFields__trailing { color:var(--color-icon-disabled); }
       .dcds-InputFields--state-read-only .dcds-InputFields__box { background:var(--color-surface-2); border-color:var(--color-stroke-neutral); cursor:default; }
+      .dcds-InputFields--state-read-only .dcds-InputFields__leading, .dcds-InputFields--state-read-only .dcds-InputFields__trailing { color:var(--color-icon-disabled); pointer-events:none; cursor:default; }
       @media (prefers-reduced-motion:reduce) { .dcds-InputFields__box, .dcds-BaseHelpText, .dcds-BaseElemFront, .dcds-InputFields__search-btn { transition:none; } }
 
       /* ============================================================
@@ -1290,7 +1362,7 @@
       .dcds-Grid { display:flex; flex-direction:column; gap:var(--gap-12); font-family:var(--font-family); margin:0; padding:0; }
       .dcds-Grid__section-label { font-size:var(--font-size-h3); font-weight:var(--font-weight-bold); color:var(--color-text-neutral); line-height:normal; margin:0; }
       .dcds-Grid__spec-list { margin:0; padding:0 0 0 var(--gap-20); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-secondary); line-height:1.6; }
-      .dcds-Grid__viewport { position:relative; height:300px; border:0.5px solid var(--color-text-secondary); background-color:var(--color-surface-1); overflow:hidden; box-sizing:border-box; flex-shrink:0; }
+      .dcds-Grid__viewport { position:relative; height:300px; border:1px solid var(--color-text-secondary); background-color:var(--color-surface-1); overflow:hidden; box-sizing:border-box; flex-shrink:0; }
       .dcds-Grid__ruler { position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:center; z-index:4; pointer-events:none; }
       .dcds-Grid__ruler-line { position:absolute; top:50%; left:0; right:0; height:1px; background-color:var(--color-text-secondary); transform:translateY(-50%); }
       .dcds-Grid__ruler-value { position:relative; background-color:var(--color-surface-1); padding:0 var(--gap-8); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); color:var(--color-text-secondary); z-index:1; white-space:nowrap; }
@@ -1588,25 +1660,25 @@
        * or color-icon-success (hover) or color-icon-disabled (disabled).
        * ============================================================ */
       const MenuCheckboxEmpty = () => (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-          <rect x="1" y="1" width="22" height="22" rx="4" fill="white" stroke="currentColor" strokeWidth="2" />
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <rect x="0.667" y="0.667" width="14.667" height="14.667" rx="2.667" fill="white" stroke="currentColor" strokeWidth="1.333" />
         </svg>
       );
       const MenuCheckboxChecked = () => (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-          <rect width="24" height="24" rx="4" fill="currentColor" />
-          <path d="M5 12L10 17L19 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <rect width="16" height="16" rx="2.667" fill="currentColor" />
+          <path d="M3 8L6.5 11.5L13 4.5" stroke="white" strokeWidth="1.667" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
       const MenuRadioEmpty = () => (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-          <circle cx="12" cy="12" r="11" fill="white" stroke="currentColor" strokeWidth="2" />
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.333" fill="white" stroke="currentColor" strokeWidth="1.333" />
         </svg>
       );
       const MenuRadioChecked = () => (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-          <circle cx="12" cy="12" r="12" fill="currentColor" />
-          <circle cx="12" cy="12" r="6" fill="white" />
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="8" fill="currentColor" />
+          <circle cx="8" cy="8" r="4" fill="white" />
         </svg>
       );
 
@@ -1631,7 +1703,7 @@
         if (item.type === 'Flag' && item.country) {
           return (
             <span className="dcds-DropdownButton__menu-item-leading dcds-DropdownButton__menu-item-leading--flag">
-              <img src={`${FLAGS_BASE_URL}${item.country.toUpperCase()}.svg`} alt={item.country} width="24" height="18" />
+              <img src={`${FLAGS_BASE_URL}${item.country.toUpperCase()}.svg`} alt={item.country} width="16" height="12" />
             </span>
           );
         }
@@ -1641,6 +1713,409 @@
       /* ============================================================
        * DropdownButton (with floating _BaseMenu)
        * ============================================================ */
+      /* ============================================================
+       * DropdownMenu
+       * ============================================================ */
+
+      /* 16×16 px per Figma node 788:68291 */
+      const CheckboxEmptyIcon = () => (
+        React.createElement('svg', { width:16, height:16, viewBox:'0 0 16 16', fill:'none', 'aria-hidden':true },
+          React.createElement('rect', { x:0.667, y:0.667, width:14.667, height:14.667, rx:2.667, fill:'white', stroke:'currentColor', strokeWidth:1.333 }))
+      );
+      const CheckboxCheckedIcon = () => (
+        React.createElement('svg', { width:16, height:16, viewBox:'0 0 16 16', fill:'none', 'aria-hidden':true },
+          React.createElement('rect', { width:16, height:16, rx:2.667, fill:'currentColor' }),
+          React.createElement('path', { d:'M3 8L6.5 11.5L13 4.5', stroke:'white', strokeWidth:1.667, strokeLinecap:'round', strokeLinejoin:'round' }))
+      );
+      const RadioEmptyIcon = () => (
+        React.createElement('svg', { width:16, height:16, viewBox:'0 0 16 16', fill:'none', 'aria-hidden':true },
+          React.createElement('circle', { cx:8, cy:8, r:7.333, fill:'white', stroke:'currentColor', strokeWidth:1.333 }))
+      );
+      const RadioCheckedIcon = () => (
+        React.createElement('svg', { width:16, height:16, viewBox:'0 0 16 16', fill:'none', 'aria-hidden':true },
+          React.createElement('circle', { cx:8, cy:8, r:8, fill:'currentColor' }),
+          React.createElement('circle', { cx:8, cy:8, r:4, fill:'white' }))
+      );
+
+      function DmItemLeading({ item }) {
+        if (item.leading) return React.createElement('span', { className:'dcds-DropdownMenu__menu-item-leading' }, item.leading);
+        if (!item.type) return null;
+        if (item.showLeading === false) return null;
+        if (item.type === 'Multi-Select') return (
+          React.createElement('span', { className:'dcds-DropdownMenu__menu-item-leading' },
+            item.isSelected ? React.createElement(CheckboxCheckedIcon) : React.createElement(CheckboxEmptyIcon))
+        );
+        if (item.type === 'Single-Select') return (
+          React.createElement('span', { className:'dcds-DropdownMenu__menu-item-leading' },
+            item.isSelected ? React.createElement(RadioCheckedIcon) : React.createElement(RadioEmptyIcon))
+        );
+        if (item.type === 'Flag' && item.country) return (
+          React.createElement('span', { className:'dcds-DropdownMenu__menu-item-leading dcds-DropdownMenu__menu-item-leading--flag' },
+            React.createElement('img', { src:`dcds-flags/flags/${item.country.toUpperCase()}.svg`, alt:item.country, width:16, height:12 }))
+        );
+        return null;
+      }
+
+      function DropdownMenuComp({
+        property1 = 'close',
+        label,
+        isMandatory = true,
+        showLabel = true,
+        placeholder = 'Select...',
+        selectedId = null,
+        selectedIds,
+        items = [],
+        menuLabel,
+        showHelpText = false,
+        helpText,
+        disabled = false,
+        showStatus = false,
+        status,
+        statusSize = 'S',
+        statusEmphasis = 'subtle',
+        statusState = 'neutral',
+        statusShowIcon = true,
+        showMenuLabel = true,
+        onToggle,
+        onSelect,
+        onClick,
+        onFocus,
+        onBlur,
+        className,
+      }) {
+        const isOpen = property1 === 'open' && !disabled;
+        const menuId = useId();
+        const wrapperRef = useRef(null);
+
+        const isMultiMode = selectedIds != null;
+        const selectedIdSet = isMultiMode ? (selectedIds instanceof Set ? selectedIds : new Set(selectedIds)) : new Set();
+        const multiCount = isMultiMode ? selectedIdSet.size : 0;
+        const selectedItem = !isMultiMode && selectedId != null ? items.find(i => i.id === selectedId) : undefined;
+        const displayValue = isMultiMode
+          ? multiCount === 0 ? null : multiCount === 1 ? items.find(i => selectedIdSet.has(i.id))?.label ?? null : `${multiCount} selected`
+          : selectedItem?.label ?? null;
+
+        useEffect(() => {
+          if (!isOpen) return;
+          const h = (e) => { if (wrapperRef.current && !wrapperRef.current.contains(e.target)) { if (onToggle) onToggle(false); } };
+          document.addEventListener('mousedown', h);
+          return () => document.removeEventListener('mousedown', h);
+        }, [isOpen, onToggle]);
+
+        useEffect(() => {
+          if (!isOpen) return;
+          const h = (e) => { if (e.key === 'Escape') { if (onToggle) onToggle(false); } };
+          document.addEventListener('keydown', h);
+          return () => document.removeEventListener('keydown', h);
+        }, [isOpen, onToggle]);
+
+        const rootClass = ['dcds-DropdownMenu', isOpen ? 'dcds-DropdownMenu--open' : '', disabled ? 'dcds-DropdownMenu--disabled' : '', className || ''].filter(Boolean).join(' ');
+
+        const resolvedItems = items.map(item => ({ showStatus, status, statusSize, statusEmphasis, statusState, statusShowIcon, ...item, isSelected: item.isSelected != null ? item.isSelected : isMultiMode ? selectedIdSet.has(item.id) : item.id === selectedId }));
+
+        return (
+          React.createElement('div', { ref:wrapperRef, className:rootClass },
+            showLabel && label && React.createElement('div', { className:'dcds-DropdownMenu__label-row' },
+              React.createElement('label', { className:'dcds-DropdownMenu__label' }, label),
+              isMandatory && React.createElement('span', { className:'dcds-DropdownMenu__mandatory', 'aria-label':'required' }, '*')
+            ),
+            showHelpText && helpText && React.createElement('div', { className:`dcds-DropdownMenu__helptext${isOpen ? ' dcds-DropdownMenu__helptext--open' : ''}`, 'aria-hidden': !isOpen },
+              React.createElement('div', { className:'dcds-DropdownMenu__helptext-inner' },
+                React.createElement('div', { className:'dcds-DropdownMenu__helptext-bar' }),
+                React.createElement('p', { className:'dcds-DropdownMenu__helptext-text' }, helpText)
+              )
+            ),
+            React.createElement('div', {
+              className:'dcds-DropdownMenu__trigger',
+              role:'combobox',
+              'aria-expanded':isOpen,
+              'aria-haspopup':'menu',
+              'aria-controls':menuId,
+              'aria-disabled':disabled || undefined,
+              tabIndex:disabled ? -1 : 0,
+              onClick:(e) => { if (!disabled) { if (onToggle) onToggle(!isOpen); if (onClick) onClick(e); } },
+              onFocus,
+              onBlur,
+              onKeyDown:(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!disabled) { if (onToggle) onToggle(!isOpen); } } },
+            },
+              React.createElement('span', { className:'dcds-DropdownMenu__value-wrap' },
+                selectedItem && React.createElement(DmItemLeading, { item: selectedItem }),
+                React.createElement('span', { className:`dcds-DropdownMenu__value${!displayValue ? ' dcds-DropdownMenu__value--placeholder' : ''}` }, displayValue || placeholder)
+              ),
+              React.createElement('span', { className:'dcds-DropdownMenu__arrow', 'aria-hidden':true, style:{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' } },
+                React.createElement(ArrowDownLinearIcon, { size:16 })
+              )
+            ),
+            isOpen && React.createElement('div', { className:'dcds-DropdownMenu__panel' },
+              React.createElement('div', { className:'dcds-DropdownMenu__menu', id:menuId, role:'menu' },
+                showMenuLabel && menuLabel && React.createElement('div', { className:'dcds-DropdownMenu__menu-label', 'aria-hidden':true }, menuLabel),
+                resolvedItems.map((item) => {
+                  const cls = ['dcds-DropdownMenu__menu-item', item.isSelected && !item.disabled ? 'dcds-DropdownMenu__menu-item--selected' : '', item.disabled ? 'dcds-DropdownMenu__menu-item--disabled' : ''].filter(Boolean).join(' ');
+                  return React.createElement('div', { role:'none', key:item.id, className:'dcds-DropdownMenu__menu-item-row' },
+                    React.createElement('button', {
+                      type:'button', role:'menuitem', className:cls,
+                      disabled:item.disabled, 'aria-disabled':item.disabled || undefined,
+                      onClick:() => { if (item.disabled) return; if (item.onClick) item.onClick(); if (onSelect) onSelect(item.id); }
+                    },
+                      React.createElement(DmItemLeading, { item }),
+                      React.createElement('span', { className:'dcds-DropdownMenu__menu-item-label' }, item.label),
+                      item.showStatus && React.createElement(Badge, { size: item.statusSize || 'S', emphasis: item.statusEmphasis || 'subtle', state: item.statusState || 'neutral', showIcon: item.statusShowIcon !== false }, item.status || 'Status')
+                    )
+                  );
+                })
+              )
+            )
+          )
+        );
+      }
+
+      /* ============================================================
+       * Datepicker
+       * ============================================================ */
+
+      const DP_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const DP_MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const DP_WEEK_DAYS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+      function dpIsSameDay(a, b) {
+        return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+      }
+
+      function dpBuildGrid(year, month) {
+        const first = new Date(year, month, 1);
+        const last = new Date(year, month + 1, 0);
+        const cells = [];
+        for (let i = 0; i < first.getDay(); i++) cells.push({ date: new Date(year, month, 1 - (first.getDay() - i)), outside: true });
+        for (let d = 1; d <= last.getDate(); d++) cells.push({ date: new Date(year, month, d), outside: false });
+        while (cells.length % 7 !== 0) {
+          const i = cells.length - first.getDay() - last.getDate() + 1;
+          cells.push({ date: new Date(year, month + 1, i), outside: true });
+        }
+        // Drop last row if entirely outside-month
+        const lastRowStart = cells.length - 7;
+        if (cells.slice(lastRowStart).every(c => c.outside)) cells.splice(lastRowStart, 7);
+        return cells;
+      }
+
+      function dpFormatDate(d) {
+        const dd = String(d.getDate()).padStart(2,'0');
+        const mm = String(d.getMonth()+1).padStart(2,'0');
+        return `${dd}/${mm}/${d.getFullYear()}`;
+      }
+
+      function CalendarIcon({ size = 16 }) {
+        return React.createElement('svg', { width:size, height:size, viewBox:'0 0 24 24', fill:'none', 'aria-hidden':true },
+          React.createElement('rect', { x:3, y:4, width:18, height:17, rx:2, stroke:'currentColor', strokeWidth:1.5 }),
+          React.createElement('path', { d:'M3 9h18', stroke:'currentColor', strokeWidth:1.5 }),
+          React.createElement('path', { d:'M8 2v4M16 2v4', stroke:'currentColor', strokeWidth:1.5, strokeLinecap:'round' })
+        );
+      }
+
+      function ChevronLeftIcon({ size = 16 }) {
+        return React.createElement('svg', { width:size, height:size, viewBox:'0 0 24 24', fill:'none', 'aria-hidden':true },
+          React.createElement('path', { d:'M15 18l-6-6 6-6', stroke:'currentColor', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round' })
+        );
+      }
+
+      function ChevronRightIcon({ size = 16 }) {
+        return React.createElement('svg', { width:size, height:size, viewBox:'0 0 24 24', fill:'none', 'aria-hidden':true },
+          React.createElement('path', { d:'M9 18l6-6-6-6', stroke:'currentColor', strokeWidth:2, strokeLinecap:'round', strokeLinejoin:'round' })
+        );
+      }
+
+      function YearOverlay({ currentYear, onSelect, onClose }) {
+        const ref = useRef(null);
+        useEffect(() => {
+          const el = ref.current;
+          if (!el) return;
+          const anchor = el.querySelector('[data-year="2000"]');
+          if (anchor) el.scrollTop = anchor.offsetTop;
+        }, []);
+        useEffect(() => {
+          const handleOutside = (e) => { if (ref.current && !ref.current.contains(e.target)) onClose(); };
+          const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
+          document.addEventListener('mousedown', handleOutside);
+          document.addEventListener('keydown', handleKey);
+          return () => { document.removeEventListener('mousedown', handleOutside); document.removeEventListener('keydown', handleKey); };
+        }, [onClose]);
+        return React.createElement('div', { ref, className:'dcds-Datepicker__month-overlay', role:'dialog', 'aria-label':'Select year' },
+          Array.from({ length: 2028 - 1975 + 1 }, (_, i) => 1975 + i).map(yr =>
+            React.createElement('button', {
+              key:yr, type:'button', 'data-year':yr,
+              className:`dcds-Datepicker__month-option${yr===currentYear?' dcds-Datepicker__month-option--current':''}`,
+              onClick:()=>{ onSelect(yr); onClose(); }
+            }, yr)
+          )
+        );
+      }
+
+      function DatepickerComp({
+        property1 = 'close',
+        label,
+        isMandatory = true,
+        showLabel = true,
+        value = null,
+        viewDate: viewDateProp,
+        showHelpText = false,
+        helpText,
+        State,
+        disabled = false,
+        showValidation = false,
+        validationMessage,
+        validationProperty = 'error',
+        showTooltip = false,
+        tooltipHeading,
+        tooltipBody,
+        minDate,
+        maxDate,
+        onToggle,
+        onChange,
+        onMonthChange,
+        onClick,
+        onFocus,
+        onBlur,
+        onKeyDown,
+        onKeyUp,
+        className,
+      }) {
+        const isOpen = property1 === 'open' && !disabled;
+        const wrapperRef = useRef(null);
+        const initial = viewDateProp || value || new Date();
+        const [viewYear, setViewYear] = useState(initial.getFullYear());
+        const [viewMonth, setViewMonth] = useState(initial.getMonth());
+        const [monthOverlay, setMonthOverlay] = useState(false);
+        const [yearOverlay, setYearOverlay] = useState(false);
+
+        useEffect(() => {
+          if (viewDateProp) { setViewYear(viewDateProp.getFullYear()); setViewMonth(viewDateProp.getMonth()); }
+        }, [viewDateProp]);
+
+        useEffect(() => {
+          if (!isOpen) { setMonthOverlay(false); setYearOverlay(false); }
+        }, [isOpen]);
+
+        useEffect(() => {
+          if (!isOpen) return;
+          const h = (e) => { if (wrapperRef.current && !wrapperRef.current.contains(e.target)) { if (onToggle) onToggle(false); } };
+          document.addEventListener('mousedown', h);
+          return () => document.removeEventListener('mousedown', h);
+        }, [isOpen, onToggle]);
+
+        useEffect(() => {
+          if (!isOpen) return;
+          const h = (e) => { if (e.key === 'Escape') { setMonthOverlay(false); setYearOverlay(false); if (onToggle) onToggle(false); } };
+          document.addEventListener('keydown', h);
+          return () => document.removeEventListener('keydown', h);
+        }, [isOpen, onToggle]);
+
+        const [inputText, setInputText] = useState(value ? dpFormatDate(value) : '');
+        useEffect(() => { setInputText(value ? dpFormatDate(value) : ''); }, [value]);
+
+        const parseInputDate = (s) => {
+          const m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+          if (!m) return null;
+          const d = new Date(+m[3], +m[2]-1, +m[1]);
+          return isNaN(d.getTime()) ? null : d;
+        };
+
+        const cells = dpBuildGrid(viewYear, viewMonth);
+        const prevMonth = () => { let y=viewYear, m=viewMonth-1; if(m<0){m=11;y--;} setViewMonth(m); setViewYear(y); if(onMonthChange)onMonthChange(new Date(y,m,1)); };
+        const nextMonth = () => { let y=viewYear, m=viewMonth+1; if(m>11){m=0;y++;} setViewMonth(m); setViewYear(y); if(onMonthChange)onMonthChange(new Date(y,m,1)); };
+        const getDayCls = (date, outside) => {
+          if (outside) return 'dcds-Datepicker__day dcds-Datepicker__day--outside';
+          const disabled2 = (minDate && date < minDate) || (maxDate && date > maxDate);
+          if (disabled2) return 'dcds-Datepicker__day dcds-Datepicker__day--disabled';
+          if (value && dpIsSameDay(date, value)) return 'dcds-Datepicker__day dcds-Datepicker__day--selected';
+          return 'dcds-Datepicker__day';
+        };
+        const resolvedState = disabled ? 'Disabled' : State || (inputText ? 'Filled' : 'Default');
+        const rootClass = ['dcds-Datepicker', isOpen ? 'dcds-Datepicker--open' : '', disabled ? 'dcds-Datepicker--disabled' : '', className||''].filter(Boolean).join(' ');
+
+        return (
+          React.createElement('div', { ref:wrapperRef, className:rootClass },
+            React.createElement('div', { className:'dcds-Datepicker__trigger-wrap' },
+            React.createElement(InputFields, {
+              Type:'Default', trailingProperty:'calendar-2', showTrailing:true,
+              label, isMandatory, showLabel, showHelpText, helpText,
+              State: resolvedState,
+              showValidation, validationMessage, validationProperty,
+              showTooltip, tooltipHeading, tooltipBody,
+              placeholder:'dd/mm/yyyy', value: inputText,
+              onChange: (val) => {
+                const cleaned = val.replace(/[^\d/]/g, '');
+                let fmt = cleaned;
+                if (/^\d{2}$/.test(cleaned)) fmt = cleaned + '/';
+                else if (/^\d{2}\/\d{2}$/.test(cleaned)) fmt = cleaned + '/';
+                setInputText(fmt !== val ? fmt : val);
+              },
+              onBlur: (e) => {
+                const parsed = parseInputDate(inputText);
+                if (parsed) { if(onChange)onChange(parsed); setViewMonth(parsed.getMonth()); setViewYear(parsed.getFullYear()); }
+                if(onBlur)onBlur(e);
+              },
+              onTrailingClick: ()=>{ if(!disabled && onToggle) onToggle(!isOpen); },
+              onFocus,
+              onKeyDown: (e) => {
+                if (e.key === 'Enter') { const p = parseInputDate(inputText); if(p){if(onChange)onChange(p);if(onToggle)onToggle(false);} }
+                if (e.key === 'Escape') { if(onToggle)onToggle(false); }
+                if(onKeyDown)onKeyDown(e);
+              },
+              onKeyUp, onClick,
+            }),
+            isOpen && React.createElement('div', { className:'dcds-Datepicker__panel', role:'dialog', 'aria-label':'Date picker' },
+              React.createElement('div', { className:'dcds-Datepicker__nav' },
+                React.createElement('div', { className:'dcds-Datepicker__nav-btn-wrap' },
+                  React.createElement('button', { type:'button', className:'dcds-Datepicker__nav-btn', onClick:()=>{setMonthOverlay(v=>!v);setYearOverlay(false);}, 'aria-expanded':monthOverlay },
+                    DP_MONTHS_SHORT[viewMonth],
+                    React.createElement('span', { className:`dcds-Datepicker__nav-btn-icon${monthOverlay?' dcds-Datepicker__nav-btn-icon--open':''}`, 'aria-hidden':true }, React.createElement(ArrowDownLinearIcon, {size:16}))
+                  ),
+                  monthOverlay && React.createElement('div', { className:'dcds-Datepicker__month-overlay', role:'listbox', 'aria-label':'Select month' },
+                    DP_MONTHS_SHORT.map((name, idx) =>
+                      React.createElement('button', {
+                        key:name, type:'button', role:'option', 'aria-selected':idx===viewMonth,
+                        className:`dcds-Datepicker__month-option${idx===viewMonth?' dcds-Datepicker__month-option--current':''}`,
+                        onClick:()=>{ setViewMonth(idx); setMonthOverlay(false); }
+                      }, name)
+                    )
+                  )
+                ),
+                React.createElement('div', { className:'dcds-Datepicker__nav-btn-wrap' },
+                  React.createElement('button', { type:'button', className:'dcds-Datepicker__nav-btn', onClick:()=>{setYearOverlay(v=>!v);setMonthOverlay(false);}, 'aria-expanded':yearOverlay },
+                    viewYear,
+                    React.createElement('span', { className:`dcds-Datepicker__nav-btn-icon${yearOverlay?' dcds-Datepicker__nav-btn-icon--open':''}`, 'aria-hidden':true }, React.createElement(ArrowDownLinearIcon, {size:16}))
+                  ),
+                  yearOverlay && React.createElement(YearOverlay, {
+                    currentYear: viewYear,
+                    onSelect: (yr) => setViewYear(yr),
+                    onClose: () => setYearOverlay(false)
+                  })
+                ),
+                React.createElement('div', { className:'dcds-Datepicker__nav-arrows' },
+                  React.createElement('button', { type:'button', className:'dcds-Datepicker__arrow-btn', onClick:prevMonth, 'aria-label':'Previous month' }, React.createElement(ChevronLeftIcon, {size:16})),
+                  React.createElement('button', { type:'button', className:'dcds-Datepicker__arrow-btn', onClick:nextMonth, 'aria-label':'Next month' }, React.createElement(ChevronRightIcon, {size:16}))
+                )
+              ),
+              React.createElement('div', { className:'dcds-Datepicker__week-header', 'aria-hidden':true },
+                DP_WEEK_DAYS.map(d => React.createElement('div', { key:d, className:'dcds-Datepicker__week-day' }, d))
+              ),
+              React.createElement('div', { className:'dcds-Datepicker__days', role:'grid', 'aria-label':`${DP_MONTHS[viewMonth]} ${viewYear}` },
+                cells.map(({ date, outside }, idx) =>
+                  React.createElement('button', {
+                    key:idx, type:'button', role:'gridcell',
+                    className:getDayCls(date, outside),
+                    'aria-label':dpFormatDate(date),
+                    'aria-selected':value ? dpIsSameDay(date, value) : undefined,
+                    tabIndex:outside?-1:0,
+                    onClick:()=>{ if(!outside&&onChange){if(minDate&&date<minDate)return;if(maxDate&&date>maxDate)return;onChange(date);} }
+                  }, date.getDate())
+                )
+              )
+            )
+          ) /* end trigger-wrap */
+          )
+        );
+      }
+
       function DropdownButton({
         variant = 'Secondary',
         state = 'Default',
@@ -1717,7 +2192,11 @@
                       >
                         <MenuItemLeading item={item} />
                         <span className="dcds-DropdownButton__menu-item-label">{item.label}</span>
-                        {item.showStatus && <span className="dcds-DropdownButton__menu-item-status">{item.status || 'Status'}</span>}
+                        {item.showStatus && (
+                          <Badge size={item.statusSize || 'S'} emphasis={item.statusEmphasis || 'subtle'} state={item.statusState || 'neutral'} showIcon={item.statusShowIcon !== false}>
+                            {item.status || 'Status'}
+                          </Badge>
+                        )}
                       </button>
                     </div>
                   );
@@ -3531,7 +4010,11 @@
                       >
                         <MenuItemLeading item={item} />
                         <span className="dcds-DropdownButton__menu-item-label">{item.label}</span>
-                        {item.showStatus && <span className="dcds-DropdownButton__menu-item-status">{item.status || 'Status'}</span>}
+                        {item.showStatus && (
+                          <Badge size={item.statusSize || 'S'} emphasis={item.statusEmphasis || 'subtle'} state={item.statusState || 'neutral'} showIcon={item.statusShowIcon !== false}>
+                            {item.status || 'Status'}
+                          </Badge>
+                        )}
                       </button>
                     </div>
                   );
@@ -4144,6 +4627,7 @@
         otpValues: otpValuesProp,
         searchButtonLabel = 'Search',
         'aria-label': ariaLabel, 'aria-describedby': ariaDescribedBy,
+        ariaExpanded,
         onChange, onOtpChange, onFocus, onBlur, onClick, onKeyDown, onKeyUp,
         onMouseEnter, onMouseLeave, onSearchClick, onDropdownClick, onPrefixClick, onPrefixMenuItemSelect, onTrailingClick,
         className, dataTestId,
@@ -4422,7 +4906,7 @@
             renderHelpText(),
             React.createElement('div', {
               className: 'dcds-InputFields__box', role: 'combobox',
-              'aria-expanded': false, 'aria-haspopup': 'listbox',
+              'aria-expanded': ariaExpanded != null ? ariaExpanded : false, 'aria-haspopup': 'listbox',
               tabIndex: isDisabled ? -1 : 0,
               'aria-label': ariaLabel || label,
               'aria-disabled': isDisabled ? true : undefined,
@@ -4435,13 +4919,13 @@
                   value || React.createElement('span', { style: { color: 'var(--color-text-disabled)' } }, placeholder)
                 )
               ),
-              showTrailing && renderTrailingBtn(resolveTrailingProp('arrow-down'), onDropdownClick)
+              showTrailing && renderTrailingBtn(resolveTrailingProp(trailingProperty || 'arrow-down'), onDropdownClick)
             )
           );
         }
 
         // Default
-        const inputTypeAttr = isPasswordVisible ? 'text' : 'password';
+        const inputTypeAttr = isReadOnly ? 'text' : isPasswordVisible ? 'text' : 'password';
         const resolvedTrailing = resolveTrailingProp(isPasswordVisible ? 'eye' : 'eye-slash');
         const isPasswordToggle = !trailingProperty && Type === 'Default';
         return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
@@ -4629,7 +5113,7 @@
                     React.createElement(InputFields, {
                       Type: 'Default', State: s,
                       label: s + ' state', placeholder: 'Placeholder text',
-                      value: s === 'Filled' ? 'Some filled value' : '',
+                      value: (s === 'Filled' || s === 'Read-only') ? 'Some filled value' : '',
                       showValidation: s === 'Error', validationMessage: 'This field is required',
                     })
                   )
@@ -5070,7 +5554,9 @@
                           onClick={() => pushAgLog('_BaseMenuItem click: ' + item.id)}>
                           <MenuItemLeading item={item} />
                           <span className="dcds-DropdownButton__menu-item-label">{item.label}</span>
-                          {item.showStatus && <span className="dcds-DropdownButton__menu-item-status">{item.status}</span>}
+                          {item.showStatus && (
+                            <Badge size="S" emphasis="subtle" state="neutral">{item.status}</Badge>
+                          )}
                         </button>
                       </div>
                     );
@@ -5780,7 +6266,9 @@
           { id: 'checkbox',       label: 'Checkbox'       },
           { id: 'chip',           label: 'Chip'           },
           { id: 'drawer',         label: 'Drawer'         },
+          { id: 'datepicker',     label: 'Datepicker'     },
           { id: 'dropdownbutton', label: 'DropdownButton' },
+          { id: 'dropdownmenu',   label: 'DropdownMenu'   },
           { id: 'fileupload',     label: 'File Upload'    },
           { id: 'inputfields',    label: 'Input Fields'   },
           { id: 'linkbutton',     label: 'LinkButton'     },
@@ -5795,6 +6283,96 @@
           { id: 'tooltip',        label: 'Tooltip'        },
           { id: 'grids',          label: 'Grids'          },
         ];
+
+        /* --- DropdownMenu controls --- */
+        const [dmOpen, setDmOpen] = useState(false);
+        const [dmSelectedId, setDmSelectedId] = useState(null);
+        const [dmSelectedIds, setDmSelectedIds] = useState(new Set());
+        const [dmLabel, setDmLabel] = useState('Country');
+        const [dmPlaceholder, setDmPlaceholder] = useState('Select a country');
+        const [dmDisabled, setDmDisabled] = useState(false);
+        const [dmShowHelpText, setDmShowHelpText] = useState(false);
+        const [dmHelpText, setDmHelpText] = useState('Select the country of residence');
+        const [dmType, setDmType] = useState('Flag');
+        const [dmShowStatus, setDmShowStatus] = useState(false);
+        const [dmStatus, setDmStatus] = useState('Status');
+        const [dmStatusSize, setDmStatusSize] = useState('S');
+        const [dmStatusEmphasis, setDmStatusEmphasis] = useState('subtle');
+        const [dmStatusState, setDmStatusState] = useState('neutral');
+        const [dmStatusShowIcon, setDmStatusShowIcon] = useState(true);
+        const [dmMenuLabel, setDmMenuLabel] = useState('');
+        const [dmShowMenuLabel, setDmShowMenuLabel] = useState(true);
+        const [dmLog, pushDmLog] = useEventLog();
+        const isMultiSelect = dmType === 'Multi-Select';
+
+        /* Demo enum — string enum where key = ISO code, value = display name */
+        const CountryEnum = { IN: 'India', US: 'United States', GB: 'United Kingdom', SG: 'Singapore' };
+
+        /* enumToMenuItems — mirrors the exported utility from @dcds/components */
+        function enumToMenuItems(enumObj, options = {}) {
+          const { type, country, disabled: disabledOpt, label: labelFn } = options;
+          const disabledSet = Array.isArray(disabledOpt) ? new Set(disabledOpt) : null;
+          const isDisabled = (id) => disabledSet ? disabledSet.has(id) : typeof disabledOpt === 'function' ? disabledOpt(id) : false;
+          return Object.keys(enumObj)
+            .filter(key => isNaN(Number(key))) /* strip numeric reverse-map keys */
+            .map(key => {
+              const rawValue = enumObj[key];
+              const valueStr = typeof rawValue === 'string' ? rawValue : key;
+              const resolvedLabel = labelFn ? labelFn(key, valueStr) : valueStr;
+              const resolvedCountry = type === 'Flag'
+                ? (typeof country === 'function' ? country(key, valueStr) : typeof country === 'string' ? country : undefined)
+                : undefined;
+              return {
+                id: key,
+                label: resolvedLabel,
+                ...(type ? { type } : {}),
+                ...(resolvedCountry ? { country: resolvedCountry } : {}),
+                disabled: isDisabled(key),
+                showLeading: true,
+              };
+            });
+        }
+
+        const dmItems = dmType === 'none'
+          ? enumToMenuItems(CountryEnum, { disabled: ['SG'] })
+          : enumToMenuItems(CountryEnum, {
+              type: dmType,
+              country: (id) => id,   /* key IS the ISO code for this enum */
+              disabled: ['SG'],
+            });
+        const handleDmSelect = (id) => {
+          if (isMultiSelect) {
+            setDmSelectedIds(prev => {
+              const next = new Set(prev);
+              next.has(id) ? next.delete(id) : next.add(id);
+              return next;
+            });
+            pushDmLog(`onSelect: ${id} (toggled)`);
+            /* do NOT close for multi-select */
+          } else {
+            setDmSelectedId(id);
+            setDmOpen(false);
+            pushDmLog(`onSelect: ${id}`);
+          }
+        };
+
+        /* --- Datepicker controls --- */
+        const [dpOpen, setDpOpen] = useState(false);
+        const [dpDate, setDpDate] = useState(null);
+        const [dpLabel, setDpLabel] = useState('Date of birth');
+        const [dpDisabled, setDpDisabled] = useState(false);
+        const [dpState, setDpState] = useState('Default');
+        const [dpShowHelpText, setDpShowHelpText] = useState(false);
+        const [dpHelpText, setDpHelpText] = useState('Select your date of birth');
+        const [dpShowValidation, setDpShowValidation] = useState(false);
+        const [dpValidationMessage, setDpValidationMessage] = useState('Please select a valid date');
+        const [dpValidationProperty, setDpValidationProperty] = useState('error');
+        const [dpShowTooltip, setDpShowTooltip] = useState(false);
+        const [dpTooltipHeading, setDpTooltipHeading] = useState('Date of birth');
+        const [dpTooltipBody, setDpTooltipBody] = useState('Enter the date as shown on your ID document.');
+        const [dpIsMandatory, setDpIsMandatory] = useState(true);
+        const [dpShowLabel, setDpShowLabel] = useState(true);
+        const [dpLog, pushDpLog] = useEventLog();
 
         /* --- Button controls --- */
         const [btnVariant, setBtnVariant] = useState('Primary');
@@ -6083,6 +6661,53 @@
                 </>
               )}
 
+              {activeComponent === 'dropdownmenu' && (
+                <>
+                  <h2>DropdownMenu</h2>
+                  <CtrlText   label="label"        value={dmLabel}       onChange={setDmLabel} />
+                  <CtrlText   label="placeholder"  value={dmPlaceholder} onChange={setDmPlaceholder} />
+                  <CtrlToggle label="isOpen"       checked={dmOpen}      onChange={setDmOpen} />
+                  <CtrlToggle label="disabled"     checked={dmDisabled}  onChange={setDmDisabled} />
+                  <CtrlToggle label="showHelpText" checked={dmShowHelpText} onChange={setDmShowHelpText} />
+                  {dmShowHelpText && <CtrlText label="helpText" value={dmHelpText} onChange={setDmHelpText} />}
+                  <CtrlSelect label="item type"    value={dmType}        onChange={setDmType} options={['Flag', 'Multi-Select', 'Single-Select', 'none']} />
+                  <CtrlText    label="menuLabel"     value={dmMenuLabel}     onChange={setDmMenuLabel}  placeholder="e.g. 20 results found" />
+                  {dmMenuLabel && <CtrlToggle label="showMenuLabel" checked={dmShowMenuLabel} onChange={setDmShowMenuLabel} />}
+                  <CtrlToggle label="showStatus"        checked={dmShowStatus}       onChange={setDmShowStatus} />
+                  {dmShowStatus && <CtrlText   label="status"           value={dmStatus}          onChange={setDmStatus}          placeholder="e.g. Beta" />}
+                  {dmShowStatus && <CtrlSelect label="statusSize"       value={dmStatusSize}      onChange={setDmStatusSize}      options={['S','M','L']} />}
+                  {dmShowStatus && <CtrlSelect label="statusEmphasis"   value={dmStatusEmphasis}  onChange={setDmStatusEmphasis}  options={['subtle','intense']} />}
+                  {dmShowStatus && <CtrlSelect label="statusState"      value={dmStatusState}     onChange={setDmStatusState}     options={['neutral','info','warning','error','success']} />}
+                  {dmShowStatus && <CtrlToggle label="statusShowIcon"   checked={dmStatusShowIcon} onChange={setDmStatusShowIcon} />}
+                  <h2>Selected item</h2>
+                  <CtrlSelect label="selectedId" value={dmSelectedId ?? 'none'} onChange={(v) => setDmSelectedId(v === 'none' ? null : v)} options={['none', 'IN', 'US', 'GB']} />
+                </>
+              )}
+
+              {activeComponent === 'datepicker' && (
+                <>
+                  <h2>Datepicker</h2>
+                  <CtrlToggle label="showLabel"    checked={dpShowLabel}   onChange={setDpShowLabel} />
+                  {dpShowLabel && <CtrlText label="label" value={dpLabel} onChange={setDpLabel} />}
+                  {dpShowLabel && <CtrlToggle label="isMandatory" checked={dpIsMandatory} onChange={setDpIsMandatory} />}
+                  <CtrlToggle label="isOpen"       checked={dpOpen}        onChange={setDpOpen} />
+                  <CtrlSelect label="State"        value={dpState}         onChange={(v) => { setDpState(v); setDpDisabled(v === 'Disabled'); }} options={['Default','Focus','Filled','Error','Disabled','Read-only']} />
+                  <h2>Help text</h2>
+                  <CtrlToggle label="showHelpText" checked={dpShowHelpText} onChange={setDpShowHelpText} />
+                  {dpShowHelpText && <CtrlText label="helpText" value={dpHelpText} onChange={setDpHelpText} />}
+                  <h2>Validation</h2>
+                  <CtrlToggle label="showValidation"    checked={dpShowValidation}    onChange={setDpShowValidation} />
+                  {dpShowValidation && <CtrlText   label="validationMessage" value={dpValidationMessage} onChange={setDpValidationMessage} />}
+                  {dpShowValidation && <CtrlSelect label="validationProperty" value={dpValidationProperty} onChange={setDpValidationProperty} options={['error','warning','success','info']} />}
+                  <h2>Tooltip</h2>
+                  <CtrlToggle label="showTooltip"   checked={dpShowTooltip}   onChange={setDpShowTooltip} />
+                  {dpShowTooltip && <CtrlText label="tooltipHeading" value={dpTooltipHeading} onChange={setDpTooltipHeading} />}
+                  {dpShowTooltip && <CtrlText label="tooltipBody"    value={dpTooltipBody}    onChange={setDpTooltipBody} />}
+                  <h2>Selected date</h2>
+                  <CtrlText label="value (YYYY-MM-DD)" value={dpDate ? dpDate.toISOString().slice(0,10) : ''} onChange={(v) => { const d = new Date(v); setDpDate(isNaN(d.getTime()) ? null : d); }} placeholder="e.g. 2025-06-15" />
+                </>
+              )}
+
               {activeComponent === 'dropdownbutton' && (
                 <>
                   <h2>DropdownButton</h2>
@@ -6267,6 +6892,103 @@
              * MAIN STAGE — previews
              * ============================================================ */}
             <main className="stage">
+
+              {activeComponent === 'dropdownmenu' && (
+                <section>
+                  <h2>DropdownMenu</h2>
+                  <p className="stage-note">
+                    Interactive — use controls to configure. Click trigger to open/close. Press <code>Escape</code> or click outside to dismiss.
+                  </p>
+                  <div className="preview" style={{ minHeight: 240, alignItems: 'flex-start' }}>
+                    <div style={{ width: 280 }}>
+                      <DropdownMenuComp
+                        label={dmLabel}
+                        placeholder={dmPlaceholder}
+                        property1={dmOpen ? 'open' : 'close'}
+                        disabled={dmDisabled}
+                        showHelpText={dmShowHelpText}
+                        helpText={dmHelpText}
+                        selectedId={isMultiSelect ? null : dmSelectedId}
+                        selectedIds={isMultiSelect ? dmSelectedIds : undefined}
+                        items={dmItems}
+                        menuLabel={dmMenuLabel || undefined}
+                        showMenuLabel={dmShowMenuLabel}
+                        showStatus={dmShowStatus}
+                        status={dmStatus}
+                        statusSize={dmStatusSize}
+                        statusEmphasis={dmStatusEmphasis}
+                        statusState={dmStatusState}
+                        statusShowIcon={dmStatusShowIcon}
+                        onToggle={(next) => { setDmOpen(next); pushDmLog(`onToggle: ${next}`); }}
+                        onSelect={handleDmSelect}
+                        onClick={() => pushDmLog('onClick')}
+                        onFocus={() => pushDmLog('onFocus')}
+                        onBlur={() => pushDmLog('onBlur')}
+                      />
+                    </div>
+                  </div>
+                  <div className="events">
+                    {dmLog.length === 0 ? '— no events yet —' : dmLog.join('\n')}
+                  </div>
+
+                  <h2 style={{ marginTop: 'var(--gap-24)' }}>Item types</h2>
+                  <div className="preview" style={{ minHeight: 200, alignItems: 'flex-start', gap: 'var(--gap-24)' }}>
+                    {['Multi-Select', 'Single-Select', 'Flag'].map(type => (
+                      <div key={type} style={{ width: 220 }}>
+                        <p className="stage-note" style={{ marginTop: 0 }}>{type}</p>
+                        <DropdownMenuComp
+                          property1="open"
+                          label={type}
+                          items={[
+                            { id: 'a', label: 'Option A', type, country: 'IN', showLeading: true, isSelected: true },
+                            { id: 'b', label: 'Option B', type, country: 'US', showLeading: true },
+                            { id: 'c', label: 'Disabled', type, country: 'GB', showLeading: true, disabled: true },
+                          ]}
+                          onToggle={() => {}}
+                          onSelect={() => {}}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {activeComponent === 'datepicker' && (
+                <section>
+                  <h2>Datepicker</h2>
+                  <p className="stage-note">
+                    Interactive — click trigger to open calendar. Select a day to set the value.
+                  </p>
+                  <div className="preview" style={{ minHeight: 400, alignItems: 'flex-start' }}>
+                    <div style={{ width: 320 }}>
+                      <DatepickerComp
+                        label={dpLabel}
+                        isMandatory={dpIsMandatory}
+                        showLabel={dpShowLabel}
+                        property1={dpOpen ? 'open' : 'close'}
+                        State={dpState}
+                        disabled={dpDisabled}
+                        showHelpText={dpShowHelpText}
+                        helpText={dpHelpText}
+                        showValidation={dpShowValidation}
+                        validationMessage={dpValidationMessage}
+                        validationProperty={dpValidationProperty}
+                        showTooltip={dpShowTooltip}
+                        tooltipHeading={dpTooltipHeading}
+                        tooltipBody={dpTooltipBody}
+                        value={dpDate}
+                        onToggle={(next) => { setDpOpen(next); pushDpLog(`onToggle: ${next}`); }}
+                        onChange={(d) => { setDpDate(d); setDpOpen(false); pushDpLog(`onChange: ${d.toLocaleDateString()}`); }}
+                        onMonthChange={(m) => pushDpLog(`onMonthChange: ${m.toLocaleDateString()}`)}
+                        onClick={() => pushDpLog('onClick')}
+                      />
+                    </div>
+                  </div>
+                  <div className="events">
+                    {dpLog.length === 0 ? '— no events yet —' : dpLog.join('\n')}
+                  </div>
+                </section>
+              )}
 
               {activeComponent === 'button' && (
                 <section>

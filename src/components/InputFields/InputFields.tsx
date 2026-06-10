@@ -396,6 +396,7 @@ export const InputFields: React.FC<InputFieldsProps> = ({
   onPrefixClick,
   onPrefixMenuItemSelect,
   onTrailingClick,
+  ariaExpanded = false,
   className,
   dataTestId,
 }) => {
@@ -730,8 +731,9 @@ export const InputFields: React.FC<InputFieldsProps> = ({
     );
   }
 
-  /* Dropdown — click-driven, arrow-down trailing, no validation row */
+  /* Dropdown — click-driven, configurable trailing icon, no validation row */
   if (Type === 'Dropdown') {
+    const dropdownTrailing = trailingProperty ?? 'arrow-down';
     return (
       <div
         className={rootClasses}
@@ -744,7 +746,7 @@ export const InputFields: React.FC<InputFieldsProps> = ({
         <div
           className="dcds-InputFields__box"
           role="combobox"
-          aria-expanded={false}
+          aria-expanded={ariaExpanded}
           aria-haspopup="listbox"
           tabIndex={isDisabled ? -1 : 0}
           aria-label={ariaLabel ?? label}
@@ -769,7 +771,7 @@ export const InputFields: React.FC<InputFieldsProps> = ({
             </span>
           </div>
           {showTrailing && (
-            <_BaseTrailng property1="arrow-down" onClick={onDropdownClick} />
+            <_BaseTrailng property1={dropdownTrailing} onClick={onDropdownClick} />
           )}
         </div>
       </div>
@@ -777,7 +779,7 @@ export const InputFields: React.FC<InputFieldsProps> = ({
   }
 
   /* Default — single-line text, optional password toggle */
-  const inputType = isPasswordVisible ? 'text' : 'password';
+  const inputType = isReadOnly ? 'text' : isPasswordVisible ? 'text' : 'password';
   const isPasswordField = !trailingIcon && showTrailing;
 
   return (
