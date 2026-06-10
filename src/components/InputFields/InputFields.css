@@ -1,0 +1,653 @@
+/* ==========================================================================
+   InputFields — single-line text, dropdown, currency, phone, OTP, and search.
+   Token reference: src/theme/tokens.css
+   Figma: InputFields (all variants)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Root wrapper — column flex: label row → field row → help text → validation
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  width: 100%;
+  min-width: 240px;
+  font-family: var(--font-family);
+}
+
+/* --------------------------------------------------------------------------
+   Label row — flex: label text + mandatory marker + tooltip trigger
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields__label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+}
+
+/* Label — 14 px bold, color/text/primary */
+.dcds-InputFields__label {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: normal;
+}
+
+/* Mandatory asterisk — 14 px regular, color/text/error */
+.dcds-InputFields__mandatory {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: normal;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Field row — flex: optional _BaseElemFront prefix (120 px) + .box (flex-1)
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields__field-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--gap-8);
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Input box — 48 px tall container holding leading + <input> + trailing
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields__box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  height: 48px;
+  padding: 0 var(--gap-12);
+  gap: 0;
+  border: 1px solid var(--color-stroke-neutral);
+  border-radius: var(--rd-S);
+  background: var(--color-surface-1);
+  transition: border-color 120ms ease, background-color 120ms ease;
+  box-sizing: border-box;
+  cursor: text;
+}
+
+/* Live focus — CSS :focus-within drives this in production */
+.dcds-InputFields__box:focus-within {
+  border: 1px solid var(--color-stroke-focus-subtle);
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   <input> element — fills available width, no native styling
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-info);
+  font-variation-settings: '"YTLC" 500, "wdth" 100';
+  padding: 0;
+}
+
+.dcds-InputFields__input::placeholder {
+  color: var(--color-text-disabled);
+  font-variation-settings: '"YTLC" 500, "wdth" 100';
+}
+
+/* Remove webkit autofill background flash */
+.dcds-InputFields__input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-surface-1) inset;
+}
+
+/* --------------------------------------------------------------------------
+   Leading slot — 16 px icon or symbol text
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields__leading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-icon-primary);
+}
+
+/* Flag image inside leading slot — 16 × 12 px */
+.dcds-InputFields__leading img {
+  width: 16px;
+  height: 12px;
+  object-fit: cover;
+  border-radius: 1px;
+  display: block;
+}
+
+/* Symbol text ($, ₹) inside leading — 14 px regular, color/text/neutral */
+.dcds-InputFields__leading-symbol {
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-neutral);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Trailing slot — 24 × 24 clickable icon
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields__trailing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-icon-primary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Left group inside the box — leading icon + input, flex with gap-12 */
+.dcds-InputFields__box-left {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: var(--gap-12);
+  flex: 1;
+  min-width: 0;
+}
+
+.dcds-InputFields__trailing:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+  border-radius: var(--rd-XS);
+}
+
+/* --------------------------------------------------------------------------
+   Search button — full-height action button trailing the search input
+   -------------------------------------------------------------------------- */
+
+/* Search box — overflow hidden to clip the internal button */
+.dcds-InputFields__box--search {
+  overflow: hidden;
+  padding-right: 0;
+}
+
+.dcds-InputFields__search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  padding: 0 var(--gap-16);
+  background: var(--color-fill-action);
+  color: var(--color-text-invert);
+  border: none;
+  border-radius: 0 calc(var(--rd-S) - 1px) calc(var(--rd-S) - 1px) 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 120ms ease;
+  margin: 0;
+}
+
+.dcds-InputFields__search-btn:hover:not(:disabled) {
+  background-color: var(--color-fill-dark-action);
+}
+
+.dcds-InputFields__search-btn:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}
+
+/* --------------------------------------------------------------------------
+   OTP row — 6 equal boxes, gap 12 px
+   -------------------------------------------------------------------------- */
+
+.dcds-InputFields__otp-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-12);
+  width: 100%;
+}
+
+/* Single OTP box */
+.dcds-InputFields__otp-box {
+  flex: 1;
+  height: 48px;
+  border: 1px solid var(--color-stroke-neutral);
+  border-radius: var(--rd-S);
+  background: var(--color-surface-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 120ms ease, background-color 120ms ease;
+  min-width: 0;
+}
+
+/* OTP box input — fills box, centred text */
+.dcds-InputFields__otp-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  text-align: center;
+  padding: 0;
+  font-variation-settings: '"YTLC" 500, "wdth" 100';
+}
+
+/* OTP box focused — 1px focus-subtle border */
+.dcds-InputFields__otp-box:focus-within {
+  border: 1px solid var(--color-stroke-focus-subtle);
+}
+
+/* OTP box filled — neutral border unchanged, digit uses info text color */
+.dcds-InputFields__otp-box--filled .dcds-InputFields__otp-input {
+  color: var(--color-text-info);
+}
+
+/* OTP box error */
+.dcds-InputFields__otp-box--error {
+  border: 1px solid var(--color-stroke-error);
+}
+
+/* OTP box disabled */
+.dcds-InputFields__otp-box--disabled {
+  background: var(--color-surface-disabled);
+  pointer-events: none;
+}
+
+.dcds-InputFields__otp-box--disabled .dcds-InputFields__otp-input {
+  color: var(--color-text-disabled);
+}
+
+/* --------------------------------------------------------------------------
+   _BaseElemFront — 120 px prefix block for Currency / Phone No.
+   -------------------------------------------------------------------------- */
+
+/* Wrapper — positions the dropdown relative to the button */
+.dcds-BaseElemFront__wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Button root — Default state: 0.5 px stroke-neutral border */
+.dcds-BaseElemFront {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 120px;
+  min-width: 120px;
+  height: 48px;
+  padding: 0 var(--gap-12);
+  border: 1px solid var(--color-stroke-neutral);
+  border-radius: var(--rd-S);
+  background: var(--color-surface-1);
+  cursor: pointer;
+  box-sizing: border-box;
+  outline: none;
+  transition: background-color 120ms ease;
+}
+
+.dcds-BaseElemFront:hover {
+  background-color: var(--color-fill-primary-0);
+}
+
+.dcds-BaseElemFront:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}
+
+/* Open state — 1 px stroke-focus-subtle border */
+.dcds-BaseElemFront--open {
+  border: 1px solid var(--color-stroke-focus-subtle);
+}
+
+/* Disabled state — surface-3 bg, stroke-disabled border, no interaction */
+.dcds-BaseElemFront--disabled {
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-stroke-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dcds-BaseElemFront--disabled .dcds-BaseElemFront__code {
+  color: var(--color-text-disabled);
+}
+
+/* Read-only state — surface-2 bg, stroke-disabled border, neutral text */
+.dcds-BaseElemFront--readonly {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-stroke-disabled);
+}
+
+.dcds-BaseElemFront--readonly .dcds-BaseElemFront__code {
+  color: var(--color-text-neutral);
+}
+
+/* Inner group: flag + code text */
+.dcds-BaseElemFront__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+  min-width: 0;
+}
+
+/* Flag image in prefix block — 16 × 12 px */
+.dcds-BaseElemFront__flag {
+  width: 16px;
+  height: 12px;
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* Code text — 16 px regular, color/text/primary */
+.dcds-BaseElemFront__code {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Arrow icon — 16 px default; 20 px open (size set in JSX) */
+.dcds-BaseElemFront__arrow {
+  display: flex;
+  align-items: center;
+  color: var(--color-icon-primary);
+  flex-shrink: 0;
+  transition: transform 120ms ease;
+}
+
+/* Rotate arrow 180° when open */
+.dcds-BaseElemFront__arrow--open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu — floats below the button, matches DropdownButton__menu pattern */
+.dcds-BaseElemFront__menu {
+  position: absolute;
+  top: calc(100% + var(--gap-4));
+  left: 0;
+  min-width: 100%;
+  background-color: var(--color-surface-1);
+  border-radius: var(--rd-S);
+  box-shadow: var(--shadow-S);
+  max-height: 288px; /* 6 items × 48 px */
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  z-index: 10;
+  animation: dcds-BaseElemFront__menu-in 120ms ease-out;
+}
+
+@keyframes dcds-BaseElemFront__menu-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Row wrapper carries the bottom border separator */
+.dcds-BaseElemFront__menu-item-row {
+  border-bottom: 0.5px solid var(--color-stroke-subdued);
+}
+
+.dcds-BaseElemFront__menu-item-row:last-child {
+  border-bottom: none;
+}
+
+/* Item button — flex row, matches DropdownButton item sizing */
+.dcds-BaseElemFront__menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+  width: 100%;
+  padding: var(--gap-12) var(--gap-16);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.dcds-BaseElemFront__menu-item:hover:not(:disabled) {
+  background-color: var(--color-fill-primary-1);
+}
+
+.dcds-BaseElemFront__menu-item:focus-visible {
+  outline: none;
+  background-color: var(--color-fill-primary-1);
+  box-shadow: inset 0 0 0 2px var(--color-stroke-focus);
+}
+
+/* Flag leading slot — 24 × 18 px */
+.dcds-BaseElemFront__menu-item-leading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 18px;
+}
+
+.dcds-BaseElemFront__menu-item-leading img {
+  width: 24px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+/* Code text inside menu item */
+.dcds-BaseElemFront__menu-code {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   _BaseHelpText — collapsible help text with left accent bar
+   -------------------------------------------------------------------------- */
+
+/* Help text — hidden by default, slides open on focus */
+.dcds-BaseHelpText {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 200ms linear, opacity 150ms linear;
+}
+
+/* Open: CSS-driven via parent :focus-within, or forced via state classes */
+.dcds-InputFields:focus-within .dcds-BaseHelpText,
+.dcds-InputFields--state-focus .dcds-BaseHelpText,
+.dcds-InputFields--state-typing .dcds-BaseHelpText,
+.dcds-BaseHelpText--open {
+  max-height: 120px;
+  opacity: 1;
+}
+
+/* Inner layout: 4 px accent bar + text, with vertical padding from Figma */
+.dcds-BaseHelpText__inner {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-8);
+  align-items: flex-end;
+  padding: var(--gap-4) 0;
+}
+
+.dcds-BaseHelpText__bar {
+  width: 4px;
+  min-width: 4px;
+  align-self: stretch;
+  border-radius: var(--rd-XS);
+  background: var(--color-stroke-focus-subtle);
+  flex-shrink: 0;
+}
+
+.dcds-BaseHelpText__text {
+  flex: 1 0 0;
+  margin: 0;
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   _BaseValidation — icon + message row beneath the field
+   -------------------------------------------------------------------------- */
+
+.dcds-BaseValidation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-4);
+  padding: 0 var(--gap-4);
+}
+
+.dcds-BaseValidation__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.dcds-BaseValidation__text {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  line-height: normal;
+  font-variation-settings: '"YTLC" 500, "wdth" 100';
+}
+
+/* Validation colour variants */
+.dcds-BaseValidation--error .dcds-BaseValidation__icon { color: var(--color-icon-error); }
+.dcds-BaseValidation--error .dcds-BaseValidation__text { color: var(--color-text-error); }
+
+.dcds-BaseValidation--warning .dcds-BaseValidation__icon { color: var(--color-icon-warning); }
+.dcds-BaseValidation--warning .dcds-BaseValidation__text { color: var(--color-text-warning); }
+
+.dcds-BaseValidation--success .dcds-BaseValidation__icon,
+.dcds-BaseValidation--success .dcds-BaseValidation__text {
+  color: var(--color-text-success);
+}
+
+/* --------------------------------------------------------------------------
+   State modifiers — applied to the root .dcds-InputFields element
+   -------------------------------------------------------------------------- */
+
+/* Focus/Typing state — 1px focus-subtle border */
+.dcds-InputFields--state-focus .dcds-InputFields__box,
+.dcds-InputFields--state-typing .dcds-InputFields__box {
+  border: 1px solid var(--color-stroke-focus-subtle);
+}
+
+/* Filled state — neutral border unchanged (no border color change per Figma) */
+
+/* Error state — thicker 1 px red border */
+.dcds-InputFields--state-error .dcds-InputFields__box {
+  border: 1px solid var(--color-stroke-error);
+}
+
+.dcds-InputFields--state-error .dcds-InputFields__input {
+  background: transparent;
+}
+
+/* Disabled state — grey bg, no pointer events */
+.dcds-InputFields--state-disabled .dcds-InputFields__box {
+  background: var(--color-surface-3);
+  border-color: var(--color-stroke-disabled);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.dcds-InputFields--state-disabled .dcds-InputFields__input {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+.dcds-InputFields--state-disabled .dcds-InputFields__input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.dcds-InputFields--state-disabled .dcds-InputFields__leading,
+.dcds-InputFields--state-disabled .dcds-InputFields__trailing {
+  color: var(--color-icon-disabled);
+}
+
+/* Read-only state — focusable, neutral border, no interaction cues */
+.dcds-InputFields--state-read-only .dcds-InputFields__box {
+  background: var(--color-surface-2);
+  border-color: var(--color-stroke-neutral);
+  cursor: default;
+}
+
+.dcds-InputFields--state-read-only .dcds-InputFields__input {
+  cursor: default;
+}
+
+.dcds-InputFields--state-read-only .dcds-InputFields__leading,
+.dcds-InputFields--state-read-only .dcds-InputFields__trailing {
+  color: var(--color-icon-disabled);
+  pointer-events: none;
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Type modifier — search: no trailing slot gap needed
+   -------------------------------------------------------------------------- */
+
+/* Search type: the box and button share no border between them */
+.dcds-InputFields--type-search .dcds-InputFields__field-row {
+  align-items: stretch;
+}
+
+/* Currency / Phone: field row has no gap — prefix + box share a continuous border */
+.dcds-InputFields--type-currency .dcds-InputFields__field-row,
+.dcds-InputFields--type-phone-no- .dcds-InputFields__field-row {
+  gap: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — disable transitions
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .dcds-InputFields__box,
+  .dcds-BaseHelpText,
+  .dcds-BaseElemFront,
+  .dcds-InputFields__search-btn {
+    transition: none;
+  }
+}

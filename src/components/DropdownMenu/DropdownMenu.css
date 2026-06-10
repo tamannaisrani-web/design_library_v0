@@ -1,0 +1,301 @@
+/* DropdownMenu — trigger (InputFields Dropdown variant) + floating _BaseMenu panel.
+ * Design source: Figma P52nmDshYaKr963q1zBwQj node 1223:7582.
+ * Token prefix: --color-*, --gap-*, --rd-*, --shadow-*, --font-*
+ */
+
+/* ===========================================================
+ * Wrapper — relative-positioned, full-width by default
+ * =========================================================== */
+
+.dcds-DropdownMenu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+/* ===========================================================
+ * Label row
+ * =========================================================== */
+
+.dcds-DropdownMenu__label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+}
+
+.dcds-DropdownMenu__label {
+  font-size: var(--font-size-label);   /* 14px */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-neutral);
+  line-height: 1.2;
+}
+
+.dcds-DropdownMenu__mandatory {
+  color: var(--color-text-error);
+  font-size: var(--font-size-label);
+  line-height: 1;
+}
+
+/* ===========================================================
+ * Trigger box — mirrors InputFields Dropdown variant
+ * Figma: 48px tall, rd-S, 0.5px neutral border → 1px focus-subtle when open
+ * =========================================================== */
+
+.dcds-DropdownMenu__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 var(--gap-16);
+  background-color: var(--color-surface-1);
+  border: 0.5px solid var(--color-stroke-neutral);
+  border-radius: var(--rd-S);   /* 8px — not rd-XS */
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  gap: var(--gap-8);
+  outline: none;
+}
+
+.dcds-DropdownMenu__trigger:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* Open state — 1px focus-subtle border */
+.dcds-DropdownMenu--open .dcds-DropdownMenu__trigger {
+  border-width: 1px;
+  border-color: var(--color-stroke-focus-subtle);
+}
+
+/* Disabled state */
+.dcds-DropdownMenu--disabled .dcds-DropdownMenu__trigger {
+  background-color: var(--color-surface-3);
+  border-color: var(--color-stroke-disabled);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Value / placeholder text */
+.dcds-DropdownMenu__value-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dcds-DropdownMenu__value {
+  min-width: 0;
+  font-size: var(--font-size-body);   /* 16px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-neutral);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+}
+
+.dcds-DropdownMenu__value--placeholder {
+  color: var(--color-text-disabled);
+}
+
+/* Arrow icon — 16px, rotates 180° when open */
+.dcds-DropdownMenu__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-icon-neutral);
+  transition: transform 150ms ease;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: none;  /* clicks handled by trigger */
+}
+
+.dcds-DropdownMenu--open .dcds-DropdownMenu__arrow {
+  transform: rotate(180deg);
+}
+
+/* ===========================================================
+ * Help text — collapsible bar (mirrors _BaseHelpText from InputFields)
+ * Visible when open; collapses when closed
+ * =========================================================== */
+
+.dcds-DropdownMenu__helptext {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 150ms ease, opacity 150ms ease;
+}
+
+.dcds-DropdownMenu--open .dcds-DropdownMenu__helptext {
+  max-height: 80px;
+  opacity: 1;
+}
+
+.dcds-DropdownMenu__helptext-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  padding: var(--gap-4) 0;
+}
+
+.dcds-DropdownMenu__helptext-bar {
+  width: 4px;
+  min-width: 4px;
+  height: 16px;
+  border-radius: var(--rd-Max);
+  background-color: var(--color-stroke-focus-subtle);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.dcds-DropdownMenu__helptext-text {
+  margin: 0;
+  font-size: var(--font-size-label);   /* 14px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subdued);
+  line-height: 1.4;
+}
+
+/* ===========================================================
+ * Floating menu panel — anchored below trigger
+ * Figma: white bg, rd-S, Shadow-S, min-width = trigger width
+ * =========================================================== */
+
+.dcds-DropdownMenu__panel {
+  position: absolute;
+  top: calc(100% + var(--gap-4));
+  left: 0;
+  min-width: 100%;
+  background-color: var(--color-surface-1);
+  border-radius: var(--rd-S);
+  box-shadow: var(--shadow-S);
+  z-index: 10;
+  overflow: hidden;
+  animation: dcds-DropdownMenu__panel-in 120ms ease-out;
+}
+
+@keyframes dcds-DropdownMenu__panel-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================================================
+ * Menu items — override DropdownButton classes with DropdownMenu namespace
+ * Hover bg: color/fill/secondary-0 (Noble Blue-0 #F1F9FF) per Figma DropdownMenu spec
+ * =========================================================== */
+
+.dcds-DropdownMenu__menu {
+  margin: 0;
+  padding: 0;
+}
+
+.dcds-DropdownMenu__menu-label {
+  background-color: var(--color-surface-4);
+  padding: var(--gap-4) var(--gap-16);
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-subdued);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dcds-DropdownMenu__menu-item-row {
+  border-bottom: 0.5px solid var(--color-stroke-subdued);
+}
+
+.dcds-DropdownMenu__menu-item-row:last-child {
+  border-bottom: none;
+}
+
+.dcds-DropdownMenu__menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+  width: 100%;
+  text-align: left;
+  padding: var(--gap-12) var(--gap-16);
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.dcds-DropdownMenu__menu-item:hover:not(:disabled) {
+  /* Figma DropdownMenu spec: Noble Blue-0 = color/fill/secondary-0 */
+  background-color: var(--color-fill-secondary-0);
+}
+
+.dcds-DropdownMenu__menu-item:focus-visible {
+  outline: none;
+  background-color: var(--color-fill-secondary-0);
+  box-shadow: inset 0 0 0 2px var(--color-stroke-focus);
+}
+
+.dcds-DropdownMenu__menu-item:disabled,
+.dcds-DropdownMenu__menu-item[aria-disabled='true'] {
+  color: var(--color-text-disabled);
+  background-color: var(--color-surface-3);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Selected (Variant4) — Wealthy Green-100 bg, bold label */
+.dcds-DropdownMenu__menu-item--selected {
+  background-color: var(--color-fill-light-action);
+}
+
+.dcds-DropdownMenu__menu-item--selected .dcds-DropdownMenu__menu-item-label {
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-DropdownMenu__menu-item--selected:hover:not(:disabled) {
+  background-color: var(--color-fill-secondary-0);
+}
+
+/* Hover — leading icon border shifts to success color */
+.dcds-DropdownMenu__menu-item:hover:not(:disabled) .dcds-DropdownMenu__menu-item-leading {
+  color: var(--color-icon-success);
+}
+
+/* Leading slot — 16×16 px (Figma node 788:68291) */
+.dcds-DropdownMenu__menu-item-leading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-icon-action);
+}
+
+/* Flag — 16×12 px (Figma node 788:68245) */
+.dcds-DropdownMenu__menu-item-leading--flag {
+  width: 16px;
+  height: 12px;
+  align-self: center;
+}
+
+.dcds-DropdownMenu__menu-item-label {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Trailing status badge — rendered via Badge component; see Badge.css for styles */

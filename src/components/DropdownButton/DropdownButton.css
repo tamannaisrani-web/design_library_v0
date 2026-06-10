@@ -161,21 +161,21 @@
   cursor: not-allowed;
 }
 
-/* Leading slot — 24×24 px container for icon / checkbox / radio / avatar */
+/* Leading slot — 16×16 px per Figma node 788:68291 */
 .dcds-DropdownButton__menu-item-leading {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  /* Default: action color — applies to SVG currentColor (checkbox/radio border + fill) */
+  width: 16px;
+  height: 16px;
   color: var(--color-icon-action);
 }
 
-/* Flag leading — 24×18 px, not full square */
+/* Flag leading — 16×12 px per Figma node 788:68245 */
 .dcds-DropdownButton__menu-item-leading--flag {
-  height: 18px;
+  width: 16px;
+  height: 12px;
   align-self: center;
 }
 
@@ -228,20 +228,4 @@
  * Figma: color/surface/2 bg, color/stroke/neutral border
  * =========================================================== */
 
-.dcds-DropdownButton__menu-item-status {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--gap-4);
-  height: 24px;
-  padding: var(--gap-4) var(--gap-8);
-  background-color: var(--color-surface-2);
-  border: 1px solid var(--color-stroke-neutral);
-  border-radius: var(--rd-Max);
-  font-family: var(--font-family);
-  font-size: var(--font-size-body-small); /* 12px */
-  font-weight: var(--font-weight-regular);
-  color: var(--color-text-neutral);
-  white-space: nowrap;
-  flex-shrink: 0;
-  line-height: 1;
-}
+/* Trailing status badge — rendered via Badge component; see Badge.css for styles */
