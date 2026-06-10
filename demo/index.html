@@ -6234,15 +6234,12 @@ const MOBILE_SCALE = [
 ];
 
 function TypographySection() {
-  const [platform, setPlatform] = React.useState('desktop');
-  const rows = platform === 'desktop' ? DESKTOP_SCALE : MOBILE_SCALE;
   return (
     <PanelLayout panelContent={<>
       <h2>Typography</h2>
-      <CtrlSelect label="platform" value={platform} onChange={setPlatform} options={['desktop','mobile']} />
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
         <label>typeface</label>
-        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)',fontFamily:'var(--font-family)',fontWeight:'var(--font-weight-bold)'}}>Nunito Sans</span>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'var(--font-family)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>Nunito Sans</span>
       </div>
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
         <label>line height</label>
@@ -6253,24 +6250,33 @@ function TypographySection() {
         <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',color:'var(--color-text-primary)'}}>0%</span>
       </div>
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
-        <label>styles</label>
-        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{rows.length} styles</span>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>🅰 ・ Typography</span>
       </div>
     </>}>
       <main className="stage">
         <section>
-          <h2>{platform === 'desktop' ? 'Desktop' : 'Mobile'} Type Scale</h2>
+          <h2>Desktop Type Scale</h2>
           <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
-            {rows.map(r => (
+            {DESKTOP_SCALE.map(r => (
               <div key={r.token} style={{padding:'var(--gap-12) var(--gap-16)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
-                <span style={{
-                  fontSize:`var(${r.size})`,
-                  fontWeight:`var(${r.weight})`,
-                  fontFamily:'var(--font-family)',
-                  color:'var(--color-text-primary)',
-                  lineHeight:1.2,
-                }}>The quick brown fox</span>
-                <div style={{display:'flex',gap:'var(--gap-8)',alignItems:'center',flexWrap:'wrap'}}>
+                <span style={{fontSize:`var(${r.size})`,fontWeight:`var(${r.weight})`,fontFamily:'var(--font-family)',color:'var(--color-text-primary)',lineHeight:1.2}}>The quick brown fox</span>
+                <div style={{display:'flex',gap:'var(--gap-8)',flexWrap:'wrap'}}>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:'var(--font-weight-bold)'}}>{r.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Mobile Type Scale</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {MOBILE_SCALE.map(r => (
+              <div key={r.token} style={{padding:'var(--gap-12) var(--gap-16)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <span style={{fontSize:`var(${r.size})`,fontWeight:`var(${r.weight})`,fontFamily:'var(--font-family)',color:'var(--color-text-primary)',lineHeight:1.2}}>The quick brown fox</span>
+                <div style={{display:'flex',gap:'var(--gap-8)',flexWrap:'wrap'}}>
                   <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:'var(--font-weight-bold)'}}>{r.token}</span>
                   <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
                   <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
@@ -6321,66 +6327,64 @@ const TC_TOKENS = [
 ];
 
 function SpacingSection() {
-  const [view, setView] = React.useState('gap');
   return (
     <PanelLayout panelContent={<>
       <h2>Spacing</h2>
-      <CtrlSelect label="collection" value={view} onChange={setView} options={['gap','rd','tc']} />
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
-        <label>description</label>
-        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.4}}>
-          {view === 'gap' ? 'Use gap-* for padding, gap, margin' : view === 'rd' ? 'Use rd-* for all border-radius' : 'Use tc-* for Table column widths'}
-        </span>
+        <label>collections</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>gap-* · rd-* · tc-*</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>rule</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.5}}>Never hardcode px — always use a token</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>↔ ・ Spacing</span>
       </div>
     </>}>
       <main className="stage">
-        {view === 'gap' && (
-          <section>
-            <h2>Spacing Tokens — gap-*</h2>
-            <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
-              {GAP_TOKENS.map(t => (
-                <div key={t.token} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
-                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'72px'}}>{t.token}</span>
+        <section>
+          <h2>Spacing — gap-*</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {GAP_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'72px'}}>{t.token}</span>
+                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
+                <div style={{height:'10px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.max(2,t.px)+'px',flexShrink:0}} />
+                {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Border Radius — rd-*</h2>
+          <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-16)'}}>
+            {RD_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-8)',padding:'var(--gap-16)',background:'var(--color-surface-2)',borderRadius:'var(--rd-S)',minWidth:'96px'}}>
+                <div style={{width:'56px',height:'56px',background:'var(--color-fill-action)',borderRadius:Math.min(t.px,28)+'px'}} />
+                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)'}}>{t.token}</span>
+                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{t.px >= 1000 ? '1000px' : t.px+'px'}</span>
+                <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',textAlign:'center'}}>{t.note}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Table Columns — tc-*</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-12)'}}>
+            {TC_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <div style={{display:'flex',alignItems:'center',gap:'var(--gap-12)'}}>
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'64px'}}>{t.token}</span>
                   <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
-                  <div style={{height:'10px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.max(2,t.px)+'px',flexShrink:0}} />
                   {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
-        {view === 'rd' && (
-          <section>
-            <h2>Border Radius — rd-*</h2>
-            <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-16)'}}>
-              {RD_TOKENS.map(t => (
-                <div key={t.token} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-8)',padding:'var(--gap-16)',background:'var(--color-surface-2)',borderRadius:'var(--rd-S)',minWidth:'96px'}}>
-                  <div style={{width:'56px',height:'56px',background:'var(--color-fill-action)',borderRadius:Math.min(t.px,28)+'px'}} />
-                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)'}}>{t.token}</span>
-                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{t.px >= 1000 ? '1000px' : t.px+'px'}</span>
-                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',textAlign:'center'}}>{t.note}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-        {view === 'tc' && (
-          <section>
-            <h2>Table Column Widths — tc-*</h2>
-            <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-8)'}}>
-              {TC_TOKENS.map(t => (
-                <div key={t.token} style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
-                  <div style={{display:'flex',alignItems:'center',gap:'var(--gap-12)'}}>
-                    <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'64px'}}>{t.token}</span>
-                    <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
-                    {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
-                  </div>
-                  <div style={{height:'8px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.min(t.px,500)+'px'}} />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+                <div style={{height:'8px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.min(t.px,500)+'px'}} />
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
     </PanelLayout>
   );
@@ -6412,37 +6416,40 @@ const COLOR_CATS = {
 };
 
 function ColorSection() {
-  const [cat, setCat] = React.useState('text');
-  const tokens = COLOR_CATS[cat] || [];
   return (
     <PanelLayout panelContent={<>
       <h2>Color Tokens</h2>
-      <CtrlSelect label="category" value={cat} onChange={setCat} options={Object.keys(COLOR_CATS)} />
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
-        <label>css variable</label>
-        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>--color-{cat}-*</span>
+        <label>tier system</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.5}}>Primitives → Semantics. Always use semantic tokens.</span>
       </div>
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
-        <label>tokens</label>
-        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{tokens.length}</span>
+        <label>categories</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',lineHeight:1.8}}>{Object.keys(COLOR_CATS).join(' · ')}</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>✸ ・ Color Tokens</span>
       </div>
     </>}>
       <main className="stage">
-        <section>
-          <h2>color / {cat}</h2>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))',gap:'var(--gap-12)'}}>
-            {tokens.map(role => {
-              const varName = `--color-${cat}-${role}`;
-              return (
-                <div key={role} style={{display:'flex',flexDirection:'column',gap:'var(--gap-8)'}}>
-                  <div style={{height:'48px',borderRadius:'var(--rd-S)',border:'1px solid var(--color-stroke-subdued)',background:`var(${varName})`}} title={varName} />
-                  <span style={{fontSize:'var(--font-size-body-small)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>{role}</span>
-                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{varName}</span>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+        {Object.entries(COLOR_CATS).map(([cat, roles]) => (
+          <section key={cat}>
+            <h2>color / {cat}</h2>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))',gap:'var(--gap-12)'}}>
+              {roles.map(role => {
+                const varName = `--color-${cat}-${role}`;
+                return (
+                  <div key={role} style={{display:'flex',flexDirection:'column',gap:'var(--gap-8)'}}>
+                    <div style={{height:'48px',borderRadius:'var(--rd-S)',border:'1px solid var(--color-stroke-subdued)',background:`var(${varName})`}} title={varName} />
+                    <span style={{fontSize:'var(--font-size-body-small)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>{role}</span>
+                    <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{varName}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        ))}
       </main>
     </PanelLayout>
   );
@@ -6475,20 +6482,27 @@ const ICON_STYLES = ['linear', 'bold', 'outline'];
 
 
 function IconsSection() {
-  const [cat, setCat] = React.useState('Arrows');
   const [style, setStyle] = React.useState('linear');
   const [search, setSearch] = React.useState('');
-  const allNames = ICON_CATS[cat] || [];
-  const names = search ? allNames.filter(n => n.includes(search.toLowerCase())) : allNames;
+  const filtered = React.useMemo(() => {
+    if (!search) return ICON_CATS;
+    const q = search.toLowerCase();
+    const result = {};
+    Object.entries(ICON_CATS).forEach(([cat, names]) => {
+      const matches = names.filter(n => n.includes(q));
+      if (matches.length) result[cat] = matches;
+    });
+    return result;
+  }, [search, style]);
+  const total = Object.values(filtered).reduce((s,v)=>s+v.length,0);
   return (
     <PanelLayout panelContent={<>
       <h2>Icons</h2>
-      <CtrlSelect label="category" value={cat} onChange={v=>{setCat(v);setSearch('');}} options={Object.keys(ICON_CATS)} />
-      <CtrlSelect label="style"    value={style} onChange={setStyle} options={ICON_STYLES} />
-      <CtrlText   label="search"   value={search} onChange={setSearch} placeholder="filter icons..." />
+      <CtrlSelect label="style" value={style} onChange={setStyle} options={ICON_STYLES} />
+      <CtrlText   label="search" value={search} onChange={setSearch} placeholder="filter icons..." />
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
         <label>showing</label>
-        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{names.length} icons</span>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{total} icons</span>
       </div>
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
         <label>import</label>
@@ -6496,23 +6510,19 @@ function IconsSection() {
       </div>
     </>}>
       <main className="stage">
-        <section>
-          <h2>{cat} — {style} ({names.length})</h2>
-          <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-8)'}}>
-            {names.map(n => (
-              <div key={n} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-4)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',minWidth:'72px',cursor:'default'}} title={n}>
-                <img
-                  src={`icons/svg/${style}/${n}.svg`}
-                  alt={n}
-                  width={24} height={24}
-                  style={{color:'var(--color-icon-primary)',opacity:.9}}
-                  onError={e=>{e.currentTarget.style.display='none'}}
-                />
-                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',textAlign:'center',maxWidth:'80px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{n}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+        {Object.entries(filtered).map(([cat, names]) => (
+          <section key={cat}>
+            <h2>{cat} ({names.length})</h2>
+            <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-8)'}}>
+              {names.map(n => (
+                <div key={n} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-4)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',minWidth:'72px',cursor:'default'}} title={n}>
+                  <img src={`icons/svg/${style}/${n}.svg`} alt={n} width={24} height={24} style={{opacity:.9}} onError={e=>{e.currentTarget.style.display='none'}} />
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',textAlign:'center',maxWidth:'80px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{n}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </main>
     </PanelLayout>
   );
@@ -6588,19 +6598,25 @@ const FLAG_REGIONS = {
 };
 
 function FlagsSection() {
-  const [region, setRegion] = React.useState('Asia');
   const [search, setSearch] = React.useState('');
-  const flags = (FLAG_REGIONS[region] || []).filter(f =>
-    !search || f.name.toLowerCase().includes(search.toLowerCase()) || f.code.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = React.useMemo(() => {
+    if (!search) return FLAG_REGIONS;
+    const q = search.toLowerCase();
+    const result = {};
+    Object.entries(FLAG_REGIONS).forEach(([region, flags]) => {
+      const matches = flags.filter(f => f.name.toLowerCase().includes(q) || f.code.toLowerCase().includes(q));
+      if (matches.length) result[region] = matches;
+    });
+    return result;
+  }, [search]);
+  const total = Object.values(filtered).reduce((s,v)=>s+v.length,0);
   return (
     <PanelLayout panelContent={<>
       <h2>Flags</h2>
-      <CtrlSelect label="region" value={region} onChange={v=>{setRegion(v);setSearch('');}} options={Object.keys(FLAG_REGIONS)} />
-      <CtrlText   label="search" value={search} onChange={setSearch} placeholder="country or code..." />
+      <CtrlText label="search" value={search} onChange={setSearch} placeholder="country or code..." />
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
         <label>showing</label>
-        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{flags.length} countries</span>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{total} countries</span>
       </div>
       <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
         <label>dimensions</label>
@@ -6612,24 +6628,20 @@ function FlagsSection() {
       </div>
     </>}>
       <main className="stage">
-        <section>
-          <h2>{region} — {flags.length} countries</h2>
-          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
-            {flags.map(f => (
-              <div key={f.code} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
-                <img
-                  src={`dcds-flags/flags/${f.code}.svg`}
-                  alt={f.name}
-                  width={24} height={18}
-                  style={{borderRadius:'2px',border:'1px solid var(--color-stroke-subdued)',flexShrink:0}}
-                  onError={e=>{e.currentTarget.style.display='none'}}
-                />
-                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)',minWidth:'40px'}}>{f.code}</span>
-                <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-subdued)'}}>{f.name}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+        {Object.entries(filtered).map(([region, flags]) => (
+          <section key={region}>
+            <h2>{region} ({flags.length})</h2>
+            <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+              {flags.map(f => (
+                <div key={f.code} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                  <img src={`dcds-flags/flags/${f.code}.svg`} alt={f.name} width={24} height={18} style={{borderRadius:'2px',border:'1px solid var(--color-stroke-subdued)',flexShrink:0}} onError={e=>{e.currentTarget.style.display='none'}} />
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)',minWidth:'40px'}}>{f.code}</span>
+                  <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-subdued)'}}>{f.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </main>
     </PanelLayout>
   );
