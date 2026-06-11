@@ -20,6 +20,13 @@ import type { BaseComponentProps } from '../shared/types';
 export type TooltipPlacement = 'Top' | 'Bottom' | 'Left' | 'Right';
 
 /**
+ * Size of the default info-circle trigger icon.
+ * - `small`  — 16×16 px (default)
+ * - `medium` — 24×24 px
+ */
+export type TooltipIconSize = 'small' | 'medium';
+
+/**
  * Props for the Tooltip component.
  *
  * @example Default (info-circle trigger, Top placement)
@@ -43,16 +50,23 @@ export type TooltipPlacement = 'Top' | 'Bottom' | 'Left' | 'Right';
  */
 export interface TooltipProps extends BaseComponentProps {
   /**
-   * Bold heading inside the tooltip bubble (18 px Caption Bold).
-   * Omit when you only need a short body text with no title.
+   * Bold heading inside the tooltip bubble (16 px Body Bold).
+   * Omit when you only need body text with no title.
    */
   heading?: string;
 
   /**
-   * Descriptive body text inside the tooltip bubble (16 px Body Regular).
+   * Descriptive body text inside the tooltip bubble (14 px Label Regular).
    * At least one of `heading` or `bodyText` must be supplied.
    */
   bodyText?: string;
+
+  /**
+   * Size of the default info-circle trigger icon.
+   * Only applies when no `children` are passed.
+   * @default 'small'
+   */
+  iconSize?: TooltipIconSize;
 
   /**
    * The trigger element the tooltip anchors to.
