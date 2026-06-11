@@ -16,6 +16,9 @@
 
 import type { BaseComponentProps, InteractiveEventHandlers } from '../shared/types';
 import type { DropdownMenuItem } from '../DropdownButton/DropdownButton.types';
+import type { AvatarShape } from '../Avatar/Avatar.types';
+
+export type { AvatarShape };
 
 /* Re-export so consumers can import item type from AvatarGroup directly. */
 export type { DropdownMenuItem };
@@ -67,6 +70,17 @@ export type AvatarGroupDisplayName = boolean;
  */
 export interface AvatarGroupProps extends BaseComponentProps, InteractiveEventHandlers<HTMLButtonElement> {
   /**
+   * Shape of the internal avatar.
+   * - `Initial Circle` — circular with initials (default)
+   * - `Initial Square` — square with initials (for organisations)
+   * - `Icon Circle` — circular with icon
+   * - `Icon Square` — square with icon
+   * - `Flag Circle` — circular with country flag (pass `country` prop)
+   * @default 'Initial Circle'
+   */
+  avatarShape?: AvatarShape;
+
+  /**
    * 1–2 uppercase characters shown inside the internal Avatar (Initial Circle, Medium).
    * Rendered `aria-hidden` — the component's `ariaLabel` carries the accessible name.
    * @default 'AM'
@@ -106,11 +120,21 @@ export interface AvatarGroupProps extends BaseComponentProps, InteractiveEventHa
   showDropdown?: boolean;
 
   /**
-   * Expanded state — renders the chevron pointing up and name in Bold weight.
+   * Expanded state — renders the chevron pointing up.
    * Typically toggled by the parent in response to a menu open/close event.
    * @default false
    */
   isExpanded?: boolean;
+
+  /**
+   * Visual type of the AvatarGroup widget.
+   * - `Default` — white background, navy text (for use on light surfaces)
+   * - `Inverse` — dark navy background (`color/fill/primary-9`), white text
+   *   (for use inside dark sidebars or nav bars)
+   * Figma node 1671:9415.
+   * @default 'Default'
+   */
+  type?: 'Default' | 'Inverse';
 
   /**
    * Accessible label for the button element.

@@ -936,18 +936,28 @@
        * AvatarGroup.css — Figma node 645:9512 / variant frame 1671:9406
        * ============================================================ */
       .dcds-AvatarGroup__wrapper { position:relative; display:inline-block; }
-      .dcds-AvatarGroup { display:inline-flex; align-items:center; height:48px; padding:var(--gap-4) var(--gap-8); gap:var(--gap-8); border-radius:var(--rd-S); border:none; background-color:var(--color-surface-1); cursor:pointer; font-family:var(--font-family); text-align:left; transition:background-color 120ms ease; overflow:hidden; flex-shrink:0; }
-      .dcds-AvatarGroup:hover,.dcds-AvatarGroup:focus-visible { background-color:var(--color-fill-secondary-0); }
+      .dcds-AvatarGroup { display:inline-flex; align-items:center; height:48px; padding:var(--gap-4) var(--gap-8); gap:var(--gap-8); border-radius:var(--rd-S); border:none; background-color:var(--color-surface-1); cursor:pointer; font-family:var(--font-family); text-align:left; transition:background-color 120ms ease,color 120ms ease; overflow:hidden; flex-shrink:0; }
       .dcds-AvatarGroup:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-AvatarGroup:hover,.dcds-AvatarGroup:focus-visible { background-color:var(--color-surface-2); }
+      .dcds-AvatarGroup--expanded { background-color:var(--color-fill-secondary-0); }
       .dcds-AvatarGroup__avatar { display:inline-flex; align-items:center; justify-content:center; width:var(--gap-32); height:var(--gap-32); border-radius:var(--rd-Max); background-color:var(--color-fill-secondary-2); flex-shrink:0; overflow:hidden; }
+      .dcds-AvatarGroup__avatar--square { border-radius:var(--rd-S); }
       .dcds-AvatarGroup__initials { font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:1; white-space:nowrap; }
       .dcds-AvatarGroup__info { display:flex; flex-direction:column; justify-content:center; width:152px; min-width:0; flex-shrink:0; overflow:hidden; color:var(--color-text-primary); }
       .dcds-AvatarGroup__designation { font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--color-text-primary); }
       .dcds-AvatarGroup__name { font-size:var(--font-size-body); font-weight:var(--font-weight-regular); line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--color-text-primary); }
-      .dcds-AvatarGroup--expanded .dcds-AvatarGroup__designation { font-weight:var(--font-weight-bold); }
-      .dcds-AvatarGroup--expanded .dcds-AvatarGroup__name { font-weight:var(--font-weight-bold); }
       .dcds-AvatarGroup__arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:var(--gap-24); height:var(--gap-24); color:var(--color-icon-primary); transition:transform 200ms ease; }
       .dcds-AvatarGroup--expanded .dcds-AvatarGroup__arrow { transform:rotate(180deg); }
+      .dcds-AvatarGroup--inverse { background-color:var(--color-fill-primary-9); }
+      .dcds-AvatarGroup--inverse .dcds-AvatarGroup__info,.dcds-AvatarGroup--inverse .dcds-AvatarGroup__designation,.dcds-AvatarGroup--inverse .dcds-AvatarGroup__name { color:var(--color-text-invert); }
+      .dcds-AvatarGroup--inverse .dcds-AvatarGroup__arrow { color:var(--color-icon-invert); }
+      .dcds-AvatarGroup--inverse:hover,.dcds-AvatarGroup--inverse:focus-visible { background-color:var(--color-fill-dark-info); }
+      .dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded { background-color:var(--color-fill-secondary-0); }
+      .dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__info,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__designation,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__name { color:var(--color-text-primary); }
+      .dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__arrow { color:var(--color-icon-primary); }
+      .dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible { background-color:var(--color-fill-dark-info); }
+      .dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__info,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__designation,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__name,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__info,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__designation,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__name { color:var(--color-text-invert); }
+      .dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__arrow,.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__arrow { color:var(--color-icon-invert); }
 
       /* ============================================================
        * Chip / Badge / Tag — stage helpers
@@ -2259,11 +2269,11 @@
           </div>
         );
       }
-      function CtrlToggle({ label, checked, onChange }) {
+      function CtrlToggle({ label, checked, onChange, disabled = false }) {
         return (
-          <div className="control">
+          <div className="control" style={disabled ? { opacity: 0.4, pointerEvents: 'none' } : undefined}>
             <label>{label}</label>
-            <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+            <input type="checkbox" checked={checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} />
           </div>
         );
       }
@@ -3342,6 +3352,8 @@
         showDesignation = true,
         showDropdown = true,
         isExpanded = false,
+        type = 'Default',
+        avatarShape = 'Initial Circle',
         menuItems,
         onSelect,
         menuId,
@@ -3362,8 +3374,10 @@
         const classes = [
           'dcds-AvatarGroup',
           isExpanded ? 'dcds-AvatarGroup--expanded' : '',
+          type === 'Inverse' ? 'dcds-AvatarGroup--inverse' : '',
           className,
         ].filter(Boolean).join(' ');
+        const isSquareAvatar = avatarShape === 'Initial Square' || avatarShape === 'Icon Square';
         const resolvedAriaExpanded = ariaExpanded != null ? ariaExpanded : isExpanded;
         const resolvedAriaLabel = ariaLabel || name;
         const showMenu = isExpanded && menuItems && menuItems.length > 0;
@@ -3380,7 +3394,7 @@
               onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
               onKeyDown={onKeyDown} onKeyUp={onKeyUp}
             >
-              <span className="dcds-AvatarGroup__avatar" aria-hidden="true">
+              <span className={['dcds-AvatarGroup__avatar', isSquareAvatar ? 'dcds-AvatarGroup__avatar--square' : ''].filter(Boolean).join(' ')} aria-hidden="true">
                 <span className="dcds-AvatarGroup__initials">{initials}</span>
               </span>
               {displayName && (
@@ -4300,15 +4314,17 @@
         const [agShowDesignation,setAgShowDesignation]= useState(true);
         const [agShowDropdown,   setAgShowDropdown]   = useState(true);
         const [agExpanded,       setAgExpanded]       = useState(false);
+        const [agType,           setAgType]           = useState('Default');
+        const [agAvatarShape,    setAgAvatarShape]    = useState('Initial Circle');
         const [agLog, pushAgLog] = useEventLog();
 
         const [agMenuItems, setAgMenuItems] = useState([
-          { id: 'profile',  label: 'View profile', type: '', isSelected: false, showStatus: false, status: '', country: '' },
-          { id: 'settings', label: 'Settings',      type: '', isSelected: false, showStatus: false, status: '', country: '' },
-          { id: 'logout',   label: 'Log out',       type: '', isSelected: false, showStatus: true,  status: 'Beta', country: '' },
+          { id: 'profile',  label: 'View profile' },
+          { id: 'settings', label: 'Settings'     },
+          { id: 'logout',   label: 'Log out'       },
         ]);
         const setAgItem = (i, patch) => setAgMenuItems(prev => prev.map((it, idx) => idx === i ? { ...it, ...patch } : it));
-        const AG_MENU_ITEMS = agMenuItems.map(it => ({ ...it, type: it.type || undefined, country: it.country || undefined, status: it.status || undefined }));
+        const AG_MENU_ITEMS = agMenuItems;
 
         return (
           <PanelLayout panelContent={<>
@@ -4318,17 +4334,14 @@
             <CtrlText   label="designation"      value={agDesignation}     onChange={setAgDesignation} />
             <CtrlToggle label="displayName"      checked={agDisplayName}    onChange={setAgDisplayName} />
             <CtrlToggle label="showDesignation"  checked={agShowDesignation} onChange={setAgShowDesignation} />
-            <CtrlToggle label="showDropdown"     checked={agShowDropdown}   onChange={setAgShowDropdown} />
-            <CtrlToggle label="isExpanded"       checked={agExpanded}       onChange={setAgExpanded} />
+            <CtrlToggle label="showDropdown"     checked={agShowDropdown}   onChange={v => { setAgShowDropdown(v); if (!v) setAgExpanded(false); }} />
+            <CtrlToggle label="isExpanded"       checked={agExpanded}       onChange={setAgExpanded} disabled={!agShowDropdown} />
+            <CtrlSelect label="type"             value={agType}             onChange={setAgType}       options={['Default', 'Inverse']} />
+            <CtrlSelect label="avatarShape"      value={agAvatarShape}      onChange={setAgAvatarShape} options={['Initial Circle', 'Initial Square', 'Icon Circle', 'Icon Square', 'Flag Circle']} />
             {agMenuItems.map((item, i) => (
               <React.Fragment key={item.id}>
                 <h2>Item {i + 1} (_BaseMenuItem)</h2>
-                <CtrlText   label="label"      value={item.label}            onChange={v => setAgItem(i, { label: v })} />
-                <CtrlSelect label="type"       value={item.type || 'none'}   onChange={v => setAgItem(i, { type: v === 'none' ? '' : v })} options={['none', 'Multi-Select', 'Single-Select', 'Flag']} />
-                {item.type === 'Flag' && <CtrlText label="country" value={item.country} onChange={v => setAgItem(i, { country: v })} placeholder="e.g. IN, US" />}
-                <CtrlToggle label="isSelected" checked={item.isSelected}     onChange={v => setAgItem(i, { isSelected: v })} />
-                <CtrlToggle label="showStatus" checked={item.showStatus}     onChange={v => setAgItem(i, { showStatus: v })} />
-                {item.showStatus && <CtrlText label="status" value={item.status} onChange={v => setAgItem(i, { status: v })} placeholder="e.g. Beta" />}
+                <CtrlText label="label" value={item.label} onChange={v => setAgItem(i, { label: v })} />
               </React.Fragment>
             ))}
           </>}>
@@ -4347,6 +4360,8 @@
                     showDesignation={agShowDesignation}
                     showDropdown={agShowDropdown}
                     isExpanded={agExpanded}
+                    type={agType}
+                    avatarShape={agAvatarShape}
                     menuItems={AG_MENU_ITEMS}
                     onSelect={(item) => { setAgExpanded(false); pushAgLog('onSelect · ' + item.id); }}
                     menuId="ag-playground-menu"
@@ -4391,99 +4406,6 @@
                 </div>
               </section>
 
-              <section>
-                <h2>AvatarGroup — In context: sidebar nav</h2>
-                <p className="stage-note">
-                  Typical usage at the bottom of a sidebar — avatar + name + dropdown trigger.
-                </p>
-                <div style={{ background: 'var(--color-fill-primary-9)', borderRadius: 'var(--rd-M)', padding: 'var(--gap-16)', display: 'inline-flex', flexDirection: 'column', gap: 'var(--gap-8)', width: 256 }}>
-                  <div style={{ height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-invert)', fontSize: 'var(--font-size-body-small)', opacity: 0.5 }}>
-                    ← sidebar content
-                  </div>
-                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 'var(--gap-8)' }}>
-                    <AvatarGroup
-                      initials="AM"
-                      name="Alex Martin"
-                      designation="Product Designer"
-                      displayName={true}
-                      showDropdown={true}
-                      isExpanded={false}
-                    />
-                  </div>
-                </div>
-              </section>
-
-              <section>
-                <h2>_BaseMenuItem — All States × Types</h2>
-                <p className="stage-note">
-                  Figma node 788:68291. state × type matrix — hover any item to see hover state.
-                </p>
-
-                {/* Multi-Select */}
-                <p className="stage-note" style={{ marginBottom: 'var(--gap-8)' }}>type=Multi-Select (checkbox)</p>
-                <div style={{ background:'var(--color-surface-2)', borderRadius:'var(--rd-S)', overflow:'hidden', marginBottom:'var(--gap-16)' }}>
-                  {[
-                    { id:'ms1', label:'Default unselected', type:'Multi-Select', isSelected:false },
-                    { id:'ms2', label:'Selected (Variant4)', type:'Multi-Select', isSelected:true },
-                    { id:'ms3', label:'Disabled', type:'Multi-Select', isSelected:false, disabled:true },
-                    { id:'ms4', label:'With status badge', type:'Multi-Select', isSelected:false, showStatus:true, status:'In review' },
-                  ].map(item => {
-                    const cls = ['dcds-DropdownButton__menu-item', item.isSelected && !item.disabled ? 'dcds-DropdownButton__menu-item--selected' : '', item.disabled ? 'dcds-DropdownButton__menu-item--disabled' : ''].filter(Boolean).join(' ');
-                    return (
-                      <div key={item.id} className="dcds-DropdownButton__menu-item-row">
-                        <button type="button" className={cls} disabled={item.disabled}
-                          onClick={() => pushAgLog('_BaseMenuItem click: ' + item.id)}>
-                          <MenuItemLeading item={item} />
-                          <span className="dcds-DropdownButton__menu-item-label">{item.label}</span>
-                          {item.showStatus && <span className="dcds-DropdownButton__menu-item-status">{item.status}</span>}
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Single-Select */}
-                <p className="stage-note" style={{ marginBottom: 'var(--gap-8)' }}>type=Single-Select (radio)</p>
-                <div style={{ background:'var(--color-surface-2)', borderRadius:'var(--rd-S)', overflow:'hidden', marginBottom:'var(--gap-16)' }}>
-                  {[
-                    { id:'ss1', label:'Default unselected', type:'Single-Select', isSelected:false },
-                    { id:'ss2', label:'Selected (Variant4)', type:'Single-Select', isSelected:true },
-                    { id:'ss3', label:'Disabled', type:'Single-Select', isSelected:false, disabled:true },
-                  ].map(item => {
-                    const cls = ['dcds-DropdownButton__menu-item', item.isSelected && !item.disabled ? 'dcds-DropdownButton__menu-item--selected' : '', item.disabled ? 'dcds-DropdownButton__menu-item--disabled' : ''].filter(Boolean).join(' ');
-                    return (
-                      <div key={item.id} className="dcds-DropdownButton__menu-item-row">
-                        <button type="button" className={cls} disabled={item.disabled}
-                          onClick={() => pushAgLog('_BaseMenuItem click: ' + item.id)}>
-                          <MenuItemLeading item={item} />
-                          <span className="dcds-DropdownButton__menu-item-label">{item.label}</span>
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Flag */}
-                <p className="stage-note" style={{ marginBottom: 'var(--gap-8)' }}>type=Flag</p>
-                <div style={{ background:'var(--color-surface-2)', borderRadius:'var(--rd-S)', overflow:'hidden' }}>
-                  {[
-                    { id:'fl1', label:'India', type:'Flag', country:'IN', isSelected:false },
-                    { id:'fl2', label:'United States', type:'Flag', country:'US', isSelected:true },
-                    { id:'fl3', label:'United Kingdom (disabled)', type:'Flag', country:'GB', disabled:true },
-                  ].map(item => {
-                    const cls = ['dcds-DropdownButton__menu-item', item.isSelected && !item.disabled ? 'dcds-DropdownButton__menu-item--selected' : '', item.disabled ? 'dcds-DropdownButton__menu-item--disabled' : ''].filter(Boolean).join(' ');
-                    return (
-                      <div key={item.id} className="dcds-DropdownButton__menu-item-row">
-                        <button type="button" className={cls} disabled={item.disabled}
-                          onClick={() => pushAgLog('_BaseMenuItem click: ' + item.id)}>
-                          <MenuItemLeading item={item} />
-                          <span className="dcds-DropdownButton__menu-item-label">{item.label}</span>
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
             </main>
           </PanelLayout>
         );
