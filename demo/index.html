@@ -1593,6 +1593,14 @@
       .grid-bp-btn { display:block; width:100%; padding:var(--gap-8) var(--gap-16); border:none; background:none; cursor:pointer; font-family:var(--font-family); font-size:var(--font-size-body-small); color:var(--color-text-subdued); font-weight:400; text-align:left; transition:color 120ms ease,background 120ms ease; border-radius:0; white-space:nowrap; }
       .grid-bp-btn:hover { color:var(--color-text-primary); background:var(--color-surface-2); }
       .grid-bp-btn--active { color:var(--color-text-primary); font-weight:var(--font-weight-bold); background:var(--color-surface-2); border-left:2px solid var(--color-stroke-action); padding-left:calc(var(--gap-16) - 2px); }
+      /* Syntax box */
+      .grid-syntax-box { margin-top:var(--gap-16); border-radius:var(--rd-S); overflow:hidden; border:0.5px solid var(--color-stroke-subdued); }
+      .grid-syntax-header { display:flex; align-items:center; justify-content:space-between; padding:var(--gap-8) var(--gap-16); background:var(--color-surface-4); border-bottom:0.5px solid var(--color-stroke-subdued); }
+      .grid-syntax-label { font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-subdued); letter-spacing:0.04em; }
+      .grid-syntax-copy { font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-action); background:none; border:none; cursor:pointer; padding:var(--gap-4) var(--gap-8); border-radius:var(--rd-XS); transition:background 120ms ease,color 120ms ease; }
+      .grid-syntax-copy:hover { background:var(--color-fill-light-action); }
+      .grid-syntax-copy--copied { color:var(--color-text-success); }
+      .grid-syntax-pre { margin:0; padding:var(--gap-16); font-family:ui-monospace,'Cascadia Code','Fira Code',monospace; font-size:var(--font-size-body-small); line-height:1.65; color:var(--color-text-primary); background:var(--color-surface-3); overflow-x:auto; white-space:pre; tab-size:2; }
     </style>
   </head>
   <body>
@@ -7266,6 +7274,143 @@
       }
 
       /* ============================================================
+       * Syntax snippets — one per breakpoint (copy-ready TSX)
+       * ============================================================ */
+      const GRID_SYNTAX = {
+        'Mobile': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Mobile · 4 columns · 16px gutter · 20px margin · content 320px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={4}>full width (4/4)</Grid>
+    <Grid item xs={2}>half width (2/4)</Grid>
+    <Grid item xs={1}>quarter width (1/4)</Grid>
+  </Grid>
+</Box>`,
+
+        'Tablet': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Tablet · 12 columns · 16px gutter · 24px margin · content 528px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={12} sm={12}>full width</Grid>
+    <Grid item xs={12} sm={6}>half · half</Grid>
+    <Grid item xs={12} sm={4}>thirds</Grid>
+    <Grid item xs={12} sm={3}>quarters</Grid>
+  </Grid>
+</Box>`,
+
+        'Desktop-S-No-Nav': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop S · no sidebar · 12 columns · 16px gutter · 24px margin · content 944px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={12} md={12}>full width</Grid>
+    <Grid item xs={12} md={8}>8 cols — main</Grid>
+    <Grid item xs={12} md={4}>4 cols — aside</Grid>
+  </Grid>
+</Box>`,
+
+        'Desktop-S-Expanded': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop S · nav expanded 240px · 12 columns · 16px gutter · 24px margin · content 704px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-expanded) 1fr' }}>
+  <SideBar state="Expanded" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={8}>main content</Grid>
+      <Grid item xs={12} md={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+
+        'Desktop-S-Collapsed': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop S · nav collapsed 56px · 12 columns · 16px gutter · 24px margin · content 888px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-collapsed) 1fr' }}>
+  <SideBar state="Collapsed" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={8}>main content</Grid>
+      <Grid item xs={12} md={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+
+        'Desktop-L-No-Nav': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop L · no sidebar · 12 columns · 16px gutter · 24px margin · content 1152px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={12} lg={12}>full width</Grid>
+    <Grid item xs={12} lg={8}>8 cols — main</Grid>
+    <Grid item xs={12} lg={4}>4 cols — aside</Grid>
+  </Grid>
+</Box>`,
+
+        'Desktop-L-Expanded': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop L · nav expanded 240px · 12 columns · 16px gutter · 24px margin · content 912px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-expanded) 1fr' }}>
+  <SideBar state="Expanded" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} lg={8}>main content</Grid>
+      <Grid item xs={12} lg={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+
+        'Desktop-L-Collapsed': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop L · nav collapsed 56px · 12 columns · 16px gutter · 24px margin · content 1096px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-collapsed) 1fr' }}>
+  <SideBar state="Collapsed" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} lg={8}>main content</Grid>
+      <Grid item xs={12} lg={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+      };
+
+      function GridSyntaxBox({ bpId }) {
+        const [copied, setCopied] = useState(false);
+        const code = GRID_SYNTAX[bpId] || '';
+        const handleCopy = () => {
+          navigator.clipboard.writeText(code).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          }).catch(() => {
+            /* fallback for non-HTTPS */
+            const el = document.createElement('textarea');
+            el.value = code;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          });
+        };
+        return (
+          <div className="grid-syntax-box">
+            <div className="grid-syntax-header">
+              <span className="grid-syntax-label">COMPONENT SYNTAX</span>
+              <button
+                className={`grid-syntax-copy${copied ? ' grid-syntax-copy--copied' : ''}`}
+                onClick={handleCopy}
+              >
+                {copied ? '✓ Copied' : 'Copy'}
+              </button>
+            </div>
+            <pre className="grid-syntax-pre">{code}</pre>
+          </div>
+        );
+      }
+
+      /* ============================================================
        * GridSection — self-contained section with resize playground
        * ============================================================ */
       const GRID_BREAKPOINTS = [
@@ -7835,6 +7980,7 @@ function GridSection() {
                   <div style={{ overflowX:'auto', paddingBottom:'var(--gap-4)' }}>
                     <Grid breakpoint={bp.id} />
                   </div>
+                  <GridSyntaxBox bpId={bp.id} />
                 </section>
               ))}
 
