@@ -8600,7 +8600,7 @@ function GridSection() {
               {activeComponent === 'pagination' && (
                 <>
                   <h2>Pagination</h2>
-                  <CtrlSelect label="pageStatus"    value={pgStatus}      onChange={(v) => { setPgStatus(v); if (v === 'First page') setPgCurrentPage(1); if (v === 'Last pages') setPgCurrentPage(pgTotalPages); }} options={['First page', 'Middle pages', 'Last pages', '-']} />
+                  <CtrlSelect label="pageStatus"    value={pgStatus}      onChange={(v) => { setPgStatus(v); if (v === 'First page') setPgCurrentPage(1); else if (v === 'Last pages') setPgCurrentPage(pgTotalPages); else if (v === 'Middle pages') setPgCurrentPage(Math.ceil(pgTotalPages / 2)); }} options={['First page', 'Middle pages', 'Last pages']} />
                   <CtrlToggle label="showPageNumber" checked={pgShowNumbers} onChange={setPgShowNumbers} />
                   <CtrlSelect label="currentPage"   value={String(pgCurrentPage)} onChange={(v) => setPgCurrentPage(Number(v))} options={Array.from({length: pgTotalPages}, (_, i) => String(i + 1))} />
                   <CtrlSelect label="totalPages"    value={String(pgTotalPages)}  onChange={(v) => setPgTotalPages(Number(v))} options={['5', '10', '12', '20', '50']} />
