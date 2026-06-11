@@ -42,3 +42,12 @@ export * from './components/Tag';
 export * from './components/Tooltip';
 export * from './components/shared';
 export * from './theme';
+
+/* ── Layout primitives ────────────────────────────────────────
+ * Box      — generic styled wrapper (sx prop, spacing scale)
+ * GridLayout — CSS Grid container/item (xs/sm/md/lg spans)
+ *
+ * Import alias to match MUI convention:
+ *   import { GridLayout as Grid, Box } from '@dcds/components';
+ * ──────────────────────────────────────────────────────────── */
+export * from './layout';
