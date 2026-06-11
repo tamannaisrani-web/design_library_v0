@@ -1,8 +1,8 @@
 /* Tooltip — token-driven styles.
  * Source: Figma node 478:30958
  * Background: color/surface/4 (#F0F0F0) · Text: color/text/primary (#0A2E57)
- * Width: 224px · Padding: gap-16 · Border-radius: rd-S
- * Heading: 16px Body Bold · Body: 14px Label Regular
+ * Width: 224px · Padding: gap-8 (top/bottom) gap-12 (left/right) · Border-radius: rd-S
+ * Heading: 14px Label Bold · Body: 12px Body-small Regular
  * iconSize: small (16px) | medium (24px)
  */
 
@@ -80,7 +80,7 @@
   flex-direction: column;
   gap: var(--gap-0);
   width: 224px;
-  padding: var(--gap-16);
+  padding: var(--gap-8) var(--gap-12);
   background-color: var(--color-surface-4);
   color: var(--color-text-primary);
   border-radius: var(--rd-S);
@@ -88,20 +88,20 @@
   line-height: normal;
 }
 
-/* Heading — Desktop/Body/Body - Bold (16px Bold) */
+/* Heading — Desktop/Body/Label - Bold (14px Bold) */
 .dcds-Tooltip__heading {
   font-family: var(--font-family);
-  font-size: var(--font-size-body);
+  font-size: var(--font-size-label);
   font-weight: var(--font-weight-bold);
   line-height: normal;
   min-width: 100%;
   margin: 0;
 }
 
-/* Body — Desktop/Body/Label - Regular (14px Regular) */
+/* Body — Desktop/Body/Body small - Regular (12px Regular) */
 .dcds-Tooltip__body {
   font-family: var(--font-family);
-  font-size: var(--font-size-label);
+  font-size: var(--font-size-body-small);
   font-weight: var(--font-weight-regular);
   line-height: normal;
   margin: 0;
