@@ -1,5 +1,5 @@
 import React, { useCallback, useId, useRef, useState } from 'react';
-import type { TooltipPlacement, TooltipProps } from './Tooltip.types';
+import type { TooltipIconSize, TooltipPlacement, TooltipProps } from './Tooltip.types';
 import './Tooltip.css';
 
 /**
@@ -41,36 +41,48 @@ const TooltipArrow: React.FC<{ placement: TooltipPlacement }> = ({ placement }) 
 };
 
 /**
- * Default trigger — vuesax/linear/info-circle (16 px).
+ * Default trigger — vuesax/linear/info-circle.
  * Rendered when no `children` are passed to Tooltip.
+ * Size is controlled by the `iconSize` prop (small = 16px, medium = 24px).
  */
-const InfoCircleIcon: React.FC = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-    <path
-      d="M12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    {/* dot at top of the i */}
-    <path
-      d="M11.9945 8H12.0035"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    {/* vertical stroke below the dot */}
-    <path
-      d="M12 11V16"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+const InfoCircleIcon: React.FC<{ size: TooltipIconSize }> = ({ size }) => (
+  <button
+    type="button"
+    className={`dcds-Tooltip__info-trigger dcds-Tooltip__info-trigger--${size}`}
+    aria-label="More information"
+  >
+    <InfoCircleSvg size={size} />
+  </button>
 );
+
+const InfoCircleSvg: React.FC<{ size: TooltipIconSize }> = ({ size }) => {
+  const px = size === 'medium' ? 24 : 16;
+  return (
+    <svg width={px} height={px} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path
+        d="M12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.9945 8H12.0035"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 11V16"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
 
 /**
  * Tooltip
@@ -97,6 +109,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   bodyText,
   children,
   Placement = 'Top',
+  iconSize = 'small',
   forceVisible = false,
   onShow,
   onHide,
@@ -158,11 +171,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   };
 
   /* Inject aria-describedby onto a React child so AT can read the bubble */
-  const trigger = children ?? (
-    <button type="button" className="dcds-Tooltip__info-trigger" aria-label="More information">
-      <InfoCircleIcon />
-    </button>
-  );
+  const trigger = children ?? <InfoCircleIcon size={iconSize} />;
 
   const triggerWithA11y = React.isValidElement(trigger)
     ? React.cloneElement(trigger as React.ReactElement<Record<string, unknown>>, {

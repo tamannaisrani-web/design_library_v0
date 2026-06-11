@@ -1,7 +1,9 @@
 /* Tooltip — token-driven styles.
- * Source: Figma node 478:30949
+ * Source: Figma node 478:30958
  * Background: color/surface/4 (#F0F0F0) · Text: color/text/primary (#0A2E57)
- * Max-width: 224px · Padding: gap-16 · Border-radius: rd-S
+ * Width: 224px · Padding: gap-16 · Border-radius: rd-S
+ * Heading: 16px Body Bold · Body: 14px Label Regular
+ * iconSize: small (16px) | medium (24px)
  */
 
 /* ===========================================================
@@ -86,20 +88,20 @@
   line-height: normal;
 }
 
-/* Heading — Desktop/Body/Caption - Bold (18px Bold) */
+/* Heading — Desktop/Body/Body - Bold (16px Bold) */
 .dcds-Tooltip__heading {
   font-family: var(--font-family);
-  font-size: var(--font-size-caption);
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
   line-height: normal;
   min-width: 100%;
   margin: 0;
 }
 
-/* Body — Desktop/Body/Body - Regular (16px Regular) */
+/* Body — Desktop/Body/Label - Regular (14px Regular) */
 .dcds-Tooltip__body {
   font-family: var(--font-family);
-  font-size: var(--font-size-body);
+  font-size: var(--font-size-label);
   font-weight: var(--font-weight-regular);
   line-height: normal;
   margin: 0;
@@ -118,21 +120,29 @@
 }
 
 /* ===========================================================
- * Default trigger — info-circle icon
+ * Default trigger — info-circle icon (small 16px / medium 24px)
  * =========================================================== */
 
 .dcds-Tooltip__info-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   color: var(--color-icon-secondary);
   border-radius: var(--rd-XS);
+}
+
+.dcds-Tooltip__info-trigger--small {
+  width: 16px;
+  height: 16px;
+}
+
+.dcds-Tooltip__info-trigger--medium {
+  width: 24px;
+  height: 24px;
 }
 
 .dcds-Tooltip__info-trigger:focus-visible {

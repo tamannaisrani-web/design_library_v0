@@ -548,10 +548,12 @@
 .dcds-Tooltip__overlay--Left { flex-direction:row; right:calc(100% + 4px); top:50%; transform:translateY(-50%); }
 .dcds-Tooltip__overlay--Right { flex-direction:row; left:calc(100% + 4px); top:50%; transform:translateY(-50%); }
 .dcds-Tooltip__bubble { display:flex; flex-direction:column; gap:var(--gap-0); width:224px; padding:var(--gap-16); background-color:var(--color-surface-4); color:var(--color-text-primary); border-radius:var(--rd-S); word-break:break-word; line-height:normal; }
-.dcds-Tooltip__heading { font-family:var(--font-family); font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); line-height:normal; min-width:100%; margin:0; }
-.dcds-Tooltip__body { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); line-height:normal; margin:0; }
+.dcds-Tooltip__heading { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); line-height:normal; min-width:100%; margin:0; }
+.dcds-Tooltip__body { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); line-height:normal; margin:0; }
 .dcds-Tooltip__arrow { display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-surface-4); }
-.dcds-Tooltip__info-trigger { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:none; border:none; padding:0; cursor:pointer; color:var(--color-icon-secondary); border-radius:var(--rd-XS); }
+.dcds-Tooltip__info-trigger { display:inline-flex; align-items:center; justify-content:center; background:none; border:none; padding:0; cursor:pointer; color:var(--color-icon-secondary); border-radius:var(--rd-XS); }
+.dcds-Tooltip__info-trigger--small { width:16px; height:16px; }
+.dcds-Tooltip__info-trigger--medium { width:24px; height:24px; }
 .dcds-Tooltip__info-trigger:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
 
 /* ============================================================
@@ -2645,9 +2647,10 @@
       }
 
       /* Default trigger — vuesax/linear/info-circle (16px) */
-      function InfoCircleIcon() {
+      function InfoCircleIcon({ size = 'small' }) {
+        const px = size === 'medium' ? 24 : 16;
         return (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <svg width={px} height={px} viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M11.9945 8H12.0035" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M12 11V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -2655,7 +2658,7 @@
         );
       }
 
-      function Tooltip({ heading, bodyText, children, Placement = 'Top', forceVisible = false, displayI = true, onShow, onHide, onMouseEnter, onMouseLeave, onFocus, onBlur, onKeyDown, className }) {
+      function Tooltip({ heading, bodyText, children, Placement = 'Top', iconSize = 'small', forceVisible = false, displayI = true, onShow, onHide, onMouseEnter, onMouseLeave, onFocus, onBlur, onKeyDown, className }) {
         const [visible, setVisible] = React.useState(false);
         const tooltipId = useId();
         const hideTimer = useRef(null);
@@ -2670,8 +2673,8 @@
         };
 
         const trigger = children ?? (
-          <button type="button" className="dcds-Tooltip__info-trigger" aria-label="More information">
-            <InfoCircleIcon />
+          <button type="button" className={`dcds-Tooltip__info-trigger dcds-Tooltip__info-trigger--${iconSize}`} aria-label="More information">
+            <InfoCircleIcon size={iconSize} />
           </button>
         );
         const triggerWithA11y = React.isValidElement(trigger)
@@ -8304,6 +8307,7 @@ function GridSection() {
         const [ttPlacement,     setTtPlacement]     = useState('Top');
         const [ttHeading,       setTtHeading]       = useState('Heading text');
         const [ttBody,          setTtBody]          = useState('This sections here contains the text that goes inside of the tooltip.');
+        const [ttIconSize,      setTtIconSize]      = useState('small');
         const [ttDisplayI,      setTtDisplayI]      = useState(true);
         const [ttDisplayTooltip,setTtDisplayTooltip]= useState(false);
         const [ttDisplayHeading,setTtDisplayHeading]= useState(true);
@@ -8611,6 +8615,7 @@ function GridSection() {
                 <>
                   <h2>Tooltip</h2>
                   <CtrlSelect label="Placement"       value={ttPlacement}          onChange={setTtPlacement}      options={['Top', 'Bottom', 'Left', 'Right']} />
+                  <CtrlSelect label="iconSize"        value={ttIconSize}           onChange={setTtIconSize}       options={['small', 'medium']} />
                   <CtrlToggle label="displayTooltip"  checked={ttDisplayTooltip}   onChange={setTtDisplayTooltip} />
                   <CtrlToggle label="display(i)"      checked={ttDisplayI}         onChange={setTtDisplayI} />
                   <CtrlToggle label="displayHeading"  checked={ttDisplayHeading}   onChange={setTtDisplayHeading} />
@@ -9365,6 +9370,7 @@ function GridSection() {
                         Placement={ttPlacement}
                         heading={ttDisplayHeading ? ttHeading : undefined}
                         bodyText={ttDisplayBody   ? ttBody    : undefined}
+                        iconSize={ttIconSize}
                         forceVisible={ttDisplayTooltip}
                         displayI={ttDisplayI}
                         onShow={() => pushTtLog('onShow')}
