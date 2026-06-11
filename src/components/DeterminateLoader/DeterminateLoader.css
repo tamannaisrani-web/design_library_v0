@@ -1,0 +1,103 @@
+/* DeterminateLoader — token-driven styles.
+ * Figma node 1764:705 · Design Language System (Claude)
+ *
+ * Token mapping:
+ *   Fill bar  → color/fill/primary-3  (Noble Blue-200 #6ba8ee)
+ *   Track     → color/surface/4       (Cool Grey-200  #f0f0f0)
+ *   Text      → color/text/primary    (Noble Blue-500 #0A2E57)
+ *   Height    → 4px
+ *   Radius    → --rd-XS (4px)
+ *
+ * Never override background-color, border-radius, or font via className.
+ * Use className only for layout (margin / grid placement). */
+
+/* ===========================================================
+ * Root container
+ * =========================================================== */
+
+.dcds-DeterminateLoader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  width: 100%;
+  position: relative;
+}
+
+/* ===========================================================
+ * Track — the grey background rail
+ * Carries all ARIA progressbar semantics (role, aria-valuenow, etc.)
+ * =========================================================== */
+
+.dcds-DeterminateLoader__track {
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-surface-4);
+  border-radius: var(--rd-XS);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ===========================================================
+ * Fill — the blue progress indicator
+ * Width is set via inline style: `width: ${progress}%`
+ * Transitions smoothly when progress updates
+ * =========================================================== */
+
+.dcds-DeterminateLoader__fill {
+  height: 100%;
+  background-color: var(--color-fill-primary-3);
+  border-radius: var(--rd-XS);
+  transition: width 200ms ease;
+  position: relative;
+}
+
+/* ===========================================================
+ * Labels row — helper text (left) + percentage (right)
+ * Font: Desktop/Body/Body small - Regular (Nunito Sans 12px)
+ * =========================================================== */
+
+.dcds-DeterminateLoader__labels {
+  display: flex;
+  align-items: center;
+  /* Figma spec: justify-end — percentage is always anchored to the right edge.
+     Helper text (flex: 1 0 0) fills remaining space; when hidden the percentage
+     still stays at the right because of flex-end. */
+  justify-content: flex-end;
+  gap: var(--gap-12);
+  width: 100%;
+}
+
+.dcds-DeterminateLoader__helper-text {
+  flex: 1 0 0;
+  min-width: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-small); /* 12px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dcds-DeterminateLoader__percentage {
+  flex-shrink: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-small); /* 12px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: normal;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ===========================================================
+ * Reduced motion — disable fill transition
+ * =========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .dcds-DeterminateLoader__fill {
+    transition: none;
+  }
+}

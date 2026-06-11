@@ -8,20 +8,46 @@
  * ```
  */
 
+export * from './components/Accordian';
 export * from './components/Alert';
-export * from './components/Stepper';
-export * from './components/Tooltip';
+export * from './components/Avatar';
+export * from './components/AvatarGroup';
+export * from './components/Badge';
 export * from './components/Breadcrumbs';
-export * from './components/Pagination';
 export * from './components/Button';
-export * from './components/LinkButton';
-export * from './components/DropdownButton';
 export * from './components/ButtonGroup';
-export * from './components/Switch';
-export * from './components/RadioButton';
 export * from './components/Checkbox';
 export * from './components/Chip';
-export * from './components/Badge';
+export * from './components/DeterminateLoader';
+export * from './components/Drawer';
+export * from './components/Datepicker';
+export * from './components/DropdownButton';
+export * from './components/DropdownMenu';
+export * from './components/Grid';
+export * from './components/IndeterminateLoader';
+export * from './components/InputFields';
+export * from './components/LinkButton';
+export * from './components/Modal';
+export * from './components/NavElement';
+export * from './components/BaseNav';
+export * from './components/SideBar';
+export * from './components/Logo';
+export * from './components/TopBar';
+export * from './components/Pagination';
+export * from './components/RadioButton';
+export * from './components/Stepper';
+export * from './components/Switch';
+export * from './components/Tabs';
 export * from './components/Tag';
+export * from './components/Tooltip';
 export * from './components/shared';
 export * from './theme';
+
+/* ── Layout primitives ────────────────────────────────────────
+ * Box      — generic styled wrapper (sx prop, spacing scale)
+ * GridLayout — CSS Grid container/item (xs/sm/md/lg spans)
+ *
+ * Import alias to match MUI convention:
+ *   import { GridLayout as Grid, Box } from '@dcds/components';
+ * ──────────────────────────────────────────────────────────── */
+export * from './layout';

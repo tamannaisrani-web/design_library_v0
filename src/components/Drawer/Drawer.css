@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Drawer — backdrop overlay, panel shell, and sub-component styles.
+   Token reference: src/theme/tokens.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Overlay — lighter than Modal (overlay/25 vs overlay/50) so the underlying
+   page stays visible. Full Drawer uses transparent background (panel fills viewport).
+   -------------------------------------------------------------------------- */
+
+.dcds-Drawer__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--color-overlay-25);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.dcds-Drawer__overlay--full {
+  background: var(--color-overlay-25);
+}
+
+/* --------------------------------------------------------------------------
+   Panel shell — slides in from the right edge.
+   No panel-level padding — each sub-component owns its own padding.
+   Shadow: Noble Blue tinted, pointing left (-6px 0 6px).
+   -------------------------------------------------------------------------- */
+
+.dcds-Drawer__panel {
+  position: relative;
+  background: var(--color-surface-1);
+  /* Figma: rd-S on left corners, right edge flush with viewport */
+  border-radius: var(--rd-S) 0 0 var(--rd-S);
+  /* Figma: drop-shadow(-6px 0px 6px rgba(10,46,87,0.2)) */
+  box-shadow: -6px 0 6px rgba(10, 46, 87, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  animation: dcds-drawer-in 200ms ease-out;
+}
+
+@keyframes dcds-drawer-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dcds-Drawer__panel {
+    animation: none;
+  }
+}
+
+/* Partial Drawer: ~55% of viewport width, min 360px */
+.dcds-Drawer__panel--partial {
+  width: clamp(360px, 55vw, 800px);
+}
+
+/* Full Drawer: 75% viewport width, same left-corner rounding as Partial */
+.dcds-Drawer__panel--full {
+  width: 75%;
+}
+
+.dcds-Drawer__panel:focus {
+  outline: none;
+}
+
+.dcds-Drawer__panel:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}
+
+/* --------------------------------------------------------------------------
+   DrawerHeader — flex row: title left, close button right.
+   Own padding + bottom border, like ModalHeader.
+   -------------------------------------------------------------------------- */
+
+.dcds-Drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-16);
+  padding: var(--gap-16) var(--gap-32);
+  border-bottom: 1px solid var(--color-stroke-subdued);
+  border-radius: var(--rd-S) 0 0 0;
+  flex-shrink: 0;
+}
+
+.dcds-Drawer__header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  flex: 1;
+  min-width: 0;
+}
+
+.dcds-Drawer__header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-icon-subdued);
+  /* Match the title's line height so the icon centers against the title only */
+  height: var(--font-size-h3);
+}
+
+.dcds-Drawer__header-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Desktop/Heading/H3 - Bold · 24px · color/text/primary */
+.dcds-Drawer__header-title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+  margin: 0;
+}
+
+/* Label-Regular · 14px · color/text/subdued */
+.dcds-Drawer__header-subtitle {
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-subdued);
+  line-height: normal;
+  margin: 2px 0 0;
+}
+
+.dcds-Drawer__header-end {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+  flex-shrink: 0;
+}
+
+.dcds-Drawer__header-badge {
+  display: flex;
+  align-items: center;
+}
+
+/* Close (X) button — 40×40, color/Icon/subdued */
+.dcds-Drawer__close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-icon-subdued);
+  border-radius: var(--rd-S);
+  transition: color 120ms ease, background-color 120ms ease;
+  padding: 0;
+}
+
+.dcds-Drawer__close-btn:hover {
+  color: var(--color-icon-primary);
+  background-color: var(--color-surface-3);
+}
+
+.dcds-Drawer__close-btn:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   DrawerBody — flex-1 scrollable content area.
+   Own padding like ModalBody; --no-padding modifier makes content full-bleed.
+   -------------------------------------------------------------------------- */
+
+.dcds-Drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--gap-24) var(--gap-32);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  min-height: 0;
+}
+
+/* Full-bleed body — no padding, content sits flush against the edges */
+.dcds-Drawer__body--no-padding {
+  padding: 0;
+}
+
+.dcds-Drawer__body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dcds-Drawer__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dcds-Drawer__body::-webkit-scrollbar-thumb {
+  background: var(--color-stroke-subdued);
+  border-radius: var(--rd-Max);
+}
+
+/* --------------------------------------------------------------------------
+   DrawerFooter — action area, flex-end row.
+   Own padding + top border, like ModalFooter.
+   -------------------------------------------------------------------------- */
+
+.dcds-Drawer__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gap-12);
+  padding: var(--gap-16) var(--gap-32);
+  border-top: 1px solid var(--color-stroke-subdued);
+  border-radius: 0 0 0 var(--rd-S);
+  flex-shrink: 0;
+}
+
+.dcds-Drawer__footer-link {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.dcds-Drawer__footer-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+}

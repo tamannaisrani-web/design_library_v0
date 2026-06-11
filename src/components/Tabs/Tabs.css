@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Tabs — outer tablist container.
+   Token reference: src/theme/tokens.css
+   ========================================================================== */
+
+.dcds-Tabs {
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
+  /* Allow horizontal scroll on very small viewports without breaking layout */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.dcds-Tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==========================================================================
+   BORDERLESS VARIANT — auto-width tabs, 24px gap, optional full-width stretch
+   ========================================================================== */
+
+.dcds-Tabs--borderless {
+  gap: var(--gap-24);
+}
+
+.dcds-Tabs--borderless.dcds-Tabs--fullwidth {
+  width: 100%;
+}
+
+/* ==========================================================================
+   FILLED VARIANT — no gap, shared 1px bottom border, always full-width
+   ========================================================================== */
+
+.dcds-Tabs--filled {
+  gap: 0;
+  border-bottom: 1px solid var(--color-stroke-focus-subtle);
+  width: 100%;
+}
+
+/* When isFullwidth, each tab takes an equal share of the container width */
+.dcds-Tabs--filled.dcds-Tabs--fullwidth > .dcds-BaseTabs--filled {
+  flex: 1;
+  justify-content: center;
+}

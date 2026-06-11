@@ -13,20 +13,107 @@ import type {
   BaseComponentProps,
   InteractiveEventHandlers,
 } from '../shared/types';
+import type { BadgeSize, BadgeEmphasis, BadgeState } from '../Badge/Badge.types';
 
 /** Visual/interactive state. */
 export type DropdownButtonState = 'Default' | 'Open' | 'Disabled';
 
 /**
+ * Leading control type for a menu item.
+ * Matches the Figma _BaseMenuItem `type` prop (node 788:68291).
+ * - `Multi-Select` — 24px checkbox (square with rd-XS)
+ * - `Single-Select` — 24px radio button (circle with rd-Max)
+ * - `Flag` — 24×18px country flag image from dcds-flags/flags/{country}.svg
+ */
+export type DropdownMenuItemType = 'Multi-Select' | 'Single-Select' | 'Flag';
+
+/**
  * A single option inside the dropdown menu.
+ * Matches the Figma _BaseMenuItem spec (node 788:68291 / _BaseMenu 795:68851).
  */
 export interface DropdownMenuItem {
   /** Stable identifier returned to `onSelect`. */
   id: string;
-  /** Visible label. */
+
+  /** Visible label — 16px Regular (bold when selected), color/text/primary. */
   label: ReactNode;
-  /** When true, the item is rendered but not interactive. */
+
+  /**
+   * Leading element type — renders a checkbox, radio, or flag before the label.
+   * When omitted, no leading element is shown.
+   * - `Multi-Select` → checkbox (square)
+   * - `Single-Select` → radio button (circle)
+   * - `Flag` → country flag (requires `country` prop)
+   */
+  type?: DropdownMenuItemType;
+
+  /**
+   * ISO 3166-1 alpha-2 country code for `type="Flag"` items.
+   * Resolves to `dcds-flags/flags/{COUNTRY}.svg`.
+   * @example 'IN' | 'US' | 'GB'
+   */
+  country?: string;
+
+  /**
+   * Whether this item is in the selected state.
+   * - Multi-Select: checkbox is filled with a checkmark
+   * - Single-Select: radio is filled
+   * - Applies green-100 (color/fill/light-action) background + bold label text
+   * @default false
+   */
+  isSelected?: boolean;
+
+  /**
+   * Show the leading element (checkbox / radio / flag).
+   * Defaults to true when `type` is set, false otherwise.
+   */
+  showLeading?: boolean;
+
+  /**
+   * Show a trailing status Badge on this item.
+   * @default false
+   */
+  showStatus?: boolean;
+
+  /**
+   * Text label shown inside the status badge when `showStatus=true`.
+   * @default 'Status'
+   */
+  status?: string;
+
+  /**
+   * Size of the status badge. Mirrors `Badge.size`.
+   * @default 'S'
+   */
+  statusSize?: BadgeSize;
+
+  /**
+   * Visual emphasis of the status badge. Mirrors `Badge.emphasis`.
+   * @default 'subtle'
+   */
+  statusEmphasis?: BadgeEmphasis;
+
+  /**
+   * Semantic state driving badge colour. Mirrors `Badge.state`.
+   * @default 'neutral'
+   */
+  statusState?: BadgeState;
+
+  /**
+   * Show the leading state icon inside the badge. Mirrors `Badge.showIcon`.
+   * @default true
+   */
+  statusShowIcon?: boolean;
+
+  /**
+   * Custom leading ReactNode — overrides the type-based auto-leading.
+   * Use for icons, avatars, or any custom element in the 24×24 slot.
+   */
+  leading?: ReactNode;
+
+  /** When true, the item is non-interactive and uses disabled colour tokens. */
   disabled?: boolean;
+
   /** Optional per-item click handler. Fires before `onSelect`. */
   onClick?: () => void;
 }
