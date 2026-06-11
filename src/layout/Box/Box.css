@@ -1,0 +1,9 @@
+/*
+ * Box.css
+ * Generic layout wrapper. All visual styles come from the `sx` prop
+ * (converted to inline style by Box.tsx) or from className.
+ */
+
+.dcds-Box {
+  box-sizing: border-box;
+}
