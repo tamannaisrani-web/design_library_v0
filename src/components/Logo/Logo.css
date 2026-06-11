@@ -1,0 +1,109 @@
+/* =============================================================================
+ * Logo — token-driven styles
+ * Figma spec: node 673:16488 (SCF variant) · node 673:16477 (all variants)
+ *
+ * The Logo IS its own 240×64 container — do not wrap it in another sized div.
+ * The TopBar's logo slot is a transparent flex wrapper only.
+ *
+ * Figma structure (Tailwind → CSS):
+ *   .dcds-Logo             → h-[64px] w-[240px] flex flex-col items-start
+ *                             pl-[24px] pr-[12px] py-[12px] overflow-clip
+ *   .dcds-Logo__wrapper    → flex-[1_0_0] min-h-px aspect-[488/93] relative
+ *                             (aspect-ratio drives width from slot height = 40px)
+ *   .dcds-Logo__img        → absolute inset-0 size-full max-w-none object-cover
+ * ============================================================================= */
+
+/* ── Outer container: 240×64, padding-left 24px ────────────────────────────── */
+.dcds-Logo {
+  display: flex;
+  flex-direction: column;   /* column so flex:1 on wrapper fills the height */
+  align-items: flex-start;
+  width: 240px;
+  height: 64px;
+  padding: var(--gap-12) var(--gap-12) var(--gap-12) var(--gap-24);
+  overflow: hidden;         /* clips tiny bleed from aspect-ratio calculation */
+  flex-shrink: 0;
+}
+
+/*
+ * ── Logo image ──────────────────────────────────────────────────────────────
+ *
+ * height:40px fills the inner slot (64 - 12top - 12bottom).
+ * width:auto preserves natural aspect ratio — no max-width constraint.
+ * The outer .dcds-Logo has overflow:hidden which clips any width bleed.
+ *
+ * Example: SCF logo (488:93 ≈ 5.25:1) at height 40px → width ≈ 210px.
+ * Inner slot is 204px (240 - 24left - 12right), so ~6px bleeds right → clipped.
+ * No distortion, no stretching.
+ */
+.dcds-Logo__img {
+  display: block;
+  height: 40px;
+  width: auto;   /* natural width at slot height — NO max-width */
+  pointer-events: none;
+}
+
+/* ── Voyager: inner flex-row wrapper ────────────────────────────────────────── */
+/*
+ * Figma: flex-[1_0_0] min-h-px w-full flex gap-[8px] items-center
+ * fills the slot height (40px) and full inner width (204px)
+ */
+.dcds-Logo__voyager-inner {
+  flex: 1 0 0;
+  min-height: 1px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+}
+
+/* ── Voyager mark image wrapper — fixed Figma dimensions ────────────────────── */
+.dcds-Logo__voyager-mark-wrap {
+  position: relative;
+  height: 38.889px;
+  width: 44.444px;
+  flex-shrink: 0;
+}
+
+.dcds-Logo__voyager-mark-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ── Voyager wordmark text ───────────────────────────────────────────────────── */
+/*
+ * Figma specifies 20.22px (light) / 21.88px (dark) but browser Nunito Sans
+ * renders "Voyager Trading" at 154px at those sizes — 2px over the 152px
+ * available slot. Using 18px (137px) fits cleanly across all environments.
+ */
+.dcds-Logo__voyager-wordmark {
+  font-family: var(--font-family);
+  font-weight: 600; /* SemiBold per Figma */
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-primary); /* #0a2e57 */
+  flex: 1;
+  min-width: 0; /* allows flex truncation */
+}
+
+.dcds-Logo__voyager-wordmark--light {
+  color: var(--color-text-invert); /* white — for dark backgrounds */
+}
+
+/* ── Text placeholder — shown when no imageSrc provided ────────────────────── */
+.dcds-Logo__placeholder {
+  font-family: var(--font-family);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+  user-select: none;
+  align-self: center;
+}

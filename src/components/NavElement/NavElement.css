@@ -1,0 +1,188 @@
+/* =============================================================================
+ * NavElement — token-driven styles
+ * Figma spec: NavElement.ai.md · node 673:17244
+ *
+ * Width: 240px fixed (collapsed: 56px)
+ * Padding: left gap-32 (32px) | right gap-16 (16px) | vertical gap-12 (12px)
+ * Text: Desktop/Body/Label — Nunito Sans 14px Regular (Default) / Bold (Selected)
+ * Color: color/text/primary (#0a2e57) — both Default and Selected
+ *
+ * Background:
+ *   Default  → transparent
+ *   Hover    → color/fill/secondary-1 (#ecf5fb) — CSS :hover only; never set in code
+ *   Selected → color/surface/3 (#f5f5f5)          — grey, NOT green
+ * ============================================================================= */
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+.dcds-NavElement {
+  display: flex;
+  flex-direction: column; /* column to support the accordion content below the row */
+  align-items: stretch;
+  width: 240px;
+  padding: 0; /* reset browser default <button> padding — icon alignment lives in __row */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-label); /* 14px */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary); /* #0a2e57 */
+  text-align: left;
+  user-select: none;
+  transition: background-color 120ms ease;
+  /* No overflow:hidden — would clip the accordion rows when expanded */
+  overflow: visible;
+  text-decoration: none; /* for <a> variant */
+}
+
+/*
+ * Hover — direct-link variant (<button> root, no dropdown).
+ * Scoped to exclude dropdown variants so hovering the accordion area
+ * doesn't trigger the parent hover.
+ */
+.dcds-NavElement:not(.dcds-NavElement--has-dropdown):not(.dcds-NavElement--selected):hover {
+  background: var(--color-fill-secondary-1); /* #ecf5fb */
+}
+
+/* Selected — direct-link variant */
+.dcds-NavElement:not(.dcds-NavElement--has-dropdown).dcds-NavElement--selected {
+  background: var(--color-surface-3); /* #f5f5f5 */
+  font-weight: var(--font-weight-bold);
+}
+
+/* ── __trigger — inner <button> for dropdown/accordion NavElements ───────── */
+/*
+ * When showDropdown=true the outer element is a <div> and the clickable
+ * header is .dcds-NavElement__trigger. All interactive/hover/focus styles
+ * are scoped here so the accordion rows below don't inherit them.
+ */
+.dcds-NavElement__trigger {
+  display: flex;
+  align-items: center; /* vertically centre icon + label + arrow in the row */
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+  transition: background-color 120ms ease;
+}
+
+/* Hover on trigger (not when selected) */
+.dcds-NavElement:not(.dcds-NavElement--selected) .dcds-NavElement__trigger:hover {
+  background: var(--color-fill-secondary-1);
+}
+
+/* Selected — dropdown variant: grey bg on trigger */
+.dcds-NavElement--selected .dcds-NavElement__trigger {
+  background: var(--color-surface-3);
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-NavElement--selected .dcds-NavElement__trigger:hover {
+  background: var(--color-surface-3);
+}
+
+.dcds-NavElement__trigger:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}
+
+/* ── Header row ────────────────────────────────────────────────────────────── */
+/*
+ * Mirrors Figma structure:
+ *   outer row  → space-between: [__content flex:1] … [__arrow]
+ *   __content  → icon + 12px gap + label (icon+label grouped together)
+ *
+ * This keeps the 12px gap ONLY between icon and label,
+ * not between label and arrow.
+ */
+.dcds-NavElement__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--gap-12) var(--gap-16) var(--gap-12) var(--gap-32);
+  /* No gap on the row — gap lives inside __content */
+}
+
+/* ── Icon + label group ────────────────────────────────────────────────────── */
+.dcds-NavElement__content {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* icon-to-label gap per Figma spec */
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Icon slot ─────────────────────────────────────────────────────────────── */
+.dcds-NavElement__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: inherit; /* inherits color/text/primary */
+}
+
+/* ── Label ─────────────────────────────────────────────────────────────────── */
+.dcds-NavElement__label {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Dropdown arrow ─────────────────────────────────────────────────────────── */
+.dcds-NavElement__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+  transition: transform 200ms ease;
+}
+
+/* Arrow rotates 180° when accordion is open (Selected + showDropdown) */
+.dcds-NavElement--accordion-open .dcds-NavElement__arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Accordion content (BaseNav rows) ──────────────────────────────────────── */
+/* background: white resets sky-blue inherited from dcds-NavElement--selected on the parent div */
+.dcds-NavElement__accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--color-surface-1); /* white — subsections always start on clean white bg */
+}
+
+/* ── Collapsed (icon-only) mode — injected by SideBar context ─────────────── */
+.dcds-NavElement--collapsed {
+  width: 56px;
+}
+
+/* Collapsed: centre the icon, px-16 py-12 */
+.dcds-NavElement--collapsed .dcds-NavElement__row {
+  padding: var(--gap-12) var(--gap-16);
+  justify-content: center;
+}
+
+/* Collapsed: content group shrinks to icon only (not flex:1) */
+.dcds-NavElement--collapsed .dcds-NavElement__content {
+  flex: none;
+  gap: 0;
+}
+
+/* ── Focus ──────────────────────────────────────────────────────────────────── */
+.dcds-NavElement:focus-visible {
+  outline: 2px solid var(--color-stroke-focus);
+  outline-offset: -2px;
+}

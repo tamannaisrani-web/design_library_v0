@@ -1,0 +1,271 @@
+/* Datepicker — trigger (InputFields calendar variant) + floating calendar panel.
+ * Design source: Figma P52nmDshYaKr963q1zBwQj nodes 1709:8986, 1223:7583–7587.
+ * Token prefix: --color-*, --gap-*, --rd-*, --shadow-*, --font-*
+ */
+
+/* ===========================================================
+ * Wrapper
+ * =========================================================== */
+
+.dcds-Datepicker {
+  display: inline-block;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+/* ===========================================================
+ * Trigger wrap — positions InputFields trigger + floating panel
+ * =========================================================== */
+
+.dcds-Datepicker__trigger-wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* ===========================================================
+ * Calendar panel — floats below trigger
+ * Figma: white bg, rd-S, 4px 4px 8px rgba(0,0,0,0.08), 24px padding, gap-8
+ * =========================================================== */
+
+.dcds-Datepicker__panel {
+  position: absolute;
+  top: calc(100% + var(--gap-4));
+  left: 0;
+  min-width: 100%;
+  background-color: var(--color-surface-1);
+  border-radius: var(--rd-S);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+  z-index: 10;
+  animation: dcds-Datepicker__panel-in 120ms ease-out;
+}
+
+@keyframes dcds-Datepicker__panel-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================================================
+ * Month/year navigation row
+ * Figma: two flex-1 buttons (month + year), rd-S, 0.5px focus-subtle border, bold 16px
+ * =========================================================== */
+
+.dcds-Datepicker__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  /* Figma: header section has gap-12 between nav and week-header.
+   * Panel gap is 8px; add 4px margin here to reach 12px total. */
+  margin-bottom: var(--gap-4);
+}
+
+/* Wrapper around each nav button — positioning parent for its overlay */
+.dcds-Datepicker__nav-btn-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.dcds-Datepicker__nav-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gap-12);           /* Figma: p-12 all sides */
+  background-color: var(--color-surface-1);
+  border: 0.5px solid var(--color-stroke-focus-subtle);
+  border-radius: var(--rd-S);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  gap: var(--gap-4);
+  transition: background-color 120ms ease;
+}
+
+.dcds-Datepicker__nav-btn:hover {
+  background-color: var(--color-fill-secondary-0);
+}
+
+.dcds-Datepicker__nav-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-icon-neutral);
+  transition: transform 150ms ease;
+}
+
+.dcds-Datepicker__nav-btn-icon--open {
+  transform: rotate(180deg);
+}
+
+.dcds-Datepicker__nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+}
+
+.dcds-Datepicker__arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  border-radius: var(--rd-S);
+  cursor: pointer;
+  color: var(--color-icon-neutral);
+  transition: background-color 120ms ease;
+}
+
+.dcds-Datepicker__arrow-btn:hover {
+  background-color: var(--color-fill-secondary-0);
+}
+
+/* ===========================================================
+ * Week header row
+ * Figma: 14px bold, color/text/primary, 1px color/stroke/neutral separator below
+ * =========================================================== */
+
+.dcds-Datepicker__week-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--gap-4);
+  padding-bottom: var(--gap-8);
+  border-bottom: 1px solid var(--color-stroke-neutral);
+}
+
+.dcds-Datepicker__week-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  height: 32px;
+}
+
+/* ===========================================================
+ * Day grid
+ * Figma: 32px tall × ~29px wide, 7 columns, rd-S (8px) cells
+ * =========================================================== */
+
+.dcds-Datepicker__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: var(--gap-8);   /* Figma: gap-8 between week rows */
+  column-gap: 0;           /* Figma: justify-between — columns fill via 1fr */
+}
+
+.dcds-Datepicker__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border-radius: var(--rd-S);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);  /* Figma: 16px body */
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.dcds-Datepicker__day:hover:not(.dcds-Datepicker__day--outside):not(.dcds-Datepicker__day--disabled) {
+  background-color: var(--color-fill-secondary-0);  /* lighter blue, #F1F9FF */
+  font-weight: var(--font-weight-bold);
+}
+
+/* Outside-month days — color/stroke/neutral text (greyed) */
+.dcds-Datepicker__day--outside {
+  color: var(--color-stroke-neutral);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Selected day — color/fill/action bg, white bold text */
+.dcds-Datepicker__day--selected {
+  background-color: var(--color-fill-action);
+  color: var(--color-text-invert);
+  font-weight: var(--font-weight-bold);
+}
+
+.dcds-Datepicker__day--selected:hover {
+  background-color: var(--color-fill-action);
+}
+
+/* Light-selected / hover — color/fill/light-action bg */
+.dcds-Datepicker__day--light {
+  background-color: var(--color-fill-light-action);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Disabled day */
+.dcds-Datepicker__day--disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--color-surface-3);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===========================================================
+ * _BaseDatePicker — month selection overlay
+ * Figma node 1223:7585: 152×228px, left:24px, top:166px relative to panel,
+ * white bg, rd-S, border color/fill/primary-1, shadow rgba(10,46,87,0.2)
+ * =========================================================== */
+
+.dcds-Datepicker__month-overlay {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);  /* 4px below the button it belongs to */
+  width: 100%;             /* matches the nav button width */
+  background-color: var(--color-surface-1);
+  border-radius: var(--rd-S);
+  border: 1px solid var(--color-fill-primary-1);
+  box-shadow: 0 6px 12px rgba(10, 46, 87, 0.2);
+  z-index: 20;
+  max-height: 240px;   /* 6 items visible; scrolls beyond */
+  overflow-y: auto;
+  animation: dcds-Datepicker__panel-in 120ms ease-out;
+}
+
+/* Year overlay — anchored to the right (year) nav button */
+.dcds-Datepicker__month-overlay--year {
+  left: auto;
+  right: 0;
+}
+
+.dcds-Datepicker__month-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--gap-12) var(--gap-16);
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  border-bottom: 0.5px solid var(--color-stroke-subdued);
+  transition: background-color 120ms ease;
+}
+
+.dcds-Datepicker__month-option:last-child {
+  border-bottom: none;
+}
+
+.dcds-Datepicker__month-option--current {
+  background-color: var(--color-fill-light-action);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-neutral);
+}
+
+.dcds-Datepicker__month-option:hover {
+  background-color: var(--color-fill-secondary-0);
+}

@@ -1,0 +1,108 @@
+/*
+ * GridLayout.css
+ *
+ * CSS Grid layout foundation for DCDS.
+ * Breakpoints match the DCDS grid spec:
+ *   xs  < 576 px
+ *   sm  ≥ 576 px
+ *   md  ≥ 992 px
+ *   lg  ≥ 1200 px
+ *
+ * Spacing scale: 1 unit = 8 px  (--gap-8, --gap-16 … tokens)
+ */
+
+/* ── Container ──────────────────────────────────────────────── */
+
+.dcds-GridLayout--container {
+  display: grid;
+  grid-template-columns: repeat(var(--dcds-grid-cols, 12), 1fr);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Direction */
+.dcds-GridLayout--direction-column { grid-auto-flow: column; }
+
+/* ── Spacing ────────────────────────────────────────────────── */
+
+.dcds-GridLayout--spacing-0 { gap: 0; }
+.dcds-GridLayout--spacing-1 { gap: var(--gap-8); }
+.dcds-GridLayout--spacing-2 { gap: var(--gap-16); }
+.dcds-GridLayout--spacing-3 { gap: var(--gap-24); }
+.dcds-GridLayout--spacing-4 { gap: var(--gap-32); }
+.dcds-GridLayout--spacing-5 { gap: var(--gap-40); }
+.dcds-GridLayout--spacing-6 { gap: var(--gap-48); }
+
+/* ── Item ───────────────────────────────────────────────────── */
+
+.dcds-GridLayout--item { box-sizing: border-box; min-width: 0; }
+
+/* ── xs spans — mobile-first (always active) ────────────────── */
+
+.dcds-GridLayout--xs-1  { grid-column: span 1; }
+.dcds-GridLayout--xs-2  { grid-column: span 2; }
+.dcds-GridLayout--xs-3  { grid-column: span 3; }
+.dcds-GridLayout--xs-4  { grid-column: span 4; }
+.dcds-GridLayout--xs-5  { grid-column: span 5; }
+.dcds-GridLayout--xs-6  { grid-column: span 6; }
+.dcds-GridLayout--xs-7  { grid-column: span 7; }
+.dcds-GridLayout--xs-8  { grid-column: span 8; }
+.dcds-GridLayout--xs-9  { grid-column: span 9; }
+.dcds-GridLayout--xs-10 { grid-column: span 10; }
+.dcds-GridLayout--xs-11 { grid-column: span 11; }
+.dcds-GridLayout--xs-12 { grid-column: span 12; }
+.dcds-GridLayout--xs-auto { grid-column: auto; }
+
+/* ── sm spans — ≥ 576 px ────────────────────────────────────── */
+
+@media (min-width: 576px) {
+  .dcds-GridLayout--sm-1  { grid-column: span 1; }
+  .dcds-GridLayout--sm-2  { grid-column: span 2; }
+  .dcds-GridLayout--sm-3  { grid-column: span 3; }
+  .dcds-GridLayout--sm-4  { grid-column: span 4; }
+  .dcds-GridLayout--sm-5  { grid-column: span 5; }
+  .dcds-GridLayout--sm-6  { grid-column: span 6; }
+  .dcds-GridLayout--sm-7  { grid-column: span 7; }
+  .dcds-GridLayout--sm-8  { grid-column: span 8; }
+  .dcds-GridLayout--sm-9  { grid-column: span 9; }
+  .dcds-GridLayout--sm-10 { grid-column: span 10; }
+  .dcds-GridLayout--sm-11 { grid-column: span 11; }
+  .dcds-GridLayout--sm-12 { grid-column: span 12; }
+  .dcds-GridLayout--sm-auto { grid-column: auto; }
+}
+
+/* ── md spans — ≥ 992 px ────────────────────────────────────── */
+
+@media (min-width: 992px) {
+  .dcds-GridLayout--md-1  { grid-column: span 1; }
+  .dcds-GridLayout--md-2  { grid-column: span 2; }
+  .dcds-GridLayout--md-3  { grid-column: span 3; }
+  .dcds-GridLayout--md-4  { grid-column: span 4; }
+  .dcds-GridLayout--md-5  { grid-column: span 5; }
+  .dcds-GridLayout--md-6  { grid-column: span 6; }
+  .dcds-GridLayout--md-7  { grid-column: span 7; }
+  .dcds-GridLayout--md-8  { grid-column: span 8; }
+  .dcds-GridLayout--md-9  { grid-column: span 9; }
+  .dcds-GridLayout--md-10 { grid-column: span 10; }
+  .dcds-GridLayout--md-11 { grid-column: span 11; }
+  .dcds-GridLayout--md-12 { grid-column: span 12; }
+  .dcds-GridLayout--md-auto { grid-column: auto; }
+}
+
+/* ── lg spans — ≥ 1200 px ───────────────────────────────────── */
+
+@media (min-width: 1200px) {
+  .dcds-GridLayout--lg-1  { grid-column: span 1; }
+  .dcds-GridLayout--lg-2  { grid-column: span 2; }
+  .dcds-GridLayout--lg-3  { grid-column: span 3; }
+  .dcds-GridLayout--lg-4  { grid-column: span 4; }
+  .dcds-GridLayout--lg-5  { grid-column: span 5; }
+  .dcds-GridLayout--lg-6  { grid-column: span 6; }
+  .dcds-GridLayout--lg-7  { grid-column: span 7; }
+  .dcds-GridLayout--lg-8  { grid-column: span 8; }
+  .dcds-GridLayout--lg-9  { grid-column: span 9; }
+  .dcds-GridLayout--lg-10 { grid-column: span 10; }
+  .dcds-GridLayout--lg-11 { grid-column: span 11; }
+  .dcds-GridLayout--lg-12 { grid-column: span 12; }
+  .dcds-GridLayout--lg-auto { grid-column: auto; }
+}
