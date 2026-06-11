@@ -77,6 +77,18 @@ const ChevronIcon = () => (
  *   showDropdown={false}
  * />
  * ```
+ *
+ * @example Inverse — for dark sidebars / nav bars
+ * ```tsx
+ * <AvatarGroup
+ *   initials="AM"
+ *   name="Alex Martin"
+ *   designation="Product Designer"
+ *   displayName
+ *   type="Inverse"
+ *   onClick={toggleMenu}
+ * />
+ * ```
  */
 export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   initials = 'AM',
@@ -87,6 +99,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   showDropdown = true,
   isExpanded = false,
   type = 'Default',
+  avatarShape = 'Initial Circle',
   ariaLabel,
   ariaHasPopup = 'menu',
   ariaExpanded,
@@ -136,8 +149,18 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
       >
-        {/* Avatar — always a 32 px Initial Circle */}
-        <span className="dcds-AvatarGroup__avatar" aria-hidden="true">
+        {/* Avatar — 32 px, shape controlled by avatarShape prop */}
+        <span
+          className={[
+            'dcds-AvatarGroup__avatar',
+            avatarShape === 'Initial Square' || avatarShape === 'Icon Square'
+              ? 'dcds-AvatarGroup__avatar--square'
+              : '',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+          aria-hidden="true"
+        >
           <span className="dcds-AvatarGroup__initials">{initials}</span>
         </span>
 

@@ -1,4 +1,15 @@
-/* AvatarGroup — token-driven styles. Figma node 645:9512 / variant frame 1671:9406.
+/* AvatarGroup — token-driven styles. Figma node 645:9512 / variant frame 1671:9461.
+ *
+ * State × Type colour matrix (Figma):
+ *   Default  · Default  → surface/1        text/primary   icon/primary
+ *   Default  · Inverse  → fill/primary-9   text/invert    icon/invert
+ *   Hover    · Default  → fill/secondary-0 text/primary   icon/primary
+ *   Hover    · Inverse  → fill/dark-info   text/invert    icon/invert
+ *   Expanded · Default  → fill/secondary-0 text/primary   icon/primary
+ *   Expanded · Inverse  → fill/secondary-0 text/primary   icon/primary
+ *   Exp+Hover· Default  → fill/secondary-0 text/primary   icon/primary
+ *   Exp+Hover· Inverse  → fill/dark-info   text/invert    icon/invert
+ *
  * Never override background, radius, or font via className.
  * Use className only for layout (margin / grid placement). */
 
@@ -12,7 +23,9 @@
 }
 
 /* ===========================================================
- * Base — button reset + flex row
+ * Base — Default · Default
+ * bg: color/surface/1 (white)
+ * text + arrow: color/text/primary + color/icon/primary
  * =========================================================== */
 
 .dcds-AvatarGroup {
@@ -27,14 +40,9 @@
   cursor: pointer;
   font-family: var(--font-family);
   text-align: left;
-  transition: background-color 120ms ease;
+  transition: background-color 120ms ease, color 120ms ease;
   overflow: hidden;
   flex-shrink: 0;
-}
-
-.dcds-AvatarGroup:hover,
-.dcds-AvatarGroup:focus-visible {
-  background-color: var(--color-fill-secondary-0);
 }
 
 .dcds-AvatarGroup:focus-visible {
@@ -43,7 +51,28 @@
 }
 
 /* ===========================================================
- * Avatar circle — 32 px Initial Circle, Sky Blue-100 bg
+ * Hover · Default  +  Exp+Hover · Default
+ * bg: color/surface/2  (Cool Grey-50  #F9F9F9)
+ * specificity (0,2,0) — beats --expanded (0,1,0) when both apply
+ * =========================================================== */
+
+.dcds-AvatarGroup:hover,
+.dcds-AvatarGroup:focus-visible {
+  background-color: var(--color-surface-2);
+}
+
+/* ===========================================================
+ * Expanded · Default  (non-hover)
+ * bg: color/fill/secondary-0  (Sky Blue-0  #F1F9FF)
+ * When expanded+hover, the :hover rule above wins on specificity
+ * =========================================================== */
+
+.dcds-AvatarGroup--expanded {
+  background-color: var(--color-fill-secondary-0);
+}
+
+/* ===========================================================
+ * Avatar circle — 32 px, Sky Blue-100 bg
  * =========================================================== */
 
 .dcds-AvatarGroup__avatar {
@@ -58,6 +87,11 @@
   overflow: hidden;
 }
 
+/* Square avatar variant */
+.dcds-AvatarGroup__avatar--square {
+  border-radius: var(--rd-S);
+}
+
 .dcds-AvatarGroup__initials {
   font-size: var(--font-size-body-small); /* 12px */
   font-weight: var(--font-weight-bold);
@@ -67,8 +101,8 @@
 }
 
 /* ===========================================================
- * Text block — name + designation
- * Only rendered when displayName=true
+ * Text block — name + designation (displayName=true only)
+ * Both use Regular weight per Figma node 1671:9461
  * =========================================================== */
 
 .dcds-AvatarGroup__info {
@@ -82,8 +116,9 @@
   color: var(--color-text-primary);
 }
 
+/* Designation — Desktop/Body/Body small - Regular (12px 400) */
 .dcds-AvatarGroup__designation {
-  font-size: var(--font-size-body-small); /* 12px */
+  font-size: var(--font-size-body-small);
   font-weight: var(--font-weight-regular);
   line-height: 1;
   white-space: nowrap;
@@ -92,8 +127,9 @@
   color: var(--color-text-primary);
 }
 
+/* Name — Desktop/Body/Body - Regular (16px 400) */
 .dcds-AvatarGroup__name {
-  font-size: var(--font-size-body); /* 16px */
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
   line-height: 1;
   white-space: nowrap;
@@ -103,74 +139,7 @@
 }
 
 /* ===========================================================
- * Inverse type — dark navy bg, white name/designation text
- * Figma variant frame 1671:9461, type=Inverse
- *
- * Key rules from Figma:
- * - Resting bg:  color/fill/primary-9 (#082546 dark navy)
- * - Hover bg:    color/fill/secondary-0 (#f1f9ff) — SAME as Default hover
- * - Initials:    stay dark (color/text/primary) — avatar circle unchanged
- * - Name/desg:   white (color/text/invert)
- * - Arrow:       white (color/text/invert)
- * =========================================================== */
-
-.dcds-AvatarGroup--inverse {
-  background-color: var(--color-fill-primary-9); /* #082546 */
-}
-
-/* Hover reverts to the same light bg AND dark text as Default type */
-.dcds-AvatarGroup--inverse:hover,
-.dcds-AvatarGroup--inverse:focus-visible {
-  background-color: var(--color-fill-secondary-0); /* same as Default hover */
-}
-
-/* On hover: all text/icons revert to dark navy (same as Default hover state) */
-.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__info,
-.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__info {
-  color: var(--color-text-primary);
-}
-
-.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__designation,
-.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__name,
-.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__designation,
-.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__name {
-  color: var(--color-text-primary); /* dark navy */
-}
-
-.dcds-AvatarGroup--inverse:hover .dcds-AvatarGroup__arrow,
-.dcds-AvatarGroup--inverse:focus-visible .dcds-AvatarGroup__arrow {
-  color: var(--color-icon-primary); /* dark navy */
-}
-
-/* initials NOT overridden — stay dark (sky-blue avatar, dark text) */
-
-.dcds-AvatarGroup--inverse .dcds-AvatarGroup__info {
-  color: var(--color-text-invert);
-}
-
-.dcds-AvatarGroup--inverse .dcds-AvatarGroup__designation,
-.dcds-AvatarGroup--inverse .dcds-AvatarGroup__name {
-  color: var(--color-text-invert); /* white */
-}
-
-.dcds-AvatarGroup--inverse .dcds-AvatarGroup__arrow {
-  color: var(--color-text-invert); /* white chevron */
-}
-
-/* ===========================================================
- * Expanded state — Bold text, arrow rotates to ↑
- * =========================================================== */
-
-.dcds-AvatarGroup--expanded .dcds-AvatarGroup__designation {
-  font-weight: var(--font-weight-bold);
-}
-
-.dcds-AvatarGroup--expanded .dcds-AvatarGroup__name {
-  font-weight: var(--font-weight-bold);
-}
-
-/* ===========================================================
- * Dropdown arrow icon — 24 px, rotates 180° when expanded
+ * Arrow — rotates 180° when expanded
  * =========================================================== */
 
 .dcds-AvatarGroup__arrow {
@@ -186,4 +155,81 @@
 
 .dcds-AvatarGroup--expanded .dcds-AvatarGroup__arrow {
   transform: rotate(180deg);
+}
+
+/* ===========================================================
+ * Inverse type — Default · Inverse
+ * bg: color/fill/primary-9  (Noble Blue-600 #082546)
+ * text: color/text/invert   (white)
+ * arrow: color/icon/invert  (near-white)
+ * =========================================================== */
+
+.dcds-AvatarGroup--inverse {
+  background-color: var(--color-fill-primary-9);
+}
+
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__info,
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__designation,
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__name {
+  color: var(--color-text-invert);
+}
+
+.dcds-AvatarGroup--inverse .dcds-AvatarGroup__arrow {
+  color: var(--color-icon-invert);
+}
+
+/* ===========================================================
+ * Hover · Inverse  +  Exp+Hover · Inverse
+ * bg: color/fill/dark-info  (Sky Blue-700 #1D618E)
+ * text: color/text/invert · arrow: color/icon/invert
+ * =========================================================== */
+
+.dcds-AvatarGroup--inverse:hover,
+.dcds-AvatarGroup--inverse:focus-visible {
+  background-color: var(--color-fill-dark-info);
+}
+
+/* ===========================================================
+ * Expanded · Inverse  (non-hover)
+ * bg: color/fill/secondary-0 (Sky Blue-0, same as Default expanded)
+ * text + arrow: PRIMARY — same as default type when expanded
+ * =========================================================== */
+
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded {
+  background-color: var(--color-fill-secondary-0);
+}
+
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__info,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__designation,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__name {
+  color: var(--color-text-primary);
+}
+
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded .dcds-AvatarGroup__arrow {
+  color: var(--color-icon-primary);
+}
+
+/* ===========================================================
+ * Expanded Hover · Inverse
+ * bg: color/fill/dark-info  (Sky Blue-700)
+ * text: color/text/invert · arrow: color/icon/invert
+ * =========================================================== */
+
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible {
+  background-color: var(--color-fill-dark-info);
+}
+
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__info,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__designation,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__name,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__info,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__designation,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__name {
+  color: var(--color-text-invert);
+}
+
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:hover .dcds-AvatarGroup__arrow,
+.dcds-AvatarGroup--inverse.dcds-AvatarGroup--expanded:focus-visible .dcds-AvatarGroup__arrow {
+  color: var(--color-icon-invert);
 }
