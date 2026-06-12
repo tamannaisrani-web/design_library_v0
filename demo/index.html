@@ -5789,19 +5789,6 @@ function FlagsSection() {
                   <GridLayout item xs={12} md={4}><div className="gl-cell">xs=12 · md=4</div></GridLayout>
                 </GridLayout>
 
-                <h3 style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-label)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-secondary)', margin:'var(--gap-24) 0 var(--gap-8)' }}>
-                  Spacing scale
-                </h3>
-                {[0,1,2,3,4].map(sp => (
-                  <div key={sp} style={{ marginBottom:'var(--gap-8)' }}>
-                    <span style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-validation)', color:'var(--color-text-subdued)', display:'block', marginBottom:'var(--gap-4)' }}>spacing={sp} ({sp * 8}px gap)</span>
-                    <GridLayout container spacing={sp}>
-                      <GridLayout item xs={4}><div className="gl-cell">A</div></GridLayout>
-                      <GridLayout item xs={4}><div className="gl-cell">B</div></GridLayout>
-                      <GridLayout item xs={4}><div className="gl-cell">C</div></GridLayout>
-                    </GridLayout>
-                  </div>
-                ))}
               </section>
 
             </main>
