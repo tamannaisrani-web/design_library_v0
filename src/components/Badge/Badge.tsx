@@ -45,7 +45,7 @@ const INTENSE_ICONS: Record<string, IconComponent> = {
  */
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  size = 'M',
+  size = 'XS',
   emphasis = 'subtle',
   state = 'neutral',
   showIcon = true,
