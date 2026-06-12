@@ -1329,6 +1329,154 @@
       .dcds-Accordian__body-slot { width:100%; }
 
       /* ============================================================
+       * DropdownMenu.css
+       * ============================================================ */
+      .dcds-DropdownMenu { position:relative; display:flex; flex-direction:column; gap:var(--gap-4); width:100%; font-family:var(--font-family); }
+      .dcds-DropdownMenu__label-row { display:flex; align-items:center; gap:var(--gap-4); }
+      .dcds-DropdownMenu__label { font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-neutral); line-height:1.2; }
+      .dcds-DropdownMenu__mandatory { color:var(--color-text-error); font-size:var(--font-size-label); line-height:1; }
+      .dcds-DropdownMenu__trigger { display:flex; align-items:center; justify-content:space-between; height:48px; padding:0 var(--gap-16); background-color:var(--color-surface-1); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); cursor:pointer; width:100%; text-align:left; transition:border-color 120ms ease; gap:var(--gap-8); outline:none; }
+      .dcds-DropdownMenu__trigger:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
+      .dcds-DropdownMenu--open .dcds-DropdownMenu__trigger { border-width:1px; border-color:var(--color-stroke-focus-subtle); }
+      .dcds-DropdownMenu--disabled .dcds-DropdownMenu__trigger { background-color:var(--color-surface-3); border-color:var(--color-stroke-disabled); color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+      .dcds-DropdownMenu__value-wrap { display:flex; align-items:center; gap:var(--gap-8); flex:1; min-width:0; overflow:hidden; }
+      .dcds-DropdownMenu__value { min-width:0; font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-neutral); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1; }
+      .dcds-DropdownMenu__value--placeholder { color:var(--color-text-disabled); }
+      .dcds-DropdownMenu__arrow { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--color-icon-neutral); transition:transform 150ms ease; background:none; border:none; padding:0; cursor:pointer; pointer-events:none; }
+      .dcds-DropdownMenu--open .dcds-DropdownMenu__arrow { transform:rotate(180deg); }
+      .dcds-DropdownMenu__helptext { overflow:hidden; max-height:0; opacity:0; transition:max-height 150ms ease,opacity 150ms ease; }
+      .dcds-DropdownMenu--open .dcds-DropdownMenu__helptext { max-height:80px; opacity:1; }
+      .dcds-DropdownMenu__helptext-inner { display:flex; align-items:flex-start; gap:var(--gap-8); padding:var(--gap-4) 0; }
+      .dcds-DropdownMenu__helptext-bar { width:4px; min-width:4px; height:16px; border-radius:var(--rd-Max); background-color:var(--color-stroke-focus-subtle); margin-top:2px; flex-shrink:0; }
+      .dcds-DropdownMenu__helptext-text { margin:0; font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:1.4; }
+      .dcds-DropdownMenu__panel { position:absolute; top:calc(100% + var(--gap-4)); left:0; min-width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:var(--shadow-S); z-index:10; overflow:hidden; animation:dcds-DropdownMenu__panel-in 120ms ease-out; }
+      @keyframes dcds-DropdownMenu__panel-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+      .dcds-DropdownMenu__menu { margin:0; padding:0; }
+      .dcds-DropdownMenu__menu-label { background-color:var(--color-surface-4); padding:var(--gap-4) var(--gap-16); font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-subdued); line-height:normal; white-space:nowrap; }
+      .dcds-DropdownMenu__menu-item-row { border-bottom:0.5px solid var(--color-stroke-subdued); }
+      .dcds-DropdownMenu__menu-item-row:last-child { border-bottom:none; }
+      .dcds-DropdownMenu__menu-item { display:flex; align-items:center; gap:var(--gap-12); width:100%; text-align:left; padding:var(--gap-12) var(--gap-16); background:none; border:none; color:var(--color-text-primary); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); cursor:pointer; transition:background-color 120ms ease; }
+      .dcds-DropdownMenu__menu-item:hover:not(:disabled) { background-color:var(--color-fill-secondary-0); }
+      .dcds-DropdownMenu__menu-item:focus-visible { outline:none; background-color:var(--color-fill-secondary-0); box-shadow:inset 0 0 0 2px var(--color-stroke-focus); }
+      .dcds-DropdownMenu__menu-item:disabled, .dcds-DropdownMenu__menu-item[aria-disabled='true'] { color:var(--color-text-disabled); background-color:var(--color-surface-3); cursor:not-allowed; pointer-events:none; }
+      .dcds-DropdownMenu__menu-item--selected { background-color:var(--color-fill-light-action); }
+      .dcds-DropdownMenu__menu-item--selected .dcds-DropdownMenu__menu-item-label { font-weight:var(--font-weight-bold); }
+      .dcds-DropdownMenu__menu-item--selected:hover:not(:disabled) { background-color:var(--color-fill-secondary-0); }
+      .dcds-DropdownMenu__menu-item:hover:not(:disabled) .dcds-DropdownMenu__menu-item-leading { color:var(--color-icon-success); }
+      .dcds-DropdownMenu__menu-item-leading { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:var(--color-icon-action); }
+      .dcds-DropdownMenu__menu-item-leading--flag { width:16px; height:12px; align-self:center; }
+      .dcds-DropdownMenu__menu-item-label { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      /* Status badge uses Badge component — see .dcds-Badge* styles */
+
+      /* ============================================================
+       * Datepicker.css
+       * ============================================================ */
+      .dcds-Datepicker { display:inline-block; width:100%; font-family:var(--font-family); }
+      .dcds-Datepicker__trigger-wrap { position:relative; width:100%; }
+      .dcds-Datepicker__panel { position:absolute; top:calc(100% + var(--gap-4)); left:0; min-width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:4px 4px 8px rgba(0,0,0,0.08); padding:24px; display:flex; flex-direction:column; gap:var(--gap-8); z-index:10; animation:dcds-Datepicker__panel-in 120ms ease-out; }
+      @keyframes dcds-Datepicker__panel-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+      .dcds-Datepicker__nav { display:flex; align-items:center; gap:var(--gap-8); margin-bottom:var(--gap-4); }
+      .dcds-Datepicker__nav-btn-wrap { flex:1; position:relative; }
+      .dcds-Datepicker__nav-btn { width:100%; display:flex; align-items:center; justify-content:space-between; padding:var(--gap-12); background-color:var(--color-surface-1); border:1px solid var(--color-stroke-focus-subtle); border-radius:var(--rd-S); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); color:var(--color-text-primary); cursor:pointer; gap:var(--gap-4); transition:background-color 120ms ease; }
+      .dcds-Datepicker__nav-btn:hover { background-color:var(--color-fill-secondary-0); }
+      .dcds-Datepicker__nav-btn-icon { display:inline-flex; align-items:center; color:var(--color-icon-neutral); transition:transform 150ms ease; }
+      .dcds-Datepicker__nav-btn-icon--open { transform:rotate(180deg); }
+      .dcds-Datepicker__nav-arrows { display:flex; align-items:center; gap:var(--gap-4); }
+      .dcds-Datepicker__arrow-btn { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; background:none; border:none; border-radius:var(--rd-S); cursor:pointer; color:var(--color-icon-neutral); transition:background-color 120ms ease; }
+      .dcds-Datepicker__arrow-btn:hover { background-color:var(--color-fill-secondary-0); }
+      .dcds-Datepicker__week-header { display:grid; grid-template-columns:repeat(7,1fr); gap:var(--gap-4); padding-bottom:var(--gap-8); border-bottom:1px solid var(--color-stroke-neutral); }
+      .dcds-Datepicker__week-day { display:flex; align-items:center; justify-content:center; font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); height:32px; }
+      .dcds-Datepicker__days { display:grid; grid-template-columns:repeat(7,1fr); row-gap:var(--gap-8); column-gap:0; }
+      .dcds-Datepicker__day { display:flex; align-items:center; justify-content:center; height:32px; border-radius:var(--rd-S); font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); background:none; border:none; cursor:pointer; transition:background-color 120ms ease; }
+      .dcds-Datepicker__day:hover:not(.dcds-Datepicker__day--outside):not(.dcds-Datepicker__day--disabled) { background-color:var(--color-fill-secondary-0); font-weight:var(--font-weight-bold); }
+      .dcds-Datepicker__day--outside { color:var(--color-stroke-neutral); cursor:default; pointer-events:none; }
+      .dcds-Datepicker__day--selected { background-color:var(--color-fill-action); color:var(--color-text-invert); font-weight:var(--font-weight-bold); }
+      .dcds-Datepicker__day--selected:hover { background-color:var(--color-fill-action); }
+      .dcds-Datepicker__day--disabled { color:var(--color-text-disabled); background-color:var(--color-surface-3); cursor:not-allowed; pointer-events:none; }
+      .dcds-Datepicker__month-overlay { position:absolute; left:0; top:calc(100% + 4px); width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); border:1px solid var(--color-fill-primary-1); box-shadow:0 6px 12px rgba(10,46,87,0.2); z-index:20; max-height:240px; overflow-y:auto; animation:dcds-Datepicker__panel-in 120ms ease-out; }
+      .dcds-Datepicker__month-option { display:flex; align-items:center; width:100%; padding:var(--gap-12) var(--gap-16); background:none; border:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); cursor:pointer; border-bottom:0.5px solid var(--color-stroke-subdued); transition:background-color 120ms ease; }
+      .dcds-Datepicker__month-option:last-child { border-bottom:none; }
+      .dcds-Datepicker__month-option--current { background-color:var(--color-fill-light-action); font-weight:var(--font-weight-bold); color:var(--color-text-neutral); }
+      .dcds-Datepicker__month-option:hover { background-color:var(--color-fill-secondary-0); }
+
+      /* ============================================================
+       * InputFields.css
+       * ============================================================ */
+      .dcds-InputFields { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; min-width:240px; font-family:var(--font-family); }
+      .dcds-InputFields__label-row { display:flex; align-items:center; gap:var(--gap-4); }
+      .dcds-InputFields__label { font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; }
+      .dcds-InputFields__mandatory { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:normal; flex-shrink:0; }
+      .dcds-InputFields__field-row { display:flex; flex-direction:row; align-items:stretch; gap:var(--gap-8); width:100%; }
+      .dcds-InputFields__box { display:flex; flex-direction:row; align-items:center; justify-content:space-between; flex:1 1 auto; height:48px; padding:0 var(--gap-12); gap:0; border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); transition:border-color 120ms ease,background-color 120ms ease; box-sizing:border-box; cursor:text; }
+      .dcds-InputFields__box-left { display:flex; align-items:center; align-self:stretch; gap:var(--gap-12); flex:1; min-width:0; }
+      .dcds-InputFields__box:focus-within { border:1px solid var(--color-stroke-focus-subtle); outline:none; }
+      .dcds-InputFields__input { flex:1; min-width:0; height:100%; background:transparent; border:none; outline:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-info); font-variation-settings:'"YTLC" 500, "wdth" 100'; padding:0; }
+      .dcds-InputFields__input::placeholder { color:var(--color-text-disabled); font-variation-settings:'"YTLC" 500, "wdth" 100'; }
+      .dcds-InputFields__leading { display:flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:var(--color-icon-primary); }
+      .dcds-InputFields__leading img { width:16px; height:12px; object-fit:cover; border-radius:1px; display:block; }
+      .dcds-InputFields__leading-symbol { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-neutral); line-height:1; white-space:nowrap; }
+      .dcds-InputFields__trailing { display:flex; align-items:center; justify-content:center; flex-shrink:0; width:16px; height:16px; color:var(--color-icon-primary); cursor:pointer; background:none; border:none; padding:0; }
+      .dcds-InputFields__trailing:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; border-radius:var(--rd-XS); }
+      .dcds-InputFields__box--search { overflow:hidden; padding-right:0; }
+      .dcds-InputFields__search-btn { display:flex; align-items:center; justify-content:center; align-self:stretch; padding:0 var(--gap-16); background:var(--color-fill-action); color:var(--color-text-invert); border:none; border-radius:0 calc(var(--rd-S) - 1px) calc(var(--rd-S) - 1px) 0; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); cursor:pointer; white-space:nowrap; flex-shrink:0; transition:background-color 120ms ease; margin:0; }
+      .dcds-InputFields__search-btn:hover:not(:disabled) { background-color:var(--color-fill-dark-action); }
+      .dcds-InputFields__search-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+      .dcds-InputFields__otp-row { display:flex; flex-direction:row; gap:var(--gap-12); width:100%; }
+      .dcds-InputFields__otp-box { flex:1; height:48px; border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); display:flex; align-items:center; justify-content:center; transition:border-color 120ms ease,background-color 120ms ease; min-width:0; }
+      .dcds-InputFields__otp-input { width:100%; height:100%; background:transparent; border:none; outline:none; font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); text-align:center; padding:0; }
+      .dcds-InputFields__otp-box:focus-within { border:1px solid var(--color-stroke-focus-subtle); }
+      .dcds-InputFields__otp-box--filled .dcds-InputFields__otp-input { color:var(--color-text-info); }
+      .dcds-InputFields__otp-box--error { border:1px solid var(--color-stroke-error); }
+      .dcds-InputFields__otp-box--disabled { background:var(--color-surface-disabled); pointer-events:none; }
+      .dcds-InputFields__otp-box--disabled .dcds-InputFields__otp-input { color:var(--color-text-disabled); }
+      .dcds-BaseElemFront__wrap { position:relative; flex-shrink:0; }
+      .dcds-BaseElemFront { display:flex; flex-direction:row; align-items:center; justify-content:space-between; width:120px; min-width:120px; height:48px; padding:0 var(--gap-12); border:1px solid var(--color-stroke-neutral); border-radius:var(--rd-S); background:var(--color-surface-1); cursor:pointer; box-sizing:border-box; outline:none; transition:background-color 120ms ease; }
+      .dcds-BaseElemFront:hover { background-color:var(--color-fill-primary-0); }
+      .dcds-BaseElemFront:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:-2px; }
+      .dcds-BaseElemFront--open { border:1px solid var(--color-stroke-focus-subtle); }
+      .dcds-BaseElemFront--disabled { background:var(--color-surface-3); border:1px solid var(--color-stroke-disabled); cursor:not-allowed; pointer-events:none; }
+      .dcds-BaseElemFront--disabled .dcds-BaseElemFront__code { color:var(--color-text-disabled); }
+      .dcds-BaseElemFront--readonly { background:var(--color-surface-2); border:1px solid var(--color-stroke-disabled); }
+      .dcds-BaseElemFront--readonly .dcds-BaseElemFront__code { color:var(--color-text-neutral); }
+      .dcds-BaseElemFront__inner { display:flex; align-items:center; gap:var(--gap-12); min-width:0; }
+      .dcds-BaseElemFront__flag { width:16px; height:12px; object-fit:cover; border-radius:1px; flex-shrink:0; }
+      .dcds-BaseElemFront__code { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-BaseElemFront__arrow { display:flex; align-items:center; color:var(--color-icon-primary); flex-shrink:0; transition:transform 120ms ease; }
+      .dcds-BaseElemFront__arrow--open { transform:rotate(180deg); }
+      .dcds-BaseElemFront__menu { position:absolute; top:calc(100% + var(--gap-4)); left:0; min-width:100%; background-color:var(--color-surface-1); border-radius:var(--rd-S); box-shadow:var(--shadow-S); max-height:288px; overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; z-index:10; animation:dcds-BaseElemFront__menu-in 120ms ease-out; }
+      @keyframes dcds-BaseElemFront__menu-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+      .dcds-BaseElemFront__menu-item-row { border-bottom:0.5px solid var(--color-stroke-subdued); }
+      .dcds-BaseElemFront__menu-item-row:last-child { border-bottom:none; }
+      .dcds-BaseElemFront__menu-item { display:flex; align-items:center; gap:var(--gap-12); width:100%; padding:var(--gap-12) var(--gap-16); background:none; border:none; text-align:left; cursor:pointer; transition:background-color 120ms ease; }
+      .dcds-BaseElemFront__menu-item:hover { background-color:var(--color-fill-primary-1); }
+      .dcds-BaseElemFront__menu-item:focus-visible { outline:none; background-color:var(--color-fill-primary-1); box-shadow:inset 0 0 0 2px var(--color-stroke-focus); }
+      .dcds-BaseElemFront__menu-item-leading { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:24px; height:18px; }
+      .dcds-BaseElemFront__menu-item-leading img { width:24px; height:18px; object-fit:cover; border-radius:2px; display:block; }
+      .dcds-BaseElemFront__menu-code { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); color:var(--color-text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .dcds-BaseHelpText { max-height:0; opacity:0; overflow:hidden; transition:max-height 200ms linear,opacity 150ms linear; }
+      .dcds-InputFields:focus-within .dcds-BaseHelpText, .dcds-InputFields--state-focus .dcds-BaseHelpText, .dcds-InputFields--state-typing .dcds-BaseHelpText, .dcds-BaseHelpText--open { max-height:120px; opacity:1; }
+      .dcds-BaseHelpText__inner { display:flex; flex-direction:row; gap:var(--gap-8); align-items:flex-end; padding:var(--gap-4) 0; }
+      .dcds-BaseHelpText__bar { width:4px; min-width:4px; align-self:stretch; border-radius:var(--rd-XS); background:var(--color-stroke-focus-subtle); flex-shrink:0; }
+      .dcds-BaseHelpText__text { flex:1 0 0; margin:0; font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); color:var(--color-text-primary); line-height:1.4; }
+      .dcds-BaseValidation { display:flex; flex-direction:row; align-items:center; gap:var(--gap-4); padding:0 var(--gap-4); }
+      .dcds-BaseValidation__icon { display:flex; align-items:center; justify-content:center; width:16px; height:16px; flex-shrink:0; }
+      .dcds-BaseValidation__text { font-size:var(--font-size-label); font-weight:var(--font-weight-regular); line-height:normal; font-variation-settings:'"YTLC" 500, "wdth" 100'; }
+      .dcds-BaseValidation--error .dcds-BaseValidation__icon { color:var(--color-icon-error); }
+      .dcds-BaseValidation--error .dcds-BaseValidation__text { color:var(--color-text-error); }
+      .dcds-BaseValidation--warning .dcds-BaseValidation__icon { color:var(--color-icon-warning); }
+      .dcds-BaseValidation--warning .dcds-BaseValidation__text { color:var(--color-text-warning); }
+      .dcds-BaseValidation--success .dcds-BaseValidation__icon, .dcds-BaseValidation--success .dcds-BaseValidation__text { color:var(--color-text-success); }
+      .dcds-InputFields--state-focus .dcds-InputFields__box, .dcds-InputFields--state-typing .dcds-InputFields__box { border:1px solid var(--color-stroke-focus-subtle); }
+      .dcds-InputFields--state-error .dcds-InputFields__box { border:1px solid var(--color-stroke-error); }
+      .dcds-InputFields--state-disabled .dcds-InputFields__box { background:var(--color-surface-3); border-color:var(--color-stroke-disabled); pointer-events:none; cursor:not-allowed; }
+      .dcds-InputFields--state-disabled .dcds-InputFields__input { color:var(--color-text-disabled); cursor:not-allowed; }
+      .dcds-InputFields--state-disabled .dcds-InputFields__input::placeholder { color:var(--color-text-disabled); }
+      .dcds-InputFields--state-disabled .dcds-InputFields__leading, .dcds-InputFields--state-disabled .dcds-InputFields__trailing { color:var(--color-icon-disabled); }
+      .dcds-InputFields--state-read-only .dcds-InputFields__box { background:var(--color-surface-2); border-color:var(--color-stroke-neutral); cursor:default; }
+      .dcds-InputFields--state-read-only .dcds-InputFields__leading, .dcds-InputFields--state-read-only .dcds-InputFields__trailing { color:var(--color-icon-disabled); pointer-events:none; cursor:default; }
+      @media (prefers-reduced-motion:reduce) { .dcds-InputFields__box, .dcds-BaseHelpText, .dcds-BaseElemFront, .dcds-InputFields__search-btn { transition:none; } }
+
+      /* ============================================================
        * DeterminateLoader.css — Figma node 1764:705
        * ============================================================ */
       .dcds-DeterminateLoader { display:flex; flex-direction:column; gap:var(--gap-4); width:100%; position:relative; }
@@ -6843,6 +6991,514 @@ function FlagsSection() {
         );
       }
 
+      function InputFields({
+        Type = 'Default', State = 'Default',
+        label, isMandatory = true, showLabel = true,
+        showTooltip = false, tooltipHeading, tooltipBody,
+        showHelpText = false, helpText,
+        placeholder, value, name, id,
+        showLeading = true, leadingProperty, showTrailing = true, trailingProperty, trailingIcon,
+        showValidation = false, validationMessage, validationProperty = 'error',
+        prefixCountry, prefixCode = '', prefixMenuItems,
+        otpValues: otpValuesProp,
+        searchButtonLabel = 'Search',
+        'aria-label': ariaLabel, 'aria-describedby': ariaDescribedBy,
+        ariaExpanded,
+        onChange, onOtpChange, onFocus, onBlur, onClick, onKeyDown, onKeyUp,
+        onMouseEnter, onMouseLeave, onSearchClick, onDropdownClick, onPrefixClick, onPrefixMenuItemSelect, onTrailingClick,
+        className, dataTestId,
+      }) {
+        const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+        const [isPrefixOpen, setIsPrefixOpen] = React.useState(false);
+        const [internalOtpValues, setInternalOtpValues] = React.useState(['','','','','','']);
+        const isOtpControlled = otpValuesProp !== undefined;
+        const otpValues = isOtpControlled ? otpValuesProp : internalOtpValues;
+        const prefixWrapRef = React.useRef(null);
+        const otpRefs = React.useRef([]);
+
+        React.useEffect(() => {
+          if (!isPrefixOpen) return;
+          const handleOutside = (e) => {
+            if (prefixWrapRef.current && !prefixWrapRef.current.contains(e.target)) setIsPrefixOpen(false);
+          };
+          const handleKey = (e) => { if (e.key === 'Escape') setIsPrefixOpen(false); };
+          document.addEventListener('mousedown', handleOutside);
+          document.addEventListener('keydown', handleKey);
+          return () => { document.removeEventListener('mousedown', handleOutside); document.removeEventListener('keydown', handleKey); };
+        }, [isPrefixOpen]);
+
+        const isDisabled = State === 'Disabled';
+        const isReadOnly = State === 'Read-only';
+        const isError = State === 'Error';
+        const isFilled = State === 'Filled' || (value != null && value !== '' && State !== 'Error');
+        const resolvedShowValidation = Type !== 'Dropdown' && (isError || showValidation);
+
+        const validationId = id ? id + '-validation' : undefined;
+        const helpTextId = id ? id + '-helptext' : undefined;
+        const inputId = id;
+
+        const describedByParts = [ariaDescribedBy, resolvedShowValidation && validationId, showHelpText && helpTextId].filter(Boolean);
+        const resolvedAriaDescribedBy = describedByParts.length ? describedByParts.join(' ') : undefined;
+
+        const typeSlug = Type.toLowerCase().replace(/\s/g, '-').replace(/\./g, '-');
+        const stateSlug = State.toLowerCase().replace(/-/g, '-');
+
+        const rootClasses = ['dcds-InputFields', 'dcds-InputFields--type-' + typeSlug, 'dcds-InputFields--state-' + stateSlug, isFilled ? 'dcds-InputFields--state-filled' : '', className].filter(Boolean).join(' ');
+
+        const prefixState = isDisabled ? 'Disabled' : isReadOnly ? 'Read-Only' : isPrefixOpen ? 'Open' : 'Default';
+
+        const handleOtpChange = (digit, index) => {
+          const next = [...otpValues];
+          next[index] = digit;
+          if (!isOtpControlled) setInternalOtpValues(next);
+          onOtpChange && onOtpChange(next, index);
+          if (digit && index < 5) { const el = otpRefs.current[index + 1]; if (el) el.focus(); }
+        };
+
+        const handleOtpKeyDown = (e, index) => {
+          if (e.key === 'Backspace' && !otpValues[index] && index > 0) {
+            const el = otpRefs.current[index - 1]; if (el) el.focus();
+          }
+          const allowed = new Set(['Backspace','Delete','Tab','ArrowLeft','ArrowRight','Home','End']);
+          const isCtrl = e.ctrlKey || e.metaKey;
+          if (!allowed.has(e.key) && !isCtrl && !/^[0-9]$/.test(e.key)) e.preventDefault();
+        };
+
+        const commonInputProps = {
+          id: inputId, name, value, placeholder,
+          disabled: isDisabled, readOnly: isReadOnly,
+          'aria-required': isMandatory ? true : undefined,
+          'aria-invalid': isError ? true : undefined,
+          'aria-readonly': isReadOnly ? true : undefined,
+          'aria-disabled': isDisabled ? true : undefined,
+          'aria-label': ariaLabel,
+          'aria-describedby': resolvedAriaDescribedBy,
+          className: 'dcds-InputFields__input',
+          onChange: (e) => onChange && onChange(e.target.value, e),
+          onFocus, onBlur, onKeyDown, onKeyUp,
+        };
+
+        function renderLabelRow() {
+          if (!showLabel) return null;
+          return React.createElement('div', { className: 'dcds-InputFields__label-row' },
+            label && React.createElement('label', { className: 'dcds-InputFields__label', htmlFor: inputId }, label),
+            isMandatory && React.createElement('span', { className: 'dcds-InputFields__mandatory', 'aria-label': 'required' }, '*'),
+            showTooltip && React.createElement(Tooltip, { heading: tooltipHeading, bodyText: tooltipBody, Placement: 'Bottom' })
+          );
+        }
+
+        function renderHelpText() {
+          if (!showHelpText) return null;
+          return React.createElement('div', { id: helpTextId },
+            React.createElement('div', { className: 'dcds-BaseHelpText' },
+              React.createElement('div', { className: 'dcds-BaseHelpText__inner' },
+                React.createElement('div', { className: 'dcds-BaseHelpText__bar', 'aria-hidden': 'true' }),
+                React.createElement('p', { className: 'dcds-BaseHelpText__text' }, helpText || '')
+              )
+            )
+          );
+        }
+
+        function renderValidation() {
+          if (!resolvedShowValidation) return null;
+          const isSuccess = validationProperty === 'success';
+          const iconSvg = isSuccess
+            ? React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': true, focusable: 'false' }, React.createElement('path', { d: 'M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z', fill: 'currentColor' }))
+            : React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': true, focusable: 'false' }, React.createElement('path', { d: 'M21.56 10.74L20.21 9.16002C19.96 8.86002 19.75 8.30002 19.75 7.90002V6.20002C19.75 5.14002 18.88 4.27002 17.82 4.27002H16.12C15.72 4.27002 15.15 4.06002 14.85 3.81002L13.27 2.46002C12.58 1.87002 11.45 1.87002 10.76 2.46002L9.16 3.81002C8.86 4.06002 8.3 4.27002 7.9 4.27002H6.17C5.11 4.27002 4.24 5.14002 4.24 6.20002V7.90002C4.24 8.29002 4.04 8.85002 3.79 9.15002L2.44 10.74C1.86 11.44 1.86 12.56 2.44 13.24L3.79 14.83C4.04 15.12 4.24 15.69 4.24 16.08V17.79C4.24 18.85 5.11 19.72 6.17 19.72H7.91C8.3 19.72 8.87 19.93 9.17 20.18L10.75 21.53C11.44 22.12 12.57 22.12 13.26 21.53L14.84 20.18C15.14 19.93 15.7 19.72 16.1 19.72H17.8C18.86 19.72 19.73 18.85 19.73 17.79V16.09C19.73 15.69 19.94 15.13 20.19 14.83L21.54 13.25C22.15 12.57 22.15 11.44 21.56 10.74ZM11.25 8.13002C11.25 7.72002 11.59 7.38002 12 7.38002C12.41 7.38002 12.75 7.72002 12.75 8.13002V12.96C12.75 13.37 12.41 13.71 12 13.71C11.59 13.71 11.25 13.37 11.25 12.96V8.13002ZM12 16.87C11.45 16.87 11 16.42 11 15.87C11 15.32 11.44 14.87 12 14.87C12.55 14.87 13 15.32 13 15.87C13 16.42 12.56 16.87 12 16.87Z', fill: 'currentColor' }));
+          return React.createElement('div', { id: validationId },
+            React.createElement('div', { className: 'dcds-BaseValidation dcds-BaseValidation--' + (validationProperty || 'error'), role: 'alert', 'aria-live': 'polite' },
+              React.createElement('span', { className: 'dcds-BaseValidation__icon', 'aria-hidden': 'true' }, iconSvg),
+              React.createElement('span', { className: 'dcds-BaseValidation__text' }, validationMessage || '')
+            )
+          );
+        }
+
+        function renderTrailingBtn(prop1, onClickFn) {
+          const icons = {
+            'eye-slash': React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': true, focusable: 'false' },
+              React.createElement('path', { d: 'M14.5299 9.46992L9.46992 14.5299C8.81992 13.8799 8.41992 12.9899 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C12.9899 8.41992 13.8799 8.81992 14.5299 9.46992Z', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M17.8198 5.76998C16.0698 4.44998 14.0698 3.72998 11.9998 3.72998C8.46984 3.72998 5.17984 5.80998 2.88984 9.40998C1.98984 10.82 1.98984 13.19 2.88984 14.6C3.67984 15.84 4.59984 16.91 5.59984 17.77', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M8.41992 19.5302C9.55992 20.0102 10.7699 20.2702 11.9999 20.2702C15.5299 20.2702 18.8199 18.1902 21.1099 14.5902C22.0099 13.1802 22.0099 10.8102 21.1099 9.40018C20.7799 8.88018 20.4199 8.39018 20.0499 7.93018', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M15.5104 12.7002C15.2504 14.1102 14.1004 15.2602 12.6904 15.5202', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M9.47 14.5298L2 21.9998', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M22.0003 2L14.5303 9.47', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' })
+            ),
+            'eye': React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': true, focusable: 'false' },
+              React.createElement('path', { d: 'M15.5799 11.9999C15.5799 13.9799 13.9799 15.5799 11.9999 15.5799C10.0199 15.5799 8.41992 13.9799 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C13.9799 8.41992 15.5799 10.0199 15.5799 11.9999Z', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M11.9998 20.2702C15.5298 20.2702 18.8198 18.1902 21.1098 14.5902C22.0098 13.1802 22.0098 10.8102 21.1098 9.40021C18.8198 5.80021 15.5298 3.72021 11.9998 3.72021C8.46984 3.72021 5.17984 5.80021 2.88984 9.40021C1.98984 10.8102 1.98984 13.1802 2.88984 14.5902C5.17984 18.1902 8.46984 20.2702 11.9998 20.2702Z', stroke: 'currentColor', strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' })
+            ),
+            'arrow-down': React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': true, focusable: 'false' },
+              React.createElement('path', { d: 'M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995', stroke: 'currentColor', strokeWidth: '1.5', strokeMiterlimit: '10', strokeLinecap: 'round', strokeLinejoin: 'round' })
+            ),
+            'calendar-2': React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': true, focusable: 'false' },
+              React.createElement('path', { d: 'M8 2V5', stroke: 'currentColor', strokeWidth: '1.5', strokeMiterlimit: '10', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M16 2V5', stroke: 'currentColor', strokeWidth: '1.5', strokeMiterlimit: '10', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M3.5 9.08984H20.5', stroke: 'currentColor', strokeWidth: '1.5', strokeMiterlimit: '10', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z', stroke: 'currentColor', strokeWidth: '1.5', strokeMiterlimit: '10', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M11.9955 13.7002H12.0045', stroke: 'currentColor', strokeWidth: '2', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M8.29431 13.7002H8.30329', stroke: 'currentColor', strokeWidth: '2', strokeLinecap: 'round', strokeLinejoin: 'round' }),
+              React.createElement('path', { d: 'M8.29431 16.7002H8.30329', stroke: 'currentColor', strokeWidth: '2', strokeLinecap: 'round', strokeLinejoin: 'round' })
+            ),
+          };
+          return React.createElement('button', { type: 'button', className: 'dcds-InputFields__trailing', onClick: onClickFn, 'aria-label': prop1, tabIndex: -1 }, icons[prop1]);
+        }
+
+        function renderElemFront() {
+          const flagSrc = 'dcds-flags/flags/' + (prefixCountry || 'IN').toUpperCase() + '.svg';
+          const arrowSize = 16;
+          const arrowIcon = React.createElement('svg', { width: arrowSize, height: arrowSize, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': 'true', focusable: 'false', style: { transform: isPrefixOpen ? 'rotate(180deg)' : 'none', transition: 'transform 120ms ease' } }, React.createElement('path', { d: 'M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995', stroke: 'currentColor', strokeWidth: '1.5', strokeMiterlimit: '10', strokeLinecap: 'round', strokeLinejoin: 'round' }));
+          const accessLabel = (Type === 'Phone No.' ? 'Dial code selector: ' : 'Currency selector: ') + prefixCode;
+          const btnClass = ['dcds-BaseElemFront', isPrefixOpen ? 'dcds-BaseElemFront--open' : '', isDisabled ? 'dcds-BaseElemFront--disabled' : '', isReadOnly ? 'dcds-BaseElemFront--readonly' : ''].filter(Boolean).join(' ');
+          const items = prefixMenuItems || [];
+          return React.createElement('div', { className: 'dcds-BaseElemFront__wrap', ref: prefixWrapRef },
+            React.createElement('button', {
+              type: 'button', className: btnClass,
+              onClick: () => { if (!isDisabled && !isReadOnly) { setIsPrefixOpen(v => !v); onPrefixClick && onPrefixClick(); } },
+              disabled: isDisabled, 'aria-label': accessLabel,
+              'aria-expanded': isPrefixOpen, 'aria-haspopup': 'menu',
+              tabIndex: isDisabled ? -1 : 0,
+            },
+              React.createElement('span', { className: 'dcds-BaseElemFront__inner' },
+                React.createElement('img', { className: 'dcds-BaseElemFront__flag', src: flagSrc, width: 16, height: 12, alt: '', 'aria-hidden': 'true' }),
+                React.createElement('span', { className: 'dcds-BaseElemFront__code' }, prefixCode)
+              ),
+              React.createElement('span', { className: 'dcds-BaseElemFront__arrow' + (isPrefixOpen ? ' dcds-BaseElemFront__arrow--open' : ''), 'aria-hidden': 'true' }, arrowIcon)
+            ),
+            isPrefixOpen && items.length > 0 && React.createElement('div', { className: 'dcds-BaseElemFront__menu', role: 'menu', 'aria-label': accessLabel },
+              items.map((item, i) =>
+                React.createElement('div', { key: item.country + '-' + i, role: 'none', className: 'dcds-BaseElemFront__menu-item-row' },
+                  React.createElement('button', {
+                    type: 'button', role: 'menuitem', className: 'dcds-BaseElemFront__menu-item',
+                    onClick: () => { setIsPrefixOpen(false); onPrefixMenuItemSelect && onPrefixMenuItemSelect(item, i); },
+                  },
+                    React.createElement('span', { className: 'dcds-BaseElemFront__menu-item-leading' },
+                      React.createElement('img', { src: 'dcds-flags/flags/' + item.country.toUpperCase() + '.svg', width: 24, height: 18, alt: item.country })
+                    ),
+                    React.createElement('span', { className: 'dcds-BaseElemFront__menu-code' }, item.code)
+                  )
+                )
+              )
+            )
+          );
+        }
+
+        if (Type === 'OTP') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', { className: 'dcds-InputFields__otp-row', role: 'group', 'aria-label': label || 'OTP' },
+              Array.from({ length: 6 }).map((_, i) => {
+                const v = otpValues[i] || '';
+                const isFill = v.length > 0;
+                const boxClass = ['dcds-InputFields__otp-box', isFill && !isError ? 'dcds-InputFields__otp-box--filled' : '', isError ? 'dcds-InputFields__otp-box--error' : '', isDisabled ? 'dcds-InputFields__otp-box--disabled' : ''].filter(Boolean).join(' ');
+                return React.createElement('div', { key: i, className: boxClass },
+                  React.createElement('input', {
+                    type: 'text', inputMode: 'numeric', maxLength: 1, pattern: '[0-9]*',
+                    value: v, disabled: isDisabled, 'aria-label': 'Digit ' + (i + 1) + ' of 6',
+                    className: 'dcds-InputFields__otp-input',
+                    ref: el => { otpRefs.current[i] = el; },
+                    onChange: e => { const raw = e.target.value.replace(/[^0-9]/g, ''); handleOtpChange(raw.slice(-1), i); },
+                    onKeyDown: e => handleOtpKeyDown(e, i),
+                    autoComplete: 'one-time-code',
+                  })
+                );
+              })
+            ),
+            renderValidation()
+          );
+        }
+
+        if (Type === 'Currency' || Type === 'Phone No.') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', { className: 'dcds-InputFields__field-row' },
+              renderElemFront(),
+              React.createElement('div', { className: 'dcds-InputFields__box' },
+                React.createElement('div', { className: 'dcds-InputFields__box-left' },
+                  showLeading && leadingProperty && renderLeading(leadingProperty),
+                  React.createElement('input', {
+                    ...commonInputProps,
+                    type: 'text',
+                    inputMode: Type === 'Currency' ? 'decimal' : 'numeric',
+                    pattern: Type === 'Currency' ? '[0-9]*[.,]?[0-9]*' : '[0-9]*',
+                    onKeyDown: (e) => {
+                      const allowed = new Set(['Backspace','Delete','Tab','Enter','Escape','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End']);
+                      const isCtrl = e.ctrlKey || e.metaKey;
+                      const isDecimal = Type === 'Currency' && (e.key === '.' || e.key === ',');
+                      const isDigit = /^[0-9]$/.test(e.key);
+                      if (!allowed.has(e.key) && !isCtrl && !isDecimal && !isDigit) e.preventDefault();
+                      onKeyDown && onKeyDown(e);
+                    },
+                    onClick,
+                  })
+                )
+              )
+            ),
+            renderValidation()
+          );
+        }
+
+        // Resolve leading element
+        function renderLeading(defaultProp) {
+          const prop = leadingProperty || defaultProp;
+          if (prop === 'INR') return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, React.createElement('span', { className: 'dcds-InputFields__leading-symbol' }, '₹'));
+          if (prop === 'USD') return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, React.createElement('span', { className: 'dcds-InputFields__leading-symbol' }, '$'));
+          if (prop === 'Flag') {
+            const flagSrc = 'dcds-flags/flags/' + (prefixCountry || 'IN').toUpperCase() + '.svg';
+            return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, React.createElement('img', { src: flagSrc, width: 16, height: 12, alt: '' }));
+          }
+          // default: icon (search)
+          const searchIcon = React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 }, React.createElement('circle', { cx: 11, cy: 11, r: 8 }), React.createElement('line', { x1: 21, y1: 21, x2: 16.65, y2: 16.65 }));
+          return React.createElement('div', { className: 'dcds-InputFields__leading', 'aria-hidden': 'true' }, searchIcon);
+        }
+
+        // Resolve trailing variant
+        function resolveTrailingProp(defaultProp) {
+          return trailingProperty || defaultProp;
+        }
+
+        if (Type === 'Search') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', { className: 'dcds-InputFields__box dcds-InputFields__box--search' },
+              React.createElement('div', { className: 'dcds-InputFields__box-left' },
+                showLeading && renderLeading('icon'),
+                React.createElement('input', { ...commonInputProps, type: 'text', onClick })
+              ),
+              React.createElement('button', {
+                type: 'button', className: 'dcds-InputFields__search-btn',
+                onClick: onSearchClick, disabled: isDisabled, 'aria-label': searchButtonLabel,
+              }, searchButtonLabel)
+            ),
+            renderValidation()
+          );
+        }
+
+        if (Type === 'Dropdown') {
+          return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+            renderLabelRow(),
+            renderHelpText(),
+            React.createElement('div', {
+              className: 'dcds-InputFields__box', role: 'combobox',
+              'aria-expanded': ariaExpanded != null ? ariaExpanded : false, 'aria-haspopup': 'listbox',
+              tabIndex: isDisabled ? -1 : 0,
+              'aria-label': ariaLabel || label,
+              'aria-disabled': isDisabled ? true : undefined,
+              onClick: onDropdownClick,
+              onKeyDown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onDropdownClick && onDropdownClick(); } },
+            },
+              React.createElement('div', { className: 'dcds-InputFields__box-left' },
+                showLeading && leadingProperty && renderLeading(leadingProperty),
+                React.createElement('span', { className: 'dcds-InputFields__input', style: { display: 'flex', alignItems: 'center', lineHeight: 1 } },
+                  value || React.createElement('span', { style: { color: 'var(--color-text-disabled)' } }, placeholder)
+                )
+              ),
+              showTrailing && renderTrailingBtn(resolveTrailingProp(trailingProperty || 'arrow-down'), onDropdownClick)
+            )
+          );
+        }
+
+        // Default
+        const inputTypeAttr = isReadOnly ? 'text' : isPasswordVisible ? 'text' : 'password';
+        const resolvedTrailing = resolveTrailingProp(isPasswordVisible ? 'eye' : 'eye-slash');
+        const isPasswordToggle = !trailingProperty && Type === 'Default';
+        return React.createElement('div', { className: rootClasses, 'data-testid': dataTestId, onMouseEnter, onMouseLeave },
+          renderLabelRow(),
+          renderHelpText(),
+          React.createElement('div', { className: 'dcds-InputFields__box' },
+            React.createElement('div', { className: 'dcds-InputFields__box-left' },
+              showLeading && leadingProperty && renderLeading(leadingProperty),
+              React.createElement('input', { ...commonInputProps, type: isPasswordToggle ? inputTypeAttr : 'text', onClick })
+            ),
+            showTrailing && renderTrailingBtn(resolvedTrailing, isPasswordToggle ? () => { setIsPasswordVisible(v => !v); onTrailingClick && onTrailingClick(); } : onTrailingClick)
+          ),
+          renderValidation()
+        );
+      }
+
+      function InputFieldsSection() {
+        const [ifType,          setIfType]          = React.useState('Default');
+        const [ifState,         setIfState]         = React.useState('Default');
+        const [ifLabel,         setIfLabel]         = React.useState('Account number');
+        const [ifPlaceholder,   setIfPlaceholder]   = React.useState('Enter value');
+        const [ifValue,         setIfValue]         = React.useState('');
+        const [ifMandatory,     setIfMandatory]     = React.useState(true);
+        const [ifShowLabel,     setIfShowLabel]     = React.useState(true);
+        const [ifShowLeading,      setIfShowLeading]      = React.useState(true);
+        const [ifLeadingProperty,  setIfLeadingProperty]  = React.useState('none');
+        const [ifShowTrailing,     setIfShowTrailing]     = React.useState(true);
+        const [ifTrailingProperty, setIfTrailingProperty] = React.useState('none');
+        const [ifShowHelpText,  setIfShowHelpText]  = React.useState(false);
+        const [ifHelpText,      setIfHelpText]      = React.useState('This field is required for verification');
+        const [ifShowValidation,setIfShowValidation]= React.useState(false);
+        const [ifValMsg,        setIfValMsg]        = React.useState('This field is required');
+        const [ifValProp,       setIfValProp]       = React.useState('error');
+        const [ifShowTooltip,   setIfShowTooltip]   = React.useState(false);
+        const [ifPrefixCountry, setIfPrefixCountry] = React.useState('IN');
+        const [ifPrefixCode,    setIfPrefixCode]    = React.useState('+91');
+        const [ifSearchLabel,   setIfSearchLabel]   = React.useState('Search');
+        const [ifOtp,           setIfOtp]           = React.useState(['','','','','','']);
+        const [ifLog,           pushIfLog]          = useEventLog();
+
+        // 'Dropdown' intentionally excluded — will be showcased in the Dropdowns component
+        const ALL_TYPES  = ['Default','Currency','Phone No.','OTP','Search'];
+        const ALL_STATES = ['Default','Focus','Typing','Filled','Error','Disabled','Read-only'];
+
+        const sharedProps = {
+          Type: ifType, State: ifState,
+          label: ifLabel, placeholder: ifPlaceholder,
+          value: ifValue, isMandatory: ifMandatory,
+          showLabel: ifShowLabel,
+          showLeading: ifShowLeading,
+          leadingProperty: ifLeadingProperty !== 'none' ? ifLeadingProperty : undefined,
+          showTrailing: ifShowTrailing,
+          trailingProperty: ifTrailingProperty !== 'none' ? ifTrailingProperty : undefined,
+          showHelpText: ifShowHelpText, helpText: ifHelpText,
+          showValidation: ifShowValidation, validationMessage: ifValMsg, validationProperty: ifValProp,
+          showTooltip: ifShowTooltip, tooltipHeading: 'About this field', tooltipBody: 'Provide the value as shown on your document.',
+          prefixCountry: ifPrefixCountry, prefixCode: ifPrefixCode,
+          prefixMenuItems: ifType === 'Currency'
+            ? [
+                { country: 'IN', code: 'INR', label: 'Indian Rupee' },
+                { country: 'US', code: 'USD', label: 'US Dollar' },
+                { country: 'GB', code: 'GBP', label: 'British Pound' },
+                { country: 'EU', code: 'EUR', label: 'Euro' },
+              ]
+            : ifType === 'Phone No.'
+            ? [
+                { country: 'IN', code: '+91', label: 'India' },
+                { country: 'US', code: '+1',  label: 'United States' },
+                { country: 'GB', code: '+44', label: 'United Kingdom' },
+                { country: 'AE', code: '+971',label: 'UAE' },
+              ]
+            : undefined,
+          onPrefixMenuItemSelect: (item) => {
+            setIfPrefixCountry(item.country);
+            setIfPrefixCode(item.code);
+            pushIfLog('onPrefixMenuItemSelect: ' + item.code);
+          },
+          searchButtonLabel: ifSearchLabel,
+          otpValues: ifOtp,
+          onChange: (v) => { setIfValue(v); pushIfLog('onChange: ' + v); },
+          onOtpChange: (vals) => { setIfOtp(vals); pushIfLog('onOtpChange: ' + vals.join('')); },
+          onFocus: () => pushIfLog('onFocus'),
+          onBlur: () => pushIfLog('onBlur'),
+          onSearchClick: () => pushIfLog('onSearchClick'),
+          onDropdownClick: () => pushIfLog('onDropdownClick'),
+          onPrefixClick: () => pushIfLog('onPrefixClick'),
+          onTrailingClick: () => pushIfLog('onTrailingClick'),
+        };
+
+        return React.createElement(PanelLayout, {
+          panelContent: React.createElement(React.Fragment, null,
+            React.createElement('h2', null, 'InputFields'),
+            React.createElement(CtrlSelect, { label: 'Type',  value: ifType,  onChange: setIfType,  options: ALL_TYPES }),
+            React.createElement(CtrlSelect, { label: 'State', value: ifState, onChange: setIfState, options: ALL_STATES }),
+            React.createElement(CtrlText,   { label: 'label',       value: ifLabel,      onChange: setIfLabel }),
+            React.createElement(CtrlText,   { label: 'placeholder', value: ifPlaceholder,onChange: setIfPlaceholder }),
+            React.createElement(CtrlText,   { label: 'value',       value: ifValue,      onChange: setIfValue }),
+            React.createElement(CtrlToggle, { label: 'isMandatory',    checked: ifMandatory,     onChange: setIfMandatory }),
+            React.createElement(CtrlToggle, { label: 'showLabel',      checked: ifShowLabel,     onChange: setIfShowLabel }),
+            React.createElement(CtrlToggle, { label: 'showLeading',       checked: ifShowLeading,      onChange: setIfShowLeading }),
+            ifShowLeading && React.createElement(CtrlSelect, { label: 'leadingProperty', value: ifLeadingProperty, onChange: setIfLeadingProperty, options: ['none', 'icon', 'INR', 'USD', 'Flag'] }),
+            React.createElement(CtrlToggle, { label: 'showTrailing',      checked: ifShowTrailing,     onChange: setIfShowTrailing }),
+            ifShowTrailing && React.createElement(CtrlSelect, { label: 'trailingProperty', value: ifTrailingProperty, onChange: setIfTrailingProperty, options: ['none', 'eye-slash', 'eye', 'calendar-2', 'arrow-down'] }),
+            React.createElement(CtrlToggle, { label: 'showHelpText',   checked: ifShowHelpText,  onChange: setIfShowHelpText }),
+            React.createElement(CtrlText,   { label: 'helpText',       value: ifHelpText,        onChange: setIfHelpText }),
+            React.createElement(CtrlToggle, { label: 'showValidation', checked: ifShowValidation,onChange: setIfShowValidation }),
+            React.createElement(CtrlText,   { label: 'validationMessage', value: ifValMsg,       onChange: setIfValMsg }),
+            React.createElement(CtrlSelect, { label: 'validationProperty', value: ifValProp,     onChange: setIfValProp, options: ['error','warning','success'] }),
+            React.createElement(CtrlToggle, { label: 'showTooltip',    checked: ifShowTooltip,   onChange: setIfShowTooltip }),
+            React.createElement('h2', null, 'Prefix (Currency / Phone)'),
+            React.createElement(CtrlText,   { label: 'prefixCountry', value: ifPrefixCountry, onChange: setIfPrefixCountry, placeholder: 'e.g. IN, US' }),
+            React.createElement(CtrlText,   { label: 'prefixCode',    value: ifPrefixCode,    onChange: setIfPrefixCode,    placeholder: 'e.g. +91, INR' }),
+            React.createElement('h2', null, 'Search'),
+            React.createElement(CtrlText,   { label: 'searchButtonLabel', value: ifSearchLabel, onChange: setIfSearchLabel })
+          )
+        },
+          React.createElement('main', { className: 'stage' },
+
+            React.createElement('section', null,
+              React.createElement('h2', null, 'InputFields — Interactive Playground'),
+              React.createElement('p', { className: 'stage-note' }, 'Configure props in the left panel.'),
+              React.createElement('div', { className: 'preview', style: { maxWidth: 600 } },
+                React.createElement(InputFields, sharedProps)
+              ),
+              React.createElement('div', { className: 'events' }, ifLog.length === 0 ? '— interact to see events —' : ifLog.join('   '))
+            ),
+
+            React.createElement('section', null,
+              React.createElement('h2', null, 'All Types — Default state'),
+              React.createElement('p', { className: 'stage-note' }, 'One example of each input type.'),
+              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-24)', maxWidth: 600 } },
+                React.createElement(InputFields, { Type: 'Default',   label: 'Password',       placeholder: 'Enter password',    showHelpText: true, helpText: 'Min 8 characters' }),
+                React.createElement(InputFields, { Type: 'Currency',  label: 'Loan amount',    placeholder: '0.00',        prefixCountry: 'IN', prefixCode: 'INR',
+                  prefixMenuItems: [
+                    { country: 'IN', code: 'INR', label: 'Indian Rupee',        value: 'INR' },
+                    { country: 'US', code: 'USD', label: 'US Dollar',           value: 'USD' },
+                    { country: 'GB', code: 'GBP', label: 'British Pound',       value: 'GBP' },
+                    { country: 'EU', code: 'EUR', label: 'Euro',                value: 'EUR' },
+                    { country: 'AE', code: 'AED', label: 'UAE Dirham',          value: 'AED' },
+                    { country: 'SG', code: 'SGD', label: 'Singapore Dollar',    value: 'SGD' },
+                    { country: 'JP', code: 'JPY', label: 'Japanese Yen',        value: 'JPY' },
+                    { country: 'AU', code: 'AUD', label: 'Australian Dollar',   value: 'AUD' },
+                    { country: 'CA', code: 'CAD', label: 'Canadian Dollar',     value: 'CAD' },
+                    { country: 'CH', code: 'CHF', label: 'Swiss Franc',         value: 'CHF' },
+                    { country: 'CN', code: 'CNY', label: 'Chinese Yuan',        value: 'CNY' },
+                    { country: 'HK', code: 'HKD', label: 'Hong Kong Dollar',    value: 'HKD' },
+                    { country: 'SE', code: 'SEK', label: 'Swedish Krona',       value: 'SEK' },
+                    { country: 'NZ', code: 'NZD', label: 'New Zealand Dollar',  value: 'NZD' },
+                    { country: 'ZA', code: 'ZAR', label: 'South African Rand',  value: 'ZAR' },
+                  ],
+                  onPrefixMenuItemSelect: (item) => console.log('currency selected', item.value) }),
+                React.createElement(InputFields, { Type: 'Phone No.', label: 'Mobile number',  placeholder: '98765 43210', prefixCountry: 'IN', prefixCode: '+91',
+                  prefixMenuItems: [
+                    { country: 'IN', code: '+91',  label: 'India',           value: '+91'  },
+                    { country: 'US', code: '+1',   label: 'United States',   value: '+1'   },
+                    { country: 'GB', code: '+44',  label: 'United Kingdom',  value: '+44'  },
+                    { country: 'AE', code: '+971', label: 'UAE',             value: '+971' },
+                    { country: 'SG', code: '+65',  label: 'Singapore',       value: '+65'  },
+                    { country: 'AU', code: '+61',  label: 'Australia',       value: '+61'  },
+                    { country: 'CA', code: '+1',   label: 'Canada',          value: '+1'   },
+                    { country: 'DE', code: '+49',  label: 'Germany',         value: '+49'  },
+                    { country: 'FR', code: '+33',  label: 'France',          value: '+33'  },
+                    { country: 'JP', code: '+81',  label: 'Japan',           value: '+81'  },
+                    { country: 'CN', code: '+86',  label: 'China',           value: '+86'  },
+                    { country: 'NG', code: '+234', label: 'Nigeria',         value: '+234' },
+                    { country: 'BR', code: '+55',  label: 'Brazil',          value: '+55'  },
+                    { country: 'ZA', code: '+27',  label: 'South Africa',    value: '+27'  },
+                    { country: 'NZ', code: '+64',  label: 'New Zealand',     value: '+64'  },
+                  ],
+                  onPrefixMenuItemSelect: (item) => console.log('dial code selected', item.value) }),
+                React.createElement(InputFields, { Type: 'OTP',       label: 'Enter OTP' }),
+                React.createElement(InputFields, { Type: 'Search',    label: 'IFSC code',      placeholder: 'e.g. SBIN0001234',  searchButtonLabel: 'Search' })
+              )
+            ),
+
+            React.createElement('section', null,
+              React.createElement('h2', null, 'All States — Default type'),
+              React.createElement('p', { className: 'stage-note' }, 'Every visual state of the Default input type.'),
+              React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--gap-20)', maxWidth: 600 } },
+                ALL_STATES.map(s =>
+                  React.createElement('div', { key: s },
+                    React.createElement('p', { className: 'stage-note', style: { marginBottom: 'var(--gap-4)' } }, React.createElement('strong', null, s)),
+                    React.createElement(InputFields, {
+                      Type: 'Default', State: s,
+                      label: s + ' state', placeholder: 'Placeholder text',
+                      value: (s === 'Filled' || s === 'Read-only') ? 'Some filled value' : '',
+                      showValidation: s === 'Error', validationMessage: 'This field is required',
+                    })
+                  )
+                )
+              )
+            )
+
+          )
+        );
+      }
+
       function Playground() {
         /* --- Navigation --- */
         const [activeComponent, setActiveComponent] = useState('button');
@@ -6862,6 +7518,7 @@ function FlagsSection() {
           { id: 'drawer',         label: 'Drawer'         },
           { id: 'dropdownbutton', label: 'DropdownButton' },
           { id: 'fileupload',     label: 'File Upload'    },
+          { id: 'inputfields',    label: 'Input Fields'   },
           { id: 'linkbutton',     label: 'LinkButton'     },
           { id: 'modal',          label: 'Modal'          },
           { id: 'navigation',     label: 'Navigation'     },
@@ -7201,6 +7858,7 @@ function FlagsSection() {
             {activeComponent === 'drawer'       && <DrawerSection />}
             {activeComponent === 'modal'       && <ModalSection />}
             {activeComponent === 'accordian'   && <AccordianSection />}
+            {activeComponent === 'inputfields' && <InputFieldsSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
             {activeComponent === 'typography'  && <TypographySection />}
@@ -7213,7 +7871,7 @@ function FlagsSection() {
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'typography' && activeComponent !== 'grids' && activeComponent !== 'spacing' && activeComponent !== 'colors' && activeComponent !== 'icons' && activeComponent !== 'flags' && activeComponent !== '__sep__' && (
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'inputfields' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'typography' && activeComponent !== 'grids' && activeComponent !== 'spacing' && activeComponent !== 'colors' && activeComponent !== 'icons' && activeComponent !== 'flags' && activeComponent !== '__sep__' && (
             <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
