@@ -66,6 +66,7 @@ export const Modal: React.FC<ModalProps> = ({
   onClose,
   closeOnBackdrop = true,
   closeOnEscape = true,
+  showFooter = true,
   children,
   className,
   id,
@@ -163,7 +164,7 @@ export const Modal: React.FC<ModalProps> = ({
   };
 
   return ReactDOM.createPortal(
-    <ModalContext.Provider value={{ headerId, bodyId, onClose }}>
+    <ModalContext.Provider value={{ headerId, bodyId, onClose, showFooter }}>
       <div className="dcds-Modal__overlay" onClick={handleOverlayClick}>
         <div
           ref={dialogRef}
@@ -208,6 +209,7 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({
   icon,
   subtitle,
   badge,
+  showDismiss = true,
   onClose: onCloseProp,
   id: idProp,
   className,
@@ -228,7 +230,7 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({
       </div>
       <div className="dcds-Modal__header-end">
         {badge && <span className="dcds-Modal__header-badge">{badge}</span>}
-        {closeHandler && (
+        {showDismiss && closeHandler && (
           <button
             type="button"
             className="dcds-Modal__close-btn"
@@ -307,9 +309,13 @@ export const ModalFooter: React.FC<ModalFooterProps> = ({
   children,
   link,
   className,
-}) => (
-  <div className={['dcds-Modal__footer', className].filter(Boolean).join(' ')}>
-    {link && <span className="dcds-Modal__footer-link">{link}</span>}
-    <div className="dcds-Modal__footer-actions">{children}</div>
-  </div>
-);
+}) => {
+  const { showFooter } = useModalContext();
+  if (showFooter === false) return null;
+  return (
+    <div className={['dcds-Modal__footer', className].filter(Boolean).join(' ')}>
+      {link && <span className="dcds-Modal__footer-link">{link}</span>}
+      <div className="dcds-Modal__footer-actions">{children}</div>
+    </div>
+  );
+};
