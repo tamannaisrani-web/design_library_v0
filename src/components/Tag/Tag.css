@@ -34,11 +34,12 @@
 }
 
 /* ===========================================================
- * Leading icon (star)
+ * Leading icon (star) — icon/info colour
  * =========================================================== */
 
 .dcds-Tag__icon {
   flex-shrink: 0;
+  color: var(--color-icon-info);
 }
 
 .dcds-Tag--size-S .dcds-Tag__icon {
@@ -73,7 +74,7 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  color: var(--color-text-info);
+  color: var(--color-icon-info);
   border-radius: var(--rd-XS);
   transition: color 120ms ease, opacity 120ms ease;
   line-height: 1;
