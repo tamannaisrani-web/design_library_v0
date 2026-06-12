@@ -76,6 +76,10 @@
   color: var(--color-text-info);
 }
 
+.dcds-Chip--selected .dcds-Chip__icon {
+  color: var(--color-icon-info);
+}
+
 /* ===========================================================
  * Hover states
  * =========================================================== */
