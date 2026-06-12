@@ -5381,7 +5381,308 @@ function FlagsSection() {
   );
 }
 
-function GridSection() {
+      const GRID_CONFIGS = {
+        'Mobile':              { viewport:360,  columns:4,  gutter:16, margin:20, navWidth:0,   navHeight:56, contentArea:360,  label:'Mobile layout'  },
+        'Tablet':              { viewport:576,  columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:576,  label:'Tablet layout'  },
+        'Desktop-S-No-Nav':    { viewport:992,  columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:992,  label:'Desktop Layout'  },
+        'Desktop-S-Expanded':  { viewport:992,  columns:12, gutter:16, margin:24, navWidth:240, navHeight:64, contentArea:752,  label:'Desktop Layout'  },
+        'Desktop-S-Collapsed': { viewport:992,  columns:12, gutter:16, margin:24, navWidth:56,  navHeight:64, contentArea:936,  label:'Desktop Layout'  },
+        'Desktop-L-No-Nav':    { viewport:1200, columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:1200, label:'Desktop Layout'  },
+        'Desktop-L-Expanded':  { viewport:1200, columns:12, gutter:16, margin:24, navWidth:240, navHeight:64, contentArea:960,  label:'Desktop Layout'  },
+        'Desktop-L-Collapsed': { viewport:1200, columns:12, gutter:16, margin:24, navWidth:56,  navHeight:64, contentArea:1144, label:'Desktop Layout'  },
+      };
+      const GRID_SPEC_ITEMS = {
+        'Mobile':              ['Width: 360px', 'Columns: 4',  'Gutter: 16px','Margin: 20px','Nav bar height: 56px','Content width: 320px'],
+        'Tablet':              ['Width: 576px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Content width: 528px'],
+        'Desktop-S-No-Nav':    ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','No sidebar',       'Content width: 944px'],
+        'Desktop-S-Expanded':  ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px', 'Content width: 704px'],
+        'Desktop-S-Collapsed': ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px',  'Content width: 888px'],
+        'Desktop-L-No-Nav':    ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','No sidebar',       'Content width: 1152px'],
+        'Desktop-L-Expanded':  ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px', 'Content width: 912px'],
+        'Desktop-L-Collapsed': ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px',  'Content width: 1096px'],
+      };
+      const FRAME_H = 300;
+
+      function Grid({ breakpoint = 'Mobile', viewportWidth, onNavToggle, className, id, dataTestId }) {
+        const cfg      = GRID_CONFIGS[breakpoint];
+        const hasNav   = cfg.navWidth > 0;
+        const isMobile = breakpoint === 'Mobile';
+
+        const displayWidth = viewportWidth != null ? viewportWidth : cfg.viewport;
+        const scale        = displayWidth / cfg.viewport;
+
+        /* Heights */
+        const rulerH     = 32;
+        const topbarH    = isMobile ? 0 : cfg.navHeight;
+        const bottombarH = isMobile ? cfg.navHeight : 0;
+        const bodyTop    = rulerH + topbarH;
+        const bodyH      = FRAME_H - bodyTop - bottombarH;
+
+        /* Margin, gutter, nav are absolute — only columns flex */
+        const navPx    = cfg.navWidth; // absolute
+        const marginPx = cfg.margin;   // absolute
+        const gutterPx = cfg.gutter;   // absolute — 16px all breakpoints
+        const contentDivPx = hasNav ? displayWidth - navPx : displayWidth;
+        const colAreaPx    = contentDivPx - 2 * marginPx;
+        const colWidthPx   = Math.max(0, (colAreaPx - (cfg.columns - 1) * gutterPx) / cfg.columns);
+
+        const liveContentWidth     = Math.round(contentDivPx - 2 * marginPx);
+        const marginLabelPx        = marginPx / 2;
+        const gutterLabelPx        = marginPx + colWidthPx + gutterPx / 2;
+        const dimLabelTop          = bodyH * 0.28;
+        const contentWidthRulerTop = dimLabelTop + 36;
+
+        const rootClass = ['dcds-Grid', className].filter(Boolean).join(' ');
+
+        return (
+          <figure className={rootClass} id={id} data-testid={dataTestId}
+            aria-label={`${cfg.label} — ${cfg.viewport}px viewport, ${cfg.columns} columns`}>
+            <p className="dcds-Grid__section-label">{cfg.label}</p>
+            <ul className="dcds-Grid__spec-list">
+              {GRID_SPEC_ITEMS[breakpoint].map(item => <li key={item}>{item}</li>)}
+            </ul>
+
+            <div className="dcds-Grid__viewport" style={{ width: displayWidth }}>
+              {/* Width ruler */}
+              <div className="dcds-Grid__ruler" style={{ height: rulerH }}>
+                <span className="dcds-Grid__ruler-line" />
+                <span className="dcds-Grid__ruler-value">{displayWidth}px</span>
+              </div>
+
+              {/* Top nav bar — tablet / desktop */}
+              {!isMobile && (
+                <div className="dcds-Grid__topbar" style={{ top: rulerH, height: topbarH }}>
+                  <span className="dcds-Grid__topbar-label">TopBar · {cfg.navHeight}px</span>
+                </div>
+              )}
+
+              {/* Bottom nav bar — mobile */}
+              {isMobile && (
+                <div className="dcds-Grid__bottombar" style={{ height: bottombarH }}>
+                  <span className="dcds-Grid__bottombar-label">Bottom nav · {cfg.navHeight}px</span>
+                </div>
+              )}
+
+              {/* Body */}
+              <div className="dcds-Grid__body" style={{ top: bodyTop, height: bodyH }}>
+                {hasNav && (
+                  <div
+                    className={['dcds-Grid__nav-sidebar', onNavToggle ? 'dcds-Grid__nav-sidebar--clickable' : ''].filter(Boolean).join(' ')}
+                    style={{ width: navPx, height: bodyH }}
+                    onClick={onNavToggle}
+                    role={onNavToggle ? 'button' : undefined}
+                    title={onNavToggle ? (cfg.navWidth > 100 ? 'Click to collapse' : 'Click to expand') : undefined}
+                  >
+                    <span className="dcds-Grid__nav-label">{cfg.navWidth}px</span>
+                    {onNavToggle && (
+                      <span className="dcds-Grid__nav-chevron" aria-hidden="true">
+                        {cfg.navWidth > 100 ? '‹' : '›'}
+                      </span>
+                    )}
+                  </div>
+                )}
+                <div className="dcds-Grid__content-area" style={{ width: hasNav ? contentDivPx : '100%', height: bodyH }}>
+                  {hasNav && (
+                    <div className="dcds-Grid__content-ruler">
+                      <span className="dcds-Grid__content-ruler-line" />
+                      <span className="dcds-Grid__content-ruler-value">{contentDivPx}px</span>
+                    </div>
+                  )}
+                  {/* Absolute margin/gutter — only columns are 1fr */}
+                  <div className="dcds-Grid__cols" style={{
+                    top: hasNav ? 28 : 0,
+                    bottom: 0,
+                    paddingInline:       marginPx,
+                    columnGap:           gutterPx,
+                    gridTemplateColumns: `repeat(${cfg.columns}, 1fr)`,
+                  }}>
+                    {Array.from({ length: cfg.columns }, (_, i) => (
+                      <div key={i} className="dcds-Grid__col" />
+                    ))}
+                  </div>
+                  <span className="dcds-Grid__dim-label" style={{ left: marginLabelPx, top: dimLabelTop }}>
+                    {cfg.margin}px
+                  </span>
+                  <span className="dcds-Grid__dim-label" style={{ left: gutterLabelPx, top: dimLabelTop }}>
+                    {cfg.gutter}px
+                  </span>
+                  {/* Content-width ruler — green, viewport − 2×margin − navWidth */}
+                  <div className="dcds-Grid__content-width-ruler"
+                    style={{ top: contentWidthRulerTop, left: marginPx, width: liveContentWidth, height: 28 }}>
+                    <span className="dcds-Grid__content-width-line" />
+                    <span className="dcds-Grid__content-width-value">{liveContentWidth}px</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        );
+      }
+
+      /* ============================================================
+       * Syntax snippets — one per breakpoint (copy-ready TSX)
+       * ============================================================ */
+      const GRID_SYNTAX = {
+        'Mobile': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Mobile · 4 columns · 16px gutter · 20px margin · content 320px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={4}>full width (4/4)</Grid>
+    <Grid item xs={2}>half width (2/4)</Grid>
+    <Grid item xs={1}>quarter width (1/4)</Grid>
+  </Grid>
+</Box>`,
+
+        'Tablet': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Tablet · 12 columns · 16px gutter · 24px margin · content 528px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={12} sm={12}>full width</Grid>
+    <Grid item xs={12} sm={6}>half · half</Grid>
+    <Grid item xs={12} sm={4}>thirds</Grid>
+    <Grid item xs={12} sm={3}>quarters</Grid>
+  </Grid>
+</Box>`,
+
+        'Desktop-S-No-Nav': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop S · no sidebar · 12 columns · 16px gutter · 24px margin · content 944px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={12} md={12}>full width</Grid>
+    <Grid item xs={12} md={8}>8 cols — main</Grid>
+    <Grid item xs={12} md={4}>4 cols — aside</Grid>
+  </Grid>
+</Box>`,
+
+        'Desktop-S-Expanded': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop S · nav expanded 240px · 12 columns · 16px gutter · 24px margin · content 704px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-expanded) 1fr' }}>
+  <SideBar state="Expanded" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={8}>main content</Grid>
+      <Grid item xs={12} md={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+
+        'Desktop-S-Collapsed': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop S · nav collapsed 56px · 12 columns · 16px gutter · 24px margin · content 888px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-collapsed) 1fr' }}>
+  <SideBar state="Collapsed" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={8}>main content</Grid>
+      <Grid item xs={12} md={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+
+        'Desktop-L-No-Nav': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop L · no sidebar · 12 columns · 16px gutter · 24px margin · content 1152px
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid item xs={12} lg={12}>full width</Grid>
+    <Grid item xs={12} lg={8}>8 cols — main</Grid>
+    <Grid item xs={12} lg={4}>4 cols — aside</Grid>
+  </Grid>
+</Box>`,
+
+        'Desktop-L-Expanded': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop L · nav expanded 240px · 12 columns · 16px gutter · 24px margin · content 912px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-expanded) 1fr' }}>
+  <SideBar state="Expanded" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} lg={8}>main content</Grid>
+      <Grid item xs={12} lg={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+
+        'Desktop-L-Collapsed': `import { GridLayout as Grid, Box } from '@dcds/components';
+
+// Desktop L · nav collapsed 56px · 12 columns · 16px gutter · 24px margin · content 1096px
+<Box sx={{ display: 'grid', gridTemplateColumns: 'var(--nav-width-collapsed) 1fr' }}>
+  <SideBar state="Collapsed" />
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12} lg={8}>main content</Grid>
+      <Grid item xs={12} lg={4}>aside</Grid>
+    </Grid>
+  </Box>
+</Box>`,
+      };
+
+      function GridSyntaxBox({ bpId }) {
+        const [copied, setCopied] = useState(false);
+        const code = GRID_SYNTAX[bpId] || '';
+        const handleCopy = () => {
+          navigator.clipboard.writeText(code).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          }).catch(() => {
+            /* fallback for non-HTTPS */
+            const el = document.createElement('textarea');
+            el.value = code;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          });
+        };
+        return (
+          <div className="grid-syntax-box">
+            <div className="grid-syntax-header">
+              <span className="grid-syntax-label">COMPONENT SYNTAX</span>
+              <button
+                className={`grid-syntax-copy${copied ? ' grid-syntax-copy--copied' : ''}`}
+                onClick={handleCopy}
+              >
+                {copied ? '✓ Copied' : 'Copy'}
+              </button>
+            </div>
+            <pre className="grid-syntax-pre">{code}</pre>
+          </div>
+        );
+      }
+
+      /* ============================================================
+       * GridSection — self-contained section with resize playground
+       * ============================================================ */
+      const GRID_BREAKPOINTS = [
+        { id:'Mobile',              label:'Mobile',                sub:'360px · 4 cols'     },
+        { id:'Tablet',              label:'Tablet',                sub:'576px · 12 cols'    },
+        { id:'Desktop-S-No-Nav',    label:'Desktop S — No Nav',    sub:'992px · no sidebar' },
+        { id:'Desktop-S-Expanded',  label:'Desktop S — Expanded',  sub:'992px · nav 240px'  },
+        { id:'Desktop-S-Collapsed', label:'Desktop S — Collapsed', sub:'992px · nav 56px'   },
+        { id:'Desktop-L-No-Nav',    label:'Desktop L — No Nav',    sub:'1200px · no sidebar'},
+        { id:'Desktop-L-Expanded',  label:'Desktop L — Expanded',  sub:'1200px · nav 240px' },
+        { id:'Desktop-L-Collapsed', label:'Desktop L — Collapsed', sub:'1200px · nav 56px'  },
+      ];
+
+      function getBpForWidth(w, navExpanded, noNav) {
+        if (w < 576)  return 'Mobile';
+        if (w < 992)  return 'Tablet';
+        if (noNav) return w < 1200 ? 'Desktop-S-No-Nav' : 'Desktop-L-No-Nav';
+        const exp = navExpanded !== false;
+        if (w < 1200) return exp ? 'Desktop-S-Expanded' : 'Desktop-S-Collapsed';
+        return exp ? 'Desktop-L-Expanded' : 'Desktop-L-Collapsed';
+      }
+
+      
+
+
+      function GridSection() {
         const [activeBp,     setActiveBp]     = useState('Mobile');
         const [resizeWidth,  setResizeWidth]  = useState(360);
         const [isResizing,   setIsResizing]   = useState(false);
