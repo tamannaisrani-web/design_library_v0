@@ -3205,7 +3205,7 @@
        * Modal, ModalHeader, ModalBody, ModalFooter
        * Mirrors src/components/Modal/Modal.tsx
        * ============================================================ */
-      const ModalContext = React.createContext(null);
+      const ModalContext = React.createContext({ headerId: '', bodyId: '', onClose: undefined, showFooter: true });
 
       function Modal({ isOpen, size = 'M', onClose, closeOnBackdrop = true, closeOnEscape = true, showFooter = true, children, id, dataTestId, className }) {
         const instanceId = useId();
@@ -4150,7 +4150,7 @@
                   showFooter={showFooter}
                 >
                   <ModalHeader
-                    icon={showIcon ? React.createElement(ICON_MAP[modalIconName] || ICON_MAP['InfoCircle'], { size: 16 }) : undefined}
+                    icon={showIcon ? ICON_MAP[modalIconName] || ICON_MAP['InfoCircle'] : undefined}
                     subtitle={showSubtitle ? subtitleText : undefined}
                     badge={showBadge ? (
                       <Badge size="XS" state={badgeState} emphasis={badgeEmphasis} showIcon={false}>{badgeText}</Badge>
@@ -6361,8 +6361,25 @@
         );
       }
 
+      /* ── minimal error boundary so crashes surface instead of going blank ── */
+      class ErrorBoundary extends React.Component {
+        constructor(props) { super(props); this.state = { error: null }; }
+        static getDerivedStateFromError(e) { return { error: e }; }
+        render() {
+          if (this.state.error) {
+            return (
+              <div style={{ padding: 32, fontFamily: 'monospace', color: 'crimson' }}>
+                <strong>Render error</strong>
+                <pre style={{ whiteSpace: 'pre-wrap', marginTop: 8 }}>{String(this.state.error)}</pre>
+              </div>
+            );
+          }
+          return this.props.children;
+        }
+      }
+
       const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<Playground />);
+      root.render(<ErrorBoundary><Playground /></ErrorBoundary>);
     </script>
   </body>
 </html>
