@@ -862,9 +862,9 @@
       .dcds-Chip--size-S .dcds-Chip__icon { width:14px; height:14px; }
       .dcds-Chip--size-M .dcds-Chip__icon { width:16px; height:16px; }
       .dcds-Chip--size-L .dcds-Chip__icon { width:24px; height:24px; }
-      .dcds-Chip--selected { background-color:var(--color-fill-primary-2); border:1px solid var(--color-stroke-focus); color:var(--color-text-primary); }
+      .dcds-Chip--selected { background-color:var(--color-fill-light-action); border:1px solid var(--color-stroke-action); color:var(--color-text-action); }
       .dcds-Chip--unselected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) { background-color:var(--color-surface-2); }
-      .dcds-Chip--selected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) { background-color:var(--color-fill-primary-1); }
+      .dcds-Chip--selected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) { background-color:var(--color-fill-dark-action); color:var(--color-text-invert); }
       .dcds-Chip:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
       .dcds-Chip--unselected.dcds-Chip--state-Disabled, .dcds-Chip--unselected:disabled { background-color:var(--color-surface-1); border-color:var(--color-stroke-disabled); color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
       .dcds-Chip--selected.dcds-Chip--state-Disabled, .dcds-Chip--selected:disabled { opacity:0.5; cursor:not-allowed; pointer-events:none; }
@@ -874,10 +874,12 @@
        * Badge.css
        * ============================================================ */
       .dcds-Badge { display:inline-flex; align-items:center; gap:var(--gap-4); padding:var(--gap-4) var(--gap-8); border-radius:var(--rd-Max); font-family:var(--font-family); font-weight:var(--font-weight-regular); white-space:nowrap; line-height:1; }
+      .dcds-Badge--size-XS { height:20px; padding-top:2px; padding-bottom:2px; font-size:var(--font-size-validation); }
       .dcds-Badge--size-S { height:24px; font-size:var(--font-size-body-small); }
       .dcds-Badge--size-M { height:32px; font-size:var(--font-size-label); }
       .dcds-Badge--size-L { height:40px; font-size:var(--font-size-body); }
       .dcds-Badge__icon { flex-shrink:0; }
+      .dcds-Badge--size-XS .dcds-Badge__icon { width:12px; height:12px; }
       .dcds-Badge--size-S .dcds-Badge__icon { width:14px; height:14px; }
       .dcds-Badge--size-M .dcds-Badge__icon { width:16px; height:16px; }
       .dcds-Badge--size-L .dcds-Badge__icon { width:24px; height:24px; }
@@ -895,20 +897,20 @@
       /* ============================================================
        * Tag.css
        * ============================================================ */
-      .dcds-Tag { display:inline-flex; align-items:center; gap:var(--gap-4); padding:var(--gap-4) var(--gap-8); border-radius:var(--rd-Max); background-color:var(--color-surface-4); color:var(--color-text-neutral); font-family:var(--font-family); font-weight:var(--font-weight-regular); white-space:nowrap; line-height:1; }
+      .dcds-Tag { display:inline-flex; align-items:center; gap:var(--gap-4); padding:var(--gap-4) var(--gap-8); border-radius:var(--rd-Max); background-color:var(--color-fill-light-info); border:0.5px solid var(--color-stroke-info); color:var(--color-text-info); font-family:var(--font-family); font-weight:var(--font-weight-regular); white-space:nowrap; line-height:1; }
       .dcds-Tag--size-S { height:24px; font-size:var(--font-size-body-small); }
       .dcds-Tag--size-M { height:32px; font-size:var(--font-size-label); }
       .dcds-Tag__icon { flex-shrink:0; }
       .dcds-Tag--size-S .dcds-Tag__icon { width:14px; height:14px; }
       .dcds-Tag--size-M .dcds-Tag__icon { width:16px; height:16px; }
       .dcds-Tag__label { flex:1; min-width:0; }
-      .dcds-Tag__remove { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; background:none; border:none; padding:0; cursor:pointer; color:var(--color-text-neutral); border-radius:var(--rd-XS); transition:color 120ms ease,opacity 120ms ease; line-height:1; }
+      .dcds-Tag__remove { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; background:none; border:none; padding:0; cursor:pointer; color:var(--color-text-info); border-radius:var(--rd-XS); transition:color 120ms ease,opacity 120ms ease; line-height:1; }
       .dcds-Tag__remove:hover { opacity:0.6; }
       .dcds-Tag__remove:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:1px; }
       .dcds-Tag--size-S .dcds-Tag__remove { width:14px; height:14px; }
       .dcds-Tag--size-M .dcds-Tag__remove { width:16px; height:16px; }
-      .dcds-Tag--state-Disabled { background-color:var(--color-surface-3); color:var(--color-text-disabled); cursor:not-allowed; }
-      .dcds-Tag--state-Disabled .dcds-Tag__remove { color:var(--color-text-disabled); cursor:not-allowed; pointer-events:none; }
+      .dcds-Tag--state-Disabled { background-color:var(--color-surface-disabled); border-color:transparent; color:var(--color-text-subdued); opacity:0.75; cursor:not-allowed; }
+      .dcds-Tag--state-Disabled .dcds-Tag__remove { color:var(--color-text-subdued); cursor:not-allowed; pointer-events:none; }
 
       /* ============================================================
        * Avatar.css — Figma node 440:6502
@@ -1047,7 +1049,7 @@
       .dcds-Modal__header-title { font-family:var(--font-family); font-size:var(--font-size-caption); font-weight:var(--font-weight-bold); color:var(--color-text-primary); line-height:normal; margin:0; }
       .dcds-Modal__header-subtitle { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-regular); color:var(--color-text-subdued); line-height:normal; margin:0; }
       .dcds-Modal__header-end { display:flex; align-items:center; gap:var(--gap-4); flex-shrink:0; }
-      .dcds-Modal__header-badge { display:flex; align-items:center; }
+      .dcds-Modal__header-badge { display:flex; align-items:center; height:var(--gap-20,20px); }
       .dcds-Modal__close-btn { display:flex; align-items:center; justify-content:center; width:40px; height:40px; flex-shrink:0; background:none; border:none; cursor:pointer; color:var(--color-icon-subdued); border-radius:var(--rd-S); transition:color 120ms ease,background-color 120ms ease; padding:0; }
       .dcds-Modal__close-btn:hover { color:var(--color-icon-primary); background-color:var(--color-surface-3); }
       .dcds-Modal__close-btn:focus-visible { outline:2px solid var(--color-stroke-focus); outline-offset:2px; }
@@ -2632,7 +2634,7 @@
        * BadgeSection — self-contained badge playground (panel + stage)
        * ============================================================ */
       function BadgeSection() {
-        const [badge, setBadge] = useState({ size: 'M', emphasis: 'subtle', state: 'success', showIcon: true, label: 'Active' });
+        const [badge, setBadge] = useState({ size: 'XS', emphasis: 'subtle', state: 'success', showIcon: true, label: 'Active' });
         const setBadgeSize     = (v) => setBadge((p) => ({ ...p, size: v }));
         const setBadgeEmphasis = (v) => setBadge((p) => ({ ...p, emphasis: v }));
         const setBadgeState    = (v) => setBadge((p) => ({ ...p, state: v }));
@@ -2642,7 +2644,7 @@
         return (
           <PanelLayout panelContent={<>
             <h2>Badge</h2>
-            <CtrlSelect label="size"     value={badgeSize}      onChange={setBadgeSize}     options={['S', 'M', 'L']} />
+            <CtrlSelect label="size"     value={badgeSize}      onChange={setBadgeSize}     options={['XS', 'S', 'M', 'L']} />
             <CtrlSelect label="emphasis" value={badgeEmphasis}  onChange={setBadgeEmphasis} options={['subtle', 'intense']} />
             <CtrlSelect label="state"    value={badgeState}     onChange={setBadgeState}    options={['neutral', 'info', 'warning', 'error', 'success']} />
             <CtrlToggle label="showIcon" checked={badgeShowIcon} onChange={setBadgeShowIcon} />
@@ -2679,12 +2681,14 @@
                 </div>
               </section>
               <section>
-                <h2>Badge — Sizes (S / M / L)</h2>
-                <p className="stage-note">S (24px) = tables · M (32px) = default · L (40px) = headers/hero only.</p>
+                <h2>Badge — Sizes (XS / S / M / L)</h2>
+                <p className="stage-note">XS (20px) = inline/dense tables · S (24px) = tables · M (32px) = default · L (40px) = headers/hero only.</p>
                 <div className="badge-grid" style={{ alignItems: 'center' }}>
+                  <Badge size="XS" emphasis="subtle" state="success">XS Active</Badge>
                   <Badge size="S" emphasis="subtle" state="success">S Active</Badge>
                   <Badge size="M" emphasis="subtle" state="success">M Active</Badge>
                   <Badge size="L" emphasis="subtle" state="success">L Active</Badge>
+                  <Badge size="XS" emphasis="intense" state="info">XS Pending</Badge>
                   <Badge size="S" emphasis="intense" state="info">S Pending</Badge>
                   <Badge size="M" emphasis="intense" state="info">M Pending</Badge>
                   <Badge size="L" emphasis="intense" state="info">L Pending</Badge>
@@ -3201,7 +3205,7 @@
        * ============================================================ */
       const ModalContext = React.createContext(null);
 
-      function Modal({ isOpen, size = 'M', onClose, closeOnBackdrop = true, closeOnEscape = true, children, id, dataTestId, className }) {
+      function Modal({ isOpen, size = 'M', onClose, closeOnBackdrop = true, closeOnEscape = true, showFooter = true, children, id, dataTestId, className }) {
         const instanceId = useId();
         const headerId = `dcds-modal-header-${instanceId}`;
         const bodyId   = `dcds-modal-body-${instanceId}`;
@@ -3268,7 +3272,7 @@
         };
 
         return ReactDOM.createPortal(
-          <ModalContext.Provider value={{ headerId, bodyId, onClose }}>
+          <ModalContext.Provider value={{ headerId, bodyId, onClose, showFooter }}>
             <div className="dcds-Modal__overlay" onClick={handleOverlayClick}>
               <div
                 ref={dialogRef}
@@ -3290,7 +3294,7 @@
         );
       }
 
-      function ModalHeader({ children, icon, subtitle, badge, onClose: onCloseProp, id: idProp, className }) {
+      function ModalHeader({ children, icon, subtitle, badge, showDismiss = true, onClose: onCloseProp, id: idProp, className }) {
         const { headerId, onClose: ctxClose } = React.useContext(ModalContext);
         const closeHandler = onCloseProp ?? ctxClose;
         return (
@@ -3304,7 +3308,7 @@
             </div>
             <div className="dcds-Modal__header-end">
               {badge && <span className="dcds-Modal__header-badge">{badge}</span>}
-              {closeHandler && (
+              {showDismiss && closeHandler && (
                 <button type="button" className="dcds-Modal__close-btn" aria-label="Close modal" onClick={closeHandler}>
                   <CloseIcon size={20} />
                 </button>
@@ -3324,6 +3328,8 @@
       }
 
       function ModalFooter({ children, link, className }) {
+        const { showFooter } = React.useContext(ModalContext);
+        if (showFooter === false) return null;
         return (
           <div className={['dcds-Modal__footer', className].filter(Boolean).join(' ')}>
             {link && <span className="dcds-Modal__footer-link">{link}</span>}
@@ -4038,6 +4044,7 @@
         const [badgeState,       setBadgeState]       = useState('neutral');
         const [badgeEmphasis,    setBadgeEmphasis]    = useState('subtle');
         const [badgeShowIcon,    setBadgeShowIcon]    = useState(false);
+        const [showDismiss,      setShowDismiss]      = useState(true);
         /* ModalBody */
         const [bodyText,         setBodyText]         = useState(
           'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries.'
@@ -4097,6 +4104,7 @@
                 <CtrlToggle label="showIcon"      checked={badgeShowIcon} onChange={setBadgeShowIcon} />
               </>
             )}
+            <CtrlToggle label="showDismiss"      checked={showDismiss}    onChange={setShowDismiss}      />
 
             <h2>ModalBody</h2>
             <CtrlText   label="body"             value={bodyText}         onChange={setBodyText}         />
@@ -4139,6 +4147,7 @@
                   onClose={() => { setPlaygroundOpen(false); pushModalLog('onClose'); }}
                   closeOnBackdrop={closeOnBackdrop}
                   closeOnEscape={closeOnEscape}
+                  showFooter={showFooter}
                 >
                   <ModalHeader
                     icon={showIcon ? React.createElement(ICON_MAP[modalIconName] || ICON_MAP['InfoCircle'], { size: 16 }) : undefined}
@@ -4146,6 +4155,7 @@
                     badge={showBadge ? (
                       <Badge state={badgeState} emphasis={badgeEmphasis} showIcon={badgeShowIcon}>{badgeText}</Badge>
                     ) : undefined}
+                    showDismiss={showDismiss}
                   >
                     {titleText}
                   </ModalHeader>
@@ -4156,7 +4166,6 @@
                       </div>
                     )}
                   </ModalBody>
-                  {showFooter && (
                   <ModalFooter
                     link={showLink ? (
                       <LinkButton onClick={(e) => { e.preventDefault(); pushModalLog('link clicked'); }} showIcon={false}>{linkText}</LinkButton>
@@ -4171,7 +4180,6 @@
                       {confirmLabel}
                     </Button>
                   </ModalFooter>
-                  )}
                 </Modal>
               </section>
 

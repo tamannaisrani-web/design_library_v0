@@ -67,13 +67,13 @@
 }
 
 /* ===========================================================
- * Selected — primary blue fill, 1px focus border, primary text
+ * Selected — action green fill, action border, action text
  * =========================================================== */
 
 .dcds-Chip--selected {
-  background-color: var(--color-fill-primary-2);
-  border: 1px solid var(--color-stroke-focus);
-  color: var(--color-text-primary);
+  background-color: var(--color-fill-light-action);
+  border: 1px solid var(--color-stroke-action);
+  color: var(--color-text-action);
 }
 
 /* ===========================================================
@@ -85,9 +85,10 @@
   background-color: var(--color-surface-2);
 }
 
-/* Selected hover: lighter primary-1 fill */
+/* Selected hover: dark action fill */
 .dcds-Chip--selected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) {
-  background-color: var(--color-fill-primary-1);
+  background-color: var(--color-fill-dark-action);
+  color: var(--color-text-invert);
 }
 
 /* ===========================================================
