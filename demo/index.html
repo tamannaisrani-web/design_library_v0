@@ -1141,6 +1141,24 @@
       .dcds-Grid__content-width-line { position:absolute; top:50%; left:0; right:0; height:1px; background-color:var(--color-text-success); transform:translateY(-50%); }
       .dcds-Grid__content-width-value { position:relative; background-color:var(--color-surface-1); padding:0 var(--gap-4); font-size:var(--font-size-body); font-weight:var(--font-weight-bold); color:var(--color-text-success); z-index:1; white-space:nowrap; }
 
+      /* ── GridLayout — layout primitive ──────────────────────────── */
+      .dcds-GridLayout--container { display:grid; grid-template-columns:repeat(var(--dcds-grid-cols,12),1fr); box-sizing:border-box; width:100%; }
+      .dcds-GridLayout--direction-column { grid-auto-flow:column; }
+      .dcds-GridLayout--spacing-0 { gap:0; }
+      .dcds-GridLayout--spacing-1 { gap:var(--gap-8); }
+      .dcds-GridLayout--spacing-2 { gap:var(--gap-16); }
+      .dcds-GridLayout--spacing-3 { gap:var(--gap-24); }
+      .dcds-GridLayout--spacing-4 { gap:var(--gap-32); }
+      .dcds-GridLayout--spacing-5 { gap:var(--gap-40); }
+      .dcds-GridLayout--spacing-6 { gap:var(--gap-48); }
+      .dcds-GridLayout--item { box-sizing:border-box; min-width:0; }
+      .dcds-GridLayout--xs-1{grid-column:span 1} .dcds-GridLayout--xs-2{grid-column:span 2} .dcds-GridLayout--xs-3{grid-column:span 3} .dcds-GridLayout--xs-4{grid-column:span 4} .dcds-GridLayout--xs-5{grid-column:span 5} .dcds-GridLayout--xs-6{grid-column:span 6} .dcds-GridLayout--xs-7{grid-column:span 7} .dcds-GridLayout--xs-8{grid-column:span 8} .dcds-GridLayout--xs-9{grid-column:span 9} .dcds-GridLayout--xs-10{grid-column:span 10} .dcds-GridLayout--xs-11{grid-column:span 11} .dcds-GridLayout--xs-12{grid-column:span 12} .dcds-GridLayout--xs-auto{grid-column:auto}
+      @media(min-width:576px){.dcds-GridLayout--sm-1{grid-column:span 1} .dcds-GridLayout--sm-2{grid-column:span 2} .dcds-GridLayout--sm-3{grid-column:span 3} .dcds-GridLayout--sm-4{grid-column:span 4} .dcds-GridLayout--sm-5{grid-column:span 5} .dcds-GridLayout--sm-6{grid-column:span 6} .dcds-GridLayout--sm-7{grid-column:span 7} .dcds-GridLayout--sm-8{grid-column:span 8} .dcds-GridLayout--sm-9{grid-column:span 9} .dcds-GridLayout--sm-10{grid-column:span 10} .dcds-GridLayout--sm-11{grid-column:span 11} .dcds-GridLayout--sm-12{grid-column:span 12} .dcds-GridLayout--sm-auto{grid-column:auto}}
+      @media(min-width:992px){.dcds-GridLayout--md-1{grid-column:span 1} .dcds-GridLayout--md-2{grid-column:span 2} .dcds-GridLayout--md-3{grid-column:span 3} .dcds-GridLayout--md-4{grid-column:span 4} .dcds-GridLayout--md-5{grid-column:span 5} .dcds-GridLayout--md-6{grid-column:span 6} .dcds-GridLayout--md-7{grid-column:span 7} .dcds-GridLayout--md-8{grid-column:span 8} .dcds-GridLayout--md-9{grid-column:span 9} .dcds-GridLayout--md-10{grid-column:span 10} .dcds-GridLayout--md-11{grid-column:span 11} .dcds-GridLayout--md-12{grid-column:span 12} .dcds-GridLayout--md-auto{grid-column:auto}}
+      @media(min-width:1200px){.dcds-GridLayout--lg-1{grid-column:span 1} .dcds-GridLayout--lg-2{grid-column:span 2} .dcds-GridLayout--lg-3{grid-column:span 3} .dcds-GridLayout--lg-4{grid-column:span 4} .dcds-GridLayout--lg-5{grid-column:span 5} .dcds-GridLayout--lg-6{grid-column:span 6} .dcds-GridLayout--lg-7{grid-column:span 7} .dcds-GridLayout--lg-8{grid-column:span 8} .dcds-GridLayout--lg-9{grid-column:span 9} .dcds-GridLayout--lg-10{grid-column:span 10} .dcds-GridLayout--lg-11{grid-column:span 11} .dcds-GridLayout--lg-12{grid-column:span 12} .dcds-GridLayout--lg-auto{grid-column:auto}}
+      /* GridLayout demo cells */
+      .gl-cell { background:var(--color-fill-secondary-1); border:1px solid var(--color-stroke-action); border-radius:var(--rd-XS); padding:var(--gap-8) var(--gap-12); font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-bold); color:var(--color-text-action); text-align:center; }
+
       /* ── Grid playground ─────────────────────────────────────────── */
       .grid-playground-outer { display:flex; align-items:flex-start; gap:0; width:100%; }
       .grid-resizable-wrap { position:relative; display:inline-flex; flex-direction:column; align-items:flex-start; }
@@ -5566,6 +5584,46 @@ function FlagsSection() {
       }
 
       /* ============================================================
+       * GridLayout — layout primitive (mirrors src/layout/Grid)
+       * ============================================================ */
+      const SPACING_KEYS = new Set(['padding','paddingTop','paddingRight','paddingBottom','paddingLeft','paddingInline','paddingBlock','margin','marginTop','marginRight','marginBottom','marginLeft','marginInline','marginBlock','gap','rowGap','columnGap']);
+
+      function processSx(sx) {
+        if (!sx) return {};
+        const out = {};
+        for (const [k, v] of Object.entries(sx)) {
+          out[k] = (typeof v === 'number' && SPACING_KEYS.has(k)) ? `${v * 8}px` : v;
+        }
+        return out;
+      }
+
+      const Box = React.forwardRef(({ as: Component = 'div', sx, className, style, children, ...rest }, ref) => {
+        const cls = ['dcds-Box', className].filter(Boolean).join(' ');
+        return React.createElement(Component, { ref, className: cls, style: { ...processSx(sx), ...style }, ...rest }, children);
+      });
+      Box.displayName = 'Box';
+
+      const GridLayout = React.forwardRef(({ container=false, item=false, spacing=0, columns=12, xs, sm, md, lg, direction='row', className, style, children, ...rest }, ref) => {
+        const cls = ['dcds-GridLayout'];
+        if (container) {
+          cls.push('dcds-GridLayout--container');
+          if (spacing > 0) cls.push(`dcds-GridLayout--spacing-${spacing}`);
+          if (direction === 'column') cls.push('dcds-GridLayout--direction-column');
+        }
+        if (item) {
+          cls.push('dcds-GridLayout--item');
+          if (xs !== undefined) cls.push(`dcds-GridLayout--xs-${xs}`);
+          if (sm !== undefined) cls.push(`dcds-GridLayout--sm-${sm}`);
+          if (md !== undefined) cls.push(`dcds-GridLayout--md-${md}`);
+          if (lg !== undefined) cls.push(`dcds-GridLayout--lg-${lg}`);
+        }
+        if (className) cls.push(className);
+        const s = container ? { '--dcds-grid-cols': columns, ...style } : (style ?? {});
+        return <div ref={ref} className={cls.join(' ')} style={s} {...rest}>{children}</div>;
+      });
+      GridLayout.displayName = 'GridLayout';
+
+      /* ============================================================
        * GridSection — self-contained section with resize playground
        * ============================================================ */
       const GRID_BREAKPOINTS = [
@@ -5689,6 +5747,62 @@ function FlagsSection() {
                   </div>
                 </section>
               ))}
+
+              {/* ── GridLayout — layout primitive ── */}
+              <section>
+                <h2>GridLayout — Layout Primitive</h2>
+                <p className="stage-note">
+                  <code>GridLayout</code> is the layout companion to the Grid visualisation above.
+                  Use <code>container</code> on the wrapper and <code>item + xs/sm/md/lg</code> on
+                  each child to control responsive column spans. <code>spacing</code> maps to DCDS
+                  gap tokens (1 unit = 8 px).
+                </p>
+
+                <h3 style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-label)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-secondary)', marginBottom:'var(--gap-8)' }}>
+                  Basic — xs=8 / xs=4
+                </h3>
+                <Box sx={{ flexGrow: 1 }}>
+                  <GridLayout container spacing={2}>
+                    <GridLayout item xs={8}><div className="gl-cell">xs=8</div></GridLayout>
+                    <GridLayout item xs={4}><div className="gl-cell">xs=4</div></GridLayout>
+                    <GridLayout item xs={4}><div className="gl-cell">xs=4</div></GridLayout>
+                    <GridLayout item xs={8}><div className="gl-cell">xs=8</div></GridLayout>
+                  </GridLayout>
+                </Box>
+
+                <h3 style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-label)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-secondary)', margin:'var(--gap-24) 0 var(--gap-8)' }}>
+                  Equal columns — spacing=2
+                </h3>
+                <GridLayout container spacing={2}>
+                  {[1,2,3,4,6,12].map(n => (
+                    <GridLayout key={n} item xs={n}>
+                      <div className="gl-cell">xs={n}</div>
+                    </GridLayout>
+                  ))}
+                </GridLayout>
+
+                <h3 style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-label)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-secondary)', margin:'var(--gap-24) 0 var(--gap-8)' }}>
+                  Responsive — full-width mobile, split desktop (xs=12 / md=8 + md=4)
+                </h3>
+                <GridLayout container spacing={2}>
+                  <GridLayout item xs={12} md={8}><div className="gl-cell">xs=12 · md=8</div></GridLayout>
+                  <GridLayout item xs={12} md={4}><div className="gl-cell">xs=12 · md=4</div></GridLayout>
+                </GridLayout>
+
+                <h3 style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-label)', fontWeight:'var(--font-weight-bold)', color:'var(--color-text-secondary)', margin:'var(--gap-24) 0 var(--gap-8)' }}>
+                  Spacing scale
+                </h3>
+                {[0,1,2,3,4].map(sp => (
+                  <div key={sp} style={{ marginBottom:'var(--gap-8)' }}>
+                    <span style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-validation)', color:'var(--color-text-subdued)', display:'block', marginBottom:'var(--gap-4)' }}>spacing={sp} ({sp * 8}px gap)</span>
+                    <GridLayout container spacing={sp}>
+                      <GridLayout item xs={4}><div className="gl-cell">A</div></GridLayout>
+                      <GridLayout item xs={4}><div className="gl-cell">B</div></GridLayout>
+                      <GridLayout item xs={4}><div className="gl-cell">C</div></GridLayout>
+                    </GridLayout>
+                  </div>
+                ))}
+              </section>
 
             </main>
           </PanelLayout>
