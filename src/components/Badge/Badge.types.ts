@@ -14,11 +14,12 @@ import type { BaseComponentProps } from '../shared/types';
 
 /**
  * Size variant for the Badge component.
- * - `S` — smallest: dense data tables, compact lists (12px Bold)
- * - `M` — default: cards, lists, detail views (14px Bold)
- * - `L` — largest: headers, hero sections, high-emphasis labels (16px Bold)
+ * - `XS` — 20px height, 10px text — inline labels, dense tables (default)
+ * - `S`  — 24px height, 12px text — dense data tables, compact lists
+ * - `M`  — 32px height, 14px text — cards, lists, detail views
+ * - `L`  — 40px height, 16px text — headers, hero sections only
  */
-export type BadgeSize = 'S' | 'M' | 'L';
+export type BadgeSize = 'XS' | 'S' | 'M' | 'L';
 
 /**
  * Visual weight of the Badge.
@@ -70,7 +71,7 @@ export interface BadgeProps extends BaseComponentProps {
    * - `S` — 12px Bold, compact tables and lists
    * - `M` — 14px Bold, default for most contexts
    * - `L` — 16px Bold, headers and hero sections only
-   * @default 'M'
+   * @default 'XS'
    */
   size?: BadgeSize;
 

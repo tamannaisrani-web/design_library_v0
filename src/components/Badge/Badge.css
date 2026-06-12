@@ -17,8 +17,16 @@
 }
 
 /* ===========================================================
- * Sizes — S / M / L
+ * Sizes — XS / S / M / L
  * =========================================================== */
+
+/* XS: 20px height, 2px vertical padding (not gap-4), 10px validation text */
+.dcds-Badge--size-XS {
+  height: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: var(--font-size-validation); /* 10px */
+}
 
 .dcds-Badge--size-S {
   height: 24px;
@@ -41,6 +49,11 @@
 
 .dcds-Badge__icon {
   flex-shrink: 0;
+}
+
+.dcds-Badge--size-XS .dcds-Badge__icon {
+  width: 12px;
+  height: 12px;
 }
 
 .dcds-Badge--size-S .dcds-Badge__icon {
