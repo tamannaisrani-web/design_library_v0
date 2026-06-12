@@ -504,23 +504,21 @@
 .dcds-Step__bar--disabled  { background-color:var(--color-surface-disabled); }
 
 /* Content — label + description. Spacing from track handled by gap-8 on the step container. */
-.dcds-Step__content { display:flex; flex-direction:column; gap:var(--gap-0); }
+.dcds-Step__content { display:flex; flex-direction:column; gap:var(--gap-0); white-space:nowrap; overflow:hidden; min-width:0; }
+/* Vertical: content must flex to fill available width so text can truncate */
+.dcds-Stepper--Vertical .dcds-Step__content { flex:1 0 0; min-width:1px; }
 /* Vertical normal: 2px optical alignment with circle top edge */
 .dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__content { padding-top:2px; }
-/* Label — 16px Regular by default */
-.dcds-Step__label { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-text-primary); word-break:break-word; }
+/* Label — 16px Regular by default, single-line truncated */
+.dcds-Step__label { font-family:var(--font-family); font-size:var(--font-size-body); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-text-primary); display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 /* Active Bold ONLY in Normal mode (Figma: compact active label = font-normal) */
 .dcds-Stepper--normal .dcds-Step--active .dcds-Step__label { font-weight:var(--font-weight-bold); }
 .dcds-Stepper--compact .dcds-Step--active .dcds-Step__label { font-weight:var(--font-weight-regular); }
 .dcds-Step--disabled .dcds-Step__label { color:var(--color-text-disabled); }
-/* Description — 12px Regular, colour varies by orientation */
-.dcds-Step__description { font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-icon-subdued); word-break:break-word; }
-/* Vertical Normal: darker text per Figma color/text/subdued (#4b4b4b) */
-.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step__description { color:var(--color-text-subdued); }
-/* Disabled: BOTH label and description always use color/text/disabled.
-   Second rule needed: vertical-normal rule (0,3,0) would override base disabled rule (0,2,0) */
+/* Description — 12px Regular, unified color/text/subdued across all orientations, single-line truncated */
+.dcds-Step__description { font-family:var(--font-family); font-size:var(--font-size-body-small); font-weight:var(--font-weight-regular); line-height:normal; color:var(--color-text-subdued); display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+/* Disabled: both label and description use color/text/disabled */
 .dcds-Step--disabled .dcds-Step__description { color:var(--color-text-disabled); }
-.dcds-Stepper--Vertical.dcds-Stepper--normal .dcds-Step--disabled .dcds-Step__description { color:var(--color-text-disabled); }
 
 /* Interaction */
 .dcds-Step[tabindex='0'] { cursor:pointer; }
