@@ -40,6 +40,9 @@ export * from './components/Switch';
 export * from './components/Tabs';
 export * from './components/Tag';
 export * from './components/Tooltip';
+export * from './components/UploadCTA';
+export * from './components/UploadDocument';
+export * from './components/UploadDragDrop';
 export * from './components/shared';
 export * from './theme';
 
