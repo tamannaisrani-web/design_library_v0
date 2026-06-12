@@ -7200,7 +7200,11 @@ function FlagsSection() {
             {activeComponent === 'tabs'        && <TabsSection />}
             {activeComponent === 'drawer'       && <DrawerSection />}
             {activeComponent === 'modal'       && <ModalSection />}
-            {activeComponent === 'navigation'  && <NavigationSection sbState={sbState} setSbState={setSbState} sections={sections} updateSection={updateSection} enabledTabIds={enabledTabIds} enabledSectionIds={enabledSectionIds} toggleTabId={toggleTabId} toggleSectionId={toggleSectionId} enabledSubIds={enabledSubIds} activeSubId={activeSubId} setActiveSubId={setActiveSubId} tbType={tbType} tbShowCompany={tbShowCompany} tbShowUser={tbShowUser} tbCompany={tbCompany} tbInitials={tbInitials} logoPortal={logoPortal} setLogoPortal={setLogoPortal} bmState={bmState} bmType={bmType} bmShowLeading={bmShowLeading} bmShowStatus={bmShowStatus} />}
+            {activeComponent === 'navigation'  && (
+              <div style={{ gridColumn: '2 / -1', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+                <NavigationSection sbState={sbState} setSbState={setSbState} sections={sections} updateSection={updateSection} enabledTabIds={enabledTabIds} enabledSectionIds={enabledSectionIds} toggleTabId={toggleTabId} toggleSectionId={toggleSectionId} enabledSubIds={enabledSubIds} activeSubId={activeSubId} setActiveSubId={setActiveSubId} tbType={tbType} tbShowCompany={tbShowCompany} tbShowUser={tbShowUser} tbCompany={tbCompany} tbInitials={tbInitials} logoPortal={logoPortal} setLogoPortal={setLogoPortal} bmState={bmState} bmType={bmType} bmShowLeading={bmShowLeading} bmShowStatus={bmShowStatus} />
+              </div>
+            )}
             {activeComponent === 'accordian'   && <AccordianSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
