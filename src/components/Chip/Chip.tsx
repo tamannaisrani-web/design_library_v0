@@ -10,7 +10,7 @@ import './Chip.css';
  * Use in filter bars so users can activate / deactivate a category.
  * Renders as `<button aria-pressed>` so toggled state is announced to assistive technology.
  *
- * Selected state uses the action green palette (`fill-light-action` bg, `stroke-action` border).
+ * Selected state uses the info blue palette (`fill-light-info` bg, `stroke-info` border, `text-info`).
  *
  * @example
  * ```tsx

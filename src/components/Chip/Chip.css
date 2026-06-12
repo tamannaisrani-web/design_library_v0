@@ -67,28 +67,27 @@
 }
 
 /* ===========================================================
- * Selected — action green fill, action border, action text
+ * Selected — info blue fill, info border, info text
  * =========================================================== */
 
 .dcds-Chip--selected {
-  background-color: var(--color-fill-light-action);
-  border: 1px solid var(--color-stroke-action);
-  color: var(--color-text-action);
+  background-color: var(--color-fill-light-info);
+  border: 1px solid var(--color-stroke-info);
+  color: var(--color-text-info);
 }
 
 /* ===========================================================
  * Hover states
  * =========================================================== */
 
-/* Unselected hover: subtle surface-2 bg, border stays neutral */
+/* Unselected hover: surface-2 bg, border stays neutral */
 .dcds-Chip--unselected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) {
   background-color: var(--color-surface-2);
 }
 
-/* Selected hover: dark action fill */
+/* Selected hover: secondary-1 (lighter sky blue), border stays info */
 .dcds-Chip--selected:hover:not(:disabled):not(.dcds-Chip--state-Disabled) {
-  background-color: var(--color-fill-dark-action);
-  color: var(--color-text-invert);
+  background-color: var(--color-fill-secondary-1);
 }
 
 /* ===========================================================
@@ -101,20 +100,21 @@
 }
 
 /* ===========================================================
- * Disabled — unselected
+ * Disabled — unselected: surface-disabled bg, subdued text at 75%
  * =========================================================== */
 
 .dcds-Chip--unselected.dcds-Chip--state-Disabled,
 .dcds-Chip--unselected:disabled {
-  background-color: var(--color-surface-1);
+  background-color: var(--color-surface-disabled);
   border-color: var(--color-stroke-disabled);
-  color: var(--color-text-disabled);
+  color: var(--color-text-subdued);
+  opacity: 0.75;
   cursor: not-allowed;
   pointer-events: none;
 }
 
 /* ===========================================================
- * Disabled — selected (keeps blue fill, fades with opacity)
+ * Disabled — selected: keeps info-blue colours, fades entire chip
  * =========================================================== */
 
 .dcds-Chip--selected.dcds-Chip--state-Disabled,
