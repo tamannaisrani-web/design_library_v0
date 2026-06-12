@@ -111,8 +111,12 @@
   cursor: not-allowed;
 }
 
+.dcds-Tag--state-Disabled .dcds-Tag__icon {
+  color: var(--color-icon-disabled);
+}
+
 .dcds-Tag--state-Disabled .dcds-Tag__remove {
-  color: var(--color-text-subdued);
+  color: var(--color-icon-disabled);
   cursor: not-allowed;
   pointer-events: none;
 }
