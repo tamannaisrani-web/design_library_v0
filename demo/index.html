@@ -1067,6 +1067,65 @@
       /* Modal demo helpers */
       .modal-variant-row { display:flex; flex-wrap:wrap; gap:var(--gap-12); padding:var(--gap-16); background:var(--color-surface-2); border-radius:var(--rd-S); margin-top:var(--gap-8); }
 
+      /* ── Foundation pages ───────────────────────────────────────── */
+      .fnd-stage { padding: 32px; overflow-y: auto; }
+      .fnd-section { margin-bottom: 48px; }
+      .fnd-section h2 { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary, #6b7280); margin: 0 0 16px; }
+      /* Typography */
+      .type-scale { display: flex; flex-direction: column; gap: 6px; }
+      .type-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 12px; border-radius: 8px; background: var(--color-surface-secondary, #f9fafb); }
+      .type-token { font-size: 11px; font-family: monospace; color: var(--color-text-secondary, #6b7280); min-width: 180px; flex-shrink: 0; }
+      .type-meta  { font-size: 11px; color: var(--color-text-tertiary, #9ca3af); min-width: 120px; flex-shrink: 0; }
+      .type-sample { color: var(--color-text-primary, #111827); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      /* Spacing */
+      .gap-rows { display: flex; flex-direction: column; gap: 4px; }
+      .gap-row { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+      .gap-label { font-size: 11px; font-family: monospace; min-width: 100px; color: var(--color-text-secondary, #6b7280); }
+      .gap-val   { font-size: 11px; color: var(--color-text-tertiary, #9ca3af); min-width: 40px; }
+      .gap-bar   { height: 12px; background: var(--color-fill-action, #26b67f); border-radius: 3px; min-width: 2px; }
+      .rd-grid   { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+      .rd-box    { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .rd-swatch { width: 48px; height: 48px; background: var(--color-fill-action, #26b67f); }
+      .rd-name   { font-size: 11px; font-family: monospace; color: var(--color-text-secondary, #6b7280); }
+      .rd-val    { font-size: 10px; color: var(--color-text-tertiary, #9ca3af); }
+      .tc-rows   { display: flex; flex-direction: column; gap: 4px; }
+      .tc-row    { display: flex; align-items: center; gap: 12px; }
+      .tc-label  { font-size: 11px; font-family: monospace; min-width: 80px; color: var(--color-text-secondary, #6b7280); }
+      .tc-bar    { height: 10px; background: var(--color-surface-4, #e5e7eb); border-radius: 3px; }
+      /* Colors */
+      .color-grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+      .color-swatch { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; cursor: default; }
+      .color-dot   { width: 100%; height: 48px; border-radius: 8px; border: 1px solid rgba(0,0,0,.08); }
+      .color-cname { font-size: 11px; font-weight: 600; color: var(--color-text-primary, #121212); word-break: break-all; }
+      .color-hex   { font-size: 10px; font-family: monospace; color: var(--color-text-subdued, #4b4b4b); }
+      /* Icons */
+      .icon-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .icon-chip  { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 10px; border-radius: 8px; background: var(--color-surface-2, #f9f9f9); min-width: 72px; cursor: pointer; }
+      .icon-chip svg { width: 24px; height: 24px; }
+      .icon-name  { font-size: 9px; font-family: monospace; color: var(--color-text-subdued, #6b7280); text-align: center; }
+      /* Flags */
+      .flag-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+      .flag-item { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; background: var(--color-surface-2, #f9f9f9); min-width: 160px; }
+      .flag-code { font-size: 11px; font-family: monospace; font-weight: 600; color: var(--color-text-primary, #111827); min-width: 36px; }
+      .flag-cname { font-size: 11px; color: var(--color-text-subdued, #6b7280); }
+      /* Nav separator */
+      .primary-nav__item--sep { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-subdued, #6b7280); padding: 16px 12px 4px; pointer-events: none; }
+
+      /* ── Grid playground ─────────────────────────────────────────── */
+      .grid-playground-outer { display:flex; align-items:flex-start; gap:0; width:100%; }
+      .grid-resizable-wrap { position:relative; display:inline-flex; flex-direction:column; align-items:flex-start; }
+      .grid-scrollable { overflow-x:auto; }
+      .grid-resize-handle { width:18px; cursor:ew-resize; display:flex; align-items:center; justify-content:center; align-self:stretch; flex-shrink:0; user-select:none; }
+      .grid-resize-handle::after { content:''; display:block; width:4px; height:48px; background:var(--color-stroke-action); border-radius:var(--rd-Max); transition:background-color 120ms ease; }
+      .grid-resize-handle:hover::after { background:var(--color-fill-dark-action); }
+      .grid-resize-handle:active::after { background:var(--color-fill-dark-action); }
+      .grid-width-badge { display:inline-flex; align-items:center; gap:var(--gap-8); margin-bottom:var(--gap-8); }
+      .grid-width-num { font-family:var(--font-family); font-size:var(--font-size-label); font-weight:var(--font-weight-bold); color:var(--color-text-primary); font-variant-numeric:tabular-nums; min-width:52px; }
+      .grid-bp-pill { font-family:var(--font-family); font-size:var(--font-size-body-small); color:var(--color-text-secondary); background:var(--color-fill-secondary-1); padding:2px var(--gap-8); border-radius:var(--rd-Max); white-space:nowrap; }
+      .grid-bp-btn { display:block; width:100%; padding:var(--gap-8) var(--gap-16); border:none; background:none; cursor:pointer; font-family:var(--font-family); font-size:var(--font-size-body-small); color:var(--color-text-subdued); font-weight:400; text-align:left; transition:color 120ms ease,background 120ms ease; border-radius:0; white-space:nowrap; }
+      .grid-bp-btn:hover { color:var(--color-text-primary); background:var(--color-surface-2); }
+      .grid-bp-btn--active { color:var(--color-text-primary); font-weight:var(--font-weight-bold); background:var(--color-surface-2); border-left:2px solid var(--color-stroke-action); padding-left:calc(var(--gap-16) - 2px); }
+
       /*
        * Drawer — backdrop overlay, panel shell, and sub-component styles.
        * Mirrors src/components/Drawer/Drawer.css
@@ -4894,6 +4953,717 @@
         );
       }
 
+// ── Typography ────────────────────────────────────────────────────
+const DESKTOP_SCALE = [
+  { token: 'Desktop/Heading/H1',                size: '--font-size-h1',       weight: '--font-weight-bold',    px: '44px', bold: true  },
+  { token: 'Desktop/Heading/H2 - Bold',         size: '--font-size-h2',       weight: '--font-weight-bold',    px: '32px', bold: true  },
+  { token: 'Desktop/Heading/H2 - Regular',      size: '--font-size-h2',       weight: '--font-weight-regular', px: '32px', bold: false },
+  { token: 'Desktop/Heading/H3 - Bold',         size: '--font-size-h3',       weight: '--font-weight-bold',    px: '24px', bold: true  },
+  { token: 'Desktop/Heading/H3 - Regular',      size: '--font-size-h3',       weight: '--font-weight-regular', px: '24px', bold: false },
+  { token: 'Desktop/Heading/H4 - Bold',         size: '--font-size-h4',       weight: '--font-weight-bold',    px: '20px', bold: true  },
+  { token: 'Desktop/Heading/H4 - Regular',      size: '--font-size-h4',       weight: '--font-weight-regular', px: '20px', bold: false },
+  { token: 'Desktop/Body/Caption - Bold',       size: '--font-size-caption',  weight: '--font-weight-bold',    px: '18px', bold: true  },
+  { token: 'Desktop/Body/Body - Bold',          size: '--font-size-body',     weight: '--font-weight-bold',    px: '16px', bold: true  },
+  { token: 'Desktop/Body/Body - Regular',       size: '--font-size-body',     weight: '--font-weight-regular', px: '16px', bold: false },
+  { token: 'Desktop/Body/Label - Bold',         size: '--font-size-label',    weight: '--font-weight-bold',    px: '14px', bold: true  },
+  { token: 'Desktop/Body/Label - Regular',      size: '--font-size-label',    weight: '--font-weight-regular', px: '14px', bold: false },
+  { token: 'Desktop/Body/Body small - Bold',    size: '--font-size-body-small', weight: '--font-weight-bold',  px: '12px', bold: true  },
+  { token: 'Desktop/Body/Body small - Regular', size: '--font-size-body-small', weight: '--font-weight-regular', px: '12px', bold: false },
+  { token: 'Desktop/Body/Validation - Bold',    size: '--font-size-validation', weight: '--font-weight-bold',  px: '10px', bold: true  },
+  { token: 'Desktop/Body/Validation - Regular', size: '--font-size-validation', weight: '--font-weight-regular', px: '10px', bold: false },
+];
+const MOBILE_SCALE = [
+  { token: 'Mobile/Mobile - H1',         size: '--font-size-h2',   weight: '--font-weight-bold',    px: '32px', bold: true  },
+  { token: 'Mobile/Mobile - H2 Bold',    size: '--font-size-h3',   weight: '--font-weight-bold',    px: '28px', bold: true  },
+  { token: 'Mobile/Mobile - H2 Regular', size: '--font-size-h3',   weight: '--font-weight-regular', px: '28px', bold: false },
+  { token: 'Mobile/Mobile - H3 Bold',    size: '--font-size-h4',   weight: '--font-weight-bold',    px: '22px', bold: true  },
+  { token: 'Mobile/Mobile - H3 Regular', size: '--font-size-h4',   weight: '--font-weight-regular', px: '22px', bold: false },
+  { token: 'Mobile/Mobile - H4 Bold',    size: '--font-size-h4',   weight: '--font-weight-bold',    px: '20px', bold: true  },
+  { token: 'Mobile/Mobile - H4 Regular', size: '--font-size-h4',   weight: '--font-weight-regular', px: '20px', bold: false },
+];
+
+function TypographySection() {
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Typography</h2>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>typeface</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'var(--font-family)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>Nunito Sans</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>line height</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',color:'var(--color-text-primary)'}}>AUTO</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>letter spacing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',color:'var(--color-text-primary)'}}>0%</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>🅰 ・ Typography</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
+          <h2>Desktop Type Scale</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {DESKTOP_SCALE.map(r => (
+              <div key={r.token} style={{padding:'var(--gap-12) var(--gap-16)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <span style={{fontSize:`var(${r.size})`,fontWeight:`var(${r.weight})`,fontFamily:'var(--font-family)',color:'var(--color-text-primary)',lineHeight:1.2}}>The quick brown fox</span>
+                <div style={{display:'flex',gap:'var(--gap-8)',flexWrap:'wrap'}}>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:'var(--font-weight-bold)'}}>{r.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Mobile Type Scale</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {MOBILE_SCALE.map(r => (
+              <div key={r.token} style={{padding:'var(--gap-12) var(--gap-16)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <span style={{fontSize:`var(${r.size})`,fontWeight:`var(${r.weight})`,fontFamily:'var(--font-family)',color:'var(--color-text-primary)',lineHeight:1.2}}>The quick brown fox</span>
+                <div style={{display:'flex',gap:'var(--gap-8)',flexWrap:'wrap'}}>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-action)',fontWeight:'var(--font-weight-bold)'}}>{r.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{r.px}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{r.bold ? 'Bold' : 'Regular'}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Spacing ───────────────────────────────────────────────────────
+const GAP_TOKENS = [
+  { token: 'gap-0',   px: 0,   note: 'no gap'              },
+  { token: 'gap-2',   px: 2,   note: 'hairline'             },
+  { token: 'gap-4',   px: 4,   note: 'icon-to-label, tight' },
+  { token: 'gap-8',   px: 8,   note: 'compact padding'      },
+  { token: 'gap-12',  px: 12,  note: 'small padding'        },
+  { token: 'gap-16',  px: 16,  note: 'default gap / padding'},
+  { token: 'gap-20',  px: 20,  note: ''                     },
+  { token: 'gap-24',  px: 24,  note: 'card / section padding'},
+  { token: 'gap-32',  px: 32,  note: ''                     },
+  { token: 'gap-40',  px: 40,  note: ''                     },
+  { token: 'gap-48',  px: 48,  note: ''                     },
+  { token: 'gap-56',  px: 56,  note: ''                     },
+  { token: 'gap-64',  px: 64,  note: ''                     },
+  { token: 'gap-80',  px: 80,  note: ''                     },
+  { token: 'gap-108', px: 108, note: ''                     },
+];
+const RD_TOKENS = [
+  { token: 'rd-Nil', px: 0,    note: 'square / no rounding'           },
+  { token: 'rd-XS',  px: 4,    note: 'subtle (inputs, small chips)'   },
+  { token: 'rd-S',   px: 8,    note: 'default (buttons, badges, tags)'},
+  { token: 'rd-M',   px: 12,   note: 'medium (cards, panels)'         },
+  { token: 'rd-L',   px: 24,   note: 'large (modals, drawers)'        },
+  { token: 'rd-XL',  px: 40,   note: 'extra large / pill-adjacent'    },
+  { token: 'rd-Max', px: 1000, note: 'full pill (avatars, toggles)'   },
+];
+const TC_TOKENS = [
+  { token: 'tc-XXS',  px: 24,  note: 'icon-only column'      },
+  { token: 'tc-XS',   px: 48,  note: 'status dot, checkbox'  },
+  { token: 'tc-S',    px: 112, note: 'short text column'      },
+  { token: 'tc-M',    px: 192, note: 'standard column'        },
+  { token: 'tc-L',    px: 288, note: 'wide column'            },
+  { token: 'tc-Full', px: 300, note: 'maximum/full-width'     },
+];
+
+function SpacingSection() {
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Spacing</h2>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>collections</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>gap-* · rd-* · tc-*</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>rule</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.5}}>Never hardcode px — always use a token</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>↔ ・ Spacing</span>
+      </div>
+    </>}>
+      <main className="stage">
+        <section>
+          <h2>Spacing — gap-*</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+            {GAP_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'72px'}}>{t.token}</span>
+                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
+                <div style={{height:'10px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.max(2,t.px)+'px',flexShrink:0}} />
+                {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Border Radius — rd-*</h2>
+          <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-16)'}}>
+            {RD_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-8)',padding:'var(--gap-16)',background:'var(--color-surface-2)',borderRadius:'var(--rd-S)',minWidth:'96px'}}>
+                <div style={{width:'56px',height:'56px',background:'var(--color-fill-action)',borderRadius:Math.min(t.px,28)+'px'}} />
+                <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)'}}>{t.token}</span>
+                <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{t.px >= 1000 ? '1000px' : t.px+'px'}</span>
+                <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',textAlign:'center'}}>{t.note}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2>Table Columns — tc-*</h2>
+          <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-12)'}}>
+            {TC_TOKENS.map(t => (
+              <div key={t.token} style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+                <div style={{display:'flex',alignItems:'center',gap:'var(--gap-12)'}}>
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-action)',minWidth:'64px'}}>{t.token}</span>
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',minWidth:'36px'}}>{t.px}px</span>
+                  {t.note && <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>{t.note}</span>}
+                </div>
+                <div style={{height:'8px',borderRadius:'var(--rd-XS)',background:'var(--color-fill-action)',width:Math.min(t.px,500)+'px'}} />
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Color Tokens ──────────────────────────────────────────────────
+const COLOR_CATS = {
+  text: [
+    'primary','secondary','action','neutral','subdued','invert','disabled',
+    'warning','invert-warning','error','invert-error','success','invert-success','info','invert-info',
+  ],
+  icon: [
+    'primary','secondary','action','neutral','subdued','invert','disabled',
+    'warning','invert-warning','error','invert-error','success','invert-success','info','invert-info',
+  ],
+  surface: ['1','2','3','4','disabled'],
+  overlay: ['50','25'],
+  fill: [
+    'light-action','action','dark-action',
+    'primary-0','primary-1','primary-2','primary-3','primary-9',
+    'secondary-0','secondary-1','secondary-2','secondary-3',
+    'light-warning','invert-warning','dark-warning',
+    'light-error','invert-error','dark-error',
+    'light-success','invert-success','dark-success',
+    'light-info','invert-info','dark-info',
+  ],
+  stroke: ['focus','focus-subtle','action','neutral','subdued','invert','disabled','warning','error','success','info'],
+  hyperlink: ['default','hover','disabled'],
+};
+
+function ColorSection() {
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Color Tokens</h2>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>tier system</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)',lineHeight:1.5}}>Primitives → Semantics. Always use semantic tokens.</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>categories</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',lineHeight:1.8}}>{Object.keys(COLOR_CATS).join(' · ')}</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>figma page</label>
+        <span style={{fontSize:'var(--font-size-validation)',color:'var(--color-text-subdued)'}}>✸ ・ Color Tokens</span>
+      </div>
+    </>}>
+      <main className="stage">
+        {Object.entries(COLOR_CATS).map(([cat, roles]) => (
+          <section key={cat}>
+            <h2>color / {cat}</h2>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))',gap:'var(--gap-12)'}}>
+              {roles.map(role => {
+                const varName = `--color-${cat}-${role}`;
+                return (
+                  <div key={role} style={{display:'flex',flexDirection:'column',gap:'var(--gap-8)'}}>
+                    <div style={{height:'48px',borderRadius:'var(--rd-S)',border:'1px solid var(--color-stroke-subdued)',background:`var(${varName})`}} title={varName} />
+                    <span style={{fontSize:'var(--font-size-body-small)',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)'}}>{role}</span>
+                    <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>{varName}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Icons ─────────────────────────────────────────────────────────
+const ICON_CATS = {
+  'Money & Finance': ['wallet-add','empty-wallet','wallet-check','receipt-item','receipt-discount','empty-wallet-remove','money','coin','discount-shape','wallet-2','wallet-money','card-remove','cards','wallet-3','card-tick','receipt-2','receipt','tag','tag-2','card-add','card-slash','card-pos','card','dollar-square','dollar-circle','ticket','ticket-star','math'],
+  'Arrows': ['arrow-down','arrow-left','arrow-right','arrow-up','arrow-bottom','refresh-2','rotate-right','rotate-left','arrow-swap-horizontal','arrow-swap','arrow-circle-up','arrow-circle-down','arrow-circle-right','arrow-circle-left','arrow-square-left','arrow-square-right','arrow-square-down','arrow-square-up','arrow-3','arrow-2','send','redo','undo','refresh','export','import','logout','login','forward-square','back-square','arrange-square-2','arrange-square','convert','refresh-left-square','refresh-right-square','refresh-square-2','refresh-circle','repeat','arrange-circle','arrange-circle-2'],
+  'Users & Profiles': ['user','user-add','user-remove','user-tick','user-minus','user-search','user-edit','user-tag','user-octagon','user-cirlce-add','user-square','profile','profile-2user','profile-remove','profile-tick','profile-add','profile-delete','profile-circle','tag-user','people','personalcard'],
+  'Messages': ['message','message-favorite','message-notif','message-search','message-text','device-message','messages','messages-2','messages-3','sms','sms-tracking','sms-notification','sms-edit','sms-star','sms-search','message-remove','message-add','message-tick','message-time','message-2','message-circle','message-square','message-minus','message-edit','direct','direct-notification','direct-inbox','direct-send','directbox-send'],
+  'Security': ['security','security-safe','lock-circle','lock','security-user','lock-slash','unlock','check','key-square','key','shield-search','password-check','shield-security','shield-slash','shield-cross','shield-tick','shield','eye-slash','eye'],
+  'Documents': ['note-favorite','note-text','archive-book','document-filter','task-square','task','note-add','stickynote','note-remove','note','edit-2','edit','document-like','document-text','upload','download','clipboard-import','clipboard-export','clipboard-close','clipboard-tick','clipboard-text','document-normal','document-copy','document-cloud','document-sketch','document-previous','document-forward','document-upload','document-download','document-favorite','document','folder','folder-cross','folder-add','folder-minus','folder-favorite','folder-2','folder-open'],
+  'Settings & UI': ['category','setting','setting-2','setting-3','setting-4','setting-5','more','more-2','toggle-off','toggle-on','menu','settings','sort','filter','filter-square','filter-remove','filter-add','filter-search','filter-edit','filter-tick','close','close-circle','close-square','add','minus','add-circle','minus-cirlce','add-square','minus-square','tick-circle','tick-square','more-circle','more-square'],
+  'Location & Maps': ['location','location-minus','location-cross','location-tick','location-slash','location-add','discover','global','global-search','global-edit','global-refresh','map','gps','gps-slash','routing','routing-2'],
+  'Time & Calendar': ['timer','clock','timer-pause','timer-start','security-time','calendar','calendar-tick','calendar-search','calendar-remove','calendar-add','calendar-edit','calendar-2','calendar-circle'],
+  'Media': ['play','pause','stop','record','play-circle','pause-circle','stop-circle','record-circle','volume-high','volume-low','volume-mute','volume-cross','volume-slash','microphone','microphone-2','camera','camera-slash','gallery','gallery-favorite','gallery-slash','gallery-edit','gallery-add','gallery-remove','image','video','video-slash','video-circle','video-play','music','music-circle','music-square','audio-square'],
+  'Notifications': ['notification-bing','notification','notification-favorite','notification-status','notification-circle'],
+  'Charts & Business': ['chart-success','chart-fail','chart-2','graph','activity','trend-up','trend-down','hashtag','chart','status-up','diagram','presention-chart','health','favorite-chart'],
+  'Grid & Layout': ['grid-1','grid-2','grid-3','grid-4','grid-5','grid-6','grid-7','grid-8','grid-9','fatrows','row-vertical','row-horizontal','align-vertically','align-horizontally','align-left','align-right','align-top','align-bottom','rotate-left','rotate-right','sidebar-bottom','sidebar-top','sidebar-right','sidebar-left','kanban','crop','maximize'],
+  'Search': ['search-normal','search-zoom-in','search-zoom-out','search-favorite','search-status'],
+  'Shop & Delivery': ['bag','bag-happy','bag-tick','bag-cross','bag-timer','bag-2','shopping-cart','shopping-bag','shop-add','shop-remove','shop','truck-remove','truck-time','truck-tick','truck-fast','truck','box-search','box','box-time','box-tick','box-remove','box-add'],
+  'Devices & Computers': ['cpu','cpu-charge','cpu-setting','monitor','headphone','speaker','keyboard','mouse','bluetooth','bluetooth-2','wifi','wifi-square','devices','mobile','cloud-add','cloud-remove','cloud-connection','external-drive'],
+  'Call': ['call','call-calling','call-incoming','call-outgoing','call-add','call-minus','call-remove','call-received','call-slash'],
+  'Support & Social': ['star','star-slash','heart','like','dislike','magic-star','heart-edit','heart-tick','heart-circle','heart-search','heart-slash','like-dislike','like-tag','medal-star','medal','award','24-support'],
+  'Design Tools': ['bezier','brush','brush-2','magicpen','pen-tool','bucket','paintbucket','additem','ruler','designtools','shapes','pen-tool-2','pen-close','pen-add','pen-remove','path','path-2','scissor','eraser','mask','blur','colorfilter','layer','copy','copy-success'],
+  'Programming': ['code','mobile-programming','message-programming','document-code-2','programming-arrows','hierarchy-3','code-circle','document-code','data-2','data','hierarchy-square','command-square','command'],
+};
+const ICON_STYLES = ['linear', 'bold', 'outline'];
+
+
+function IconsSection() {
+  const [style, setStyle] = React.useState('linear');
+  const [search, setSearch] = React.useState('');
+  const filtered = React.useMemo(() => {
+    if (!search) return ICON_CATS;
+    const q = search.toLowerCase();
+    const result = {};
+    Object.entries(ICON_CATS).forEach(([cat, names]) => {
+      const matches = names.filter(n => n.includes(q));
+      if (matches.length) result[cat] = matches;
+    });
+    return result;
+  }, [search, style]);
+  const total = Object.values(filtered).reduce((s,v)=>s+v.length,0);
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Icons</h2>
+      <CtrlSelect label="style" value={style} onChange={setStyle} options={ICON_STYLES} />
+      <CtrlText   label="search" value={search} onChange={setSearch} placeholder="filter icons..." />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>showing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{total} icons</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>import</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>{"import { IconName } from '@dcds/icons'"}</span>
+      </div>
+    </>}>
+      <main className="stage">
+        {Object.entries(filtered).map(([cat, names]) => (
+          <section key={cat}>
+            <h2>{cat} ({names.length})</h2>
+            <div style={{display:'flex',flexWrap:'wrap',gap:'var(--gap-8)'}}>
+              {names.map(n => (
+                <div key={n} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'var(--gap-4)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-S)',background:'var(--color-surface-2)',minWidth:'72px',cursor:'default'}} title={n}>
+                  <img src={`icons/svg/${style}/${n}.svg`} alt={n} width={24} height={24} style={{opacity:.9}} onError={e=>{e.currentTarget.style.display='none'}} />
+                  <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',textAlign:'center',maxWidth:'80px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{n}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </main>
+    </PanelLayout>
+  );
+}
+
+// ── Flags ─────────────────────────────────────────────────────────
+const FLAG_REGIONS = {
+  'Africa': [
+    {code:'AO',name:'Angola'},{code:'BJ',name:'Benin'},{code:'BW',name:'Botswana'},{code:'BF',name:'Burkina Faso'},
+    {code:'BI',name:'Burundi'},{code:'CM',name:'Cameroon'},{code:'CV',name:'Cabo Verde'},{code:'CF',name:'C. African Rep.'},
+    {code:'TD',name:'Chad'},{code:'KM',name:'Comoros'},{code:'CD',name:'D.R. Congo'},{code:'CG',name:'R. Congo'},
+    {code:'CI',name:"Cote d'Ivoire"},{code:'DJ',name:'Djibouti'},{code:'EG',name:'Egypt'},{code:'ER',name:'Eritrea'},
+    {code:'ET',name:'Ethiopia'},{code:'GA',name:'Gabon'},{code:'GM',name:'Gambia'},{code:'GH',name:'Ghana'},
+    {code:'GN',name:'Guinea'},{code:'GQ',name:'Eq. Guinea'},{code:'GW',name:'Guinea-Bissau'},{code:'KE',name:'Kenya'},
+    {code:'LS',name:'Lesotho'},{code:'LR',name:'Liberia'},{code:'LY',name:'Libya'},{code:'MG',name:'Madagascar'},
+    {code:'MW',name:'Malawi'},{code:'ML',name:'Mali'},{code:'MR',name:'Mauritania'},{code:'MU',name:'Mauritius'},
+    {code:'MA',name:'Morocco'},{code:'MZ',name:'Mozambique'},{code:'NA',name:'Namibia'},{code:'NE',name:'Niger'},
+    {code:'NG',name:'Nigeria'},{code:'RW',name:'Rwanda'},{code:'SC',name:'Seychelles'},{code:'SL',name:'Sierra Leone'},
+    {code:'SO',name:'Somalia'},{code:'ZA',name:'South Africa'},{code:'SS',name:'South Sudan'},{code:'SD',name:'Sudan'},
+    {code:'SZ',name:'Swaziland'},{code:'TZ',name:'Tanzania'},{code:'TG',name:'Togo'},{code:'TN',name:'Tunisia'},
+    {code:'UG',name:'Uganda'},{code:'ZM',name:'Zambia'},{code:'ZW',name:'Zimbabwe'},
+  ],
+  'Asia': [
+    {code:'AF',name:'Afghanistan'},{code:'AM',name:'Armenia'},{code:'AZ',name:'Azerbaijan'},{code:'BD',name:'Bangladesh'},
+    {code:'BT',name:'Bhutan'},{code:'BN',name:'Brunei'},{code:'KH',name:'Cambodia'},{code:'CN',name:'China'},
+    {code:'GE',name:'Georgia'},{code:'HK',name:'Hong Kong'},{code:'IN',name:'India'},{code:'ID',name:'Indonesia'},
+    {code:'JP',name:'Japan'},{code:'KZ',name:'Kazakhstan'},{code:'KG',name:'Kyrgyzstan'},{code:'LA',name:'Laos'},
+    {code:'MO',name:'Macao'},{code:'MY',name:'Malaysia'},{code:'MV',name:'Maldives'},{code:'MN',name:'Mongolia'},
+    {code:'MM',name:'Myanmar'},{code:'NP',name:'Nepal'},{code:'KP',name:'North Korea'},{code:'PK',name:'Pakistan'},
+    {code:'PH',name:'Philippines'},{code:'RU',name:'Russia'},{code:'SG',name:'Singapore'},{code:'KR',name:'South Korea'},
+    {code:'LK',name:'Sri Lanka'},{code:'TW',name:'Taiwan'},{code:'TJ',name:'Tajikistan'},{code:'TH',name:'Thailand'},
+    {code:'TL',name:'Timor-Leste'},{code:'TM',name:'Turkmenistan'},{code:'TR',name:'Turkey'},{code:'UZ',name:'Uzbekistan'},
+    {code:'VN',name:'Vietnam'},
+  ],
+  'Europe': [
+    {code:'AL',name:'Albania'},{code:'AD',name:'Andorra'},{code:'AT',name:'Austria'},{code:'BY',name:'Belarus'},
+    {code:'BE',name:'Belgium'},{code:'BA',name:'Bosnia'},{code:'BG',name:'Bulgaria'},{code:'HR',name:'Croatia'},
+    {code:'CY',name:'Cyprus'},{code:'CZ',name:'Czech Republic'},{code:'DK',name:'Denmark'},{code:'EE',name:'Estonia'},
+    {code:'FI',name:'Finland'},{code:'FR',name:'France'},{code:'DE',name:'Germany'},{code:'GR',name:'Greece'},
+    {code:'HU',name:'Hungary'},{code:'IS',name:'Iceland'},{code:'IE',name:'Ireland'},{code:'IT',name:'Italy'},
+    {code:'LV',name:'Latvia'},{code:'LI',name:'Liechtenstein'},{code:'LT',name:'Lithuania'},{code:'LU',name:'Luxembourg'},
+    {code:'MT',name:'Malta'},{code:'MD',name:'Moldova'},{code:'MC',name:'Monaco'},{code:'ME',name:'Montenegro'},
+    {code:'NL',name:'Netherlands'},{code:'MK',name:'North Macedonia'},{code:'NO',name:'Norway'},{code:'PL',name:'Poland'},
+    {code:'PT',name:'Portugal'},{code:'RO',name:'Romania'},{code:'SM',name:'San Marino'},{code:'RS',name:'Serbia'},
+    {code:'SK',name:'Slovakia'},{code:'SI',name:'Slovenia'},{code:'ES',name:'Spain'},{code:'SE',name:'Sweden'},
+    {code:'CH',name:'Switzerland'},{code:'UA',name:'Ukraine'},{code:'GB',name:'England'},{code:'GB-UKM',name:'United Kingdom'},
+    {code:'GB-SCT',name:'Scotland'},{code:'GB-WLS',name:'Wales'},{code:'GB-NIR',name:'N. Ireland'},{code:'VA',name:'Vatican'},
+  ],
+  'Americas': [
+    {code:'AG',name:'Antigua & Barbuda'},{code:'AR',name:'Argentina'},{code:'AW',name:'Aruba'},{code:'BS',name:'Bahamas'},
+    {code:'BB',name:'Barbados'},{code:'BZ',name:'Belize'},{code:'BO',name:'Bolivia'},{code:'BR',name:'Brazil'},
+    {code:'CA',name:'Canada'},{code:'CL',name:'Chile'},{code:'CO',name:'Colombia'},{code:'CR',name:'Costa Rica'},
+    {code:'CU',name:'Cuba'},{code:'DM',name:'Dominica'},{code:'DO',name:'Dominican Rep.'},{code:'EC',name:'Ecuador'},
+    {code:'SV',name:'El Salvador'},{code:'GD',name:'Grenada'},{code:'GT',name:'Guatemala'},{code:'GY',name:'Guyana'},
+    {code:'HT',name:'Haiti'},{code:'HN',name:'Honduras'},{code:'JM',name:'Jamaica'},{code:'MX',name:'Mexico'},
+    {code:'NI',name:'Nicaragua'},{code:'PA',name:'Panama'},{code:'PY',name:'Paraguay'},{code:'PE',name:'Peru'},
+    {code:'PR',name:'Puerto Rico'},{code:'KN',name:'Saint Kitts'},{code:'LC',name:'Saint Lucia'},{code:'VC',name:'St Vincent'},
+    {code:'SR',name:'Suriname'},{code:'TT',name:'Trinidad'},{code:'US',name:'United States'},{code:'UY',name:'Uruguay'},
+    {code:'VE',name:'Venezuela'},
+  ],
+  'Oceania': [
+    {code:'AU',name:'Australia'},{code:'FJ',name:'Fiji'},{code:'KI',name:'Kiribati'},{code:'MH',name:'Marshall Islands'},
+    {code:'FM',name:'Micronesia'},{code:'NR',name:'Nauru'},{code:'NZ',name:'New Zealand'},{code:'PW',name:'Palau'},
+    {code:'PG',name:'Papua New Guinea'},{code:'WS',name:'Samoa'},{code:'SB',name:'Solomon Islands'},{code:'TO',name:'Tonga'},
+    {code:'TV',name:'Tuvalu'},{code:'VU',name:'Vanuatu'},
+  ],
+  'Middle East': [
+    {code:'AE',name:'UAE'},{code:'BH',name:'Bahrain'},{code:'IR',name:'Iran'},{code:'IQ',name:'Iraq'},
+    {code:'IL',name:'Israel'},{code:'JO',name:'Jordan'},{code:'KW',name:'Kuwait'},{code:'LB',name:'Lebanon'},
+    {code:'OM',name:'Oman'},{code:'PS',name:'Palestine'},{code:'QA',name:'Qatar'},{code:'SA',name:'Saudi Arabia'},
+    {code:'SY',name:'Syria'},{code:'YE',name:'Yemen'},
+  ],
+};
+
+function FlagsSection() {
+  const [search, setSearch] = React.useState('');
+  const filtered = React.useMemo(() => {
+    if (!search) return FLAG_REGIONS;
+    const q = search.toLowerCase();
+    const result = {};
+    Object.entries(FLAG_REGIONS).forEach(([region, flags]) => {
+      const matches = flags.filter(f => f.name.toLowerCase().includes(q) || f.code.toLowerCase().includes(q));
+      if (matches.length) result[region] = matches;
+    });
+    return result;
+  }, [search]);
+  const total = Object.values(filtered).reduce((s,v)=>s+v.length,0);
+  return (
+    <PanelLayout panelContent={<>
+      <h2>Flags</h2>
+      <CtrlText label="search" value={search} onChange={setSearch} placeholder="country or code..." />
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>showing</label>
+        <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-primary)'}}>{total} countries</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>dimensions</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)'}}>24 × 18 px (fixed)</span>
+      </div>
+      <div className="control" style={{flexDirection:'column',alignItems:'flex-start',gap:'var(--gap-4)'}}>
+        <label>usage</label>
+        <span style={{fontSize:'var(--font-size-validation)',fontFamily:'monospace',color:'var(--color-text-subdued)',wordBreak:'break-all'}}>{'<Flag Country="IN" />'}</span>
+      </div>
+    </>}>
+      <main className="stage">
+        {Object.entries(filtered).map(([region, flags]) => (
+          <section key={region}>
+            <h2>{region} ({flags.length})</h2>
+            <div style={{display:'flex',flexDirection:'column',gap:'var(--gap-4)'}}>
+              {flags.map(f => (
+                <div key={f.code} style={{display:'flex',alignItems:'center',gap:'var(--gap-12)',padding:'var(--gap-8) var(--gap-12)',borderRadius:'var(--rd-XS)',background:'var(--color-surface-2)'}}>
+                  <img src={`dcds-flags/flags/${f.code}.svg`} alt={f.name} width={24} height={18} style={{borderRadius:'2px',border:'1px solid var(--color-stroke-subdued)',flexShrink:0}} onError={e=>{e.currentTarget.style.display='none'}} />
+                  <span style={{fontSize:'var(--font-size-body-small)',fontFamily:'monospace',fontWeight:'var(--font-weight-bold)',color:'var(--color-text-primary)',minWidth:'40px'}}>{f.code}</span>
+                  <span style={{fontSize:'var(--font-size-body-small)',color:'var(--color-text-subdued)'}}>{f.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </main>
+    </PanelLayout>
+  );
+}
+
+      const GRID_CONFIGS = {
+        'Mobile':              { viewport:360,  columns:4,  gutter:16, margin:20, navWidth:0,   navHeight:56, contentArea:360,  label:'Mobile layout'  },
+        'Tablet':              { viewport:576,  columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:576,  label:'Tablet layout'  },
+        'Desktop-S-No-Nav':    { viewport:992,  columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:992,  label:'Desktop Layout'  },
+        'Desktop-S-Expanded':  { viewport:992,  columns:12, gutter:16, margin:24, navWidth:240, navHeight:64, contentArea:752,  label:'Desktop Layout'  },
+        'Desktop-S-Collapsed': { viewport:992,  columns:12, gutter:16, margin:24, navWidth:56,  navHeight:64, contentArea:936,  label:'Desktop Layout'  },
+        'Desktop-L-No-Nav':    { viewport:1200, columns:12, gutter:16, margin:24, navWidth:0,   navHeight:64, contentArea:1200, label:'Desktop Layout'  },
+        'Desktop-L-Expanded':  { viewport:1200, columns:12, gutter:16, margin:24, navWidth:240, navHeight:64, contentArea:960,  label:'Desktop Layout'  },
+        'Desktop-L-Collapsed': { viewport:1200, columns:12, gutter:16, margin:24, navWidth:56,  navHeight:64, contentArea:1144, label:'Desktop Layout'  },
+      };
+      const GRID_SPEC_ITEMS = {
+        'Mobile':              ['Width: 360px', 'Columns: 4',  'Gutter: 16px','Margin: 20px','Nav bar height: 56px','Content width: 320px'],
+        'Tablet':              ['Width: 576px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Content width: 528px'],
+        'Desktop-S-No-Nav':    ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','No sidebar',       'Content width: 944px'],
+        'Desktop-S-Expanded':  ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px', 'Content width: 704px'],
+        'Desktop-S-Collapsed': ['Width: 992px', 'Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px',  'Content width: 888px'],
+        'Desktop-L-No-Nav':    ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','No sidebar',       'Content width: 1152px'],
+        'Desktop-L-Expanded':  ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 240px', 'Content width: 912px'],
+        'Desktop-L-Collapsed': ['Width: 1200px','Columns: 12', 'Gutter: 16px','Margin: 24px','Nav bar height: 64px','Nav width: 56px',  'Content width: 1096px'],
+      };
+      const FRAME_H = 300;
+
+      function Grid({ breakpoint = 'Mobile', viewportWidth, onNavToggle, className, id, dataTestId }) {
+        const cfg      = GRID_CONFIGS[breakpoint];
+        const hasNav   = cfg.navWidth > 0;
+        const isMobile = breakpoint === 'Mobile';
+
+        const displayWidth = viewportWidth != null ? viewportWidth : cfg.viewport;
+        const scale        = displayWidth / cfg.viewport;
+
+        /* Heights */
+        const rulerH     = 32;
+        const topbarH    = isMobile ? 0 : cfg.navHeight;
+        const bottombarH = isMobile ? cfg.navHeight : 0;
+        const bodyTop    = rulerH + topbarH;
+        const bodyH      = FRAME_H - bodyTop - bottombarH;
+
+        /* Margin, gutter, nav are absolute — only columns flex */
+        const navPx    = cfg.navWidth; // absolute
+        const marginPx = cfg.margin;   // absolute
+        const gutterPx = cfg.gutter;   // absolute — 16px all breakpoints
+        const contentDivPx = hasNav ? displayWidth - navPx : displayWidth;
+        const colAreaPx    = contentDivPx - 2 * marginPx;
+        const colWidthPx   = Math.max(0, (colAreaPx - (cfg.columns - 1) * gutterPx) / cfg.columns);
+
+        const liveContentWidth     = Math.round(contentDivPx - 2 * marginPx);
+        const marginLabelPx        = marginPx / 2;
+        const gutterLabelPx        = marginPx + colWidthPx + gutterPx / 2;
+        const dimLabelTop          = bodyH * 0.28;
+        const contentWidthRulerTop = dimLabelTop + 36;
+
+        const rootClass = ['dcds-Grid', className].filter(Boolean).join(' ');
+
+        return (
+          <figure className={rootClass} id={id} data-testid={dataTestId}
+            aria-label={`${cfg.label} — ${cfg.viewport}px viewport, ${cfg.columns} columns`}>
+            <p className="dcds-Grid__section-label">{cfg.label}</p>
+            <ul className="dcds-Grid__spec-list">
+              {GRID_SPEC_ITEMS[breakpoint].map(item => <li key={item}>{item}</li>)}
+            </ul>
+
+            <div className="dcds-Grid__viewport" style={{ width: displayWidth }}>
+              {/* Width ruler */}
+              <div className="dcds-Grid__ruler" style={{ height: rulerH }}>
+                <span className="dcds-Grid__ruler-line" />
+                <span className="dcds-Grid__ruler-value">{displayWidth}px</span>
+              </div>
+
+              {/* Top nav bar — tablet / desktop */}
+              {!isMobile && (
+                <div className="dcds-Grid__topbar" style={{ top: rulerH, height: topbarH }}>
+                  <span className="dcds-Grid__topbar-label">TopBar · {cfg.navHeight}px</span>
+                </div>
+              )}
+
+              {/* Bottom nav bar — mobile */}
+              {isMobile && (
+                <div className="dcds-Grid__bottombar" style={{ height: bottombarH }}>
+                  <span className="dcds-Grid__bottombar-label">Bottom nav · {cfg.navHeight}px</span>
+                </div>
+              )}
+
+              {/* Body */}
+              <div className="dcds-Grid__body" style={{ top: bodyTop, height: bodyH }}>
+                {hasNav && (
+                  <div
+                    className={['dcds-Grid__nav-sidebar', onNavToggle ? 'dcds-Grid__nav-sidebar--clickable' : ''].filter(Boolean).join(' ')}
+                    style={{ width: navPx, height: bodyH }}
+                    onClick={onNavToggle}
+                    role={onNavToggle ? 'button' : undefined}
+                    title={onNavToggle ? (cfg.navWidth > 100 ? 'Click to collapse' : 'Click to expand') : undefined}
+                  >
+                    <span className="dcds-Grid__nav-label">{cfg.navWidth}px</span>
+                    {onNavToggle && (
+                      <span className="dcds-Grid__nav-chevron" aria-hidden="true">
+                        {cfg.navWidth > 100 ? '‹' : '›'}
+                      </span>
+                    )}
+                  </div>
+                )}
+                <div className="dcds-Grid__content-area" style={{ width: hasNav ? contentDivPx : '100%', height: bodyH }}>
+                  {hasNav && (
+                    <div className="dcds-Grid__content-ruler">
+                      <span className="dcds-Grid__content-ruler-line" />
+                      <span className="dcds-Grid__content-ruler-value">{contentDivPx}px</span>
+                    </div>
+                  )}
+                  {/* Absolute margin/gutter — only columns are 1fr */}
+                  <div className="dcds-Grid__cols" style={{
+                    top: hasNav ? 28 : 0,
+                    bottom: 0,
+                    paddingInline:       marginPx,
+                    columnGap:           gutterPx,
+                    gridTemplateColumns: `repeat(${cfg.columns}, 1fr)`,
+                  }}>
+                    {Array.from({ length: cfg.columns }, (_, i) => (
+                      <div key={i} className="dcds-Grid__col" />
+                    ))}
+                  </div>
+                  <span className="dcds-Grid__dim-label" style={{ left: marginLabelPx, top: dimLabelTop }}>
+                    {cfg.margin}px
+                  </span>
+                  <span className="dcds-Grid__dim-label" style={{ left: gutterLabelPx, top: dimLabelTop }}>
+                    {cfg.gutter}px
+                  </span>
+                  {/* Content-width ruler — green, viewport − 2×margin − navWidth */}
+                  <div className="dcds-Grid__content-width-ruler"
+                    style={{ top: contentWidthRulerTop, left: marginPx, width: liveContentWidth, height: 28 }}>
+                    <span className="dcds-Grid__content-width-line" />
+                    <span className="dcds-Grid__content-width-value">{liveContentWidth}px</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        );
+      }
+
+      /* ============================================================
+       * GridSection — self-contained section with resize playground
+       * ============================================================ */
+      const GRID_BREAKPOINTS = [
+        { id:'Mobile',              label:'Mobile',                sub:'360px · 4 cols'     },
+        { id:'Tablet',              label:'Tablet',                sub:'576px · 12 cols'    },
+        { id:'Desktop-S-No-Nav',    label:'Desktop S — No Nav',    sub:'992px · no sidebar' },
+        { id:'Desktop-S-Expanded',  label:'Desktop S — Expanded',  sub:'992px · nav 240px'  },
+        { id:'Desktop-S-Collapsed', label:'Desktop S — Collapsed', sub:'992px · nav 56px'   },
+        { id:'Desktop-L-No-Nav',    label:'Desktop L — No Nav',    sub:'1200px · no sidebar'},
+        { id:'Desktop-L-Expanded',  label:'Desktop L — Expanded',  sub:'1200px · nav 240px' },
+        { id:'Desktop-L-Collapsed', label:'Desktop L — Collapsed', sub:'1200px · nav 56px'  },
+      ];
+
+      function getBpForWidth(w, navExpanded, noNav) {
+        if (w < 576)  return 'Mobile';
+        if (w < 992)  return 'Tablet';
+        if (noNav) return w < 1200 ? 'Desktop-S-No-Nav' : 'Desktop-L-No-Nav';
+        const exp = navExpanded !== false;
+        if (w < 1200) return exp ? 'Desktop-S-Expanded' : 'Desktop-S-Collapsed';
+        return exp ? 'Desktop-L-Expanded' : 'Desktop-L-Collapsed';
+      }
+
+      function GridSection() {
+        const [activeBp,     setActiveBp]     = useState('Mobile');
+        const [resizeWidth,  setResizeWidth]  = useState(360);
+        const [isResizing,   setIsResizing]   = useState(false);
+        const [navExpanded,  setNavExpanded]  = useState(true);
+        const [noNav,        setNoNav]        = useState(false);
+        const { setOpen } = React.useContext(PanelContext);
+        const isDesktop = resizeWidth >= 992 && !noNav;
+        const autoBp = getBpForWidth(resizeWidth, navExpanded, noNav);
+
+        const startResize = (e) => {
+          e.preventDefault();
+          const startX = e.clientX;
+          const startW = resizeWidth;
+          const onMove = (me) => {
+            const next = Math.round(Math.max(320, Math.min(1920, startW + me.clientX - startX)));
+            setResizeWidth(next);
+          };
+          const onUp = () => {
+            setIsResizing(false);
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+          };
+          setIsResizing(true);
+          document.addEventListener('mousemove', onMove);
+          document.addEventListener('mouseup', onUp);
+        };
+
+        const bpSnapBtns = (
+          <div style={{ display:'flex', flexDirection:'column', gap:'var(--gap-4)', marginBottom:'var(--gap-8)' }}>
+            {GRID_BREAKPOINTS.map(bp => (
+              <button key={bp.id}
+                className={`grid-bp-btn${activeBp === bp.id ? ' grid-bp-btn--active' : ''}`}
+                onClick={() => {
+                setActiveBp(bp.id);
+                setResizeWidth(GRID_CONFIGS[bp.id].viewport);
+                setNoNav(bp.id.includes('No-Nav'));
+                setNavExpanded(!bp.id.includes('Collapsed'));
+                setOpen(false);
+              }}>
+                <span style={{ display:'block', fontWeight:'inherit' }}>{bp.label}</span>
+                <span style={{ display:'block', fontSize:'var(--font-size-validation)', color:'var(--color-text-subdued)', fontWeight:400 }}>{bp.sub}</span>
+              </button>
+            ))}
+          </div>
+        );
+
+        const panelContent = (
+          <>
+            <h1 style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-h4)', margin:'0 0 var(--gap-4)', color:'var(--color-text-primary)' }}>Grids</h1>
+            <p style={{ fontFamily:'var(--font-family)', fontSize:'var(--font-size-body-small)', color:'var(--color-text-subdued)', margin:'0 0 var(--gap-16)' }}>
+              Columns, gutters &amp; margins per breakpoint
+            </p>
+            <h2>Breakpoint</h2>
+            {bpSnapBtns}
+          </>
+        );
+
+        return (
+          <PanelLayout panelContent={panelContent}>
+            <main className="stage">
+
+              {/* ── Interactive resizable playground ── */}
+              <section>
+                <h2>Columns, Gutters &amp; Margins — Interactive</h2>
+                <p className="stage-note">
+                  Drag the handle on the right to resize. The grid adapts across breakpoints.
+                  Current auto-detected breakpoint: <strong>{autoBp.replace(/-/g,' ')}</strong>.
+                </p>
+
+                <div className="grid-width-badge">
+                  <span className="grid-width-num">{resizeWidth}px</span>
+                  <span className="grid-bp-pill">{autoBp.replace(/-/g,' ')}</span>
+                </div>
+
+                {/* Scrollable container — handle lives inside at the frame's right edge */}
+                <div style={{ overflowX:'auto' }}>
+                  <div style={{ display:'flex', alignItems:'stretch', width:'max-content' }}>
+                    <Grid
+                      breakpoint={autoBp}
+                      viewportWidth={resizeWidth}
+                      onNavToggle={isDesktop ? () => { setNoNav(false); setNavExpanded(e => !e); } : undefined}
+                    />
+                    <div
+                      className="grid-resize-handle"
+                      onMouseDown={startResize}
+                      title="Drag to resize"
+                    />
+                  </div>
+                </div>
+              </section>
+
+              {/* ── Static breakpoint sections ── */}
+              {GRID_BREAKPOINTS.map(bp => (
+                <section key={bp.id} style={{ scrollMarginTop: 'var(--gap-24)' }} id={`grid-${bp.id}`}>
+                  <h2>{bp.label} — {bp.sub}</h2>
+                  <div style={{ overflowX:'auto', paddingBottom:'var(--gap-4)' }}>
+                    <Grid breakpoint={bp.id} />
+                  </div>
+                </section>
+              ))}
+
+            </main>
+          </PanelLayout>
+        );
+      }
+
       function Playground() {
         /* --- Navigation --- */
         const [activeComponent, setActiveComponent] = useState('button');
@@ -4923,6 +5693,13 @@
           { id: 'tabs',           label: 'Tabs'           },
           { id: 'tag',            label: 'Tag'            },
           { id: 'tooltip',        label: 'Tooltip'        },
+          { id: '__sep__',        label: 'Foundations'    },
+          { id: 'typography',     label: 'Typography'     },
+          { id: 'grids',          label: 'Grids'          },
+          { id: 'spacing',        label: 'Spacing'        },
+          { id: 'colors',         label: 'Colors'         },
+          { id: 'icons',          label: 'Icons'          },
+          { id: 'flags',          label: 'Flags'          },
         ];
 
         /* --- Button controls --- */
@@ -5153,13 +5930,17 @@
               <ul className="primary-nav__list">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.id}>
-                    <button
-                      className={`primary-nav__item${activeComponent === item.id ? ' primary-nav__item--active' : ''}`}
-                      onClick={() => setActiveComponent(item.id)}
-                      aria-current={activeComponent === item.id ? 'page' : undefined}
-                    >
-                      {item.label}
-                    </button>
+                    {item.id === '__sep__' ? (
+                      <span className="primary-nav__item--sep">{item.label}</span>
+                    ) : (
+                      <button
+                        className={`primary-nav__item${activeComponent === item.id ? ' primary-nav__item--active' : ''}`}
+                        onClick={() => setActiveComponent(item.id)}
+                        aria-current={activeComponent === item.id ? 'page' : undefined}
+                      >
+                        {item.label}
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -5176,11 +5957,17 @@
             {activeComponent === 'accordian'   && <AccordianSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
+            {activeComponent === 'typography'  && <TypographySection />}
+            {activeComponent === 'grids'       && <GridSection />}
+            {activeComponent === 'spacing'     && <SpacingSection />}
+            {activeComponent === 'colors'      && <ColorSection />}
+            {activeComponent === 'icons'       && <IconsSection />}
+            {activeComponent === 'flags'       && <FlagsSection />}
 
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && (
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'typography' && activeComponent !== 'grids' && activeComponent !== 'spacing' && activeComponent !== 'colors' && activeComponent !== 'icons' && activeComponent !== 'flags' && activeComponent !== '__sep__' && (
             <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
