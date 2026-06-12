@@ -15,6 +15,8 @@ export interface ModalContextValue {
   bodyId: string;
   /** `onClose` forwarded from `Modal` so `ModalHeader` can wire the X button automatically. */
   onClose?: () => void;
+  /** Forwarded from `Modal` — `ModalFooter` returns `null` when this is `false`. */
+  showFooter?: boolean;
 }
 
 /**
@@ -115,6 +117,13 @@ export interface ModalProps extends BaseComponentProps {
    * Always include `ModalHeader` — it renders the required close (X) button.
    */
   children: ReactNode;
+
+  /**
+   * Whether to render the `ModalFooter`. Set to `false` to hide the footer
+   * for view-only or informational modals that need no action buttons.
+   * @default true
+   */
+  showFooter?: boolean;
 }
 
 /**
@@ -160,9 +169,16 @@ export interface ModalHeaderProps {
   /**
    * Optional element placed in the header's right action area, before the close button.
    * Intended for a `Badge` or `Tag` indicating status.
-   * Slot — any node can be substituted.
+   * Slot — any node can be substituted. Use `size="XS"` on the Badge component.
    */
   badge?: ReactNode;
+
+  /**
+   * Whether to render the dismiss (×) button.
+   * Set to `false` only for modals that must be closed via an explicit footer action.
+   * @default true
+   */
+  showDismiss?: boolean;
 
   /**
    * Override the close handler from `Modal` context.

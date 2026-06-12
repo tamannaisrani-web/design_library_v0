@@ -126,10 +126,11 @@
   flex-shrink: 0;
 }
 
-/* Badge slot wrapper — badge component provides its own styling */
+/* Badge slot wrapper — constrains to XS size (20px) per Figma spec */
 .dcds-Modal__header-badge {
   display: flex;
   align-items: center;
+  height: var(--gap-20, 20px);
 }
 
 /* Close (X) button — 40×40, color/Icon/subdued */
