@@ -7200,11 +7200,6 @@ function FlagsSection() {
             {activeComponent === 'tabs'        && <TabsSection />}
             {activeComponent === 'drawer'       && <DrawerSection />}
             {activeComponent === 'modal'       && <ModalSection />}
-            {activeComponent === 'navigation'  && (
-              <div style={{ gridColumn: '2 / -1', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-                <NavigationSection sbState={sbState} setSbState={setSbState} sections={sections} updateSection={updateSection} enabledTabIds={enabledTabIds} enabledSectionIds={enabledSectionIds} toggleTabId={toggleTabId} toggleSectionId={toggleSectionId} enabledSubIds={enabledSubIds} activeSubId={activeSubId} setActiveSubId={setActiveSubId} tbType={tbType} tbShowCompany={tbShowCompany} tbShowUser={tbShowUser} tbCompany={tbCompany} tbInitials={tbInitials} logoPortal={logoPortal} setLogoPortal={setLogoPortal} bmState={bmState} bmType={bmType} bmShowLeading={bmShowLeading} bmShowStatus={bmShowStatus} />
-              </div>
-            )}
             {activeComponent === 'accordian'   && <AccordianSection />}
             {activeComponent === 'avatar'      && <AvatarSection />}
             {activeComponent === 'avatargroup' && <AvatarGroupSection />}
@@ -7218,7 +7213,7 @@ function FlagsSection() {
             {/* ============================================================
              * SECONDARY NAV + STAGE — all other components
              * ============================================================ */}
-            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'navigation' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'typography' && activeComponent !== 'grids' && activeComponent !== 'spacing' && activeComponent !== 'colors' && activeComponent !== 'icons' && activeComponent !== 'flags' && activeComponent !== '__sep__' && (
+            {activeComponent !== 'chip' && activeComponent !== 'badge' && activeComponent !== 'tag' && activeComponent !== 'tabs' && activeComponent !== 'drawer' && activeComponent !== 'modal' && activeComponent !== 'accordian' && activeComponent !== 'avatar' && activeComponent !== 'avatargroup' && activeComponent !== 'typography' && activeComponent !== 'grids' && activeComponent !== 'spacing' && activeComponent !== 'colors' && activeComponent !== 'icons' && activeComponent !== 'flags' && activeComponent !== '__sep__' && (
             <PanelLayout panelContent={<>
 
               {activeComponent === 'button' && (
@@ -7501,6 +7496,8 @@ function FlagsSection() {
              * MAIN STAGE — previews
              * ============================================================ */}
             <main className="stage">
+
+              {activeComponent === 'navigation' && <NavigationSection sbState={sbState} setSbState={setSbState} sections={sections} updateSection={updateSection} enabledTabIds={enabledTabIds} enabledSectionIds={enabledSectionIds} toggleTabId={toggleTabId} toggleSectionId={toggleSectionId} enabledSubIds={enabledSubIds} activeSubId={activeSubId} setActiveSubId={setActiveSubId} tbType={tbType} tbShowCompany={tbShowCompany} tbShowUser={tbShowUser} tbCompany={tbCompany} tbInitials={tbInitials} logoPortal={logoPortal} setLogoPortal={setLogoPortal} bmState={bmState} bmType={bmType} bmShowLeading={bmShowLeading} bmShowStatus={bmShowStatus} />}
 
               {activeComponent === 'button' && (
                 <section>
